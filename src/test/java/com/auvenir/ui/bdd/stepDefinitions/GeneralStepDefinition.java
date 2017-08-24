@@ -23,14 +23,14 @@ public class GeneralStepDefinition extends BaseInit{
 
     @Given("^I navigate to login page$")
     public void iNavigateToLoginPage() throws Throwable {
-        System.out.println("I navigate to login page.");
+        //System.out.println("I navigate to login page.");
         MarketingPage marketingPage = new MarketingPage(logger,driver);
     }
 
     @And("^I click on login link$")
     public void iClickOnLoginLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        System.out.println("I click on login link.");
+        //System.out.println("I click on login link.");
         MarketingPage marketingPage = new MarketingPage(logger,driver);
         marketingPage.clickOnLoginBTN();
     }

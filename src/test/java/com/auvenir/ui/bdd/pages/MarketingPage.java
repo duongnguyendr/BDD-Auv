@@ -1,9 +1,9 @@
 package com.auvenir.ui.bdd.pages;
 
 import com.auvenir.ui.services.AbstractService;
-import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
-import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
-import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +13,6 @@ import org.testng.Assert;
 
 import java.util.List;
 
-import static com.auvenir.ui.pages.common.AbstractPage.smallerTimeOut;
 
 /**
  * Created by doai.tran on 8/21/2017.
@@ -455,9 +454,9 @@ public class MarketingPage extends AbstractPage {
          validateElementText(eleBambooHeader, BAMBOO_HEADER_TITLE);
          validateElementText(eleBambooSubtitle, BAMBOO_SUB_TITLE);
          Assert.assertTrue(AbstractService.sStatusCnt == 0);
-         NXGReports.addStep("Verify about bamboo page.", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify about bamboo page.", LogAs.PASSED, (CaptureScreen) null);
       } catch (AssertionError assertionError) {
-         NXGReports.addStep("Verify about bamboo page.", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify about bamboo page.", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -479,10 +478,10 @@ public class MarketingPage extends AbstractPage {
 
       if (isCheckAboutContentPage & isCheckAboutContentPage1 & isCheckAboutContentPage2 & isCheckAboutContentPage3 & isCheckAboutContentPage4 & isCheckAboutContentPage5
               & isCheckAboutContentPage6 & isCheckAboutContentPage7 & isCheckAboutContentPage8 & isCheckAboutContentPage9) {
-         NXGReports.addStep("Verify about content page: PASSED", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify about content page: PASSED", LogAs.PASSED, (CaptureScreen) null);
       } else {
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify about content page: PASSED", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify about content page: PASSED", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -510,10 +509,10 @@ public class MarketingPage extends AbstractPage {
       isCheckCareersContentPage5 = waitForVisibleElement(SalesText, "SalesText");
       if (isCheckCareersContentPage & isCheckCareersContentPage1 & isCheckCareersContentPage2 & isCheckCareersContentPage3 & isCheckCareersContentPage4
               & isCheckCareersContentPage5 & checkMarketingHeaderText & checkCareersAuvenirText) {
-         NXGReports.addStep("Verify careers content page: PASSED", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify careers content page: PASSED", LogAs.PASSED, (CaptureScreen) null);
       } else {
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify careers content page: PASSED", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify careers content page: PASSED", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -544,10 +543,10 @@ public class MarketingPage extends AbstractPage {
       if (isCheckTouchText & isCheckContactContentPage & isCheckContactContentPage1 & isCheckContactContentPage2 & isCheckContactContentPage3
               & isCheckContactContentPage4 & isCheckContactContentPage5 & isCheckContactContentPage6 & isCheckContactContentPage7 & isCheckContactContentPage8
               & checkHeaderText) {
-         NXGReports.addStep("Verify contact content page: PASSED", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify contact content page: PASSED", LogAs.PASSED, (CaptureScreen) null);
       } else {
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify contact content page: PASSED", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify contact content page: PASSED", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -579,10 +578,10 @@ public class MarketingPage extends AbstractPage {
          checkCookiesNoticecontent = true;
       }
       if (checkCookiesNoticeContentPage & checkCookiesNoticeContentPage1 & checkCookiesNotie & checkAuvenirCookiesNotice & checkCookiesNoticecontent) {
-         NXGReports.addStep("Verify cookies notice content page: PASSED", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify cookies notice content page: PASSED", LogAs.PASSED, (CaptureScreen) null);
       } else {
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify cookies notice content page", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify cookies notice content page", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -592,20 +591,20 @@ public class MarketingPage extends AbstractPage {
 
    public void clickOnLoginBTN() {
       getLogger().info("Click on login button.");
-      //clickElement(loginBTN, "loginBTN");
-      loginBTN.click();
+      clickElement(loginBTN, "loginBTN");
+      //loginBTN.click();
    }
 
    public void inputUserNamePassword(String username, String password) {
-      /*sendKeyTextBox(emailTextBox, username, "emailTextBox");
-      sendKeyTextBox(passwordTextBox, password, "passwordTextBox");*/
-      emailTextBox.sendKeys(username);
-      passwordTextBox.sendKeys(password);
+      sendKeyTextBox(emailTextBox, username, "emailTextBox");
+      sendKeyTextBox(passwordTextBox, password, "passwordTextBox");
+//      emailTextBox.sendKeys(username);
+//      passwordTextBox.sendKeys(password);
    }
 
    public void clickOnSubmitBTN() {
-      //clickElement(submitBTN, "loginBTN");
-      submitBTN.click();
+      clickElement(submitBTN, "loginBTN");
+      //submitBTN.click();
    }
 
    public void clickOnProfile() {
@@ -674,15 +673,15 @@ public class MarketingPage extends AbstractPage {
          Boolean isVisible = waitForVisibleElement(forgotPasswordTitle, "forgotPasswordTitle");
          Boolean isText = validateElementText(forgotPasswordTitle, "Forgot Your Password?");
          if (isText && isVisible) {
-            NXGReports.addStep("Verify Forgot Password Title: Pass", LogAs.PASSED, null);
+//            NXGReports.addStep("Verify Forgot Password Title: Pass", LogAs.PASSED, null);
          } else {
             AbstractService.sStatusCnt++;
-            NXGReports.addStep("Verify Forgot Password Title: Fail", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("Verify Forgot Password Title: Fail", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
          }
       } catch (Exception e) {
          e.printStackTrace();
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify Forgot Password Title: Fail_Exception", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//         NXGReports.addStep("Verify Forgot Password Title: Fail_Exception", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
 
       }
 
@@ -783,9 +782,9 @@ public class MarketingPage extends AbstractPage {
          validateElementText(eleAutomatedToolsDescription, AUTOMATION_TOOL_DESCRIPTION);
 
          Assert.assertTrue(AbstractService.sStatusCnt == 0);
-         NXGReports.addStep("Verify home content page", LogAs.PASSED, null);
+//         NXGReports.addStep("Verify home content page", LogAs.PASSED, null);
       } catch (AssertionError assertionError) {
-         NXGReports.addStep("Verify home content page", LogAs.FAILED, null, assertionError.getMessage());
+//         NXGReports.addStep("Verify home content page", LogAs.FAILED, null, assertionError.getMessage());
       }
    }
 
@@ -830,10 +829,10 @@ public class MarketingPage extends AbstractPage {
       }
       getLogger().info("privacyPolicyTextContent = " + privacyPolicyTextContent.getText());
       if (checkPrivacyPolicyTextContent & checkAuvenirPrivacyText & checkPrivacyHeaderText & checkAuvenirLogoImage) {
-         NXGReports.addStep("Verify privacy policy content page", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify privacy policy content page", LogAs.PASSED, (CaptureScreen) null);
       } else {
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify privacy policy content page", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify privacy policy content page", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -849,9 +848,9 @@ public class MarketingPage extends AbstractPage {
          validateElementText(auvenirTermsOfServiceText, "Effective: January 16, 2017");
          //validateElementText(termsContentText, termsContentTextCst);
          Assert.assertTrue(AbstractService.sStatusCnt == 0);
-         NXGReports.addStep("Verify terms content page", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify terms content page", LogAs.PASSED, (CaptureScreen) null);
       } catch (AssertionError assertionError) {
-         NXGReports.addStep("Verify terms content page", LogAs.FAILED, (CaptureScreen) null, assertionError.getMessage());
+//         NXGReports.addStep("Verify terms content page", LogAs.FAILED, (CaptureScreen) null, assertionError.getMessage());
       }
    }
 
@@ -883,10 +882,10 @@ public class MarketingPage extends AbstractPage {
          Thread.sleep(smallTimeOut);
          sendKeyTextBox(inputSecondPassword, retypeResetPass, "send key to eleRetypeNewPassword");
          clickElement(buttonSetPassword, "click to btnReset");
-         NXGReports.addStep("Verify to reset password", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify to reset password", LogAs.PASSED, (CaptureScreen) null);
       } catch (Exception ex) {
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify to reset password", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify to reset password", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -896,10 +895,10 @@ public class MarketingPage extends AbstractPage {
          Thread.sleep(smallTimeOut);
          switchToOtherTab(1);
          sendKeyTextBox(inputFirstPassword, newPassword, "send key to new password");
-         NXGReports.addStep("Verify to set new password", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify to set new password", LogAs.PASSED, (CaptureScreen) null);
       } catch (Exception ex) {
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify to set new password", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify to set new password", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -909,10 +908,10 @@ public class MarketingPage extends AbstractPage {
          Thread.sleep(smallTimeOut);
          switchToOtherTab(1);
          sendKeyTextBox(inputSecondPassword, confirmPassword, "send key to confirm password");
-         NXGReports.addStep("Verify to set confirm password", LogAs.PASSED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify to set confirm password", LogAs.PASSED, (CaptureScreen) null);
       } catch (Exception ex) {
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify to set confirm password", LogAs.FAILED, (CaptureScreen) null);
+//         NXGReports.addStep("Verify to set confirm password", LogAs.FAILED, (CaptureScreen) null);
       }
    }
 
@@ -991,7 +990,7 @@ public class MarketingPage extends AbstractPage {
          clickElement(inputSecondPassword, "Second pwd box");
          sendKeyTextBox(inputSecondPassword, newPwd, "Input Second Password");
       }
-      Thread.sleep(smallerTimeOut);
+      Thread.sleep(1000);
    }
 
 
@@ -1008,25 +1007,25 @@ public class MarketingPage extends AbstractPage {
          if (isVisible && position.equals("1")) {
             Boolean isCheck = validateElementText(errorPwdMessage.get(0), errorPwdMesg1);
             if (isCheck) {
-               NXGReports.addStep("Verify error password message: Pass", LogAs.PASSED, null);
+//               NXGReports.addStep("Verify error password message: Pass", LogAs.PASSED, null);
             } else {
                AbstractService.sStatusCnt++;
-               NXGReports.addStep("Verify error password message: Fail", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//               NXGReports.addStep("Verify error password message: Fail", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             }
          }
          if (isVisible && position.equals("2")) {
             Boolean isCheck = validateElementText(errorPwdMessage.get(1), errorPwdMesg2);
             if (isCheck) {
-               NXGReports.addStep("Verify error password message: Pass", LogAs.PASSED, null);
+//               NXGReports.addStep("Verify error password message: Pass", LogAs.PASSED, null);
             } else {
                AbstractService.sStatusCnt++;
-               NXGReports.addStep("Verify error password message: Fail", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//               NXGReports.addStep("Verify error password message: Fail", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             }
          }
       } catch (Exception e) {
          e.printStackTrace();
          AbstractService.sStatusCnt++;
-         NXGReports.addStep("Verify all cases of password input: Fail", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//         NXGReports.addStep("Verify all cases of password input: Fail", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
       }
    }
 

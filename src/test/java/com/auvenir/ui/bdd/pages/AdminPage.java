@@ -1,8 +1,8 @@
 package com.auvenir.ui.bdd.pages;
 
-import com.auvenir.ui.pages.AuvenirPage;
-import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
-import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
+//import com.auvenir.ui.pages.AuvenirPage;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AdminPage extends AbstractPage {
 
-    AuvenirPage auvenirPage = null;
+//    AuvenirPage auvenirPage = null;
     WebElement SelectStatus = null;
     String xpathUserTypeCellOnAdminPage = "//*[@id='w-mu-table']//tr/td[2][text()='%s']";
     private int waitTime = 60;
@@ -662,7 +662,7 @@ public class AdminPage extends AbstractPage {
 
     public void getEleClientEntryValidate(String UserType, String Email, String DateCreated, String ClientName) throws InterruptedException {
         Thread.sleep(10000);
-        auvenirPage = new AuvenirPage(getLogger(), getDriver());
+//        auvenirPage = new AuvenirPage(getLogger(), getDriver());
         WebElement getEleClientTxt =
                 getDriver().findElement(By.xpath("//td[contains(text(),'" + Email + "')]//..//td[contains(text(),'" + UserType + "')]"));
         validateDisPlayedElement(getEleClientTxt, "Client Text");
@@ -709,14 +709,14 @@ public class AdminPage extends AbstractPage {
         getLogger().info("Wait for confirm popup render.");
         visibilityOfElementWait(getEleWAITLISTtoONBOARDINGTxt(), "Confirm Poup", waitTime);
         Assert.assertTrue(getEleWAITLISTtoONBOARDINGTxt().isDisplayed(), "Onboarding status is not selected");
-        NXGReports.addStep("Confirmation popup changing status from pending to onboarding is displayed", LogAs.PASSED, null);
+//        NXGReports.addStep("Confirmation popup changing status from pending to onboarding is displayed", LogAs.PASSED, null);
         getLogger().info("Click confirm button.");
         getEleStatusConfirmBtn().click();
         visibilityOfElementWait(eleCredentialsCloseIcn, "Auditor onboarding successful message", waitTime);
         getLogger().info("Change Auditor to Onboarding successful.");
         Assert.assertTrue(getDriver().findElement(By.xpath("//div[text()='Verified " + Email + " successfully.']")).isDisplayed(),
                 "Wait-List user is verified");
-        NXGReports.addStep("Verified user is successfully displayed", LogAs.PASSED, null);
+//        NXGReports.addStep("Verified user is successfully displayed", LogAs.PASSED, null);
         eleCredentialsCloseIcn.click();
     }
 
@@ -727,12 +727,12 @@ public class AdminPage extends AbstractPage {
         Select select = new Select(SelectStatus);
         select.selectByVisibleText("Active");
         Assert.assertTrue(getEleONBOARDINGtoACTIVETxt().isDisplayed(), "ACTIVE status is not selected");
-        NXGReports.addStep("Confirmation popup changing status from onboarding to active is displayed", LogAs.PASSED, null);
+//        NXGReports.addStep("Confirmation popup changing status from onboarding to active is displayed", LogAs.PASSED, null);
         Thread.sleep(3000);
         getEleStatusConfirmBtn().click();
         Thread.sleep(3000);
         Assert.assertTrue(getEleUpdatedtoACTIVETxt().isDisplayed(), "OnBoarding text is not displayed");
-        NXGReports.addStep("ONBoarding text is displayed", LogAs.PASSED, null);
+//        NXGReports.addStep("ONBoarding text is displayed", LogAs.PASSED, null);
         eleCredentialsCloseIcn.click();
 
     }
@@ -851,7 +851,7 @@ public class AdminPage extends AbstractPage {
     }
 
     public void navigateToSettingAccountPage() {
-        auvenirPage.getEleNotificationImg().click();
+//        auvenirPage.getEleNotificationImg().click();
         getEleViewAllLnk().click();
         visibilityOfElementWait(getEleClickHereLnk(), "Click Here - Link", 20);
         getEleClickHereLnk().click();
@@ -892,8 +892,8 @@ public class AdminPage extends AbstractPage {
     }
 
     public void navigateToSettingDevicesPage() {
-        visibilityOfElementWait(auvenirPage.getEleNotificationImg(), "Notification Icon", 10);
-        auvenirPage.getEleNotificationImg().click();
+        /*visibilityOfElementWait(auvenirPage.getEleNotificationImg(), "Notification Icon", 10);
+        auvenirPage.getEleNotificationImg().click();*/
         visibilityOfElementWait(getEleViewAllLnk(), "Notification Icon", 10);
         getEleViewAllLnk().click();
         visibilityOfElementWait(getEleClickHereLnk(), "Notification Icon", 10);

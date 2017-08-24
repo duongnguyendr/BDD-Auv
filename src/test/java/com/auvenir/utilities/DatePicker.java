@@ -1,9 +1,9 @@
 package com.auvenir.utilities;
 
 import com.auvenir.ui.services.AbstractService;
-import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
+/*import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
 import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
-import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
+import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;*/
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -198,8 +198,8 @@ public class DatePicker {
         try {
             webElement = datePicker.findElement(By.xpath(xpath));
         } catch (Exception ex) {
-            NXGReports.addStep("Can't find element for xpath: " + xpath, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
-                    ex.getMessage());
+//            NXGReports.addStep("Can't find element for xpath: " + xpath, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
+//                    ex.getMessage());
         }
         return webElement;
     }
@@ -216,8 +216,8 @@ public class DatePicker {
         } catch (Exception e) {
             AbstractService.sStatusCnt++;
             System.out.println("Unable to click on: " + elementName);
-            NXGReports.addStep("Unable to Click on: " + elementName, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
-                    e.getMessage());
+//            NXGReports.addStep("Unable to Click on: " + elementName, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
+//                    e.getMessage());
             e.printStackTrace();
             return false;
         }

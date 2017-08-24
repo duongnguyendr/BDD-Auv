@@ -1,9 +1,9 @@
 package com.auvenir.utilities;
 
 import com.auvenir.ui.services.AbstractService;
-import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
-import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
-import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,39 +62,39 @@ public class GeneralUtilities {
             case "Displayed":
                 try {
                     element.isDisplayed();
-                    NXGReports.addStep(sExpectedText + " is displayed", LogAs.PASSED, null);
+//                    NXGReports.addStep(sExpectedText + " is displayed", LogAs.PASSED, null);
                 } catch (Exception e) {
                     AbstractService.sStatusCnt++;
-                    NXGReports.addStep(sExpectedText + " is not displayed", LogAs.FAILED, null);
+//                    NXGReports.addStep(sExpectedText + " is not displayed", LogAs.FAILED, null);
                 }
 
                 break;
             case "Enabled":
                 try {
                     element.isEnabled();
-                    NXGReports.addStep(sExpectedText + " is enabled", LogAs.PASSED, null);
+//                    NXGReports.addStep(sExpectedText + " is enabled", LogAs.PASSED, null);
                 } catch (Exception e) {
                     AbstractService.sStatusCnt++;
-                    NXGReports.addStep(sExpectedText + " is not enabled", LogAs.FAILED, null);
+//                    NXGReports.addStep(sExpectedText + " is not enabled", LogAs.FAILED, null);
                 }
 
                 break;
             case "Selected":
                 try {
                     element.isSelected();
-                    NXGReports.addStep(sExpectedText + " is selected", LogAs.PASSED, null);
+//                    NXGReports.addStep(sExpectedText + " is selected", LogAs.PASSED, null);
                 } catch (Exception e) {
                     AbstractService.sStatusCnt++;
-                    NXGReports.addStep(sExpectedText + " is not selected", LogAs.FAILED, null);
+//                    NXGReports.addStep(sExpectedText + " is not selected", LogAs.FAILED, null);
                 }
 
             case "ElementText":
                 try {
                     element.getText().equals(sExpectedText);
-                    NXGReports.addStep(sExpectedText + " text is displayed", LogAs.PASSED, null);
+//                    NXGReports.addStep(sExpectedText + " text is displayed", LogAs.PASSED, null);
                 } catch (Exception e) {
                     AbstractService.sStatusCnt++;
-                    NXGReports.addStep(sExpectedText + " text is displayed", LogAs.FAILED, null);
+//                    NXGReports.addStep(sExpectedText + " text is displayed", LogAs.FAILED, null);
                 }
                 break;
         }
@@ -113,13 +113,13 @@ public class GeneralUtilities {
                     Files.delete(path);
                     if (Files.exists(path)) {
                         AbstractService.sStatusCnt++;
-                        NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//                        NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
                     }
                 }
             }
         } catch (IOException ex) {
             AbstractService.sStatusCnt++;
-            NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             ex.printStackTrace();
         }
         return result;

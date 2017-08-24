@@ -1,18 +1,19 @@
 package com.auvenir.ui.services;
 
-import com.auvenir.ui.pages.common.GmailPage;
-import com.auvenir.ui.pages.marketing.MarketingPage;
-import com.auvenir.ui.services.admin.AdminService;
-import com.auvenir.ui.services.auditor.AuditorEngagementService;
-import com.auvenir.ui.services.marketing.AuditorSignUpService;
-import com.auvenir.ui.services.marketing.EmailTemplateService;
-import com.auvenir.ui.services.marketing.MarketingService;
+//import com.auvenir.ui.pages.common.GmailPage;
+//import com.auvenir.ui.pages.marketing.MarketingPage;
+//import com.auvenir.ui.services.admin.AdminService;
+//import com.auvenir.ui.services.auditor.AuditorEngagementService;
+//import com.auvenir.ui.services.marketing.AuditorSignUpService;
+//import com.auvenir.ui.services.marketing.EmailTemplateService;
+//import com.auvenir.ui.services.marketing.MarketingService;
+import com.auvenir.ui.bdd.pages.MarketingPage;
 import com.auvenir.utilities.GenericService;
 import com.auvenir.utilities.MongoDBService;
 import com.auvenir.utilities.WebService;
-import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
-import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
-import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
+//import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -28,7 +29,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static com.auvenir.ui.tests.AbstractTest.httpProtocol;
+//import static com.auvenir.ui.tests.AbstractTest.httpProtocol;
 
 /**
  * Created by cuong.nguyen on 4/25/2017.
@@ -57,12 +58,12 @@ public class AbstractService {
     private final String keywordApiUpdateOnboading = "/update?status=ONBOARDING";
 
     private String apiUrl = "";
-    private AuditorSignUpService auditorSignUpService;
-    private MarketingService marketingService;
-    private AdminService adminService;
-    private GmailLoginService gmailLoginService;
-    private EmailTemplateService emailTemplateService;
-    private AuditorEngagementService auditorEngagementService;
+//    private AuditorSignUpService auditorSignUpService;
+//    private MarketingService marketingService;
+//    private AdminService adminService;
+//    private GmailLoginService gmailLoginService;
+//    private EmailTemplateService emailTemplateService;
+//    private AuditorEngagementService auditorEngagementService;
 
     public void setApiUrl(String apiURL) {
         this.apiUrl = "https://" + apiURL;
@@ -93,7 +94,7 @@ public class AbstractService {
         this.logger = logger;
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        marketingPage = new MarketingPage(getLogger(), getDriver());
+//        marketingPage = new MarketingPage(getLogger(), getDriver());
     }
 
     public WebDriver getDriver() {
@@ -162,9 +163,9 @@ public class AbstractService {
             driver.manage().timeouts().setScriptTimeout(1, TimeUnit.SECONDS);
             driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
             driver.manage().window().maximize();
-            NXGReports.addStep("Login with userid: " + userId, LogAs.PASSED, null);
+//            NXGReports.addStep("Login with userid: " + userId, LogAs.PASSED, null);
         } catch (Exception e) {
-            NXGReports.addStep("Login with userid: " + userId, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("Login with userid: " + userId, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             throw e;
         }
 
@@ -174,9 +175,9 @@ public class AbstractService {
         try {
             String[] cmdRun = new String[]{AutoITScripDirectory, fileDirectory};
             Runtime.getRuntime().exec(cmdRun);
-            NXGReports.addStep("Execute AutoITScriptUploadImage successfully", LogAs.PASSED, null);
+//            NXGReports.addStep("Execute AutoITScriptUploadImage successfully", LogAs.PASSED, null);
         } catch (Exception e) {
-            NXGReports.addStep("Execute AutoITScriptUploadImage successfully", LogAs.FAILED, null);
+//            NXGReports.addStep("Execute AutoITScriptUploadImage successfully", LogAs.FAILED, null);
             throw e;
         }
     }
@@ -215,31 +216,31 @@ public class AbstractService {
             getLogger().info(sLanguage);
             if (sLanguage.equals("French")) {
                 getLogger().info("Language is : " + baseLanguage);
-                marketingPage.clickOnChangeLanguageBTN();
+//                marketingPage.clickOnChangeLanguageBTN();
             }
             GenericService.sLanguage = sLanguage;
-            NXGReports.addStep("Go to home page successfully", LogAs.PASSED, null);
+//            NXGReports.addStep("Go to home page successfully", LogAs.PASSED, null);
         } catch (Exception e) {
             AbstractService.sStatusCnt++;
             //NXGReports.addStep("unable to go to home page.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
-            NXGReports.addStep("unable to go to home page.", LogAs.FAILED,
-                    new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),e.getMessage());
+            /*NXGReports.addStep("unable to go to home page.", LogAs.FAILED,
+                    new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),e.getMessage());*/
         }
     }
 
     public void loginToMarketingPageWithInvalidValue(String UserName, String Password) {
         try {
 //            goToBaseURL();
-            marketingPage.clickOnLoginBTN();
+//            marketingPage.clickOnLoginBTN();
             getLogger().info("Input Username and Password.");
-            marketingPage.inputUserNamePassword(UserName, Password);
+//            marketingPage.inputUserNamePassword(UserName, Password);
             getLogger().info("Click on Login button.");
-            marketingPage.clickOnSubmitBTN();
+//            marketingPage.clickOnSubmitBTN();
             //driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-            marketingPage.waitPageLoad();
-            marketingPage.waitForJSandJQueryToLoad();
+//            marketingPage.waitPageLoad();
+//            marketingPage.waitForJSandJQueryToLoad();
         } catch (Exception e) {
-            NXGReports.addStep("unable to login to Marketing page.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("unable to login to Marketing page.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
         }
     }
 
@@ -269,7 +270,7 @@ public class AbstractService {
             driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
             driver.manage().window().maximize();
         } catch (AssertionError e) {
-            NXGReports.addStep("Fail to load main Auvenir URL.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("Fail to load main Auvenir URL.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             throw e;
         }
     }
@@ -298,7 +299,7 @@ public class AbstractService {
             driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
             driver.manage().window().maximize();
         } catch (AssertionError e) {
-            NXGReports.addStep("Fail to load main Auvenir URL.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("Fail to load main Auvenir URL.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             throw e;
         }
     }
@@ -325,9 +326,9 @@ public class AbstractService {
             } else {
                 getLogger().info(s1);
             }
-            NXGReports.addStep("Call API service successfully" + userId, LogAs.PASSED, null);
+//            NXGReports.addStep("Call API service successfully" + userId, LogAs.PASSED, null);
         } catch (Exception e) {
-            NXGReports.addStep("Call API service unsuccessfully" + userId, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("Call API service unsuccessfully" + userId, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             throw e;
         }
     }
@@ -384,7 +385,7 @@ public class AbstractService {
             http.gettingURL(sEMAILID, sLOGINURL, sDevAuthID, sApiKey);
             //System.out.println(GenericService.getConfigValue(GenericService.sConfigFile, sLOGINURL));
         } catch (AssertionError e) {
-            NXGReports.addStep("Fail to load Logged-In Auvenir URL.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("Fail to load Logged-In Auvenir URL.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             throw e;
         }
     }
@@ -396,43 +397,43 @@ public class AbstractService {
             sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
         } catch (Exception e) {
             sStatusCnt++;
-            NXGReports.addStep(elementName + " is not Visible", LogAs.FAILED, null);
+//            NXGReports.addStep(elementName + " is not Visible", LogAs.FAILED, null);
         }
     }
 
     public void gmaillLogin() throws Exception {
         try {
-            GmailPage gmailLoginPage = new GmailPage(logger, driver);
+//            GmailPage gmailLoginPage = new GmailPage(logger, driver);
             driver.get(GenericService.getConfigValue(GenericService.sConfigFile, "GMAIL_URL"));
             driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
             driver.manage().window().maximize();
 
             //gmailLoginPage.getEleSignInLink().click();
-            if (gmailLoginPage.getEleEmailIDTxtFld().isDisplayed()) {
-                gmailLoginPage.getEleEmailIDTxtFld().sendKeys(GenericService.getConfigValue(GenericService.sConfigFile, "CLIENT_EMAIL_ID"));
-                gmailLoginPage.getEleNextBtn().click();
-            }
-            Thread.sleep(5000);
-            gmailLoginPage.getElePasswordTxtFld().sendKeys(GenericService.getConfigValue(GenericService.sConfigFile, "CLIENT_PWD"));
-            gmailLoginPage.getEleSignInBtn().click();
-            Assert.assertTrue(gmailLoginPage.getEleSearchTxtFld().isDisplayed(), "User is not logged into gmail");
-            Thread.sleep(5000);
-            gmailLoginPage.getEleSearchTxtFld().sendKeys(GenericService.getConfigValue(GenericService.sConfigFile, "GMAIL_SEARCHMAIL"));
-            gmailLoginPage.getEleSearchBtn().click();
-            gmailLoginPage.getEleInviteMailLnk().click();
-            gmailWindow = driver.getWindowHandle();
-
-            gmailLoginPage.getEleStartBtn().click();
-            switchToWindow();
-
-            driver.close();
-            driver.switchTo().window(parentWin);
+//            if (gmailLoginPage.getEleEmailIDTxtFld().isDisplayed()) {
+//                gmailLoginPage.getEleEmailIDTxtFld().sendKeys(GenericService.getConfigValue(GenericService.sConfigFile, "CLIENT_EMAIL_ID"));
+//                gmailLoginPage.getEleNextBtn().click();
+//            }
+//            Thread.sleep(5000);
+//            gmailLoginPage.getElePasswordTxtFld().sendKeys(GenericService.getConfigValue(GenericService.sConfigFile, "CLIENT_PWD"));
+//            gmailLoginPage.getEleSignInBtn().click();
+//            Assert.assertTrue(gmailLoginPage.getEleSearchTxtFld().isDisplayed(), "User is not logged into gmail");
+//            Thread.sleep(5000);
+//            gmailLoginPage.getEleSearchTxtFld().sendKeys(GenericService.getConfigValue(GenericService.sConfigFile, "GMAIL_SEARCHMAIL"));
+//            gmailLoginPage.getEleSearchBtn().click();
+//            gmailLoginPage.getEleInviteMailLnk().click();
+//            gmailWindow = driver.getWindowHandle();
+//
+//            gmailLoginPage.getEleStartBtn().click();
+//            switchToWindow();
+//
+//            driver.close();
+//            driver.switchTo().window(parentWin);
         } catch (AssertionError e) {
-            NXGReports.addStep("Page not Loaded", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+//            NXGReports.addStep("Page not Loaded", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
         }
     }
 
-    public void auditorLogout() throws Exception {
+    /*public void auditorLogout() throws Exception {
         Thread.sleep(10000);
         GmailPage gmailLoginPage = new GmailPage(logger, driver);
         driver.close();
@@ -440,7 +441,7 @@ public class AbstractService {
         driver.switchTo().window(gmailWindow);
         gmailLoginPage.getEleProfileIcn().click();
         gmailLoginPage.getEleSignOutBtn().click();
-    }
+    }*/
 
     /**
      * Refactored by huy.huynh on 06/06/2017.
@@ -493,7 +494,7 @@ public class AbstractService {
     Method to delete all existed mail in GMail.
      */
 
-     public void deleteAllExistedGMail(String eGMail, String ePassword) {
+     /*public void deleteAllExistedGMail(String eGMail, String ePassword) {
         getLogger().info("Try to delete all existed eGMail");
         try {
             GmailPage gmailLoginPage = new GmailPage(logger, driver);
@@ -531,12 +532,12 @@ public class AbstractService {
             getLogger().info("Unable to relogin use another account.");
         }
 
-    }
+    }*/
 
     /*
     Method to the lasted mail in GMail.
      */
-    public void deleteTheLastedGMail(String eGMail, String ePassword) {
+    /*public void deleteTheLastedGMail(String eGMail, String ePassword) {
         getLogger().info("Try to delete all existed eGMail");
         try {
             GmailPage gmailLoginPage = new GmailPage(logger, driver);
@@ -547,14 +548,14 @@ public class AbstractService {
         } catch (Exception e) {
             getLogger().info("Unable to delete all existed mail.");
         }
-    }
+    }*/
 
     /**
      * Delete user using MongoDB service.
      *
      * @param email The email which is deleted.
      */
-    public void deleteUserUsingMongoDB(String email) {
+    /*public void deleteUserUsingMongoDB(String email) {
         try {
             MongoDBService.removeUserObjectByEmail(MongoDBService.getCollection("users"), email);
         } catch (Exception e) {
@@ -562,14 +563,14 @@ public class AbstractService {
             NXGReports.addStep("User cannot be deleted.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             getLogger().info(e);
         }
-    }
+    }*/
 
     /**
      * Update status of user to ONBOARDING using MongoDB service.
      *
      * @param email The email which is deleted.
      */
-    public void updateUserOnboardingUsingMongoDB(String email) {
+    /*public void updateUserOnboardingUsingMongoDB(String email) {
         try {
             MongoDBService.changeUserObjectField(MongoDBService.getCollection("users"), email, "status", "ONBOARDING");
         } catch (Exception e) {
@@ -577,14 +578,14 @@ public class AbstractService {
             NXGReports.addStep("User cannot be deleted.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             getLogger().info(e);
         }
-    }
+    }*/
 
     /**
      * Update status of user to ACTIVE using MongoDB service.
      *
      * @param email The email which is updated.
      */
-    public void updateUserActiveUsingMongoDB(String email) {
+    /*public void updateUserActiveUsingMongoDB(String email) {
         try {
             MongoDBService.changeUserObjectField(MongoDBService.getCollection("users"), email, "status", "ACTIVE");
         } catch (Exception e) {
@@ -592,12 +593,12 @@ public class AbstractService {
             NXGReports.addStep("User cannot be deleted.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             getLogger().info(e);
         }
-    }
+    }*/
 
     /**
      * Logout of Gmail.
      */
-    public void logoutGmail() {
+    /*public void logoutGmail() {
         getLogger().info("Try to logout gmail.");
         try {
             GmailPage gmailLoginPage = new GmailPage(logger, driver);
@@ -708,5 +709,5 @@ public class AbstractService {
         getLogger().info("Scroll up.");
         JavascriptExecutor jse = (JavascriptExecutor)driver;
         jse.executeScript("window.scrollBy(0,-250)", "");
-    }
+    }*/
 }
