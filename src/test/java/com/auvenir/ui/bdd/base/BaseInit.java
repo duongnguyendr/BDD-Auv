@@ -14,12 +14,12 @@ public class BaseInit {
         this.logger = logger;
         this.driver = driver;
     }
-
+*/
     public WebDriver getDriver() {
         return driver;
     }
     public Logger getLogger() {
         return logger;
     }
-    */
+
 }

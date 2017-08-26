@@ -7,6 +7,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.jfree.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +24,15 @@ public class GeneralStepDefinition extends BaseInit{
 
     @Given("^I navigate to login page$")
     public void iNavigateToLoginPage() throws Throwable {
-        //System.out.println("I navigate to login page.");
-        MarketingPage marketingPage = new MarketingPage(logger,driver);
+        base.getLogger().info("I navigate to login page.");
+        MarketingPage marketingPage = new MarketingPage(getLogger(),getDriver());
     }
 
     @And("^I click on login link$")
     public void iClickOnLoginLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        //System.out.println("I click on login link.");
-        MarketingPage marketingPage = new MarketingPage(logger,driver);
+        getLogger().info("=====I click on login link.");
+        MarketingPage marketingPage = new MarketingPage(getLogger(),getDriver());
         marketingPage.clickOnLoginBTN();
     }
     @And("^I enter the following for Login$")
@@ -45,7 +46,7 @@ public class GeneralStepDefinition extends BaseInit{
         System.out.println(data.get(1).get(1).toString());*/
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
-        MarketingPage marketingPage = new MarketingPage(logger,driver);
+        MarketingPage marketingPage = new MarketingPage(getLogger(),getDriver());
         for (User user: users){
             System.out.println("The Username is: "+user.username);
             System.out.println("The Password is: "+user.password);
@@ -64,7 +65,7 @@ public class GeneralStepDefinition extends BaseInit{
     public void iClickOnLoginButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         System.out.println("I click on login button.");
-        MarketingPage marketingPage = new MarketingPage(logger,driver);
+        MarketingPage marketingPage = new MarketingPage(getLogger(),getDriver());
         marketingPage.clickOnSubmitBTN();
 
     }
@@ -73,7 +74,7 @@ public class GeneralStepDefinition extends BaseInit{
         //System.out.println("The driver is: "+base.StepInfo);
         // Write code here that turns the phrase above into concrete actions
         System.out.println("I should see the home page.");
-        AdminPage adminPage = new AdminPage(logger,driver);
+        AdminPage adminPage = new AdminPage(getLogger(),getDriver());
         adminPage.verifyHeaderAdminPage();
     }
 }
