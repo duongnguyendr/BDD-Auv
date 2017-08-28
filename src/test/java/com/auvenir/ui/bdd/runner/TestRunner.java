@@ -7,7 +7,9 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
  * Created by doai.tran on 8/21/2017.
  */
 //@RunWith(Cucumber.class)
-@CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features"}, glue="com.auvenir.ui.bdd.stepDefinitions")
+@CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features"}
+,format={"json:target/cucumber.json","html:target/site/cucumber-pretty"}
+,glue="com.auvenir.ui.bdd.stepDefinitions")
 public class TestRunner extends AbstractTestNGCucumberTests{
 
 }
