@@ -26,6 +26,7 @@ public class AbstractPage {
     private Logger logger = null;
     private WebDriver driver = null;
     public AbstractPage(Logger logger, WebDriver driver){
+        //super(driver);
         this.driver = driver;
         this.logger = logger;
         PageFactory.initElements(driver, this);
