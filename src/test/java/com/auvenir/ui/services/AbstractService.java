@@ -394,7 +394,7 @@ public class AbstractService {
     public void visibilityOfElementWait(WebElement webElement, String elementName, int waitTime) {
         try {
             sWebDriverWait = new WebDriverWait(driver, waitTime);
-            sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
+            V until = sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
         } catch (Exception e) {
             sStatusCnt++;
 //            NXGReports.addStep(elementName + " is not Visible", LogAs.FAILED, null);
