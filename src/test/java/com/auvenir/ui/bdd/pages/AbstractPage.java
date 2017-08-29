@@ -38,7 +38,7 @@ public class AbstractPage {
         return logger;
     }
 
-    public static final int waitTime = 30;
+    public static final int waitTime = 15;
     public static final int smallTimeOut = 1000;
 
     /**

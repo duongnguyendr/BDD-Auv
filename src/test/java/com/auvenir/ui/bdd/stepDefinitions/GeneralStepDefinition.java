@@ -2,6 +2,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.AdminPage;
+import com.auvenir.ui.bdd.pages.MarketingNewPage;
 import com.auvenir.ui.bdd.pages.MarketingPage;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -20,37 +21,38 @@ public class GeneralStepDefinition extends BaseInit{
     public GeneralStepDefinition(BaseInit base) {
         this.base = base;
     }
-    private MarketingPage marketingPage;
+    private MarketingNewPage marketingNewPage;
 
     @Given("^I navigate to login page$")
     public void iNavigateToLoginPage() throws Throwable {
         base.getLogger().info("I navigate to login page.");
-        MarketingPage marketingPage = new MarketingPage(logger,driver);
+        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
     }
 
     @And("^I click on login link$")
     public void iClickOnLoginLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("=====I click on login link.");
-        MarketingPage marketingPage = new MarketingPage(logger,driver);
-        marketingPage.clickOnLoginBTN();
+        getLogger().info("===== I click on login link =====");
+        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+        marketingNewPage.clickOnLoginBTN();
     }
     @And("^I enter the following for Login$")
     public void iEnterTheFollowingForLogin(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        System.out.println("I enter the following for login.");
+        getLogger().info("I enter the following for login.");
         //List<List<String>> data = table.raw();
         /*System.out.println(data.get(0).get(0).toString());
         System.out.println(data.get(0).get(1).toString());
         System.out.println(data.get(1).get(0).toString());
         System.out.println(data.get(1).get(1).toString());*/
+        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
-        MarketingPage marketingPage = new MarketingPage(getLogger(),getDriver());
         for (User user: users){
             System.out.println("The Username is: "+user.username);
             System.out.println("The Password is: "+user.password);
-            marketingPage.inputUserNamePassword(user.username, user.password);
+            marketingNewPage.inputUserNamePassword(user.username, user.password);
         }
     }
     public class User{
@@ -64,17 +66,22 @@ public class GeneralStepDefinition extends BaseInit{
     @And("^I click on login button$")
     public void iClickOnLoginButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        System.out.println("I click on login button.");
-        MarketingPage marketingPage = new MarketingPage(logger,driver);
-        marketingPage.clickOnSubmitBTN();
+        getLogger().info("<3<3<3 I click on login button. <3<3<3");
+        /*MarketingPage marketingPage = new MarketingPage(logger,driver);
+        marketingPage.clickOnSubmitBTN();*/
+        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+        marketingNewPage.clickOnSubmitBTN();
+
 
     }
     @Then("^I should see the home page$")
     public void iShouldSeeTheHomePage()throws Throwable{
         //System.out.println("The driver is: "+base.StepInfo);
         // Write code here that turns the phrase above into concrete actions
-        System.out.println("I should see the home page.");
-        AdminPage adminPage = new AdminPage(logger,driver);
-        adminPage.verifyHeaderAdminPage();
+        getLogger().info("I should see the home page.");
+        /*AdminPage adminPage = new AdminPage(logger,driver);
+        adminPage.verifyHeaderAdminPage();*/
+        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+        marketingNewPage.verifyHeaderAdminPage();
     }
 }

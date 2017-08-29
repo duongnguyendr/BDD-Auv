@@ -8,13 +8,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.List;
 
 public class AdminPage extends AbstractPage {
-
+    public AdminPage(Logger logger, WebDriver driver) {
+        super(logger, driver);
+        PageFactory.initElements(driver, this);
+    }
 //    AuvenirPage auvenirPage = null;
     WebElement SelectStatus = null;
     String xpathUserTypeCellOnAdminPage = "//*[@id='w-mu-table']//tr/td[2][text()='%s']";
@@ -256,9 +260,6 @@ public class AdminPage extends AbstractPage {
      */
     private String xpathDueDateByName = "//table[@id='w-mu-table']//td[3][text()='%s']";
 
-    public AdminPage(Logger logger, WebDriver driver) {
-        super(logger, driver);
-    }
 
     public WebElement getEleAdminHdrTxt() {
         return eleAdminHdrTxt;
@@ -753,12 +754,15 @@ public class AdminPage extends AbstractPage {
     }
 
     public void verifyHeaderAdminPage() {
-        try {
+        /*try {
             waitForVisibleElement(eleAdminHdrTxt, "eleAdminHdrTxt");
             validateElementText(eleAdminHdrTxt, "Admin");
+            Assert.assertEquals(validateElementText(eleAdminHdrTxt, "Admin"),"true");
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
+        Assert.assertEquals(validateElementText(eleAdminHdrTxt, "Admin"),"true");
+
     }
 
     public void verifyAdminHeaderText() {
