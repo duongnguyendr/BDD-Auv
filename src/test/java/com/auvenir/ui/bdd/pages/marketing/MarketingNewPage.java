@@ -1,5 +1,6 @@
-package com.auvenir.ui.bdd.pages;
+package com.auvenir.ui.bdd.pages.marketing;
 
+import com.auvenir.ui.bdd.pages.AbstractPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ import org.testng.Assert;
 /**
  * Created by doai.tran on 8/29/2017.
  */
-public class MarketingNewPage extends AbstractPage{
+public class MarketingNewPage extends AbstractPage {
     public MarketingNewPage(Logger logger,WebDriver driver) {
         super(logger, driver);
         PageFactory.initElements(driver, this);
@@ -24,13 +25,13 @@ public class MarketingNewPage extends AbstractPage{
     @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='password']")
     private WebElement passwordTextBox;
 
-    @FindBy(xpath = ".//*[@id='login-popup']//button123")
+    @FindBy(xpath = ".//*[@id='login-popup']//button")
     private WebElement submitBTN;
 
 
 
     public void clickOnLoginBTN() {
-        getLogger().info("Click on login button.");
+        //getLogger().info("Click on login button.");
         clickElement(loginBTN, "loginBTN");
         //loginBTN.click();
     }

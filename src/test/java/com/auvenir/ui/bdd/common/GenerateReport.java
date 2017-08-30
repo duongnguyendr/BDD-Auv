@@ -1,4 +1,4 @@
-package com.auvenir.ui.bdd.runner;
+package com.auvenir.ui.bdd.common;
 import net.masterthought.cucumber.ReportBuilder;
 import net.masterthought.cucumber.Reportable;
 import net.masterthought.cucumber.Configuration;

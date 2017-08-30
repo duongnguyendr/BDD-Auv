@@ -1,8 +1,9 @@
-package com.auvenir.ui.bdd.runner;
+package com.auvenir.ui.bdd.common;
 
 /**
  * Created by doai.tran on 8/29/2017.
  */
+import com.auvenir.ui.bdd.common.GenerateReport;
 import org.testng.IExecutionListener;
 
 /**

@@ -1,9 +1,8 @@
 package com.auvenir.ui.bdd.runner;
 
+import com.auvenir.ui.bdd.common.GenerateReport;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 
 /**
