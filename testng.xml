@@ -1,12 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Suite" verbose="1" thread-count="3" parallel="tests">
-    <!--
     <listeners>
-        <listener class-name="com.auvenir.utilities.listeners.TestngListener"/>
-        <listener class-name="com.auvenir.utilities.listeners.SuiteListener"/>
-        <listener class-name="com.auvenir.utilities.htmlreport.com.nxgreport.listners.NXGTestListner"></listener>
+        <listener class-name="com.auvenir.ui.bdd.common.TestNGExecutionListener"/>
     </listeners>
-    -->
     <test name="SmokeTest - Chrome">
         <!--<parameter name="browser" value="chrome"/>
         <parameter name="version" value="59.0.3071.115"/>
