@@ -6,9 +6,6 @@ package com.auvenir.ui.bdd.common;
 import com.auvenir.ui.bdd.common.GenerateReport;
 import org.testng.IExecutionListener;
 
-/**
- * Created by amit.rawat on 06/01/16.
- */
 public class TestNGExecutionListener implements IExecutionListener {
     @Override
     public void onExecutionStart() {
