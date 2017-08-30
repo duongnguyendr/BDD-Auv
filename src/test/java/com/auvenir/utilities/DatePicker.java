@@ -1,6 +1,5 @@
 package com.auvenir.utilities;
 
-import com.auvenir.ui.services.AbstractService;
 /*import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
 import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
 import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;*/
@@ -214,7 +213,7 @@ public class DatePicker {
             element.click();
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            //AbstractService.sStatusCnt++;
             System.out.println("Unable to click on: " + elementName);
 //            NXGReports.addStep("Unable to Click on: " + elementName, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
 //                    e.getMessage());

@@ -1,6 +1,5 @@
 package com.auvenir.ui.bdd.pages;
 
-import com.auvenir.ui.services.AbstractService;
 import com.auvenir.utilities.GenericService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;

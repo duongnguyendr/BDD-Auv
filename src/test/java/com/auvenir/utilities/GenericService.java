@@ -10,7 +10,6 @@
 
 package com.auvenir.utilities;
 
-import com.auvenir.ui.services.AbstractService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
@@ -340,12 +339,13 @@ public class GenericService {
             // msg.setSubject("Auvenir_Execution_Report_"+GenericService.getCongigValue(GenericService.sConfigFile,"EXECUTION_REPORT_DATE"));
             /*msg.setSubject("Auvenir Execution Report on " + GenericService.getConfigValue(GenericService.sConfigFile, "SERVER")
                     + " " + sExecutionDate);*/
-            String prefixProtocol = AbstractService.prefixProtocol;
+            /*String prefixProtocol = AbstractService.prefixProtocol;
             if (prefixProtocol == "") {
                 prefixProtocol = "https://";
-            }
+            }*/
 
-            String baseUrlRun = prefixProtocol + System.getProperty("serverDomainName");
+            //String baseUrlRun = prefixProtocol + System.getProperty("serverDomainName");
+            String baseUrlRun = System.getProperty("serverDomainName");
 
             msg.setSubject("Auvenir Execution Report on " + baseUrlRun + " " + sExecutionDate);
             msg.setSentDate(new Date());

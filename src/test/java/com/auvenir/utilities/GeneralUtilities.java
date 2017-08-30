@@ -1,6 +1,5 @@
 package com.auvenir.utilities;
 
-import com.auvenir.ui.services.AbstractService;
 //import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
 //import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
 //import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
@@ -64,7 +63,7 @@ public class GeneralUtilities {
                     element.isDisplayed();
 //                    NXGReports.addStep(sExpectedText + " is displayed", LogAs.PASSED, null);
                 } catch (Exception e) {
-                    AbstractService.sStatusCnt++;
+                    //AbstractService.sStatusCnt++;
 //                    NXGReports.addStep(sExpectedText + " is not displayed", LogAs.FAILED, null);
                 }
 
@@ -74,7 +73,7 @@ public class GeneralUtilities {
                     element.isEnabled();
 //                    NXGReports.addStep(sExpectedText + " is enabled", LogAs.PASSED, null);
                 } catch (Exception e) {
-                    AbstractService.sStatusCnt++;
+                    //AbstractService.sStatusCnt++;
 //                    NXGReports.addStep(sExpectedText + " is not enabled", LogAs.FAILED, null);
                 }
 
@@ -84,7 +83,7 @@ public class GeneralUtilities {
                     element.isSelected();
 //                    NXGReports.addStep(sExpectedText + " is selected", LogAs.PASSED, null);
                 } catch (Exception e) {
-                    AbstractService.sStatusCnt++;
+                    //AbstractService.sStatusCnt++;
 //                    NXGReports.addStep(sExpectedText + " is not selected", LogAs.FAILED, null);
                 }
 
@@ -93,7 +92,7 @@ public class GeneralUtilities {
                     element.getText().equals(sExpectedText);
 //                    NXGReports.addStep(sExpectedText + " text is displayed", LogAs.PASSED, null);
                 } catch (Exception e) {
-                    AbstractService.sStatusCnt++;
+                    ///AbstractService.sStatusCnt++;
 //                    NXGReports.addStep(sExpectedText + " text is displayed", LogAs.FAILED, null);
                 }
                 break;
@@ -112,13 +111,13 @@ public class GeneralUtilities {
                 if (deleteExisted) {
                     Files.delete(path);
                     if (Files.exists(path)) {
-                        AbstractService.sStatusCnt++;
+                        //AbstractService.sStatusCnt++;
 //                        NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
                     }
                 }
             }
         } catch (IOException ex) {
-            AbstractService.sStatusCnt++;
+            //AbstractService.sStatusCnt++;
 //            NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             ex.printStackTrace();
         }
