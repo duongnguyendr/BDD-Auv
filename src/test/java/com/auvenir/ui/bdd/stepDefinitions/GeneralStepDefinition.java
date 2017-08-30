@@ -25,27 +25,22 @@ public class GeneralStepDefinition extends BaseInit{
 
     @Given("^I navigate to login page$")
     public void iNavigateToLoginPage() throws Throwable {
-        base.getLogger().info("I navigate to login page.");
-        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+        base.getLogger().info("===== I navigate to login page =====");
+        MarketingNewPage marketingNewPage = new MarketingNewPage(logger,driver);
     }
 
     @And("^I click on login link$")
     public void iClickOnLoginLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("===== I click on login link =====");
-        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+        MarketingNewPage marketingNewPage = new MarketingNewPage(logger,driver);
         marketingNewPage.clickOnLoginBTN();
     }
     @And("^I enter the following for Login$")
     public void iEnterTheFollowingForLogin(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I enter the following for login.");
-        //List<List<String>> data = table.raw();
-        /*System.out.println(data.get(0).get(0).toString());
-        System.out.println(data.get(0).get(1).toString());
-        System.out.println(data.get(1).get(0).toString());
-        System.out.println(data.get(1).get(1).toString());*/
-        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+        getLogger().info("===== I enter the following for login =====");
+        MarketingNewPage marketingNewPage = new MarketingNewPage(logger,driver);
 
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
@@ -66,10 +61,10 @@ public class GeneralStepDefinition extends BaseInit{
     @And("^I click on login button$")
     public void iClickOnLoginButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("<3<3<3 I click on login button. <3<3<3");
+        getLogger().info("===== I click on login button =====");
         /*MarketingPage marketingPage = new MarketingPage(logger,driver);
         marketingPage.clickOnSubmitBTN();*/
-        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+        MarketingNewPage marketingNewPage = new MarketingNewPage(logger,driver);
         marketingNewPage.clickOnSubmitBTN();
 
 
@@ -78,10 +73,10 @@ public class GeneralStepDefinition extends BaseInit{
     public void iShouldSeeTheHomePage()throws Throwable{
         //System.out.println("The driver is: "+base.StepInfo);
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I should see the home page.");
+        getLogger().info("===== I should see the home page =====");
         /*AdminPage adminPage = new AdminPage(logger,driver);
         adminPage.verifyHeaderAdminPage();*/
-        MarketingNewPage marketingNewPage = new MarketingNewPage(driver);
+        MarketingNewPage marketingNewPage = new MarketingNewPage(logger,driver);
         marketingNewPage.verifyHeaderAdminPage();
     }
 }

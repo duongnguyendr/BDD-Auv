@@ -10,9 +10,9 @@ import org.testng.Assert;
 /**
  * Created by doai.tran on 8/29/2017.
  */
-public class MarketingNewPage {
-    public MarketingNewPage(WebDriver driver) {
-        //super(logger, driver);
+public class MarketingNewPage extends AbstractPage{
+    public MarketingNewPage(Logger logger,WebDriver driver) {
+        super(logger, driver);
         PageFactory.initElements(driver, this);
     }
     @FindBy(xpath = "//*[@class='ui right aligned container']/button")
@@ -24,27 +24,27 @@ public class MarketingNewPage {
     @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='password']")
     private WebElement passwordTextBox;
 
-    @FindBy(xpath = ".//*[@id='login-popup']//button")
+    @FindBy(xpath = ".//*[@id='login-popup']//button123")
     private WebElement submitBTN;
 
 
 
     public void clickOnLoginBTN() {
-/*        getLogger().info("Click on login button.");
-        clickElement(loginBTN, "loginBTN");*/
-        loginBTN.click();
+        getLogger().info("Click on login button.");
+        clickElement(loginBTN, "loginBTN");
+        //loginBTN.click();
     }
 
     public void inputUserNamePassword(String username, String password) {
-/*        sendKeyTextBox(emailTextBox, username, "emailTextBox");
-        sendKeyTextBox(passwordTextBox, password, "passwordTextBox");*/
-        emailTextBox.sendKeys(username);
-        passwordTextBox.sendKeys(password);
+        sendKeyTextBox(emailTextBox, username, "emailTextBox");
+        sendKeyTextBox(passwordTextBox, password, "passwordTextBox");
+        /*emailTextBox.sendKeys(username);
+        passwordTextBox.sendKeys(password);*/
     }
 
     public void clickOnSubmitBTN() {
-        //clickElement(submitBTN, "loginBTN");
-        submitBTN.click();
+        clickElement(submitBTN, "loginBTN");
+        //submitBTN.click();
     }
 
     @FindBy(id = "pageHeadBackText")

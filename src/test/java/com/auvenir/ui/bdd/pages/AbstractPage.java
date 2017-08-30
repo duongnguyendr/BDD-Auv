@@ -37,7 +37,10 @@ public class AbstractPage {
     public Logger getLogger(){
         return logger;
     }
-
+    
+    public AbstractPage(WebDriver webDriver) {
+        this.driver = webDriver;
+    }
     public static final int waitTime = 15;
     public static final int smallTimeOut = 1000;
 
@@ -48,10 +51,12 @@ public class AbstractPage {
      */
     public void visibilityOfElementWait(WebElement webElement, String elementName, int waitTime) {
         try {
+            getLogger().info("+++ Verify Element is visibility.");
             WebDriverWait sWebDriverWait = new WebDriverWait(driver, waitTime);
             sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++ Element: "+elementName+" is not visibility.");
         }
     }
 
@@ -61,17 +66,19 @@ public class AbstractPage {
      */
     public boolean validateElementText(WebElement webElement, String elementText) {
         try {
-            getLogger().info("Check rendered of text: " + elementText.trim());
-            getLogger().info("Actual Text is displayed: " + getText(webElement).trim());
+            getLogger().info("+++ Check rendered of text: " + elementText.trim());
+            getLogger().info("+++++ Actual Text is displayed: " + getText(webElement).trim());
             Assert.assertEquals(getText(webElement).trim(), elementText.trim());
             return true;
         } catch (AssertionError error) {
             getLogger().info(error);
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Text of Element is not: "+elementText);
             return false;
         } catch (Exception e) {
             getLogger().info(e.getMessage());
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Text of Element is not: "+elementText);
             return false;
         }
     }
@@ -87,7 +94,7 @@ public class AbstractPage {
             getLogger().info("The xpath of web element = " + xpathElement);
             resultWebElement = getDriver().findElement(By.xpath(xpathElement));
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
         }
         return resultWebElement;
     }
@@ -98,14 +105,14 @@ public class AbstractPage {
      * @elementName Name of element that we want to verify
      */
     public boolean validateDisPlayedElement(WebElement element, String elementName) throws InvalidElementStateException {
-        getLogger().info("verify Displayed of: " + elementName);
+        getLogger().info("+++ Verify Displayed of: " + elementName);
         try {
             element.isDisplayed();
-            getLogger().info("Element : " + elementName + " is presented");
+            getLogger().info("+++++ Element : " + elementName + " is presented");
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element : " + element + "is not presented");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element : " + element + "is not presented");
             return false;
         }
     }
@@ -117,14 +124,14 @@ public class AbstractPage {
      */
 
     public boolean validateEnabledElement(WebElement element, String elementName) throws InvalidElementStateException {
-        getLogger().info("verify enabled of: " + elementName);
+        getLogger().info("+++ Verify enabled of: " + elementName);
         try {
             element.isEnabled();
-            getLogger().info("Element : " + elementName + "is enable");
+            getLogger().info("+++++ Element : " + elementName + "is enable");
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element : " + elementName + "is not enable.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element : " + elementName + "is not enable.");
             return false;
         }
     }
@@ -135,14 +142,14 @@ public class AbstractPage {
      * @throws InvalidElementStateException
      */
     public boolean validateSelectedElement(WebElement element, String elementName) throws InvalidElementStateException {
-        getLogger().info("verify selected of: " + elementName);
+        getLogger().info("+++ Verify selected of: " + elementName);
         try {
             element.isSelected();
-            getLogger().info("Element : " + element.getText() + "is selected.");
+            getLogger().info("+++++ Element : " + element.getText() + "is selected.");
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element : " + element.getText() + "is not selected.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element : " + element.getText() + "is not selected.");
             return false;
         }
     }
@@ -153,34 +160,34 @@ public class AbstractPage {
      * @throws InvalidElementStateException
      */
     public boolean validateNotSelectedElement(WebElement element, String elementName) throws InvalidElementStateException {
-        getLogger().info("verify not selected of: " + elementName);
+        getLogger().info("+++ Verify not selected of: " + elementName);
         try {
             if (!element.isSelected()) {
-                getLogger().info("Element : " + element.getText() + "is not selected.");
+                getLogger().info("+++++ Element : " + element.getText() + "is not selected.");
                 return true;
             } else {
                 throw new Exception();
             }
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element : " + element.getText() + "is selected.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element : " + element.getText() + "is selected.");
             return false;
         }
     }
 
-    public boolean validateMaxlenght(WebElement webElement, String webElementName, int maxLength) {
+    public boolean validateMaxLength(WebElement webElement, String webElementName, int maxLength) {
         try {
-            String inputTextwithMaxLength = randomCharacters(maxLength);
+            String inputTextWithMaxLength = randomCharacters(maxLength);
             getLogger().info("Verify input with max length with " + maxLength + " characters");
             clickElement(webElement, webElementName);
             clearTextBox(webElement, webElementName);
-            webElement.sendKeys(inputTextwithMaxLength);
+            webElement.sendKeys(inputTextWithMaxLength);
             String actualTextInput = webElement.getAttribute("value");
-            Assert.assertEquals(actualTextInput, inputTextwithMaxLength, String.format("%s cannot input %d characters", webElementName, maxLength));
+            Assert.assertEquals(actualTextInput, inputTextWithMaxLength, String.format("%s cannot input %d characters", webElementName, maxLength));
             return true;
         } catch (AssertionError error) {
             getLogger().info(error);
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
             return false;
         }
     }
@@ -196,19 +203,16 @@ public class AbstractPage {
         return results;
     }
 
-    /*
-            Improvement to detect value: true/ false after take actions
-            Updated by: Doai.Tran 8/5/2017
-             */
     public void scrollPageUp() {
-        getLogger().info("Try to scroll Page up.");
+        getLogger().info("+++ Scroll Page up.");
         try {
             Robot robot = new Robot();
             robot.keyPress(KeyEvent.VK_PAGE_UP);
             robot.keyRelease(KeyEvent.VK_PAGE_UP);
+            getLogger().info("+++++ Scroll Page up successfully.");
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("scroll Page up unsuccessfully.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Scroll Page up unsuccessfully.");
         }
     }
 
@@ -216,14 +220,15 @@ public class AbstractPage {
     Method to scrollPageDown
      */
     public void scrollPageDown() {
-        getLogger().info("Try to scroll Page down.");
+        getLogger().info("+++ Scroll Page down.");
         try {
             Robot robot = new Robot();
             robot.keyPress(KeyEvent.VK_PAGE_DOWN);
             robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
+            getLogger().info("+++++ Scroll Page down successfully.");
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("scroll Page down unsuccessfully.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Scroll Page down unsuccessfully.");
         }
     }
 
@@ -233,13 +238,15 @@ public class AbstractPage {
      * @Description In order to wait element to be visible.
      */
     public boolean waitForVisibleElement(WebElement element, String elementName) {
-        getLogger().info("Try to waitForVisibleElement: " + elementName);
+        getLogger().info("+++ Wait For Visible Element: " + elementName);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(ExpectedConditions.visibilityOf(element));
+            getLogger().info("+++++ Element: "+elementName+" is visible.");
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element: "+elementName+" is not visible.");
             getLogger().info(e);
             return false;
         }
@@ -249,14 +256,15 @@ public class AbstractPage {
      * @Description In order to wait element to be present by locator.
      */
     public boolean waitForPresentOfLocator(By by) {
-        getLogger().info("Try to waitForPresentOfLocator");
+        getLogger().info("+++ Wait For Present Of Locator");
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
+            getLogger().info("+++++ Element is present.");
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element is not present.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not present.");
             return false;
         }
     }
@@ -265,25 +273,25 @@ public class AbstractPage {
      * @Description In order to wait element to be visible by locator.
      */
     public boolean waitForVisibleOfLocator(By by) {
-        getLogger().info("Try to waitForVisibleOfLocator");
+        getLogger().info("+++ Wait For Visible Of Locator");
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+            getLogger().info("+++++ Element is visible.");
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element is not visible.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not visible.");
             return false;
         }
     }
 
     /**
-     * created by: minh.nguyen
      *
      * @Description In order to wait element to be visible by locator with seconds input.
      */
     public boolean waitForVisibleOfLocator(By locator, int seconds) {
-        getLogger().info("Try to waitForVisibleOfLocator by seconds");
+        getLogger().info("+++ Wait For Visible Of Locator by seconds");
         boolean isResult = false;
         try {
             int i = 0;
@@ -302,12 +310,13 @@ public class AbstractPage {
                 }
             }
             if (!isResult) {
-                AbstractService.sStatusCnt++;
+                getLogger().info("+++++ Element is not visible.");
+                getLogger().info(e.getMessage());
             }
             return isResult;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element is not visible, try to waitForVisibleOfLocator by seconds.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not visible.");
             return isResult;
         }
     }
@@ -316,14 +325,15 @@ public class AbstractPage {
      * @Description In order to wait element to be invisible by locator.
      */
     public boolean waitForInvisibleOfLocator(By by) {
-        getLogger().info("Try to waitForInvisibleOfLocator");
+        getLogger().info("+++ Wait For Invisible Of Locator");
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+            getLogger().info("+++++ Element is invisible.");
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element is not invisible.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not invisible.");
             return false;
         }
     }
@@ -332,14 +342,15 @@ public class AbstractPage {
      * @Description In order to wait element to be clickable by locator.
      */
     public boolean waitForClickableOfLocator(By by) {
-        getLogger().info("Try to waitForClickableOfLocator");
+        getLogger().info("+++ Wait For Clickable Of Locator");
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(ExpectedConditions.elementToBeClickable(by));
+            getLogger().info("+++++ Element is clickable.");
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element is not clickable.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not clickable.");
             return false;
         }
     }
@@ -350,14 +361,15 @@ public class AbstractPage {
      * @Description In order to wait element to be visible.
      */
     public boolean waitForClickableOfElement(WebElement element, String elementName) {
-        getLogger().info("Try to waitForClickableOfElement: " + elementName);
+        getLogger().info("+++ Wait For Clickable Of Element: " + elementName);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(ExpectedConditions.elementToBeClickable(element));
+            getLogger().info("+++++ Element is clickable on Element: " + element.getText());
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element is not clickable on Element: " + element.getText());
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not clickable on Element: " + element.getText());
             return false;
         }
     }
@@ -366,13 +378,14 @@ public class AbstractPage {
      * @Description In order to wait element to be visible.
      */
     public void waitForClickableOfElement(WebElement element) {
-        getLogger().info("Try to waitForClickableOfElement: " + element);
+        getLogger().info("+++ Wait For Clickable Of Element: " + element);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(ExpectedConditions.elementToBeClickable(element));
+            getLogger().info("+++++ Element is clickable on Element: ");
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element is not clickable on Element: " + e.getMessage());
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not clickable on Element: " + e.getMessage());
         }
     }
 
@@ -382,14 +395,15 @@ public class AbstractPage {
      * @Description In order to wait element to be visible.
      */
     public boolean waitForInvisibleElement(WebElement element, String elementName) {
-        getLogger().info("Try to waitForInvisibleElement: " + elementName);
+        getLogger().info("+++ Wait For Invisible Element: " + elementName);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(ExpectedConditions.invisibilityOf(element));
+            getLogger().info("+++++ Element is invisible on Element: " + elementName);
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Element is not invisible on Element: " + elementName);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not invisible on Element: " + elementName);
             return false;
         }
     }
@@ -409,7 +423,7 @@ public class AbstractPage {
                 throw new Exception();
             }
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
             getLogger().info(elementName + " is  not disabled");
             return false;
         }
@@ -423,15 +437,16 @@ public class AbstractPage {
      * @Description: Click on element
      */
     public boolean clickElement(WebElement element, String elementName) {
-        getLogger().info("Try to ClickElement: " + elementName);
+        getLogger().info("+++ Click on Element: " + elementName);
         try {
             waitForClickableOfElement(element, "click to " + elementName);
             element.click();
+            getLogger().info("+++++ Clicked on Element: " + elementName);
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
             System.out.println("exception: " + e.getMessage());
-            getLogger().info("Unable to Click on: " + elementName);
+            getLogger().info("+++++ Unable to Click on: " + elementName);
             return false;
         }
     }
@@ -441,13 +456,14 @@ public class AbstractPage {
      * @Author: minh.nguyen
      */
     public void clickElement(WebElement element) {
-        getLogger().info("Try to ClickElement: " + element);
+        getLogger().info("+++ Click on Element: " + element);
         try {
             waitForClickableOfElement(element);
             element.click();
+            getLogger().info("+++++ Clicked on element");
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to Click on: " + e.getMessage());
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to Click on Element: " + e.getMessage());
         }
     }
 
@@ -457,18 +473,20 @@ public class AbstractPage {
      * @Description: Click and Hold on element
      */
     public void clickAndHold(WebElement element, String elementName) {
-        getLogger().info("Try to ClickAndHold: " + elementName);
+        getLogger().info("+++ Click And Hold: " + elementName);
         try {
             if (GenericService.sBrowserData.equals("chr.")) {
                 Actions actions = new Actions(driver);
                 actions.moveToElement(element);
                 actions.click(element);
                 actions.perform();
-            } else
+            } else {
                 element.click();
+            }
+            getLogger().info("+++++ Click And Hold on: " + elementName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to ClickAndHold on: " + elementName);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to ClickAndHold on: " + elementName);
         }
     }
 
@@ -478,16 +496,15 @@ public class AbstractPage {
      * @Description: Hover on element
      */
     public void hoverElement(WebElement element, String elementName) {
-        getLogger().info("Try to hoverElement: " + elementName);
+        getLogger().info("+++ Hover on Element: " + elementName);
         try {
-            if ((GenericService.sBrowserData).equals("chr.")) {
-                Actions actions = new Actions(driver);
-                actions.moveToElement(element);
-                actions.build().perform();
-            }
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element);
+            actions.build().perform();
+            getLogger().info("+++++ Hovered on Element: " + elementName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to hoverElement on: " + elementName);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to hoverElement on: " + elementName);
         }
     }
 
@@ -499,18 +516,19 @@ public class AbstractPage {
      * @Description: Send a String to textBox.
      */
     public boolean sendKeyTextBox(WebElement element, String text, String elementName) {
-        getLogger().info("Try to sendKey on : " + elementName);
+        getLogger().info("+++ SendKey on : " + elementName);
         try {
             waitForClickableOfElement(element, "wait for click to " + elementName);
             //element.click();
             element.clear();
             waitForClickableOfElement(element, "wait for click to " + elementName);
             element.sendKeys(text);
+            getLogger().info("+++++ Sent KeyValue on: " + elementName);
             return true;
         } catch (Exception e) {
             getLogger().info(e);
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to sendKey on: " + elementName);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to sendKey on: " + elementName);
             getLogger().info(e);
             return false;
         }
@@ -523,12 +541,13 @@ public class AbstractPage {
      * @Description: Clear all Strings to textBox.
      */
     public void clearTextBox(WebElement element, String elementName) {
-        getLogger().info("Try to clear text on : " + elementName);
+        getLogger().info("+++ Clear text on : " + elementName);
         try {
             element.clear();
+            getLogger().info("+++++ Cleared on: " + elementName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to clear on: " + elementName);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to clear on: " + elementName);
         }
     }
 
@@ -538,12 +557,13 @@ public class AbstractPage {
      * @Description: Click on checkbox
      */
     public void clickOnCheckBox(WebElement element, String elementName) {
-        getLogger().info("Try to click on checkbox: " + elementName);
+        getLogger().info("+++ Click on checkbox: " + elementName);
         try {
             element.click();
+            getLogger().info("+++ Clicked on checkbox: " + elementName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to click on checkbox element: " + elementName);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to click on checkbox element: " + elementName);
         }
     }
 
@@ -555,13 +575,15 @@ public class AbstractPage {
      * @Description: select a value on dropdown via visible text
      */
     public boolean selectByVisibleText(WebElement element, String selText, String elementName) {
-        getLogger().info("Try to selectByVisibleText on element: " + elementName);
+        getLogger().info("+++ Select By VisibleText on element: " + elementName);
         try {
             Select dropDown = new Select(element);
             dropDown.selectByVisibleText(selText);
+            getLogger().info("+++++ Selected By VisibleText on element: " + elementName);
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to Select By VisibleText on element: " + elementName);
             return false;
         }
     }
@@ -574,12 +596,14 @@ public class AbstractPage {
      * @Description: select a value on dropdown via visible text
      */
     public void selectByValue(WebElement element, String selValue, String elementName) {
-        getLogger().info("Try to selectByValue on element: " + elementName);
+        getLogger().info("+++ Select By Value on element: " + elementName);
         try {
             Select dropDown = new Select(element);
             dropDown.selectByValue(selValue);
+            getLogger().info("+++++ Selected By Value on element: " + elementName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info("+++++ Selected By Value on element: " + elementName);
+            getLogger().info(e.getMessage());
         }
     }
 
@@ -591,12 +615,14 @@ public class AbstractPage {
      * @Description: select a value on dropdown via visible text
      */
     public void selectByIndex(WebElement element, int selIndex, String elementName) {
-        getLogger().info("Try to selectByIndex on element: " + elementName);
+        getLogger().info("+++ Select By Index on element: " + elementName);
         try {
             Select dropDown = new Select(element);
             dropDown.selectByIndex(selIndex);
+            getLogger().info("+++++ Selected By Index on element: " + elementName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ unable to select By Index on element: " + elementName);
         }
     }
 
@@ -606,23 +632,25 @@ public class AbstractPage {
      * @Description: Send TabKey
      * @Description: Send TabKey
      */
-    public void sendTabkey(WebElement element, String elementName) {
-        getLogger().info("Try to sendTabkey: " + elementName);
+    public void sendTabKey(WebElement element, String elementName) {
+        getLogger().info("+++ Send TabKey on Element " + elementName);
         try {
             element.sendKeys(Keys.TAB);
+            getLogger().info("+++++ Sent TabKey on Element " + elementName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to sendTabkey on: " + elementName);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to send Tab key on: " + elementName);
         }
     }
 
-    public void sendEnterkey(WebElement element, String elementName) {
-        getLogger().info("Try to sendEnterkey: " + elementName);
+    public void sendEnterKey(WebElement element, String elementName) {
+        getLogger().info("+++ Send Enter Key: " + elementName);
         try {
             element.sendKeys(Keys.ENTER);
+            getLogger().info("+++++ Sent Enter Key: " + elementName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to sendEnterkey on: " + elementName);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to sendEnterkey on: " + elementName);
         }
     }
 
@@ -632,7 +660,7 @@ public class AbstractPage {
      * @param expectedAttributeValue Expected value that we want to validate
      */
     public boolean validateAttributeElement(WebElement element, String attributeName, String expectedAttributeValue) {
-        getLogger().info("verify Attribute " + attributeName + " of: " + element.toString());
+        getLogger().info("+++ Verify Attribute " + attributeName + " of: " + element.toString());
         String actualAttributeValue = null;
         try {
             actualAttributeValue = element.getAttribute(attributeName).trim();
@@ -645,8 +673,8 @@ public class AbstractPage {
             }
         } catch (Exception e) {
             getLogger().info(e);
-            AbstractService.sStatusCnt++;
-            getLogger().info("Error: " + element.getTagName() + " has attribute not as expected with actual: " + actualAttributeValue);
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Error: " + element.getTagName() + " has attribute not as expected with actual: " + actualAttributeValue);
             return false;
         }
     }
@@ -657,33 +685,36 @@ public class AbstractPage {
      * @param attributeValue Expected value that we want to validate
      */
     public boolean validateCssValueElement(WebElement element, String attributeName, String attributeValue) throws InvalidElementStateException {
-        getLogger().info("verify style with " + attributeName);
+        getLogger().info("+++ Verify style with " + attributeName);
         try {
             getLogger().info("CurrentL: " + element.getCssValue(attributeName).trim());
             Assert.assertEquals(element.getCssValue(attributeName).trim(), attributeValue);
             return true;
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Validate CSS Value Element is not correct.");
             return false;
         } catch (AssertionError e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ CSS Value Element is not correct.");
             return false;
         }
 
     }
 
     public boolean validateIsNotDisPlayedElement(WebElement element, String elementName) {
-        getLogger().info("Verify element is not displayed of: " + elementName);
+        getLogger().info("+++ Verify element is not displayed of: " + elementName);
         try {
             if (!element.isDisplayed()) {
                 return true;
             } else {
-                AbstractService.sStatusCnt++;
+                getLogger().info(e.getMessage());
+                getLogger().info("+++++ Element is not displayed.");
                 return false;
-
             }
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info("+++++ Element is not displayed.");
+            getLogger().info(e.getMessage());
             return false;
         }
 
@@ -695,20 +726,23 @@ public class AbstractPage {
      * @return The text of web element
      */
     public String getTextByJavaScripts(WebElement eleGetText, String elementName) {
-        getLogger().info("Get text by javascript of element " + elementName);
+        getLogger().info("+++ Get text by javascript of element " + elementName);
         String textOfElement = "";
         try {
             JavascriptExecutor jse = (JavascriptExecutor) getDriver();
             textOfElement = (String) ((JavascriptExecutor) getDriver()).executeScript("return arguments[0].value;", eleGetText);
+            getLogger().info("+++++ Text of element: " + elementName + textOfElement);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
             getLogger().info(e.getMessage());
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to get text of element: " + elementName + textOfElement);
         }
         return textOfElement;
     }
 
     public void verifySortDataGrid(java.util.List<WebElement> elementRowValue, WebElement elementSortIcon) {
         try {
+            getLogger().info("+++ Verify Sort Data Grid: "+elementSortIcon);
             java.util.List<String> listToDoTaskName = new ArrayList<String>();
             java.util.List<String> listSortedToDoTaskName;
             for (int i = 0; i < elementRowValue.size(); i++) {
@@ -729,9 +763,10 @@ public class AbstractPage {
                 listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
             }
             Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Descending sort is NOT as expected");
+            getLogger().info("++++ Verified Sort Data Grid: "+elementSortIcon);
         } catch (AssertionError e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Cannot sort data on Data Grid View.");
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to sort data on Data Grid View.");
         }
     }
     public enum Element_Type {
@@ -746,15 +781,16 @@ public class AbstractPage {
      * @param type
      */
     public void validateElememt(WebElement webElement, String expected, Element_Type type) {
+        getLogger().info("+++++ Validate Element with: "+ type);
         switch (type) {
             case DISPLAYED:
                 try {
                     Assert.assertTrue(webElement.isDisplayed(), expected + " is not displayed.");
                 } catch (NoSuchElementException e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -762,10 +798,10 @@ public class AbstractPage {
                 try {
                     Assert.assertTrue(webElement.isEnabled(), expected + " is not enabled.");
                 } catch (NoSuchElementException e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -773,10 +809,10 @@ public class AbstractPage {
                 try {
                     Assert.assertTrue(webElement.isSelected(), expected + " is not selected  ");
                 } catch (NoSuchElementException e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -784,10 +820,10 @@ public class AbstractPage {
                 try {
                     Assert.assertFalse(webElement.isDisplayed(), expected + " is not hidden.");
                 } catch (NoSuchElementException e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -795,10 +831,10 @@ public class AbstractPage {
                 try {
                     Assert.assertEquals(getText(webElement), expected);
                 } catch (NoSuchElementException e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    AbstractService.sStatusCnt++;
+                    getLogger().info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -817,15 +853,19 @@ public class AbstractPage {
         }
     }
 
-    public AbstractPage(WebDriver webDriver) {
-        this.driver = webDriver;
-    }
-
     /**
+     * Method togo to URL
      * @param url
      */
     public void getUrl(String url) {
-        driver.get(url);
+        getLogger().info("+++ Navigate to URL: "+ url);
+        try{
+            driver.get(url);
+            getLogger().info("+++++ Navigated to URL: "+url);
+        }catch (Exception e){
+            getLogger().info(e.getMessage());
+            getLogger().info("++++ Unable to navigate to URL: "+url);
+        }
     }
 
     /**
@@ -835,11 +875,14 @@ public class AbstractPage {
      * @param item
      */
     public void selectOptionByText(WebElement webElement, String item, String elementName) {
+        getLogger().info("+++ Select option: "+elementName+ "by Text: "+ item);
         try {
             Select select = new Select(webElement);
             select.selectByVisibleText(item);
+            getLogger().info("+++++ Selected option: "+elementName+" option: "+item);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to select option: "+elementName+" option: "+item);
         }
     }
 
@@ -850,11 +893,14 @@ public class AbstractPage {
      * @param val
      */
     public void selectOptionByValue(WebElement ele, String val) {
+        getLogger().info("+++ Select option: "+ele+ "by value: "+ val);
         try {
             Select select = new Select(ele);
             select.selectByValue(val);
+            getLogger().info("+++++ Selected option: "+ele+ "by value: "+ val);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to Select option: "+ele+ "by value: "+ val);
         }
     }
 
@@ -865,11 +911,15 @@ public class AbstractPage {
      * @param index
      */
     public void selectOptionByIndex(WebElement ele, int index) {
+        getLogger().info("+++ Select option: "+ele+ "by index: "+ index);
         try {
             Select select = new Select(ele);
             select.selectByIndex(index);
+            getLogger().info("+++++ Select option: "+ele+ "by index: "+ index);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Select option: "+ele+ "by index: "+ index);
+
         }
     }
 
@@ -880,8 +930,15 @@ public class AbstractPage {
      * @param tabIndex
      */
     public void switchToOtherTab(int tabIndex) {
-        java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(tabIndex));
+        getLogger().info("+++ Switch to tab: "+ tabIndex);
+        try {
+            java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+            driver.switchTo().window(tabs.get(tabIndex));
+            getLogger().info("+++++ Switched to tab: "+ tabIndex);
+        }catch (Exception e){
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to Switch to tab: "+ tabIndex);
+        }
     }
 
     /**
@@ -912,11 +969,15 @@ public class AbstractPage {
      * @param timeOut
      */
     public void waitUtilElementClickable(WebElement webElement, long timeOut) {
+        getLogger().info("+++ Wait util Element: " +webElement+" clickable.");
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeOut);
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            getLogger().info("+++++ Element: " +webElement+" is clickable.");
+
         } catch (TimeoutException e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element: " +webElement+" is not clickable.");
             throw new AssertionError(e.getMessage());
         }
     }
@@ -927,11 +988,14 @@ public class AbstractPage {
      * @param text
      */
     public void waitUtilTextPresent(WebElement webElement, long timeOut, String text) {
+        getLogger().info("+++ Wait util Element: " +webElement+" present.");
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeOut);
             wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
+            getLogger().info("+++++ Element: " +webElement+" is present.");
         } catch (TimeoutException e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element: " +webElement+" is not present.");
             throw new AssertionError(e.getMessage());
         }
     }
@@ -943,11 +1007,15 @@ public class AbstractPage {
      * @param timeOut
      */
     public void waitUtilElementHidden(By by, long timeOut) {
+        getLogger().info("+++ Wait util Element is hidden.");
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeOut);
             wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+            getLogger().info("+++++ Element is hidden.");
+
         } catch (TimeoutException e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not hidden.");
             throw new AssertionError(e.getMessage());
         }
     }
@@ -958,12 +1026,13 @@ public class AbstractPage {
      * @param IframeName
      */
     public void switchToFrame(String IframeName) {
+        getLogger().info("+++ Switch to iFrame: " + IframeName);
         try {
-            getLogger().info("Try to switch to iFrame: " + IframeName);
             driver.switchTo().frame(IframeName);
+            getLogger().info("+++++ Switched to iFrame: " + IframeName);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Unable to switch to iFrame: " + IframeName + "with error: " + e.getMessage());
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to switch to iFrame: " + IframeName);
         }
     }
 
@@ -973,12 +1042,13 @@ public class AbstractPage {
      * @param iFrameId
      */
     public void switchToFrame(int iFrameId) {
+        getLogger().info("+++ Switch to iFrame with id: " + iFrameId);
         try {
-            getLogger().info("Try to switch to iFrame with id: " + iFrameId);
             driver.switchTo().frame(iFrameId);
+            getLogger().info("+++++ Switch to iFrame with id: " + iFrameId);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Try to switch to iFrame with id: " + iFrameId + "with error: " + e.getMessage());
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Try to switch to iFrame with id: " + iFrameId);
         }
     }
 
@@ -988,12 +1058,13 @@ public class AbstractPage {
      * @param eleFrame
      */
     public void switchToFrame(WebElement eleFrame) {
+        getLogger().info("+++ Switch to iFrame with WebElement: " + eleFrame);
         try {
-            getLogger().info("Try to switch to iFrame with WebElement: " + eleFrame);
             driver.switchTo().frame(eleFrame);
+            getLogger().info("+++++ Switched to iFrame with WebElement: " + eleFrame);
         } catch (Exception e) {
-            AbstractService.sStatusCnt++;
-            getLogger().info("Try to switch to iFrame with WebElement: " + eleFrame + "with error: " + e.getMessage());
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to switch to iFrame with WebElement: " + eleFrame);
         }
     }
 
@@ -1005,19 +1076,22 @@ public class AbstractPage {
      * @param expected
      */
     public void verifyCssValue(WebElement webElement, String cssName, String expected) {
-
+        getLogger().info("+++ Verify CSS value: "+ cssName+ " of Element: "+ webElement);
         try {
-
             String actualValue = webElement.getCssValue(cssName);
             System.out.println("Actual CSS Value: " + actualValue);
             if (cssName.contains("color")) {
                 actualValue = GenericService.parseRgbTohex(actualValue);
             }
-
             Assert.assertEquals(actualValue, expected);
+            getLogger().info("+++++ Verified CSS value: "+ cssName+ " of Element: "+ webElement);
         } catch (AssertionError e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ CSS value: "+ cssName+ " of Element: "+ webElement+" is not equal to "+ expected);
             throw new AssertionError(e.getMessage());
+        }catch (Exception e){
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to verify CSS Value"+ webElement);
         }
     }
 
@@ -1029,13 +1103,16 @@ public class AbstractPage {
      * @return
      */
     public void getValueCssOfBeforeElement(WebElement element, String cssType, String expectedResult) {
+        getLogger().info("+++ Get CSS value: "+ cssType+ " of Element: "+ element);
         try {
             WebElement parent = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].parentNode;", element);
             String actual = ((JavascriptExecutor) driver)
                     .executeScript("return window.getComputedStyle(arguments[0], ':before').getPropertyValue('" + cssType + "');", parent).toString();
             Assert.assertEquals(actual, expectedResult);
+            getLogger().info("+++++ Got CSS value: "+ cssType+ " of Element: "+ element);
         } catch (AssertionError e) {
-            AbstractService.sStatusCnt++;
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to get CSS value.");
         }
     }
 
