@@ -72,7 +72,6 @@ public class AbstractPage {
             return true;
         } catch (AssertionError error) {
             getLogger().info(error);
-            getLogger().info(e.getMessage());
             getLogger().info("+++++ Text of Element is not: "+elementText);
             return false;
         } catch (Exception e) {
@@ -176,9 +175,9 @@ public class AbstractPage {
     }
 
     public boolean validateMaxLength(WebElement webElement, String webElementName, int maxLength) {
+        getLogger().info("Verify input with max length with " + maxLength + " characters");
         try {
             String inputTextWithMaxLength = randomCharacters(maxLength);
-            getLogger().info("Verify input with max length with " + maxLength + " characters");
             clickElement(webElement, webElementName);
             clearTextBox(webElement, webElementName);
             webElement.sendKeys(inputTextWithMaxLength);
@@ -187,7 +186,6 @@ public class AbstractPage {
             return true;
         } catch (AssertionError error) {
             getLogger().info(error);
-            getLogger().info(e.getMessage());
             return false;
         }
     }
@@ -311,7 +309,6 @@ public class AbstractPage {
             }
             if (!isResult) {
                 getLogger().info("+++++ Element is not visible.");
-                getLogger().info(e.getMessage());
             }
             return isResult;
         } catch (Exception e) {
@@ -708,7 +705,6 @@ public class AbstractPage {
             if (!element.isDisplayed()) {
                 return true;
             } else {
-                getLogger().info(e.getMessage());
                 getLogger().info("+++++ Element is not displayed.");
                 return false;
             }
