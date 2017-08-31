@@ -22,4 +22,14 @@ public class BaseInit {
         return logger;
     }
 
+    public static String baseUrl = "ariel.auvenir.com";
+    public void setBaseUrl(String serverDomainName) {
+        baseUrl = serverDomainName;
+        getLogger().info("Url of testing server is: " + baseUrl);
+    }
+    public String getBaseUrl() {
+        setBaseUrl(System.getProperty("serverDomainName"));
+        return baseUrl;
+    }
+
 }

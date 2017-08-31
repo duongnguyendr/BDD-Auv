@@ -24,7 +24,8 @@ public class GeneralStepDefinition extends BaseInit{
     public void iNavigateToLoginPage() throws Throwable {
         base.getLogger().info("===== I navigate to login page =====");
         MarketingNewPage marketingNewPage = new MarketingNewPage(logger,driver);
-        marketingNewPage.getUrl("https://auvenir-qa-automation.com");
+        getLogger().info("=========="+baseUrl);
+        marketingNewPage.getUrl("https://"+baseUrl);
     }
 
 
