@@ -1,5 +1,6 @@
 package com.auvenir.ui.bdd.common;
 
+import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.utilities.GenericService;
 import com.auvenir.utilities.PdfGenerater;
 import org.codehaus.groovy.runtime.powerassert.SourceText;
@@ -12,21 +13,44 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.File;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+
 /**
  * Created by doai.tran on 8/31/2017.
  */
-public class Generic {
+public class Generic extends BaseInit{
+    private static BaseInit base;
+    public Generic(BaseInit base) {
+        this.base = base;
+    }
     static public String sDirPath = System.getProperty("user.dir");
     static public String sUserPath = System.getProperty("user.home");
     static public String sBrowser = null;
+    public final static String PROPERTIES_FILE = sDirPath + "\\TestBDD.properties";
 
+    public static String getConfigValue(String sFile, String sKey) {
+        getLogger().info("**** Read Configuration file ****");
+        Properties prop = new Properties();
+        String sValue = null;
+        try {
+            InputStream input = new FileInputStream(sFile);
+            prop.load(input);
+            sValue = prop.getProperty(sKey);
+            getLogger().info("**** Value of Parameter: "+sKey+": "+sValue);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            getLogger().info("**** Can not find the properties file ****"+sValue);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sValue;
+    }
     /*public static void sendReportMail(File pdfReports, ArrayList sTestName, ArrayList sStatus, String timeStamp) {
         System.out.println("REPORT");
         Date date = new Date();

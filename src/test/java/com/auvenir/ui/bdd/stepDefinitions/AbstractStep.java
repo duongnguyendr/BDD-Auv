@@ -14,6 +14,9 @@ import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.auvenir.ui.bdd.common.Generic.PROPERTIES_FILE;
+import static com.auvenir.ui.bdd.common.Generic.getConfigValue;
+
 /**
  * Created by doai.tran on 8/18/2017.
  */
@@ -24,6 +27,7 @@ public class AbstractStep extends BaseInit {
     @Before
     public void intializeWebDriver(){
         getBaseUrl();
+        baseUrl=getConfigValue(PROPERTIES_FILE,"BASE_URL");
         /*switch (Generic.sBrowser){
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/chromedriver.exe");
@@ -43,8 +47,6 @@ public class AbstractStep extends BaseInit {
         }else if(Generic.sBrowser.equalsIgnoreCase("edge")){
 
         }
-        /*System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();*/
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);

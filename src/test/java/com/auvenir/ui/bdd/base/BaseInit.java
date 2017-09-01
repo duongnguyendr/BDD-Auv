@@ -18,7 +18,7 @@ public class BaseInit {
     public WebDriver getDriver() {
         return driver;
     }
-    public Logger getLogger() {
+    public static Logger getLogger() {
         return logger;
     }
 
