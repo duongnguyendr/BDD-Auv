@@ -34,6 +34,12 @@ public class Generic extends BaseInit{
     static public String sBrowser = null;
     public final static String PROPERTIES_FILE = sDirPath + "\\TestBDD.properties";
 
+    /**
+     * Description: Method to read the configuration from Config file.
+     * @param sFile FILE Destination
+     * @param sKey KeyWord to read value.
+     * @return
+     */
     public static String getConfigValue(String sFile, String sKey) {
         getLogger().info("**** Read Configuration file ****");
         Properties prop = new Properties();
