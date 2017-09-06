@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.auvenir.ui.bdd.common.Generic.sExecuteTime;
+
 /**
  * Created by doai.tran on 29/08/17.
  */
@@ -18,8 +20,8 @@ public class GenerateReport {
     public static void GenerateMasterthoughtReport(){
         try{
             System.out.println("START");
-
-            File reportOutputDirectory = new File("Reports/Report_"+GetTimeStampValue());
+            sExecuteTime = GetTimeStampValue();
+            File reportOutputDirectory = new File("Reports/HTMLReports/Report_"+sExecuteTime);
             List<String> jsonFiles = new ArrayList<>();
             jsonFiles.add("./target/cucumber-report.json");
             //jsonFiles.add("cucumber-report-2.json");
@@ -30,11 +32,11 @@ public class GenerateReport {
             boolean parallelTesting = false;
 
             Configuration configuration = new Configuration(reportOutputDirectory, projectName);
-// optional configuration
+    // optional configuration
             configuration.setParallelTesting(parallelTesting);
             configuration.setRunWithJenkins(runWithJenkins);
             configuration.setBuildNumber(buildNumber);
-// addidtional metadata presented on main page
+    // addidtional metadata presented on main page
             configuration.addClassifications("Platform", "Windows");
             configuration.addClassifications("Browser", "Chrome");
             configuration.addClassifications("Branch", "release/1.0");

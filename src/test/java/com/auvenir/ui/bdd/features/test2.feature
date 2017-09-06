@@ -6,6 +6,6 @@ Feature: Login Feature - admin
     And I click on login link
     And I enter the following for Login
       | Username | Password |
-      | chr.adm.auvenir@gmail.com | Changeit@123 |
+      | qatest02@auvenir.com  | P@ssword123 |
     And I click on login button
     Then I should see the home page
