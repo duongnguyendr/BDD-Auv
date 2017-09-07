@@ -136,13 +136,22 @@ public class GenericService {
         return sData;
     }
 
-    public static void getPieChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp) {
+    public static void getFeaturesChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp){
+        getPieChart(iPassCount,  iFailCount, iSkippedCount, timeStamp, "Features");
+    }
+
+    public static void getScenariosChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp){
+        getPieChart(iPassCount,  iFailCount, iSkippedCount, timeStamp, "Scenarios");
+    }
+
+
+    private static void getPieChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp, String nameChart) {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
         pieDataset.setValue("FAIL", new Integer(iFailCount));
         pieDataset.setValue("SKIP", new Integer(iSkippedCount));
         pieDataset.setValue("PASS", new Integer(iPassCount));
 
-        JFreeChart piechart = ChartFactory.createPieChart("Features", pieDataset, true, true, false);
+        JFreeChart piechart = ChartFactory.createPieChart(nameChart, pieDataset, true, true, false);
         PiePlot plot = (PiePlot) piechart.getPlot();
 
         plot.setSectionPaint("FAIL", Color.RED);
@@ -159,7 +168,7 @@ public class GenericService {
         try {
             ChartUtilities
                     .saveChartAsJPEG(new File(System.getProperty("user.dir")
-                            + "\\Reports\\ImageReports\\" + timeStamp + "\\PieChart" + "_" + timeStamp + ".png"), piechart, 400, 400);
+                            + "\\Reports\\ImageReports\\" + timeStamp + "\\" + nameChart + "Chart" + "_" + timeStamp + ".png"), piechart, 400, 400);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
