@@ -41,9 +41,9 @@ public class MarketingStepDefinition extends BaseInit {
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
         for (User user: users){
-            System.out.println("The Username is: "+user.username);
+            System.out.println("The Username is: "+user.email);
             System.out.println("The Password is: "+user.password);
-            marketingNewPage.inputUserNamePassword(user.username, user.password);
+            marketingNewPage.inputUserNamePassword(user.email, user.password);
         }
     }
 
@@ -85,7 +85,7 @@ public class MarketingStepDefinition extends BaseInit {
         adminPage.clickConfirmButton();
     }
 
-    @Then("^I should see verified message succesfull$")
+    @Then("^I should see verified message successful$")
     public void iShouldSeeVerifiedMessageSuccesfull() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see verified message succesfull");
@@ -93,10 +93,10 @@ public class MarketingStepDefinition extends BaseInit {
     }
 
     public class User{
-        public String username;
+        public String email;
         public String password;
-        public User (String userName, String passWord){
-            username = userName;
+        public User (String eMail, String passWord){
+            email = eMail;
             password = passWord;
         }
     }
