@@ -136,13 +136,13 @@ public class GenericService {
         return sData;
     }
 
-    public static void getPieChart(int iPassCount, int iFailCount, int iSkippedCount) {
+    public static void getPieChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp) {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
         pieDataset.setValue("FAIL", new Integer(iFailCount));
         pieDataset.setValue("SKIP", new Integer(iSkippedCount));
         pieDataset.setValue("PASS", new Integer(iPassCount));
 
-        JFreeChart piechart = ChartFactory.createPieChart("Pie Chart", pieDataset, true, true, false);
+        JFreeChart piechart = ChartFactory.createPieChart("Features", pieDataset, true, true, false);
         PiePlot plot = (PiePlot) piechart.getPlot();
 
         plot.setSectionPaint("FAIL", Color.RED);
@@ -158,14 +158,15 @@ public class GenericService {
         plot.setLabelFont(new Font("SansSerif", Font.BOLD, 12));
         try {
             ChartUtilities
-                    .saveChartAsJPEG(new File(System.getProperty("user.dir") + "\\src\\test\\resources\\images\\PieChart.png"), piechart, 400, 400);
+                    .saveChartAsJPEG(new File(System.getProperty("user.dir")
+                            + "\\Reports\\ImageReports\\" + timeStamp + "\\PieChart" + "_" + timeStamp + ".png"), piechart, 400, 400);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    public static void getBarChart(int iPassCount, int iFailCount, int iSkippedCount) {
+    public static void getBarChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp) {
         final String series1 = "First";
         final String series2 = "Second";
         final String series3 = "Third";
@@ -208,7 +209,8 @@ public class GenericService {
 
         try {
             ChartUtilities
-                    .saveChartAsJPEG(new File(System.getProperty("user.dir") + "\\src\\test\\resources\\images\\BarChart.png"), chart, 400, 400);
+                    .saveChartAsJPEG(new File(System.getProperty("user.dir")
+                            + "\\Reports\\ImageReports\\" + timeStamp + "\\BarChart" + "_" + timeStamp + ".png"), chart, 400, 400);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

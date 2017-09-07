@@ -237,4 +237,13 @@ public class Generic extends BaseInit{
 //            ex.printStackTrace();
 //        }
     }
+
+    public static String GetTimeStampValue(){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd HH_mm_ss_SSS");
+        String systime = sdf.format(new Date());
+        systime = systime.replace(":","");
+        systime = systime.replace("-","");
+        return systime;
+    }
 }

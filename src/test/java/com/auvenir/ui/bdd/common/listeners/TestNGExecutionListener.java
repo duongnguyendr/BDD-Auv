@@ -5,8 +5,11 @@ package com.auvenir.ui.bdd.common.listeners;
  */
 import com.auvenir.ui.bdd.common.GeneratePDF;
 import com.auvenir.ui.bdd.common.GenerateReport;
+import com.auvenir.ui.bdd.common.Generic;
+import com.auvenir.utilities.GeneralUtilities;
 import com.auvenir.utilities.GenericService;
 import com.auvenir.utilities.PdfGenerater;
+import net.masterthought.cucumber.Reportable;
 import org.apache.commons.io.FileUtils;
 import org.testng.IExecutionListener;
 
@@ -27,9 +30,24 @@ public class TestNGExecutionListener implements IExecutionListener {
     public void onExecutionFinish() {
         System.out.println("***** Generating the Master thought Report *****");
         // Generate HTML Report
-        GenerateReport.GenerateMasterthoughtReport();
-        // Generate PDF File
-        pdf.toExecute();
+        String timeStamp = Generic.GetTimeStampValue();
+        Reportable result = GenerateReport.GenerateMasterthoughtReport(timeStamp);
+        File sDateReports = new File(GenericService.sDirPath+"//Reports//ImageReports//" + timeStamp);
+        try {
+            if (!sDateReports.exists()) {
+                FileUtils.forceMkdir(sDateReports);
+            }
+            sPdfReports = new File(sPdfReports+"\\PDFReports_"+ timeStamp +".pdf");
+            // Create Bar char
+            GenericService.getBarChart(result.getPassedFeatures(), result.getFailedFeatures(),0, timeStamp);
+            // Create Pie char
+            GenericService.getPieChart(result.getPassedFeatures(), result.getFailedFeatures(),0, timeStamp);
+            // Generate PDF File
+            pdf.toExecute(sPdfReports,timeStamp);
+        }catch (Exception ex){
+
+        }
+
         //Send Email
 
         System.out.println("***** TestNG has finished, the execution *****");
