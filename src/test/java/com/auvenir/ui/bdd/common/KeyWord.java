@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -1108,6 +1109,82 @@ public class KeyWord {
         } catch (AssertionError e) {
             getLogger().info(e.getMessage());
             getLogger().info("+++++ Unable to get CSS value.");
+        }
+    }
+
+    /**
+     * Author: Thuan Duong.
+     *
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait element to change Attribute value.
+     */
+    public boolean waitForAtrributeValueChanged(WebElement element, String elementName, String attributeName, String attributeValue) {
+        getLogger().info("Try to waitForAtrributeValueChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    String actualAttributeValue = null;
+                    if (element.getAttribute(attributeName) != null) {
+                        actualAttributeValue = element.getAttribute(attributeName);
+                        System.out.println("Actual Displayed Value: " + actualAttributeValue);
+                    } else {
+                        getLogger().info(String.format("Attribute %s is null", attributeName));
+                        return false;
+                    }
+                    if (actualAttributeValue.equals(attributeValue))
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+            return false;
+        }
+    }
+    /**
+     * get element which cant use @FindBy to find
+     *
+     * @param xpath xpath to get element
+     * @param arg   vararg for formating
+     */
+    public WebElement getElementByXpath(String xpath, String... arg) {
+        WebElement webElement = null;
+        xpath = String.format(xpath, arg);
+        try {
+            webElement = getDriver().findElement(By.xpath(xpath));
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+        return webElement;
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait element to be visible.
+     */
+    public boolean waitForCssValueChanged(WebElement element, String elementName, String cssName, String cssValue) {
+        getLogger().info("Try to waitForCssValueChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 20);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    String actualcssValue = element.getCssValue(cssName);
+                    System.out.println("Actual Displayed Value: " + actualcssValue);
+                    if (actualcssValue.equals(cssValue))
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            getLogger().info("CSS Value is not changed");
+            return false;
         }
     }
 
