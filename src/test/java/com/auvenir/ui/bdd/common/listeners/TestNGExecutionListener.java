@@ -42,7 +42,7 @@ public class TestNGExecutionListener implements IExecutionListener {
             // Create Bar char
             GenericService.getFeaturesChart(result.getPassedFeatures(), result.getFailedFeatures(),0, timeStamp);
             // Create Pie char
-            GenericService.getScenariosChart(result.getPassedFeatures(), result.getFailedFeatures(),0, timeStamp);
+            GenericService.getScenariosChart(result.getPassedScenarios(), result.getFailedScenarios(),0, timeStamp);
             // Create report result
             ReportResult reportResult= GenerateReport.createReportDetail(timeStamp);
             // Generate PDF File
