@@ -1,6 +1,6 @@
 package com.auvenir.ui.bdd.pages.marketing;
 
-import com.auvenir.ui.bdd.pages.AbstractPage;
+import com.auvenir.ui.bdd.common.KeyWord;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,7 @@ import org.testng.Assert;
 /**
  * Created by doai.tran on 8/29/2017.
  */
-public class MarketingNewPage extends AbstractPage {
+public class MarketingNewPage extends KeyWord {
     public MarketingNewPage(Logger logger,WebDriver driver) {
         super(logger, driver);
         PageFactory.initElements(driver, this);

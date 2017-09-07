@@ -3,12 +3,12 @@ package com.auvenir.ui.bdd.pages;
 //import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
 //import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
 //import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;
+import com.auvenir.ui.bdd.common.KeyWord;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by doai.tran on 8/21/2017.
  */
-public class MarketingPage extends AbstractPage {
+public class MarketingPage extends KeyWord {
 
    public MarketingPage(Logger logger, WebDriver driver) {
       super(logger, driver);

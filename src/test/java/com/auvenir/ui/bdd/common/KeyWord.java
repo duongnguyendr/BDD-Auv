@@ -1,4 +1,4 @@
-package com.auvenir.ui.bdd.pages;
+package com.auvenir.ui.bdd.common;
 
 import com.auvenir.utilities.GenericService;
 import org.apache.log4j.Logger;
@@ -21,10 +21,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by doai.tran on 8/21/2017.
  */
-public class AbstractPage {
+public class KeyWord {
     private Logger logger = null;
     private WebDriver driver = null;
-    public AbstractPage(Logger logger, WebDriver driver){
+    public KeyWord(Logger logger, WebDriver driver){
         //super(driver);
         this.driver = driver;
         this.logger = logger;
@@ -37,7 +37,7 @@ public class AbstractPage {
         return logger;
     }
     
-    public AbstractPage(WebDriver webDriver) {
+    public KeyWord(WebDriver webDriver) {
         this.driver = webDriver;
     }
     public static final int waitTime = 15;
