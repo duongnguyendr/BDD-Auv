@@ -28,7 +28,7 @@ public class MongoDBService {
     private static String username;
     private static String ssl;
     private static String password;
-    public static String sTestDataFile = sDirPath + "\\TestData.xlsx";
+    public static String sTestDataFile = sDirPath + "\\testData.xlsx";
     private static String testCaseId;
     static String[] sData = null;
 

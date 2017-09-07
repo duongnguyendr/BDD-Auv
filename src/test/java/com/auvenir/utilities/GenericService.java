@@ -50,7 +50,7 @@ public class GenericService {
     public static int iSkippedCount = 0;
     static public String sDirPath = System.getProperty("user.dir");
     static public String sUserPath = System.getProperty("user.home");
-    public static String sTestDataFile = sDirPath + "\\TestData.xlsx";
+    public static String sTestDataFile = sDirPath + "\\testData.xlsx";
     public final static String MONGODBPROPERTIESFILE = sDirPath + "\\src\\test\\resources\\properties\\MongoDB.properties";
     public final static String LOCATORPROPERTIESFILE = sDirPath + "\\src\\test\\resources\\properties\\Locator.properties";
     public static String sConfigFile = null;
@@ -63,7 +63,7 @@ public class GenericService {
     public static String sLanguage = "";
     public static String sToEmail;
     public static String sCcEmail;
-    public static String uploadRelativePath = "\\src\\test\\resources\\upload\\";
+    public static String uploadRelativePath = "\\src\\test\\resources\\testData.upload\\";
     public static String downloadRelativePath = "\\src\\test\\resources\\download\\";
     /*
      * @author: LAKSHMI BS Description: To read the basic environment settings
@@ -117,7 +117,7 @@ public class GenericService {
 
             FileInputStream fis = new FileInputStream(sTestDataFile);
             Workbook wb = WorkbookFactory.create(fis);
-            Sheet sht = wb.getSheet("TestData");
+            Sheet sht = wb.getSheet("testData");
             int iRowNum = sht.getLastRowNum();
             int k = 0;
             for (int i = 1; i <= iRowNum; i++) {
@@ -770,7 +770,7 @@ public class GenericService {
      * Description: This method to read from Excel file to
      * get the value of userID following Chrome parameter
      * that we input on testNG.XML
-     * Data file: TestData.xlsx
+     * Data file: testData.xlsx
      *
      * @param SheetName
      * @param rowName
