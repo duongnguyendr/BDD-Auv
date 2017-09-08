@@ -17,7 +17,9 @@ D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\ui\bd
 D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\utilities\GenericData.java
 D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\utilities\MongoDBService.java
 D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\utilities\Keyboard.java
+D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\ui\bdd\common\SendReportMail.java
 D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\ui\bdd\stepDefinitions\gmail\GmailStepDefinition.java
+D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\ui\bdd\stepDefinitions\smoke\SmokeStepDefinition.java
 D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\utilities\GeneralUtilities.java
 D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\ui\bdd\pages\MarketingPage.java
 D:\BDD-Auvenir-Automation\BDD-Auvenir-Automation\src\test\java\com\auvenir\ui\bdd\stepDefinitions\AbstractStep.java

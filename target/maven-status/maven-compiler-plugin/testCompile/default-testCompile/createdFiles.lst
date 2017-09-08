@@ -4,12 +4,15 @@ com\auvenir\utilities\GenericData$UserStatus.class
 com\auvenir\ui\bdd\common\GmailPage.class
 com\auvenir\ui\bdd\stepDefinitions\marketing\MarketingStepDefinition.class
 com\auvenir\ui\bdd\stepDefinitions\gmail\GmailStepDefinition.class
+com\auvenir\ui\bdd\common\SendReportMail$1.class
 com\auvenir\ui\bdd\common\KeyWord$1.class
+com\auvenir\ui\bdd\common\SendReportMail.class
 com\auvenir\ui\bdd\stepDefinitions\admin\AdminPortalStepDefinition.class
 com\auvenir\ui\bdd\stepDefinitions\marketing\MarketingStepDefinition$User.class
 com\auvenir\ui\bdd\base\BaseInit.class
 com\auvenir\ui\bdd\common\GeneratePDF.class
 com\auvenir\ui\bdd\common\GenerateReport.class
+com\auvenir\ui\bdd\stepDefinitions\smoke\SmokeStepDefinition.class
 com\auvenir\utilities\DatePicker.class
 com\auvenir\ui\bdd\common\KeyWord$3.class
 com\auvenir\utilities\MongoDBService.class
