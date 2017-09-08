@@ -39,7 +39,7 @@ public class MarketingStepDefinition extends BaseInit {
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
         for (User user: users){
-            System.out.println("The Username is: "+user.email);
+            System.out.println("The Email is: "+user.email);
             System.out.println("The Password is: "+user.password);
             marketingPage.inputUserNamePassword(user.email, user.password);
         }

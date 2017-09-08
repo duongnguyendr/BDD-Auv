@@ -37,7 +37,7 @@ public class AbstractStep extends BaseInit {
     protected String SELENIUM_GRID_HUB = "http://jenkins.auvenir.com:4444/wd/hub";
 
     @Before
-    public void intializeWebDriver() {
+    public void intializeWebDriver() throws MalformedURLException {
         getBaseUrl();
         baseUrl = getConfigValue(PROPERTIES_FILE, "BASE_URL");
         getRunMode();
@@ -58,7 +58,7 @@ public class AbstractStep extends BaseInit {
                 System.setProperty("webdriver.edge.driver", GenericService.sDirPath + "/src/test/resources/MicrosoftWebDriver.exe");
                 driver = new EdgeDriver();
             }
-        }/*else if (sRunMode.equalsIgnoreCase("SeleniumGrid")){
+        }else if (sRunMode.equalsIgnoreCase("SeleniumGrid")){
                 if (Generic.sBrowser.equalsIgnoreCase("chrome")) {
                     DesiredCapabilities capabilitiesChrome;
                     capabilitiesChrome = DesiredCapabilities.chrome();
@@ -97,7 +97,7 @@ public class AbstractStep extends BaseInit {
                     capabilitiesSafari.setVersion(Generic.sVersion);
                     driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesSafari, capabilitiesSafari);
                 }
-            }*/
+            }
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
             System.out.println("***** Open browser *****");
