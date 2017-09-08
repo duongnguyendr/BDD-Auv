@@ -86,8 +86,8 @@ Feature: Smoke Test Feature
     And I click confirm button
     Then I should see verified message successful
 
-#  Scenario: Verify Auditor Login Gmail And Active User
-#    Given I navigate to gmail login page
-#    Then Gmail
-#    And I signIn gmail
-#      | chr.adm.auvenir@gmail.com | Changeit@123 |
+  Scenario: Verify Auditor Login Gmail And Active User
+    Given I navigate to gmail login page
+    Then Gmail
+    And I signIn gmail
+      | chr.adm.auvenir@gmail.com | Changeit@123 |
