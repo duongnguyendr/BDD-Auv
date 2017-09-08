@@ -243,8 +243,6 @@ public class AdminPage extends KeyWord {
     private WebElement selectBtnOnDemotePopup;
     @FindBy(xpath = "//*[contains(@id,'m-demoteUser') and (@class ='au-modal-title')]")
     private WebElement demoteSuperAdminTitlePopup;
-    @FindBy(xpath = "//*[@class='progress-overlay']")
-    private WebElement progressingDiv;
     /**
      * Refactored by huy.huynh on 30/05/2017.
      * New for smoke test
@@ -964,46 +962,6 @@ public class AdminPage extends KeyWord {
         clickElement(getEleCloseIcn(), "Close button");
     }
 
-    public String getEleAuditorStatusLst(String Email) {
-        WebElement status = getElementByXpath(xpathStatusCellOnUserTableAdminX, Email);
-        Select select = new Select(status);
-        String eleAuditorStatusLst = select.getAllSelectedOptions().get(0).getText();
-        return eleAuditorStatusLst;
-    }
-
-    public void verifyUserStatusAsExpected(String userEmail, String expectedStatus){
-        String status = getEleAuditorStatusLst(userEmail);
-        Assert.assertEquals(expectedStatus, status);
-    }
-
-    public void changeStatusUser(String email, String status){
-        WebElement statusEle = getElementByXpath(xpathStatusCellOnUserTableAdminX, email);
-        selectOptionByText(statusEle, status, "User Status");
-    }
-
-    public void vefiryConfirmPopupDisplay(){
-        getLogger().info("Validate Popup Confirm.");
-        waitForVisibleElement(textViewOnPopupConfirm, "Are you sure you want to change user status from");
-        validateElementText(textViewOnPopupConfirm, "Are you sure you want to change user status from");
-    }
-
-    public void clickConfirmButton(){
-        waitForVisibleElement(getEleStatusConfirmBtn(), "Confirm Poup");
-        waitForClickableOfElement(getEleStatusConfirmBtn(), "Confirm Poup");
-        clickElement(getEleStatusConfirmBtn(), "Status Confirm Button");
-    }
-
-    public void verifyMessageSuccessful(){
-        waitForVisibleElement(eleCredentialsCloseIcn, "Close Icon");
-        waitForClickableOfElement(eleCredentialsCloseIcn, "Close Icon");
-        clickElement(eleCredentialsCloseIcn, "Close Icon");
-    }
-
-    public void waitForProgressOverlayIsClosed() {
-        getLogger().info("Try to waiting the ProgressOverlayIsClosed.");
-        waitForCssValueChanged(progressingDiv, "Progress Overlay", "display", "none");
-    }
-
     /*public void verifyUserIsChangeStatusOnTheList(String email, String expectedStatus) {
         getLogger().info("Verify user is changed status on the list.");
         try {
@@ -1318,5 +1276,4 @@ public class AdminPage extends KeyWord {
         }
     }*/
     /*-----------end of huy.huynh on 06/07/2017.*/
-
 }

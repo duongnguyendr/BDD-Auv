@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 /**
@@ -17,7 +16,6 @@ public class MarketingNewPage extends KeyWord {
         super(logger, driver);
         PageFactory.initElements(driver, this);
     }
-    private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
     @FindBy(xpath = "//*[@class='ui right aligned container']/button")
     private WebElement loginBTN;
 
@@ -30,18 +28,12 @@ public class MarketingNewPage extends KeyWord {
     @FindBy(xpath = ".//*[@id='login-popup']//button")
     private WebElement submitBTN;
 
-    @FindBy(xpath = "//*/a[@class='ui large basic inverted button']")
-    private WebElement signUpBTN;
 
 
     public void clickOnLoginBTN() {
         //getLogger().info("Click on login button.");
         clickElement(loginBTN, "loginBTN");
         //loginBTN.click();
-    }
-
-    public void clickOnSignupButton() {
-        clickElement(signUpBTN, "signup button");
     }
 
     public void inputUserNamePassword(String username, String password) {
@@ -70,5 +62,4 @@ public class MarketingNewPage extends KeyWord {
         System.out.println("00000000: "+eleAdminHdrTxt.getText());
         Assert.assertEquals((eleAdminHdrTxt).getText(), "Admin");
     }
-
 }

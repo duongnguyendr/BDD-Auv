@@ -1,7 +1,4 @@
-BDD.QA.iml
-target/*
-target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
-target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+/target/*
 .idea/*
 .idea/.name
 .idea/compiler.xml

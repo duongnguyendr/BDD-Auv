@@ -9,6 +9,7 @@ import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.utilities.GeneralUtilities;
 import com.auvenir.utilities.GenericService;
 import com.auvenir.utilities.PdfGenerater;
+import net.masterthought.cucumber.ReportResult;
 import net.masterthought.cucumber.Reportable;
 import org.apache.commons.io.FileUtils;
 import org.testng.IExecutionListener;
@@ -39,11 +40,13 @@ public class TestNGExecutionListener implements IExecutionListener {
             }
             sPdfReports = new File(sPdfReports+"\\PDFReports_"+ timeStamp +".pdf");
             // Create Bar char
-            GenericService.getBarChart(result.getPassedFeatures(), result.getFailedFeatures(),0, timeStamp);
+            GenericService.getFeaturesChart(result.getPassedFeatures(), result.getFailedFeatures(),0, timeStamp);
             // Create Pie char
-            GenericService.getPieChart(result.getPassedFeatures(), result.getFailedFeatures(),0, timeStamp);
+            GenericService.getScenariosChart(result.getPassedScenarios(), result.getFailedScenarios(),0, timeStamp);
+            // Create report result
+            ReportResult reportResult= GenerateReport.createReportDetail(timeStamp);
             // Generate PDF File
-            pdf.toExecute(sPdfReports,timeStamp);
+            pdf.toExecute(sPdfReports,timeStamp, reportResult);
         }catch (Exception ex){
 
         }

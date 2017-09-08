@@ -14,12 +14,7 @@ public class BaseInit {
         this.logger = logger;
         this.driver = driver;
     }
-    */
-
-    /**
-     * Description: Set up to get sBaseUrl
-     * @return
-     */
+*/
     public WebDriver getDriver() {
         return driver;
     }
@@ -27,28 +22,14 @@ public class BaseInit {
         return logger;
     }
 
-    public static String sBaseUrl = "ariel.auvenir.com";
+    public static String baseUrl = "ariel.auvenir.com";
     public void setBaseUrl(String serverDomainName) {
-        sBaseUrl = serverDomainName;
-        getLogger().info("**** Url of testing server is: " + sBaseUrl);
+        baseUrl = serverDomainName;
+        getLogger().info("Url of testing server is: " + baseUrl);
     }
-
     public String getBaseUrl() {
         setBaseUrl(System.getProperty("serverDomainName"));
-        return sBaseUrl;
+        return baseUrl;
     }
 
-    /**
-     * Description: set up to get sRunMode.
-     * @return
-     */
-    public static String sRunMode = "local";
-    public void setRunMode(String runMode){
-        sRunMode = runMode;
-        getLogger().info("***** Run mode:");
-    }
-    public String getRunMode(){
-        setRunMode(System.getProperty("runMode"));
-        return sRunMode;
-    }
 }
