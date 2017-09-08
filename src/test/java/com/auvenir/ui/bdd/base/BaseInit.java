@@ -9,12 +9,7 @@ import org.openqa.selenium.WebDriver;
 public class BaseInit {
     public static Logger logger = Logger.getLogger(BaseInit.class);
     public static WebDriver driver = null;
-    /*
-    public BaseInit(Logger logger, WebDriver driver){
-        this.logger = logger;
-        this.driver = driver;
-    }
-*/
+
     public WebDriver getDriver() {
         return driver;
     }
@@ -22,6 +17,9 @@ public class BaseInit {
         return logger;
     }
 
+    /**
+     * Description: Methods to get sBaseUrl
+     */
     public static String baseUrl = "ariel.auvenir.com";
     public void setBaseUrl(String serverDomainName) {
         baseUrl = serverDomainName;
@@ -32,4 +30,16 @@ public class BaseInit {
         return baseUrl;
     }
 
+    /**
+     * Description: Methods to get sRunMode
+     */
+    public static String sRunMode = "local";
+    public void setRunMode(String runMode){
+        sRunMode = runMode;
+        getLogger().info("Run Mode: " +  sRunMode);
+    }
+    public String getRunMode(){
+        setRunMode(System.getProperty("runMode"));
+        return sRunMode;
+    }
 }
