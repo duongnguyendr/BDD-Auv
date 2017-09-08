@@ -143,3 +143,8 @@ src/test/resources/images/
 /target/test-classes/upload/TXT_helloAuvenir_client.png
 /target/test-classes/upload/TXT_helloAuvenir_client.txt
 /target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/src/test/resources/MicrosoftWebDriver.exe
+/src/test/resources/chromedriver.exe
+/src/test/resources/geckodriver.exe
+/src/test/resources/IEDriverServer.exe
+/src/test/resources/IEDriverServer_64.exe
