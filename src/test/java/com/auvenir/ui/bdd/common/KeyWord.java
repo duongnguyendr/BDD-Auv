@@ -1188,4 +1188,117 @@ public class KeyWord {
         }
     }
 
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element: CheckBox that we want to Send TabKey
+     * @Description: Send TabKey
+     * @Description: Send TabKey
+     */
+    public void sendTabkey(WebElement element, String elementName) {
+        getLogger().info("Try to sendTabkey: " + elementName);
+        try {
+            element.sendKeys(Keys.TAB);
+            getLogger().info("sendTabkey on element: " + elementName);
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+        }
+    }
+
+    public void sendEnterkey(WebElement element, String elementName) {
+        getLogger().info("Try to sendEnterkey: " + elementName);
+        try {
+            element.sendKeys(Keys.ENTER);
+            getLogger().info("sendEnterkey on element: " + elementName);
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+        }
+    }
+
+    /**
+     * validate if attribute contain given value
+     *
+     * @param webElement  element need to validate
+     * @param attribute   attribute name
+     * @param value       Expected attribute value
+     * @param elementName Element name
+     */
+    public boolean validateAttributeContain(WebElement webElement, String attribute, String value, String elementName) {
+        try {
+            getLogger().info("Validate Style Attribute Exist " + elementName);
+            if (webElement.getAttribute(attribute).contains(value)) {
+                getLogger().info(value + " exist on " + attribute + " on element: " + elementName);
+                return true;
+            } else {
+                Assert.fail(value + " still exist on " + attribute + " on element: " + elementName);
+                return false;
+            }
+        } catch (NoSuchElementException e) {
+            getLogger().info(e.getMessage());
+            Assert.fail("Error: " + elementName + " is not exist.");
+            return false;
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+            Assert.fail("Error: Validate attribute contain " + elementName);
+            return false;
+        }
+    }
+
+    /**
+     * validate text contain given value
+     *
+     * @param webElement  element need to validate
+     * @param value       Expected attribute value
+     * @param elementName Element name
+     */
+    public void validateElementTextContain(WebElement webElement, String value, String elementName) {
+        try {
+            getLogger().info("Validate Element Text Contain " + elementName);
+            System.out.println("expected = " + value);
+            System.out.println("actualll = " + webElement.getText());
+            if (webElement.getText().contains(value)) {
+                getLogger().info(elementName + "'s text contain: " + value);
+            } else {
+                Assert.fail(elementName + "'s text contain: " + value);
+            }
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+            Assert.fail("Error: Validate text contain " + elementName);
+        }
+    }
+
+    public void waitSomeSeconds(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public boolean validateNotExistedElement(WebElement element, String elementName) {
+        try {
+            getLogger().info("Try to validate Element is not existed.");
+            //getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            element.click();
+            element.getText();
+            return false;
+        } catch (NoSuchElementException e) {
+            getLogger().info("Element is not existed.");
+            //NXGReports.addStep(elementName + " is not exist.", LogAs.PASSED, null, e.getMessage());
+            //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            return true;
+        } catch (ElementNotVisibleException e) {
+            getLogger().info("Element is visible.");
+            //NXGReports.addStep(elementName + " is not exist.", LogAs.PASSED, null, e.getMessage());
+            //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            return true;
+        } catch (IndexOutOfBoundsException outEx) {
+            getLogger().info("List element is empty.");
+            return true;
+        } catch (Exception e) {
+            getLogger().info("Element is still displayed.");
+            //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            return false;
+        }
+    }
+
 }

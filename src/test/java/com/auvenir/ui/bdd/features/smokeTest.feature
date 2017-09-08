@@ -81,7 +81,13 @@ Feature: Smoke Test Feature
     Then I should see status off user is waitlisted
       |chr.auditor0111.adm@gmail.com|Wait Listed|
     And I change status of user to onboarding
-      |chr.auditor0111.adm@gmail.com|Wait Listed|
+      |chr.auditor0111.adm@gmail.com|Onboarding|
     Then I should see confirm popup
     And I click confirm button
     Then I should see verified message succesfull
+
+#  Scenario: Verify Auditor Login Gmail And Active User
+#    Given I navigate to gmail login page
+#    Then Gmail
+#    And I signIn gmail
+#      | chr.adm.auvenir@gmail.com | Changeit@123 |
