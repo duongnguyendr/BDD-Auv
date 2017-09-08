@@ -118,3 +118,12 @@ src/test/resources/images/BarChartchr.png
 src/test/resources/images/PieChartchr.png
 Reports/
 src/test/resources/images/
+.idea/
+src/main/java/
+src/test/java/com/auvenir/ui/bdd/features/admin/
+src/test/java/com/auvenir/ui/bdd/features/auditor/
+src/test/java/com/auvenir/ui/bdd/features/client/
+src/test/java/com/auvenir/ui/bdd/features/marketing/
+src/test/java/com/auvenir/ui/bdd/pages/admin/
+src/test/java/com/auvenir/ui/bdd/pages/client/
+src/test/java/com/auvenir/ui/bdd/stepDefinitions/client/
