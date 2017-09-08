@@ -5,7 +5,7 @@ Feature: Smoke Test Feature
     Given I navigate to login page
     And I click on login link
     And I enter the following for Login
-      | Username | Password |
+      | Email | Password |
       | chr.auvenirad@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the home page
@@ -14,7 +14,7 @@ Feature: Smoke Test Feature
     Given I navigate to login page
     And I click on login link
     And I enter the following for Login
-      | Username | Password |
+      | Email | Password |
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the home page
@@ -34,7 +34,7 @@ Feature: Smoke Test Feature
       And I select role in firm
       And I input phone number
       |1234567890|
-      And I select how to hear about auvenir
+      And I select how to hear about Auvenir
       And I click agree with privacy and term service check box
       And I click confirm check box
       And I click continue button
@@ -74,7 +74,7 @@ Feature: Smoke Test Feature
     Given I navigate to login page
     And I click on login link
     And I enter the following for Login
-      | Username | Password |
+      | Email | Password |
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
 #    Then I should see the home page
@@ -84,7 +84,7 @@ Feature: Smoke Test Feature
       |chr.auditor0111.adm@gmail.com|Onboarding|
     Then I should see confirm popup
     And I click confirm button
-    Then I should see verified message succesfull
+    Then I should see verified message successful
 
 #  Scenario: Verify Auditor Login Gmail And Active User
 #    Given I navigate to gmail login page

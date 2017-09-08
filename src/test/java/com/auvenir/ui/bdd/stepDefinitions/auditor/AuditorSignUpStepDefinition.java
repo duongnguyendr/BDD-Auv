@@ -56,7 +56,7 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.inputPhoneNumber(phoneNumber.get(0));
     }
 
-    @And("^I select how to hear about auvenir$")
+    @And("^I select how to hear about Auvenir$")
     public void iSelectHowToHearAboutAuvenir() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I select how to hear about auvenir");
@@ -197,7 +197,7 @@ public class AuditorSignUpStepDefinition extends BaseInit {
     }
 
     @And("^I click on countinue button$")
-    public void iClickOnCountinueButton() throws Throwable {
+    public void iClickOnContinueButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I click on countinue button");
         auditorSignUpPage.clickContinueButton();

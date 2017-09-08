@@ -9,7 +9,9 @@ import cucumber.api.java.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
@@ -27,30 +29,28 @@ public class AbstractStep extends BaseInit {
     @Before
     public void intializeWebDriver(){
         getBaseUrl();
-        baseUrl=getConfigValue(PROPERTIES_FILE,"BASE_URL");
-        /*switch (Generic.sBrowser){
-            case "chrome":
-                System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/chromedriver.exe");
+        sBaseUrl=getConfigValue(PROPERTIES_FILE,"BASE_URL");
+        if(sRunMode.equalsIgnoreCase("local")){
+            if(Generic.sBrowser.equalsIgnoreCase("chrome")){
+                System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/chromedriver.exe");
                 driver = new ChromeDriver();
-            case  "firefox":
-
-        }*/
-
-        if(Generic.sBrowser.equalsIgnoreCase("chrome")){
-            System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/chromedriver.exe");
-            driver = new ChromeDriver();
-        }else if(Generic.sBrowser.equalsIgnoreCase("firefox")){
-            System.setProperty("webdriver.gecko.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/geckodriver.exe");
-            driver = new FirefoxDriver();
-        }else if(Generic.sBrowser.equalsIgnoreCase("internetexplorer")) {
-
-        }else if(Generic.sBrowser.equalsIgnoreCase("edge")){
+            }else if(Generic.sBrowser.equalsIgnoreCase("firefox")){
+                System.setProperty("webdriver.gecko.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/geckodriver.exe");
+                driver = new FirefoxDriver();
+            }else if(Generic.sBrowser.equalsIgnoreCase("internetexplorer")) {
+                System.setProperty("webdriver.ie.driver", GenericService.sDirPath + "/src/test/resources/IEDriverServer.exe");
+                driver = new InternetExplorerDriver();
+            }else if(Generic.sBrowser.equalsIgnoreCase("edge")){
+                System.setProperty("webdriver.edge.driver", GenericService.sDirPath + "/src/test/resources/MicrosoftWebDriver.exe");
+                driver = new EdgeDriver();
+            }
+        }else {
 
         }
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-        System.out.println("Open browser");
+        getLogger().info("***** Open browser *****");
     }
     @After
     public void tearDownTest(Scenario scenario){
@@ -62,7 +62,7 @@ public class AbstractStep extends BaseInit {
         }
         driver.close();
         driver.quit();
-
+        System.out.println("***** Close browser *****");
     }
     @BeforeSuite
     public void beforeSuite(){
