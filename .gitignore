@@ -1,4 +1,5 @@
 /target/*
+BDD.QA.iml
 .idea/*
 .idea/.name
 .idea/compiler.xml
