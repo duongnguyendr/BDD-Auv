@@ -84,8 +84,8 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.clickContinueButton();
     }
 
-    @Then("^I should see provide firm infomation page$")
-    public void iShouldSeeProvideFirmInfomationPage() throws Throwable {
+    @Then("^I should see provide firm information page$")
+    public void iShouldSeeProvideFirmInformationPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see provide firm infomation page");
         auditorSignUpPage.verifyFirmInfomationPage();
@@ -196,7 +196,7 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.inputAffiliate(affiliateName.get(0));
     }
 
-    @And("^I click on countinue button$")
+    @And("^I click on continue button$")
     public void iClickOnContinueButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I click on countinue button");

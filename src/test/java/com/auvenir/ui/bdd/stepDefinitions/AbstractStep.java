@@ -28,19 +28,12 @@ public class AbstractStep extends BaseInit {
     public void intializeWebDriver(){
         getBaseUrl();
         baseUrl=getConfigValue(PROPERTIES_FILE,"BASE_URL");
-        /*switch (Generic.sBrowser){
-            case "chrome":
-                System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/chromedriver.exe");
-                driver = new ChromeDriver();
-            case  "firefox":
-
-        }*/
 
         if(Generic.sBrowser.equalsIgnoreCase("chrome")){
-            System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/chromedriver.exe");
             driver = new ChromeDriver();
         }else if(Generic.sBrowser.equalsIgnoreCase("firefox")){
-            System.setProperty("webdriver.gecko.driver", GenericService.sDirPath + "/src/test/resources/geckodriver.exe");
+            System.setProperty("webdriver.gecko.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/geckodriver.exe");
             driver = new FirefoxDriver();
         }else if(Generic.sBrowser.equalsIgnoreCase("internetexplorer")) {
 
