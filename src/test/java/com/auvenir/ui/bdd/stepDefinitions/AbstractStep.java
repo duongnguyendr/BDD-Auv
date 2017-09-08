@@ -35,13 +35,14 @@ public class AbstractStep extends BaseInit {
 
     private BaseInit base;
     protected String SELENIUM_GRID_HUB = "http://jenkins.auvenir.com:4444/wd/hub";
+
     @Before
-    public void intializeWebDriver() throws MalformedURLException {
+    public void intializeWebDriver() {
         getBaseUrl();
-        baseUrl=getConfigValue(PROPERTIES_FILE,"BASE_URL");
+        baseUrl = getConfigValue(PROPERTIES_FILE, "BASE_URL");
         getRunMode();
         // Configure for run test local mode
-        if(sRunMode.equalsIgnoreCase("")) {
+        if (sRunMode.equalsIgnoreCase("local")) {
             if (Generic.sBrowser.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/chromedriver.exe");
                 DesiredCapabilities cap = setDownloadLocationChrome();
@@ -57,50 +58,50 @@ public class AbstractStep extends BaseInit {
                 System.setProperty("webdriver.edge.driver", GenericService.sDirPath + "/src/test/resources/MicrosoftWebDriver.exe");
                 driver = new EdgeDriver();
             }
-        }else {
-            if (Generic.sBrowser.equalsIgnoreCase("chrome")) {
-                DesiredCapabilities capabilitiesChrome;
-                capabilitiesChrome = DesiredCapabilities.chrome();
-                String downloadFilepath = GenericService.sDirPath + "/src/test/resources/download/";
-                HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-                chromePrefs.put("profile.default_content_settings.popups", 0);
-                chromePrefs.put("download.default_directory", downloadFilepath);
-                ChromeOptions options = new ChromeOptions();
-                options.setExperimentalOption("prefs", chromePrefs);
-                capabilitiesChrome.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-                capabilitiesChrome.setCapability(ChromeOptions.CAPABILITY, options);
-                capabilitiesChrome.setPlatform(setOSForBrowser(Generic.sOS));
-                capabilitiesChrome.setVersion(Generic.sVersion);
-                driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesChrome, capabilitiesChrome);
-            }else if (Generic.sBrowser.equalsIgnoreCase("firefox")) {
-                DesiredCapabilities capabilitiesFireFox;
-                capabilitiesFireFox = DesiredCapabilities.firefox();
-                FirefoxProfile profile = setDownloadLocationFirefox();
-                capabilitiesFireFox.setCapability(FirefoxDriver.PROFILE, profile);
-                capabilitiesFireFox.setPlatform(setOSForBrowser(Generic.sOS));
-                capabilitiesFireFox.setVersion(Generic.sVersion);
-                driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesFireFox, capabilitiesFireFox);
-            }else if (Generic.sBrowser.equalsIgnoreCase("internet explorer")) {
-                DesiredCapabilities capabilitiesIE;
-                capabilitiesIE = DesiredCapabilities.internetExplorer();
-                driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesIE, capabilitiesIE);
-            }else if (Generic.sBrowser.equalsIgnoreCase("edge")) {
-                DesiredCapabilities capabilitiesEdge;
-                capabilitiesEdge = DesiredCapabilities.edge();
-                driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesEdge, capabilitiesEdge);
-                GenericService.sBrowserData = "edge.";
-            } else if (Generic.sBrowser.equalsIgnoreCase("safari")) {
-                DesiredCapabilities capabilitiesSafari;
-                capabilitiesSafari = DesiredCapabilities.safari();
-                capabilitiesSafari.setPlatform(setOSForBrowser(Generic.sOS));
-                capabilitiesSafari.setVersion(Generic.sVersion);
-                driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesSafari, capabilitiesSafari);
-            }
+        }/*else if (sRunMode.equalsIgnoreCase("SeleniumGrid")){
+                if (Generic.sBrowser.equalsIgnoreCase("chrome")) {
+                    DesiredCapabilities capabilitiesChrome;
+                    capabilitiesChrome = DesiredCapabilities.chrome();
+                    String downloadFilepath = GenericService.sDirPath + "/src/test/resources/download/";
+                    HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+                    chromePrefs.put("profile.default_content_settings.popups", 0);
+                    chromePrefs.put("download.default_directory", downloadFilepath);
+                    ChromeOptions options = new ChromeOptions();
+                    options.setExperimentalOption("prefs", chromePrefs);
+                    capabilitiesChrome.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+                    capabilitiesChrome.setCapability(ChromeOptions.CAPABILITY, options);
+                    capabilitiesChrome.setPlatform(setOSForBrowser(Generic.sOS));
+                    capabilitiesChrome.setVersion(Generic.sVersion);
+                    driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesChrome, capabilitiesChrome);
+                } else if (Generic.sBrowser.equalsIgnoreCase("firefox")) {
+                    DesiredCapabilities capabilitiesFireFox;
+                    capabilitiesFireFox = DesiredCapabilities.firefox();
+                    FirefoxProfile profile = setDownloadLocationFirefox();
+                    capabilitiesFireFox.setCapability(FirefoxDriver.PROFILE, profile);
+                    capabilitiesFireFox.setPlatform(setOSForBrowser(Generic.sOS));
+                    capabilitiesFireFox.setVersion(Generic.sVersion);
+                    driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesFireFox, capabilitiesFireFox);
+                } else if (Generic.sBrowser.equalsIgnoreCase("internet explorer")) {
+                    DesiredCapabilities capabilitiesIE;
+                    capabilitiesIE = DesiredCapabilities.internetExplorer();
+                    driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesIE, capabilitiesIE);
+                } else if (Generic.sBrowser.equalsIgnoreCase("edge")) {
+                    DesiredCapabilities capabilitiesEdge;
+                    capabilitiesEdge = DesiredCapabilities.edge();
+                    driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesEdge, capabilitiesEdge);
+                    GenericService.sBrowserData = "edge.";
+                } else if (Generic.sBrowser.equalsIgnoreCase("safari")) {
+                    DesiredCapabilities capabilitiesSafari;
+                    capabilitiesSafari = DesiredCapabilities.safari();
+                    capabilitiesSafari.setPlatform(setOSForBrowser(Generic.sOS));
+                    capabilitiesSafari.setVersion(Generic.sVersion);
+                    driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesSafari, capabilitiesSafari);
+                }
+            }*/
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+            System.out.println("***** Open browser *****");
         }
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-        System.out.println("***** Open browser *****");
-    }
     public Platform setOSForBrowser(String os) {
 
         Platform osType = null;
