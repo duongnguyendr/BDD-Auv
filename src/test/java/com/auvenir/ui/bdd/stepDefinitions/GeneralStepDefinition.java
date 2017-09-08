@@ -20,13 +20,12 @@ public class GeneralStepDefinition extends BaseInit{
     }
     private MarketingNewPage marketingNewPage;
 
-    @Given("^I navigate to login page$")
-    public void iNavigateToLoginPage() throws Throwable {
+    @Given("^I navigate to Marketing page$")
+    public void iNavigateToMarketingPage() throws Throwable {
         base.getLogger().info("===== I navigate to login page =====");
         MarketingNewPage marketingNewPage = new MarketingNewPage(logger,driver);
         getLogger().info("=========="+baseUrl);
         marketingNewPage.getUrl("https://"+baseUrl);
     }
-
 
 }

@@ -32,6 +32,8 @@ public class Generic extends BaseInit{
     public static String sDirPath = System.getProperty("user.dir");
     public static String sUserPath = System.getProperty("user.home");
     public static String sBrowser = null;
+    public static String sVersion = null;
+    public static String sOS = null;
     public final static String PROPERTIES_FILE = sDirPath + "\\TestBDD.properties";
     public static String sExecuteTime = null;
     public static String sExecutionDate = null;

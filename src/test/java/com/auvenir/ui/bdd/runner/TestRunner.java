@@ -26,10 +26,12 @@ public class TestRunner extends AbstractTestNGCucumberTests{
         GenerateReport.GenerateMasterthoughtReport();
         System.out.println("TestNG has finished, the execution");
     }*/
-    @Parameters("browser")
+    @Parameters({"browser", "version", "os"})
     @BeforeMethod
-    public  void beforeSuite(String browser){
+    public  void beforeSuite(String browser, String version, String os){
         Generic.sBrowser = browser;
+        Generic.sVersion = version;
+        Generic.sOS = os;
     }
 }
 
