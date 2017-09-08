@@ -197,6 +197,9 @@ public class GeneratePDF {
         table.addCell(createHeaderCell(String.format("%.2f",fScenarioFail) + "%",0, new BaseColor(211,211,211),tableCellValue));
         table.addCell(createHeaderCell("",0, new BaseColor(211,211,211),tableCellValue));
 
+
+        //Create step row
+
         preface.add(table);
     }
     private static void addTitlePageCucumberPDF(Document document, String timeStamp, ReportResult reportResult) throws DocumentException, IOException {
