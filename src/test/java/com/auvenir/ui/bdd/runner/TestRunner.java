@@ -4,10 +4,7 @@ import com.auvenir.ui.bdd.common.GenerateReport;
 import com.auvenir.ui.bdd.common.Generic;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 /**
  * Created by doai.tran on 8/21/2017.
@@ -26,13 +23,5 @@ public class TestRunner extends AbstractTestNGCucumberTests{
         Generic.sVersion = version;
         Generic.sOS = os;
     }
-
-    /*@AfterSuite
-    public void afterSuite(){
-        System.out.println("This is after method.");
-        System.out.println("Generating the Masterthought Report");
-        GenerateReport.GenerateMasterthoughtReport();
-        System.out.println("TestNG has finished, the execution");
-    }*/
 }
 
