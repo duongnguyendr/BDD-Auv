@@ -19,13 +19,6 @@ import org.testng.annotations.Test;
 ,glue="com.auvenir.ui.bdd.stepDefinitions")
 public class TestRunner extends AbstractTestNGCucumberTests{
 
-    /*@AfterSuite
-    public void afterSuite(){
-        System.out.println("This is after method.");
-        System.out.println("Generating the Masterthought Report");
-        GenerateReport.GenerateMasterthoughtReport();
-        System.out.println("TestNG has finished, the execution");
-    }*/
     @Parameters({"browser", "version", "os"})
     @BeforeMethod
     public  void beforeSuite(String browser, String version, String os){
@@ -33,5 +26,13 @@ public class TestRunner extends AbstractTestNGCucumberTests{
         Generic.sVersion = version;
         Generic.sOS = os;
     }
+
+    /*@AfterSuite
+    public void afterSuite(){
+        System.out.println("This is after method.");
+        System.out.println("Generating the Masterthought Report");
+        GenerateReport.GenerateMasterthoughtReport();
+        System.out.println("TestNG has finished, the execution");
+    }*/
 }
 
