@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by vien.pham on 7/28/2017.
  */
-public abstract class TeamPage extends AbstractPage {
+public abstract class TeamPage extends CommonPage {
     public TeamPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }

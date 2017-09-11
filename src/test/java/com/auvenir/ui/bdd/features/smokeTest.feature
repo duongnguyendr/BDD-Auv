@@ -123,7 +123,7 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page
       | Engagement Dr01 |
 
-  Scenario: Verify Admin Auditor Create Simple Engagement
+  Scenario: Verify Admin Auditor Invite New Member Auditor
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
