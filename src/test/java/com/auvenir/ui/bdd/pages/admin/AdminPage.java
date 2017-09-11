@@ -1,4 +1,4 @@
-package com.auvenir.ui.bdd.pages;
+package com.auvenir.ui.bdd.pages.admin;
 
 //import com.auvenir.ui.pages.AuvenirPage;
 //import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;

@@ -37,7 +37,7 @@ Feature: Smoke Test Feature
     And I select how to hear about Auvenir
     And I click agree with privacy and term service check box
     And I click confirm check box
-    And I click continue button
+    And I click continue button on sign up page
     Then I should see provide firm information page
 
     # Input Firm information
@@ -66,9 +66,9 @@ Feature: Smoke Test Feature
     And I check on affiliate checkbox
     And I input affiliate name
       | Titan corp |
-    And I click on continue button
+    And I click continue button on sign up page
     Then I should see thank for create account page
-    And I click on continue button
+    And I click continue button on sign up page
 
   Scenario: Verify Admin Change Status User To OnBoarding
     Given I navigate to Marketing page
@@ -77,14 +77,14 @@ Feature: Smoke Test Feature
       | Email                     | Password     |
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
-    Then I should see the home page
-    Then I should see status off user is waitlisted
+    Then I should see the AdminPortal page
+    Then I should see status off user is wait listed
       | auvenirinfo@gmail.com | Wait Listed |
     And I change status of user to onboarding
       | auvenirinfo@gmail.com | Onboarding |
-    Then I should see confirm popup
-    And I click confirm button
-    Then I should see verified message successful
+    Then I should see confirm popup on admin page
+    And I click confirm button on admin page
+    Then I should see verified message successful on admin page
 
   Scenario: Verify Auditor Login Gmail And Active User
     Given I navigate to gmail login page
@@ -123,7 +123,7 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page
       | Engagement Dr01 |
 
-  Scenario: Verify Admin Auditor Create Simple Engagement
+  Scenario: Verify Admin Auditor Invite New Member Auditor
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login

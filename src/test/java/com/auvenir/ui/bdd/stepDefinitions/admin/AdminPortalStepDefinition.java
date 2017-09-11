@@ -1,10 +1,8 @@
 package com.auvenir.ui.bdd.stepDefinitions.admin;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.pages.AdminPage;
-import com.auvenir.ui.bdd.pages.auditor.AuditorSignUpPage;
+import com.auvenir.ui.bdd.pages.admin.AdminPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -31,8 +29,8 @@ public class AdminPortalStepDefinition extends BaseInit {
         //MarketingPage MarketingPage = new MarketingPage(logger,driver);
         adminPage.verifyHeaderAdminPage();
     }
-    @Then("^I should see status off user is waitlisted$")
-    public void iShouldSeeStatusOffUserIsWaitlisted(DataTable datas) throws Throwable {
+    @Then("^I should see status off user is wait listed$")
+    public void iShouldSeeStatusOffUserIsWaitListed(DataTable datas) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see status off user is waitlisted");
         List<String> listData = datas.asList(String.class);
@@ -47,22 +45,22 @@ public class AdminPortalStepDefinition extends BaseInit {
         adminPage.changeStatusUser(listData.get(0), listData.get(1));
     }
 
-    @Then("^I should see confirm popup$")
-    public void iShouldSeeConfirmPopup() throws Throwable {
+    @Then("^I should see confirm popup on admin page$")
+    public void iShouldSeeConfirmPopupOnAdminPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see confirm popup");
         adminPage.vefiryConfirmPopupDisplay();
     }
 
-    @And("^I click confirm button$")
-    public void iClickConfirmButton() throws Throwable {
+    @And("^I click confirm button on admin page$")
+    public void iClickConfirmButtonOnAdminPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I click confirm button");
         adminPage.clickConfirmButton();
     }
 
-    @Then("^I should see verified message successful$")
-    public void iShouldSeeVerifiedMessageSuccessful() throws Throwable {
+    @Then("^I should see verified message successful on admin page$")
+    public void iShouldSeeVerifiedMessageSuccessfulOnAdminPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see verified message successful");
         adminPage.verifyMessageSuccessful();

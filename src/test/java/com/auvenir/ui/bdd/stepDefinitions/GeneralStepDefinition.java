@@ -1,7 +1,7 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.pages.marketing.MarketingNewPage;
+import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -18,14 +18,14 @@ public class GeneralStepDefinition extends BaseInit{
     public GeneralStepDefinition(BaseInit base) {
         this.base = base;
     }
-    private MarketingNewPage marketingNewPage;
+    private MarketingPage marketingPage;
 
     @Given("^I navigate to Marketing page$")
     public void iNavigateToMarketingPage() throws Throwable {
         base.getLogger().info("===== I navigate to login page =====");
-        MarketingNewPage marketingNewPage = new MarketingNewPage(logger,driver);
+        MarketingPage marketingPage = new MarketingPage(logger,driver);
         getLogger().info("=========="+baseUrl);
-        marketingNewPage.getUrl("https://"+baseUrl);
+        marketingPage.getUrl("https://"+baseUrl);
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by huy.huynh on 20/07/2017.
  */
-public class EngagementPage extends KeyWord {
+public class EngagementPage extends CommonPage {
 
     //@FindBy(xpath = "//div[@id='allClientEngagement']//span[@id='c-header-title']")
     @FindBy(xpath = "//div[@id='preview-header-left']/span[@id='c-header-title']")

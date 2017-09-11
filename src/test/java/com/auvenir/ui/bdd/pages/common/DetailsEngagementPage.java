@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by huy.huynh on 20/07/2017.
  */
-public abstract class DetailsEngagementPage extends AbstractPage {
+public abstract class DetailsEngagementPage extends CommonPage {
 
     @FindBy(xpath = "//span[@id='a-header-title']")
     protected WebElement engagementNameUneditable;

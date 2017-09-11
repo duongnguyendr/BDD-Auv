@@ -10,8 +10,8 @@ import org.testng.Assert;
 /**
  * Created by duong.nguyen on 9/8/2017.
  */
-public class AbstractPage extends KeyWord {
-    public AbstractPage(Logger logger, WebDriver driver) {
+public class CommonPage extends KeyWord {
+    public CommonPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
 

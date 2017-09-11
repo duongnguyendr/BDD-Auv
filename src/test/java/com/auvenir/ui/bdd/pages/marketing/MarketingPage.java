@@ -48,7 +48,7 @@ public class MarketingPage extends KeyWord {
       sendKeyTextBox(emailTextBox, username, "emailTextBox");
       sendKeyTextBox(passwordTextBox, password, "passwordTextBox");
         /*emailTextBox.sendKeys(username);
-        passwordTextBox.sendKeys(password);*/
+        passwordTextBox.sendKeys(password);.*/
    }
 
    public void clickOnSubmitBTN() {
