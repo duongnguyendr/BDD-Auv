@@ -1,4 +1,4 @@
-package com.auvenir.ui.bdd.pages;
+package com.auvenir.ui.bdd.pages.marketing;
 
 import com.auvenir.ui.bdd.common.KeyWord;
 import org.apache.log4j.Logger;
