@@ -11,7 +11,6 @@ import com.itextpdf.text.html.simpleparser.HTMLWorker;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.tool.xml.XMLWorkerHelper;
 import cucumber.api.java.it.Ma;
 import net.masterthought.cucumber.ReportResult;
 import net.masterthought.cucumber.json.Feature;

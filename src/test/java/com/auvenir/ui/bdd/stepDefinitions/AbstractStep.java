@@ -42,7 +42,7 @@ public class AbstractStep extends BaseInit {
         baseUrl = getConfigValue(PROPERTIES_FILE, "BASE_URL");
         getRunMode();
         // Configure for run test local mode
-        if (sRunMode.equalsIgnoreCase("local")) {
+        if (sRunMode == null) {
             if (Generic.sBrowser.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/chromedriver.exe");
                 DesiredCapabilities cap = setDownloadLocationChrome();

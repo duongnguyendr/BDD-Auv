@@ -21,7 +21,7 @@ import static com.auvenir.ui.bdd.base.BaseInit.baseUrl;
 public class SendReportMail {
 
     private static String sExecutionDate;
-    private static String sToEmail = "tan.pham@titancorpvn.com,doai.tran@titancorpvn.com";
+    private static String sToEmail = "doai.tran@titancorpvn.com";
     private static String sCcEmail = "";
 
     private static String createTHTable(int colspan, String nameHeader){

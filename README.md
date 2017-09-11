@@ -40,7 +40,16 @@ Besides, we can run test script on Selenium Grid with Jenkins Integration
 
 Framework is supporting reports with: `HTML report, PDF report, Mail report`.
 
+![alt text](http://i65.tinypic.com/jzh7oo.png)
+
 _References:_
 
-1. Genkins Language:
-  
+1. Gherkin Language: https://github.com/cucumber/cucumber/wiki/Gherkin
+
+2. Cucumber:
+https://github.com/cucumber
+
+3. Maven: https://github.com/cucumber
+
+4. TestNG: 
+http://testng.org
