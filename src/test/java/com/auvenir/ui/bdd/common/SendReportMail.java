@@ -13,15 +13,82 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+import static com.auvenir.ui.bdd.base.BaseInit.baseUrl;
+
 /**
  * Created by tan.pham on 9/8/2017.
  */
 public class SendReportMail {
 
     private static String sExecutionDate;
-    private static String sToEmail = "tan.pham@titancorpvn.com";
+    private static String sToEmail = "tan.pham@titancorpvn.com,doai.tran@titancorpvn.com";
     private static String sCcEmail = "";
 
+    private static String createTHTable(int colspan, String nameHeader){
+        StringBuilder sb = new StringBuilder();
+        if(colspan ==0){
+            sb.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">" + nameHeader +"</th>");
+        }else{
+            sb.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\" colspan = " + "\""+ colspan + "\""+">" + nameHeader +"</th>");
+        }
+
+        return sb.toString();
+    }
+
+    private static String createHeaderRow(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<tr style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">");
+        sb.append(createTHTable(0,""));
+        sb.append(createTHTable(6,"Steps"));
+        sb.append(createTHTable(3,"Scenario"));
+        sb.append("</tr>");
+        return sb.toString();
+    }
+
+    private static String createTDTable(String detailValueColumn){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + detailValueColumn + "</td>");
+        return sb.toString();
+    }
+
+    private static String createHeaderDetailRow(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<tr style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">");
+        sb.append(createTHTable(0,"Features"));
+        sb.append(createTHTable(0,"Passed"));
+        sb.append(createTHTable(0,"Failed"));
+        sb.append(createTHTable(0,"Skipped"));
+        sb.append(createTHTable(0,"Pending"));
+        sb.append(createTHTable(0,"Undefined"));
+        sb.append(createTHTable(0,"Total"));
+        sb.append(createTHTable(0,"Passed"));
+        sb.append(createTHTable(0,"Failed"));
+        sb.append(createTHTable(0,"Total"));
+        sb.append("</tr>");
+        return sb.toString();
+    }
+
+    private static String createDetailRow(ReportResult reportResult){
+        StringBuilder sb = new StringBuilder();
+        //Create detail row
+        int totalFeatures = reportResult.getAllFeatures().size();
+        for(int i=0; i<totalFeatures ;i++) {
+            Feature featureItem = reportResult.getAllFeatures().get(i);
+            sb.append("<tr>");
+            sb.append(createTDTable(featureItem.getName()));
+            sb.append(createTDTable(String.valueOf(featureItem.getPassedSteps())));
+            sb.append(createTDTable(String.valueOf(featureItem.getFailedSteps())));
+            sb.append(createTDTable(String.valueOf(featureItem.getSkippedSteps())));
+            sb.append(createTDTable(String.valueOf(featureItem.getPendingSteps())));
+            sb.append(createTDTable(String.valueOf(featureItem.getUndefinedSteps())));
+            sb.append(createTDTable(String.valueOf(featureItem.getSteps())));
+            sb.append(createTDTable(String.valueOf(featureItem.getPassedScenarios())));
+            sb.append(createTDTable(String.valueOf(featureItem.getFailedScenarios())));
+            sb.append(createTDTable(String.valueOf(featureItem.getScenarios())));
+            sb.append("</tr>");
+        }
+        return sb.toString();
+    }
 
     public static void sendMail(File pdfReports, String timeStamp, ReportResult reportResult) {
         Date date = new Date();
@@ -32,42 +99,9 @@ public class SendReportMail {
         //Create detail table
         StringBuilder sbDetailTable = new StringBuilder();
         sbDetailTable.append("<table style=\"border: 1px solid black1;border-collapse: collapse; width : 100%\">");
-        sbDetailTable.append("<tr style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\"></th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\" colspan=\"6\">Steps</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\" colspan=\"3\">Scenario</th>");
-        sbDetailTable.append("</tr>");
-        sbDetailTable.append("<tr style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Features</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Passed</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Failed</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Skipped</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Pending</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Undefined</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Total</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Passed</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Failed</th>");
-        sbDetailTable.append("<th style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: center;\">Total</th>");
-        sbDetailTable.append("</tr>");
-
-        //Create detail row
-        int totalFeatures = reportResult.getAllFeatures().size();
-        for(int i=0; i<totalFeatures ;i++) {
-            Feature featureItem = reportResult.getAllFeatures().get(i);
-            sbDetailTable.append("<tr>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;  width: 200px;\">" + featureItem.getName() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getPassedSteps() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getFailedFeatures() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getSkippedSteps() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getPendingSteps() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getUndefinedSteps() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getSteps() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getPassedScenarios() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getFailedScenarios() + "</td>");
-            sbDetailTable.append("<td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">" + featureItem.getScenarios() + "</td>");
-            sbDetailTable.append("</tr>");
-        }
-
+        sbDetailTable.append(createHeaderRow());
+        sbDetailTable.append(createHeaderDetailRow());
+        sbDetailTable.append(createDetailRow(reportResult));
         sbDetailTable.append("</table>");
 
         String featureChartImage = System.getProperty("user.dir") + "\\Reports\\ImageReports\\" + timeStamp + "\\FeaturesChart" + "_" + timeStamp + ".png";
@@ -84,14 +118,12 @@ public class SendReportMail {
 
         String message =
                 "<p>Team,</p><div style=\"font-family:Verdana;\">Find the tests automation execution status as below. For detail information, find the attached pdf file.</div><p></p><p></p><p></p><p></p>" + "<p><div style=\"font-family:Verdana;\"><b> EXECUTION SUMMARY : </b></div></p>" + "<table bgcolor=\"#BDE4F6\" style=\"border-radius: 20px; padding: 25px;\">"
-                /*+ "<tr><td>&nbsp;&nbsp;&nbsp;</td>"
-                + "&nbsp;&nbsp;&nbsp;"
-                + "<td><img src=\"cid:image\" style=\"height:200px; width: 200px; outline: thin solid;\"></td>"
-                + "</tr>"*/ + sbBrowserImageRow
+                        + sbBrowserImageRow
                         .toString() + "</table><p></p><p></p><p></p><p></p>" + "<p><div style=\"font-family:Verdana;\"><b> EXECUTION SUMMARY FOR BROWSER: CHROME</b></div></p>"
                         + sbDetailTable.toString()
                         + "<p></p><div style=\"font-family:Verdana;\">We can review detailed HTML report: </div><p></p>"
-                        +"<a href=\"http://jenkins-auvenir-automation.titancorpvn.com:8080/job/automation/ws/Reports/HTMLReports/index.html\">Automation HTML Report<br/></a>"
+                        + baseUrl
+                        +"<a href=\"http://jenkins.auvenir.com\">Automation HTML Report<br/></a>"
                         + "<p></p><div style=\"font-family:Verdana;\">Regards,</div><p></p>" + "<div style=\"font-family:Verdana;\">Automation " +
                         "Team</div>";
         properties.put("mail.smtp.auth", "true");

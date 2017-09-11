@@ -58,6 +58,7 @@ public class AbstractStep extends BaseInit {
                 System.setProperty("webdriver.edge.driver", GenericService.sDirPath + "/src/test/resources/MicrosoftWebDriver.exe");
                 driver = new EdgeDriver();
             }
+            // Configure for Selenium Grid mode, to run on Jenkins
         }else if (sRunMode.equalsIgnoreCase("SeleniumGrid")){
                 if (Generic.sBrowser.equalsIgnoreCase("chrome")) {
                     DesiredCapabilities capabilitiesChrome;
@@ -103,7 +104,6 @@ public class AbstractStep extends BaseInit {
             System.out.println("***** Open browser *****");
         }
     public Platform setOSForBrowser(String os) {
-
         Platform osType = null;
         System.out.println("Current OS: " + os);
         if (os.equalsIgnoreCase("WIN10")) {
@@ -123,7 +123,7 @@ public class AbstractStep extends BaseInit {
     Update for method: setDownload Location on Chrome
      */
     public DesiredCapabilities setDownloadLocationChrome() {
-        String downloadFilepath = GenericService.sDirPath + "\\src\\test\\resources\\download\\";
+        String downloadFilepath = Generic.sDirPath + "\\src\\test\\resources\\testData\\download\\";
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("profile.default_content_settings.popups", 0);
         chromePrefs.put("download.default_directory", downloadFilepath);
@@ -142,26 +142,22 @@ public class AbstractStep extends BaseInit {
         FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("browser.download.folderList", 2);
         profile.setPreference("browser.download.manager.showWhenStarting", false);
-        String downloadFilepath = GenericService.sDirPath + "/src/test/resources/download/";
+        String downloadFilepath = Generic.sDirPath + "/src/test/resources/testData/download/";
         profile.setPreference("browser.download.dir", downloadFilepath);
         profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/x-gzip");
         profile.setAcceptUntrustedCertificates(false);
         return profile;
     }
     @After
-    public void tearDownTest(Scenario scenario){
-        if(scenario.isFailed()){
-            scenario.embed(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES), "image/png");
+    public void tearDownTest(Scenario scenario) {
+        if (scenario.isFailed()) {
+            scenario.embed(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png");
             scenario.write("Scenario failed.");
-        }else {
+        } else {
             scenario.write("Scenario Passed");
         }
         driver.close();
         driver.quit();
         getLogger().info("***** Closed browser *****");
-    }
-    @BeforeSuite
-    public void beforeSuite(){
-        getBaseUrl();
     }
 }
