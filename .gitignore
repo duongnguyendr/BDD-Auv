@@ -6,3 +6,13 @@ BDD.QA.iml
 Reports/
 target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+/target/
+.idea/
+src/main/java/
+src/test/java/com/auvenir/ui/bdd/features/admin/
+src/test/java/com/auvenir/ui/bdd/features/auditor/
+src/test/java/com/auvenir/ui/bdd/features/client/
+src/test/java/com/auvenir/ui/bdd/features/marketing/
+src/test/java/com/auvenir/ui/bdd/pages/admin/
+src/test/java/com/auvenir/ui/bdd/pages/client/
+src/test/java/com/auvenir/ui/bdd/stepDefinitions/client/
