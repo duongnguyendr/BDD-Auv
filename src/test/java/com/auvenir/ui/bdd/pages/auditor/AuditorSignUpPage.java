@@ -188,6 +188,19 @@ public class AuditorSignUpPage extends KeyWord {
     @FindBy(css = ".ui.image")
     private WebElement eleImageLetter;
 
+    // ======================================  Element of Create Password ===================================================
+    @FindBy(xpath = "//input[@name='password']")
+    //    @FindBy(xpath = "//input[@id='first-password']")
+    private WebElement elePassword;
+
+    // Element of Confirm Password
+    @FindBy(xpath = "//input[@name='retype_password']")
+    //    @FindBy(xpath = "//input[@id='second-password']")
+    private WebElement eleConfirmPass;
+
+    @FindBy(xpath = "//button[@id='security-continueBtn']")
+    private WebElement createAccountBtnEle;
+
     /**
      * Verify Content of Register Personal Information Page
      */
@@ -434,6 +447,33 @@ public class AuditorSignUpPage extends KeyWord {
         validateDisPlayedElement(eleImageLetter, "Element of Image Letter");
         // Checking button Close element is displayed
         validateDisPlayedElement(btnContinue, "Element of button Continue");
+    }
+
+    public void createPassword(String strPass) {
+        getLogger().info("Create Password for New User.");
+        boolean result;
+        try {
+            waitForVisibleElement(elePassword, "Password Input");
+            sendKeyTextBox(elePassword, strPass, "Password Input");
+
+            waitForVisibleElement(eleConfirmPass, "Confirm Password Input");
+            sendKeyTextBox(eleConfirmPass, strPass, "Confirm Password Input");
+            sendTabkey(eleConfirmPass, "Confirm Password Input");
+//            scrollToFooter();
+            /*scrollPageDown();
+            waitForJSandJQueryToLoad();*/
+//            hoverAndWaitForClickableOfElement(createAccountBtnEle, "Create Account button");
+//            clickElementActions(createAccountBtnEle, "Create Account button");
+            clickElement(createAccountBtnEle, "Create Account button");
+            waitSomeSeconds(5);
+            // Verify Register Auditor Security Page is passed
+            //            waitForVisibleElement(successPageHeaderEle, "Success Page Header");
+            //            result = validateElementText(successPageHeaderEle, "Your Account Is on the Waitlist!");
+            //            Assert.assertTrue(result, "Success Page should be displayed.");
+
+        } catch (AssertionError e) {
+            getLogger().info(e.getMessage());
+        }
     }
 }
 

@@ -2,6 +2,7 @@ package com.auvenir.ui.bdd.stepDefinitions.gmail;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.GmailPage;
+import com.auvenir.ui.bdd.pages.common.MailAuditorJoinPage;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
@@ -15,10 +16,12 @@ import java.util.List;
 public class GmailStepDefinition extends BaseInit {
     private BaseInit base;
     GmailPage gmailPage;
+    MailAuditorJoinPage mailAuditorJoinPage;
 
     public GmailStepDefinition(BaseInit base) {
         this.base = base;
         gmailPage = new GmailPage(logger, driver);
+        mailAuditorJoinPage = new MailAuditorJoinPage(logger, driver);
     }
 
     @Given("^I navigate to gmail login page$")
@@ -33,5 +36,19 @@ public class GmailStepDefinition extends BaseInit {
         getLogger().info("===== I signIn gmail =====");
         List<String> lstData = users.asList(String.class);
         gmailPage.signInGmail(lstData.get(0), lstData.get(1));
+    }
+
+    @And("^I open Auditor active email$")
+    public void iOpenAuditorActiveEmail() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I select Auditor active email");
+        gmailPage.selectActiveEmaill();
+    }
+
+    @And("^I click on confirmation link$")
+    public void iClickOnConfirmationLink() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I click on confirmation link");
+        mailAuditorJoinPage.navigateToConfirmationLink();
     }
 }

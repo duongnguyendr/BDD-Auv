@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.common;
 import com.auvenir.utilities.GenericService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -13,9 +14,9 @@ import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -1301,4 +1302,189 @@ public class KeyWord {
         }
     }
 
+    public int findElementByText(java.util.List<WebElement> listElement, String textValue) {
+        try {
+            String actualTextValue;
+            for (int i = 0; i < listElement.size(); i++) {
+                actualTextValue = listElement.get(i).getText().trim();
+                if (actualTextValue.equals(textValue)) {
+                    getLogger().info("Element is found at " + i);
+                    return i;
+                }
+            }
+            getLogger().info(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+
+        } catch (Exception e) {
+            getLogger().info(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+        }
+    }
+
+    /**
+     * Scroll to footer of current page
+     * TODO: duplicating with scrollToFooter on AbstractService, find solution later
+     */
+    public void scrollToFooter() {
+        getLogger().info("Scroll down to see page footer.");
+        JavascriptExecutor js = ((JavascriptExecutor) getDriver());
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    /**
+     * Find the index(position) of Web Element in the list Web Element by attribute value
+     *
+     * @param listElement   List WebElement
+     * @param textValue     String text which is compared with each WebElements.
+     * @param attributeName String attributeName which attribute will be found with get Attribute method.
+     * @return i if the WebElement is matched, otherwise return -1.
+     */
+    public int findElementByAttribute(List<WebElement> listElement, String textValue, String attributeName) {
+        try {
+            String actualAttributeValue;
+            for (int i = 0; i < listElement.size(); i++) {
+                actualAttributeValue = listElement.get(i).getAttribute(attributeName).trim();
+                if (actualAttributeValue.equals(textValue)) {
+                    getLogger().info("Element is found at " + i);
+                    getLogger().info(String.format("The position of the text name '%s' at %d", textValue, i));
+                    return i;
+                }
+            }
+            Assert.fail(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+
+        } catch (Exception e) {
+            Assert.fail(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+        }
+    }
+
+    /**
+     * validate element list size equal
+     *
+     * @param elements    list element
+     * @param quantity    Expected quantity
+     * @param elementName Element name
+     */
+    public void validateElementsQuantity(List<WebElement> elements, int quantity, String elementName) {
+        try {
+            getLogger().info("Validate elements quantity" + elementName);
+            if (elements.size() == quantity) {
+                getLogger().info(elementName + " quantity equal: " + quantity);
+            } else {
+                Assert.fail(elementName + " quantity not equal: [Expected]= " + quantity + " /[Actual]= " + elements.size());
+            }
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+    }
+
+    /**
+     * validate placeholder text
+     *
+     * @param webElement  element need to validate
+     * @param value       Expected placeholder text
+     * @param elementName Element name
+     */
+    public void validatePlaceholder(WebElement webElement, String value, String elementName) {
+        try {
+            getLogger().info("Validate placeholder " + elementName);
+            if (webElement.getAttribute("placeholder").equals(value)) {
+                getLogger().info(elementName + " placeholder equal: " + value);
+            } else {
+                Assert.fail(elementName + " placeholder not equal: [Expected]= " + value + " /[Actual]= " + webElement.getAttribute("placeholder"));
+            }
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+    }
+
+    /**
+     * validate if attribute not contain given value
+     *
+     * @param webElement  element need to validate
+     * @param attribute   attribute name
+     * @param value       Expected attribute value
+     * @param elementName Element name
+     */
+    public void validateAttributeNotContain(WebElement webElement, String attribute, String value, String elementName) {
+        try {
+            getLogger().info("Validate Style Attribute Not Exist " + elementName);
+            if (!webElement.getAttribute(attribute).contains(value)) {
+                getLogger().info(value + " not exist on " + attribute + " on element: " + elementName);
+            } else {
+                Assert.fail(value + " not exist on " + attribute + " on element: " + elementName);
+            }
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+    }
+
+    /**
+     * validate text get by JS contain given value
+     *
+     * @param webElement  element need to validate
+     * @param value       Expected attribute value
+     * @param elementName Element name
+     */
+    public void validateElementJavaScriptTextContain(WebElement webElement, String value, String elementName) {
+        try {
+            getLogger().info("Validate Element JavaScript Text Contain " + elementName);
+            if (getTextByJavaScripts(webElement, elementName).contains(value)) {
+                getLogger().info(elementName + "'s JavaScript text contain: " + value);
+            } else {
+                Assert.fail(elementName + "'s JavaScript text contain: " + value);
+            }
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+    }
+
+    public String getDate(int day) {
+        Calendar date = Calendar.getInstance();
+        date.add(Calendar.DATE, day);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/d/yyyy");
+        return simpleDateFormat.format(date.getTime());
+    }
+
+    /**
+     * @param element     The element that we want to check.
+     * @param elementName Name of element we are verifying.
+     * @return
+     */
+    public boolean hoverAndWaitForClickableOfElement(WebElement element, String elementName) {
+        getLogger().info("Try to HoverAnd waitForClickableOfElement: " + elementName);
+        try {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element);
+            actions.build().perform();
+            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            return true;
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean validateExistedElement(WebElement element, String elementName) {
+        try {
+            getLogger().info("Validating " + elementName + " is existed.");
+            element.getText();
+            return true;
+        } catch (NoSuchElementException e) {
+            getLogger().info(elementName + " is not existed.");
+            return false;
+        } catch (ElementNotVisibleException e) {
+            getLogger().info(elementName + " is visible.");
+            return false;
+        } catch (IndexOutOfBoundsException outEx) {
+            getLogger().info("List " + elementName + " is empty.");
+            return false;
+        } catch (Exception e) {
+            getLogger().info("Error: Finding " + elementName + " error.");
+            //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            return false;
+        }
+    }
 }
