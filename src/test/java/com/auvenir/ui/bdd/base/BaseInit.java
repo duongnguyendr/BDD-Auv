@@ -42,4 +42,31 @@ public class BaseInit {
         setRunMode(System.getProperty("runMode"));
         return sRunMode;
     }
+
+    /**
+     * Description: Methods to get SToEmail
+     */
+    public static String sToEmail = "";
+    public void setToEmail(String toEmail){
+        sToEmail = toEmail;
+        getLogger().info("ToEmail: " +  sToEmail);
+    }
+    public String getToEmail(){
+        setToEmail(System.getProperty("toEmail"));
+        return sToEmail;
+    }
+
+    /**
+     * Description: Methods to get SCcEmail
+     */
+    public static String sCcEmail = "";
+    public void setCcEmail(String CcEmail){
+        sCcEmail = CcEmail;
+        getLogger().info("ToEmail: " +  sCcEmail);
+    }
+    public String getCcEmail(){
+        setCcEmail(System.getProperty("ccEmail"));
+        return sCcEmail;
+    }
+
 }

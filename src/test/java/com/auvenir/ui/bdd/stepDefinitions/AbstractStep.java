@@ -40,6 +40,8 @@ public class AbstractStep extends BaseInit {
     public void intializeWebDriver() throws MalformedURLException {
         getBaseUrl();
         baseUrl = getConfigValue(PROPERTIES_FILE, "BASE_URL");
+        getToEmail();
+        getCcEmail();
         getRunMode();
         // Configure for run test local mode
         if (sRunMode == null) {

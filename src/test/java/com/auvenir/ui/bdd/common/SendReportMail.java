@@ -1,5 +1,6 @@
 package com.auvenir.ui.bdd.common;
 
+import com.auvenir.ui.bdd.base.BaseInit;
 import net.masterthought.cucumber.ReportResult;
 import net.masterthought.cucumber.json.Feature;
 
@@ -21,8 +22,6 @@ import static com.auvenir.ui.bdd.base.BaseInit.baseUrl;
 public class SendReportMail {
 
     private static String sExecutionDate;
-    private static String sToEmail = "doai.tran@titancorpvn.com";
-    private static String sCcEmail = "";
 
     private static String createTHTable(int colspan, String nameHeader){
         StringBuilder sb = new StringBuilder();
@@ -133,14 +132,15 @@ public class SendReportMail {
         properties.put("mail.debug", "true");
         Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("chr.auditor01.auvenir@gmail.com","Changeit@123");
+                return new PasswordAuthentication(Generic.getConfigValue(Generic.PROPERTIES_FILE,"FROM_EMAILID"),
+                                                  Generic.getConfigValue(Generic.PROPERTIES_FILE,"FROM_PWD"));
             }
         });
         try {
             MimeMessage msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress("chr.auditor01.auvenir@gmail.com"));
-            msg.setRecipients(Message.RecipientType.TO, sToEmail);
-            msg.setRecipients(Message.RecipientType.CC, sCcEmail);
+            msg.setRecipients(Message.RecipientType.TO, BaseInit.sToEmail);
+            msg.setRecipients(Message.RecipientType.CC, BaseInit.sCcEmail);
             String prefixProtocol = "";
             if (prefixProtocol == "") {
                 prefixProtocol = "https://";
