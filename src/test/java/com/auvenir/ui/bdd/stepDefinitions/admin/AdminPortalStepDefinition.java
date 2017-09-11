@@ -4,6 +4,7 @@ import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.AdminPage;
 import com.auvenir.ui.bdd.pages.auditor.AuditorSignUpPage;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -60,10 +61,10 @@ public class AdminPortalStepDefinition extends BaseInit {
         adminPage.clickConfirmButton();
     }
 
-    @Then("^I should see verified message succesfull$")
-    public void iShouldSeeVerifiedMessageSuccesfull() throws Throwable {
+    @Then("^I should see verified message successful$")
+    public void iShouldSeeVerifiedMessageSuccessful() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I should see verified message succesfull");
+        getLogger().info("I should see verified message successful");
         adminPage.verifyMessageSuccessful();
     }
 }

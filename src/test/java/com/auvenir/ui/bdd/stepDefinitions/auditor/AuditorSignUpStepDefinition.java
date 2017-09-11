@@ -210,4 +210,10 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.verifySuccessPageContent();
     }
 
+    @And("^I create password$")
+    public void iCreatePassword(List<String> passWord) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I create password");
+        auditorSignUpPage.createPassword(passWord.get(0));
+    }
 }
