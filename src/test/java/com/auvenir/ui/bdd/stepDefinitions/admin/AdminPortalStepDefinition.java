@@ -1,10 +1,8 @@
 package com.auvenir.ui.bdd.stepDefinitions.admin;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.pages.AdminPage;
-import com.auvenir.ui.bdd.pages.auditor.AuditorSignUpPage;
+import com.auvenir.ui.bdd.pages.admin.AdminPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 

@@ -39,9 +39,9 @@ public class KeyWord {
         return logger;
     }
     
-    public KeyWord(WebDriver webDriver) {
-        this.driver = webDriver;
-    }
+//    public KeyWord(WebDriver webDriver) {
+//        this.driver = webDriver;
+//    }
     public static final int waitTime = 15;
     public static final int smallTimeOut = 1000;
 

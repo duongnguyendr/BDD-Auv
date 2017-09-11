@@ -1,6 +1,6 @@
 package com.auvenir.ui.bdd.pages.auditor;
 
-import com.auvenir.ui.bdd.pages.common.AbstractPage;
+import com.auvenir.ui.bdd.pages.common.CommonPage;
 import com.auvenir.utilities.DatePicker;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by cuong.nguyen on 5/8/2017.
  */
 
-public class AuditorNewEngagementPage extends AbstractPage {
+public class AuditorNewEngagementPage extends CommonPage {
 
     //@FindBy(id = "team-component-header")
     @FindBy(id = "team-component-header")

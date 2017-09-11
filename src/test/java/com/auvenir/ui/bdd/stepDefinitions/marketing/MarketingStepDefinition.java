@@ -1,16 +1,13 @@
 package com.auvenir.ui.bdd.stepDefinitions.marketing;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.pages.AdminPage;
+import com.auvenir.ui.bdd.pages.admin.AdminPage;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by doai.tran on 8/30/2017.

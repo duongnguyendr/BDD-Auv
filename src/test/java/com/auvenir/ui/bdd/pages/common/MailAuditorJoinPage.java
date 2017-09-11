@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by cuong.nguyen on 4/25/2017.
  */
-public class MailAuditorJoinPage extends KeyWord {
+public class MailAuditorJoinPage extends CommonPage {
 
     // Element of title mail
     @FindBy(xpath = "//p[contains(text(),'Hello')]")
@@ -191,10 +191,10 @@ public class MailAuditorJoinPage extends KeyWord {
         return eleSignatureMail;
     }
 
-    public MailAuditorJoinPage(WebDriver webDriver) {
-        super(webDriver);
-        PageFactory.initElements(webDriver, this);
-    }
+//    public MailAuditorJoinPage(Logger logger, WebDriver webDriver) {
+//        super(logger, webDriver);
+//        PageFactory.initElements(webDriver, this);
+//    }
 
     public MailAuditorJoinPage(Logger logger, WebDriver webDriver) {
         super(logger, webDriver);
