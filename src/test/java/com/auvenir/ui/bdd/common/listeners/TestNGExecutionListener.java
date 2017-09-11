@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.common.listeners;
 /**
  * Created by doai.tran on 8/29/2017.
  */
+import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.GeneratePDF;
 import com.auvenir.ui.bdd.common.GenerateReport;
 import com.auvenir.ui.bdd.common.Generic;
@@ -49,7 +50,10 @@ public class TestNGExecutionListener implements IExecutionListener {
             // Generate PDF File
             pdf.toExecute(sPdfReports,timeStamp, reportResult);
             //Send mail
-            SendReportMail.sendMail(sPdfReports,timeStamp, reportResult);
+            if((null != BaseInit.sToEmail) || (null != BaseInit.sCcEmail)){
+                SendReportMail.sendMail(sPdfReports,timeStamp, reportResult);
+            }
+
 
         }catch (Exception ex){
 

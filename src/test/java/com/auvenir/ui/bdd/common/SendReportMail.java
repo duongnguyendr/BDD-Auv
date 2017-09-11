@@ -139,8 +139,12 @@ public class SendReportMail {
         try {
             MimeMessage msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress("chr.auditor01.auvenir@gmail.com"));
-            msg.setRecipients(Message.RecipientType.TO, BaseInit.sToEmail);
-            msg.setRecipients(Message.RecipientType.CC, BaseInit.sCcEmail);
+            if(null != BaseInit.sToEmail) {
+                msg.setRecipients(Message.RecipientType.TO, BaseInit.sToEmail);
+            }
+            if(null != BaseInit.sCcEmail) {
+                msg.setRecipients(Message.RecipientType.CC, BaseInit.sCcEmail);
+            }
             String prefixProtocol = "";
             if (prefixProtocol == "") {
                 prefixProtocol = "https://";
