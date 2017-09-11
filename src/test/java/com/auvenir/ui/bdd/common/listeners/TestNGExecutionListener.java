@@ -6,6 +6,7 @@ package com.auvenir.ui.bdd.common.listeners;
 import com.auvenir.ui.bdd.common.GeneratePDF;
 import com.auvenir.ui.bdd.common.GenerateReport;
 import com.auvenir.ui.bdd.common.Generic;
+import com.auvenir.ui.bdd.common.SendReportMail;
 import com.auvenir.utilities.GeneralUtilities;
 import com.auvenir.utilities.GenericService;
 import com.auvenir.utilities.PdfGenerater;
@@ -47,6 +48,9 @@ public class TestNGExecutionListener implements IExecutionListener {
             ReportResult reportResult= GenerateReport.createReportDetail(timeStamp);
             // Generate PDF File
             pdf.toExecute(sPdfReports,timeStamp, reportResult);
+            //Send mail
+            SendReportMail.sendMail(sPdfReports,timeStamp, reportResult);
+
         }catch (Exception ex){
 
         }

@@ -24,7 +24,6 @@
         <mail.version>1.4</mail.version>
     </properties>
 
-
     <build>
         <plugins>
             <plugin>
@@ -47,28 +46,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
-            <!--<plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>3.10.0</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>cucumber-jvm-example</projectName>
-                            <outputDirectory>${basedir}/cucumber-html-reports</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
-                            &lt;!&ndash;<parallelTesting>false</parallelTesting>&ndash;&gt;
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
@@ -260,16 +237,6 @@
             <artifactId>testng</artifactId>
             <version>6.11</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.4.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itextpdf.tool</groupId>
-            <artifactId>xmlworker</artifactId>
-            <version>5.4.1</version>
         </dependency>
     </dependencies>
     <repositories>

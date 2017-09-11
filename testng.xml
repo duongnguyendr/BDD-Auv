@@ -5,46 +5,11 @@
     </listeners>
     <test name="SmokeTest - Chrome">
         <parameter name="browser" value="chrome"/>
-        <!--<parameter name="version" value="59.0.3071.115"/>
-        <parameter name="os" value="WIN10"/>-->
+        <parameter name="version" value="59.0.3071.115"/>
+        <parameter name="os" value="WIN10"/>
         <classes>
             <class name="com.auvenir.ui.bdd.runner.TestRunner"/>
         </classes>
     </test>
-    <!--
-    <test name="Regression - Chrome - Win8">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="version" value="59.0.3071.115"/>
-        <parameter name="os" value="WIN8"/>
-        <classes>
-            <class name="com.auvenir.ui.tests.SmokeTest"/>
-        </classes>
-    </test>
-   <test name="Regression - IE - Win10">
-       <parameter name="browser" value="internet explorer"/>
-       <parameter name="version" value="11"/>
-       <parameter name="os" value="WIN10"/>
-       <classes>
-           <class name="com.auvenir.ui.tests.marketing.MarketingTest"/>
-       </classes>
-   </test>
-   <test name="Regression - FireFox - Win10">
-       <parameter name="browser" value="firefox"/>
-       <parameter name="version" value="50.1.0"/>
-       <parameter name="os" value="WIN10"/>
-       <classes>
-           <class name="com.auvenir.ui.tests.SmokeTest"/>
-       </classes>
-   </test>-->
-
-    <!--
-    <test name="Regression - Safari - MAC">
-        <parameter name="browser" value="safari"/>
-        <parameter name="version" value="10.1.1"/>
-        <parameter name="os" value="MAC"/>
-        <classes>
-            <class name="com.auvenir.ui.tests.marketing.MarketingTest"/>
-        </classes>
-    </test>
-    -->
 </suite>
+

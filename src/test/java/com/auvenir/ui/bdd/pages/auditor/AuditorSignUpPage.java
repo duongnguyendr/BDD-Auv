@@ -11,9 +11,9 @@ import org.testng.Assert;
 import java.util.List;
 
 /**
- * Created by doai.tran on 9/8/2017.
+ * Created by duong.nguyen on 9/7/2017.
  */
-public class AuditorSignUpPage extends KeyWord{
+public class AuditorSignUpPage extends KeyWord {
     public AuditorSignUpPage(Logger logger, WebDriver driver) {
         super(logger, driver);
         PageFactory.initElements(driver, this);
@@ -207,17 +207,17 @@ public class AuditorSignUpPage extends KeyWord{
     public void verifyPersonalInfoPageContent() {
         getLogger().info("Verify Content of Register Personal Information Page");
         // Checking First and Last Name element is displayed
-        validateElememt(eleName, "Element First and Last Name", KeyWord.Element_Type.DISPLAYED);
+        validateElememt(eleName, "Element First and Last Name", Element_Type.DISPLAYED);
         // Checking Email Address element is displayed
-        validateElememt(eleEmail, "Element of Email Address", KeyWord.Element_Type.DISPLAYED);
+        validateElememt(eleEmail, "Element of Email Address", Element_Type.DISPLAYED);
         // Checking ReEnter Email Address element is displayed
-        validateElememt(eleConfirmEmail, "Element of ReEnter Email Address", KeyWord.Element_Type.DISPLAYED);
+        validateElememt(eleConfirmEmail, "Element of ReEnter Email Address", Element_Type.DISPLAYED);
         //  Checking Role in Firm element is displayed
-        validateElememt(eleRoleFirm, "Element of Role in Firm", KeyWord.Element_Type.DISPLAYED);
+        validateElememt(eleRoleFirm, "Element of Role in Firm", Element_Type.DISPLAYED);
         // Checking Phone Number element is displayed
-        validateElememt(elePhoneNumber, "Element of Phone Number", KeyWord.Element_Type.DISPLAYED);
+        validateElememt(elePhoneNumber, "Element of Phone Number", Element_Type.DISPLAYED);
         // Checking Reference Auvenir element is displayed
-        validateElememt(eleReference, "Element of Reference Auvenir", KeyWord.Element_Type.DISPLAYED);
+        validateElememt(eleReference, "Element of Reference Auvenir", Element_Type.DISPLAYED);
     }
 
     public void inputFullName(String fullName){
@@ -238,9 +238,9 @@ public class AuditorSignUpPage extends KeyWord{
     public void selectRoleInFirm(){
         waitForClickableOfElement(eleRoleFirm, "Role in Firm Dropdown");
         clickElement(eleRoleFirm, "Role");
-        waitForAtrributeValueChanged(eleRoleFirm, "Role in Firm Dropdown", "aria-expanded", "true");
+        //waitForAtrributeValueChanged(eleRoleFirm, "Role in Firm Dropdown", "aria-expanded", "true");
         clickElement(listItemRoleFirmEle.get(0), "First Item on Role Dropdown");
-        waitForAtrributeValueChanged(eleRoleFirm, "Role in Firm Dropdown", "aria-expanded", "false");
+        //waitForAtrributeValueChanged(eleRoleFirm, "Role in Firm Dropdown", "aria-expanded", "false");
     }
 
     public void inputPhoneNumber(String strPhone){
@@ -251,9 +251,9 @@ public class AuditorSignUpPage extends KeyWord{
     public void selectOptionHearAboutAuvenir(){
         waitForVisibleElement(eleReference, "Reference check box");
         clickElement(eleReference, "Reference check box");
-        waitForAtrributeValueChanged(eleReference, "Reference 'Hear' Dropdown", "aria-expanded", "true");
+        //waitForAtrributeValueChanged(eleReference, "Reference 'Hear' Dropdown", "aria-expanded", "true");
         clickElement(listItemReferenceEle.get(0), "First Item on Reference 'Hear' Dropdown");
-        waitForAtrributeValueChanged(eleReference, "Reference 'Hear' Dropdown", "aria-expanded", "false");
+        //waitForAtrributeValueChanged(eleReference, "Reference 'Hear' Dropdown", "aria-expanded", "false");
     }
 
     public void clickAgreeCheckBox(){
@@ -336,9 +336,9 @@ public class AuditorSignUpPage extends KeyWord{
     public void selectNumberEmployee(){
         waitForVisibleElement(numberOfEmployeeDropdownEle, "Number Of Employee Dropdown");
         clickElement(numberOfEmployeeDropdownEle, "Number Of Employee Dropdown");
-        waitForAtrributeValueChanged(numberOfEmployeeDropdownEle, "Number Of Employee Dropdown", "aria-expanded", "true");
+        //waitForAtrributeValueChanged(numberOfEmployeeDropdownEle, "Number Of Employee Dropdown", "aria-expanded", "true");
         clickElement(country_State_NumberOfEmployee_ListEle.get(0), "First Item on Number of Employee Dropdown");
-        waitForAtrributeValueChanged(numberOfEmployeeDropdownEle, "Number Of Employee Dropdown", "aria-expanded", "false");
+        //waitForAtrributeValueChanged(numberOfEmployeeDropdownEle, "Number Of Employee Dropdown", "aria-expanded", "false");
     }
 
     public void selectFirmPhoneNumber(String strPhone){
@@ -476,3 +476,4 @@ public class AuditorSignUpPage extends KeyWord{
         }
     }
 }
+

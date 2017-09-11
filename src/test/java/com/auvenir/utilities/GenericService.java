@@ -148,14 +148,14 @@ public class GenericService {
     private static void getPieChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp, String nameChart) {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
         pieDataset.setValue("FAIL", new Integer(iFailCount));
-        pieDataset.setValue("SKIP", new Integer(iSkippedCount));
+        //pieDataset.setValue("SKIP", new Integer(iSkippedCount));
         pieDataset.setValue("PASS", new Integer(iPassCount));
 
         JFreeChart piechart = ChartFactory.createPieChart(nameChart, pieDataset, true, true, false);
         PiePlot plot = (PiePlot) piechart.getPlot();
 
         plot.setSectionPaint("FAIL", Color.RED);
-        plot.setSectionPaint("SKIP", Color.ORANGE);
+       // plot.setSectionPaint("SKIP", Color.ORANGE);
         plot.setSectionPaint("PASS", new Color(192 * 85 + 192 * 104 + 192 * 47));
         plot.setBackgroundPaint(new Color(192 * 65536 + 192 * 256 + 192));
         plot.setExplodePercent("FAIL", 0.05);
