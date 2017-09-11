@@ -77,8 +77,8 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.clickConfirmCheckBox();
     }
 
-    @And("^I click continue button$")
-    public void iClickContinueButton() throws Throwable {
+    @And("^I click continue button on sign up page$")
+    public void iClickContinueButtonOnSignUpPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I click continue button");
         auditorSignUpPage.clickContinueButton();
@@ -196,12 +196,12 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.inputAffiliate(affiliateName.get(0));
     }
 
-    @And("^I click on continue button$")
-    public void iClickOnCountinueButton() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I click on countinue button");
-        auditorSignUpPage.clickContinueButton();
-    }
+//    @And("^I click on continue button$")
+//    public void iClickOnCountinueButton() throws Throwable {
+//        // Write code here that turns the phrase above into concrete actions
+//        getLogger().info("I click on countinue button");
+//        auditorSignUpPage.clickContinueButton();
+//    }
 
     @Then("^I should see thank for create account page$")
     public void iShouldSeeThankForCreateAccountPage() throws Throwable {
