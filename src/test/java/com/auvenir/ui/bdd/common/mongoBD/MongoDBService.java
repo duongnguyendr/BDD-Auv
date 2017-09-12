@@ -44,7 +44,15 @@ public class MongoDBService {
 //        MongoDBService.username = ab.getUserName();
 //        MongoDBService.password = ab.getPassword();
 //        MongoDBService.ssl = ab.getSSL();
-        if(baseUrl.equalsIgnoreCase("auvenir-qa-automaiton")){
+
+        MongoDBProperties mongoDBProperties = new MongoDBProperties(baseUrl);
+        dataBaseSer = mongoDBProperties.getServerIp();
+        DB = mongoDBProperties.getDatabaseName();
+        port = Integer.valueOf(mongoDBProperties.getPort());
+        username =mongoDBProperties.getUserName();
+        password =mongoDBProperties.getUserPassword();
+        ssl=mongoDBProperties.getSsl();
+       /* if(baseUrl.equalsIgnoreCase("auvenir-qa-automaiton")){
             dataBaseSer = "192.168.1.222";
             DB = "auvenir";
             port = 27017;
@@ -60,7 +68,7 @@ public class MongoDBService {
             ssl="";
         }else {
 
-        }
+        }*/
 
     }
 

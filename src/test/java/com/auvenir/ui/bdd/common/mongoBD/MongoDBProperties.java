@@ -32,7 +32,14 @@ public class MongoDBProperties {
         item.setPort("27017");
         item.setSsl("No");
 
-        if(!Generic.isEmptyString(runServer)){
+        if(runServer.equalsIgnoreCase("greed.auvenir.com")){
+            item.setServerIp("golem.auvenir.com");
+            item.setDatabaseName("auvenir");
+            item.setUserName("auvqadb");
+            item.setUserPassword("rE7IrgSfjnSjP9Pr08MQNhcXpezZp3d7SzfWreRVhW1zpU6f4gHnca0CNOLH9wvKewslvb5mfXDd3vsds76UhQ==");
+            item.setPort("27017");
+            item.setSsl("");
+        }else{
 
         }
 
