@@ -1,14 +1,14 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
 
-  Scenario: Verify super admin login.
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email | Password |
-      | chr.auvenirad@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see the AdminPortal page
+#  Scenario: Verify super admin login.
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email | Password |
+#      | chr.auvenirad@gmail.com | Changeit@123 |
+#    And I click on login button
+#    Then I should see the AdminPortal page
 
 #  Scenario: Verify admin login.
 #    Given I navigate to Marketing page
@@ -137,6 +137,17 @@ Feature: Smoke Test Feature
 #      | Engagement Dr01 |
 #    And I click on team tab
 #    And I delete existed member on team page
+
+
+
+  Scenario: Admin Client active account: AUV-645
+    Given I navigate to gmail login page
+    And I signIn gmail
+      | chr.auvenirclient01@gmail.com | Changeit@123 |
+    And I open active email
+    And I click on onboarding invitation link
+    Then I should see Welcome to Auvenir Page
+
 
 
 

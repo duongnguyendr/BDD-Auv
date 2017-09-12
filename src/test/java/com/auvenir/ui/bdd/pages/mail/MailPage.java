@@ -34,6 +34,9 @@ public class MailPage extends KeyWord{
     private WebElement elePassword;
     @FindBy(xpath = "//*//span[contains(text(),'Next')]")
     private WebElement eleNext;
+    @FindBy(xpath = "//a[text()='Start Your Engagement']")
+    private WebElement buttonStartEngagement;
+
 
     public void selectActiveEmail() {
         getLogger().info("Select Active Email");
@@ -81,15 +84,27 @@ public class MailPage extends KeyWord{
                 clickElement(signButtonEle, "signButtonEle");
             }
             if (!email.isEmpty()) {
+                getLogger().info("Send email: " + email);
                 sendKeyTextBox(eleEmail, email, "eleEmail");
                 sendTabKey(eleEmail, "eleEmail");
                 sendEnterKey(eleEmail, "eleEmail");
-                getLogger().info("Send email: " + email);
             }
-            sendKeyTextBox(elePassword, password, "password");
             getLogger().info("Send password: " + password);
+            sendKeyTextBox(elePassword, password, "password");
             clickElement(eleNext, "click to eleNext");
             getLogger().info("DONE => LOGIN");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Enter the email(after search) n click 'Start Engagement' button to go to Auvenir site
+     */
+    public void clickOnboardingInvitationLink() {
+        try {
+            getLogger().info("Redirecting from Gmail to Auvenir Welcome Page");
+            clickElement(buttonStartEngagement, "Button Start Engagement");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
