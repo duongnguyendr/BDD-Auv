@@ -2,7 +2,7 @@ package com.auvenir.ui.bdd.pages.mail;
 
 import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.ui.bdd.common.KeyWord;
-import com.auvenir.utilities.GenericService;
+//import com.auvenir.utilities.GenericService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -64,7 +64,7 @@ public class MailPage extends KeyWord{
     public void goGMail() {
         try {
 //            getDriver().get("https://mail.google.com/mail/u/0/?tab=wm#inbox");
-            getDriver().get(GenericService.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
+            getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             getDriver().manage().window().maximize();
         } catch (Exception e) {

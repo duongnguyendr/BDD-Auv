@@ -1,4 +1,4 @@
-package com.auvenir.utilities;
+package com.auvenir.ui.bdd.common;
 
 /**
  * Created by thuan.duong on 7/7/2017.

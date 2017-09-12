@@ -32,7 +32,7 @@ public class TestNGExecutionListener implements IExecutionListener {
         // Generate HTML Report
         String timeStamp = Generic.GetTimeStampValue();
         Reportable result = GenerateReport.GenerateMasterthoughtReport(timeStamp);
-        File sDateReports = new File(GenericService.sDirPath+"//Reports//ImageReports//" + timeStamp);
+        File sDateReports = new File(Generic.sDirPath+"//Reports//ImageReports//" + timeStamp);
         try {
             if (!sDateReports.exists()) {
                 FileUtils.forceMkdir(sDateReports);
@@ -67,8 +67,8 @@ public class TestNGExecutionListener implements IExecutionListener {
     public void initReportsFolder() throws IOException {
         try{
             System.out.println("***** Start initialize Report folders *****");
-        sHtmlReports = new File(GenericService.sDirPath + "//Reports//HTMLReports");
-        sPdfReports = new File(GenericService.sDirPath + "//Reports//PDFReports");
+        sHtmlReports = new File(Generic.sDirPath + "//Reports//HTMLReports");
+        sPdfReports = new File(Generic.sDirPath + "//Reports//PDFReports");
         if (!sHtmlReports.exists()) {
             FileUtils.forceMkdir(sHtmlReports);
         }

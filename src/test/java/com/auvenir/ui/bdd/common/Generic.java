@@ -49,6 +49,11 @@ public class Generic extends BaseInit{
     public static int iPassCount = 0;
     public static int iFailCount = 0;
     public static int iSkippedCount = 0;
+    public static String sConfigFile = null;
+    public static String sBrowserData = null;
+    public final static String MONGODBPROPERTIESFILE = sDirPath + "\\src\\test\\resources\\properties\\MongoDB.properties";
+
+
     /**
      * Description: Method to read the configuration from Config file.
      * @param sFile FILE Destination
@@ -546,7 +551,7 @@ public class Generic extends BaseInit{
     public static String[][] readExcelSheetData(String sheetName) {
         String data[][] = null;
         try {
-            FileInputStream fis = new FileInputStream(GenericService.sTestDataFile);
+            FileInputStream fis = new FileInputStream(Generic.sTestDataFile);
             Workbook wb = WorkbookFactory.create(fis);
             Sheet sheet = wb.getSheet(sheetName);
 
@@ -574,7 +579,7 @@ public class Generic extends BaseInit{
     public static String[] toReadExcelData(String sTestCaseID, String SheetName) {
         String sData[] = null;
         try {
-            FileInputStream fis = new FileInputStream(GenericService.sTestDataFile);
+            FileInputStream fis = new FileInputStream(Generic.sTestDataFile);
             Workbook wb = WorkbookFactory.create(fis);
             Sheet sht = wb.getSheet(SheetName);
 

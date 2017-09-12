@@ -1,4 +1,4 @@
-package com.auvenir.utilities;
+package com.auvenir.ui.bdd.common;
 
 import java.awt.*;
 

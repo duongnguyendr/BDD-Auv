@@ -1,4 +1,4 @@
-package com.auvenir.utilities;
+package com.auvenir.ui.bdd.common;
 
 
 import com.auvenir.ui.bdd.common.Generic;
@@ -17,8 +17,8 @@ public class WebService {
     String splitArray[] = null;
     String sResult[] = null;
     String sValue = null;
-    String sRegisterUrl = Generic.getConfigValue(GenericService.sConfigFile, "REGISTER_URL");
-    String sLoginUrl = Generic.getConfigValue(GenericService.sConfigFile, "LOGIN_URL");
+    String sRegisterUrl = Generic.getConfigValue(Generic.sConfigFile, "REGISTER_URL");
+    String sLoginUrl = Generic.getConfigValue(Generic.sConfigFile, "LOGIN_URL");
     String sUserAuthID = null;
 
     /*	String sDevAuthID = null;
@@ -37,8 +37,8 @@ public class WebService {
         httpsUrlCon.setRequestMethod("POST");
         httpsUrlCon.setRequestProperty("User-Agent", USER_AGENT);
         httpsUrlCon.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-    /*	sDevAuthID = GenericService.getCongigValue(GenericService.sConfigFile, "DEVAUTHID");
-		sApiKey = GenericService.getCongigValue(GenericService.sConfigFile, "APIKEY");*/
+    /*	sDevAuthID = Generic.getCongigValue(Generic.sConfigFile, "DEVAUTHID");
+		sApiKey = Generic.getCongigValue(Generic.sConfigFile, "APIKEY");*/
         String urlParameters = "email=" + sEmailID + "&devAuthID=" + sDevAuthID + "&apiKey=" + sApiKey;
         httpsUrlCon.setDoOutput(true);
         DataOutputStream dataOpStream = new DataOutputStream(httpsUrlCon.getOutputStream());
@@ -67,20 +67,20 @@ public class WebService {
         logger.info("Value of  sValue: " + sValue);
         //System.out.println(sValue);
 
-        /*GenericService.setConfigValue(GenericService.sConfigFile, sKey, sValue);*/
+        /*Generic.setConfigValue(Generic.sConfigFile, sKey, sValue);*/
     }
 
     public void gettingURL(String sEmailID, String sKey, String sDevAuthID, String sApiKey) throws Exception {
         String sUrl = "https://ariel.auvenir.com/api/v1/login-link";
-        //String sUrl = GenericService.getCongigValue(GenericService.sConfigFile,"AUDITOR_URL") + "/api/v1/login-link";
+        //String sUrl = Generic.getCongigValue(Generic.sConfigFile,"AUDITOR_URL") + "/api/v1/login-link";
         URL url = new URL(sUrl);
         HttpsURLConnection httpsUrlCon = (HttpsURLConnection) url.openConnection();
         httpsUrlCon.setRequestMethod("POST");
         httpsUrlCon.setRequestProperty("User-Agent", USER_AGENT);
         httpsUrlCon.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-        sUserAuthID = Generic.getConfigValue(GenericService.sConfigFile, "USERAUTHID");
-        sDevAuthID = Generic.getConfigValue(GenericService.sConfigFile, "DEVAUTHID");
-        sApiKey = Generic.getConfigValue(GenericService.sConfigFile, "APIKEY");
+        sUserAuthID = Generic.getConfigValue(Generic.sConfigFile, "USERAUTHID");
+        sDevAuthID = Generic.getConfigValue(Generic.sConfigFile, "DEVAUTHID");
+        sApiKey = Generic.getConfigValue(Generic.sConfigFile, "APIKEY");
         String urlParameters = "email=" + sEmailID + "&userAuthID=" + sUserAuthID + "&devAuthID=" + sDevAuthID
                 + "&apiKey=" + sApiKey;
         httpsUrlCon.setDoOutput(true);
@@ -103,6 +103,6 @@ public class WebService {
         //System.out.println("--------------------------");
         logger.info("Skey value is: " + sKey);
         //System.out.println(sKey);
-        /*GenericService.setConfigValue(GenericService.sConfigFile, sKey, sValue);*/
+        /*Generic.setConfigValue(Generic.sConfigFile, sKey, sValue);*/
     }
 }

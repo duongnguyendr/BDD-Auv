@@ -33,7 +33,7 @@ public class GeneralUtilities {
     public static Properties getMongoDBProperties() {
         Properties properties = null;
         try {
-            FileInputStream fis = new FileInputStream(GenericService.MONGODBPROPERTIESFILE);
+            FileInputStream fis = new FileInputStream(Generic.MONGODBPROPERTIESFILE);
             properties = new Properties();
             properties.load(fis);
         } catch (Exception ex) {

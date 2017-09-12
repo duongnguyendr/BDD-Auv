@@ -476,7 +476,7 @@ public class KeyWord {
     public void clickAndHold(WebElement element, String elementName) {
         getLogger().info("+++ Click And Hold: " + elementName);
         try {
-            if (GenericService.sBrowserData.equals("chr.")) {
+            if (Generic.sBrowserData.equals("chr.")) {
                 Actions actions = new Actions(driver);
                 actions.moveToElement(element);
                 actions.click(element);
