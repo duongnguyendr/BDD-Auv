@@ -19,7 +19,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see the AdminPortal page
 
-  Scenario: Verify Sign Up Auditor User.
+  Scenario: Auditor Admin click Sign up button and fill information: AUV-542
     Given I navigate to Marketing page
     And I click sign up link
     Then I should see personal sign up page
@@ -70,7 +70,7 @@ Feature: Smoke Test Feature
     Then I should see thank for create account page
     And I click continue button on sign up page
 
-  Scenario: Verify Admin Change Status User To OnBoarding
+  Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -86,7 +86,7 @@ Feature: Smoke Test Feature
     And I click confirm button on admin page
     Then I should see verified message successful on admin page
 
-  Scenario: Verify Auditor Login Gmail And Active User
+  Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
     Given I navigate to gmail login page
     And I signIn gmail
       | auvenirinfo@gmail.com | 12345678@Ab |
@@ -96,7 +96,7 @@ Feature: Smoke Test Feature
     |Changeit@123|
     Then I should see engagement page
 
-  Scenario: Verify Admin Auditor Create Simple Engagement
+  Scenario: Auditor user create new Engegament: AUV-585
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -123,7 +123,7 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page
       | Engagement Dr01 |
 
-  Scenario: Verify Admin Auditor Invite New Member Auditor
+  Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -136,7 +136,7 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page
       | Engagement Dr01 |
     And I click on team tab
-    And I delete existed member
+    And I delete existed member on team page
 
 
 

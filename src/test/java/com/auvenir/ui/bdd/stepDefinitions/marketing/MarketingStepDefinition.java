@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions.marketing;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.admin.AdminPage;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
+
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 
@@ -65,6 +66,7 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.clickOnSubmitBTN();*/
         //MarketingPage MarketingPage = new MarketingPage(logger,driver);
         marketingPage.clickOnSubmitBTN();
+        marketingPage.waitForProgressOverlayIsClosed();
     }
 
 }

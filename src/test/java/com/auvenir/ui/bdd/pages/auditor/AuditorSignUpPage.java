@@ -1,6 +1,7 @@
 package com.auvenir.ui.bdd.pages.auditor;
 
 import com.auvenir.ui.bdd.common.KeyWord;
+import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by duong.nguyen on 9/7/2017.
  */
-public class AuditorSignUpPage extends KeyWord {
+public class AuditorSignUpPage extends CommonPage {
     public AuditorSignUpPage(Logger logger, WebDriver driver) {
         super(logger, driver);
         PageFactory.initElements(driver, this);

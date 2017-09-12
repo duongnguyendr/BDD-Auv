@@ -1,18 +1,17 @@
-package com.auvenir.ui.bdd.pages;
+package com.auvenir.ui.bdd.pages.marketing;
 
-import com.auvenir.ui.bdd.common.KeyWord;
+import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 /**
  * Created by doai.tran on 8/29/2017.
  */
-public class MarketingPage extends KeyWord {
+public class MarketingPage extends CommonPage {
    public MarketingPage(Logger logger,WebDriver driver) {
       super(logger, driver);
       PageFactory.initElements(driver, this);

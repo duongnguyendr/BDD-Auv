@@ -1,6 +1,5 @@
 package com.auvenir.ui.bdd.pages.common;
 
-import com.auvenir.ui.bdd.common.KeyWord;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -80,7 +79,6 @@ public class EngagementPage extends CommonPage {
         } else {
             Assert.fail("Verify user Engagement: Fail");
         }
-
     }
 
     /**
@@ -110,7 +108,5 @@ public class EngagementPage extends CommonPage {
             Assert.fail("Fail: Verify " + role + " can see all engagements within firm");
         }
     }
-
-
     /*-----------end of huy.huynh on 17/07/2017.*/
 }

@@ -1,9 +1,6 @@
 package com.auvenir.ui.bdd.pages.admin;
 
-//import com.auvenir.ui.pages.AuvenirPage;
-//import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
-//import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
-import com.auvenir.ui.bdd.common.KeyWord;
+import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +12,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class AdminPage extends KeyWord {
+public class AdminPage extends CommonPage {
     public AdminPage(Logger logger, WebDriver driver) {
         super(logger, driver);
         PageFactory.initElements(driver, this);
