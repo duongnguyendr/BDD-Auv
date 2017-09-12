@@ -96,32 +96,32 @@ Feature: Smoke Test Feature
 #    |Changeit@123|
 #    Then I should see engagement page
 #
-#  Scenario: Auditor user create new Engegament: AUV-585
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                   | Password     |
-#      | auvenirinfo@gmail.com   | Changeit@123 |
-#    And I click on login button
-#    Then I should see engagement page
-#    And I click create new engagement button
-#    Then I should see new engagement page
-#    And I input enagagement name
-#    | Engagement Dr01 |
-#    And I select engagement type
-#    | Review |
-#    And I select company name
-#    | Titan |
-#    And I set report deadline
-#    And I set start date
-#    And I set end date
-#    And I click on engagement continue button
-#    Then I should see team member wizard page
-#    And I click continue button without member
-#    And I should see create todo list page
-#    And I click create todo button
-#    Then I should see engagement detail page
-#      | Engagement Dr01 |
+  Scenario: Auditor user create new Engegament: AUV-585
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | auvenirinfo@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click create new engagement button
+    Then I should see new engagement page
+    And I input enagagement name
+    | Engagement Dr01 |
+    And I select engagement type
+    | Review |
+    And I select company name
+    | Titan |
+    And I set report deadline
+    And I set start date
+    And I set end date
+    And I click on engagement continue button
+    Then I should see team member wizard page
+    And I click continue button without member
+    And I should see create todo list page
+    And I click create todo button
+    Then I should see engagement detail page
+      | Engagement Dr01 |
 #
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
@@ -160,8 +160,8 @@ Feature: Smoke Test Feature
       | En05|
     Then I should see client engagement detail page
       | En05 |
-#    And I click on team tab
-#    And I delete existed member on team page
+    And I click on Client team tab
+
 
 
 

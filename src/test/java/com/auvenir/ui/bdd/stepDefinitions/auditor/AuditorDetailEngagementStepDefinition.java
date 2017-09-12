@@ -29,7 +29,6 @@ public class AuditorDetailEngagementStepDefinition extends BaseInit {
     public void iShouldSeeEngagementDetailPage(List<String> engagementName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see engagement detail page");
-        auditorDetailsEngagementPage.verifyNewEngagementPopupClose();
         auditorDetailsEngagementPage.verifyDetailsEngagementPage(engagementName.get(0));
     }
 

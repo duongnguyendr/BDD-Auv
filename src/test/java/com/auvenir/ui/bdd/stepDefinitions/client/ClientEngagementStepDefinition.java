@@ -35,9 +35,5 @@ public class ClientEngagementStepDefinition extends BaseInit {
         clientEngagementPage.viewEngagementDetailsPage(EngagementName.get(0));
     }
 
-    @Then("^I should see client engagement detail page$")
-    public void iShouldSeeClientEngagementDetailPage() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
 
-    }
 }

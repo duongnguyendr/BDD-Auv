@@ -102,6 +102,7 @@ public class AuditorNewEngagementStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I click create todo button");
         auditorNewEngagementPage.clickCreateToDoBtn();
+        auditorDetailsEngagementPage.verifyNewEngagementPopupClose();
     }
 
 
