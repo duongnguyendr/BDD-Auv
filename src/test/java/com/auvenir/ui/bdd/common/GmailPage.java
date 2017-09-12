@@ -1,6 +1,5 @@
 package com.auvenir.ui.bdd.common;
 
-import com.auvenir.utilities.GenericService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -182,7 +181,7 @@ public class GmailPage extends KeyWord {
 
     public void gmailLogin(String sUSN, String sPWD) throws InterruptedException {
         try {
-            getDriver().get(GenericService.getConfigValue(GenericService.sConfigFile, "GMAIL_URL"));
+            getDriver().get(Generic.getConfigValue(GenericService.sConfigFile, "GMAIL_URL"));
             getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             getDriver().manage().window().maximize();
             try {
@@ -360,7 +359,7 @@ public class GmailPage extends KeyWord {
     public void goGMail() {
         try {
 //            getDriver().get("https://mail.google.com/mail/u/0/?tab=wm#inbox");
-            getDriver().get(GenericService.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
+            getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             getDriver().manage().window().maximize();
         } catch (Exception e) {
@@ -568,7 +567,7 @@ public class GmailPage extends KeyWord {
      */
     public void filterEmail() {
         try {
-            sendKeyTextBox(inputSearch, GenericService.getConfigValue(GenericService.sConfigFile, "GMAIL_SEARCHMAIL"), "Search Email");
+            sendKeyTextBox(inputSearch, Generic.getConfigValue(GenericService.sConfigFile, "GMAIL_SEARCHMAIL"), "Search Email");
             clickElement(buttonSearch, "Button Search");
             //waitForCssValueChanged(divSearchResultHidden, "Hidden div", "display", "none");
             waitSomeSeconds(5);
@@ -683,7 +682,7 @@ public class GmailPage extends KeyWord {
      */
     public void gmailNewLogin(String userName, String pwd) {
         try {
-            getDriver().get(GenericService.getConfigValue(GenericService.sConfigFile, "GMAIL_URL"));
+            getDriver().get(Generic.getConfigValue(GenericService.sConfigFile, "GMAIL_URL"));
             getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             if (!validateNotExistedElement(getEleEmail(), "UserName textbox")) {
                 //Wait for clickable of userName txtbox

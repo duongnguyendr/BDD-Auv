@@ -4,11 +4,11 @@ package com.auvenir.ui.bdd.common.listeners;
  * Created by doai.tran on 8/29/2017.
  */
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.common.GeneratePDF;
-import com.auvenir.ui.bdd.common.GenerateReport;
+import com.auvenir.ui.bdd.common.reports.GeneratePDF;
+import com.auvenir.ui.bdd.common.reports.GenerateReport;
 import com.auvenir.ui.bdd.common.Generic;
-import com.auvenir.ui.bdd.common.SendReportMail;
-import com.auvenir.utilities.GenericService;
+import com.auvenir.ui.bdd.common.reports.SendReportMail;
+import com.auvenir.ui.bdd.common.GenericService;
 import net.masterthought.cucumber.ReportResult;
 import net.masterthought.cucumber.Reportable;
 import org.apache.commons.io.FileUtils;

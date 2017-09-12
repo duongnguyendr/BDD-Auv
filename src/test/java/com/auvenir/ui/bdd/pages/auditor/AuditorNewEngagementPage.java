@@ -1,7 +1,7 @@
 package com.auvenir.ui.bdd.pages.auditor;
 
 import com.auvenir.ui.bdd.pages.common.CommonPage;
-import com.auvenir.utilities.DatePicker;
+import com.auvenir.ui.bdd.pages.DatePicker;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

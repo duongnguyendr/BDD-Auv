@@ -1,7 +1,6 @@
 package com.auvenir.ui.bdd.pages.auditor;
 
 import com.auvenir.ui.bdd.pages.common.EngagementPage;
-import com.auvenir.utilities.GeneralUtilities;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -493,14 +492,14 @@ public class AuditorEngagementPage extends EngagementPage {
 
     public void auditorPageHeaderContent() {
         auditorEngagementPage = new AuditorEngagementPage(getLogger(), getDriver());
-        GeneralUtilities.toValidate(auditorEngagementPage.getEleAuvenirLogoImg(), "Auvenir Logo", "Displayed");
-        GeneralUtilities.toValidate(auditorEngagementPage.getEleEngagementLnk(), "Engagement Link", "Displayed");
-        GeneralUtilities.toValidate(auditorEngagementPage.getEleClientsLnk(), "Clients Link", "Displayed");
-        GeneralUtilities.toValidate(auditorEngagementPage.getEleAuditorNameDrpDwn(), "Auditor Name Dropdown", "Displayed");
-        GeneralUtilities.toValidate(auditorEngagementPage.getEleSettingsLnk(), "Dropdown Settings Link", "Displayed");
-        GeneralUtilities.toValidate(auditorEngagementPage.getEleSignOutLnk(), "Dropdown SignOut Link", "Displayed");
-        GeneralUtilities.toValidate(auditorEngagementPage.getEleChatIcn(), "Chat Icon", "Displayed");
-        GeneralUtilities.toValidate(auditorEngagementPage.getEleNotificationIcn(), "Notification Icon", "Displayed");
+        toValidate(auditorEngagementPage.getEleAuvenirLogoImg(), "Auvenir Logo", "Displayed");
+        toValidate(auditorEngagementPage.getEleEngagementLnk(), "Engagement Link", "Displayed");
+        toValidate(auditorEngagementPage.getEleClientsLnk(), "Clients Link", "Displayed");
+        toValidate(auditorEngagementPage.getEleAuditorNameDrpDwn(), "Auditor Name Dropdown", "Displayed");
+        toValidate(auditorEngagementPage.getEleSettingsLnk(), "Dropdown Settings Link", "Displayed");
+        toValidate(auditorEngagementPage.getEleSignOutLnk(), "Dropdown SignOut Link", "Displayed");
+        toValidate(auditorEngagementPage.getEleChatIcn(), "Chat Icon", "Displayed");
+        toValidate(auditorEngagementPage.getEleNotificationIcn(), "Notification Icon", "Displayed");
     }
 
     public void verifyAuditorEngagementFilter() {

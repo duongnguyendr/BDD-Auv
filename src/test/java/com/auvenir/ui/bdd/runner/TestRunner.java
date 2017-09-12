@@ -1,6 +1,5 @@
 package com.auvenir.ui.bdd.runner;
 
-import com.auvenir.ui.bdd.common.GenerateReport;
 import com.auvenir.ui.bdd.common.Generic;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
