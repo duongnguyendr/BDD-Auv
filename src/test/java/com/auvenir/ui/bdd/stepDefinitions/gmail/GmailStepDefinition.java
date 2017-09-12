@@ -35,8 +35,8 @@ public class GmailStepDefinition extends BaseInit {
         mailPage.signInGmail(lstData.get(0), lstData.get(1));
     }
 
-    @And("^I open Auditor active email$")
-    public void iOpenAuditorActiveEmail() throws Throwable {
+    @And("^I open active email$")
+    public void iOpenActiveEmail() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I select Auditor active email");
         mailPage.selectActiveEmail();
@@ -63,4 +63,12 @@ public class GmailStepDefinition extends BaseInit {
         getLogger().info("I relogin gmail");
         mailPage.reSignInGmail(email);
     }
+
+    @And("^I click on onboarding invitation link$")
+    public void iClickOnOnboardingInvitationLink() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I click on onboarding invitation link");
+        mailPage.clickOnboardingInvitationLink();
+    }
+
 }

@@ -39,6 +39,9 @@ public class MailPage extends KeyWord{
     private WebElement elePassword;
     @FindBy(xpath = "//*//span[contains(text(),'Next')]")
     private WebElement eleNext;
+    @FindBy(xpath = "//a[text()='Start Your Engagement']")
+    private WebElement buttonStartEngagement;
+
     @FindBy(xpath = "//div[@class='T-I J-J5-Ji T-I-KE L3']")
     private WebElement composeBtn;
     @FindBy(xpath = "//div[@class='J-J5-Ji J-JN-M-I-Jm']//div[@role='presentation']/..")
@@ -110,6 +113,18 @@ public class MailPage extends KeyWord{
         signInGmail(eGMail, ePassword);
         deleteAllMail();
         gmailLogout();
+    }
+
+    /**
+     * Enter the email(after search) n click 'Start Engagement' button to go to Auvenir site
+     */
+    public void clickOnboardingInvitationLink() {
+        try {
+            getLogger().info("Redirecting from Gmail to Auvenir Welcome Page");
+            clickElement(buttonStartEngagement, "Button Start Engagement");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void deleteAllMail() throws InterruptedException {
