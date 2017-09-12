@@ -136,7 +136,7 @@ public class GenericService {
         return sData;
     }
 
-    public static void getFeaturesChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp){
+    /*public static void getFeaturesChart(int iPassCount, int iFailCount, int iSkippedCount, String timeStamp){
         getPieChart(iPassCount,  iFailCount, iSkippedCount, timeStamp, "Features");
     }
 
@@ -224,7 +224,7 @@ public class GenericService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static void sendMail(File pdfReports, ArrayList sTestName, ArrayList sStatus, String timeStamp) {
         Date date = new Date();
