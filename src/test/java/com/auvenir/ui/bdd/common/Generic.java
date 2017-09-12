@@ -1,10 +1,7 @@
 package com.auvenir.ui.bdd.common;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -21,6 +18,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.List;
 import java.io.*;
 import java.text.DecimalFormat;
@@ -603,5 +602,49 @@ public class Generic extends BaseInit{
             e.printStackTrace();
         }
         return sData;
+    }
+
+    public static String getTestDataFromExcelNoBrowserPrefix(String SheetName, String rowName, String columnName) {
+        String userData = null;
+        try {
+            String userDataExcel = null;
+            FileInputStream fis = new FileInputStream(Generic.sTestDataFile);
+            Workbook wb = WorkbookFactory.create(fis);
+            Sheet sht = wb.getSheet(SheetName);
+            //            System.out.println(SheetName);
+            int iRowNum = sht.getLastRowNum();
+            for (int i = 1; i <= iRowNum; i++) {
+                if (sht.getRow(i).getCell(0) != null) {
+                    if (sht.getRow(i).getCell(0).toString().equals(rowName)) {
+                        int iCellNum = sht.getRow(i).getLastCellNum();
+                        /*System.out.println("Row: " + i);
+                        System.out.println("The number of Columns:" + iCellNum);
+                        System.out.println(columnName);*/
+                        for (int j = 1; j <= iCellNum; j++) {
+                            if (sht.getRow(0).getCell(j) != null) {
+                                if ((sht.getRow(0).getCell(j).toString()).equals(columnName)) {
+                                    DataFormatter formatter = new DataFormatter();
+                                    userDataExcel = formatter.formatCellValue(sht.getRow(i).getCell(j));
+                                    //System.out.println("Data login: "+userDataExcel);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            userData = userDataExcel;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userData;
+    }
+
+    public static  boolean isEmptyString(String input){
+        if((null != input) && (!"".equals(input))){
+            return false;
+        }
+        return true;
     }
 }
