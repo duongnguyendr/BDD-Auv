@@ -56,4 +56,11 @@ public class GmailStepDefinition extends BaseInit {
         List<String> lstData = users.asList(String.class);
         mailPage.deleteAllExistedGMail(lstData.get(0), lstData.get(1));
     }
+
+    @And("^I relogin gmail$")
+    public void iReloginGmail() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I relogin gmail");
+
+    }
 }

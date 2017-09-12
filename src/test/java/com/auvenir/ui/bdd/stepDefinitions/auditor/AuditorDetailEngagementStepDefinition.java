@@ -2,7 +2,9 @@ package com.auvenir.ui.bdd.stepDefinitions.auditor;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorDetailsEngagementPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 
 /**
  * Created by duong.nguyen on 9/8/2017.
@@ -21,4 +23,10 @@ public class AuditorDetailEngagementStepDefinition extends BaseInit {
         auditorDetailsEngagementPage.navigateToTeamTab();
     }
 
+    @Then("^I should see engagement detail page: \"([^\"]*)\"$")
+    public void iShouldSeeEngagementDetailPage(String engagementName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I should see engagement detail page");
+        auditorDetailsEngagementPage.verifyDetailsEngagementPage(engagementName);
+    }
 }

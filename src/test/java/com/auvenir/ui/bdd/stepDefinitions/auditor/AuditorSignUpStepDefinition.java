@@ -28,27 +28,6 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.verifyPersonalInfoPageContent();
     }
 
-    @And("^I input full name text box$")
-    public void iInputFullNameTextBox(List<String> fullName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I input: " + fullName.get(0) + " to full name text box =====");
-        auditorSignUpPage.inputFullName(fullName.get(0));
-    }
-
-    @And("^I input email address$")
-    public void iInputEmailAddress(List<String> strEmail) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I input email: " + strEmail.get(0) + " to email text box =====");
-        auditorSignUpPage.inputEmail(strEmail.get(0));
-    }
-
-    @And("^I input confirm email$")
-    public void iInputConfirmEmail(List<String> strEmailConfirm) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I input email: " + strEmailConfirm.get(0) + " to confirm email text box =====");
-        auditorSignUpPage.inputEmailConfirm(strEmailConfirm.get(0));
-    }
-
     @And("^I input phone number$")
     public void iInputPhoneNumber(List<String> phoneNumber) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -98,81 +77,11 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.selectRoleInFirm();
     }
 
-    @And("^I input firm name$")
-    public void iInputFirmName(List<String> firmName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input firm name");
-        auditorSignUpPage.inputFirmName(firmName.get(0));
-    }
-
-    @And("^I input firm webside$")
-    public void iInputFirmWebside(List<String> firmWebside) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input firm webside");
-        auditorSignUpPage.inputFirmWebSide(firmWebside.get(0));
-    }
-
-    @And("^I select country$")
-    public void iSelectCountry(List<String> country) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I select country");
-        auditorSignUpPage.selectCountry(country.get(0));
-    }
-
-    @And("^I select provide state$")
-    public void iSelectProvideState(List<String> strState) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I select provide state");
-        auditorSignUpPage.selectAnyStateInList(strState.get(0));
-    }
-
-    @And("^I input street address$")
-    public void iInputStreetAddress(List<String> strStreet) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input street address");
-        auditorSignUpPage.inputStreet(strStreet.get(0));
-    }
-
-    @And("^I input zip code$")
-    public void iInputZipCode(List<String> StrZipCode) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input zip code");
-        auditorSignUpPage.inputZipCode(StrZipCode.get(0));
-    }
-
-    @And("^I input city$")
-    public void iInputCity(List<String> strCity) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input city");
-        auditorSignUpPage.inputCity(strCity.get(0));
-    }
-
-    @And("^I input office number$")
-    public void iInputOfficeNumber(List<String> strOffiNum) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input office number");
-        auditorSignUpPage.inputOfficeNumber(strOffiNum.get(0));
-    }
-
-    @And("^I input memberId$")
-    public void iInputMemberId(List<String> strMemberId) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input member Id");
-        auditorSignUpPage.inputMemberID(strMemberId.get(0));
-    }
-
     @And("^I select number employee$")
     public void iSelectNumberEmployee() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I select number employee");
         auditorSignUpPage.selectNumberEmployee();
-    }
-
-    @And("^I input business phone number$")
-    public void iInputBusinessPhoneNumber(List<String> businessPhoneNum) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input business phone number");
-        auditorSignUpPage.selectFirmPhoneNumber(businessPhoneNum.get(0));
     }
 
     @And("^I check rule logo check box$")
@@ -189,13 +98,6 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.clickOnAllFirmCheckBox();
     }
 
-    @And("^I input affiliate name$")
-    public void iInputAffiliateName(List<String> affiliateName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input affiliate name");
-        auditorSignUpPage.inputAffiliate(affiliateName.get(0));
-    }
-
 //    @And("^I click on continue button$")
 //    public void iClickOnCountinueButton() throws Throwable {
 //        // Write code here that turns the phrase above into concrete actions
@@ -210,10 +112,111 @@ public class AuditorSignUpStepDefinition extends BaseInit {
         auditorSignUpPage.verifySuccessPageContent();
     }
 
-    @And("^I create password$")
-    public void iCreatePassword(List<String> passWord) throws Throwable {
+    @And("^I input full name: \"([^\"]*)\" text box$")
+    public void iInputFullNameTextBox(String fullName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.inputFullName(fullName);
+    }
+
+    @And("^I input email address: \"([^\"]*)\"$")
+    public void iInputEmailAddress(String email) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.inputEmail(email);
+    }
+
+    @And("^I input confirm email: \"([^\"]*)\"$")
+    public void iInputConfirmEmail(String emailConfirm) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.inputEmailConfirm(emailConfirm);
+    }
+
+    @And("^I input phone number: \"([^\"]*)\"$")
+    public void iInputPhoneNumber(String phoneNumber) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.inputPhoneNumber(phoneNumber);
+    }
+
+    @And("^I input firm name: \"([^\"]*)\"$")
+    public void iInputFirmName(String firmName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input firm name");
+        auditorSignUpPage.inputFirmName(firmName);
+    }
+
+    @And("^I input firm web side: \"([^\"]*)\"$")
+    public void iInputFirmWebSide(String firmWebside) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input firm webside");
+        auditorSignUpPage.inputFirmWebSide(firmWebside);
+    }
+
+    @And("^I select country: \"([^\"]*)\"$")
+    public void iSelectCountry(String country) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I select country");
+        auditorSignUpPage.selectCountry(country);
+    }
+
+    @And("^I select provide state: \"([^\"]*)\"$")
+    public void iSelectProvideState(String strState) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I select provide state");
+        auditorSignUpPage.selectAnyStateInList(strState);
+    }
+
+    @And("^I input street address: \"([^\"]*)\"$")
+    public void iInputStreetAddress(String strStreet) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input street address");
+        auditorSignUpPage.inputStreet(strStreet);
+    }
+
+    @And("^I input zip code: \"([^\"]*)\"$")
+    public void iInputZipCode(String StrZipCode) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input zip code");
+        auditorSignUpPage.inputZipCode(StrZipCode);
+    }
+
+    @And("^I input city: \"([^\"]*)\"$")
+    public void iInputCity(String strCity) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input city");
+        auditorSignUpPage.inputCity(strCity);
+    }
+
+    @And("^I input office number: \"([^\"]*)\"$")
+    public void iInputOfficeNumber(String strOffiNum) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input office number");
+        auditorSignUpPage.inputOfficeNumber(strOffiNum);
+    }
+
+    @And("^I input memberId: \"([^\"]*)\"$")
+    public void iInputMemberId(String strMemberId) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input member Id");
+        auditorSignUpPage.inputMemberID(strMemberId);
+    }
+
+    @And("^I input business phone number: \"([^\"]*)\"$")
+    public void iInputBusinessPhoneNumber(String businessPhoneNum) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input business phone number");
+        auditorSignUpPage.selectFirmPhoneNumber(businessPhoneNum);
+    }
+
+    @And("^I input affiliate name: \"([^\"]*)\"$")
+    public void iInputAffiliateName(String affiliateName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input affiliate name");
+        auditorSignUpPage.inputAffiliate(affiliateName);
+    }
+
+    @And("^I create password: \"([^\"]*)\"$")
+    public void iCreatePassword(String passWord) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I create password");
-        auditorSignUpPage.createPassword(passWord.get(0));
+        auditorSignUpPage.createPassword(passWord);
     }
 }

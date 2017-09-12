@@ -138,4 +138,12 @@ public class MailPage extends KeyWord{
         Thread.sleep(3000);
     }
 
+    public void reSignInGmail(String password) throws Exception{
+            Thread.sleep(1000);
+            elePassword.sendKeys(password);
+            getLogger().info("Send password: " + password);
+            Thread.sleep(1000);
+            clickElement(eleNext, "click to eleNext");
+            getLogger().info("DONE => LOGIN");
+    }
 }
