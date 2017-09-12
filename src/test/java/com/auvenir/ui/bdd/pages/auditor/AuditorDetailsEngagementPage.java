@@ -42,6 +42,9 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
     @FindBy(id = "engagementOverview")
     private WebElement engagementOverviewEle;
 
+    @FindBy(xpath = "//*[@id='CreateEngagementParent']/../../../..")
+    private WebElement createEngagementPopupEle;
+
     /**
      * verifyDownloadAttachmentFromAllToDo - TanPh - 2017/06/22 - Start
      */
@@ -95,5 +98,8 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
         clickElement(eleContactLink, "contact link");
     }
 
+    public void verifyNewEngagementPopupClose() {
+        waitForCssValueChanged(createEngagementPopupEle, "Create Engagement Popup", "display", "none");
+    }
 }
 

@@ -24,6 +24,7 @@ public class EngagementPage extends CommonPage {
     //    @FindBy(xpath = "//div[@id='cpa-main']/div")
     @FindBy(xpath = "//tbody[@id='engagement-tbody']//td/a")
     protected List<WebElement> engagementListEle;
+
     @FindBy(id = "c-header-title")
     private WebElement myEngagementTextEle;
 
@@ -63,7 +64,6 @@ public class EngagementPage extends CommonPage {
         System.out.println("Position: " + index);
         //        hoverElement(engagementListEle.get(index), engagementName);
         waitForClickableOfElement(engagementListEle.get(index), engagementName);
-
         if (index == engagementListEle.size() - 1) {
             scrollToFooter();
         } else
@@ -75,9 +75,9 @@ public class EngagementPage extends CommonPage {
         waitForVisibleElement(myEngagementTextEle, "myEngagementTextEle");
         boolean isCompareText = validateElementText(myEngagementTextEle, "All Engagements");
         if (isCompareText) {
-            getLogger().info("Verify user Engagement: Pass");
+            getLogger().info("Verify user's Engagement page: Pass");
         } else {
-            Assert.fail("Verify user Engagement: Fail");
+            Assert.fail("Verify user's Engagement page: Fail");
         }
     }
 

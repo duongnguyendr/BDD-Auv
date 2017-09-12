@@ -2,7 +2,6 @@ package com.auvenir.ui.bdd.stepDefinitions.auditor;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorDetailsEngagementPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -12,6 +11,7 @@ import cucumber.api.java.en.Then;
 public class AuditorDetailEngagementStepDefinition extends BaseInit {
     BaseInit baseInit;
     AuditorDetailsEngagementPage auditorDetailsEngagementPage;
+
     public AuditorDetailEngagementStepDefinition(BaseInit baseInit){
         this.baseInit = baseInit;
         auditorDetailsEngagementPage = new AuditorDetailsEngagementPage(logger, driver);

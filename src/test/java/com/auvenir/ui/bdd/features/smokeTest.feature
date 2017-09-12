@@ -126,5 +126,21 @@ Feature: Smoke Test Feature
     Then I should see invite successful message
     And I relogin gmail
 
+  Scenario: Admin Client invite Lead Client into Engagement: AUV-818
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | clvien.adm@mailinator.com   | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on client engagement
+      | En05|
+    Then I should see client engagement detail page
+      | En05 |
+    And I click on Client team tab
+
+
+
 
 
