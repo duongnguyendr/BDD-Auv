@@ -40,27 +40,6 @@ public class AuditorTeamStepDefinition extends BaseInit {
         auditorTeamPage.verifyInviteNewMemberPageDisplayed();
     }
 
-    @And("^I input full name on invite new member page$")
-    public void iInputFullNameOnInviteNewMemberPage(List<String> fullName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input full name on invite new member page");
-        auditorTeamPage.inputFullName(fullName.get(0));
-    }
-
-    @And("^I input email on invite new member page$")
-    public void iInputEmailOnInviteNewMemberPage(List<String> strEmail) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input email on invite new member page");
-        auditorTeamPage.inputEmail(strEmail.get(0));
-    }
-
-    @And("^I input email confirm on invite new member page$")
-    public void iInputEmailConfirmOnInviteNewMemberPage(List<String> strEmail) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input email confirm on invite new member page");
-        auditorTeamPage.inputEmailConfirm(strEmail.get(0));
-    }
-
     @And("^I select role of new member$")
     public void iSelectRoleOfNewMember() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -82,4 +61,24 @@ public class AuditorTeamStepDefinition extends BaseInit {
         auditorTeamPage.verifyAddNewMemberSuccessful();
     }
 
+    @And("^I input full name on invite new member page: \"([^\"]*)\"$")
+    public void iInputFullNameOnInviteNewMemberPage(String fullName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input full name on invite new member page");
+        auditorTeamPage.inputFullName(fullName);
+    }
+
+    @And("^I input email on invite new member page: \"([^\"]*)\"$")
+    public void iInputEmailOnInviteNewMemberPage(String strEmail) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input email on invite new member page");
+        auditorTeamPage.inputEmail(strEmail);
+    }
+
+    @And("^I input email confirm on invite new member page: \"([^\"]*)\"$")
+    public void iInputEmailConfirmOnInviteNewMemberPage(String strEmail) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input email confirm on invite new member page");
+        auditorTeamPage.inputEmailConfirm(strEmail);
+    }
 }

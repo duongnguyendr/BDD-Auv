@@ -103,8 +103,11 @@ Feature: Smoke Test Feature
     And I click create todo button
     Then I should see engagement detail page: "Engagement Dr01"
 
+    #=================== Start Duong Nguyen ========================#
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
+      | Email                   | Password     |
+      | auditor01@gmail.com   | Changeit@123 |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -118,13 +121,15 @@ Feature: Smoke Test Feature
     And I delete existed member on team page
     And I click in invite new member on team page
     Then I should see invite new member page
-    And I input full name on invite new member page
-    And I input email on invite new member page
-    And I input email confirm on invite new member page
+    And I input full name on invite new member page: "Lead Auditor"
+    And I input email on invite new member page: "auditor01@gmail.com"
+    And I input email confirm on invite new member page: "auditor01@gmail.com"
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
-    And I relogin gmail
+    And I relogin gmail: "auditor01@gmail.com"
+
+    #=================== End of Duong Nguyen ========================#
 
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
     Given I navigate to Marketing page
