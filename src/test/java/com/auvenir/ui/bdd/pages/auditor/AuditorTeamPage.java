@@ -81,6 +81,8 @@ public class AuditorTeamPage extends TeamPage {
     @FindBy(xpath = "//*[@id='m-inm-jobTitle-container']/ul/li/a")
     private List<WebElement> roleCompanyListItemDdl;
 
+    @FindBy(xpath = "//h3[@class='inm-subTitle']")
+    private WebElement inviteNewMemberTitle;
 
     /**
      * verifyCheckListTeam - TanPH - 2017/06/22 - End
@@ -242,7 +244,7 @@ public class AuditorTeamPage extends TeamPage {
      * @param roleInFirm     : role in firm need check
      */
     public void verifyMemberIsShownInTeamList(String memberFullName, String roleInFirm) {
-        getLogger().info(String.format("Verify member is already exists in team list"));
+        getLogger().info("Verify member is already exists in team list");
         try {
             boolean result = checkMemberTeamIsExists(memberFullName, roleInFirm);
             Assert.assertTrue(result);
@@ -250,7 +252,41 @@ public class AuditorTeamPage extends TeamPage {
         } catch (AssertionError e) {
             getLogger().info(e.getMessage());
         }
+    }
 
+    public void verifyInviteNewMemberPageDisplayed(){
+        getLogger().info("Verify invite new member page load");
+        boolean result = validateDisPlayedElement(inviteNewMemberTitle, "inviteNewMemberTitle");
+        Assert.assertTrue(result);
+    }
+
+    public void inputFullName(String fullName){
+        sendKeyTextBox(fullNameMemberTxt, fullName, "Full Name Textbox");
+    }
+
+    public void inputEmail(String email){
+        sendKeyTextBox(emailMemberTxt, email, "Email Textbox");
+    }
+
+    public void inputEmailConfirm(String email){
+        sendKeyTextBox(reEmailMemberTxt, email, "ReEnter Email Textbox");
+    }
+
+    public void selectRoleMember(){
+        clickElement(roleCompanyDropdown, "Role in Company Dropdown");
+        waitForAtrributeValueChanged(roleCompanyDdlPopup, "Role in Company Popup", "class", "ddlLink inputDdl inputDdl-after");
+        clickElement(roleCompanyListItemDdl.get(0), "second Item in Role Dropdown list");
+        waitForAtrributeValueChanged(roleCompanyDdlPopup, "Role in Company Popup", "class", "ddlLink inputDdl");
+    }
+
+    public void clickButtonInviteNewMember(){
+        clickElement(inviteButton, "Invite Button");
+        waitForProgressOverlayIsClosed();
+    }
+
+    public void verifyAddNewMemberSuccessful(){
+        boolean result = verifyContentOfSuccessToastMessage("Your engagement invitation has been sent.");
+        Assert.assertTrue(result, "The Message Invite New Member Successful should be displayed");
     }
 
     /**

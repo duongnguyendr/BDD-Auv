@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions.gmail;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.mail.MailPage;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 
@@ -46,6 +47,21 @@ public class GmailStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I click on confirmation link");
         mailPage.navigateToConfirmationLink();
+    }
+
+    @Given("^I delete existed email$")
+    public void iDeleteExistedEmail(DataTable users) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I delete existed email");
+        List<String> lstData = users.asList(String.class);
+        mailPage.deleteAllExistedGMail(lstData.get(0), lstData.get(1));
+    }
+
+    @And("^I relogin gmail$")
+    public void iReloginGmail() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I relogin gmail");
+
     }
 
     @And("^I click on onboarding invitation link$")
