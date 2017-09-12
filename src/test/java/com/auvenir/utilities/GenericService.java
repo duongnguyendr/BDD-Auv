@@ -226,7 +226,7 @@ public class GenericService {
         }
     }*/
 
-    public static void sendMail(File pdfReports, ArrayList sTestName, ArrayList sStatus, String timeStamp) {
+    /*public static void sendMail(File pdfReports, ArrayList sTestName, ArrayList sStatus, String timeStamp) {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         sExecutionDate = simpleDateFormat.format(date);
@@ -318,10 +318,10 @@ public class GenericService {
         }
         String message =
                 "<p>Team,</p><div style=\"font-family:Verdana;\">Find the tests automation execution status as below. For detail information, find the attached pdf file.</div><p></p><p></p><p></p><p></p>" + "<p><div style=\"font-family:Verdana;\"><b> EXECUTION SUMMARY : </b></div></p>" + "<table bgcolor=\"#BDE4F6\" style=\"border-radius: 20px; padding: 25px;\">"
-                /*+ "<tr><td>&nbsp;&nbsp;&nbsp;</td>"
+                *//*+ "<tr><td>&nbsp;&nbsp;&nbsp;</td>"
                 + "&nbsp;&nbsp;&nbsp;"
                 + "<td><img src=\"cid:image\" style=\"height:200px; width: 200px; outline: thin solid;\"></td>"
-                + "</tr>"*/ + sbBrowserImageRow
+                + "</tr>"*//* + sbBrowserImageRow
                         .toString() + "</table><p></p><p></p><p></p><p></p>" + "<p><div style=\"font-family:Verdana;\"><b> EXECUTION SUMMARY FOR BROWSER: </b></div></p>" + "<table style=\"border: 1px solid black;border-collapse: collapse;\"><col width=\"130\"><col width=\"80\"><col width=\"80\"><col width=\"80\"><col width=\"80\">" + "<tr style=\"border: 1px solid black;border-collapse: collapse; padding: 5px;text-align: left\">" + sbSummaryBrowserHeaderRow
                         .toString() + "</tr>" + "<tr>" + sbTotalTestCaseRow
                         .toString() + "</tr>" + "<tr><td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">Passed</td>" + passedRow + "</tr>" + "<tr><td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">Failed</td>" + failedRow + "</tr>" + "<tr><td style=\"border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;\">Skiped</td>" + skippedRow + "</tr></table>"
@@ -348,12 +348,12 @@ public class GenericService {
             msg.setRecipients(Message.RecipientType.TO, GenericService.sToEmail);
             msg.setRecipients(Message.RecipientType.CC, GenericService.sCcEmail);
             // msg.setSubject("Auvenir_Execution_Report_"+GenericService.getCongigValue(GenericService.sConfigFile,"EXECUTION_REPORT_DATE"));
-            /*msg.setSubject("Auvenir Execution Report on " + GenericService.getConfigValue(GenericService.sConfigFile, "SERVER")
-                    + " " + sExecutionDate);*/
-            /*String prefixProtocol = AbstractService.prefixProtocol;
+            *//*msg.setSubject("Auvenir Execution Report on " + GenericService.getConfigValue(GenericService.sConfigFile, "SERVER")
+                    + " " + sExecutionDate);*//*
+            *//*String prefixProtocol = AbstractService.prefixProtocol;
             if (prefixProtocol == "") {
                 prefixProtocol = "https://";
-            }*/
+            }*//*
 
             //String baseUrlRun = prefixProtocol + System.getProperty("serverDomainName");
             String baseUrlRun = System.getProperty("serverDomainName");
@@ -367,8 +367,8 @@ public class GenericService {
             for (int i = 0; i < totalBrowser; i++) {
                 MimeBodyPart messageBodyPart = new MimeBodyPart();
                 String browserName = browserList.get(i).substring(0, browserList.get(i).length() - 1);
-                /*DataSource fds = new FileDataSource(
-                        System.getProperty("user.dir") + "\\src\\test\\resources\\images\\PieChart"+ browserName + "_" + timeStamp +".png");*/
+                *//*DataSource fds = new FileDataSource(
+                        System.getProperty("user.dir") + "\\src\\test\\resources\\images\\PieChart"+ browserName + "_" + timeStamp +".png");*//*
                 DataSource fds = new FileDataSource(System.getProperty(
                         "user.dir") + "\\Reports\\ImageReports\\" + timeStamp + "\\PieChart" + browserName + "_" + timeStamp + ".png");
                 messageBodyPart.setDataHandler(new DataHandler(fds));
@@ -376,10 +376,10 @@ public class GenericService {
                 multipart.addBodyPart(messageBodyPart);
             }
 
-            /*DataSource fds = new FileDataSource(
+            *//*DataSource fds = new FileDataSource(
                     System.getProperty("user.dir") + "\\src\\test\\resources\\images\\PieChartCHROME.png");
             messageBodyPart.setDataHandler(new DataHandler(fds));
-            messageBodyPart.setHeader("Content-ID", "<image>");*/
+            messageBodyPart.setHeader("Content-ID", "<image>");*//*
             multipart.addBodyPart(textPart);
             MimeBodyPart attachementPart = new MimeBodyPart();
             // attachementPart.attachFile(new File(pdfReports));
@@ -391,7 +391,7 @@ public class GenericService {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
+    }*/
 
     private static String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
