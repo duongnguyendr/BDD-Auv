@@ -1,6 +1,7 @@
 package com.auvenir.utilities;
 
 //import com.auvenir.ui.tests.AbstractTest;
+import com.auvenir.ui.bdd.common.Generic;
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
@@ -12,7 +13,7 @@ import javax.sql.rowset.spi.SyncFactoryException;
 import java.net.UnknownHostException;
 import java.util.*;
 
-import static com.auvenir.utilities.GenericService.sDirPath;
+import static com.auvenir.ui.bdd.common.Generic.sDirPath;
 import static com.mongodb.MongoClientOptions.builder;
 import static javax.sql.rowset.spi.SyncFactory.getLogger;
 
@@ -80,7 +81,7 @@ public class MongoDBService {
      =================================================================== */
     public static void insertOwner(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "owners");
+            sData = Generic.toReadExcelData(valueId, "owners");
 
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
@@ -114,7 +115,7 @@ public class MongoDBService {
      =================================================================== */
     public static void deleteOwner(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "owners");
+            sData = Generic.toReadExcelData(valueId, "owners");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -135,7 +136,7 @@ public class MongoDBService {
      =================================================================== */
     public static void insertConsumer(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "consumers");
+            sData = Generic.toReadExcelData(valueId, "consumers");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -164,7 +165,7 @@ public class MongoDBService {
      =================================================================== */
     public static void deleteConsumer(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "consumers");
+            sData = Generic.toReadExcelData(valueId, "consumers");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -185,7 +186,7 @@ public class MongoDBService {
      =================================================================== */
     public static void insertInstitution(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "institutions");
+            sData = Generic.toReadExcelData(valueId, "institutions");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -220,7 +221,7 @@ public class MongoDBService {
      =================================================================== */
     public static void deleteInstitution(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "institutions");
+            sData = Generic.toReadExcelData(valueId, "institutions");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -241,7 +242,7 @@ public class MongoDBService {
      =================================================================== */
     public static void insertConsumerAccount(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "consumerAccounts");
+            sData = Generic.toReadExcelData(valueId, "consumerAccounts");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -277,7 +278,7 @@ public class MongoDBService {
      =================================================================== */
     public static void deleteConsumerAccount(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "consumerAccounts");
+            sData = Generic.toReadExcelData(valueId, "consumerAccounts");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -298,7 +299,7 @@ public class MongoDBService {
      =================================================================== */
     public static void insertAccount(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "accounts");
+            sData = Generic.toReadExcelData(valueId, "accounts");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -337,7 +338,7 @@ public class MongoDBService {
      =================================================================== */
     public static void deleteAccount(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "accounts");
+            sData = Generic.toReadExcelData(valueId, "accounts");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -358,7 +359,7 @@ public class MongoDBService {
      =================================================================== */
     public static void insertAuthSession(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "authSessions");
+            sData = Generic.toReadExcelData(valueId, "authSessions");
             configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
@@ -424,7 +425,7 @@ public class MongoDBService {
      =================================================================== */
     public static void deleteAuthSession(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
-            sData = GenericService.toReadExcelData(valueId, "authSessions");
+            sData = Generic.toReadExcelData(valueId, "authSessions");
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("authSessions");
@@ -565,7 +566,7 @@ public class MongoDBService {
      */
     public static void createUserByEmail(String email) {
         try {
-            String[][] data = GenericService.readExcelSheetData("usersRegression");
+            String[][] data = Generic.readExcelSheetData("usersRegression");
 
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             System.out.println("MongoClient = " + MongoClient);

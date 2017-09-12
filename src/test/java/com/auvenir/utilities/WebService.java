@@ -1,7 +1,8 @@
 package com.auvenir.utilities;
 
-//import org.testng.log4testng.Logger;
 
+import com.auvenir.ui.bdd.common.Generic;
+import com.auvenir.ui.bdd.common.GenericService;
 import org.apache.log4j.Logger;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -17,8 +18,8 @@ public class WebService {
     String splitArray[] = null;
     String sResult[] = null;
     String sValue = null;
-    String sRegisterUrl = GenericService.getConfigValue(GenericService.sConfigFile, "REGISTER_URL");
-    String sLoginUrl = GenericService.getConfigValue(GenericService.sConfigFile, "LOGIN_URL");
+    String sRegisterUrl = Generic.getConfigValue(GenericService.sConfigFile, "REGISTER_URL");
+    String sLoginUrl = Generic.getConfigValue(GenericService.sConfigFile, "LOGIN_URL");
     String sUserAuthID = null;
 
     /*	String sDevAuthID = null;
@@ -78,9 +79,9 @@ public class WebService {
         httpsUrlCon.setRequestMethod("POST");
         httpsUrlCon.setRequestProperty("User-Agent", USER_AGENT);
         httpsUrlCon.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-        sUserAuthID = GenericService.getConfigValue(GenericService.sConfigFile, "USERAUTHID");
-        sDevAuthID = GenericService.getConfigValue(GenericService.sConfigFile, "DEVAUTHID");
-        sApiKey = GenericService.getConfigValue(GenericService.sConfigFile, "APIKEY");
+        sUserAuthID = Generic.getConfigValue(GenericService.sConfigFile, "USERAUTHID");
+        sDevAuthID = Generic.getConfigValue(GenericService.sConfigFile, "DEVAUTHID");
+        sApiKey = Generic.getConfigValue(GenericService.sConfigFile, "APIKEY");
         String urlParameters = "email=" + sEmailID + "&userAuthID=" + sUserAuthID + "&devAuthID=" + sDevAuthID
                 + "&apiKey=" + sApiKey;
         httpsUrlCon.setDoOutput(true);

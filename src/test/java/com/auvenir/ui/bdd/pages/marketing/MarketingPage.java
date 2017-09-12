@@ -47,7 +47,7 @@ public class MarketingPage extends CommonPage {
       sendKeyTextBox(emailTextBox, username, "emailTextBox");
       sendKeyTextBox(passwordTextBox, password, "passwordTextBox");
         /*emailTextBox.sendKeys(username);
-        passwordTextBox.sendKeys(password);*/
+        passwordTextBox.sendKeys(password);.*/
    }
 
    public void clickOnSubmitBTN() {
@@ -59,14 +59,6 @@ public class MarketingPage extends CommonPage {
    private WebElement eleAdminHdrTxt;
 
    public void verifyHeaderAdminPage() {
-        /*try {
-            waitForVisibleElement(eleAdminHdrTxt, "eleAdminHdrTxt");
-            validateElementText(eleAdminHdrTxt, "Admin");
-            Assert.assertEquals(validateElementText(eleAdminHdrTxt, "Admin"),"true");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }*/
-      System.out.println("00000000: "+eleAdminHdrTxt.getText());
       Assert.assertEquals((eleAdminHdrTxt).getText(), "Admin");
    }
 

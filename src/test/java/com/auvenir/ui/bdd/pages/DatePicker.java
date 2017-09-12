@@ -1,4 +1,4 @@
-package com.auvenir.utilities;
+package com.auvenir.ui.bdd.pages;
 
 /*import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
 import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;

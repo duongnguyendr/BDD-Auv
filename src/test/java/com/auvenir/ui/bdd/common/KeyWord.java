@@ -1,6 +1,5 @@
 package com.auvenir.ui.bdd.common;
 
-import com.auvenir.utilities.GenericService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,6 +13,10 @@ import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
@@ -1078,7 +1081,7 @@ public class KeyWord {
             String actualValue = webElement.getCssValue(cssName);
             System.out.println("Actual CSS Value: " + actualValue);
             if (cssName.contains("color")) {
-                actualValue = GenericService.parseRgbTohex(actualValue);
+                actualValue = Generic.parseRgbTohex(actualValue);
             }
             Assert.assertEquals(actualValue, expected);
             getLogger().info("+++++ Verified CSS value: "+ cssName+ " of Element: "+ webElement);
@@ -1486,5 +1489,59 @@ public class KeyWord {
             //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
         }
+    }
+    public static void toValidate(WebElement element, String sExpectedText, String checkType) throws InvalidElementStateException {
+        System.out.println("verify present of: " + sExpectedText);
+        switch (checkType) {
+            case "Displayed":
+                try {
+                    element.isDisplayed();
+                } catch (Exception e) {
+                }
+
+                break;
+            case "Enabled":
+                try {
+                    element.isEnabled();
+                } catch (Exception e) {
+                }
+
+                break;
+            case "Selected":
+                try {
+                    element.isSelected();
+                } catch (Exception e) {
+                }
+
+            case "ElementText":
+                try {
+                    element.getText().equals(sExpectedText);
+                } catch (Exception e) {
+                }
+                break;
+        }
+    }
+    public static boolean checkFileExists(String pathLocation, boolean deleteExisted) {
+        //        waitSomeSeconds(3);
+        Path path = Paths.get(pathLocation);
+        System.out.println("file: " + path);
+        boolean result = false;
+        try {
+            if (Files.exists(path)) {
+                result = true;
+                if (deleteExisted) {
+                    Files.delete(path);
+                    if (Files.exists(path)) {
+                        //AbstractService.sStatusCnt++;
+//                        NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            //AbstractService.sStatusCnt++;
+//            NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+            ex.printStackTrace();
+        }
+        return result;
     }
 }
