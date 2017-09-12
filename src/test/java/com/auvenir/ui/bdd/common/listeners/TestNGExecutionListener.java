@@ -8,7 +8,6 @@ import com.auvenir.ui.bdd.common.reports.GeneratePDF;
 import com.auvenir.ui.bdd.common.reports.GenerateReport;
 import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.ui.bdd.common.reports.SendReportMail;
-import com.auvenir.ui.bdd.common.GenericService;
 import net.masterthought.cucumber.ReportResult;
 import net.masterthought.cucumber.Reportable;
 import org.apache.commons.io.FileUtils;

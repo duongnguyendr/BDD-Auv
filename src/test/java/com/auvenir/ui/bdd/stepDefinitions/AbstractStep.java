@@ -2,7 +2,6 @@ package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.Generic;
-import com.auvenir.ui.bdd.common.GenericService;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -45,18 +44,18 @@ public class AbstractStep extends BaseInit {
         // Configure for run test local mode
         if (sRunMode == null) {
             if (Generic.sBrowser.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", Generic.sDirPath + "/src/test/resources/webDrivers/chromedriver.exe");
                 DesiredCapabilities cap = setDownloadLocationChrome();
                 driver = new ChromeDriver(cap);
             } else if (Generic.sBrowser.equalsIgnoreCase("firefox")) {
-                System.setProperty("webdriver.gecko.driver", GenericService.sDirPath + "/src/test/resources/webDrivers/geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", Generic.sDirPath + "/src/test/resources/webDrivers/geckodriver.exe");
                 FirefoxProfile profileFF = setDownloadLocationFirefox();
                 driver = new FirefoxDriver(profileFF);
             } else if (Generic.sBrowser.equalsIgnoreCase("internetexplorer")) {
-                System.setProperty("webdriver.ie.driver", GenericService.sDirPath + "/src/test/resources/IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", Generic.sDirPath + "/src/test/resources/IEDriverServer.exe");
                 driver = new InternetExplorerDriver();
             } else if (Generic.sBrowser.equalsIgnoreCase("edge")) {
-                System.setProperty("webdriver.edge.driver", GenericService.sDirPath + "/src/test/resources/MicrosoftWebDriver.exe");
+                System.setProperty("webdriver.edge.driver", Generic.sDirPath + "/src/test/resources/MicrosoftWebDriver.exe");
                 driver = new EdgeDriver();
             }
             // Configure for Selenium Grid mode, to run on Jenkins
@@ -64,7 +63,7 @@ public class AbstractStep extends BaseInit {
                 if (Generic.sBrowser.equalsIgnoreCase("chrome")) {
                     DesiredCapabilities capabilitiesChrome;
                     capabilitiesChrome = DesiredCapabilities.chrome();
-                    String downloadFilepath = GenericService.sDirPath + "/src/test/resources/download/";
+                    String downloadFilepath = Generic.sDirPath + "/src/test/resources/download/";
                     HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
                     chromePrefs.put("profile.default_content_settings.popups", 0);
                     chromePrefs.put("download.default_directory", downloadFilepath);
@@ -91,7 +90,6 @@ public class AbstractStep extends BaseInit {
                     DesiredCapabilities capabilitiesEdge;
                     capabilitiesEdge = DesiredCapabilities.edge();
                     driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), capabilitiesEdge, capabilitiesEdge);
-                    GenericService.sBrowserData = "edge.";
                 } else if (Generic.sBrowser.equalsIgnoreCase("safari")) {
                     DesiredCapabilities capabilitiesSafari;
                     capabilitiesSafari = DesiredCapabilities.safari();
