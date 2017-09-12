@@ -1,6 +1,6 @@
 package com.auvenir.ui.bdd.initialize;
 
-import com.auvenir.ui.bdd.base.MongoDBProperties;
+import com.auvenir.ui.bdd.common.mongoBD.MongoDBProperties;
 import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.ui.bdd.common.mongoBD.MongoDBService;
 import com.auvenir.ui.bdd.stepDefinitions.AbstractStep;

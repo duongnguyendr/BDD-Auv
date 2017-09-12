@@ -1,4 +1,4 @@
-package com.auvenir.ui.bdd.base;
+package com.auvenir.ui.bdd.common.mongoBD;
 
 import com.auvenir.ui.bdd.common.Generic;
 
@@ -20,6 +20,23 @@ public class MongoDBProperties {
 
     public MongoDBProperties(String runServer){
         this.getMongoDBProperties(runServer);
+    }
+
+
+    private MongoDBProperties getMongoDBProperties(String runServer){
+        MongoDBProperties item = new MongoDBProperties();
+        item.setServerIp("192.168.1.222");
+        item.setDatabaseName("auvenir");
+        item.setUserName("");
+        item.setUserPassword("");
+        item.setPort("27017");
+        item.setSsl("No");
+
+        if(!Generic.isEmptyString(runServer)){
+
+        }
+
+        return item;
     }
 
     public String getServerIp() {
@@ -68,21 +85,5 @@ public class MongoDBProperties {
 
     public void setSsl(String ssl) {
         this.ssl = ssl;
-    }
-
-    private MongoDBProperties getMongoDBProperties(String runServer){
-        MongoDBProperties item = new MongoDBProperties();
-        item.setServerIp("192.168.1.222");
-        item.setDatabaseName("auvenir");
-        item.setUserName("");
-        item.setUserPassword("");
-        item.setPort("27017");
-        item.setSsl("No");
-
-        if(!Generic.isEmptyString(runServer)){
-
-        }
-
-        return item;
     }
 }
