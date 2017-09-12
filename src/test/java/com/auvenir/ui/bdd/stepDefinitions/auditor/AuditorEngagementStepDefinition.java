@@ -38,5 +38,4 @@ public class AuditorEngagementStepDefinition extends BaseInit{
         getLogger().info("I click on engagement: " + engagementName.get(0));
         auditorEngagementPage.viewEngagementDetailsPage(engagementName.get(0));
     }
-
 }

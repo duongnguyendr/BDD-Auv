@@ -104,11 +104,5 @@ public class AuditorNewEngagementStepDefinition extends BaseInit {
         auditorNewEngagementPage.clickCreateToDoBtn();
     }
 
-    @Then("^I should see engagement detail page$")
-    public void iShouldSeeEngagementDetailPage(List<String> engagementName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I should see engagement detail page");
-        auditorNewEngagementPage.verifyNewEngagementPopupClose();
-        auditorDetailsEngagementPage.verifyDetailsEngagementPage(engagementName.get(0));
-    }
+
 }
