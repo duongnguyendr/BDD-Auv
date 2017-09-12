@@ -4,10 +4,10 @@ package com.auvenir.ui.bdd.common.listeners;
  * Created by doai.tran on 8/29/2017.
  */
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.common.reports.GeneratePDF;
-import com.auvenir.ui.bdd.common.reports.GenerateReport;
+import com.auvenir.ui.bdd.common.reportLB.GeneratePDF;
+import com.auvenir.ui.bdd.common.reportLB.GenerateReport;
 import com.auvenir.ui.bdd.common.Generic;
-import com.auvenir.ui.bdd.common.reports.SendReportMail;
+import com.auvenir.ui.bdd.common.reportLB.SendReportMail;
 import net.masterthought.cucumber.ReportResult;
 import net.masterthought.cucumber.Reportable;
 import org.apache.commons.io.FileUtils;
@@ -76,7 +76,7 @@ public class TestNGExecutionListener implements IExecutionListener {
             FileUtils.forceMkdir(sPdfReports);
         }
         }catch(Exception e){
-            System.out.println("***** Unable to create reports folders: "+e.getMessage());
+            System.out.println("***** Unable to create reportLB folders: "+e.getMessage());
         }
     }
 }

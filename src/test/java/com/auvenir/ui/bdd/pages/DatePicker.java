@@ -2,7 +2,7 @@ package com.auvenir.ui.bdd.pages;
 
 /*import com.auvenir.utilities.htmlreport.com.nxgreport.NXGReports;
 import com.auvenir.utilities.htmlreport.com.nxgreport.logging.LogAs;
-import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reports.CaptureScreen;*/
+import com.auvenir.utilities.htmlreport.com.nxgreport.selenium.reportLB.CaptureScreen;*/
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
