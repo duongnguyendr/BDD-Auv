@@ -139,5 +139,21 @@ Feature: Smoke Test Feature
     And I delete existed member on team page
 
 
+  Scenario: Admin Client invite Lead Client into Engagement: AUV-818
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | clvien.adm@mailinator.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement
+      | Engagement Dr01 |
+    Then I should see engagement detail page
+      | Engagement Dr01 |
+    And I click on team tab
+    And I delete existed member on team page
+
+
 
 
