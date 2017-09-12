@@ -3,20 +3,12 @@ package com.auvenir.ui.bdd.common;
 import java.io.*;
 import java.util.*;
 
-import com.auvenir.utilities.GenericService;
-import com.auvenir.utilities.PdfGenerater;
 import com.itextpdf.text.*;
-import com.itextpdf.text.List;
-import com.itextpdf.text.html.simpleparser.HTMLWorker;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import cucumber.api.java.it.Ma;
 import net.masterthought.cucumber.ReportResult;
 import net.masterthought.cucumber.json.Feature;
-import org.apache.commons.io.FileUtils;
-
-import static com.auvenir.ui.bdd.common.Generic.sExecuteTime;
 
 /**
  * Created by doai.tran on 9/6/2017.
