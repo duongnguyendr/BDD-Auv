@@ -54,14 +54,17 @@ public class KeyWord {
      * @param waitTime
      */
     public void visibilityOfElementWait(WebElement webElement, String elementName, int waitTime) {
-        try {
-            getLogger().info("+++ Verify Element is visibility.");
-            WebDriverWait sWebDriverWait = new WebDriverWait(driver, waitTime);
-            sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++ Element: "+elementName+" is not visibility.");
-        }
+        getLogger().info("+++ Verify Element is visibility.");
+        WebDriverWait sWebDriverWait = new WebDriverWait(driver, waitTime);
+        sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
+//        try {
+//            getLogger().info("+++ Verify Element is visibility.");
+//            WebDriverWait sWebDriverWait = new WebDriverWait(driver, waitTime);
+//            sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++ Element: "+elementName+" is not visibility.");
+//        }
     }
 
     /**
@@ -69,6 +72,7 @@ public class KeyWord {
      * @param elementText Text of Element be presented.
      */
     public boolean validateElementText(WebElement webElement, String elementText) {
+        getLogger().info("+++ Check rendered of text: " + elementText.trim());
         try {
             getLogger().info("+++ Check rendered of text: " + elementText.trim());
             getLogger().info("+++++ Actual Text is displayed: " + getText(webElement).trim());
@@ -93,12 +97,14 @@ public class KeyWord {
      */
     public WebElement findWebElementByXpath(String xpathElement) {
         WebElement resultWebElement = null;
-        try {
-            getLogger().info("The xpath of web element = " + xpathElement);
-            resultWebElement = getDriver().findElement(By.xpath(xpathElement));
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-        }
+        getLogger().info("The xpath of web element = " + xpathElement);
+        resultWebElement = getDriver().findElement(By.xpath(xpathElement));
+//        try {
+//            getLogger().info("The xpath of web element = " + xpathElement);
+//            resultWebElement = getDriver().findElement(By.xpath(xpathElement));
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//        }
         return resultWebElement;
     }
 
@@ -109,6 +115,8 @@ public class KeyWord {
      */
     public boolean validateDisPlayedElement(WebElement element, String elementName) throws InvalidElementStateException {
         getLogger().info("+++ Verify Displayed of: " + elementName);
+        element.isDisplayed();
+        getLogger().info("+++++ Element : " + elementName + " is presented");
         try {
             element.isDisplayed();
             getLogger().info("+++++ Element : " + elementName + " is presented");
@@ -239,53 +247,59 @@ public class KeyWord {
      * @param elementName Name of element that we want to verify
      * @Description In order to wait element to be visible.
      */
-    public boolean waitForVisibleElement(WebElement element, String elementName) {
+    public void waitForVisibleElement(WebElement element, String elementName) {
         getLogger().info("+++ Wait For Visible Element: " + elementName);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.visibilityOf(element));
-            getLogger().info("+++++ Element: "+elementName+" is visible.");
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element: "+elementName+" is not visible.");
-            getLogger().info(e);
-            return false;
-        }
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.visibilityOf(element));
+//        try {
+//            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+//            wait.until(ExpectedConditions.visibilityOf(element));
+//            getLogger().info("+++++ Element: "+elementName+" is visible.");
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Element: "+elementName+" is not visible.");
+//            getLogger().info(e);
+//            return false;
+//        }
     }
 
     /**
      * @Description In order to wait element to be present by locator.
      */
-    public boolean waitForPresentOfLocator(By by) {
+    public void waitForPresentOfLocator(By by) {
         getLogger().info("+++ Wait For Present Of Locator");
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.presenceOfElementLocated(by));
-            getLogger().info("+++++ Element is present.");
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not present.");
-            return false;
-        }
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+//        try {
+//            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+//            wait.until(ExpectedConditions.presenceOfElementLocated(by));
+//            getLogger().info("+++++ Element is present.");
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Element is not present.");
+//            return false;
+//        }
     }
 
     /**
      * @Description In order to wait element to be visible by locator.
      */
-    public boolean waitForVisibleOfLocator(By by) {
+    public void waitForVisibleOfLocator(By by) {
         getLogger().info("+++ Wait For Visible Of Locator");
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-            getLogger().info("+++++ Element is visible.");
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not visible.");
-            return false;
-        }
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+//        try {
+//            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+//            getLogger().info("+++++ Element is visible.");
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Element is not visible.");
+//            return false;
+//        }
     }
 
     /**
@@ -323,71 +337,24 @@ public class KeyWord {
     }
 
     /**
-     * @Description In order to wait element to be invisible by locator.
-     */
-    public boolean waitForInvisibleOfLocator(By by) {
-        getLogger().info("+++ Wait For Invisible Of Locator");
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
-            getLogger().info("+++++ Element is invisible.");
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not invisible.");
-            return false;
-        }
-    }
-
-    /**
-     * @Description In order to wait element to be clickable by locator.
-     */
-    public boolean waitForClickableOfLocator(By by) {
-        getLogger().info("+++ Wait For Clickable Of Locator");
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.elementToBeClickable(by));
-            getLogger().info("+++++ Element is clickable.");
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not clickable.");
-            return false;
-        }
-    }
-
-    /**
      * @param element     element defined on page class
      * @param elementName Name of element that we want to verify
      * @Description In order to wait element to be visible.
      */
-    public boolean waitForClickableOfElement(WebElement element, String elementName) {
+    public void waitForClickableOfElement(WebElement element, String elementName) {
         getLogger().info("+++ Wait For Clickable Of Element: " + elementName);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            getLogger().info("+++++ Element is clickable on Element: " + element.getText());
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not clickable on Element: " + element.getText());
-            return false;
-        }
-    }
-
-    /**
-     * @Description In order to wait element to be visible.
-     */
-    public void waitForClickableOfElement(WebElement element) {
-        getLogger().info("+++ Wait For Clickable Of Element: " + element);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            getLogger().info("+++++ Element is clickable on Element: ");
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not clickable on Element: " + e.getMessage());
-        }
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+//        try {
+//            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+//            wait.until(ExpectedConditions.elementToBeClickable(element));
+//            getLogger().info("+++++ Element is clickable on Element: " + element.getText());
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Element is not clickable on Element: " + element.getText());
+//            return false;
+//        }
     }
 
     /**
@@ -395,18 +362,20 @@ public class KeyWord {
      * @param elementName Name of element that we want to verify
      * @Description In order to wait element to be visible.
      */
-    public boolean waitForInvisibleElement(WebElement element, String elementName) {
+    public void waitForInvisibleElement(WebElement element, String elementName) {
         getLogger().info("+++ Wait For Invisible Element: " + elementName);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.invisibilityOf(element));
-            getLogger().info("+++++ Element is invisible on Element: " + elementName);
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not invisible on Element: " + elementName);
-            return false;
-        }
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.invisibilityOf(element));
+//        try {
+//            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+//            wait.until(ExpectedConditions.invisibilityOf(element));
+//            getLogger().info("+++++ Element is invisible on Element: " + elementName);
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Element is not invisible on Element: " + elementName);
+//            return false;
+//        }
     }
 
     /**
@@ -437,36 +406,38 @@ public class KeyWord {
      * @param elementName Name of element that we want to click
      * @Description: Click on element
      */
-    public boolean clickElement(WebElement element, String elementName) {
+    public void clickElement(WebElement element, String elementName) {
         getLogger().info("+++ Click on Element: " + elementName);
-        try {
-            waitForClickableOfElement(element, "click to " + elementName);
-            element.click();
-            getLogger().info("+++++ Clicked on Element: " + elementName);
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            System.out.println("exception: " + e.getMessage());
-            getLogger().info("+++++ Unable to Click on: " + elementName);
-            return false;
-        }
+        element.click();
+//        try {
+//            waitForClickableOfElement(element, "click to " + elementName);
+//            element.click();
+//            getLogger().info("+++++ Clicked on Element: " + elementName);
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            System.out.println("exception: " + e.getMessage());
+//            getLogger().info("+++++ Unable to Click on: " + elementName);
+//            return false;
+//        }
     }
 
     /**
      * @Description: Click on element
      * @Author: minh.nguyen
      */
-    public void clickElement(WebElement element) {
-        getLogger().info("+++ Click on Element: " + element);
-        try {
-            waitForClickableOfElement(element);
-            element.click();
-            getLogger().info("+++++ Clicked on element");
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to Click on Element: " + e.getMessage());
-        }
-    }
+//    public void clickElement(WebElement element) {
+//        getLogger().info("+++ Click on Element: " + element);
+//        element.click();
+//        try {
+//            waitForClickableOfElement(element);
+//            element.click();
+//            getLogger().info("+++++ Clicked on element");
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to Click on Element: " + e.getMessage());
+//        }
+//    }
 
     /**
      * @param element     element defined on page class
@@ -475,20 +446,28 @@ public class KeyWord {
      */
     public void clickAndHold(WebElement element, String elementName) {
         getLogger().info("+++ Click And Hold: " + elementName);
-        try {
-            if (Generic.sBrowserData.equals("chr.")) {
-                Actions actions = new Actions(driver);
-                actions.moveToElement(element);
-                actions.click(element);
-                actions.perform();
-            } else {
-                element.click();
-            }
-            getLogger().info("+++++ Click And Hold on: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to ClickAndHold on: " + elementName);
+        if (Generic.sBrowserData.equals("chr.")) {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element);
+            actions.click(element);
+            actions.perform();
+        } else {
+            element.click();
         }
+//        try {
+//            if (Generic.sBrowserData.equals("chr.")) {
+//                Actions actions = new Actions(driver);
+//                actions.moveToElement(element);
+//                actions.click(element);
+//                actions.perform();
+//            } else {
+//                element.click();
+//            }
+//            getLogger().info("+++++ Click And Hold on: " + elementName);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to ClickAndHold on: " + elementName);
+//        }
     }
 
     /**
@@ -498,15 +477,18 @@ public class KeyWord {
      */
     public void hoverElement(WebElement element, String elementName) {
         getLogger().info("+++ Hover on Element: " + elementName);
-        try {
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element);
-            actions.build().perform();
-            getLogger().info("+++++ Hovered on Element: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to hoverElement on: " + elementName);
-        }
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.build().perform();
+//        try {
+//            Actions actions = new Actions(driver);
+//            actions.moveToElement(element);
+//            actions.build().perform();
+//            getLogger().info("+++++ Hovered on Element: " + elementName);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to hoverElement on: " + elementName);
+//        }
     }
 
     /**
@@ -516,23 +498,27 @@ public class KeyWord {
      * @Description: Send a String to textBox.
      * @Description: Send a String to textBox.
      */
-    public boolean sendKeyTextBox(WebElement element, String text, String elementName) {
+    public void sendKeyTextBox(WebElement element, String text, String elementName) {
         getLogger().info("+++ SendKey on : " + elementName);
-        try {
-            waitForClickableOfElement(element, "wait for click to " + elementName);
-            //element.click();
-            element.clear();
-            waitForClickableOfElement(element, "wait for click to " + elementName);
-            element.sendKeys(text);
-            getLogger().info("+++++ Sent KeyValue on: " + elementName);
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e);
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to sendKey on: " + elementName);
-            getLogger().info(e);
-            return false;
-        }
+        waitForClickableOfElement(element, "wait for click to " + elementName);
+        element.clear();
+        waitForClickableOfElement(element, "wait for click to " + elementName);
+        element.sendKeys(text);
+//        try {
+//            waitForClickableOfElement(element, "wait for click to " + elementName);
+//            //element.click();
+//            element.clear();
+//            waitForClickableOfElement(element, "wait for click to " + elementName);
+//            element.sendKeys(text);
+//            getLogger().info("+++++ Sent KeyValue on: " + elementName);
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e);
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to sendKey on: " + elementName);
+//            getLogger().info(e);
+//            return false;
+//        }
     }
 
     /**
@@ -543,29 +529,14 @@ public class KeyWord {
      */
     public void clearTextBox(WebElement element, String elementName) {
         getLogger().info("+++ Clear text on : " + elementName);
-        try {
-            element.clear();
-            getLogger().info("+++++ Cleared on: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to clear on: " + elementName);
-        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element: CheckBox that we want to click
-     * @Description: Click on checkbox
-     */
-    public void clickOnCheckBox(WebElement element, String elementName) {
-        getLogger().info("+++ Click on checkbox: " + elementName);
-        try {
-            element.click();
-            getLogger().info("+++ Clicked on checkbox: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to click on checkbox element: " + elementName);
-        }
+        element.clear();
+//        try {
+//            element.clear();
+//            getLogger().info("+++++ Cleared on: " + elementName);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to clear on: " + elementName);
+//        }
     }
 
     /**
@@ -575,18 +546,20 @@ public class KeyWord {
      * @Description: select a value on dropdown via visible text
      * @Description: select a value on dropdown via visible text
      */
-    public boolean selectByVisibleText(WebElement element, String selText, String elementName) {
+    public void selectOptionByText(WebElement element, String selText, String elementName) {
         getLogger().info("+++ Select By VisibleText on element: " + elementName);
-        try {
-            Select dropDown = new Select(element);
-            dropDown.selectByVisibleText(selText);
-            getLogger().info("+++++ Selected By VisibleText on element: " + elementName);
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to Select By VisibleText on element: " + elementName);
-            return false;
-        }
+        Select dropDown = new Select(element);
+        dropDown.selectByVisibleText(selText);
+//        try {
+//            Select dropDown = new Select(element);
+//            dropDown.selectOptionByText(selText);
+//            getLogger().info("+++++ Selected By VisibleText on element: " + elementName);
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to Select By VisibleText on element: " + elementName);
+//            return false;
+//        }
     }
 
     /**
@@ -596,16 +569,18 @@ public class KeyWord {
      * @Description: select a value on dropdown via visible text
      * @Description: select a value on dropdown via visible text
      */
-    public void selectByValue(WebElement element, String selValue, String elementName) {
+    public void selectOptionByValue(WebElement element, String selValue, String elementName) {
         getLogger().info("+++ Select By Value on element: " + elementName);
-        try {
-            Select dropDown = new Select(element);
-            dropDown.selectByValue(selValue);
-            getLogger().info("+++++ Selected By Value on element: " + elementName);
-        } catch (Exception e) {
-            getLogger().info("+++++ Selected By Value on element: " + elementName);
-            getLogger().info(e.getMessage());
-        }
+        Select dropDown = new Select(element);
+        dropDown.selectByValue(selValue);
+//        try {
+//            Select dropDown = new Select(element);
+//            dropDown.selectOptionByValue(selValue);
+//            getLogger().info("+++++ Selected By Value on element: " + elementName);
+//        } catch (Exception e) {
+//            getLogger().info("+++++ Selected By Value on element: " + elementName);
+//            getLogger().info(e.getMessage());
+//        }
     }
 
     /**
@@ -615,16 +590,18 @@ public class KeyWord {
      * @Description: select a value on dropdown via visible text
      * @Description: select a value on dropdown via visible text
      */
-    public void selectByIndex(WebElement element, int selIndex, String elementName) {
+    public void selectOptionByIndex(WebElement element, int selIndex, String elementName) {
         getLogger().info("+++ Select By Index on element: " + elementName);
-        try {
-            Select dropDown = new Select(element);
-            dropDown.selectByIndex(selIndex);
-            getLogger().info("+++++ Selected By Index on element: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ unable to select By Index on element: " + elementName);
-        }
+        Select dropDown = new Select(element);
+        dropDown.selectByIndex(selIndex);
+//        try {
+//            Select dropDown = new Select(element);
+//            dropDown.selectOptionByIndex(selIndex);
+//            getLogger().info("+++++ Selected By Index on element: " + elementName);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ unable to select By Index on element: " + elementName);
+//        }
     }
 
     /**
@@ -635,17 +612,19 @@ public class KeyWord {
      */
     public void sendTabKey(WebElement element, String elementName) {
         getLogger().info("+++ Send TabKey on Element " + elementName);
-        try {
-            element.sendKeys(Keys.TAB);
-            getLogger().info("+++++ Sent TabKey on Element " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to send Tab key on: " + elementName);
-        }
+        element.sendKeys(Keys.TAB);
+//        try {
+//            element.sendKeys(Keys.TAB);
+//            getLogger().info("+++++ Sent TabKey on Element " + elementName);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to send Tab key on: " + elementName);
+//        }
     }
 
     public void sendEnterKey(WebElement element, String elementName) {
         getLogger().info("+++ Send Enter Key: " + elementName);
+        element.sendKeys(Keys.ENTER);
         try {
             element.sendKeys(Keys.ENTER);
             getLogger().info("+++++ Sent Enter Key: " + elementName);
@@ -741,34 +720,36 @@ public class KeyWord {
     }
 
     public void verifySortDataGrid(java.util.List<WebElement> elementRowValue, WebElement elementSortIcon) {
-        try {
-            getLogger().info("+++ Verify Sort Data Grid: "+elementSortIcon);
-            java.util.List<String> listToDoTaskName = new ArrayList<String>();
-            java.util.List<String> listSortedToDoTaskName;
-            for (int i = 0; i < elementRowValue.size(); i++) {
-                listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-            }
-            listSortedToDoTaskName = listToDoTaskName;
-            Collections.sort(listSortedToDoTaskName);
-            elementSortIcon.click();
-            listToDoTaskName.clear();
-            for (int i = 0; i < elementRowValue.size(); i++) {
-                listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-            }
-            Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Ascending sort is NOT as expected");
-            Collections.reverse(listSortedToDoTaskName);
-            elementSortIcon.click();
-            listToDoTaskName.clear();
-            for (int i = 0; i < elementRowValue.size(); i++) {
-                listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-            }
-            Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Descending sort is NOT as expected");
-            getLogger().info("++++ Verified Sort Data Grid: "+elementSortIcon);
-        } catch (AssertionError e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to sort data on Data Grid View.");
+        getLogger().info("+++ Verify Sort Data Grid: "+elementSortIcon);
+        java.util.List<String> listToDoTaskName = new ArrayList<String>();
+        java.util.List<String> listSortedToDoTaskName;
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
         }
+        listSortedToDoTaskName = listToDoTaskName;
+        Collections.sort(listSortedToDoTaskName);
+        elementSortIcon.click();
+        listToDoTaskName.clear();
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
+        }
+        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Ascending sort is NOT as expected");
+        Collections.reverse(listSortedToDoTaskName);
+        elementSortIcon.click();
+        listToDoTaskName.clear();
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
+        }
+        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Descending sort is NOT as expected");
+        getLogger().info("++++ Verified Sort Data Grid: "+elementSortIcon);
+//        try {
+//
+//        } catch (AssertionError e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to sort data on Data Grid View.");
+//        }
     }
+
     public enum Element_Type {
         DISPLAYED, ISENABLE, ISSELECTED, HIDDEN, TEXT_VALUE, NOT_EXIST
     }
@@ -859,13 +840,14 @@ public class KeyWord {
      */
     public void getUrl(String url) {
         getLogger().info("+++ Navigate to URL: "+ url);
-        try{
-            driver.get(url);
-            getLogger().info("+++++ Navigated to URL: "+url);
-        }catch (Exception e){
-            getLogger().info(e.getMessage());
-            getLogger().info("++++ Unable to navigate to URL: "+url);
-        }
+        driver.get(url);
+//        try{
+//            driver.get(url);
+//            getLogger().info("+++++ Navigated to URL: "+url);
+//        }catch (Exception e){
+//            getLogger().info(e.getMessage());
+//            getLogger().info("++++ Unable to navigate to URL: "+url);
+//        }
     }
 
     /**
@@ -874,17 +856,17 @@ public class KeyWord {
      * @param webElement
      * @param item
      */
-    public void selectOptionByText(WebElement webElement, String item, String elementName) {
-        getLogger().info("+++ Select option: "+elementName+ "by Text: "+ item);
-        try {
-            Select select = new Select(webElement);
-            select.selectByVisibleText(item);
-            getLogger().info("+++++ Selected option: "+elementName+" option: "+item);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to select option: "+elementName+" option: "+item);
-        }
-    }
+//    public void selectOptionByText(WebElement webElement, String item, String elementName) {
+//        getLogger().info("+++ Select option: "+elementName+ "by Text: "+ item);
+//        try {
+//            Select select = new Select(webElement);
+//            select.selectOptionByText(item);
+//            getLogger().info("+++++ Selected option: "+elementName+" option: "+item);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to select option: "+elementName+" option: "+item);
+//        }
+//    }
 
     /**
      * Select option in select element by value
@@ -892,17 +874,17 @@ public class KeyWord {
      * @param ele
      * @param val
      */
-    public void selectOptionByValue(WebElement ele, String val) {
-        getLogger().info("+++ Select option: "+ele+ "by value: "+ val);
-        try {
-            Select select = new Select(ele);
-            select.selectByValue(val);
-            getLogger().info("+++++ Selected option: "+ele+ "by value: "+ val);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to Select option: "+ele+ "by value: "+ val);
-        }
-    }
+//    public void selectOptionByValue(WebElement ele, String val) {
+//        getLogger().info("+++ Select option: "+ele+ "by value: "+ val);
+//        try {
+//            Select select = new Select(ele);
+//            select.selectOptionByValue(val);
+//            getLogger().info("+++++ Selected option: "+ele+ "by value: "+ val);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to Select option: "+ele+ "by value: "+ val);
+//        }
+//    }
 
     /**
      * Select option in select element by index
@@ -910,18 +892,18 @@ public class KeyWord {
      * @param ele
      * @param index
      */
-    public void selectOptionByIndex(WebElement ele, int index) {
-        getLogger().info("+++ Select option: "+ele+ "by index: "+ index);
-        try {
-            Select select = new Select(ele);
-            select.selectByIndex(index);
-            getLogger().info("+++++ Select option: "+ele+ "by index: "+ index);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Select option: "+ele+ "by index: "+ index);
-
-        }
-    }
+//    public void selectOptionByIndex(WebElement ele, int index) {
+//        getLogger().info("+++ Select option: "+ele+ "by index: "+ index);
+//        try {
+//            Select select = new Select(ele);
+//            select.selectOptionByIndex(index);
+//            getLogger().info("+++++ Select option: "+ele+ "by index: "+ index);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Select option: "+ele+ "by index: "+ index);
+//
+//        }
+//    }
 
     /**
      * Switch to other tab
@@ -931,14 +913,16 @@ public class KeyWord {
      */
     public void switchToOtherTab(int tabIndex) {
         getLogger().info("+++ Switch to tab: "+ tabIndex);
-        try {
-            java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-            driver.switchTo().window(tabs.get(tabIndex));
-            getLogger().info("+++++ Switched to tab: "+ tabIndex);
-        }catch (Exception e){
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to Switch to tab: "+ tabIndex);
-        }
+        java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tabIndex));
+//        try {
+//            java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//            driver.switchTo().window(tabs.get(tabIndex));
+//            getLogger().info("+++++ Switched to tab: "+ tabIndex);
+//        }catch (Exception e){
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to Switch to tab: "+ tabIndex);
+//        }
     }
 
     /**
@@ -960,9 +944,9 @@ public class KeyWord {
      * @param script
      * @return
      */
-    public String executeJavascript(String script) {
-        return "";
-    }
+//    public String executeJavascript(String script) {
+//        return "";
+//    }
 
     /**
      * @param webElement
@@ -970,16 +954,18 @@ public class KeyWord {
      */
     public void waitUtilElementClickable(WebElement webElement, long timeOut) {
         getLogger().info("+++ Wait util Element: " +webElement+" clickable.");
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, timeOut);
-            wait.until(ExpectedConditions.elementToBeClickable(webElement));
-            getLogger().info("+++++ Element: " +webElement+" is clickable.");
-
-        } catch (TimeoutException e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element: " +webElement+" is not clickable.");
-            throw new AssertionError(e.getMessage());
-        }
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+//        try {
+//            WebDriverWait wait = new WebDriverWait(driver, timeOut);
+//            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+//            getLogger().info("+++++ Element: " +webElement+" is clickable.");
+//
+//        } catch (TimeoutException e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Element: " +webElement+" is not clickable.");
+//            throw new AssertionError(e.getMessage());
+//        }
     }
 
     /**
@@ -989,15 +975,17 @@ public class KeyWord {
      */
     public void waitUtilTextPresent(WebElement webElement, long timeOut, String text) {
         getLogger().info("+++ Wait util Element: " +webElement+" present.");
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, timeOut);
-            wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
-            getLogger().info("+++++ Element: " +webElement+" is present.");
-        } catch (TimeoutException e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element: " +webElement+" is not present.");
-            throw new AssertionError(e.getMessage());
-        }
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
+//        try {
+//            WebDriverWait wait = new WebDriverWait(driver, timeOut);
+//            wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
+//            getLogger().info("+++++ Element: " +webElement+" is present.");
+//        } catch (TimeoutException e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Element: " +webElement+" is not present.");
+//            throw new AssertionError(e.getMessage());
+//        }
     }
 
     /**
@@ -1008,16 +996,18 @@ public class KeyWord {
      */
     public void waitUtilElementHidden(By by, long timeOut) {
         getLogger().info("+++ Wait util Element is hidden.");
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, timeOut);
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
-            getLogger().info("+++++ Element is hidden.");
-
-        } catch (TimeoutException e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not hidden.");
-            throw new AssertionError(e.getMessage());
-        }
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+//        try {
+//            WebDriverWait wait = new WebDriverWait(driver, timeOut);
+//            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+//            getLogger().info("+++++ Element is hidden.");
+//
+//        } catch (TimeoutException e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Element is not hidden.");
+//            throw new AssertionError(e.getMessage());
+//        }
     }
 
     /**
@@ -1027,13 +1017,14 @@ public class KeyWord {
      */
     public void switchToFrame(String IframeName) {
         getLogger().info("+++ Switch to iFrame: " + IframeName);
-        try {
-            driver.switchTo().frame(IframeName);
-            getLogger().info("+++++ Switched to iFrame: " + IframeName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to switch to iFrame: " + IframeName);
-        }
+        driver.switchTo().frame(IframeName);
+//        try {
+//            driver.switchTo().frame(IframeName);
+//            getLogger().info("+++++ Switched to iFrame: " + IframeName);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to switch to iFrame: " + IframeName);
+//        }
     }
 
     /**
@@ -1043,13 +1034,14 @@ public class KeyWord {
      */
     public void switchToFrame(int iFrameId) {
         getLogger().info("+++ Switch to iFrame with id: " + iFrameId);
-        try {
-            driver.switchTo().frame(iFrameId);
-            getLogger().info("+++++ Switch to iFrame with id: " + iFrameId);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Try to switch to iFrame with id: " + iFrameId);
-        }
+        driver.switchTo().frame(iFrameId);
+//        try {
+//            driver.switchTo().frame(iFrameId);
+//            getLogger().info("+++++ Switch to iFrame with id: " + iFrameId);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Try to switch to iFrame with id: " + iFrameId);
+//        }
     }
 
     /**
@@ -1059,61 +1051,14 @@ public class KeyWord {
      */
     public void switchToFrame(WebElement eleFrame) {
         getLogger().info("+++ Switch to iFrame with WebElement: " + eleFrame);
-        try {
-            driver.switchTo().frame(eleFrame);
-            getLogger().info("+++++ Switched to iFrame with WebElement: " + eleFrame);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to switch to iFrame with WebElement: " + eleFrame);
-        }
-    }
-
-    /**
-     * Verify CSS value of element
-     *
-     * @param webElement
-     * @param cssName
-     * @param expected
-     */
-    public void verifyCssValue(WebElement webElement, String cssName, String expected) {
-        getLogger().info("+++ Verify CSS value: "+ cssName+ " of Element: "+ webElement);
-        try {
-            String actualValue = webElement.getCssValue(cssName);
-            System.out.println("Actual CSS Value: " + actualValue);
-            if (cssName.contains("color")) {
-                actualValue = Generic.parseRgbTohex(actualValue);
-            }
-            Assert.assertEquals(actualValue, expected);
-            getLogger().info("+++++ Verified CSS value: "+ cssName+ " of Element: "+ webElement);
-        } catch (AssertionError e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ CSS value: "+ cssName+ " of Element: "+ webElement+" is not equal to "+ expected);
-            throw new AssertionError(e.getMessage());
-        }catch (Exception e){
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to verify CSS Value"+ webElement);
-        }
-    }
-
-    /**
-     * Get css value of element:before
-     *
-     * @param element
-     * @param cssType
-     * @return
-     */
-    public void getValueCssOfBeforeElement(WebElement element, String cssType, String expectedResult) {
-        getLogger().info("+++ Get CSS value: "+ cssType+ " of Element: "+ element);
-        try {
-            WebElement parent = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].parentNode;", element);
-            String actual = ((JavascriptExecutor) driver)
-                    .executeScript("return window.getComputedStyle(arguments[0], ':before').getPropertyValue('" + cssType + "');", parent).toString();
-            Assert.assertEquals(actual, expectedResult);
-            getLogger().info("+++++ Got CSS value: "+ cssType+ " of Element: "+ element);
-        } catch (AssertionError e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to get CSS value.");
-        }
+        driver.switchTo().frame(eleFrame);
+//        try {
+//            driver.switchTo().frame(eleFrame);
+//            getLogger().info("+++++ Switched to iFrame with WebElement: " + eleFrame);
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            getLogger().info("+++++ Unable to switch to iFrame with WebElement: " + eleFrame);
+//        }
     }
 
     /**
@@ -1193,32 +1138,6 @@ public class KeyWord {
     }
 
     /**
-     * @param element     element defined on page class
-     * @param elementName Name of element: CheckBox that we want to Send TabKey
-     * @Description: Send TabKey
-     * @Description: Send TabKey
-     */
-    public void sendTabkey(WebElement element, String elementName) {
-        getLogger().info("Try to sendTabkey: " + elementName);
-        try {
-            element.sendKeys(Keys.TAB);
-            getLogger().info("sendTabkey on element: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-        }
-    }
-
-    public void sendEnterkey(WebElement element, String elementName) {
-        getLogger().info("Try to sendEnterkey: " + elementName);
-        try {
-            element.sendKeys(Keys.ENTER);
-            getLogger().info("sendEnterkey on element: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-        }
-    }
-
-    /**
      * validate if attribute contain given value
      *
      * @param webElement  element need to validate
@@ -1281,26 +1200,26 @@ public class KeyWord {
     public boolean validateNotExistedElement(WebElement element, String elementName) {
         try {
             getLogger().info("Try to validate Element is not existed.");
-            //getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             element.click();
             element.getText();
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
         } catch (NoSuchElementException e) {
             getLogger().info("Element is not existed.");
-            //NXGReports.addStep(elementName + " is not exist.", LogAs.PASSED, null, e.getMessage());
-            //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (ElementNotVisibleException e) {
             getLogger().info("Element is visible.");
-            //NXGReports.addStep(elementName + " is not exist.", LogAs.PASSED, null, e.getMessage());
-            //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (IndexOutOfBoundsException outEx) {
             getLogger().info("List element is empty.");
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (Exception e) {
             getLogger().info("Element is still displayed.");
-            //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
         }
     }
@@ -1450,25 +1369,25 @@ public class KeyWord {
         return simpleDateFormat.format(date.getTime());
     }
 
-    /**
-     * @param element     The element that we want to check.
-     * @param elementName Name of element we are verifying.
-     * @return
-     */
-    public boolean hoverAndWaitForClickableOfElement(WebElement element, String elementName) {
-        getLogger().info("Try to HoverAnd waitForClickableOfElement: " + elementName);
-        try {
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element);
-            actions.build().perform();
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            return false;
-        }
-    }
+//    /**
+//     * @param element     The element that we want to check.
+//     * @param elementName Name of element we are verifying.
+//     * @return
+//     */
+//    public boolean hoverAndWaitForClickableOfElement(WebElement element, String elementName) {
+//        getLogger().info("Try to HoverAnd waitForClickableOfElement: " + elementName);
+//        try {
+//            Actions actions = new Actions(driver);
+//            actions.moveToElement(element);
+//            actions.build().perform();
+//            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+//            wait.until(ExpectedConditions.elementToBeClickable(element));
+//            return true;
+//        } catch (Exception e) {
+//            getLogger().info(e.getMessage());
+//            return false;
+//        }
+//    }
 
     public boolean validateExistedElement(WebElement element, String elementName) {
         try {
@@ -1522,7 +1441,6 @@ public class KeyWord {
         }
     }
     public static boolean checkFileExists(String pathLocation, boolean deleteExisted) {
-        //        waitSomeSeconds(3);
         Path path = Paths.get(pathLocation);
         System.out.println("file: " + path);
         boolean result = false;
@@ -1532,14 +1450,10 @@ public class KeyWord {
                 if (deleteExisted) {
                     Files.delete(path);
                     if (Files.exists(path)) {
-                        //AbstractService.sStatusCnt++;
-//                        NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
                     }
                 }
             }
         } catch (IOException ex) {
-            //AbstractService.sStatusCnt++;
-//            NXGReports.addStep("Delete file failed.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             ex.printStackTrace();
         }
         return result;

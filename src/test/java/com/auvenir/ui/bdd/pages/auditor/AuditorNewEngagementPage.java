@@ -250,6 +250,7 @@ public class AuditorNewEngagementPage extends CommonPage {
         NXGReports.addStep("Click create to do button.", LogAs.PASSED, null);
     }
     */
+
     public void enterDataForNewEngagementPage(String name, String engagementType, String company){
         getLogger().info("Enter data for new Engagement form");
         try {
@@ -261,15 +262,15 @@ public class AuditorNewEngagementPage extends CommonPage {
             enterDeadLineDate(getDate(10));
             waitSomeSeconds(3);
             scrollToFooter();
-            hoverAndWaitForClickableOfElement(eleEngagementNameInput, "engagement Name");
+//            hoverAndWaitForClickableOfElement(eleEngagementNameInput, "engagement Name");
             clickElement(eleEngagementNameInput, "engagement Name");
 
             enterEndDate(getDate(10));
-            hoverAndWaitForClickableOfElement(eleEngagementNameInput, "engagement Name");
+//            hoverAndWaitForClickableOfElement(eleEngagementNameInput, "engagement Name");
             clickElement(eleEngagementNameInput, "engagement Name");
 
             enterStartDate(getDate(0));
-            hoverAndWaitForClickableOfElement(eleEngagementNameInput, "engagement Name");
+//            hoverAndWaitForClickableOfElement(eleEngagementNameInput, "engagement Name");
             clickElement(eleEngagementNameInput, "engagement Name");
 
             clickContinueBtn();
@@ -415,7 +416,7 @@ public class AuditorNewEngagementPage extends CommonPage {
         String engagementTypeText = "";
         clickElement(eleEngagementTypeSelect, "Select Engagement Type");
         if (engagementType.equals("")) {
-            clickElement(listEngagementType.get(0));
+            clickElement(listEngagementType.get(0), "Engagement Type option.");
             clickElement(eleEngagementTypeSelect, "Select Engagement Type");
         } else {
             for (int i = 0; i < listEngagementType.size(); i++) {
@@ -437,14 +438,14 @@ public class AuditorNewEngagementPage extends CommonPage {
 
     public void selectCompanyName(String companyName){
         getLogger().info("Enter company name: " + companyName);
-        clickElement(eleCompanyNameInput);
-        clickElement(listCompanyName.get(listCompanyName.size()-1));
+        clickElement(eleCompanyNameInput, "Company Name Textbox");
+        clickElement(listCompanyName.get(listCompanyName.size()-1), "List Company Name");
         sendKeyTextBox(eleCompanyNameInput, companyName, "Company field");
     }
 
     public void enterDeadLineDate(String dateLineDate) throws Exception {
         getLogger().info("Enter deadline date.");
-        clickElement(eleReportDeadlineInput);
+        clickElement(eleReportDeadlineInput, "DeadLine Input");
         String dates [] = dateLineDate.split("/");
         DatePicker datePicker = new DatePicker(getDriver());
         datePicker.pickADate(dates[0], dates[1], dates[2]);
@@ -455,7 +456,7 @@ public class AuditorNewEngagementPage extends CommonPage {
 
     public void enterStartDate(String startDate) throws Exception{
         getLogger().info("Enter start date.");
-        clickElement(eleStartDateInput);
+        clickElement(eleStartDateInput, "Start Date Input");
         String dates [] = startDate.split("/");
         DatePicker datePicker = new DatePicker(getDriver());
         System.out.println("Start Date: " + startDate);
@@ -467,7 +468,7 @@ public class AuditorNewEngagementPage extends CommonPage {
 
     public void enterEndDate(String endDate) throws Exception{
         getLogger().info("Enter end date.");
-        clickElement(eleEndDateInput);
+        clickElement(eleEndDateInput, "End Date Input");
         String dates [] = endDate.split("/");
         DatePicker datePicker = new DatePicker(getDriver());
         datePicker.pickADate(dates[0], dates[1], dates[2]);
@@ -523,12 +524,12 @@ public class AuditorNewEngagementPage extends CommonPage {
             validateElementText(titleEngagementType, "Select Engagement Type");
             clickElement(inputEngagementType, "Engagement Type");
             validateElementsQuantity(listEngagementTypeContain, 4, "List Engagement Type");
-            clickElement(optionFirstEngagementType);
+            clickElement(optionFirstEngagementType, "First Engagement Type");
             validateElementText(titleEngagementCompany, "Company Name");
             sendKeyTextBox(inputEngagementCompany, "company", "Engagement Name Input");
             validateElementText(titleEngagementReportDeadline, "Set Reporting Deadline");
             validatePlaceholder(inputEngagementReportDeadline, "DD/MM/YYYY", "Engagement Report Deadline");
-            clickElement(inputEngagementReportDeadline);
+            clickElement(inputEngagementReportDeadline, "Engagement Report Deadline");
             validateAttributeNotContain(widgetDatePicker, "style", "display: none", "Date Picker");
             datePicker = new DatePicker(getDriver(), widgetDatePicker);
             datePicker.pickADate("26");
@@ -536,13 +537,13 @@ public class AuditorNewEngagementPage extends CommonPage {
             validateElementText(titleEngagementDateRange, "Select a Date Range of Bank Statements to be requested from your client.");
             validatePlaceholder(inputEngagementDateRangeStart, "DD/MM/YYYY", "Engagement DateRange Start");
             waitForInvisibleElement(widgetDatePicker, "Date Picker");
-            clickElement(inputEngagementDateRangeStart);
+            clickElement(inputEngagementDateRangeStart, "Engagement Date Range Start");
             validateAttributeNotContain(widgetDatePicker, "style", "display: none", "Date Picker");
             datePicker = new DatePicker(getDriver(), widgetDatePicker);
             datePicker.pickADate("27");
             validateElementJavaScriptTextContain(inputEngagementDateRangeStart, "27", "Engagement Report Deadline");
             validatePlaceholder(inputEngagementDateRangeEnd, "DD/MM/YYYY", "Engagement DateRange End");
-            clickElement(inputEngagementDateRangeEnd);
+            clickElement(inputEngagementDateRangeEnd, "Engagement Date Range End");
             validateAttributeNotContain(widgetDatePicker, "style", "display: none", "Date Picker");
             datePicker = new DatePicker(getDriver(), widgetDatePicker);
             datePicker.pickADate("28");
