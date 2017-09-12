@@ -2,7 +2,6 @@ package com.auvenir.utilities;
 
 
 import com.auvenir.ui.bdd.common.Generic;
-import com.auvenir.ui.bdd.common.GenericService;
 import org.apache.log4j.Logger;
 
 import javax.net.ssl.HttpsURLConnection;

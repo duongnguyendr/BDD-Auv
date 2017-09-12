@@ -1,4 +1,4 @@
-package com.auvenir.utilities;
+package com.auvenir.ui.bdd.common.mongoBD;
 
 //import com.auvenir.ui.tests.AbstractTest;
 import com.auvenir.ui.bdd.common.Generic;
