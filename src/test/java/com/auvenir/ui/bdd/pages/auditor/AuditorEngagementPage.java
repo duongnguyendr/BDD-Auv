@@ -502,21 +502,21 @@ public class AuditorEngagementPage extends EngagementPage {
         toValidate(auditorEngagementPage.getEleNotificationIcn(), "Notification Icon", "Displayed");
     }
 
-    public void verifyAuditorEngagementFilter() {
-        boolean isAuditorEngagementFilter, isFilterTypeOfEngagement, isFilterEngaFinancialAudit, isFilterEngaNoticeCompilation, isFilterEngaReview,
-                isFilterEngaOther = false;
-        isAuditorEngagementFilter = clickElement(auditorEngagementFilter, "click to auditorEngagementFilter");
-        isFilterTypeOfEngagement = clickElement(filterTypeOfEngagement, "click to filterTypeOfEngagement");
-        isFilterEngaFinancialAudit = validateDisPlayedElement(filterEngaFinancialAudit, "display filterEngaFinancialAudit");
-        isFilterEngaNoticeCompilation = validateDisPlayedElement(filterEngaNoticeCompilation, "display filterEngaNoticeCompilation");
-        isFilterEngaReview = validateDisPlayedElement(filterEngaReview, "display filterEngaReview");
-        isFilterEngaOther = validateDisPlayedElement(filterEngaOther, "display filterEngaOther");
-        if (isAuditorEngagementFilter && isFilterTypeOfEngagement && isFilterEngaFinancialAudit && isFilterEngaNoticeCompilation && isFilterEngaReview && isFilterEngaOther) {
-            getLogger().info("Verify Auditor Engagement filter");
-        } else {
-            Assert.fail("Verify Auditor Engagement filter");
-        }
-    }
+//    public void verifyAuditorEngagementFilter() {
+//        boolean isAuditorEngagementFilter, isFilterTypeOfEngagement, isFilterEngaFinancialAudit, isFilterEngaNoticeCompilation, isFilterEngaReview,
+//                isFilterEngaOther = false;
+//        isAuditorEngagementFilter = clickElement(auditorEngagementFilter, "click to auditorEngagementFilter");
+//        isFilterTypeOfEngagement = clickElement(filterTypeOfEngagement, "click to filterTypeOfEngagement");
+//        isFilterEngaFinancialAudit = validateDisPlayedElement(filterEngaFinancialAudit, "display filterEngaFinancialAudit");
+//        isFilterEngaNoticeCompilation = validateDisPlayedElement(filterEngaNoticeCompilation, "display filterEngaNoticeCompilation");
+//        isFilterEngaReview = validateDisPlayedElement(filterEngaReview, "display filterEngaReview");
+//        isFilterEngaOther = validateDisPlayedElement(filterEngaOther, "display filterEngaOther");
+//        if (isAuditorEngagementFilter && isFilterTypeOfEngagement && isFilterEngaFinancialAudit && isFilterEngaNoticeCompilation && isFilterEngaReview && isFilterEngaOther) {
+//            getLogger().info("Verify Auditor Engagement filter");
+//        } else {
+//            Assert.fail("Verify Auditor Engagement filter");
+//        }
+//    }
 
     public void verifyAuditorEngagementHover() {
         boolean isHoverCompleteToDosResult, isHoverCompleteDocsResult = false;
@@ -722,29 +722,29 @@ public class AuditorEngagementPage extends EngagementPage {
         }
     }
 
-    public void verifyCompanyName(String companyName) {
-        try {
-            getLogger().info("companyName = " + companyName);
-            boolean isCheckCompany = false;
-            if (waitForVisibleOfLocator(By.xpath(companyEleStr))) {
-                for (WebElement companyEle : listCompanyEle) {
-                    getLogger().info("companyEle.getText() = " + companyEle.getText());
-                    Thread.sleep(1000);
-                    if (companyEle.getText().equals(companyName)) {
-                        isCheckCompany = true;
-                        break;
-                    }
-                }
-            }
-            if (!isCheckCompany) {
-                Assert.fail("Search engagement with company key: " + companyName);
-            } else {
-                getLogger().info("Search engagement with company key: " + companyName);
-            }
-        } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
-        }
-    }
+//    public void verifyCompanyName(String companyName) {
+//        try {
+//            getLogger().info("companyName = " + companyName);
+//            boolean isCheckCompany = false;
+//            if (waitForVisibleOfLocator(By.xpath(companyEleStr))) {
+//                for (WebElement companyEle : listCompanyEle) {
+//                    getLogger().info("companyEle.getText() = " + companyEle.getText());
+//                    Thread.sleep(1000);
+//                    if (companyEle.getText().equals(companyName)) {
+//                        isCheckCompany = true;
+//                        break;
+//                    }
+//                }
+//            }
+//            if (!isCheckCompany) {
+//                Assert.fail("Search engagement with company key: " + companyName);
+//            } else {
+//                getLogger().info("Search engagement with company key: " + companyName);
+//            }
+//        } catch (Exception ex) {
+//            getLogger().info(ex.getMessage());
+//        }
+//    }
 
     public void sendKeyEngagementName(String engagementName) {
         try {
@@ -756,29 +756,29 @@ public class AuditorEngagementPage extends EngagementPage {
         }
     }
 
-    public void verifyEngagementName(String engagementName) {
-        try {
-            getLogger().info("engagementName = " + engagementName);
-            boolean isCheckEngagement = false;
-            //Checking for result
-            if (waitForVisibleOfLocator(By.xpath(engagementNameStr))) {
-                for (WebElement engagementNameEle : listEngagementNameEle) {
-                    getLogger().info("engagementNameEle.getText() = " + engagementNameEle.getText());
-                    Thread.sleep(1000);
-                    if (engagementNameEle.getText().equals(engagementName)) {
-                        isCheckEngagement = true;
-                        break;
-                    }
-                }
-            }
-            if (!isCheckEngagement) {
-                Assert.fail("Search engagement with engagement name key: " + engagementName);
-            } else {
-                getLogger().info("Search engagement with engagement name key: " + engagementName);
-            }
-        } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
-        }
-    }
+//    public void verifyEngagementName(String engagementName) {
+//        try {
+//            getLogger().info("engagementName = " + engagementName);
+//            boolean isCheckEngagement = false;
+//            //Checking for result
+//            if (waitForVisibleOfLocator(By.xpath(engagementNameStr))) {
+//                for (WebElement engagementNameEle : listEngagementNameEle) {
+//                    getLogger().info("engagementNameEle.getText() = " + engagementNameEle.getText());
+//                    Thread.sleep(1000);
+//                    if (engagementNameEle.getText().equals(engagementName)) {
+//                        isCheckEngagement = true;
+//                        break;
+//                    }
+//                }
+//            }
+//            if (!isCheckEngagement) {
+//                Assert.fail("Search engagement with engagement name key: " + engagementName);
+//            } else {
+//                getLogger().info("Search engagement with engagement name key: " + engagementName);
+//            }
+//        } catch (Exception ex) {
+//            getLogger().info(ex.getMessage());
+//        }
+//    }
 
 }

@@ -124,6 +124,7 @@ Feature: Smoke Test Feature
 #      | Engagement Dr01 |
 #
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
+    Given I delete existed email
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -137,6 +138,14 @@ Feature: Smoke Test Feature
       | Engagement Dr01 |
     And I click on team tab
     And I delete existed member on team page
+    And I click in invite new member on team page
+    Then I should see invite new member page
+    And I input full name on invite new member page
+    And I input email on invite new member page
+    And I input email confirm on invite new member page
+    And I select role of new member
+    And I click on invite new member
+    Then I should see invite successful message
 
 
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818

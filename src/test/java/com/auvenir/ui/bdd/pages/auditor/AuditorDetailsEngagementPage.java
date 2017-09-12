@@ -87,7 +87,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
      */
     public void clickOnFileManagerLink() {
         waitForClickableOfElement(eleFileManagerLink, "file manager link");
-        clickElement(eleFileManagerLink);
+        clickElement(eleFileManagerLink,"file manager link");
     }
 
     /**
@@ -95,7 +95,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
      */
     public void clickOnContactLink() {
         waitForClickableOfElement(eleContactLink, "contact link");
-        clickElement(eleContactLink);
+        clickElement(eleContactLink, "contact link");
     }
 
     public void verifyNewEngagementPopupClose() {

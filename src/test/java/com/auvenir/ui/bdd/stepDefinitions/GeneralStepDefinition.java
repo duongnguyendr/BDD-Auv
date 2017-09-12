@@ -26,6 +26,7 @@ public class GeneralStepDefinition extends BaseInit{
         MarketingPage marketingPage = new MarketingPage(logger,driver);
         getLogger().info("=========="+baseUrl);
         marketingPage.getUrl("https://"+baseUrl);
+
     }
 
 }
