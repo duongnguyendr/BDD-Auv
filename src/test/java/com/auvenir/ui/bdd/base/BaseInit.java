@@ -77,13 +77,8 @@ public class BaseInit {
     public String dataBaseServer="192.168.1.222";
     public void setDataBaseSer(String serverDataBase){
         dataBaseServer= serverDataBase;
-        getLogger().info("DataBase server: " + dataBaseServer);
     }
     public String getDataBaseSer(){
-        String sDataBaseServerProperty = System.getProperty("serverDataBase");
-        if(!Generic.isEmptyString(sDataBaseServerProperty)){
-            setDataBaseSer(sDataBaseServerProperty);
-        }
         return dataBaseServer;
     }
 
@@ -96,10 +91,6 @@ public class BaseInit {
         getLogger().info("DataBase: " + dataBase);
     }
     public String getDataBase(){
-        String sDataBaseProperty = System.getProperty("dataBase");
-        if(!Generic.isEmptyString(sDataBaseProperty)){
-            setDataBase(sDataBaseProperty);
-        }
         return dataBase;
     }
 
@@ -112,10 +103,6 @@ public class BaseInit {
         getLogger().info("Connection Port: " + port);
     }
     public int getPort(){
-        String sPortNoProperty = System.getProperty("portNo");
-        if(!Generic.isEmptyString(sPortNoProperty)){
-            setPort(sPortNoProperty);
-        }
         return port;
     }
 
@@ -128,42 +115,30 @@ public class BaseInit {
         getLogger().info("UserName: " + userName);
     }
     public String getUserName(){
-        String sUserNameProperty = System.getProperty("userNameDB");
-        if(!Generic.isEmptyString(sUserNameProperty)) {
-            setUserName(sUserNameProperty);
-        }
         return userName;
     }
 
     /**
      * Description: Methods to get getPassword
      */
-    public  String password = "";
+    public String password = "";
     public void setPassword(String PasswordDB){
         password= PasswordDB;
         getLogger().info("Password: " + password);
     }
     public String getPassword(){
-        String sPasswordProperty = System.getProperty("PasswordDB");
-        if(!Generic.isEmptyString(sPasswordProperty)){
-            setPassword(sPasswordProperty);
-        }
         return password;
     }
 
     /**
      * Description: Methods to get getSSL
      */
-    public  String ssl ="No";
+    public String ssl ="No";
     public void setSSL(String SSL){
         ssl= SSL;
         getLogger().info("SSL: " + ssl);
     }
     public String getSSL(){
-        String sSSLProperty = System.getProperty("SSL");
-        if(!Generic.isEmptyString(sSSLProperty)){
-            setSSL(sSSLProperty);
-        }
         return ssl;
     }
 }

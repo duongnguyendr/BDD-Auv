@@ -1,5 +1,6 @@
 package com.auvenir.ui.bdd.initialize;
 
+import com.auvenir.ui.bdd.base.MongoDBProperties;
 import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.ui.bdd.common.mongoBD.MongoDBService;
 import com.auvenir.ui.bdd.stepDefinitions.AbstractStep;
@@ -24,12 +25,13 @@ public class InitData extends AbstractStep {
     public void deleteAllOldRecord() throws UnknownHostException {
         try {
             getBaseUrl();
-            getDataBaseSer();
-            getDataBase();
-            getPort();
-            getUserName();
-            getPassword();
-            getSSL();
+            MongoDBProperties mongoDBProperties = new MongoDBProperties(System.getProperty("serverDomainName"));
+            setDataBaseSer(mongoDBProperties.getServerIp());
+            setDataBase(mongoDBProperties.getDatabaseName());
+            setPort(mongoDBProperties.getPort());
+            setUserName(mongoDBProperties.getUserName());
+            setPassword(mongoDBProperties.getUserPassword());
+            setSSL(mongoDBProperties.getSsl());
             getRunMode();
             //getToEmail();
             //getCcEmail();
