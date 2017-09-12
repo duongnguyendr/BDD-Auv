@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
@@ -16,10 +18,13 @@ import java.util.concurrent.TimeUnit;
  * Created by thuan.duong on 9/11/2017.
  */
 public class MailPage extends KeyWord{
-
+    WebDriver driver;
+    Logger logger;
+    MailPage mailPage;
     public MailPage(Logger logger, WebDriver driver) {
         super(logger, driver);
         PageFactory.initElements(driver, this);
+        mailPage = new MailPage(logger, driver);
     }
 
     @FindBy(xpath = "//div[@class='yW']/span[@email='andi@auvenir.com']")
@@ -34,6 +39,16 @@ public class MailPage extends KeyWord{
     private WebElement elePassword;
     @FindBy(xpath = "//*//span[contains(text(),'Next')]")
     private WebElement eleNext;
+    @FindBy(xpath = "//div[@class='T-I J-J5-Ji T-I-KE L3']")
+    private WebElement composeBtn;
+    @FindBy(xpath = "//div[@class='J-J5-Ji J-JN-M-I-Jm']//div[@role='presentation']/..")
+    private WebElement allMailCheckBox;
+    @FindBy(xpath = "//div[@class='ar9 T-I-J3 J-J5-Ji']")
+    private WebElement deleteBTN;
+    @FindBy(xpath = "//span[contains(@class,'gbii')]")
+    private WebElement eleProfileIcn;
+    @FindBy(xpath = "//a[contains(@href,'https://accounts.google.com/Logout')]")
+    private WebElement eleSignOutBtn;
 
     public void selectActiveEmaill() {
         Boolean isSelect = clickElement(eleEmailAuvenir, "Non-reply Active email");
@@ -62,14 +77,10 @@ public class MailPage extends KeyWord{
     }
 
     public void goGMail() {
-        try {
 //            getDriver().get("https://mail.google.com/mail/u/0/?tab=wm#inbox");
-            getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
-            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            getDriver().manage().window().maximize();
-        } catch (Exception e) {
-            getLogger().info("Unable to go to Gmail.");
-        }
+        getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
+        getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        getDriver().manage().window().maximize();
     }
 
     /**
@@ -79,24 +90,56 @@ public class MailPage extends KeyWord{
      * @param password password of email
      */
     public void signInGmail(String email, String password) {
-        try {
-            getLogger().info("Try to login GMail");
-            if (!getDriver().getCurrentUrl().contains("accounts.google.com")) {
-                clickElement(signButtonEle, "signButtonEle");
-            }
-            if (!email.isEmpty()) {
-                sendKeyTextBox(eleEmail, email, "eleEmail");
-                sendTabkey(eleEmail, "eleEmail");
-                sendEnterkey(eleEmail, "eleEmail");
-                getLogger().info("Send email: " + email);
-            }
-            sendKeyTextBox(elePassword, password, "password");
-            getLogger().info("Send password: " + password);
-            clickElement(eleNext, "click to eleNext");
-            getLogger().info("DONE => LOGIN");
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        getLogger().info("Try to login GMail");
+        if (!getDriver().getCurrentUrl().contains("accounts.google.com")) {
+            clickElement(signButtonEle, "signButtonEle");
         }
+        if (!email.isEmpty()) {
+            sendKeyTextBox(eleEmail, email, "eleEmail");
+            sendTabkey(eleEmail, "eleEmail");
+            sendEnterkey(eleEmail, "eleEmail");
+            getLogger().info("Send email: " + email);
+        }
+        sendKeyTextBox(elePassword, password, "password");
+        getLogger().info("Send password: " + password);
+        clickElement(eleNext, "click to eleNext");
+        getLogger().info("DONE => LOGIN");
+    }
+
+    public void deleteAllExistedGMail(String eGMail, String ePassword) throws Exception {
+        getLogger().info("Try to delete all existed eGMail");
+        driver.get( Generic.getConfigValue(Generic.sConfigFile, "GMAIL_URL"));
+        driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        signInGmail(eGMail, ePassword);
+        deleteAllMail();
+        gmailLogout();
+    }
+
+    public void deleteAllMail() throws InterruptedException {
+        waitForVisibleElement(composeBtn, "composeBtn");
+        getLogger().info("Try to delete all existed mail.");
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(ExpectedConditions.elementToBeClickable(allMailCheckBox));
+        Thread.sleep(2000);
+        getLogger().info("Select all Delete mail: ");
+        allMailCheckBox.click();
+        Thread.sleep(200);
+        if (deleteBTN.isDisplayed()) {
+            getLogger().info("Click Delete All Email.");
+            deleteBTN.click();
+        }
+        Thread.sleep(2000);
+        getLogger().info("Delete all mail successfully");
+    }
+
+    public void gmailLogout() throws Exception {
+        waitForVisibleElement(eleProfileIcn, "eleProfileIcn");
+        clickElement(eleProfileIcn, "click to eleProfileIcn");
+        Thread.sleep(2000);
+        waitForVisibleElement(eleSignOutBtn, "eleSignOutBtn");
+        clickElement(eleSignOutBtn, "click to eleSignOutBtn");
+        Thread.sleep(3000);
     }
 
 }
