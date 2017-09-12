@@ -761,8 +761,7 @@ public class AdminPage extends CommonPage {
         } catch (Exception ex) {
             ex.printStackTrace();
         }*/
-        Assert.assertEquals(validateElementText(eleAdminHdrTxt, "Admin"),"true");
-
+        validateElementText(eleAdminHdrTxt, "Admin");
     }
 
     public void verifyAdminHeaderText() {

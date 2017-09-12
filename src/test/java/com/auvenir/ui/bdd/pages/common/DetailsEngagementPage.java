@@ -33,8 +33,8 @@ public abstract class DetailsEngagementPage extends CommonPage {
     public void verifyDetailsEngagementPage(String engagementName, boolean isLeadAuditor) {
         if (isLeadAuditor) {
             waitForVisibleElement(engagementNameEditable, "Engagement name text");
-            clickElement(engagementNameEditable);
-            sendTabkey(engagementNameEditable, "");
+            clickElement(engagementNameEditable, "Engagement name text");
+            sendTabKey(engagementNameEditable, "");
             validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
         } else {
             waitForVisibleElement(engagementNameUneditable, "Engagement name text");

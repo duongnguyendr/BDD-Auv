@@ -309,7 +309,7 @@ public class AuditorSignUpPage extends CommonPage {
             if (index == -1) {
                 System.out.println("Can not find the state has name is: " + nameOfState);
             }
-            clickElement(country_State_NumberOfEmployee_ListEle.get(index));
+            clickElement(country_State_NumberOfEmployee_ListEle.get(index), "Country State Option.");
         } catch (Exception e) {
             getLogger().info(e.getMessage());
         }
@@ -388,7 +388,7 @@ public class AuditorSignUpPage extends CommonPage {
             if (index == -1) {
                 System.out.println("Can not find the country has name is: " + nameOfCountry);
             }
-            clickElement(country_State_NumberOfEmployee_ListEle.get(index));
+            clickElement(country_State_NumberOfEmployee_ListEle.get(index), "Country State Option.");
         } catch (Exception e) {
             getLogger().info(e.getMessage());
         }
@@ -459,7 +459,7 @@ public class AuditorSignUpPage extends CommonPage {
 
             waitForVisibleElement(eleConfirmPass, "Confirm Password Input");
             sendKeyTextBox(eleConfirmPass, strPass, "Confirm Password Input");
-            sendTabkey(eleConfirmPass, "Confirm Password Input");
+            sendTabKey(eleConfirmPass, "Confirm Password Input");
 //            scrollToFooter();
             /*scrollPageDown();
             waitForJSandJQueryToLoad();*/

@@ -26,7 +26,7 @@ public class MarketingPage extends CommonPage {
    @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='password']")
    private WebElement passwordTextBox;
 
-   @FindBy(xpath = ".//*[@id='login-popup']//button")
+   @FindBy(xpath = ".//*[@id='login-popup']//button1")
    private WebElement submitBTN;
 
    @FindBy(xpath = "//*/a[@class='ui large basic inverted button']")

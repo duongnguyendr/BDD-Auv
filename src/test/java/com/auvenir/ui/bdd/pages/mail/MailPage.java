@@ -50,13 +50,9 @@ public class MailPage extends KeyWord{
     @FindBy(xpath = "//a[contains(@href,'https://accounts.google.com/Logout')]")
     private WebElement eleSignOutBtn;
 
-    public void selectActiveEmaill() {
-        Boolean isSelect = clickElement(eleEmailAuvenir, "Non-reply Active email");
-        if (isSelect) {
-            getLogger().info("Email is existed: Pass");
-        } else {
-            Assert.fail("Email is not existed: Fail");
-        }
+    public void selectActiveEmail() {
+        getLogger().info("Select Active Email");
+        clickElement(eleEmailAuvenir, "Non-reply Active email");
     }
 
     public void navigateToConfirmationLink() throws Exception {
@@ -96,8 +92,8 @@ public class MailPage extends KeyWord{
         }
         if (!email.isEmpty()) {
             sendKeyTextBox(eleEmail, email, "eleEmail");
-            sendTabkey(eleEmail, "eleEmail");
-            sendEnterkey(eleEmail, "eleEmail");
+            sendTabKey(eleEmail, "eleEmail");
+            sendEnterKey(eleEmail, "eleEmail");
             getLogger().info("Send email: " + email);
         }
         sendKeyTextBox(elePassword, password, "password");

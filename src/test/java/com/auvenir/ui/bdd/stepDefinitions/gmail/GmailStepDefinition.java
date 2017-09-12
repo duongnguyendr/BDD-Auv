@@ -39,7 +39,7 @@ public class GmailStepDefinition extends BaseInit {
     public void iOpenAuditorActiveEmail() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I select Auditor active email");
-        mailPage.selectActiveEmaill();
+        mailPage.selectActiveEmail();
     }
 
     @And("^I click on confirmation link$")

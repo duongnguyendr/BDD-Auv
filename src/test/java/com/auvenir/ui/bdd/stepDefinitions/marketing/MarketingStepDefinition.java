@@ -28,6 +28,7 @@ public class MarketingStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("===== I click on login link =====");
         marketingPage.clickOnLoginBTN();
+
     }
     @And("^I enter the following for Login$")
     public void iEnterTheFollowingForLogin(DataTable table) throws Throwable {
