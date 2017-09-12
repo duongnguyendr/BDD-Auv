@@ -18,13 +18,8 @@ import java.util.concurrent.TimeUnit;
  * Created by thuan.duong on 9/11/2017.
  */
 public class MailPage extends KeyWord{
-    WebDriver driver;
-    Logger logger;
-    MailPage mailPage;
     public MailPage(Logger logger, WebDriver driver) {
         super(logger, driver);
-        PageFactory.initElements(driver, this);
-        mailPage = new MailPage(logger, driver);
     }
 
     @FindBy(xpath = "//div[@class='yW']/span[@email='andi@auvenir.com']")
@@ -107,9 +102,9 @@ public class MailPage extends KeyWord{
 
     public void deleteAllExistedGMail(String eGMail, String ePassword) throws Exception {
         getLogger().info("Try to delete all existed eGMail");
-        driver.get( Generic.getConfigValue(Generic.sConfigFile, "GMAIL_URL"));
-        driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        getDriver().get( Generic.getConfigValue(Generic.sConfigFile, "GMAIL_URL"));
+        getDriver().manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
+        getDriver().manage().window().maximize();
         signInGmail(eGMail, ePassword);
         deleteAllMail();
         gmailLogout();
