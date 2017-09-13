@@ -1,7 +1,6 @@
 package com.auvenir.ui.bdd.pages.client;
 
 import com.auvenir.ui.bdd.pages.common.DetailsEngagementPage;
-import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 

@@ -30,8 +30,8 @@ public class DetailsEngagementPage extends CommonPage {
      * @param engagementName : to verify engagement name displayed correctly
      */
     public void verifyDetailsEngagementPageUnEditable(String engagementName) {
-            waitForVisibleElement(engagementNameUneditable, "Engagement name text");
-            validateElementText(engagementNameUneditable, engagementName);
+        waitForVisibleElement(engagementNameUneditable, "Engagement name text");
+        validateElementText(engagementNameUneditable, engagementName);
     }
 
     /**
@@ -51,8 +51,10 @@ public class DetailsEngagementPage extends CommonPage {
     //        } else if (engagementNameText.getTagName().equals("span")) {
     //            validateElementText(engagementNameText, engagementName);
     //        } else {
-    //            NXGReports.addStep("Fail: Engagement name tag name undefined.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
-    //                    "Engagement name tag name must be input(editable) or span(uneditable). Actual tag: " + engagementNameText.getTagName());
+    //            NXGReports.addStep("Fail: Engagement name tag name undefined.", LogAs.FAILED, new CaptureScreen
+    // (CaptureScreen.ScreenshotOf.BROWSER_PAGE),
+    //                    "Engagement name tag name must be input(editable) or span(uneditable). Actual tag: " +
+    // engagementNameText.getTagName());
     //        }
     //    }
 
@@ -67,7 +69,6 @@ public class DetailsEngagementPage extends CommonPage {
             getLogger().info("Fail: Verify Invite Client Into Engagement.");
         }
     }
-
 
 
 }

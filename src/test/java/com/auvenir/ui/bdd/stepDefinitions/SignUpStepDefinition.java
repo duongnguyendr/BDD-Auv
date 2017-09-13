@@ -15,7 +15,8 @@ public class SignUpStepDefinition extends BaseInit {
     BaseInit baseInit;
     ClientSignUpPage clientSignUpPage;
     AuditorSignUpPage auditorSignUpPage;
-    public SignUpStepDefinition(BaseInit baseInit){
+
+    public SignUpStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         auditorSignUpPage = new AuditorSignUpPage(logger, driver);
         clientSignUpPage = new ClientSignUpPage(logger, driver);
@@ -98,12 +99,12 @@ public class SignUpStepDefinition extends BaseInit {
         auditorSignUpPage.clickOnAllFirmCheckBox();
     }
 
-//    @And("^I click on continue button$")
-//    public void iClickOnCountinueButton() throws Throwable {
-//        // Write code here that turns the phrase above into concrete actions
-//        getLogger().info("I click on countinue button");
-//        auditorSignUpPage.clickContinueButton();
-//    }
+    //    @And("^I click on continue button$")
+    //    public void iClickOnCountinueButton() throws Throwable {
+    //        // Write code here that turns the phrase above into concrete actions
+    //        getLogger().info("I click on countinue button");
+    //        auditorSignUpPage.clickContinueButton();
+    //    }
 
     @Then("^I should see thank for create account page$")
     public void iShouldSeeThankForCreateAccountPage() throws Throwable {
@@ -274,19 +275,19 @@ public class SignUpStepDefinition extends BaseInit {
     @Then("^I should see Bank Information Page$")
     public void seeBankInformationPage() throws Throwable {
         getLogger().info("I should see Bank Information Page");
-//        clientSignUpPage.verifyBankInformationTitle();
+        //        clientSignUpPage.verifyBankInformationTitle();
     }
 
     @And("^I fill up all Bank Information$")
     public void fillUpBankInformation() throws Throwable {
         getLogger().info("I fill up all Bank Information");
-//        clientSignUpPage.fillUpBankForm();
+        //        clientSignUpPage.fillUpBankForm();
     }
 
     @And("^I click on Skip Button on Bank Information Page$")
     public void clickSkipButtonOnBankPage() throws Throwable {
         getLogger().info("I click on Skip Button on Bank Information Page");
-//        clientSignUpPage.clickSkipButtonOnBankPage();
+        //        clientSignUpPage.clickSkipButtonOnBankPage();
     }
 
     @Then("^I should see File Storage Information Page$")

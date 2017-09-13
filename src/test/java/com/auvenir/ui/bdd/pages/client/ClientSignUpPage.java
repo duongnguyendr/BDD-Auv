@@ -3,7 +3,6 @@ package com.auvenir.ui.bdd.pages.client;
 import com.auvenir.ui.bdd.pages.DatePicker;
 import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
-import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -90,7 +89,6 @@ public class ClientSignUpPage extends CommonPage {
     private WebElement buttonSecurityContinue;
 
 
-
     public ClientSignUpPage(Logger logger, WebDriver driver) {
         super(logger, driver);
         PageFactory.initElements(driver, this);
@@ -100,7 +98,7 @@ public class ClientSignUpPage extends CommonPage {
         getLogger().info("Welcome Page loaded.(Status change: Onboarding->Active)");
         switchToOtherTab(1);
         boolean result = validateElementText(titleWelcome, "Welcome to Auvenir!");
-        Assert.assertTrue(result,"Should see the Welcome to Auvenir! title.");
+        Assert.assertTrue(result, "Should see the Welcome to Auvenir! title.");
     }
 
     public void clickGetStartedButton() {
@@ -125,7 +123,7 @@ public class ClientSignUpPage extends CommonPage {
     public void verifyProvideInformationPageTitle() {
         getLogger().info("Verify Provide Information Page Title");
         boolean result = validateElementText(titleComponentPersonal, "Please Provide your Information");
-        Assert.assertTrue(result,"Should see the Please Provide your Information title.");
+        Assert.assertTrue(result, "Should see the Please Provide your Information title.");
     }
 
     public void clickPersonalContinueButton() {
@@ -141,7 +139,7 @@ public class ClientSignUpPage extends CommonPage {
 
     public void fillUpBusinessForm() {
         getLogger().info("Fill Up Business Form");
-        if (validateNotExistedElement(labelBusinessIndustry,"Input Business Industry")) {
+        if (validateNotExistedElement(labelBusinessIndustry, "Input Business Industry")) {
             String industryData = getText(inputBusinessIndustry);
             System.out.println("industryData = " + industryData);
             if (industryData.equalsIgnoreCase("Please select")) {
@@ -149,10 +147,11 @@ public class ClientSignUpPage extends CommonPage {
                 DatePicker datePicker = new DatePicker(getDriver());
                 datePicker.pickADate("28");
                 //Old business
-//                    sendKeyTextBox(inputBusinessIndustry, "Financial", "Input Business Industry");
+                //                    sendKeyTextBox(inputBusinessIndustry, "Financial", "Input Business Industry");
                 clickElement(inputBusinessIndustry, "Input Business Industry");
                 // Change the first Item to Third Item
-//                chooseFirstOptionOfInputSelect(listOptionIndustryEle, "chooseFirstOptionOfInputSelect");
+                //                chooseFirstOptionOfInputSelect(listOptionIndustryEle,
+                // "chooseFirstOptionOfInputSelect");
                 clickElement(listOptionIndustryEle.get(0), "First Option Industry");
                 clickElement(businessNameEle, "Business Name Textbox");
 
@@ -169,7 +168,7 @@ public class ClientSignUpPage extends CommonPage {
 
     public void fillUpBankForm() {
         getLogger().info("Fill Up Bank Form");
-//        validateElementText(titleComponentBank, "Integrate with your Bank");
+        //        validateElementText(titleComponentBank, "Integrate with your Bank");
         //            waitSomeSeconds(10);
         waitForJSandJQueryToLoad();
         scrollToFooter();
@@ -186,8 +185,8 @@ public class ClientSignUpPage extends CommonPage {
     }
 
     public void fillUpFileForm() {
-            getLogger().info("Fill Up File Storage Information Form");
-            scrollToFooter();
+        getLogger().info("Fill Up File Storage Information Form");
+        scrollToFooter();
     }
 
     public void verifyFileStoragePageTitle() {
@@ -201,11 +200,11 @@ public class ClientSignUpPage extends CommonPage {
     }
 
     public void fillUpSecurityForm(String password) {
-            getLogger().info("Fill Up Personal Form");
-            sendKeyTextBox(inputCreatePassword, password, "Input Create Password");
-            sendKeyTextBox(inputConfirmPassword, password, "Input Confirm Password");
-            sendTabKey(inputConfirmPassword, "Input Confirm Password");
-            waitSomeSeconds(1);
+        getLogger().info("Fill Up Personal Form");
+        sendKeyTextBox(inputCreatePassword, password, "Input Create Password");
+        sendKeyTextBox(inputConfirmPassword, password, "Input Confirm Password");
+        sendTabKey(inputConfirmPassword, "Input Confirm Password");
+        waitSomeSeconds(1);
     }
 
     public void verifySecurityPageTitle() {

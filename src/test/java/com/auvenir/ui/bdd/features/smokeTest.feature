@@ -5,7 +5,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email | Password |
+      | Email                   | Password     |
       | chr.auvenirad@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
@@ -198,18 +198,35 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | auvenirinfo@gmail.com   | Changeit@123 |
+      | Email                 | Password     |
+      | auvenirinfo@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement Dr01"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement Dr01"
     Then I assignee list To-Do to General Auditor
-      | Auditor Name  | Todo Name|
-      |General Auditor| ToDo 01  |
-      |General Auditor| ToDo 01  |
-      |General Auditor| ToDo 01  |
-      |General Auditor| ToDo 01  |
+      | Auditor Name    | Todo Name |
+      | General Auditor | ToDo 01   |
+      | General Auditor | ToDo 01   |
+      | General Auditor | ToDo 01   |
+      | General Auditor | ToDo 01   |
 
+#Huy
+  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                      | Password     |
+      | auvenirauditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 03"
+    Then I click on Invite Client button
+    Then I should see Invite Your Client page
+    Then I select option Admin Client fullname: "Huy AC (Huy Company)"
+    Then I click on Invite button
+    Then I should see invite client success toast message
+
+#/Huy
 
 
