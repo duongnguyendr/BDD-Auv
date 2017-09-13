@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTeamPage;
 import com.auvenir.ui.bdd.pages.client.ClientTeamPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -131,4 +132,9 @@ public class TeamStepDefinition extends BaseInit {
         clientTeamPage.verifyAddNewMemberSuccessful();
     }
 
+    @And("^I change the permission of member: \"([^\"]*)\" to be Lead$")
+    public void changeThePermissionOfMember(String memberName) throws Throwable {
+        getLogger().info("I am going change the permission of Member: "+ memberName);
+        clientTeamPage.changePermissionOfMember(memberName);
+    }
 }
