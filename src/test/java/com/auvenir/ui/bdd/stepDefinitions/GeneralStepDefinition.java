@@ -20,10 +20,6 @@ public class GeneralStepDefinition extends BaseInit{
     }
     private MarketingPage marketingPage;
 
-    /**
-     * aaaaaaaaaaaaaaaaaa
-     * @throws Throwable
-     */
     @Given("^I navigate to Marketing page$")
     public void iNavigateToMarketingPage() throws Throwable {
         base.getLogger().info("===== I navigate to login page =====");
