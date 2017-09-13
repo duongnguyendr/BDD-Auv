@@ -96,6 +96,7 @@ public class MailPage extends KeyWord{
         }
         sendKeyTextBox(elePassword, password, "password");
         getLogger().info("Send password: " + password);
+        waitSomeSeconds(2);
         clickElement(eleNext, "click to eleNext");
         getLogger().info("DONE => LOGIN");
     }
