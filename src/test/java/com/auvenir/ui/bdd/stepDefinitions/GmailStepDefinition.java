@@ -1,4 +1,4 @@
-package com.auvenir.ui.bdd.stepDefinitions.gmail;
+package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.mail.MailPage;
@@ -57,11 +57,11 @@ public class GmailStepDefinition extends BaseInit {
         mailPage.deleteAllExistedGMail(lstData.get(0), lstData.get(1));
     }
 
-    @And("^I relogin gmail$")
-    public void iReloginGmail() throws Throwable {
+    @And("^I relogin gmail: \"([^\"]*)\"$")
+    public void iReloginGmail(String email) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I relogin gmail");
-
+        mailPage.reSignInGmail(email);
     }
 
     @And("^I click on onboarding invitation link$")

@@ -1,25 +1,35 @@
-package com.auvenir.ui.bdd.stepDefinitions.client;
+package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.client.ClientDetailsEngagementPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
-import java.util.List;
-
 /**
- * Created by vien.pham on 9/12/2017.
+ * Created by duong.nguyen on 9/13/2017.
  */
-public class ClientDetailEngagementStepDefinition extends BaseInit {
-
+public class EngagementDetailStepDefinition extends BaseInit {
     BaseInit baseInit;
+    AuditorDetailsEngagementPage auditorDetailsEngagementPage;
     ClientDetailsEngagementPage clientDetailsEngagementPage;
-
-    public ClientDetailEngagementStepDefinition(BaseInit baseInit){
+    public EngagementDetailStepDefinition(BaseInit baseInit){
         this.baseInit = baseInit;
+        auditorDetailsEngagementPage = new AuditorDetailsEngagementPage(logger, driver);
         clientDetailsEngagementPage = new ClientDetailsEngagementPage(logger, driver);
+    }
+
+    @And("^I click on team tab$")
+    public void iClickOnTeamTab() throws Throwable{
+        getLogger().info("I click on team tab");
+        auditorDetailsEngagementPage.navigateToTeamTab();
+    }
+
+    @Then("^I should see engagement detail page: \"([^\"]*)\"$")
+    public void iShouldSeeEngagementDetailPage(String engagementName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I should see engagement detail page");
+        auditorDetailsEngagementPage.verifyDetailsEngagementPage(engagementName);
     }
 
     @Then("^I should see the title of selected engagement: \"([^\"]*)\"$")
@@ -33,5 +43,4 @@ public class ClientDetailEngagementStepDefinition extends BaseInit {
         logger.info("Client click on Team tab");
         clientDetailsEngagementPage.navigateToTeamTab();
     }
-
 }
