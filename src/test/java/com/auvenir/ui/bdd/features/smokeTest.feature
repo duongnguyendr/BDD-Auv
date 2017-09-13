@@ -204,7 +204,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Auditor
       | Auditor Name| Todo Name|
       |Admin Auditor| ToDo 01  |
@@ -226,7 +226,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Client
       |userName | Todo Name|
       |Unassigned| ToDo 01|
