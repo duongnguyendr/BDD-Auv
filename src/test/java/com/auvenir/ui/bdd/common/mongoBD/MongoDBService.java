@@ -1,6 +1,7 @@
 package com.auvenir.ui.bdd.common.mongoBD;
 
 //import com.auvenir.ui.tests.AbstractTest;
+import com.auvenir.ui.bdd.common.GeneralUtilities;
 import com.auvenir.ui.bdd.common.Generic;
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.mongodb.*;
@@ -43,6 +44,12 @@ public class MongoDBService {
 //        MongoDBService.username = ab.getUserName();
 //        MongoDBService.password = ab.getPassword();
 //        MongoDBService.ssl = ab.getSSL();
+        dataBaseSer ="192.168.1.222";
+        port = 27017;
+        DB = "auvenir_bk";
+        username = "";
+        password = "";
+        ssl ="No";
 
     }
 
@@ -53,20 +60,20 @@ public class MongoDBService {
      =================================================================== */
     public static MongoClient connectDBServer(String ServerHost, int portNo, String DB, String username, String password, String SSL) throws UnknownHostException, SyncFactoryException {
         try {
-            if (SSL.equals("yes")) {
+            MongoClient mongoClient = null;
+            if (SSL.equalsIgnoreCase("yes")) {
                 char[] pwd = password.toCharArray();
                 MongoCredential credential = MongoCredential.createCredential(username, DB, pwd); // user "myadmin" on admin database
                 List<MongoCredential> credentials = Collections.singletonList(credential);
                 ServerAddress hosts = new ServerAddress(ServerHost + ":" + portNo);
                 MongoClientOptions.Builder options = builder().sslEnabled(true).sslInvalidHostNameAllowed(true);
-                MongoClient mongoClient = new MongoClient(hosts, credentials, options.build());
-                return mongoClient;
-            } else if (SSL.equals("no") && username == null && password == null) {
-                MongoClient mongoClient = new MongoClient(ServerHost, portNo);
-                return mongoClient;
+                mongoClient = new MongoClient(hosts, credentials, options.build());
+            } else if (SSL.equalsIgnoreCase("no") && GeneralUtilities.isEmptyString(username) && GeneralUtilities.isEmptyString(password)) {
+                mongoClient = new MongoClient(ServerHost, portNo);
             }
             //getLogger().info("Connected successfully.");
             System.out.println("Connected successfully.");
+            return mongoClient;
         } catch (Exception e) {
             //getLogger().info("Unable to connect to DB: "+ e.getMessage());
             System.out.println("Unable to connect to DB: " + e.getMessage());
@@ -500,11 +507,11 @@ public class MongoDBService {
     /**
      * remove given email user on database
      *
-     * @param dBCollection DBCollection object
      * @param email        of user want to query
      */
-    public static void removeUserObjectByEmail(DBCollection dBCollection, String email) {
+    public static void removeUserObjectByEmail(String email) {
         try {
+            DBCollection dBCollection = getCollection("users");
             BasicDBObject searchQuery = new BasicDBObject();
             searchQuery.put("email", email);
             DBCursor cursor = dBCollection.find(searchQuery);
@@ -624,11 +631,11 @@ public class MongoDBService {
     /**
      * remove given name engagement on database
      *
-     * @param dBCollection DBCollection object
      * @param name         of engagement want to query
      */
-    public static void removeEngagementObjectByName(DBCollection dBCollection, String name) {
+    public static void removeEngagementObjectByName(String name) {
         try {
+            DBCollection dBCollection = getCollection("engagements");
             BasicDBObject searchQuery = new BasicDBObject();
             searchQuery.put("name", name);
             DBCursor cursor = dBCollection.find(searchQuery);
@@ -792,7 +799,7 @@ public class MongoDBService {
         removeInvitedClientInBusinessesCollection(email);
         removeAllActivitiesCollectionOfAUser(email);
         try {
-            removeUserObjectByEmail(getCollection("users"), email);
+            removeUserObjectByEmail(email);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -803,7 +810,8 @@ public class MongoDBService {
      * @param firmName
      */
     public static void removeAllFirmByName(String firmName) {
-        int count = 0;
+        removeAllDataOutOfCollection("firms", "name", firmName, "Firm");
+        /*int count = 0;
         try {
             DBCollection dBCollection = getCollection("firms");
             BasicDBObject searchQuery = new BasicDBObject();
@@ -824,7 +832,7 @@ public class MongoDBService {
             System.out.println("This Firm not exist on database.");
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -832,7 +840,8 @@ public class MongoDBService {
      * @param businessName
      */
     public static void removeAllBusinessByName(String businessName) {
-        int count = 0;
+        removeAllDataOutOfCollection("businesses", "name", businessName, "Businesses");
+        /*int count = 0;
         try {
             DBCollection dBCollection = getCollection("businesses");
             BasicDBObject searchQuery = new BasicDBObject();
@@ -853,7 +862,7 @@ public class MongoDBService {
             System.out.println("This Businesses not exist on database.");
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -861,8 +870,15 @@ public class MongoDBService {
      * @param email the String email which has object ID displayed in 'acl' array object.
      */
     public static void removeEngagementCreatedByLeadAuditor(String email, String engagementName) {
-        String objectId = null;
-        int count = 0;
+        int count = countTotalRowDelete("engagements", email,engagementName,"lead");
+        if (count == -1) {
+            System.out.println("This engagement not exist on database: ");
+        }else if(count == 0){
+            System.out.println(String.format("Engagement name '%s' is created by email '%s' is not exist on database", engagementName, email));
+        } else
+            System.out.println("Deleted Engagement successfully.");
+        //String objectId = null;
+        /*int count = 0;
         try {
             DBCollection dBCollection = getCollection("engagements");
             objectId = getObjectIdOfEmailUser(email);
@@ -896,7 +912,7 @@ public class MongoDBService {
             System.out.println("This engagement not exist on database.");
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -904,9 +920,15 @@ public class MongoDBService {
      * @param email the String email which has object ID displayed in 'acl' array object.
      */
     public static void removeEngagementCreatedByLeadAuditor(String email) {
-        String objectId = null;
-        int count = 0;
-        try {
+        //String objectId = null;
+        int count = countTotalRowDelete("engagements", email,"","lead");
+        if (count == -1) {
+            System.out.println("This engagement not exist on database: ");
+        }else if(count == 0){
+            System.out.println(String.format("User '%s' does not have any engagement on database", email));
+        } else
+            System.out.println("Deleted Engagement successfully.");
+        /*try {
             DBCollection dBCollection = getCollection("engagements");
             objectId = getObjectIdOfEmailUser(email);
             if(objectId != null) {
@@ -939,7 +961,7 @@ public class MongoDBService {
             System.out.println("This engagement not exist on database.");
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -999,4 +1021,69 @@ public class MongoDBService {
             ex.printStackTrace();
         }
     }
+
+    private static int countTotalRowDelete(String collectionName, String emailSeach,
+                                           String engagementNameSearch, String roleName){
+        String objectId;
+        int count = 0;
+        try{
+            DBCollection dBCollection = getCollection(collectionName);
+            objectId = getObjectIdOfEmailUser(emailSeach);
+            if(objectId != null) {
+                BasicDBObject searchQuery = new BasicDBObject();
+                searchQuery.put("acl.id", new ObjectId(objectId));
+                if(!GeneralUtilities.isEmptyString(engagementNameSearch)){
+                    searchQuery.put("name",engagementNameSearch);
+                }
+                DBCursor curs = dBCollection.find(searchQuery);
+                while (curs.hasNext()) {
+                    DBObject dBbject = curs.next();
+                    // shows the whole result document
+                    BasicDBList aclObjectID = (BasicDBList) dBbject.get("acl");
+                    BasicDBObject[] aclObjectArr = aclObjectID.toArray(new BasicDBObject[0]);
+                    for(BasicDBObject dbObj : aclObjectArr) {
+                        // shows each item from the lights array
+                        if(dbObj.get("id").toString().equals(objectId) && dbObj.get(roleName).equals(true)) {
+                            System.out.println("Engagement ObjectID: " + dBbject.get("_id"));
+                            System.out.println("Acl ObjectID: " + dBbject.get("acl"));
+                            dBCollection.remove(dBbject);
+                        }
+                    }
+                    count++;
+                }
+            }
+        }catch (NoSuchElementException ex1) {
+            return -1;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return count;
+    }
+
+    private static void removeAllDataOutOfCollection(String collectorName,String keySearch,  String valueSearch, String titleName){
+        int count = 0;
+        try {
+            DBCollection dBCollection = getCollection(collectorName);
+            BasicDBObject searchQuery = new BasicDBObject();
+            searchQuery.put(keySearch, valueSearch);
+            DBCursor curs = dBCollection.find(searchQuery);
+            while (curs.hasNext()) {
+                DBObject dBbject = curs.next();
+                // shows the whole result document
+                System.out.println(titleName + " name: " + dBbject.get("name"));
+                dBCollection.remove(dBbject);
+                count++;
+            }
+            if (count == 0) {
+                System.out.println(String.format(titleName + " name '%s' is not exist on database", valueSearch));
+            } else
+                System.out.println("Deleted " + titleName +" successfully.");
+        } catch (NoSuchElementException ex) {
+            System.out.println("This " +  titleName + " not exist on database.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
