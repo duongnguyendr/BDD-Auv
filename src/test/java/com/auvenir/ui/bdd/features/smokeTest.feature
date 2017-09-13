@@ -173,11 +173,6 @@ Feature: Smoke Test Feature
     And I input Role of new client member on invite new member popup: "Client role"
     And I click on invite button
     Then I should see Invite Member successful message
-    And I click on client engagement
-      | En05|
-    Then I should see client engagement detail page
-      | En05 |
-    And I click on Client team tab
 
   Scenario:Lead Auditor assign To Do task to Auditor Memeber: AUV-924
     Given I delete existed email
