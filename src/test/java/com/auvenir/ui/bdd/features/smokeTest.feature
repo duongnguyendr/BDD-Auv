@@ -155,7 +155,26 @@ Feature: Smoke Test Feature
     And I fill up all Information Page with Phone Number: "1234567899"
     And I click on Continue Button on Personal Information Page
 
-
+#Vien Pham create testcase:
+  Scenario: Admin Client invite Lead Client into Engagement: AUV-818
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | clvien.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on assigned engagement: "En05"
+    Then I should see the title of selected engagement: "En05"
+    And I click on Team tab on Client page
+    And I click on Invite New Member button on Client team page
+    Then I should see Invite New Member popup
+    And I input full name on invite new member popup: "Lead Client"
+    And I input email on invite new member popup: "vien1234@gmail.com"
+    And I input email confirm on invite new member popup: "vien1234@gmail.com"
+    And I input Role of new client member on invite new member popup: "Client role"
+    And I click on invite button
+    Then I should see Invite Member successful message
 
 
 
