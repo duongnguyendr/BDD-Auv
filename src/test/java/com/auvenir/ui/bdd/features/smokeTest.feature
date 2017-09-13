@@ -140,8 +140,6 @@ Feature: Smoke Test Feature
 #      | En05 |
 #    And I click on Client team tab
 
-
-
 #Thuan Duong create testcase:
   Scenario: Admin Client active account: AUV-645
     Given I navigate to gmail login page
@@ -155,7 +153,7 @@ Feature: Smoke Test Feature
     And I fill up all Information Page with Phone Number: "1234567899"
     And I click on Continue Button on Personal Information Page
 
-    #Vien Pham create testcase:
+#Vien Pham create testcase:
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
     Given I navigate to Marketing page
     And I click on login link
