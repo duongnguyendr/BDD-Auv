@@ -21,15 +21,17 @@ public class ClientDetailEngagementStepDefinition extends BaseInit {
         this.baseInit = baseInit;
         clientDetailsEngagementPage = new ClientDetailsEngagementPage(logger, driver);
     }
-    @Then("^I should see client engagement detail page$")
-    public void iShouldSeeClientEngagementDetailPage(List<String> engagementName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I should see client engagement detail page");
-        clientDetailsEngagementPage.verifyDetailsEngagementPage(engagementName.get(0),false);
+
+    @Then("^I should see the title of selected engagement: \"([^\"]*)\"$")
+    public void iShouldSeeTheTitleOfSelectedEngagement(String engagementName) throws Throwable {
+        clientDetailsEngagementPage.verifyDetailsEngagementPage(engagementName,false);
     }
 
-    @And("^I click on Client team tab$")
-    public void iClickOnClientTeamTab() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
+
+    @And("^I click on Team tab on Client page$")
+    public void iClickOnTeamTabOnClientPage() throws Throwable {
+        logger.info("Client click on Team tab");
+        clientDetailsEngagementPage.navigateToTeamTab();
     }
+
 }

@@ -5,7 +5,7 @@ Feature: Smoke Test Feature
 #    Given I navigate to Marketing page
 #    And I click on login link
 #    And I enter the following for Login
-#      | Email | Password |
+#      | Email                   | Password     |
 #      | chr.auvenirad@gmail.com | Changeit@123 |
 #    And I click on login button
 #    Then I should see the AdminPortal page
@@ -14,7 +14,7 @@ Feature: Smoke Test Feature
 #    Given I navigate to Marketing page
 #    And I click on login link
 #    And I enter the following for Login
-#      | Email | Password |
+#      | Email                     | Password     |
 #      | chr.adm.auvenir@gmail.com | Changeit@123 |
 #    And I click on login button
 #    Then I should see the AdminPortal page
@@ -93,76 +93,80 @@ Feature: Smoke Test Feature
 #    And I open Auditor active email
 #    And I click on confirmation link
 #    And I create password
-#    |Changeit@123|
+#      | Changeit@123 |
 #    Then I should see engagement page
 #
-  Scenario: Auditor user create new Engegament: AUV-585
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                   | Password     |
-      | auvenirinfo@gmail.com   | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click create new engagement button
-    Then I should see new engagement page
-    And I input enagagement name
-    | Engagement Dr01 |
-    And I select engagement type
-    | Review |
-    And I select company name
-    | Titan |
-    And I set report deadline
-    And I set start date
-    And I set end date
-    And I click on engagement continue button
-    Then I should see team member wizard page
-    And I click continue button without member
-    And I should see create todo list page
-    And I click create todo button
-    Then I should see engagement detail page
-      | Engagement Dr01 |
-#
-  Scenario: Admin Auditor Invite Lead Auditor: AUV-599
-    Given I delete existed email
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                   | Password     |
-      | auvenirinfo@gmail.com   | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement
-      | Engagement Dr01 |
-    Then I should see engagement detail page
-      | Engagement Dr01 |
-    And I click on team tab
-    And I delete existed member on team page
-    And I click in invite new member on team page
-    Then I should see invite new member page
-    And I input full name on invite new member page
-    And I input email on invite new member page
-    And I input email confirm on invite new member page
-    And I select role of new member
-    And I click on invite new member
-    Then I should see invite successful message
+#  Scenario: Auditor user create new Engegament: AUV-585
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email                 | Password     |
+#      | auvenirinfo@gmail.com | Changeit@123 |
+#    And I click on login button
+#    Then I should see engagement page
+#    And I click create new engagement button
+#    Then I should see new engagement page
+#    And I input enagagement name
+#      | Engagement Dr01 |
+#    And I select engagement type
+#      | Review |
+#    And I select company name
+#      | Titan |
+#    And I set report deadline
+#    And I set start date
+#    And I set end date
+#    And I click on engagement continue button
+#    Then I should see team member wizard page
+#    And I click continue button without member
+#    And I should see create todo list page
+#    And I click create todo button
+#    Then I should see engagement detail page
+#      | Engagement Dr01 |
+##
+#  Scenario: Admin Auditor Invite Lead Auditor: AUV-599
+#    Given I delete existed email
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email                 | Password     |
+#      | auvenirinfo@gmail.com | Changeit@123 |
+#    And I click on login button
+#    Then I should see engagement page
+#    And I click on engagement
+#      | Engagement Dr01 |
+#    Then I should see engagement detail page
+#      | Engagement Dr01 |
+#    And I click on team tab
+#    And I delete existed member on team page
+#    And I click in invite new member on team page
+#    Then I should see invite new member page
+#    And I input full name on invite new member page
+#    And I input email on invite new member page
+#    And I input email confirm on invite new member page
+#    And I select role of new member
+#    And I click on invite new member
+#    Then I should see invite successful message
 
 
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | clvien.adm@mailinator.com   | Changeit@123 |
+      | Email                     | Password     |
+      | clvien.adm@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
-    And I click on client engagement
-      | En05|
-    Then I should see client engagement detail page
-      | En05 |
-    And I click on Client team tab
-
-
+    And I click on assigned engagement: "En05"
+    Then I should see the title of selected engagement: "En05"
+    And I click on Team tab on Client page
+    And I click on Invite New Member button on Client team page
+    Then I should see Invite New Member popup
+    And I input full name on invite new member popup: "Lead Client"
+    And I input email on invite new member popup: "vien1234@gmail.com"
+    And I input email confirm on invite new member popup: "vien1234@gmail.com"
+    And I input Role of new client member on invite new member popup: "Client role"
+    And I click on invite button
+    Then I should see Invite Member successful message
 
 
 
