@@ -349,11 +349,9 @@ public class KeyWord {
 //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
 //            wait.until(ExpectedConditions.elementToBeClickable(element));
 //            getLogger().info("+++++ Element is clickable on Element: " + element.getText());
-//            return true;
 //        } catch (Exception e) {
 //            getLogger().info(e.getMessage());
 //            getLogger().info("+++++ Element is not clickable on Element: " + element.getText());
-//            return false;
 //        }
     }
 
@@ -408,6 +406,7 @@ public class KeyWord {
      */
     public void clickElement(WebElement element, String elementName) {
         getLogger().info("+++ Click on Element: " + elementName);
+        waitForClickableOfElement(element, elementName);
         element.click();
 //        try {
 //            waitForClickableOfElement(element, "click to " + elementName);
@@ -1138,33 +1137,6 @@ public class KeyWord {
     }
 
     /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait text value of Element is changed.
-     */
-    public boolean waitForTextValueChanged(WebElement element, String elementName, String textValue) {
-        getLogger().info("Try to waitForTextValueChanged: " + elementName);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver driver) {
-                    String actualTextValue = element.getText().trim();
-                    System.out.println("Actual Displayed Value: " + actualTextValue);
-                    System.out.println("Expected Displayed Value: " + textValue);
-                    if (actualTextValue.equals(textValue))
-                        return true;
-                    else
-                        return false;
-                }
-            });
-            return true;
-        } catch (Exception e) {
-            getLogger().info("CSS Value is not changed");
-            return false;
-        }
-    }
-
-    /**
      * validate if attribute contain given value
      *
      * @param webElement  element need to validate
@@ -1486,5 +1458,35 @@ public class KeyWord {
         return result;
     }
 
+    public void chooseFirstOptionOfInputSelect(List<WebElement> list, String elementName) {
+        // Change the first Item to Third Item
+        clickElement(list.get(0), elementName);
+    }
 
+    /*
+Method to wait Ajax function on Site be loaded successfully.
+ */
+    public boolean waitForJSandJQueryToLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
+                } catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        // wait for Javascript to load
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) getDriver()).executeScript("return document.readyState").toString().equals("complete");
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
 }

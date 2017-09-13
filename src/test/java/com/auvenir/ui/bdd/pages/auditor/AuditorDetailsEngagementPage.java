@@ -52,13 +52,6 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
     @FindBy(xpath = "//nav[@id='dashboardLinks']/div[@id='engagementFileMangerLink']")
     private WebElement eleFileManagerLink;
 
-    /**
-     * verifyDownloadAttachmentFromAllToDo - TanPh - 2017/06/22 - End
-     */
-    public void verifyDetailsEngagementPage(String engagementName) {
-        verifyDetailsEngagementPage(engagementName, true);
-    }
-
     public void verifyDetailsEngagementAtGeneralPage(String engagementName) {
         waitForVisibleElement(dashboardTextAtGeneralPage, "dashboard text");
         validateElementText(dashboardTextAtGeneralPage, engagementName);

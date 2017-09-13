@@ -14,5 +14,4 @@ public class ClientDetailsEngagementPage extends DetailsEngagementPage {
         super(logger, driver);
     }
 
-
 }

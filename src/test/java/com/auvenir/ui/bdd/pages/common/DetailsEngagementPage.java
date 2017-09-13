@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by huy.huynh on 20/07/2017.
  */
-public abstract class DetailsEngagementPage extends CommonPage {
+public class DetailsEngagementPage extends CommonPage {
 
     @FindBy(xpath = "//span[@id='a-header-title']")
     protected WebElement engagementNameUneditable;
@@ -28,18 +28,20 @@ public abstract class DetailsEngagementPage extends CommonPage {
 
     /**
      * @param engagementName : to verify engagement name displayed correctly
-     * @param isLeadAuditor: true: elements of Page can be edited or false: elements of Page can not be edited
      */
-    public void verifyDetailsEngagementPage(String engagementName, boolean isLeadAuditor) {
-        if (isLeadAuditor) {
-            waitForVisibleElement(engagementNameEditable, "Engagement name text");
-            clickElement(engagementNameEditable, "Engagement name text");
-            sendTabKey(engagementNameEditable, "");
-            validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
-        } else {
+    public void verifyDetailsEngagementPageUnEditable(String engagementName) {
             waitForVisibleElement(engagementNameUneditable, "Engagement name text");
             validateElementText(engagementNameUneditable, engagementName);
-        }
+    }
+
+    /**
+     * @param engagementName : to verify engagement name displayed correctly
+     */
+    public void verifyDetailsEngagementPageEditable(String engagementName) {
+        waitForVisibleElement(engagementNameEditable, "Engagement name text");
+        clickElement(engagementNameEditable, "Engagement name text");
+        sendTabKey(engagementNameEditable, "");
+        validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
     }
 
     //    public void verifyDetailsEngagementPage(String engagementName) {
@@ -65,5 +67,7 @@ public abstract class DetailsEngagementPage extends CommonPage {
             getLogger().info("Fail: Verify Invite Client Into Engagement.");
         }
     }
+
+
 
 }
