@@ -153,6 +153,7 @@ Feature: Smoke Test Feature
     And I click on Get Start button on Client Sign Up Page
     Then I should see Provide Information Page
     And I fill up all Information Page with Phone Number: "1234567899"
+    And I click on Continue Button on Personal Information Page
 
 
 

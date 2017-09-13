@@ -61,7 +61,6 @@ public class ClientSignUpPage extends CommonPage {
         clickElement(checkboxAgreementPersonal, "Checkbox Agreement Personal");
         switchToOtherTab(1);
         scrollToFooter();
-        clickElement(buttonPersonalContinue, "Button Personal Continue");
     }
 
     public void verifyProvideInformationPageTitle() {
@@ -70,7 +69,10 @@ public class ClientSignUpPage extends CommonPage {
         Assert.assertTrue(result,"Should see the Please Provide your Information title.");
     }
 
-
+    public void clickPersonalContinueButton() {
+        getLogger().info("Click Personal Continue Button.");
+        clickElement(buttonPersonalContinue, "Button Personal Continue");
+    }
 
 
 }

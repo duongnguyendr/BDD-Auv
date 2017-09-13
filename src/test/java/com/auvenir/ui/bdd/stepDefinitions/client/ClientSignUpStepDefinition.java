@@ -39,10 +39,16 @@ public class ClientSignUpStepDefinition extends BaseInit{
         clientSignUpPage.verifyProvideInformationPageTitle();
     }
 
-    @Then("^I fill up all Information Page with Phone Number: \"([^\"]*)\"$")
+    @And("^I fill up all Information Page with Phone Number: \"([^\"]*)\"$")
     public void iFillUpAllInformationPage(String phoneNumber) throws Throwable {
         getLogger().info("I fill up all Information Page");
         clientSignUpPage.fillUpPersonalForm(phoneNumber);
+    }
+
+    @And("^I click on Continue Button on Personal Information Page")
+    public void iClickPersonalContinueButton() throws Throwable {
+        getLogger().info("I click on Continue Button on Personal Information Page");
+        clientSignUpPage.clickPersonalContinueButton();
     }
 
 }
