@@ -46,6 +46,24 @@ public abstract class TeamPage extends CommonPage {
     @FindBy(xpath = "//*[@id='m-inm-addBtn']")
     protected WebElement inviteButton;
 
+    @FindBy(xpath = "//div[@class='ui dropdown team-permission-dropdown']")
+    private List<WebElement> permissionSelectBox;
+
+    @FindBy(xpath = "//div[starts-with(@id,'Set User To Lead')]")
+    private WebElement setUserToLeadPopup;
+
+    @FindBy(xpath = "//div[starts-with(@id,'m-Set User To Lead')]/label")
+    private WebElement setUserToLeadTitle;
+
+    @FindBy(xpath = "//div[starts-with(@id,'Set User To Lead')]//button[@class='auvbtn warning']")
+    private WebElement setLeadConfirmBtn;
+
+//    @FindBy(xpath = "//div[@class='ui dropdown team-permission-dropdown']/div[contains(@class,'menu')]")
+//    private List<WebElement> permissionMenuDropdown;
+
+    @FindBy(xpath = "//div[@class='ui dropdown team-permission-dropdown']//div[@class='item']")
+    private List<WebElement> leadPermissionOption;
+
     public int findMemberByName(String memberName) {
         int index = -1;
         for (int i = 0; i < listTeamMember.size(); i++) {
@@ -133,17 +151,17 @@ public abstract class TeamPage extends CommonPage {
     }
 
 
-    public void verifyInviteNewMemberPageDisplayed(){
+    public void verifyInviteNewMemberPageDisplayed() {
         getLogger().info("Verify invite new member page load");
         boolean result = validateDisPlayedElement(inviteNewMemberTitle, "inviteNewMemberTitle");
         Assert.assertTrue(result);
     }
 
-    public void inputFullName(String fullName){
+    public void inputFullName(String fullName) {
         sendKeyTextBox(fullNameMemberTxt, fullName, "Full Name Textbox");
     }
 
-    public void inputEmail(String email){
+    public void inputEmail(String email) {
         sendKeyTextBox(emailMemberTxt, email, "Email Textbox");
     }
 
@@ -162,4 +180,12 @@ public abstract class TeamPage extends CommonPage {
         Assert.assertTrue(result, "The Message Invite New Member Successful should be displayed");
     }
 
+    public void changePermissionOfMember(String memberName) {
+        int index = findMemberByName(memberName);
+        clickElement(permissionSelectBox.get(index), "Permisson Select box");
+        clickElement(leadPermissionOption.get(index), "Lead Permission");
+        waitForCssValueChanged(setUserToLeadPopup,"Set User to Lead Popup","display","block");
+        validateElementText(setUserToLeadTitle,"Set User to Lead");
+        clickElement(setLeadConfirmBtn,"Confirm Set Lead Btn");
+    }
 }
