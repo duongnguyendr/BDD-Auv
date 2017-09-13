@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.admin.AdminPage;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -29,8 +30,8 @@ public class AdminPortalStepDefinition extends BaseInit {
         //MarketingPage MarketingPage = new MarketingPage(logger,driver);
         adminPage.verifyHeaderAdminPage();
     }
-    @Then("^I should see status off user is wait listed$")
-    public void iShouldSeeStatusOffUserIsWaitListed(DataTable datas) throws Throwable {
+    @Then("^I should see status of user is wait listed$")
+    public void iShouldSeeStatusOfUserIsWaitListed(DataTable datas) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see status off user is waitlisted");
         List<String> listData = datas.asList(String.class);
@@ -65,4 +66,13 @@ public class AdminPortalStepDefinition extends BaseInit {
         getLogger().info("I should see verified message successful");
         adminPage.verifyMessageSuccessful();
     }
+
+    @Then("^I should see status of user is onboarding$")
+    public void iShouldSeeStatusOffUserIsOnboarding(DataTable datas) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I should see status of user is Onboarding");
+        List<String> listData = datas.asList(String.class);
+        adminPage.verifyUserStatusAsExpected(listData.get(0), listData.get(1));
+    }
+
 }

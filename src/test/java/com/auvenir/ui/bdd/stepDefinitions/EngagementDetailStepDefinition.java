@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.client.ClientDetailsEngagementPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -42,5 +43,12 @@ public class EngagementDetailStepDefinition extends BaseInit {
     public void iClickOnTeamTabOnClientPage() throws Throwable {
         logger.info("Client click on Team tab");
         clientDetailsEngagementPage.navigateToTeamTab();
+    }
+
+    @And("^I click on invite client button on engagement detail page$")
+    public void iClickOnInviteButton() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I click on invite client button on engagement detail page");
+        auditorDetailsEngagementPage.clickOnInviteClientBtn();
     }
 }

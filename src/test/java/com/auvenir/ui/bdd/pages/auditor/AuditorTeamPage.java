@@ -142,23 +142,19 @@ public class AuditorTeamPage extends TeamPage {
 
     public void deleteMemberInEngagementByName(String fullNameMember) {
         getLogger().info(String.format("Click Delete Team Member '%s'", fullNameMember));
-        try {
-            int index = findTeamMemberByName(fullNameMember);
-            if (index != -1) {
-                clickElement(checkBoxTeamMember.get(index), "Check Box Team Member");
-                boolean checked = checkBoxTeamMember.get(index).isSelected();
-                if (checked) {
-                    clickElement(bulkActionsDropdown, "Bulk Actions Dropdown");
-                    clickElement(deleteOptionActions, "Delete Option Dropdown");
-                    waitForProgressOverlayIsClosed();
-                    //                    boolean result = verifyContentOfSuccessToastMessage("Your team member has been removed.");
-                    //                    if (!result) throw new Exception();
-                }
+        int index = findTeamMemberByName(fullNameMember);
+        if (index != -1) {
+            clickElement(checkBoxTeamMember.get(index), "Check Box Team Member");
+            boolean checked = checkBoxTeamMember.get(index).isSelected();
+            if (checked) {
+                clickElement(bulkActionsDropdown, "Bulk Actions Dropdown");
+                clickElement(deleteOptionActions, "Delete Option Dropdown");
+                waitForProgressOverlayIsClosed();
+                //                    boolean result = verifyContentOfSuccessToastMessage("Your team member has been removed.");
+                //                    if (!result) throw new Exception();
             }
-            getLogger().info("Delete All Member in Engagement.");
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
         }
+        getLogger().info("Delete All Member in Engagement.");
 
     }
 

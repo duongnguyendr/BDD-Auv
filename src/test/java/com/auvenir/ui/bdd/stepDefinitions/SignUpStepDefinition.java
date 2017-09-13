@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorSignUpPage;
 import com.auvenir.ui.bdd.pages.client.ClientSignUpPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -250,5 +251,19 @@ public class SignUpStepDefinition extends BaseInit {
     public void iClickPersonalContinueButton() throws Throwable {
         getLogger().info("I click on Continue Button on Personal Information Page");
         clientSignUpPage.clickPersonalContinueButton();
+    }
+
+    @And("^I input confirm auditor personal information: \"([^\"]*)\"$")
+    public void iInputConfirmAuditorPersonalInformation(String phoneNumber) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input confirm auditor personal information: " + phoneNumber);
+        auditorSignUpPage.confirmAuditorPersonalInfo(phoneNumber);
+    }
+
+    @And("^I click on continue button on firm information page$")
+    public void iClickOnContinueButtonOnFirmInformationPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I click on continue button on firm information page");
+        auditorSignUpPage.clickContinueFilmButton();
     }
 }

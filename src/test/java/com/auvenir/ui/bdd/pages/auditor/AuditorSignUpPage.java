@@ -201,6 +201,36 @@ public class AuditorSignUpPage extends CommonPage {
     @FindBy(xpath = "//button[@id='security-continueBtn']")
     private WebElement createAccountBtnEle;
 
+    @FindBy(xpath = "//*[@id='personal-phoneNumber']")
+    private WebElement phoneConfirmTxtEle;
+
+    @FindBy(xpath = "//*[@id='personal-referral']")
+    private WebElement referalConfirmDrdEle;
+
+    @FindBy(xpath = "//*[@id='personal-referral-container']/ul/li")
+    private List<WebElement> listItemreferalConfirmDrdEle;
+
+    @FindBy(xpath = "//*[@id='personal-referral']/../ul")
+    private WebElement referalDropdownPopupEle;
+
+    @FindBy(xpath = "//button[@id='personal-continueBtn']")
+    private WebElement continuePerConfirmBtnEle;
+
+    @FindBy(xpath = "//div[@id='personal-referral']//div[@class='text']")
+    WebElement valueOfHearAuvenir;
+    @FindBy(xpath = "//div[@id='personal-referral']//div[@role='option']")
+    List<WebElement> selectFirstOptionOfHearAuvenir;
+    @FindBy(xpath = "//div[@id='icheckbox']")
+    WebElement agreementCheckbox;
+
+    @FindBy(xpath = "//div[@class='field']/div[@class='ui checkbox']")
+    WebElement herebyCheckbox;
+    @FindBy(xpath = "//*[@id='onboarding-firm-container']/div//h2")
+    private WebElement firmHeaderTxtEle;
+
+    @FindBy(xpath = "//button[@id='onboard-firm-continue']")
+    private WebElement continueFirmConfirmBtnEle;
+
     /**
      * Verify Content of Register Personal Information Page
      */
@@ -451,29 +481,55 @@ public class AuditorSignUpPage extends CommonPage {
 
     public void createPassword(String strPass) {
         getLogger().info("Create Password for New User.");
+        waitForVisibleElement(elePassword, "Password Input");
+        sendKeyTextBox(elePassword, strPass, "Password Input");
+
+        waitForVisibleElement(eleConfirmPass, "Confirm Password Input");
+        sendKeyTextBox(eleConfirmPass, strPass, "Confirm Password Input");
+        sendTabKey(eleConfirmPass, "Confirm Password Input");
+        clickElement(createAccountBtnEle, "Create Account button");
+        waitSomeSeconds(5);
+    }
+
+    public void confirmAuditorPersonalInfo(String strPhone) {
+        getLogger().info("Input all field in Register Personal Information Page and click Continue Button");
         boolean result;
-        try {
-            waitForVisibleElement(elePassword, "Password Input");
-            sendKeyTextBox(elePassword, strPass, "Password Input");
+        waitForVisibleElement(phoneConfirmTxtEle, "Phone number");
+        sendKeyTextBox(phoneConfirmTxtEle, strPhone, "Phone number TextBox");
+        clickElement(referalConfirmDrdEle, "Referal Dropdown List");
+        waitForAtrributeValueChanged(referalConfirmDrdEle, "Role in Firm Dropdown", "aria-expanded", "true");
+        String firstItemText = selectFirstOptionOfHearAuvenir.get(0).getText();
+        clickElement(selectFirstOptionOfHearAuvenir.get(0), "First Item on Role Dropdown");
 
-            waitForVisibleElement(eleConfirmPass, "Confirm Password Input");
-            sendKeyTextBox(eleConfirmPass, strPass, "Confirm Password Input");
-            sendTabKey(eleConfirmPass, "Confirm Password Input");
-//            scrollToFooter();
-            /*scrollPageDown();
-            waitForJSandJQueryToLoad();*/
-//            hoverAndWaitForClickableOfElement(createAccountBtnEle, "Create Account button");
-//            clickElementActions(createAccountBtnEle, "Create Account button");
-            clickElement(createAccountBtnEle, "Create Account button");
-            waitSomeSeconds(5);
-            // Verify Register Auditor Security Page is passed
-            //            waitForVisibleElement(successPageHeaderEle, "Success Page Header");
-            //            result = validateElementText(successPageHeaderEle, "Your Account Is on the Waitlist!");
-            //            Assert.assertTrue(result, "Success Page should be displayed.");
+        System.out.print("firstItemText: " + firstItemText);
+        waitForTextValueChanged(valueOfHearAuvenir, "", firstItemText);
+        waitForAtrributeValueChanged(referalConfirmDrdEle, "Role in Firm Dropdown", "class", "ui selection dropdown");
 
-        } catch (AssertionError e) {
-            getLogger().info(e.getMessage());
-        }
+        scrollToFooter();
+
+        waitForVisibleElement(agreementCheckbox, "Agree Check Box");
+        clickElement(agreementCheckbox, "Agree Check Box");
+
+        waitForVisibleElement(herebyCheckbox, "Confirm CPA Check Box");
+        clickElement(herebyCheckbox, "Confirm CPA Check Box");
+
+        waitForVisibleElement(continuePerConfirmBtnEle, "Continue button");
+        clickElement(continuePerConfirmBtnEle, "continue button");
+
+        waitForVisibleElement(firmHeaderTxtEle, "Header Firm Info Page");
+        validateDisPlayedElement(firmHeaderTxtEle, "Header Firm Info Page");
+        result = validateElementText(firmHeaderTxtEle, "Please Provide Your Firm Information");
+        Assert.assertTrue(result, "Page Provide Your Firm Infomation should be loaded.");
+        getLogger().info("Confirm Auditor Personal Info passed");
+        switchToOtherTab(2);
+        getDriver().close();
+        switchToOtherTab(1);
+    }
+
+    public void clickContinueFilmButton(){
+        scrollToFooter();
+        waitForVisibleElement(continueFirmConfirmBtnEle, "Continue Firm Button");
+        clickElement(continueFirmConfirmBtnEle, "Continue Firm Button");
     }
 }
 

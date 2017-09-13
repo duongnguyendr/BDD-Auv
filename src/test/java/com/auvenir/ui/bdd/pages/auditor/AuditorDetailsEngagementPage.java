@@ -51,6 +51,8 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     @FindBy(xpath = "//nav[@id='dashboardLinks']/div[@id='engagementFileMangerLink']")
     private WebElement eleFileManagerLink;
+    @FindBy(id = "engagementUserBtn")
+    private WebElement buttonInviteClient;
 
     /**
      * verifyDownloadAttachmentFromAllToDo - TanPh - 2017/06/22 - End
@@ -100,6 +102,11 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     public void verifyNewEngagementPopupClose() {
         waitForCssValueChanged(createEngagementPopupEle, "Create Engagement Popup", "display", "none");
+    }
+
+    public void clickOnInviteClientBtn(){
+        waitForClickableOfElement(buttonInviteClient,"buttonInviteClient");
+        clickElement(buttonInviteClient, "buttonInviteClient");
     }
 }
 

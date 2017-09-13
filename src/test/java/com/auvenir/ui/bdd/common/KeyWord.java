@@ -1458,4 +1458,32 @@ public class KeyWord {
         }
         return result;
     }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait text value of Element is changed.
+     */
+    public boolean waitForTextValueChanged(WebElement element, String elementName, String textValue) {
+        getLogger().info("Try to waitForTextValueChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    String actualTextValue = element.getText().trim();
+                    System.out.println("Actual Displayed Value: " + actualTextValue);
+                    System.out.println("Expected Displayed Value: " + textValue);
+                    if (actualTextValue.equals(textValue))
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            getLogger().info(String.format("Text Value of element '%s' is changed to '%s'", elementName, textValue));
+            return true;
+        } catch (Exception e) {
+            getLogger().info("CSS Value is not changed");
+            return false;
+        }
+    }
 }
