@@ -14,6 +14,7 @@ import javax.sql.rowset.spi.SyncFactoryException;
 import java.net.UnknownHostException;
 import java.util.*;
 
+import static com.auvenir.ui.bdd.base.BaseInit.baseUrl;
 import static com.auvenir.ui.bdd.common.Generic.sDirPath;
 import static com.mongodb.MongoClientOptions.builder;
 import static javax.sql.rowset.spi.SyncFactory.getLogger;
@@ -35,16 +36,13 @@ public class MongoDBService {
     static String[] sData = null;
 
     private static void configurateDatabase() {
-        //AbstractAPIService ab = new AbstractAPIService();
-//        AbstractTest ab = new AbstractTest();
-//        MongoDBService.dataBaseSer = ab.getDataBaseSer();
-//        MongoDBService.port = ab.getPort();
-//
-//        MongoDBService.DB = ab.getDataBase();
-//        MongoDBService.username = ab.getUserName();
-//        MongoDBService.password = ab.getPassword();
-//        MongoDBService.ssl = ab.getSSL();
-
+        MongoDBProperties mongoDBProperties = new MongoDBProperties((baseUrl));
+        dataBaseSer = mongoDBProperties.getServerIp();
+        port = Integer.valueOf(mongoDBProperties.getPort());
+        DB = mongoDBProperties.getDatabaseName();
+        username = mongoDBProperties.getUserName();
+        password = mongoDBProperties.getUserPassword();
+        ssl = mongoDBProperties.getSsl();
     }
 
     /* ===================================================================
@@ -54,20 +52,20 @@ public class MongoDBService {
      =================================================================== */
     public static MongoClient connectDBServer(String ServerHost, int portNo, String DB, String username, String password, String SSL) throws UnknownHostException, SyncFactoryException {
         try {
-            if (SSL.equals("yes")) {
+            MongoClient mongoClient = null;
+            if (SSL.equalsIgnoreCase("yes")) {
                 char[] pwd = password.toCharArray();
                 MongoCredential credential = MongoCredential.createCredential(username, DB, pwd); // user "myadmin" on admin database
                 List<MongoCredential> credentials = Collections.singletonList(credential);
                 ServerAddress hosts = new ServerAddress(ServerHost + ":" + portNo);
                 MongoClientOptions.Builder options = builder().sslEnabled(true).sslInvalidHostNameAllowed(true);
-                MongoClient mongoClient = new MongoClient(hosts, credentials, options.build());
-                return mongoClient;
-            } else if (SSL.equals("no") && username == null && password == null) {
-                MongoClient mongoClient = new MongoClient(ServerHost, portNo);
-                return mongoClient;
+                mongoClient = new MongoClient(hosts, credentials, options.build());
+            } else if (SSL.equalsIgnoreCase("no") && GeneralUtilities.isEmptyString(username) && GeneralUtilities.isEmptyString(password)){
+                mongoClient = new MongoClient(ServerHost, portNo);
             }
             //getLogger().info("Connected successfully.");
             System.out.println("Connected successfully.");
+            return mongoClient;
         } catch (Exception e) {
             //getLogger().info("Unable to connect to DB: "+ e.getMessage());
             System.out.println("Unable to connect to DB: " + e.getMessage());
@@ -625,11 +623,11 @@ public class MongoDBService {
     /**
      * remove given name engagement on database
      *
-     * @param dBCollection DBCollection object
      * @param name         of engagement want to query
      */
-    public static void removeEngagementObjectByName(DBCollection dBCollection, String name) {
+    public static void removeEngagementObjectByName(String name) {
         try {
+            DBCollection dBCollection = getCollection("engagements");
             BasicDBObject searchQuery = new BasicDBObject();
             searchQuery.put("name", name);
             DBCursor cursor = dBCollection.find(searchQuery);
