@@ -22,7 +22,7 @@ public class EngagementPage extends CommonPage {
 
     // Old version
     //    @FindBy(xpath = "//div[@id='cpa-main']/div")
-    @FindBy(xpath = "//tbody[@id='engagement-tbody']//td/a")
+    @FindBy(xpath = "//tbody[@id='engagement-tbody']//td/p")
     protected List<WebElement> engagementListEle;
 
     @FindBy(id = "c-header-title")

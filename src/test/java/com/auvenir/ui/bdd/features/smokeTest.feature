@@ -140,7 +140,23 @@ Feature: Smoke Test Feature
       | En05 |
     And I click on Client team tab
 
-
+  Scenario:Lead Auditor assign To Do task to Auditor Memeber: AUV-924
+    Given I delete existed email
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | auvenirinfo@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement Dr01"
+    Then I should see engagement detail page: "Engagement Dr01"
+    Then I assignee list To-Do to General Auditor
+      | Auditor Name  | Todo Name|
+      |General Auditor| ToDo 01  |
+      |General Auditor| ToDo 01  |
+      |General Auditor| ToDo 01  |
+      |General Auditor| ToDo 01  |
 
 
 
