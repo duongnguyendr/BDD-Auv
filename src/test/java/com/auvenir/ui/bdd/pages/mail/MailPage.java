@@ -161,8 +161,4 @@ public class MailPage extends KeyWord{
             clickElement(eleNext, "click to eleNext");
             getLogger().info("DONE => LOGIN");
     }
-
-    public void selectActiveEmaill() {
-        clickElement(eleEmailAuvenir, "Non-reply Active email");
-    }
 }
