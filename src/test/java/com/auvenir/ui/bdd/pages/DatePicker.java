@@ -72,7 +72,7 @@ public class DatePicker {
      *
      * @param date name of To-Do to choose
      */
-    public void pickADate(String date) throws Exception {
+    public void pickADate(String date) {
         clickElement(getElementByXpath(validDate, date), "Datepicker date: " + date);
     }
 
@@ -148,10 +148,6 @@ public class DatePicker {
         return titleMonthYear.getText();
     }
 
-    //    public boolean isMouseHovering(WebElement webElement){
-    //
-    //    }
-
     /**
      * count months from now
      *
@@ -168,24 +164,6 @@ public class DatePicker {
     }
 
     /**
-     * choose given name To-Do and cho an action for it
-     *
-     * @param date  date of month
-     * @param month month of year
-     * @param year  year AD
-     */
-    private boolean timeValidation(String date, String month, String year) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            simpleDateFormat.setLenient(false);
-            simpleDateFormat.parse(date + "-" + month + "-" + year);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    /**
      * get element which cant use @FindBy to find
      *
      * @param xpath xpath to get element
@@ -194,12 +172,7 @@ public class DatePicker {
     public WebElement getElementByXpath(String xpath, String... arg) {
         WebElement webElement = null;
         xpath = String.format(xpath, arg);
-        try {
-            webElement = datePicker.findElement(By.xpath(xpath));
-        } catch (Exception ex) {
-//            NXGReports.addStep("Can't find element for xpath: " + xpath, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
-//                    ex.getMessage());
-        }
+        webElement = datePicker.findElement(By.xpath(xpath));
         return webElement;
     }
 
@@ -208,17 +181,8 @@ public class DatePicker {
      * @param elementName Name of element that we want to click
      * @Description: Click on element
      */
-    public boolean clickElement(WebElement element, String elementName) {
-        try {
-            element.click();
-            return true;
-        } catch (Exception e) {
-            //AbstractService.sStatusCnt++;
-            System.out.println("Unable to click on: " + elementName);
-//            NXGReports.addStep("Unable to Click on: " + elementName, LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
-//                    e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
+    public void clickElement(WebElement element, String elementName) {
+        System.out.println("Click Element: " + elementName);
+        element.click();
     }
 }
