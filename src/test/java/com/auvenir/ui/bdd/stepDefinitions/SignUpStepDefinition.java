@@ -15,7 +15,8 @@ public class SignUpStepDefinition extends BaseInit {
     BaseInit baseInit;
     ClientSignUpPage clientSignUpPage;
     AuditorSignUpPage auditorSignUpPage;
-    public SignUpStepDefinition(BaseInit baseInit){
+
+    public SignUpStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         auditorSignUpPage = new AuditorSignUpPage(logger, driver);
         clientSignUpPage = new ClientSignUpPage(logger, driver);
@@ -98,12 +99,12 @@ public class SignUpStepDefinition extends BaseInit {
         auditorSignUpPage.clickOnAllFirmCheckBox();
     }
 
-//    @And("^I click on continue button$")
-//    public void iClickOnCountinueButton() throws Throwable {
-//        // Write code here that turns the phrase above into concrete actions
-//        getLogger().info("I click on countinue button");
-//        auditorSignUpPage.clickContinueButton();
-//    }
+    //    @And("^I click on continue button$")
+    //    public void iClickOnCountinueButton() throws Throwable {
+    //        // Write code here that turns the phrase above into concrete actions
+    //        getLogger().info("I click on countinue button");
+    //        auditorSignUpPage.clickContinueButton();
+    //    }
 
     @Then("^I should see thank for create account page$")
     public void iShouldSeeThankForCreateAccountPage() throws Throwable {
@@ -214,21 +215,21 @@ public class SignUpStepDefinition extends BaseInit {
     }
 
     @And("^I create password: \"([^\"]*)\"$")
-    public void iCreatePassword(String passWord) throws Throwable {
+    public void createPassword(String passWord) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I create password");
         auditorSignUpPage.createPassword(passWord);
     }
 
     @Then("^I should see Welcome to Auvenir Page$")
-    public void iVerifyWelcomePageTitle() throws Throwable {
+    public void verifyWelcomePageTitle() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see Welcome to Auvenir Page");
         clientSignUpPage.verifyWelcomePageTitle();
     }
 
     @And("^I click on Get Start button on Client Sign Up Page$")
-    public void iClickGetStartedButton() throws Throwable {
+    public void clickGetStartedButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see Welcome to Auvenir Page");
         clientSignUpPage.clickGetStartedButton();
@@ -240,21 +241,90 @@ public class SignUpStepDefinition extends BaseInit {
         clientSignUpPage.verifyProvideInformationPageTitle();
     }
 
-    @And("^I fill up all Information Page with Phone Number: \"([^\"]*)\"$")
-    public void iFillUpAllInformationPage(String phoneNumber) throws Throwable {
+    @And("^I fill up all Client Personal Information with Phone Number: \"([^\"]*)\"$")
+    public void fillUpClientPersonalInformationPage(String phoneNumber) throws Throwable {
         getLogger().info("I fill up all Information Page");
         clientSignUpPage.fillUpPersonalForm(phoneNumber);
     }
 
-    @And("^I click on Continue Button on Personal Information Page")
-    public void iClickPersonalContinueButton() throws Throwable {
+    @And("^I click on Continue Button on Personal Information Page$")
+    public void clickPersonalContinueButton() throws Throwable {
         getLogger().info("I click on Continue Button on Personal Information Page");
         clientSignUpPage.clickPersonalContinueButton();
     }
 
-    @Then("^I should see Business Information Page")
+    @Then("^I should see Business Information Page$")
     public void seeBusinessInformationPage() throws Throwable {
         getLogger().info("I should see Business Information Page");
         clientSignUpPage.verifyBusinessPageTitle();
     }
+
+    @And("^I fill up all Client Business Information$")
+    public void fillUpBusinessInformationPage() throws Throwable {
+        getLogger().info("I fill up Client Business Information Page");
+        clientSignUpPage.fillUpBusinessForm();
+    }
+
+
+    @And("^I click on Continue Button on Business Information Page$")
+    public void clickBusinessContinueButton() throws Throwable {
+        getLogger().info("I click on Continue Button on Business Information Page");
+        clientSignUpPage.clickContinueButtonOnBusinessPage();
+    }
+
+    @Then("^I should see Bank Information Page$")
+    public void seeBankInformationPage() throws Throwable {
+        getLogger().info("I should see Bank Information Page");
+        //        clientSignUpPage.verifyBankInformationTitle();
+    }
+
+    @And("^I fill up all Bank Information$")
+    public void fillUpBankInformation() throws Throwable {
+        getLogger().info("I fill up all Bank Information");
+        //        clientSignUpPage.fillUpBankForm();
+    }
+
+    @And("^I click on Skip Button on Bank Information Page$")
+    public void clickSkipButtonOnBankPage() throws Throwable {
+        getLogger().info("I click on Skip Button on Bank Information Page");
+        //        clientSignUpPage.clickSkipButtonOnBankPage();
+    }
+
+    @Then("^I should see File Storage Information Page$")
+    public void seeFileStorageInformationPage() throws Throwable {
+        getLogger().info("I should see File Storage Information Page");
+        clientSignUpPage.verifyFileStoragePageTitle();
+    }
+
+    @And("^I fill up all File Storage Information$")
+    public void fillUpFileStorageInformation() throws Throwable {
+        getLogger().info("I fill up all File Storage Information");
+        clientSignUpPage.fillUpFileForm();
+    }
+
+    @And("^I click on Skip Button on File Storage Information Page$")
+    public void clickSkipButtonOnFilePage() throws Throwable {
+        getLogger().info("I click on Skip Button on File Storage Information Page");
+        clientSignUpPage.clickSkipButtonOnFilePage();
+    }
+
+    @Then("^I should see Security Information Page$")
+    public void seeSecurityInformationPage() throws Throwable {
+        getLogger().info("I should see Security Information Page");
+        clientSignUpPage.verifySecurityPageTitle();
+    }
+
+    @And("^I fill up all Security Information with Password: \"([^\"]*)\"$")
+    public void fillUpAllSecurityInformation(String password) throws Throwable {
+        getLogger().info("I fill up all Security Information");
+        clientSignUpPage.fillUpSecurityForm(password);
+    }
+
+    @And("^I click on Create Account Button on Security Information Page$")
+    public void clickCreateAccountButtonOnSecurityPage() throws Throwable {
+        getLogger().info("I click on Create Account Button on Security Information Page");
+        clientSignUpPage.clickCreateAccountButtonOnSecurityPage();
+    }
+
+
 }
