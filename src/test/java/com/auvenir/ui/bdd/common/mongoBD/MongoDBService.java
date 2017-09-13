@@ -13,7 +13,6 @@ import javax.sql.rowset.spi.SyncFactoryException;
 import java.net.UnknownHostException;
 import java.util.*;
 
-import static com.auvenir.ui.bdd.base.BaseInit.baseUrl;
 import static com.auvenir.ui.bdd.common.Generic.sDirPath;
 import static com.mongodb.MongoClientOptions.builder;
 import static javax.sql.rowset.spi.SyncFactory.getLogger;
@@ -34,7 +33,7 @@ public class MongoDBService {
     private static String testCaseId;
     static String[] sData = null;
 
-    private static void configureDatabase() {
+    private static void configurateDatabase() {
         //AbstractAPIService ab = new AbstractAPIService();
 //        AbstractTest ab = new AbstractTest();
 //        MongoDBService.dataBaseSer = ab.getDataBaseSer();
@@ -44,31 +43,6 @@ public class MongoDBService {
 //        MongoDBService.username = ab.getUserName();
 //        MongoDBService.password = ab.getPassword();
 //        MongoDBService.ssl = ab.getSSL();
-
-        MongoDBProperties mongoDBProperties = new MongoDBProperties(baseUrl);
-        dataBaseSer = mongoDBProperties.getServerIp();
-        DB = mongoDBProperties.getDatabaseName();
-        port = Integer.valueOf(mongoDBProperties.getPort());
-        username =mongoDBProperties.getUserName();
-        password =mongoDBProperties.getUserPassword();
-        ssl=mongoDBProperties.getSsl();
-       /* if(baseUrl.equalsIgnoreCase("auvenir-qa-automaiton")){
-            dataBaseSer = "192.168.1.222";
-            DB = "auvenir";
-            port = 27017;
-            username ="";
-            password ="";
-            ssl="";
-        }else if(baseUrl.equalsIgnoreCase("greed.auvenir.com")){
-            dataBaseSer = "golem.auvenir.com";
-            DB = "auvenir";
-            port = 27017;
-            username ="auvqadb";
-            password ="rE7IrgSfjnSjP9Pr08MQNhcXpezZp3d7SzfWreRVhW1zpU6f4gHnca0CNOLH9wvKewslvb5mfXDd3vsds76UhQ==";
-            ssl="";
-        }else {
-
-        }*/
 
     }
 
@@ -109,7 +83,7 @@ public class MongoDBService {
         try {
             sData = Generic.toReadExcelData(valueId, "owners");
 
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("owners");
@@ -142,7 +116,7 @@ public class MongoDBService {
     public static void deleteOwner(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "owners");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("owners");
@@ -163,7 +137,7 @@ public class MongoDBService {
     public static void insertConsumer(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "consumers");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("consumers");
@@ -192,7 +166,7 @@ public class MongoDBService {
     public static void deleteConsumer(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "consumers");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("consumers");
@@ -213,7 +187,7 @@ public class MongoDBService {
     public static void insertInstitution(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "institutions");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("institutions");
@@ -248,7 +222,7 @@ public class MongoDBService {
     public static void deleteInstitution(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "institutions");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("institutions");
@@ -269,7 +243,7 @@ public class MongoDBService {
     public static void insertConsumerAccount(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "consumerAccounts");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("consumerAccounts");
@@ -305,7 +279,7 @@ public class MongoDBService {
     public static void deleteConsumerAccount(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "consumerAccounts");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("consumerAccounts");
@@ -326,7 +300,7 @@ public class MongoDBService {
     public static void insertAccount(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "accounts");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("accounts");
@@ -365,7 +339,7 @@ public class MongoDBService {
     public static void deleteAccount(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "accounts");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("accounts");
@@ -386,7 +360,7 @@ public class MongoDBService {
     public static void insertAuthSession(String valueId) throws UnknownHostException, SyncFactoryException {
         try {
             sData = Generic.toReadExcelData(valueId, "authSessions");
-            configureDatabase();
+            configurateDatabase();
             MongoClient MongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(DB);
             DBCollection table = db.getCollection("authSessions");
@@ -475,7 +449,7 @@ public class MongoDBService {
      * @param collectionName engagement value chosen as value
      */
     public static DBCollection getCollection(String collectionName) throws Exception {
-        configureDatabase();
+        configurateDatabase();
         MongoClient mongoClient = connectDBServer(dataBaseSer, port, DB, username, password, ssl);
         com.mongodb.DB db = mongoClient.getDB(DB);
         return db.getCollection(collectionName);
@@ -1025,5 +999,69 @@ public class MongoDBService {
             ex.printStackTrace();
         }
     }
-    
+
+    private static int countTotalRowDelete(String collectionName, String emailSeach,
+                                           String engagementNameSearch, String roleName){
+        String objectId;
+        int count = 0;
+        try{
+            DBCollection dBCollection = getCollection(collectionName);
+            objectId = getObjectIdOfEmailUser(emailSeach);
+            if(objectId != null) {
+                BasicDBObject searchQuery = new BasicDBObject();
+                searchQuery.put("acl.id", new ObjectId(objectId));
+                if(!GeneralUtilities.isEmptyString(engagementNameSearch)){
+                    searchQuery.put("name",engagementNameSearch);
+                }
+                DBCursor curs = dBCollection.find(searchQuery);
+                while (curs.hasNext()) {
+                    DBObject dBbject = curs.next();
+                    // shows the whole result document
+                    BasicDBList aclObjectID = (BasicDBList) dBbject.get("acl");
+                    BasicDBObject[] aclObjectArr = aclObjectID.toArray(new BasicDBObject[0]);
+                    for(BasicDBObject dbObj : aclObjectArr) {
+                        // shows each item from the lights array
+                        if(dbObj.get("id").toString().equals(objectId) && dbObj.get(roleName).equals(true)) {
+                            System.out.println("Engagement ObjectID: " + dBbject.get("_id"));
+                            System.out.println("Acl ObjectID: " + dBbject.get("acl"));
+                            dBCollection.remove(dBbject);
+                        }
+                    }
+                    count++;
+                }
+            }
+        }catch (NoSuchElementException ex1) {
+            return -1;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return count;
+    }
+
+    private static void removeAllDataOutOfCollection(String collectorName,String keySearch,  String valueSearch, String titleName){
+        int count = 0;
+        try {
+            DBCollection dBCollection = getCollection(collectorName);
+            BasicDBObject searchQuery = new BasicDBObject();
+            searchQuery.put(keySearch, valueSearch);
+            DBCursor curs = dBCollection.find(searchQuery);
+            while (curs.hasNext()) {
+                DBObject dBbject = curs.next();
+                // shows the whole result document
+                System.out.println(titleName + " name: " + dBbject.get("name"));
+                dBCollection.remove(dBbject);
+                count++;
+            }
+            if (count == 0) {
+                System.out.println(String.format(titleName + " name '%s' is not exist on database", valueSearch));
+            } else
+                System.out.println("Deleted " + titleName +" successfully.");
+        } catch (NoSuchElementException ex) {
+            System.out.println("This " +  titleName + " not exist on database.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

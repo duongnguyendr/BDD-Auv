@@ -41,4 +41,11 @@ public class GeneralUtilities {
         }
         return properties;
     }
+
+    public static boolean isEmptyString(String input){
+        if((null != input) && (!"".equals(input))){
+            return false;
+        }
+        return true;
+    }
 }
