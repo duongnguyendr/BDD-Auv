@@ -1,4 +1,4 @@
-package com.auvenir.ui.bdd.stepDefinitions.marketing;
+package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.admin.AdminPage;

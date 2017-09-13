@@ -1,4 +1,4 @@
-package com.auvenir.ui.bdd.stepDefinitions.gmail;
+package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.mail.MailPage;
