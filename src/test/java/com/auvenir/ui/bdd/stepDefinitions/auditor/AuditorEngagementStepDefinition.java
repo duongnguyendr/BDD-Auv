@@ -32,10 +32,10 @@ public class AuditorEngagementStepDefinition extends BaseInit{
         auditorEngagementPage.clickNewEngagementButton();
     }
 
-    @And("^I click on engagement$")
-    public void iClickOnEngagement(List<String> engagementName) throws Throwable {
+    @And("^I click on engagement: \"([^\"]*)\"$")
+    public void iClickOnEngagement(String engagementName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I click on engagement: " + engagementName.get(0));
-        auditorEngagementPage.viewEngagementDetailsPage(engagementName.get(0));
+        getLogger().info("I click on engagement: " + engagementName);
+        auditorEngagementPage.viewEngagementDetailsPage(engagementName);
     }
 }

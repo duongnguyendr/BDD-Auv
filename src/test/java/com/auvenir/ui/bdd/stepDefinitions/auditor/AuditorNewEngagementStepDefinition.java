@@ -28,27 +28,6 @@ public class AuditorNewEngagementStepDefinition extends BaseInit {
         auditorNewEngagementPage.verifyNewEngagementPage();
     }
 
-    @And("^I input enagagement name$")
-    public void iInputEnagagementName(List<String> engagementName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I input enagagement name");
-        auditorNewEngagementPage.enterEngagementName(engagementName.get(0));
-    }
-
-    @And("^I select engagement type$")
-    public void iSelectEngagementType(List<String> engagementType) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I select engagement type");
-        auditorNewEngagementPage.selectEngagementType(engagementType.get(0));
-    }
-
-    @And("^I select company name$")
-    public void iSelectCompanyName(List<String> companyName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I select company name");
-        auditorNewEngagementPage.selectCompanyName(companyName.get(0));
-    }
-
     @And("^I set report deadline$")
     public void iSetReportDeadline() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -105,5 +84,24 @@ public class AuditorNewEngagementStepDefinition extends BaseInit {
         auditorDetailsEngagementPage.verifyNewEngagementPopupClose();
     }
 
+    @And("^I input engagement name: \"([^\"]*)\"$")
+    public void iInputEngagementName(String engagementName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I input engagement name");
+        auditorNewEngagementPage.enterEngagementName(engagementName);
+    }
 
+    @And("^I select engagement type: \"([^\"]*)\"$")
+    public void iSelectEngagementType(String engagementType) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I select engagement type");
+        auditorNewEngagementPage.selectEngagementType(engagementType);
+    }
+
+    @And("^I select company name: \"([^\"]*)\"$")
+    public void iSelectCompanyName(String companyName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I select company name");
+        auditorNewEngagementPage.selectCompanyName(companyName);
+    }
 }

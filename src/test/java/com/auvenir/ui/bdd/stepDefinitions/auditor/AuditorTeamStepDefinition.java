@@ -81,4 +81,5 @@ public class AuditorTeamStepDefinition extends BaseInit {
         getLogger().info("I should see invite successful message");
         auditorTeamPage.verifyAddNewMemberSuccessful();
     }
+
 }
