@@ -17,7 +17,6 @@ import java.util.List;
 public class AuditorSignUpPage extends CommonPage {
     public AuditorSignUpPage(Logger logger, WebDriver driver) {
         super(logger, driver);
-        PageFactory.initElements(driver, this);
     }
 
     // ================================= Element of First and Last Name =======================================

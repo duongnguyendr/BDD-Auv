@@ -25,6 +25,27 @@ public abstract class TeamPage extends CommonPage {
     @FindBy(xpath = "//tbody[@id='w-team-tableBody']//input[contains(@type,'checkbox') and (@disabled)]")
     private List<WebElement> listDisableCheckboxTeamMember;
 
+    @FindBy(xpath = "//div[@id='engagement-team']")
+    private WebElement engagementTeam;
+
+    @FindBy(xpath = "//*[@id='team-inviteMember-btn']")
+    private WebElement inviteMemberBtn;
+
+    @FindBy(xpath = "//h3[@class='inm-subTitle']")
+    private WebElement inviteNewMemberTitle;
+
+    @FindBy(xpath = "//*[@id='m-inm-name']")
+    protected WebElement fullNameMemberTxt;
+
+    @FindBy(xpath = "//*[@id='m-inm-email']")
+    protected WebElement emailMemberTxt;
+
+    @FindBy(xpath = "//*[@id='m-inm-reEmail']")
+    protected WebElement reEmailMemberTxt;
+
+    @FindBy(xpath = "//*[@id='m-inm-addBtn']")
+    protected WebElement inviteButton;
+
     public int findMemberByName(String memberName) {
         int index = -1;
         for (int i = 0; i < listTeamMember.size(); i++) {
@@ -104,4 +125,41 @@ public abstract class TeamPage extends CommonPage {
         String xpathCellPermissionLevel = "//td[text()='%s']/following-sibling::td[2]";
         validateElementText(getElementByXpath(xpathCellPermissionLevel, name), leadText);
     }
+
+    public void clickInviteMember() {
+        getLogger().info("Click Invite Member Button.");
+        waitForCssValueChanged(engagementTeam, "engagementTeam", "display", "block");
+        clickElement(inviteMemberBtn, "Invite Member Button");
+    }
+
+
+    public void verifyInviteNewMemberPageDisplayed(){
+        getLogger().info("Verify invite new member page load");
+        boolean result = validateDisPlayedElement(inviteNewMemberTitle, "inviteNewMemberTitle");
+        Assert.assertTrue(result);
+    }
+
+    public void inputFullName(String fullName){
+        sendKeyTextBox(fullNameMemberTxt, fullName, "Full Name Textbox");
+    }
+
+    public void inputEmail(String email){
+        sendKeyTextBox(emailMemberTxt, email, "Email Textbox");
+    }
+
+    public void inputEmailConfirm(String email) {
+        sendKeyTextBox(reEmailMemberTxt, email, "ReEnter Email Textbox");
+    }
+
+    public void clickButtonInviteNewMember() {
+        clickElement(inviteButton, "Invite Button");
+        waitForProgressOverlayIsClosed();
+    }
+
+
+    public void verifyAddNewMemberSuccessful() {
+        boolean result = verifyContentOfSuccessToastMessage("Your engagement invitation has been sent.");
+        Assert.assertTrue(result, "The Message Invite New Member Successful should be displayed");
+    }
+
 }

@@ -4,6 +4,7 @@ import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorSignUpPage;
 import com.auvenir.ui.bdd.pages.client.ClientSignUpPage;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 
 import java.util.List;
 
@@ -18,10 +19,36 @@ public class ClientSignUpStepDefinition extends BaseInit{
         clientSignUpPage = new ClientSignUpPage(logger, driver);
     }
 
-    @And("^I should see Welcome to Auvenir Page$")
+    @Then("^I should see Welcome to Auvenir Page$")
     public void iVerifyWelcomePageTitle() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I should see Welcome to Auvenir Page");
         clientSignUpPage.verifyWelcomePageTitle();
     }
+
+    @And("^I click on Get Start button on Client Sign Up Page$")
+    public void iClickGetStartedButton() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I should see Welcome to Auvenir Page");
+        clientSignUpPage.clickGetStartedButton();
+    }
+
+    @Then("^I should see Provide Information Page$")
+    public void iVerifyProvideInfomationPageTitle() throws Throwable {
+        getLogger().info("I should see Welcome to Auvenir Page");
+        clientSignUpPage.verifyProvideInformationPageTitle();
+    }
+
+    @And("^I fill up all Information Page with Phone Number: \"([^\"]*)\"$")
+    public void iFillUpAllInformationPage(String phoneNumber) throws Throwable {
+        getLogger().info("I fill up all Information Page");
+        clientSignUpPage.fillUpPersonalForm(phoneNumber);
+    }
+
+    @And("^I click on Continue Button on Personal Information Page")
+    public void iClickPersonalContinueButton() throws Throwable {
+        getLogger().info("I click on Continue Button on Personal Information Page");
+        clientSignUpPage.clickPersonalContinueButton();
+    }
+
 }

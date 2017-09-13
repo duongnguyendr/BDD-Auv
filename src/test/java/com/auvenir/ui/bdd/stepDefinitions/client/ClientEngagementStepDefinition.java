@@ -15,9 +15,10 @@ import java.util.List;
 public class ClientEngagementStepDefinition extends BaseInit {
     BaseInit baseInit;
     ClientEngagementPage clientEngagementPage;
-    public ClientEngagementStepDefinition(BaseInit baseInit){
+
+    public ClientEngagementStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
-        clientEngagementPage = new ClientEngagementPage(logger,driver);
+        clientEngagementPage = new ClientEngagementPage(logger, driver);
     }
 
 
@@ -28,11 +29,10 @@ public class ClientEngagementStepDefinition extends BaseInit {
         clientEngagementPage.verifyEngagementPage();
     }
 
-    @And("^I click on client engagement$")
-    public void iClickOnClientEngagement(List<String> EngagementName) throws Throwable {
+    @And("^I click on assigned engagement: \"([^\"]*)\"$")
+    public void iClickOnAssignedEngagement(String engagementName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I click on client engagement: "+EngagementName.get(0));
-        clientEngagementPage.viewEngagementDetailsPage(EngagementName.get(0));
+        clientEngagementPage.viewEngagementDetailsPage(engagementName);
     }
 
 
