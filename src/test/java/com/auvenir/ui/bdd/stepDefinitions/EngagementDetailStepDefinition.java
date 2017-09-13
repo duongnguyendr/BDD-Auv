@@ -13,14 +13,15 @@ public class EngagementDetailStepDefinition extends BaseInit {
     BaseInit baseInit;
     AuditorDetailsEngagementPage auditorDetailsEngagementPage;
     ClientDetailsEngagementPage clientDetailsEngagementPage;
-    public EngagementDetailStepDefinition(BaseInit baseInit){
+
+    public EngagementDetailStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         auditorDetailsEngagementPage = new AuditorDetailsEngagementPage(logger, driver);
         clientDetailsEngagementPage = new ClientDetailsEngagementPage(logger, driver);
     }
 
     @And("^I click on team tab$")
-    public void iClickOnTeamTab() throws Throwable{
+    public void iClickOnTeamTab() throws Throwable {
         getLogger().info("I click on team tab");
         auditorDetailsEngagementPage.navigateToTeamTab();
     }
@@ -34,7 +35,7 @@ public class EngagementDetailStepDefinition extends BaseInit {
 
     @Then("^I should see the title of selected engagement: \"([^\"]*)\"$")
     public void iShouldSeeTheTitleOfSelectedEngagement(String engagementName) throws Throwable {
-        clientDetailsEngagementPage.verifyDetailsEngagementPage(engagementName,false);
+        clientDetailsEngagementPage.verifyDetailsEngagementPage(engagementName, false);
     }
 
 
@@ -42,5 +43,30 @@ public class EngagementDetailStepDefinition extends BaseInit {
     public void iClickOnTeamTabOnClientPage() throws Throwable {
         logger.info("Client click on Team tab");
         clientDetailsEngagementPage.navigateToTeamTab();
+    }
+
+    @Then("^I click on Invite Client button$")
+    public void clickOnInviteClientButton() throws Throwable {
+        auditorDetailsEngagementPage.clickInviteClientButton();
+    }
+
+    @Then("^I should see Invite Your Client page$")
+    public void seeInviteYourClientPage() throws Throwable {
+        auditorDetailsEngagementPage.verifyInviteYourClientPage();
+    }
+
+    @Then("^I select option Admin Client fullname: \"([^\"]*)\"$")
+    public void selectOptionAdminClientFullname(String fullName) throws Throwable {
+        auditorDetailsEngagementPage.selectClientWithFullName(fullName);
+    }
+
+    @Then("^I click on Invite button$")
+    public void clickOnInviteButton() throws Throwable {
+        auditorDetailsEngagementPage.clickInviteButton();
+    }
+
+    @Then("^I should see invite client success toast message$")
+    public void seeInviteClientSuccessToastMessage() throws Throwable {
+        auditorDetailsEngagementPage.verifyInviteClientSuccess();
     }
 }

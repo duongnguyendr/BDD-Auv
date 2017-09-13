@@ -87,7 +87,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
      */
     public void clickOnFileManagerLink() {
         waitForClickableOfElement(eleFileManagerLink, "file manager link");
-        clickElement(eleFileManagerLink,"file manager link");
+        clickElement(eleFileManagerLink, "file manager link");
     }
 
     /**
@@ -100,6 +100,48 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     public void verifyNewEngagementPopupClose() {
         waitForCssValueChanged(createEngagementPopupEle, "Create Engagement Popup", "display", "none");
+    }
+
+    @FindBy(id = "engagementUserBtn")
+    private WebElement buttonInviteClient;
+
+    /**
+     * Click Invite button
+     */
+    public void clickInviteClientButton() throws Exception {
+        validateElementText(buttonInviteClient, "Invite Client");
+        clickByJavaScripts(buttonInviteClient, "Button Invite Client");
+    }
+
+    @FindBy(className = "m-ic-subTitle")
+    private WebElement titleInviteClient;
+
+    @FindBy(xpath = "//input[@id='m-ci-step-one-input']")
+    private WebElement selectOptionInviteClient;
+
+    public void verifyInviteYourClientPage() {
+        waitSomeSeconds(1);
+        validateElementText(titleInviteClient, "Invite Your Client");
+    }
+
+    public void selectClientWithFullName(String fullName) {
+        verifyInviteYourClientPage();
+        clickElement(selectOptionInviteClient, "Select Client");
+        String xpathOptionAdminClientName = "//ul[@class='ddlLink inputDdl inputDdl-after']//a[text()='%s']";
+        clickElement(getElementByXpath(xpathOptionAdminClientName, fullName), "Option Admin Client Name");
+    }
+
+    @FindBy(id = "m-ic-continueBtn")
+    WebElement buttonInvite;
+
+    public void clickInviteButton(){
+        clickElement(buttonInvite, "Button Invite");
+    }
+
+    public void verifyInviteClientSuccess() {
+        waitForProgressOverlayIsClosed();
+        waitSomeSeconds(1);
+        verifyContentOfSuccessToastMessage("Your engagement invitation has been sent.");
     }
 }
 

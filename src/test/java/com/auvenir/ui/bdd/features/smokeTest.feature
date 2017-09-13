@@ -1,14 +1,14 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
 
-  Scenario: Verify super admin login.
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email | Password |
-      | chr.auvenirad@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see the AdminPortal page
+#  Scenario: Verify super admin login.
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email                   | Password     |
+#      | chr.auvenirad@gmail.com | Changeit@123 |
+#    And I click on login button
+#    Then I should see the AdminPortal page
 
 #  Scenario: Verify admin login.
 #    Given I navigate to Marketing page
@@ -131,58 +131,74 @@ Feature: Smoke Test Feature
 #
 
 #Thuan Duong create testcase:
-  Scenario: Admin Client active account: AUV-645
-    Given I navigate to gmail login page
-    And I signIn gmail
-      | chr.auvenirclient01@gmail.com | Changeit@123 |
-    And I open active email
-    And I click on onboarding invitation link
-    Then I should see Welcome to Auvenir Page
-    And I click on Get Start button on Client Sign Up Page
-    Then I should see Provide Information Page
-    And I fill up all Information Page with Phone Number: "1234567899"
-    And I click on Continue Button on Personal Information Page
-    Then I should see Business Information Page
+#  Scenario: Admin Client active account: AUV-645
+#    Given I navigate to gmail login page
+#    And I signIn gmail
+#      | chr.auvenirclient01@gmail.com | Changeit@123 |
+#    And I open active email
+#    And I click on onboarding invitation link
+#    Then I should see Welcome to Auvenir Page
+#    And I click on Get Start button on Client Sign Up Page
+#    Then I should see Provide Information Page
+#    And I fill up all Information Page with Phone Number: "1234567899"
+#    And I click on Continue Button on Personal Information Page
+#    Then I should see Business Information Page
+#
+#
+#
+##Vien Pham create testcase:
+#  Scenario: Admin Client invite Lead Client into Engagement: AUV-818
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email                     | Password     |
+#      | clvien.adm@mailinator.com | Changeit@123 |
+#    And I click on login button
+#    Then I should see client engagement page
+#    And I click on assigned engagement: "En05"
+#    Then I should see the title of selected engagement: "En05"
+#    And I click on Team tab on Client page
+#    And I click on Invite New Member button on Client team page
+#    Then I should see Invite New Member popup
+#    And I input full name on invite new member popup: "Lead Client"
+#    And I input email on invite new member popup: "vien1234@gmail.com"
+#    And I input email confirm on invite new member popup: "vien1234@gmail.com"
+#    And I input Role of new client member on invite new member popup: "Client role"
+#    And I click on invite button
+#    Then I should see Invite Member successful message
+#
+#  Scenario:Lead Auditor assign To Do task to Auditor Memeber: AUV-924
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email                 | Password     |
+#      | auvenirinfo@gmail.com | Changeit@123 |
+#    And I click on login button
+#    Then I should see engagement page
+#    And I click on engagement: "Engagement Dr01"
+#    Then I should see engagement detail page: "Engagement Dr01"
+#    Then I assignee list To-Do to General Auditor
+#      | Auditor Name    | Todo Name |
+#      | General Auditor | ToDo 01   |
+#      | General Auditor | ToDo 01   |
+#      | General Auditor | ToDo 01   |
+#      | General Auditor | ToDo 01   |
 
-
-
-#Vien Pham create testcase:
-  Scenario: Admin Client invite Lead Client into Engagement: AUV-818
+#Huy
+  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                     | Password     |
-      | clvien.adm@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see client engagement page
-    And I click on assigned engagement: "En05"
-    Then I should see the title of selected engagement: "En05"
-    And I click on Team tab on Client page
-    And I click on Invite New Member button on Client team page
-    Then I should see Invite New Member popup
-    And I input full name on invite new member popup: "Lead Client"
-    And I input email on invite new member popup: "vien1234@gmail.com"
-    And I input email confirm on invite new member popup: "vien1234@gmail.com"
-    And I input Role of new client member on invite new member popup: "Client role"
-    And I click on invite button
-    Then I should see Invite Member successful message
-
-  Scenario:Lead Auditor assign To Do task to Auditor Memeber: AUV-924
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                   | Password     |
-      | auvenirinfo@gmail.com   | Changeit@123 |
+      | Email                      | Password     |
+      | auvenirauditor01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement Dr01"
-    Then I should see engagement detail page: "Engagement Dr01"
-    Then I assignee list To-Do to General Auditor
-      | Auditor Name  | Todo Name|
-      |General Auditor| ToDo 01  |
-      |General Auditor| ToDo 01  |
-      |General Auditor| ToDo 01  |
-      |General Auditor| ToDo 01  |
+    Then I click on engagement: "Huy Engagement 03"
+    Then I click on Invite Client button
+    Then I should see Invite Your Client page
+    Then I select option Admin Client fullname: "Huy AC (Huy Company)"
+    Then I click on Invite button
+    Then I should see invite client success toast message
 
-
+#/Huy
 
