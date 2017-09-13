@@ -1,7 +1,7 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
 
-  Scenario: Verify super admin login.
+  Scenario: Verify super admin login: AUV-2186
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -10,7 +10,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see the AdminPortal page
 
-#  Scenario: Verify admin login.
+#  Scenario: Verify admin login: AUV-2187
 #    Given I navigate to Marketing page
 #    And I click on login link
 #    And I enter the following for Login
