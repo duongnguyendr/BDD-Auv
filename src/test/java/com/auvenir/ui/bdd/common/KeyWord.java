@@ -349,11 +349,9 @@ public class KeyWord {
 //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
 //            wait.until(ExpectedConditions.elementToBeClickable(element));
 //            getLogger().info("+++++ Element is clickable on Element: " + element.getText());
-//            return true;
 //        } catch (Exception e) {
 //            getLogger().info(e.getMessage());
 //            getLogger().info("+++++ Element is not clickable on Element: " + element.getText());
-//            return false;
 //        }
     }
 
@@ -408,6 +406,7 @@ public class KeyWord {
      */
     public void clickElement(WebElement element, String elementName) {
         getLogger().info("+++ Click on Element: " + elementName);
+        waitForClickableOfElement(element, elementName);
         element.click();
 //        try {
 //            waitForClickableOfElement(element, "click to " + elementName);
@@ -1461,7 +1460,33 @@ public class KeyWord {
 
     public void chooseFirstOptionOfInputSelect(List<WebElement> list, String elementName) {
         // Change the first Item to Third Item
-//        clickElement(list.get(0), elementName);
-        clickElement(list.get(3), elementName);
+        clickElement(list.get(0), elementName);
+    }
+
+    /*
+Method to wait Ajax function on Site be loaded successfully.
+ */
+    public boolean waitForJSandJQueryToLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
+                } catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        // wait for Javascript to load
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) getDriver()).executeScript("return document.readyState").toString().equals("complete");
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 }

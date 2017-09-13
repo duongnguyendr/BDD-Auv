@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.pages.client;
 import com.auvenir.ui.bdd.pages.DatePicker;
 import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
+import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,6 +62,34 @@ public class ClientSignUpPage extends CommonPage {
     @FindBy(xpath = "//div[@class='field business-smallerInput']//div[@role='option']")
     private List<WebElement> listOptionAccountingFramework;
 
+    @FindBy(id = "onboard-business-continue")
+    private WebElement buttonBusinessContinue;
+
+    @FindBy(xpath = "//div[@id='onboarding-bank-container']//h3")
+    private WebElement titleComponentBank;
+
+    @FindBy(xpath = "//div[@id='onboarding-bank-container']//button[@class='auvbtn light']")
+    private WebElement buttonBankSkip;
+
+    @FindBy(xpath = "//div[@id='onboarding-files-container']//p[@class='component-title']")
+    private WebElement titleComponentFiles;
+
+    @FindBy(xpath = "//div[@id='onboarding-files-container']//button[contains(@id,'files-skipBtn')]")
+    private WebElement buttonFilesSkip;
+
+    @FindBy(xpath = "//div[@id='onboarding-security-container']//h2")
+    private WebElement titleComponentSecurity;
+
+    @FindBy(name = "password")
+    private WebElement inputCreatePassword;
+
+    @FindBy(name = "retype_password")
+    private WebElement inputConfirmPassword;
+
+    @FindBy(id = "security-continueBtn")
+    private WebElement buttonSecurityContinue;
+
+
 
     public ClientSignUpPage(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -110,7 +139,7 @@ public class ClientSignUpPage extends CommonPage {
         Assert.assertTrue(result, "Should see the Business Page Title.");
     }
 
-    public void fillUpBusinessForm(String parentStakeholders) {
+    public void fillUpBusinessForm() {
         getLogger().info("Fill Up Business Form");
         if (validateNotExistedElement(labelBusinessIndustry,"Input Business Industry")) {
             String industryData = getText(inputBusinessIndustry);
@@ -123,15 +152,72 @@ public class ClientSignUpPage extends CommonPage {
 //                    sendKeyTextBox(inputBusinessIndustry, "Financial", "Input Business Industry");
                 clickElement(inputBusinessIndustry, "Input Business Industry");
                 // Change the first Item to Third Item
-                chooseFirstOptionOfInputSelect(listOptionIndustryEle, "chooseFirstOptionOfInputSelect");
+//                chooseFirstOptionOfInputSelect(listOptionIndustryEle, "chooseFirstOptionOfInputSelect");
+                clickElement(listOptionIndustryEle.get(0), "First Option Industry");
                 clickElement(businessNameEle, "Business Name Textbox");
 
                 clickElement(inputAccountingFramework, "Input Accounting Framework");
                 chooseFirstOptionOfInputSelect(listOptionAccountingFramework, "List Option Accounting Framework");
             }
         }
-//        clickElement(buttonBusinessContinue, "Button Business Continue");
     }
 
+    public void clickContinueButtonOnBusinessPage() {
+        getLogger().info("Click Continue Button on Business");
+        clickElement(buttonBusinessContinue, "Button Business Continue");
+    }
+
+    public void fillUpBankForm() {
+        getLogger().info("Fill Up Bank Form");
+//        validateElementText(titleComponentBank, "Integrate with your Bank");
+        //            waitSomeSeconds(10);
+        waitForJSandJQueryToLoad();
+        scrollToFooter();
+    }
+
+    public void verifyBankInformationTitle() {
+        getLogger().info("Verify Bank Information Title.");
+        validateElementText(titleComponentBank, "Integrate with your Bank");
+    }
+
+    public void clickSkipButtonOnBankPage() {
+        getLogger().info("Click Skip Button On Bank Page.");
+        clickElement(buttonBankSkip, "Button Bank Skip");
+    }
+
+    public void fillUpFileForm() {
+            getLogger().info("Fill Up File Storage Information Form");
+            scrollToFooter();
+    }
+
+    public void verifyFileStoragePageTitle() {
+        getLogger().info("Verify File Storage Page Title.");
+        validateElementText(titleComponentFiles, "Integrate With Your File Storage");
+    }
+
+    public void clickSkipButtonOnFilePage() {
+        getLogger().info("Click Skip Button On File Page.");
+        clickElement(buttonFilesSkip, "Button File Skip");
+    }
+
+    public void fillUpSecurityForm(String password) {
+            getLogger().info("Fill Up Personal Form");
+            sendKeyTextBox(inputCreatePassword, password, "Input Create Password");
+            sendKeyTextBox(inputConfirmPassword, password, "Input Confirm Password");
+            sendTabKey(inputConfirmPassword, "Input Confirm Password");
+            waitSomeSeconds(1);
+    }
+
+    public void verifySecurityPageTitle() {
+        getLogger().info("Verify File Storage Page Title.");
+        validateElementText(titleComponentSecurity, "Create Your Password");
+    }
+
+    public void clickCreateAccountButtonOnSecurityPage() {
+        getLogger().info("Click Continue Button on Security Page.");
+        clickElement(buttonSecurityContinue, "Button Security Continue");
+        waitSomeSeconds(3);
+        waitForProgressOverlayIsClosed();
+    }
 
 }
