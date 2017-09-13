@@ -168,7 +168,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see client engagement page
     And I click on assigned engagement: "En05"
-    Then I should see the title of selected engagement: "En05"
+    Then I should see engagement detail page with Engagement Title Uneditable: "En05"
     And I click on Team tab on Client page
     And I click on Invite New Member button on Client team page
     Then I should see Invite New Member popup
@@ -178,6 +178,7 @@ Feature: Smoke Test Feature
     And I input Role of new client member on invite new member popup: "Client role"
     And I click on invite button
     Then I should see Invite Member successful message
+
 
     #Vien Pham create testcase:
   Scenario:  Admin Client tranfer Lead permission to Lead Client in the Engagement2: AUV-847
@@ -189,7 +190,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see client engagement page
     And I click on assigned engagement: "En05"
-    Then I should see the title of selected engagement: "En05"
+    Then I should see engagement detail page with Engagement Title Uneditable: "En05"
     And I click on Team tab on Client page
     And I change the permission of member: "Lead Client" to be Lead
 
@@ -202,7 +203,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement Dr01"
-    Then I should see engagement detail page: "Engagement Dr01"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement Dr01"
     Then I assignee list To-Do to General Auditor
       | Auditor Name  | Todo Name|
       |General Auditor| ToDo 01  |
