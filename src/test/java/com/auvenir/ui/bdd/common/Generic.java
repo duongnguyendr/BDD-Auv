@@ -647,4 +647,19 @@ public class Generic extends BaseInit{
         }
         return true;
     }
+
+    public static String getPrefixFromBrowser(){
+        String prefix = "";
+        if(sBrowser.equalsIgnoreCase("firefox")){
+            prefix = "ff.";
+        }else if(sBrowser.equalsIgnoreCase("internet explorer")){
+            prefix = "ie.";
+        }else if(sBrowser.equalsIgnoreCase("edge")){
+            prefix = "edge.";
+        }else{
+            prefix = "chr.";
+        }
+
+        return prefix;
+    }
 }
