@@ -37,23 +37,8 @@ public class AuditorTeamPage extends TeamPage {
     @FindBy(xpath = "//*[@id='team-delete-btn']")
     private WebElement deleteOptionActions;
 
-    @FindBy(xpath = "//*[@id='team-inviteMember-btn']")
-    private WebElement inviteMemberBtn;
-
-    @FindBy(xpath = "//*[@id='m-inm-name']")
-    private WebElement fullNameMemberTxt;
-
-    @FindBy(xpath = "//*[@id='m-inm-email']")
-    private WebElement emailMemberTxt;
-
-    @FindBy(xpath = "//*[@id='m-inm-reEmail']")
-    private WebElement reEmailMemberTxt;
-
     @FindBy(xpath = "//*[@id='m-inm-jobTitle']")
     private WebElement roleCompanyDropdown;
-
-    @FindBy(xpath = "//*[@id='m-inm-addBtn']")
-    private WebElement inviteButton;
 
     @FindBy(xpath = "//*[contains (@id,'team-row')]/td[2]")
     //    @FindBy(xpath = "//*[@id='team-row-0']/td[2]")
@@ -81,8 +66,6 @@ public class AuditorTeamPage extends TeamPage {
     @FindBy(xpath = "//*[@id='m-inm-jobTitle-container']/ul/li/a")
     private List<WebElement> roleCompanyListItemDdl;
 
-    @FindBy(xpath = "//h3[@class='inm-subTitle']")
-    private WebElement inviteNewMemberTitle;
 
     /**
      * verifyCheckListTeam - TanPH - 2017/06/22 - End
@@ -116,16 +99,6 @@ public class AuditorTeamPage extends TeamPage {
             getLogger().info(e.getMessage());
         }
     }
-
-    @FindBy(xpath = "//div[@id='engagement-team']")
-    WebElement engagementTeam;
-
-    public void clickInviteMember() {
-        getLogger().info("Click Invite Member Button.");
-        waitForCssValueChanged(engagementTeam, "engagementTeam", "display", "block");
-        clickElement(inviteMemberBtn, "Invite Member Button");
-    }
-
 
     public void inputInviteNewMemberInfo(String fullName, String email, String roleMember) {
         try {
@@ -254,40 +227,13 @@ public class AuditorTeamPage extends TeamPage {
         }
     }
 
-    public void verifyInviteNewMemberPageDisplayed(){
-        getLogger().info("Verify invite new member page load");
-        boolean result = validateDisPlayedElement(inviteNewMemberTitle, "inviteNewMemberTitle");
-        Assert.assertTrue(result);
-    }
-
-    public void inputFullName(String fullName){
-        sendKeyTextBox(fullNameMemberTxt, fullName, "Full Name Textbox");
-    }
-
-    public void inputEmail(String email){
-        sendKeyTextBox(emailMemberTxt, email, "Email Textbox");
-    }
-
-    public void inputEmailConfirm(String email){
-        sendKeyTextBox(reEmailMemberTxt, email, "ReEnter Email Textbox");
-    }
-
-    public void selectRoleMember(){
+    public void selectRoleMember() {
         clickElement(roleCompanyDropdown, "Role in Company Dropdown");
         waitForAtrributeValueChanged(roleCompanyDdlPopup, "Role in Company Popup", "class", "ddlLink inputDdl inputDdl-after");
         clickElement(roleCompanyListItemDdl.get(0), "second Item in Role Dropdown list");
         waitForAtrributeValueChanged(roleCompanyDdlPopup, "Role in Company Popup", "class", "ddlLink inputDdl");
     }
 
-    public void clickButtonInviteNewMember(){
-        clickElement(inviteButton, "Invite Button");
-        waitForProgressOverlayIsClosed();
-    }
-
-    public void verifyAddNewMemberSuccessful(){
-        boolean result = verifyContentOfSuccessToastMessage("Your engagement invitation has been sent.");
-        Assert.assertTrue(result, "The Message Invite New Member Successful should be displayed");
-    }
 
     /**
      * verifyCheckListTeam - TanPH - 2017/06/22 - End

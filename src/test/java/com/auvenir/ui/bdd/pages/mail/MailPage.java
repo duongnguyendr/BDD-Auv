@@ -18,13 +18,8 @@ import java.util.concurrent.TimeUnit;
  * Created by thuan.duong on 9/11/2017.
  */
 public class MailPage extends KeyWord{
-    WebDriver driver;
-    Logger logger;
-    MailPage mailPage;
     public MailPage(Logger logger, WebDriver driver) {
         super(logger, driver);
-        PageFactory.initElements(driver, this);
-        mailPage = new MailPage(logger, driver);
     }
 
     @FindBy(xpath = "//div[@class='yW']/span[@email='andi@auvenir.com']")
@@ -39,6 +34,9 @@ public class MailPage extends KeyWord{
     private WebElement elePassword;
     @FindBy(xpath = "//*//span[contains(text(),'Next')]")
     private WebElement eleNext;
+    @FindBy(xpath = "//a[text()='Start Your Engagement']")
+    private WebElement buttonStartEngagement;
+
     @FindBy(xpath = "//div[@class='T-I J-J5-Ji T-I-KE L3']")
     private WebElement composeBtn;
     @FindBy(xpath = "//div[@class='J-J5-Ji J-JN-M-I-Jm']//div[@role='presentation']/..")
@@ -104,12 +102,24 @@ public class MailPage extends KeyWord{
 
     public void deleteAllExistedGMail(String eGMail, String ePassword) throws Exception {
         getLogger().info("Try to delete all existed eGMail");
-        driver.get( Generic.getConfigValue(Generic.sConfigFile, "GMAIL_URL"));
-        driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        getDriver().get( Generic.getConfigValue(Generic.sConfigFile, "GMAIL_URL"));
+        getDriver().manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
+        getDriver().manage().window().maximize();
         signInGmail(eGMail, ePassword);
         deleteAllMail();
         gmailLogout();
+    }
+
+    /**
+     * Enter the email(after search) n click 'Start Engagement' button to go to Auvenir site
+     */
+    public void clickOnboardingInvitationLink() {
+        try {
+            getLogger().info("Redirecting from Gmail to Auvenir Welcome Page");
+            clickElement(buttonStartEngagement, "Button Start Engagement");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void deleteAllMail() throws InterruptedException {
