@@ -1458,4 +1458,10 @@ public class KeyWord {
         }
         return result;
     }
+
+    public void chooseFirstOptionOfInputSelect(List<WebElement> list, String elementName) {
+        // Change the first Item to Third Item
+//        clickElement(list.get(0), elementName);
+        clickElement(list.get(3), elementName);
+    }
 }

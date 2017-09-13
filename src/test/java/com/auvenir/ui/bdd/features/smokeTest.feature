@@ -154,6 +154,9 @@ Feature: Smoke Test Feature
     Then I should see Provide Information Page
     And I fill up all Information Page with Phone Number: "1234567899"
     And I click on Continue Button on Personal Information Page
+    Then I should see Business Information Page
+
+
 
 #Vien Pham create testcase:
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818

@@ -51,4 +51,12 @@ public class ClientSignUpStepDefinition extends BaseInit{
         clientSignUpPage.clickPersonalContinueButton();
     }
 
+    @Then("^I should see Business Information Page")
+    public void seeBusinessInformationPage() throws Throwable {
+        getLogger().info("I should see Business Information Page");
+        clientSignUpPage.verifyBusinessPageTitle();
+    }
+
+
+
 }
