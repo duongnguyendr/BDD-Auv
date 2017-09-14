@@ -4,11 +4,12 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 /**
  * Created by huy.huynh on 20/07/2017.
  */
-public abstract class DetailsEngagementPage extends CommonPage {
+public class DetailsEngagementPage extends CommonPage {
 
     @FindBy(xpath = "//span[@id='a-header-title']")
     protected WebElement engagementNameUneditable;
@@ -28,18 +29,22 @@ public abstract class DetailsEngagementPage extends CommonPage {
 
     /**
      * @param engagementName : to verify engagement name displayed correctly
-     * @param isLeadAuditor: true: elements of Page can be edited or false: elements of Page can not be edited
      */
-    public void verifyDetailsEngagementPage(String engagementName, boolean isLeadAuditor) {
-        if (isLeadAuditor) {
-            waitForVisibleElement(engagementNameEditable, "Engagement name text");
-            clickElement(engagementNameEditable, "Engagement name text");
-            sendTabKey(engagementNameEditable, "");
-            validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
-        } else {
-            waitForVisibleElement(engagementNameUneditable, "Engagement name text");
-            validateElementText(engagementNameUneditable, engagementName);
-        }
+    public void verifyDetailsEngagementPageUnEditable(String engagementName) {
+        waitForVisibleElement(engagementNameUneditable, "Engagement name text");
+        boolean result = validateElementText(engagementNameUneditable, engagementName);
+        Assert.assertTrue(result,"Should see Detail Engagement.");
+    }
+
+    /**
+     * @param engagementName : to verify engagement name displayed correctly
+     */
+    public void verifyDetailsEngagementPageEditable(String engagementName) {
+        waitForVisibleElement(engagementNameEditable, "Engagement name text");
+        clickElement(engagementNameEditable, "Engagement name text");
+        sendTabKey(engagementNameEditable, "");
+        boolean result = validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
+        Assert.assertTrue(result,"Should see Detail Engagement.");
     }
 
     //    public void verifyDetailsEngagementPage(String engagementName) {
@@ -49,8 +54,10 @@ public abstract class DetailsEngagementPage extends CommonPage {
     //        } else if (engagementNameText.getTagName().equals("span")) {
     //            validateElementText(engagementNameText, engagementName);
     //        } else {
-    //            NXGReports.addStep("Fail: Engagement name tag name undefined.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
-    //                    "Engagement name tag name must be input(editable) or span(uneditable). Actual tag: " + engagementNameText.getTagName());
+    //            NXGReports.addStep("Fail: Engagement name tag name undefined.", LogAs.FAILED, new CaptureScreen
+    // (CaptureScreen.ScreenshotOf.BROWSER_PAGE),
+    //                    "Engagement name tag name must be input(editable) or span(uneditable). Actual tag: " +
+    // engagementNameText.getTagName());
     //        }
     //    }
 
@@ -65,5 +72,6 @@ public abstract class DetailsEngagementPage extends CommonPage {
             getLogger().info("Fail: Verify Invite Client Into Engagement.");
         }
     }
+
 
 }

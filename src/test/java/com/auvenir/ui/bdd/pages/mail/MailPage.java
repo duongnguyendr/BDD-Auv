@@ -96,13 +96,14 @@ public class MailPage extends KeyWord{
         }
         sendKeyTextBox(elePassword, password, "password");
         getLogger().info("Send password: " + password);
+        waitSomeSeconds(2);
         clickElement(eleNext, "click to eleNext");
         getLogger().info("DONE => LOGIN");
     }
 
     public void deleteAllExistedGMail(String eGMail, String ePassword) throws Exception {
         getLogger().info("Try to delete all existed eGMail");
-        getDriver().get( Generic.getConfigValue(Generic.sConfigFile, "GMAIL_URL"));
+        getDriver().get( Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
         getDriver().manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
         getDriver().manage().window().maximize();
         signInGmail(eGMail, ePassword);

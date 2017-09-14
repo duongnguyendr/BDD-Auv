@@ -10,49 +10,23 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+/**
+ * Created by viet.le on 9/13/2017.
+ */
+
 public class AuditorTodoPage extends TodoPage {
     public AuditorTodoPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
 
 
-    @FindBy(xpath = "//*[@id='todo-table']/tbody/tr")
-    protected List<WebElement> toDoTaskRowEle;
+
     @FindBy(xpath = "//div[contains(@class,'ui dropdown auditor todo-bulkDdl ')]")
     private List<WebElement> listAuditorAssigneeDdl;
 
 
 
 
-
-
-
-    public int findToDoTaskName(String toDoName) {
-        getLogger().info("Find Position of To Do Task Name");
-        try {
-            String actualAttributeValue;
-            String classAttribute;
-            for (int i = 0; i < toDoTaskRowEle.size(); i++) {
-                classAttribute = toDoTaskRowEle.get(i).getAttribute("class");
-                if (classAttribute.equals("newRow")) {
-                    boolean elementExisted =
-                            validateNotExistedElement(toDoTaskRowEle.get(i).findElement(By.xpath("td/input[@type='text']")), "toDoTaskRowEle");
-                    if (!elementExisted) {
-                        WebElement toDoNameCell = toDoTaskRowEle.get(i).findElement(By.xpath("td/input[@type='text']"));
-                        actualAttributeValue = toDoNameCell.getAttribute("value").trim();
-
-                        if (actualAttributeValue.equals(toDoName)) {
-                            getLogger().info("Element is found at " + i);
-                            return i;
-                        }
-                    }
-                }
-            }
-            return -1;
-        } catch (NoSuchElementException e) {
-            return -1;
-        }
-    }
     public void selectAuditorAssigneeByName(String toDoName, String auditorAssignee){
 
         String assineeAuditorEle = ".//button[text()='%s']";
@@ -64,5 +38,21 @@ public class AuditorTodoPage extends TodoPage {
         clickElement(auditorAssigneeSelected, "auditorAssigneeSelected");
 
     }
+    public void verifyAuditorAssigneeSelected(String toDoName, String auditorAssignee) {
+
+        waitSomeSeconds(2);
+        getLogger().info("Verify Auditor Assignee Selected in Dropdownlist.");
+        int index = findToDoTaskName(toDoName);
+        WebElement auditorAssigneeSelected = listAuditorAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
+        waitForTextValueChanged(auditorAssigneeSelected, "auditorAssigneeSelected", auditorAssignee);
+        if (auditorAssigneeSelected.getText().equals(auditorAssignee)) {
+            getLogger().info("verify auditor assignee selected with name: " + auditorAssignee);
+        } else {
+
+            getLogger().info("verify auditor assignee selected with name: " + auditorAssignee);
+        }
+
+    }
+
 
 }
