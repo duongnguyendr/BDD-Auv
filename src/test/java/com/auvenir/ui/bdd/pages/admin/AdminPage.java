@@ -811,7 +811,7 @@ public class AdminPage extends CommonPage {
     }
 
     public void verifyBodyMessagePage() {
-        visibilityOfElementWait(getEleNewMessageBtn(), "New Messages", 15);
+        waitForVisibleElement(getEleNewMessageBtn(), "New Messages");
         validateDisPlayedElement(getEleNewMessageBtn(), "New Messages - Button");
         validateDisPlayedElement(getEleInboxMsgImg(), "Inbox Messages - Images");
         validateDisPlayedElement(getEleYouDontHaveTxt(), "You dont have - Text");
@@ -838,7 +838,7 @@ public class AdminPage extends CommonPage {
     }
 
     public void verifyDropMenuNotification() {
-        visibilityOfElementWait(getEleYouHaveNoNotificationTxt(), "You have no new - Text", 8);
+        waitForVisibleElement(getEleYouHaveNoNotificationTxt(), "You have no new - Text");
         validateDisPlayedElement(getEleYouHaveNoNotificationTxt(), "you have no Notifications - Text");
         validateDisPlayedElement(getEleViewAllLnk(), "View All - Link");
     }
@@ -857,12 +857,12 @@ public class AdminPage extends CommonPage {
     public void navigateToSettingAccountPage() {
 //        auvenirPage.getEleNotificationImg().click();
         getEleViewAllLnk().click();
-        visibilityOfElementWait(getEleClickHereLnk(), "Click Here - Link", 20);
+        waitForVisibleElement(getEleClickHereLnk(), "Click Here - Link");
         getEleClickHereLnk().click();
     }
 
     public void verifySettingAccountPage() {
-        visibilityOfElementWait(getEleSettingsTxt(), "Settings Title", 20);
+        waitForVisibleElement(getEleSettingsTxt(), "Settings Title");
         validateDisPlayedElement(getEleSettingsTxt(), "Settings  - Title");
         validateDisPlayedElement(getEleAccountLnk(), "Account  - Link");
         validateDisPlayedElement(getEleDevicesLnk(), "Devices  - Link");
@@ -898,11 +898,11 @@ public class AdminPage extends CommonPage {
     public void navigateToSettingDevicesPage() {
         /*visibilityOfElementWait(auvenirPage.getEleNotificationImg(), "Notification Icon", 10);
         auvenirPage.getEleNotificationImg().click();*/
-        visibilityOfElementWait(getEleViewAllLnk(), "Notification Icon", 10);
+        waitForVisibleElement(getEleViewAllLnk(), "Notification Icon");
         getEleViewAllLnk().click();
-        visibilityOfElementWait(getEleClickHereLnk(), "Notification Icon", 10);
+        waitForVisibleElement(getEleClickHereLnk(), "Notification Icon");
         getEleClickHereLnk().click();
-        visibilityOfElementWait(getEleSettingsTxt(), "Settings Title", 10);
+        waitForVisibleElement(getEleSettingsTxt(), "Settings Title");
         getEleDevicesLnk().click();
     }
 
@@ -921,7 +921,7 @@ public class AdminPage extends CommonPage {
     }
 
     public void verifyAddAnotherPopup() {
-        visibilityOfElementWait(getEleRegisterDeviceTxt(), "Settings Title", 20);
+        waitForVisibleElement(getEleRegisterDeviceTxt(), "Settings Title");
         validateDisPlayedElement(getEleRegisterDeviceTxt(), "Register a New Device  - Text");
         validateDisPlayedElement(getEleDownloadAuvenirTxt(), "Download the Auvenir  - Text");
         validateDisPlayedElement(getEleTextMeBtn(), "Text me a Link  - Button");

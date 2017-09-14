@@ -14,7 +14,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email | Password |
+      | Email                     | Password     |
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
@@ -62,7 +62,7 @@ Feature: Smoke Test Feature
 
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
-      |chr.auditor01.adm@gmail.com|Changeit@123|
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -93,8 +93,8 @@ Feature: Smoke Test Feature
     And Delete all business name by : "Titan"
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | chr.auditor01.adm@gmail.com   | Changeit@123 |
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click create new engagement button
@@ -109,20 +109,20 @@ Feature: Smoke Test Feature
     Then I should see team member wizard page
     And I click continue button without member
     And I should see create todo list page
-    And I click create todo button
+    And I click create todo button on Create New Engagement Page
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
 
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
-      |chr.auditor01.lead@gmail.com|Changeit@123|
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And Delete all activity of engagement by user  : "chr.auditor01.lead@gmail.com"
     And Delete all engagement of user : "chr.auditor01.lead@gmail.com"
     And Delete user by email: "chr.auditor01.lead@gmail.com"
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | chr.auditor01.adm@gmail.com   | Changeit@123 |
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -137,7 +137,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-    Scenario: Lead Auditor Active account: AUV-660
+  Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to gmail login page
     And I signIn gmail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
@@ -152,14 +152,14 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
-      |chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And Delete all client of user
-      |chr.client01.adm@gmail.com|chr.client01.lead@gmail.com|chr.client01@gmail.com|
+      | chr.client01.adm@gmail.com | chr.client01.lead@gmail.com | chr.client01@gmail.com |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
-      | chr.auditor01.adm@gmail.com   | Changeit@123 |
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -176,8 +176,8 @@ Feature: Smoke Test Feature
     And I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | chr.adm.auvenir@gmail.com   | Changeit@123 |
+      | Email                     | Password     |
+      | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
     Then I should see status of user is onboarding
@@ -208,6 +208,30 @@ Feature: Smoke Test Feature
     And I fill up all Security Information with Password: "Changeit@123"
     And I click on Create Account Button on Security Information Page
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
+
+  Scenario: Lead Auditor Create new Engagement: AUV-684
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auvenirauditor01@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click create new engagement button
+    Then I should see new engagement page
+    And I input engagement name: "Thuan Engagement GP03"
+    And I select engagement type: "Review"
+    And I select company name: "Titan"
+    And I set report deadline
+    And I set start date
+    And I set end date
+    And I click on engagement continue button
+    Then I should see team member wizard page
+    And I click continue button without member
+    And I should see create todo list page
+    And I click create todo button on Create New Engagement Page
+    Then I should see engagement detail page with Engagement Title Editable: "Thuan Engagement GP03"
+
 
 #Vien Pham create testcase:
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
@@ -256,47 +280,102 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Auditor
-      | Auditor Name| Todo Name|
-      |Admin Auditor| ToDo 01  |
-      |Admin Auditor| ToDo 02  |
-      |Admin Auditor| ToDo 03  |
+      | Auditor Name  | Todo Name |
+      | Admin Auditor | ToDo 01   |
+      | Admin Auditor | ToDo 02   |
+      | Admin Auditor | ToDo 03   |
     And I verify Auditor Assignee Selected
-      | Auditor Name| Todo Name|
-      |Admin Auditor| ToDo 01  |
-      |Admin Auditor| ToDo 02  |
-      |Admin Auditor| ToDo 03  |
+      | Auditor Name  | Todo Name |
+      | Admin Auditor | ToDo 01   |
+      | Admin Auditor | ToDo 02   |
+      | Admin Auditor | ToDo 03   |
 
 ##Viet Le create testcase:
   Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | auvenirinfo@gmail.com   | Changeit@123 |
+      | Email                 | Password     |
+      | auvenirinfo@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Client
-      |userName | Todo Name|
-      |Unassigned| ToDo 01|
-      |Unassigned| ToDo 02|
+      | userName   | Todo Name |
+      | Unassigned | ToDo 01   |
+      | Unassigned | ToDo 02   |
 
 #Huy
   Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                      | Password     |
-      | auvenirauditor01@gmail.com | Changeit@123 |
+      | Email                    | Password     |
+      | auvenirauditor@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 03"
+    Then I click on engagement: "Huy Engagement 02"
     Then I click on Invite Client button
     Then I should see Invite Your Client page
     Then I select option Admin Client fullname: "Huy AC (Huy Company)"
     Then I click on Invite button
     Then I should see invite client success toast message
+    Then I navigate to gmail login page
+    And I signIn gmail
+      | chr.auvenirclient@gmail.com | Changeit@123 |
+    And I open active email
+    And I click on onboarding invitation link
+    Then I should see Welcome to Auvenir Page
+    And I click on Get Start button on Client Sign Up Page
+    Then I should see Provide Information Page
+    And I fill up all Client Personal Information with Phone Number: "1234567899"
+    And I click on Continue Button on Personal Information Page
+    Then I should see Business Information Page
+    And I fill up all Client Business Information
+    And I click on Continue Button on Business Information Page
+    Then I should see Bank Information Page
+    And I fill up all Bank Information
+    And I click on Skip Button on Bank Information Page
+    Then I should see File Storage Information Page
+    And I fill up all File Storage Information
+    And I click on Skip Button on File Storage Information Page
+    Then I should see Security Information Page
+    And I fill up all Security Information with Password: "Changeit@123"
+    And I click on Create Account Button on Security Information Page
+    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
+
+  Scenario: Lead Auditor add New member auditor into Engagement 2: AUV-787
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                    | Password     |
+      | auvenirauditor@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    And I click on team tab
+    And I click in invite new member on team page
+    Then I should see invite new member page
+    And I input full name on invite new member page: "Huy GA01"
+    And I input email on invite new member page: "auvenirauditor01@gmail.com"
+    And I input email confirm on invite new member page: "auvenirauditor01@gmail.com"
+    And I select role of new member
+    And I click on invite new member
+    Then I should see invite successful message
+
+  Scenario: Lead Auditor new Auditor member active account and login to Engagement 2: AUV-798
+    Given I navigate to gmail login page
+    Then I signIn gmail
+      | auvenirauditor02@gmail.com | TESTPASSWORD |
+    And I open active email
+    And I click on confirmation link
+    Then I should see personal sign up page
+    And I input confirm auditor personal information: "1234567890"
+    Then I should see provide firm information page
+    And I click on continue button on firm information page
+    And I create password: "Changeit@123"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
 #/Huy
 
   #Duong
