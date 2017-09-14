@@ -1087,4 +1087,11 @@ public class MongoDBService {
         }
     }
 
+    public static void removeUserbyEmail(String email) {
+        try {
+            removeUserObjectByEmail(getCollection("users"), email);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

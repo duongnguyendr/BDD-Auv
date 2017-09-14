@@ -100,6 +100,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
     public void clickOnInviteClientBtn() {
         waitForClickableOfElement(buttonInviteClient, "buttonInviteClient");
         clickElement(buttonInviteClient, "buttonInviteClient");
+        waitForProgressOverlayIsClosed();
     }
 
     /**
