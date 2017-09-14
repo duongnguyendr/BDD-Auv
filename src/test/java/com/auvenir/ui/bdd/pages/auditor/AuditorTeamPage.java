@@ -14,7 +14,7 @@ import java.util.List;
  * Created by thuan.duong on 6/16/2017.
  */
 public class AuditorTeamPage extends TeamPage {
-
+    private static Logger logger = Logger.getLogger(AuditorTeamPage.class.getSimpleName());
     public AuditorTeamPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -72,12 +72,12 @@ public class AuditorTeamPage extends TeamPage {
      */
 
     public void clickInviteNewMemeberBtnEle() {
-        getLogger().info("Click Invite New Memeber Button.");
+        logger.info("Click Invite New Memeber Button.");
         clickElement(inviteNewMemeberBtn, "Invite New Memeber Button");
     }
 
     public void deleteAllMemberInEngagement() {
-        getLogger().info("Click Delete All Member.");
+        logger.info("Click Delete All Member.");
         try {
             // Need to sleep because the teamEmptyDiv is always displayed first.
             Thread.sleep(3000);
@@ -94,15 +94,15 @@ public class AuditorTeamPage extends TeamPage {
                         throw new Exception();
                 }
             }
-            getLogger().info("Delete All Member in Engagement.");
+            logger.info("Delete All Member in Engagement.");
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
     public void inputInviteNewMemberInfo(String fullName, String email, String roleMember) {
         try {
-            getLogger().info("Input Invite New Member Information.");
+            logger.info("Input Invite New Member Information.");
             sendKeyTextBox(fullNameMemberTxt, fullName, "Full Name Textbox");
             sendKeyTextBox(emailMemberTxt, email, "Email Textbox");
             sendKeyTextBox(reEmailMemberTxt, email, "ReEnter Email Textbox");
@@ -117,16 +117,16 @@ public class AuditorTeamPage extends TeamPage {
             waitForProgressOverlayIsClosed();
             boolean result = verifyContentOfSuccessToastMessage("Your engagement invitation has been sent.");
             Assert.assertTrue(result, "The Message Invite New Member Successful should be displayed");
-            getLogger().info("Input Invite New Member Information.");
+            logger.info("Input Invite New Member Information.");
         } catch (AssertionError e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
     public void verifyAddNewInvitedMember(String fullName, String roleMember) {
-        getLogger().info("Verify new Auditor Member is added.");
+        logger.info("Verify new Auditor Member is added.");
         try {
             int index = findTeamMemberByName(fullName);
             //                    validateElementText(auditorTeamMemberName.get(0), fullName);
@@ -136,12 +136,12 @@ public class AuditorTeamPage extends TeamPage {
                 Assert.fail("New auditor member is not added.");
             }
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
     public int findTeamMemberByName(String fullNameMember) {
-        getLogger().info(String.format("Find position of Team Member '%s'", fullNameMember));
+        logger.info(String.format("Find position of Team Member '%s'", fullNameMember));
         try {
             // Need to sleep because the teamEmptyDiv is always displayed first.
             waitSomeSeconds(2);
@@ -153,8 +153,8 @@ public class AuditorTeamPage extends TeamPage {
                     //                        WebElement toDoNameCell = auditorTeamMemberName.get(i).findElement(By.xpath("td/input[@type='text']"));
                     actualAttributeValue = auditorTeamMemberName.get(i).getText().trim();
                     if (actualAttributeValue.equals(fullNameMember)) {
-                        getLogger().info("Team Member Name is found at " + i);
-                        getLogger().info(String.format("The position of Team Member: '%s' at %d", fullNameMember, i));
+                        logger.info("Team Member Name is found at " + i);
+                        logger.info(String.format("The position of Team Member: '%s' at %d", fullNameMember, i));
                         return i;
                     }
                 }
@@ -162,7 +162,7 @@ public class AuditorTeamPage extends TeamPage {
             }
             return -1;
         } catch (Exception e) {
-            getLogger().info(e);
+            logger.info(e);
             return -1;
         }
     }
@@ -195,13 +195,13 @@ public class AuditorTeamPage extends TeamPage {
      * @param roleInFirm     : role in firm need check
      */
     public void verifyMemberIsShownInTeamList(String memberFullName, String roleInFirm) {
-        getLogger().info("Verify member is already exists in team list");
+        logger.info("Verify member is already exists in team list");
         try {
             boolean result = checkMemberTeamIsExists(memberFullName, roleInFirm);
             Assert.assertTrue(result);
-            getLogger().info("Verify member is already exists in team list.");
+            logger.info("Verify member is already exists in team list.");
         } catch (AssertionError e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 

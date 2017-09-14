@@ -1,14 +1,14 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
 
-#  Scenario: Verify super admin login: AUV-2186
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                   | Password     |
-#      | chr.auvenirad@gmail.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see the AdminPortal page
+  Scenario: Verify super admin login: AUV-2186
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auvenirad@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see the AdminPortal page
 #
 #  Scenario: Verify admin login: AUV-2187
 #    Given I navigate to Marketing page
@@ -137,18 +137,18 @@ Feature: Smoke Test Feature
 #    And I click on invite new member
 #    Then I should see invite successful message
 #
-#    Scenario: Lead Auditor Active account: AUV-660
-#    Given I navigate to gmail login page
-#    And I signIn gmail
-#      | chr.auditor01.lead@gmail.com | Changeit@123 |
-#    And I open active email
-#    And I click on confirmation link
-#    Then I should see personal sign up page
-#    And I input confirm auditor personal information: "1234567890"
-#    Then I should see provide firm information page
-#    And I click on continue button on firm information page
-#    And I create password: "Changeit@123"
-#    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
+    Scenario: Lead Auditor Active account: AUV-660
+    Given I navigate to gmail login page
+    And I signIn gmail
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
+    And I open active email
+    And I click on confirmation link
+    Then I should see personal sign up page
+    And I input confirm auditor personal information: "1234567890"
+    Then I should see provide firm information page
+    And I click on continue button on firm information page
+    And I create password: "Changeit@123"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
 #
 #  Scenario: Admin Auditor Invite Admin Client: AUV-633
 #    Given I delete existed email
@@ -299,7 +299,7 @@ Feature: Smoke Test Feature
 #    Then I should see invite client success toast message
 ##/Huy
 
-  #Duong
+#  #Duong
 #  Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
 #    Given I navigate to Marketing page
 #    And I click on login link
@@ -316,35 +316,35 @@ Feature: Smoke Test Feature
 #    Then I should see mark completed todo popup
 #    And I click on archive button on complete todo popup
 #    Then I should see todo mark completed on todo page: "ToDo 02"
-
-  Scenario: Lead Auditor Bulk Actions Assign To Do: AUV-1016
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 03"
-    And I click bulk action drop down on todo page
-    And I click assignee on bulk action drop down
-
-  Scenario: Lead Auditor delete To Do Task: AUV-1026
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 03"
-    And I click bulk action drop down on todo page
-    And I click delete button on bulk action
-    Then I should see delete todo popup
-    And I click on confirm delete button on delete todo popup
-    Then I should see todo not existed in todo list: "ToDo 03"
-   #/Duong
+#
+#  Scenario: Lead Auditor Bulk Actions Assign To Do: AUV-1016
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email                          | Password     |
+#      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+#    And I click on login button
+#    Then I should see engagement page
+#    And I click on engagement: "Engagement GP02"
+#    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+#    And I select todo check box on todo page: "ToDo 03"
+#    And I click bulk action drop down on todo page
+##    And I click assignee on bulk action drop down
+#
+#  Scenario: Lead Auditor delete To Do Task: AUV-1026
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email                          | Password     |
+#      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+#    And I click on login button
+#    Then I should see engagement page
+#    And I click on engagement: "Engagement GP02"
+#    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+#    And I select todo check box on todo page: "ToDo 03"
+#    And I click bulk action drop down on todo page
+#    And I click delete button on bulk action
+#    Then I should see delete todo popup
+#    And I click on confirm delete button on delete todo popup
+#    Then I should see todo not existed in todo list: "ToDo 03"
+#   #/Duong

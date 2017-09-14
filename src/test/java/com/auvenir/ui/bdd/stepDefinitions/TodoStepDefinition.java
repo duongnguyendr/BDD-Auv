@@ -7,6 +7,7 @@ import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import org.apache.log4j.Logger;
 
 import javax.enterprise.inject.New;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
  * Created by duong.nguyen on 9/13/2017.
  */
 public class TodoStepDefinition extends BaseInit {
+    private Logger logger = Logger.getLogger(TodoStepDefinition.class.getSimpleName());
     private  BaseInit baseInit;
     AuditorTodoPage auditorTodoPage;
     TodoPage todoPage;
@@ -96,7 +98,7 @@ public class TodoStepDefinition extends BaseInit {
     @Then("^I assignee list To-Do to Auditor$")
     public void assigneelistToDotoAuditor(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I assignee list To-Do to General Auditor =====");
+        logger.info("===== I assignee list To-Do to General Auditor =====");
 
 
 
@@ -111,7 +113,7 @@ public class TodoStepDefinition extends BaseInit {
     @Then("^I verify Auditor Assignee Selected$")
     public void verifyAuditorAssigneeSelected(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I verify Auditor Assignee Selected =====");
+        logger.info("===== I verify Auditor Assignee Selected =====");
 
         List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
         lisTodoAndusers = table.asList(LisTodoAnduser.class);
@@ -124,7 +126,7 @@ public class TodoStepDefinition extends BaseInit {
     @Then("^I assignee list To-Do to Client")
     public void assigneelistToDotoClient(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I assignee list To-Do to General Auditor =====");
+        logger.info("===== I assignee list To-Do to General Auditor =====");
 
 
 

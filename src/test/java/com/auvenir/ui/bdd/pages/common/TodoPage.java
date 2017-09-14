@@ -11,6 +11,7 @@ import org.testng.Assert;
 import java.util.List;
 
 public class TodoPage extends CommonPage {
+    private static Logger logger = Logger.getLogger(TodoPage.class.getSimpleName());
     public TodoPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -54,7 +55,7 @@ public class TodoPage extends CommonPage {
     protected List<WebElement> childItemAssigneeBulkDrpEle;
 
     public int findToDoTaskName(String toDoName) {
-        getLogger().info("Find Position of To Do Task Name");
+        logger.info("Find Position of To Do Task Name");
         try {
             String actualAttributeValue;
             String classAttribute;
@@ -68,7 +69,7 @@ public class TodoPage extends CommonPage {
                         actualAttributeValue = toDoNameCell.getAttribute("value").trim();
 
                         if (actualAttributeValue.equals(toDoName)) {
-                            getLogger().info("Element is found at " + i);
+                            logger.info("Element is found at " + i);
                             return i;
                         }
                     }
@@ -80,7 +81,7 @@ public class TodoPage extends CommonPage {
         }
     }
     public void selectClientAssigneeByName(String toDoName, String clientAssignee) {
-        getLogger().info("== select Client Assignee By Name ==");
+        logger.info("== select Client Assignee By Name ==");
             int index = findToDoTaskName(toDoName);
             clickElement(listClientAssigneeDdl.get(index), "listClientAssigneeDdl");
             waitSomeSeconds(2);
@@ -94,7 +95,7 @@ public class TodoPage extends CommonPage {
      * Duong Nguyen
      */
     public int selectToDoCheckboxByName(String todoName) {//need
-        getLogger().info("Select To Do Task Check Box by Name");
+        logger.info("Select To Do Task Check Box by Name");
         try{
             int index = findToDoTaskName(todoName);
             System.out.println("Index: " + index);
@@ -153,7 +154,7 @@ public class TodoPage extends CommonPage {
     }
 
     public void clickOptionDeleteOnBulkActionsDropDown() {
-            getLogger().info("Choose option: Delete.");
+            logger.info("Choose option: Delete.");
             clickElement(optionDelete, "Option Delete");
     }
 
@@ -179,7 +180,7 @@ public class TodoPage extends CommonPage {
      */
     public void verifyToDoNotExist(String todoName) {
         try {
-            getLogger().info("Verify deleted todo: " + todoName);
+            logger.info("Verify deleted todo: " + todoName);
             boolean isExisted = false;
             for (int i = 0; i < eleToDoNameRow.size(); i++) {
                 if (todoName.equals(getTextByAttributeValue(eleToDoNameRow.get(i), "Todo expected not Exist"))) {
@@ -188,7 +189,7 @@ public class TodoPage extends CommonPage {
                 }
             }
             if (!isExisted) {
-                getLogger().info("Todo deleted success");
+                logger.info("Todo deleted success");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -200,7 +201,7 @@ public class TodoPage extends CommonPage {
      * TODO hardcoding, rewrite later, list assignee not stable now
      */
     public void chooseBulkActionAssignee(String assigneeName) {
-        getLogger().info(String.format("Choose Assignee '%s' in Bulk Dropdown list", assigneeName));
+        logger.info(String.format("Choose Assignee '%s' in Bulk Dropdown list", assigneeName));
             String listUser = "";
             boolean result = false;
             clickElement(optionAssignTo, "Assign To Option");

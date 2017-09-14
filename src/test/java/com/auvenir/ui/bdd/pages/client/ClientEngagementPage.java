@@ -12,6 +12,7 @@ import java.util.List;
  * Created by vien.pham on 9/12/2017.
  */
 public class ClientEngagementPage extends EngagementPage {
+    private static Logger logger = Logger.getLogger(ClientEngagementPage.class.getSimpleName());
     public ClientEngagementPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -34,7 +35,7 @@ public class ClientEngagementPage extends EngagementPage {
     }
 
     public int findEngagementName(String engagementName) {
-        getLogger().info("Find Position of Engagement Name");
+        logger.info("Find Position of Engagement Name");
         String displayValue = noEngagementDivEle.getCssValue("display");
         if (displayValue.equals("block"))
             return -1;
