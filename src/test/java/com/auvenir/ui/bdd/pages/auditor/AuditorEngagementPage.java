@@ -11,10 +11,8 @@ import org.testng.Assert;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-//import com.auvenir.ui.pages.marketing.engagement.BaseEngagementPO;
-
 public class AuditorEngagementPage extends EngagementPage {
-
+    private static Logger logger = Logger.getLogger(AuditorEngagementPage.class.getSimpleName());
 
     AuditorEngagementPage auditorEngagementPage = null;
 
@@ -491,7 +489,7 @@ public class AuditorEngagementPage extends EngagementPage {
     private WebElement eleEngagementDueDateIconSortUp;
 
     public void auditorPageHeaderContent() {
-        auditorEngagementPage = new AuditorEngagementPage(getLogger(), getDriver());
+        auditorEngagementPage = new AuditorEngagementPage(logger, getDriver());
         toValidate(auditorEngagementPage.getEleAuvenirLogoImg(), "Auvenir Logo", "Displayed");
         toValidate(auditorEngagementPage.getEleEngagementLnk(), "Engagement Link", "Displayed");
         toValidate(auditorEngagementPage.getEleClientsLnk(), "Clients Link", "Displayed");
@@ -512,7 +510,7 @@ public class AuditorEngagementPage extends EngagementPage {
 //        isFilterEngaReview = validateDisPlayedElement(filterEngaReview, "display filterEngaReview");
 //        isFilterEngaOther = validateDisPlayedElement(filterEngaOther, "display filterEngaOther");
 //        if (isAuditorEngagementFilter && isFilterTypeOfEngagement && isFilterEngaFinancialAudit && isFilterEngaNoticeCompilation && isFilterEngaReview && isFilterEngaOther) {
-//            getLogger().info("Verify Auditor Engagement filter");
+//            logger.info("Verify Auditor Engagement filter");
 //        } else {
 //            Assert.fail("Verify Auditor Engagement filter");
 //        }
@@ -525,7 +523,7 @@ public class AuditorEngagementPage extends EngagementPage {
         hoverElement(hoverCompleteDocs.get(0), "hover to hoverCompleteDocs");
         isHoverCompleteDocsResult = validateDisPlayedElement(hoverCompleteDocsResult, "display hoverCompleteDocsResult");
         if (isHoverCompleteToDosResult && isHoverCompleteDocsResult) {
-            getLogger().info("Verify Auditor Engagement hover");
+            logger.info("Verify Auditor Engagement hover");
         } else {
             Assert.fail("Verify Auditor Engagement hover");
         }
@@ -654,7 +652,7 @@ public class AuditorEngagementPage extends EngagementPage {
             validateElementText(dashboardSettings, "Settings");
             validateElementText(dashboardSignOut, "Sign Out");
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
     }
 
@@ -690,7 +688,7 @@ public class AuditorEngagementPage extends EngagementPage {
             validateElementText(thActivity, "Last Activity");
             validateElementText(thDueDate, "Due Date");
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
     }
 
@@ -707,7 +705,7 @@ public class AuditorEngagementPage extends EngagementPage {
             validateElementText(titleCookieNotice, "Cookie Notice");
             validateAttributeContain(titleCookieNotice, "href", "cookies", "Cookie Notice");
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
     }
     /*-----------end of huy.huynh on 08/06/2017.*/
@@ -718,17 +716,17 @@ public class AuditorEngagementPage extends EngagementPage {
             sendKeyTextBox(eleSearch, companyName, "search key keyCompany");
             Thread.sleep(smallTimeOut);
         } catch (InterruptedException e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
 //    public void verifyCompanyName(String companyName) {
 //        try {
-//            getLogger().info("companyName = " + companyName);
+//            logger.info("companyName = " + companyName);
 //            boolean isCheckCompany = false;
 //            if (waitForVisibleOfLocator(By.xpath(companyEleStr))) {
 //                for (WebElement companyEle : listCompanyEle) {
-//                    getLogger().info("companyEle.getText() = " + companyEle.getText());
+//                    logger.info("companyEle.getText() = " + companyEle.getText());
 //                    Thread.sleep(1000);
 //                    if (companyEle.getText().equals(companyName)) {
 //                        isCheckCompany = true;
@@ -739,10 +737,10 @@ public class AuditorEngagementPage extends EngagementPage {
 //            if (!isCheckCompany) {
 //                Assert.fail("Search engagement with company key: " + companyName);
 //            } else {
-//                getLogger().info("Search engagement with company key: " + companyName);
+//                logger.info("Search engagement with company key: " + companyName);
 //            }
 //        } catch (Exception ex) {
-//            getLogger().info(ex.getMessage());
+//            logger.info(ex.getMessage());
 //        }
 //    }
 
@@ -752,18 +750,18 @@ public class AuditorEngagementPage extends EngagementPage {
             sendKeyTextBox(eleSearch, engagementName, "search key keyEngagement");
             Thread.sleep(smallTimeOut);
         } catch (InterruptedException e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
 //    public void verifyEngagementName(String engagementName) {
 //        try {
-//            getLogger().info("engagementName = " + engagementName);
+//            logger.info("engagementName = " + engagementName);
 //            boolean isCheckEngagement = false;
 //            //Checking for result
 //            if (waitForVisibleOfLocator(By.xpath(engagementNameStr))) {
 //                for (WebElement engagementNameEle : listEngagementNameEle) {
-//                    getLogger().info("engagementNameEle.getText() = " + engagementNameEle.getText());
+//                    logger.info("engagementNameEle.getText() = " + engagementNameEle.getText());
 //                    Thread.sleep(1000);
 //                    if (engagementNameEle.getText().equals(engagementName)) {
 //                        isCheckEngagement = true;
@@ -774,10 +772,10 @@ public class AuditorEngagementPage extends EngagementPage {
 //            if (!isCheckEngagement) {
 //                Assert.fail("Search engagement with engagement name key: " + engagementName);
 //            } else {
-//                getLogger().info("Search engagement with engagement name key: " + engagementName);
+//                logger.info("Search engagement with engagement name key: " + engagementName);
 //            }
 //        } catch (Exception ex) {
-//            getLogger().info(ex.getMessage());
+//            logger.info(ex.getMessage());
 //        }
 //    }
 

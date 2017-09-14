@@ -4,11 +4,13 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 /**
  * Created by huy.huynh on 20/07/2017.
  */
 public class DetailsEngagementPage extends CommonPage {
+    private static Logger logger = Logger.getLogger(DetailsEngagementPage.class.getSimpleName());
 
     @FindBy(xpath = "//span[@id='a-header-title']")
     protected WebElement engagementNameUneditable;
@@ -31,7 +33,8 @@ public class DetailsEngagementPage extends CommonPage {
      */
     public void verifyDetailsEngagementPageUnEditable(String engagementName) {
         waitForVisibleElement(engagementNameUneditable, "Engagement name text");
-        validateElementText(engagementNameUneditable, engagementName);
+        boolean result = validateElementText(engagementNameUneditable, engagementName);
+        Assert.assertTrue(result,"Should see Detail Engagement.");
     }
 
     /**
@@ -41,7 +44,8 @@ public class DetailsEngagementPage extends CommonPage {
         waitForVisibleElement(engagementNameEditable, "Engagement name text");
         clickElement(engagementNameEditable, "Engagement name text");
         sendTabKey(engagementNameEditable, "");
-        validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
+        boolean result = validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
+        Assert.assertTrue(result,"Should see Detail Engagement.");
     }
 
     //    public void verifyDetailsEngagementPage(String engagementName) {
@@ -64,9 +68,9 @@ public class DetailsEngagementPage extends CommonPage {
 
     public void verifyCantInviteClientIntoEngagement(boolean possible) {
         if (validateExistedElement(buttonInviteClient, "Button Invite Client") == possible) {
-            getLogger().info("Verify Invite Client Into Engagement.");
+            logger.info("Verify Invite Client Into Engagement.");
         } else {
-            getLogger().info("Fail: Verify Invite Client Into Engagement.");
+            logger.info("Fail: Verify Invite Client Into Engagement.");
         }
     }
 
