@@ -194,94 +194,94 @@ Feature: Smoke Test Feature
     And I click on Create Account Button on Security Information Page
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
 
-#Vien Pham create testcase:
-#  Scenario: Admin Client invite Lead Client into Engagement: AUV-818
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                     | Password     |
-#      | clvien.adm@mailinator.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see client engagement page
-#    And I click on assigned engagement: "En05"
-#    Then I should see engagement detail page with Engagement Title Uneditable: "En05"
-#    And I click on Team tab on Client page
-#    And I click on Invite New Member button on Client team page
-#    Then I should see Invite New Member popup
-#    And I input full name on invite new member popup: "Lead Client"
-#    And I input email on invite new member popup: "vien1234@gmail.com"
-#    And I input email confirm on invite new member popup: "vien1234@gmail.com"
-#    And I input Role of new client member on invite new member popup: "Client role"
-#    And I click on invite button
-#    Then I should see Invite Member successful message
-#
-#    #Vien Pham create testcase:
-#  Scenario:  Admin Client tranfer Lead permission to Lead Client in the Engagement2: AUV-847
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                     | Password     |
-#      | clvien.adm@mailinator.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see client engagement page
-#    And I click on assigned engagement: "En05"
-#    Then I should see engagement detail page with Engagement Title Uneditable: "En05"
-#    And I click on Team tab on Client page
-#    And I change the permission of member: "Lead Client" to be Lead
-#
-#  #Viet Le create testcase:
-#  Scenario:Lead Auditor assign To Do task to Auditor Memeber: AUV-924
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                 | Password     |
-#      | auvenirinfo@gmail.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see engagement page
-#    And I click on engagement: "Engagement abc"
-#    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-#    Then I assignee list To-Do to Auditor
-#      | Auditor Name| Todo Name|
-#      |Admin Auditor| ToDo 01  |
-#      |Admin Auditor| ToDo 02  |
-#      |Admin Auditor| ToDo 03  |
-#    And I verify Auditor Assignee Selected
-#      | Auditor Name| Todo Name|
-#      |Admin Auditor| ToDo 01  |
-#      |Admin Auditor| ToDo 02  |
-#      |Admin Auditor| ToDo 03  |
-#
-###Viet Le create testcase:
-#  Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                   | Password     |
-#      | auvenirinfo@gmail.com   | Changeit@123 |
-#    And I click on login button
-#    Then I should see engagement page
-#    And I click on engagement: "Engagement abc"
-#    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-#    Then I assignee list To-Do to Client
-#      |userName | Todo Name|
-#      |Unassigned| ToDo 01|
-#      |Unassigned| ToDo 02|
-#
-##Huy
-#  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                      | Password     |
-#      | auvenirauditor01@gmail.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see engagement page
-#    Then I click on engagement: "Huy Engagement 03"
-#    Then I click on Invite Client button
-#    Then I should see Invite Your Client page
-#    Then I select option Admin Client fullname: "Huy AC (Huy Company)"
-#    Then I click on Invite button
-#    Then I should see invite client success toast message
-##/Huy
+Vien Pham create testcase:
+  Scenario: Admin Client invite Lead Client into Engagement: AUV-818
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | clvien.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on assigned engagement: "En05"
+    Then I should see engagement detail page with Engagement Title Uneditable: "En05"
+    And I click on Team tab on Client page
+    And I click on Invite New Member button on Client team page
+    Then I should see Invite New Member popup
+    And I input full name on invite new member popup: "Lead Client"
+    And I input email on invite new member popup: "vien1234@gmail.com"
+    And I input email confirm on invite new member popup: "vien1234@gmail.com"
+    And I input Role of new client member on invite new member popup: "Client role"
+    And I click on invite button
+    Then I should see Invite Member successful message
+
+    #Vien Pham create testcase:
+  Scenario:  Admin Client tranfer Lead permission to Lead Client in the Engagement2: AUV-847
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | clvien.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on assigned engagement: "En05"
+    Then I should see engagement detail page with Engagement Title Uneditable: "En05"
+    And I click on Team tab on Client page
+    And I change the permission of member: "Lead Client" to be Lead
+
+  #Viet Le create testcase:
+  Scenario:Lead Auditor assign To Do task to Auditor Memeber: AUV-924
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | auvenirinfo@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I assignee list To-Do to Auditor
+      | Auditor Name| Todo Name|
+      |Admin Auditor| ToDo 01  |
+      |Admin Auditor| ToDo 02  |
+      |Admin Auditor| ToDo 03  |
+    And I verify Auditor Assignee Selected
+      | Auditor Name| Todo Name|
+      |Admin Auditor| ToDo 01  |
+      |Admin Auditor| ToDo 02  |
+      |Admin Auditor| ToDo 03  |
+
+##Viet Le create testcase:
+  Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | auvenirinfo@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I assignee list To-Do to Client
+      |userName | Todo Name|
+      |Unassigned| ToDo 01|
+      |Unassigned| ToDo 02|
+
+#Huy
+  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                      | Password     |
+      | auvenirauditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 03"
+    Then I click on Invite Client button
+    Then I should see Invite Your Client page
+    Then I select option Admin Client fullname: "Huy AC (Huy Company)"
+    Then I click on Invite button
+    Then I should see invite client success toast message
+#/Huy
 
 
