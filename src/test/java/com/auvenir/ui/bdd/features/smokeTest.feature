@@ -21,6 +21,11 @@ Feature: Smoke Test Feature
 
   Scenario: Auditor Admin click Sign up button and fill information: AUV-542
     Given I navigate to Marketing page
+    And Delete all activity of engagement by user  : "chr.auditor01.adm@gmail.com"
+    And Delete all firm by name : "Firm Auvenir"
+    And Delete all engagement of user : "chr.auditor01.adm@gmail.com"
+    And Delete user by email: "chr.auditor01.adm@gmail.com"
+
     And I click sign up link
     Then I should see personal sign up page
 
@@ -56,6 +61,8 @@ Feature: Smoke Test Feature
     And I click continue button on sign up page
 
   Scenario: Admin change status to Onboarding of a User: AUV-557
+    Given I delete existed email
+      |chr.auditor01.adm@gmail.com|Changeit@123|
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -80,8 +87,10 @@ Feature: Smoke Test Feature
     And I create password: "Changeit@123"
     Then I should see engagement page
 
-  Scenario: Admin Auditor user create new Engagement: AUV-585
+  Scenario: Admin auditor user create new Engagement: AUV-585
     Given I navigate to Marketing page
+    And Delete engagement name by user  : "chr.auditor01.adm@gmail.com", "Engagement GP01"
+    And Delete all business name by : "Titan"
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
@@ -106,6 +115,9 @@ Feature: Smoke Test Feature
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
       |chr.auditor01.lead@gmail.com|Changeit@123|
+    And Delete all activity of engagement by user  : "chr.auditor01.lead@gmail.com"
+    And Delete all engagement of user : "chr.auditor01.lead@gmail.com"
+    And Delete user by email: "chr.auditor01.lead@gmail.com"
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -127,7 +139,9 @@ Feature: Smoke Test Feature
     Then I should see invite successful message
 
     Scenario: Lead Auditor Active account: AUV-660
-    And I relogin gmail: "Changeit@123"
+    Given I navigate to gmail login page
+    And I signIn gmail
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
     Then I should see personal sign up page
@@ -135,11 +149,13 @@ Feature: Smoke Test Feature
     Then I should see provide firm information page
     And I click on continue button on firm information page
     And I create password: "Changeit@123"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
 
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
       |chr.client01.adm@gmail.com | Changeit@123 |
+    And Delete all client of user
+      |chr.client01.adm@gmail.com|chr.client01.lead@gmail.com|chr.client01@gmail.com|
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -296,16 +312,39 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                      | Password     |
-      | auvenirauditor01@gmail.com | Changeit@123 |
+      | Email                    | Password     |
+      | auvenirauditor@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 03"
+    Then I click on engagement: "Huy Engagement 02"
     Then I click on Invite Client button
     Then I should see Invite Your Client page
     Then I select option Admin Client fullname: "Huy AC (Huy Company)"
     Then I click on Invite button
     Then I should see invite client success toast message
-/Huy
+    Then I navigate to gmail login page
+    And I signIn gmail
+      | chr.auvenirclient@gmail.com | Changeit@123 |
+    And I open active email
+    And I click on onboarding invitation link
+    Then I should see Welcome to Auvenir Page
+    And I click on Get Start button on Client Sign Up Page
+    Then I should see Provide Information Page
+    And I fill up all Client Personal Information with Phone Number: "1234567899"
+    And I click on Continue Button on Personal Information Page
+    Then I should see Business Information Page
+    And I fill up all Client Business Information
+    And I click on Continue Button on Business Information Page
+    Then I should see Bank Information Page
+    And I fill up all Bank Information
+    And I click on Skip Button on Bank Information Page
+    Then I should see File Storage Information Page
+    And I fill up all File Storage Information
+    And I click on Skip Button on File Storage Information Page
+    Then I should see Security Information Page
+    And I fill up all Security Information with Password: "Changeit@123"
+    And I click on Create Account Button on Security Information Page
+    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
+#/Huy
 
 

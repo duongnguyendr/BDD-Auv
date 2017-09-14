@@ -987,6 +987,7 @@ public class AdminPage extends CommonPage {
         waitForVisibleElement(getEleStatusConfirmBtn(), "Confirm Poup");
         waitForClickableOfElement(getEleStatusConfirmBtn(), "Confirm Poup");
         clickElement(getEleStatusConfirmBtn(), "Status Confirm Button");
+        waitForProgressOverlayIsClosed();
     }
 
     public void verifyMessageSuccessful(){
@@ -995,10 +996,10 @@ public class AdminPage extends CommonPage {
         clickElement(eleCredentialsCloseIcn, "Close Icon");
     }
 
-    public void waitForProgressOverlayIsClosed() {
-        getLogger().info("Try to waiting the ProgressOverlayIsClosed.");
-        waitForCssValueChanged(progressingDiv, "Progress Overlay", "display", "none");
-    }
+//    public void waitForProgressOverlayIsClosed() {
+//        getLogger().info("Try to waiting the ProgressOverlayIsClosed.");
+//        waitForCssValueChanged(progressingDiv, "Progress Overlay", "display", "none");
+//    }
 
     /*public void verifyUserIsChangeStatusOnTheList(String email, String expectedStatus) {
         getLogger().info("Verify user is changed status on the list.");

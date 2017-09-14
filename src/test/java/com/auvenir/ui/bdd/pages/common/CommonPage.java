@@ -2,10 +2,13 @@ package com.auvenir.ui.bdd.pages.common;
 
 import com.auvenir.ui.bdd.common.KeyWord;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by duong.nguyen on 9/8/2017.
@@ -54,5 +57,4 @@ public class CommonPage extends KeyWord {
             return false;
         }
     }
-
 }
