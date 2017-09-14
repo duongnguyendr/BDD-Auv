@@ -76,8 +76,8 @@ public class NewEngagementStepDefinition extends BaseInit {
         auditorNewEngagementPage.verifyCreateTodoListPage();
     }
 
-    @And("^I click create todo button$")
-    public void iClickCreateTodoButton() throws Throwable {
+    @And("^I click create todo button on Create New Engagement Page$")
+    public void clickCreateTodoButtonOnCreateNewEngagement() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I click create todo button");
         auditorNewEngagementPage.clickCreateToDoBtn();

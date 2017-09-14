@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 /**
  * Created by huy.huynh on 20/07/2017.
@@ -31,7 +32,8 @@ public class DetailsEngagementPage extends CommonPage {
      */
     public void verifyDetailsEngagementPageUnEditable(String engagementName) {
         waitForVisibleElement(engagementNameUneditable, "Engagement name text");
-        validateElementText(engagementNameUneditable, engagementName);
+        boolean result = validateElementText(engagementNameUneditable, engagementName);
+        Assert.assertTrue(result,"Should see Detail Engagement.");
     }
 
     /**
@@ -41,7 +43,8 @@ public class DetailsEngagementPage extends CommonPage {
         waitForVisibleElement(engagementNameEditable, "Engagement name text");
         clickElement(engagementNameEditable, "Engagement name text");
         sendTabKey(engagementNameEditable, "");
-        validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
+        boolean result = validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
+        Assert.assertTrue(result,"Should see Detail Engagement.");
     }
 
     //    public void verifyDetailsEngagementPage(String engagementName) {
