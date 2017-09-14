@@ -51,6 +51,8 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     @FindBy(xpath = "//nav[@id='dashboardLinks']/div[@id='engagementFileMangerLink']")
     private WebElement eleFileManagerLink;
+    @FindBy(id = "engagementUserBtn")
+    private WebElement buttonInviteClient;
 
     public void verifyDetailsEngagementAtGeneralPage(String engagementName) {
         waitForVisibleElement(dashboardTextAtGeneralPage, "dashboard text");
@@ -95,8 +97,12 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
         waitForCssValueChanged(createEngagementPopupEle, "Create Engagement Popup", "display", "none");
     }
 
-    @FindBy(id = "engagementUserBtn")
-    private WebElement buttonInviteClient;
+    public void clickOnInviteClientBtn() {
+        waitForClickableOfElement(buttonInviteClient, "buttonInviteClient");
+        clickElement(buttonInviteClient, "buttonInviteClient");
+        waitForProgressOverlayIsClosed();
+        waitSomeSeconds(2);
+    }
 
     /**
      * Click Invite button

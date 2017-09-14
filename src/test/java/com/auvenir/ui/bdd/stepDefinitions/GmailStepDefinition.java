@@ -58,10 +58,11 @@ public class GmailStepDefinition extends BaseInit {
     }
 
     @And("^I relogin gmail: \"([^\"]*)\"$")
-    public void iReloginGmail(String email) throws Throwable {
+    public void iReloginGmail(String password) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I relogin gmail");
-        mailPage.reSignInGmail(email);
+        mailPage.goGMail();
+        mailPage.reSignInGmail(password);
     }
 
     @And("^I click on onboarding invitation link$")

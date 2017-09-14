@@ -72,4 +72,11 @@ public class EngagementDetailStepDefinition extends BaseInit {
     public void seeInviteClientSuccessToastMessage() throws Throwable {
         auditorDetailsEngagementPage.verifyInviteClientSuccess();
     }
+
+    @And("^I click on invite client button on engagement detail page$")
+    public void iClickOnInviteButton() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I click on invite client button on engagement detail page");
+        auditorDetailsEngagementPage.clickOnInviteClientBtn();
+    }
 }

@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTeamPage;
 import com.auvenir.ui.bdd.pages.client.ClientTeamPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -19,13 +20,6 @@ public class TeamStepDefinition extends BaseInit {
         this.baseInit = baseInit;
         auditorTeamPage = new AuditorTeamPage(logger, driver);
         clientTeamPage = new ClientTeamPage(logger, driver);
-    }
-
-    @And("^I delete existed member on team page$")
-    public void iDeleteExistedMemberOnTeamPage(List<String> fullName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I delete existed member on team page");
-        auditorTeamPage.deleteMemberInEngagementByName(fullName.get(0));
     }
 
     @And("^I click in invite new member on team page$")
@@ -131,4 +125,15 @@ public class TeamStepDefinition extends BaseInit {
         clientTeamPage.verifyAddNewMemberSuccessful();
     }
 
+    @And("^I delete existed member on team page: \"([^\"]*)\"$")
+    public void iDeleteExistedMemberOnTeamPage(String fullName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        getLogger().info("I delete existed member on team page");
+        auditorTeamPage.deleteMemberInEngagementByName(fullName);
+    }
+    @And("^I change the permission of member: \"([^\"]*)\" to be Lead$")
+    public void changeThePermissionOfMember(String memberName) throws Throwable {
+        getLogger().info("I am going change the permission of Member: "+ memberName);
+        clientTeamPage.changePermissionOfMember(memberName);
+    }
 }
