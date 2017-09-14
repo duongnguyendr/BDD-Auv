@@ -269,6 +269,27 @@ public class KeyWord {
         //            return false;
         //        }
     }
+    public boolean waitForSizeListElementChanged(List<WebElement> element, String elementName, int sizeListElement) {
+        getLogger().info("Try to waitForSizeListElementChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    int actualSizeListElement = element.size();
+                    System.out.println("Actual Size of List Element: " + actualSizeListElement);
+                    System.out.println("Expected Size of List Element: " + sizeListElement);
+                    if (actualSizeListElement == sizeListElement)
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            getLogger().info("Size of Element is not changed");
+            return false;
+        }
+    }
 
     /**
      * @Description In order to wait element to be present by locator.
@@ -1544,4 +1565,28 @@ Method to wait Ajax function on Site be loaded successfully.
         JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript("arguments[0].click()", webElement);
     }
+    public void sendTabkey(WebElement element, String elementName) {
+        getLogger().info("Try to sendTabkey: " + elementName);
+            element.sendKeys(Keys.TAB);
+    }
+    public int randomNumber() {
+        Random randNum = new Random();
+        int intRanNum = randNum.nextInt(10000) + 1;
+        return intRanNum;
+    }
+    public boolean waitForClickableOfLocator(By by) {
+        getLogger().info("Try to waitForClickableOfLocator");
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+            wait.until(ExpectedConditions.elementToBeClickable(by));
+            getLogger().info("eElement is clickable.");
+            return true;
+        } catch (Exception e) {
+            getLogger().info("Element is not clickable.");
+            return false;
+        }
+    }
+
+
+
 }

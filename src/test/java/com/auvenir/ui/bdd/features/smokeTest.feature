@@ -240,7 +240,7 @@ Vien Pham create testcase:
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-    Then I assignee list To-Do to Auditor
+   Then I assignee list To-Do to Auditor
       | Auditor Name| Todo Name|
       |Admin Auditor| ToDo 01  |
       |Admin Auditor| ToDo 02  |
@@ -251,13 +251,13 @@ Vien Pham create testcase:
       |Admin Auditor| ToDo 02  |
       |Admin Auditor| ToDo 03  |
 
-##Viet Le create testcase:
+#Viet Le create testcase:
   Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | auvenirinfo@gmail.com   | Changeit@123 |
+      | chr.auditor01.lead@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
@@ -266,6 +266,11 @@ Vien Pham create testcase:
       |userName | Todo Name|
       |Unassigned| ToDo 01|
       |Unassigned| ToDo 02|
+    And I verify Client Assignee Selected
+      | Auditor Name| Todo Name|
+      |Unassigned| ToDo 01|
+      |Unassigned| ToDo 02|
+
 
 #Huy
   Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
@@ -284,4 +289,19 @@ Vien Pham create testcase:
     Then I should see invite client success toast message
 #/Huy
 
+#Viet Le create testcase:
+  Scenario:Lead Auditor Create To Do task: AUV-878
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I create To-Do with name and category
+      |ToDo name| Category|
+      |ToDo 01| Music |
+      |ToDo 02| Sport |
 
