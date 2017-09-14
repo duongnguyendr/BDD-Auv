@@ -140,24 +140,6 @@ public class AuditorTeamPage extends TeamPage {
         }
     }
 
-    public void deleteMemberInEngagementByName(String fullNameMember) {
-        getLogger().info(String.format("Click Delete Team Member '%s'", fullNameMember));
-        int index = findTeamMemberByName(fullNameMember);
-        if (index != -1) {
-            clickElement(checkBoxTeamMember.get(index), "Check Box Team Member");
-            boolean checked = checkBoxTeamMember.get(index).isSelected();
-            if (checked) {
-                clickElement(bulkActionsDropdown, "Bulk Actions Dropdown");
-                clickElement(deleteOptionActions, "Delete Option Dropdown");
-                waitForProgressOverlayIsClosed();
-                //                    boolean result = verifyContentOfSuccessToastMessage("Your team member has been removed.");
-                //                    if (!result) throw new Exception();
-            }
-        }
-        getLogger().info("Delete All Member in Engagement.");
-
-    }
-
     public int findTeamMemberByName(String fullNameMember) {
         getLogger().info(String.format("Find position of Team Member '%s'", fullNameMember));
         try {

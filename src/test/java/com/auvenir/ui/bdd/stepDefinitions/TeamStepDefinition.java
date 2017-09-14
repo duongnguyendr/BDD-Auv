@@ -125,12 +125,6 @@ public class TeamStepDefinition extends BaseInit {
         clientTeamPage.verifyAddNewMemberSuccessful();
     }
 
-    @And("^I delete existed member on team page: \"([^\"]*)\"$")
-    public void iDeleteExistedMemberOnTeamPage(String fullName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I delete existed member on team page");
-        auditorTeamPage.deleteMemberInEngagementByName(fullName);
-    }
     @And("^I change the permission of member: \"([^\"]*)\" to be Lead$")
     public void changeThePermissionOfMember(String memberName) throws Throwable {
         getLogger().info("I am going change the permission of Member: "+ memberName);
