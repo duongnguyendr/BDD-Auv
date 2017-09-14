@@ -42,7 +42,7 @@ public class MongoStepDefinition {
         MongoDBService.removeEngagementObjectByName(engagementName);
     }
 
-    @And("^Delete all client of user : \"([^\"]*)\"$")
+    @And("^Delete all client of user$")
     public void deleteAllClientOfUser(List<String> listEmail) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         for (String email: listEmail){
@@ -50,7 +50,7 @@ public class MongoStepDefinition {
         }
     }
 
-    @And("^Delete all client of user$")
+    @And("^Delete all business name by : \"([^\"]*)\"$")
     public void deleteAllBusinessNameBy(String businessName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         MongoDBService.removeAllBusinessByName(businessName);;
