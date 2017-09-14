@@ -48,12 +48,12 @@ public class MongoDBService {
 //        password = mongoDBProperties.getUserPassword();
 //        ssl = mongoDBProperties.getSsl();
         MongoDBProperties mongoDBProperties = new MongoDBProperties((baseUrl));
-        dataBaseSer = "192.168.1.222";
-        port = 27017;
-        DB = "auvenir";
-        username = null;
-        password = null;
-        ssl = "no";
+        dataBaseSer = mongoDBProperties.getServerIp();
+        port = Integer.valueOf(mongoDBProperties.getPort());
+        DB = mongoDBProperties.getDatabaseName();
+        username = mongoDBProperties.getUserName();
+        password = mongoDBProperties.getUserPassword();
+        ssl = mongoDBProperties.getSsl();
     }
 
     /* ===================================================================
