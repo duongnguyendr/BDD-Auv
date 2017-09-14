@@ -133,7 +133,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     public void verifyInviteClientSuccess() {
         waitForProgressOverlayIsClosed();
-        waitSomeSeconds(1);
+        //waitSomeSeconds(1);
         verifyContentOfSuccessToastMessage("Your engagement invitation has been sent.");
     }
 }
