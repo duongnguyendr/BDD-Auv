@@ -109,7 +109,7 @@ Feature: Smoke Test Feature
     Then I should see team member wizard page
     And I click continue button without member
     And I should see create todo list page
-    And I click create todo button
+    And I click create todo button on Create New Engagement Page
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
 
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
@@ -209,6 +209,30 @@ Feature: Smoke Test Feature
     And I fill up all Security Information with Password: "Changeit@123"
     And I click on Create Account Button on Security Information Page
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
+
+  Scenario: Lead Auditor Create new Engagement: AUV-684
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auvenirauditor01@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click create new engagement button
+    Then I should see new engagement page
+    And I input engagement name: "Thuan Engagement GP03"
+    And I select engagement type: "Review"
+    And I select company name: "Titan"
+    And I set report deadline
+    And I set start date
+    And I set end date
+    And I click on engagement continue button
+    Then I should see team member wizard page
+    And I click continue button without member
+    And I should see create todo list page
+    And I click create todo button on Create New Engagement Page
+    Then I should see engagement detail page with Engagement Title Editable: "Thuan Engagement GP03"
+
 
 #Vien Pham create testcase:
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
