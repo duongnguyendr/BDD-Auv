@@ -35,9 +35,6 @@ public class TodoStepDefinition extends BaseInit {
     public void assigneelistToDotoAuditor(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("===== I assignee list To-Do to General Auditor =====");
-
-
-
         List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
         lisTodoAndusers = table.asList(LisTodoAnduser.class);
         for (LisTodoAnduser lisTodoAnduser: lisTodoAndusers){

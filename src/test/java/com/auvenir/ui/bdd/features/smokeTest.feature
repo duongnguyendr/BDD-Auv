@@ -256,7 +256,7 @@ Feature: Smoke Test Feature
     Then I should see Invite Member successful message
 
     #Vien Pham create testcase:
-  Scenario:  Admin Client tranfer Lead permission to Lead Client in the Engagement2: AUV-847
+  Scenario:  Admin Client transfer Lead permission to Lead Client in the Engagement2: AUV-847
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -270,7 +270,7 @@ Feature: Smoke Test Feature
     And I change the permission of member: "Lead Client" to be Lead
 
   #Viet Le create testcase:
-  Scenario:Lead Auditor assign To Do task to Auditor Memeber: AUV-924
+  Scenario:Lead Auditor assign To Do task to Auditor member AUV-924
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
