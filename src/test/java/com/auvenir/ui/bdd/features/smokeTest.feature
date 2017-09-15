@@ -289,7 +289,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-  Scenario: Lead Auditor new Auditor member active account and login to Engagement 2: AUV-798
+  Scenario: New Auditor member active account and login to Engagement 2: AUV-798
     Given I navigate to gmail login page
     Then I signIn gmail
       | auvenirauditor02@gmail.com | TESTPASSWORD |
@@ -359,22 +359,57 @@ Feature: Smoke Test Feature
       |Admin Auditor| ToDo 02  |
       |Admin Auditor| ToDo 03  |
 
+
+    #Thuan Duong create
+  Scenario: Lead Auditor add file to request on To Do task AUV-954
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement"
+    And I click on Todo slide out menu of todo: ""
+
+
 ##Viet Le create testcase:
   Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | auvenirinfo@gmail.com   | Changeit@123 |
+      | Email                 | Password     |
+      | auvenirinfo@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Client
-      |userName | Todo Name|
-      |Unassigned| ToDo 01|
-      |Unassigned| ToDo 02|
+      | userName   | Todo Name |
+      | Unassigned | ToDo 01   |
+      | Unassigned | ToDo 02   |
 
+  Scenario:  Lead Auditor add new request on To Do task: AUV-947
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                      | Password     |
+      | auvien.lead@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on assigned engagement: "En02"
+    Then I should see engagement detail page with Engagement Title Editable: "En02"
+    And  I click slide out menu on selected To-do: "Todo 01"
+    Then I should see the Todo detail opened
+    And  I creates some new requests
+      | Request Name |
+      | Request 01   |
+      | Request 02   |
+      | Request 03   |
+      | Request 04   |
+      | Request 05   |
+      | Request 06   |
   #Duong
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page

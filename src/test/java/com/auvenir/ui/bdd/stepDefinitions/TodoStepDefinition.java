@@ -142,6 +142,13 @@ public class TodoStepDefinition extends BaseInit {
             todoName = LisTodoAnduser;
         }
     }
+
+    public class ListNewRequest{
+        public String newRequestName;
+        public ListNewRequest(String newRequestName){
+            this.newRequestName = newRequestName;
+        }
+    }
     @Then("^I assignee list To-Do to Auditor$")
     public void assigneelistToDotoAuditor(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -214,4 +221,30 @@ public class TodoStepDefinition extends BaseInit {
 
         }
     }
+    @And("^I click slide out menu on selected To-do: \"([^\"]*)\"$")
+    public void iClickSlideOutMenuOnSelectedToDo(String todoName) throws Throwable {
+        logger.info("===== I click slide out panel on selected To-do =====");
+        auditorTodoPage.clickSlideOutMenuOnTodo(todoName);
+    }
+
+
+    @Then("^I should see the Todo detail opened$")
+    public void verifyTodoDetailOpened() throws Throwable {
+        logger.info("===== I should see the Todo detail opened =====");
+        auditorTodoPage.verifyTodoDetailOpened();
+    }
+
+    @And("^I creates some new requests$")
+    public void createsSomeNewRequests(DataTable table) throws Throwable {
+        logger.info("===== I creates some new Request name =====");
+        List<ListNewRequest> listNewRequests = new ArrayList<>();
+        listNewRequests = table.asList(ListNewRequest.class);
+        for (ListNewRequest listNewRequest: listNewRequests){
+            System.out.println("Prepare to create: "+listNewRequest.newRequestName);
+//            auditorTodoPage.clickElement();
+//            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
+        }
+
+    }
+
 }

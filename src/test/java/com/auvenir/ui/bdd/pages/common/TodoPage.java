@@ -60,7 +60,11 @@ public class TodoPage extends CommonPage {
     @FindBy(xpath = "//div[starts-with(@id,'download-zip') and contains(@class,'au-modal')]")
     protected WebElement popUpDownloadAttachmentsWindows;
     @FindBy(id = "fm-downloadBtn")
-    WebElement downloadAllTodo;
+    protected WebElement downloadAllTodo;
+    @FindBy(xpath = "//*[@id='todo-table']/tbody/tr/td[7]/img")
+    protected List<WebElement> listSlideOutMenu;
+    @FindBy(xpath = "//div[@id='auv-todo-details']")
+    protected WebElement todoDetailPopup;
 
 
     public int findToDoTaskName(String toDoName) {
@@ -84,11 +88,14 @@ public class TodoPage extends CommonPage {
                     }
                 }
             }
+            logger.info("Element is not found");
             return -1;
         } catch (NoSuchElementException e) {
+            logger.info("Element is not found");
             return -1;
         }
     }
+
     public void selectClientAssigneeByName(String toDoName, String clientAssignee) {
         logger.info("== select Client Assignee By Name ==");
             int index = findToDoTaskName(toDoName);
@@ -262,6 +269,16 @@ public class TodoPage extends CommonPage {
             }
             logger.info("UnCheck on 'CheckAll' check box in ToDo page complete");
         }
+    }
+
+    public void clickSlideOutMenuOnTodo(String todoName) {
+        int index = findToDoTaskName(todoName);
+        clickElement(listSlideOutMenu.get(index), "Slide Out Menu icon");
+    }
+
+    public void verifyTodoDetailOpened() {
+        boolean isOpened = waitForCssValueChanged(todoDetailPopup, "Todo detail popup", "display", "block");
+        Assert.assertTrue(isOpened, "Todo detail is opened successfully");
     }
 
     public void clickToBulkDownloadAttachmentButton() {

@@ -81,4 +81,11 @@ public class EngagementDetailStepDefinition extends BaseInit {
         logger.info("I click on invite client button on engagement detail page");
         auditorDetailsEngagementPage.clickOnInviteClientBtn();
     }
+
+    @Then("^I should see all to do assigned : \"([^\"]*)\"$")
+    public void iShouldSeeAllToDoAssigned(String assignName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I should see all to do assigned======");
+        auditorDetailsEngagementPage.verifyToDoListAssignForUser(assignName);
+    }
 }
