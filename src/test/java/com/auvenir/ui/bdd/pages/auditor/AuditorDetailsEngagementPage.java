@@ -100,6 +100,8 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
     public void clickOnInviteClientBtn() {
         waitForClickableOfElement(buttonInviteClient, "buttonInviteClient");
         clickElement(buttonInviteClient, "buttonInviteClient");
+        waitForProgressOverlayIsClosed();
+        waitSomeSeconds(2);
     }
 
     /**
@@ -137,7 +139,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     public void verifyInviteClientSuccess() {
         waitForProgressOverlayIsClosed();
-        waitSomeSeconds(1);
+        //waitSomeSeconds(1);
         verifyContentOfSuccessToastMessage("Your engagement invitation has been sent.");
     }
 }

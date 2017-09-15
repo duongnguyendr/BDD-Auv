@@ -12,6 +12,7 @@ import java.util.List;
  * Created by vien.pham on 7/28/2017.
  */
 public abstract class TeamPage extends CommonPage {
+    private static Logger logger = Logger.getLogger(TeamPage.class.getSimpleName());
     public TeamPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -79,7 +80,7 @@ public abstract class TeamPage extends CommonPage {
     }
 
     public void verifyPermisionToSeeMemberList(String memberFullName, boolean permissionToSee) {
-        getLogger().info("Finding member in list...");
+        logger.info("Finding member in list...");
         int index = findMemberByName(memberFullName);
         if (permissionToSee) {
             if (index != -1) {
@@ -88,7 +89,7 @@ public abstract class TeamPage extends CommonPage {
 
         } else {
             if (index == -1) {
-                getLogger().info("Can not see member: " + memberFullName + " in list");
+                logger.info("Can not see member: " + memberFullName + " in list");
             } else {
                 Assert.fail("Can see member: " + memberFullName + " in list");
             }
@@ -102,15 +103,15 @@ public abstract class TeamPage extends CommonPage {
      * @param permissionToSelect
      */
     public void verifyPermisionToSelectMemberCheckbox(String memberFullName, boolean permissionToSelect) {
-        getLogger().info("Finding member in list...");
+        logger.info("Finding member in list...");
         int index = findMemberByName(memberFullName);
-        getLogger().info("Verifying checkbox is disabled..");
+        logger.info("Verifying checkbox is disabled..");
         if (permissionToSelect) {
 
         } else {
             Boolean isDisplayed = validateDisPlayedElement(listDisableCheckboxTeamMember.get(index), "disable checkbox");
             if (isDisplayed) {
-                getLogger().info("Cannot select member Checkbox.");
+                logger.info("Cannot select member Checkbox.");
             } else {
                 Assert.fail("Fail: Can select member Checkbox.");
             }
@@ -148,14 +149,14 @@ public abstract class TeamPage extends CommonPage {
     }
 
     public void clickInviteMember() {
-        getLogger().info("Click Invite Member Button.");
+        logger.info("Click Invite Member Button.");
         waitForCssValueChanged(engagementTeam, "engagementTeam", "display", "block");
         clickElement(inviteMemberBtn, "Invite Member Button");
     }
 
 
     public void verifyInviteNewMemberPageDisplayed() {
-        getLogger().info("Verify invite new member page load");
+        logger.info("Verify invite new member page load");
         boolean result = validateDisPlayedElement(inviteNewMemberTitle, "inviteNewMemberTitle");
         Assert.assertTrue(result);
     }

@@ -31,7 +31,6 @@ public class KeyWord {
     private WebDriver driver = null;
 
     public KeyWord(Logger logger, WebDriver driver) {
-        //super(driver);
         this.driver = driver;
         this.logger = logger;
         PageFactory.initElements(driver, this);
@@ -45,30 +44,244 @@ public class KeyWord {
         return logger;
     }
 
-    //    public KeyWord(WebDriver webDriver) {
-    //        this.driver = webDriver;
-    //    }
     public static final int waitTime = 15;
     public static final int smallTimeOut = 1000;
 
+
+    /*************** Waiting Element function ( Ex: Wait for clickable, wait for visible,... ******************/
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait element to be visible.
+     */
+    public void waitForVisibleElement(WebElement element, String elementName) {
+        getLogger().info("+++ Wait For Visible Element: " + elementName);
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+
+    /**
+     * @Description In order to wait element to be present by locator.
+     */
+    public void waitForPresentOfLocator(By by) {
+        getLogger().info("+++ Wait For Present Of Locator");
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    /**
+     * @Description In order to wait element to be visible by locator.
+     */
+    public void waitForVisibleOfLocator(By by) {
+        getLogger().info("+++ Wait For Visible Of Locator");
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
+    /**
+     * @Description In order to wait element to be visible by locator with seconds input.
+     */
+    public boolean waitForVisibleOfLocator(By locator, int seconds) {
+        getLogger().info("+++ Wait For Visible Of Locator by seconds");
+        boolean isResult = false;
+        try {
+            int i = 0;
+            while (i < seconds) {
+                try {
+                    getDriver().findElement(locator);
+                    isResult = true;
+                    break;
+                } catch (Exception ex) {
+                }
+                try {
+                    Thread.sleep(smallTimeOut);
+                    i++;
+                } catch (Exception e) {
+
+                }
+            }
+            if (!isResult) {
+                getLogger().info("+++++ Element is not visible.");
+            }
+            return isResult;
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Element is not visible.");
+            return isResult;
+        }
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait element to be visible.
+     */
+    public void waitForClickableOfElement(WebElement element, String elementName) {
+        getLogger().info("+++ Wait For Clickable Of Element: " + elementName);
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait element to be visible.
+     */
+    public void waitForInvisibleElement(WebElement element, String elementName) {
+        getLogger().info("+++ Wait For Invisible Element: " + elementName);
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+
     /**
      * @param webElement
-     * @param elementName
-     * @param waitTime
+     * @param timeOut
+     * @param text
      */
-    public void visibilityOfElementWait(WebElement webElement, String elementName, int waitTime) {
-        getLogger().info("+++ Verify Element is visibility.");
-        WebDriverWait sWebDriverWait = new WebDriverWait(driver, waitTime);
-        sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
-        //        try {
-        //            getLogger().info("+++ Verify Element is visibility.");
-        //            WebDriverWait sWebDriverWait = new WebDriverWait(driver, waitTime);
-        //            sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++ Element: "+elementName+" is not visibility.");
-        //        }
+    public void waitUtilTextPresent(WebElement webElement, long timeOut, String text) {
+        getLogger().info("+++ Wait util Element: " + webElement + " present.");
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
     }
+
+    /*
+Method to wait Ajax function on Site be loaded successfully.
+*/
+    public boolean waitForJSandJQueryToLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
+                } catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        // wait for Javascript to load
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) getDriver()).executeScript("return document.readyState").toString()
+                        .equals("complete");
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
+
+    public void waitSomeSeconds(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Wait Web Element is util hidden
+     *
+     * @param by
+     * @param timeOut
+     */
+    public void waitUtilElementHidden(By by, long timeOut) {
+        getLogger().info("+++ Wait util Element is hidden.");
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
+    /**
+     * Author: Thuan Duong.
+     *
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait element to change Attribute value.
+     */
+    public boolean waitForAtrributeValueChanged(WebElement element, String elementName, String attributeName,
+                                                String attributeValue) {
+        getLogger().info("Try to waitForAtrributeValueChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    String actualAttributeValue = null;
+                    if (element.getAttribute(attributeName) != null) {
+                        actualAttributeValue = element.getAttribute(attributeName);
+                        System.out.println("Actual Displayed Value: " + actualAttributeValue);
+                    } else {
+                        getLogger().info(String.format("Attribute %s is null", attributeName));
+                        return false;
+                    }
+                    if (actualAttributeValue.equals(attributeValue))
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait element to be visible.
+     */
+    public boolean waitForCssValueChanged(WebElement element, String elementName, String cssName, String cssValue) {
+        getLogger().info("Try to waitForCssValueChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 20);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    String actualcssValue = element.getCssValue(cssName);
+                    System.out.println("Actual Displayed Value: " + actualcssValue);
+                    if (actualcssValue.equals(cssValue))
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            getLogger().info("CSS Value is not changed");
+            return false;
+        }
+    }
+
+    public boolean waitForTextValueChanged(WebElement element, String elementName, String textValue) {
+        getLogger().info("Try to waitForTextValueChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    String actualTextValue = element.getText().trim();
+                    System.out.println("Actual Displayed Value: " + actualTextValue);
+                    System.out.println("Expected Displayed Value: " + textValue);
+                    if (actualTextValue.equals(textValue))
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            getLogger().info("Text Value of element '%s' is changed to '%s' "+elementName +" " +textValue);
+            return true;
+        } catch (Exception e) {
+            getLogger().info("CSS Value is not changed");
+            getLogger().info("Text Value of element '%s' is NOT changed "+ elementName);
+            return false;
+        }
+    }
+
+
+    /************ Validate Element function ( Ex: validateElementText, validateDisPlayedElement,... ***************/
 
     /**
      * @param webElement  WebElement
@@ -91,23 +304,6 @@ public class KeyWord {
             getLogger().info("+++++ Text of Element is not: " + elementText);
             return false;
         }
-    }
-
-    /**
-     * @param xpathElement
-     * @return Web element by xpath
-     */
-    public WebElement findWebElementByXpath(String xpathElement) {
-        WebElement resultWebElement = null;
-        getLogger().info("The xpath of web element = " + xpathElement);
-        resultWebElement = getDriver().findElement(By.xpath(xpathElement));
-        //        try {
-        //            getLogger().info("The xpath of web element = " + xpathElement);
-        //            resultWebElement = getDriver().findElement(By.xpath(xpathElement));
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //        }
-        return resultWebElement;
     }
 
     /**
@@ -248,138 +444,28 @@ public class KeyWord {
         }
     }
 
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait element to be visible.
-     */
-    public void waitForVisibleElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Visible Element: " + elementName);
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.visibilityOf(element));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.visibilityOf(element));
-        //            getLogger().info("+++++ Element: "+elementName+" is visible.");
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element: "+elementName+" is not visible.");
-        //            getLogger().info(e);
-        //            return false;
-        //        }
-    }
-
-    /**
-     * @Description In order to wait element to be present by locator.
-     */
-    public void waitForPresentOfLocator(By by) {
-        getLogger().info("+++ Wait For Present Of Locator");
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        //            getLogger().info("+++++ Element is present.");
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not present.");
-        //            return false;
-        //        }
-    }
-
-    /**
-     * @Description In order to wait element to be visible by locator.
-     */
-    public void waitForVisibleOfLocator(By by) {
-        getLogger().info("+++ Wait For Visible Of Locator");
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        //            getLogger().info("+++++ Element is visible.");
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not visible.");
-        //            return false;
-        //        }
-    }
-
-    /**
-     * @Description In order to wait element to be visible by locator with seconds input.
-     */
-    public boolean waitForVisibleOfLocator(By locator, int seconds) {
-        getLogger().info("+++ Wait For Visible Of Locator by seconds");
-        boolean isResult = false;
+    public boolean waitForSizeListElementChanged(List<WebElement> element, String elementName, int sizeListElement) {
+        getLogger().info("Try to waitForSizeListElementChanged: " + elementName);
         try {
-            int i = 0;
-            while (i < seconds) {
-                try {
-                    getDriver().findElement(locator);
-                    isResult = true;
-                    break;
-                } catch (Exception ex) {
+            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    int actualSizeListElement = element.size();
+                    System.out.println("Actual Size of List Element: " + actualSizeListElement);
+                    System.out.println("Expected Size of List Element: " + sizeListElement);
+                    if (actualSizeListElement == sizeListElement)
+                        return true;
+                    else
+                        return false;
                 }
-                try {
-                    Thread.sleep(smallTimeOut);
-                    i++;
-                } catch (Exception e) {
-
-                }
-            }
-            if (!isResult) {
-                getLogger().info("+++++ Element is not visible.");
-            }
-            return isResult;
+            });
+            return true;
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not visible.");
-            return isResult;
+            getLogger().info("Size of Element is not changed");
+            return false;
         }
     }
 
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait element to be visible.
-     */
-    public void waitForClickableOfElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Clickable Of Element: " + elementName);
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.elementToBeClickable(element));
-        //            getLogger().info("+++++ Element is clickable on Element: " + element.getText());
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not clickable on Element: " + element.getText());
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait element to be visible.
-     */
-    public void waitForInvisibleElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Invisible Element: " + elementName);
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.invisibilityOf(element));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.invisibilityOf(element));
-        //            getLogger().info("+++++ Element is invisible on Element: " + elementName);
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not invisible on Element: " + elementName);
-        //            return false;
-        //        }
-    }
 
     /**
      * @param element     element defined on page class
@@ -399,241 +485,6 @@ public class KeyWord {
             getLogger().info(e.getMessage());
             getLogger().info(elementName + " is  not disabled");
             return false;
-        }
-    }
-
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to click
-     * @Description: Click on element
-     */
-    public void clickElement(WebElement element, String elementName) {
-        getLogger().info("+++ Click on Element: " + elementName);
-        waitForClickableOfElement(element, elementName);
-        element.click();
-        //        try {
-        //            waitForClickableOfElement(element, "click to " + elementName);
-        //            element.click();
-        //            getLogger().info("+++++ Clicked on Element: " + elementName);
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            System.out.println("exception: " + e.getMessage());
-        //            getLogger().info("+++++ Unable to Click on: " + elementName);
-        //            return false;
-        //        }
-    }
-
-    /**
-     * @Description: Click on element
-     * @Author: minh.nguyen
-     */
-    //    public void clickElement(WebElement element) {
-    //        getLogger().info("+++ Click on Element: " + element);
-    //        element.click();
-    //        try {
-    //            waitForClickableOfElement(element);
-    //            element.click();
-    //            getLogger().info("+++++ Clicked on element");
-    //        } catch (Exception e) {
-    //            getLogger().info(e.getMessage());
-    //            getLogger().info("+++++ Unable to Click on Element: " + e.getMessage());
-    //        }
-    //    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to click and hold
-     * @Description: Click and Hold on element
-     */
-    public void clickAndHold(WebElement element, String elementName) {
-        getLogger().info("+++ Click And Hold: " + elementName);
-        if (Generic.sBrowserData.equals("chr.")) {
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element);
-            actions.click(element);
-            actions.perform();
-        } else {
-            element.click();
-        }
-        //        try {
-        //            if (Generic.sBrowserData.equals("chr.")) {
-        //                Actions actions = new Actions(driver);
-        //                actions.moveToElement(element);
-        //                actions.click(element);
-        //                actions.perform();
-        //            } else {
-        //                element.click();
-        //            }
-        //            getLogger().info("+++++ Click And Hold on: " + elementName);
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Unable to ClickAndHold on: " + elementName);
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to hover to
-     * @Description: Hover on element
-     */
-    public void hoverElement(WebElement element, String elementName) {
-        getLogger().info("+++ Hover on Element: " + elementName);
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element);
-        actions.build().perform();
-        //        try {
-        //            Actions actions = new Actions(driver);
-        //            actions.moveToElement(element);
-        //            actions.build().perform();
-        //            getLogger().info("+++++ Hovered on Element: " + elementName);
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Unable to hoverElement on: " + elementName);
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param text        The content of text that we want to input.
-     * @param elementName Name of element that we want to input value.
-     * @Description: Send a String to textBox.
-     * @Description: Send a String to textBox.
-     */
-    public void sendKeyTextBox(WebElement element, String text, String elementName) {
-        getLogger().info("+++ SendKey on : " + elementName);
-        waitForClickableOfElement(element, "wait for click to " + elementName);
-        element.clear();
-        waitForClickableOfElement(element, "wait for click to " + elementName);
-        element.sendKeys(text);
-        //        try {
-        //            waitForClickableOfElement(element, "wait for click to " + elementName);
-        //            //element.click();
-        //            element.clear();
-        //            waitForClickableOfElement(element, "wait for click to " + elementName);
-        //            element.sendKeys(text);
-        //            getLogger().info("+++++ Sent KeyValue on: " + elementName);
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e);
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Unable to sendKey on: " + elementName);
-        //            getLogger().info(e);
-        //            return false;
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to input value.
-     * @Description: Clear all Strings to textBox.
-     * @Description: Clear all Strings to textBox.
-     */
-    public void clearTextBox(WebElement element, String elementName) {
-        getLogger().info("+++ Clear text on : " + elementName);
-        element.clear();
-        //        try {
-        //            element.clear();
-        //            getLogger().info("+++++ Cleared on: " + elementName);
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Unable to clear on: " + elementName);
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param selText     Visible text that you want to select on dropdown
-     * @param elementName checkbox name
-     * @Description: select a value on dropdown via visible text
-     * @Description: select a value on dropdown via visible text
-     */
-    public void selectOptionByText(WebElement element, String selText, String elementName) {
-        getLogger().info("+++ Select By VisibleText on element: " + elementName);
-        Select dropDown = new Select(element);
-        dropDown.selectByVisibleText(selText);
-        //        try {
-        //            Select dropDown = new Select(element);
-        //            dropDown.selectOptionByText(selText);
-        //            getLogger().info("+++++ Selected By VisibleText on element: " + elementName);
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Unable to Select By VisibleText on element: " + elementName);
-        //            return false;
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param selValue    Value that you want to select on dropdown
-     * @param elementName checkbox name
-     * @Description: select a value on dropdown via visible text
-     * @Description: select a value on dropdown via visible text
-     */
-    public void selectOptionByValue(WebElement element, String selValue, String elementName) {
-        getLogger().info("+++ Select By Value on element: " + elementName);
-        Select dropDown = new Select(element);
-        dropDown.selectByValue(selValue);
-        //        try {
-        //            Select dropDown = new Select(element);
-        //            dropDown.selectOptionByValue(selValue);
-        //            getLogger().info("+++++ Selected By Value on element: " + elementName);
-        //        } catch (Exception e) {
-        //            getLogger().info("+++++ Selected By Value on element: " + elementName);
-        //            getLogger().info(e.getMessage());
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param selIndex    Value that you want to select on dropdown
-     * @param elementName checkbox name
-     * @Description: select a value on dropdown via visible text
-     * @Description: select a value on dropdown via visible text
-     */
-    public void selectOptionByIndex(WebElement element, int selIndex, String elementName) {
-        getLogger().info("+++ Select By Index on element: " + elementName);
-        Select dropDown = new Select(element);
-        dropDown.selectByIndex(selIndex);
-        //        try {
-        //            Select dropDown = new Select(element);
-        //            dropDown.selectOptionByIndex(selIndex);
-        //            getLogger().info("+++++ Selected By Index on element: " + elementName);
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ unable to select By Index on element: " + elementName);
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element: CheckBox that we want to Send TabKey
-     * @Description: Send TabKey
-     * @Description: Send TabKey
-     */
-    public void sendTabKey(WebElement element, String elementName) {
-        getLogger().info("+++ Send TabKey on Element " + elementName);
-        element.sendKeys(Keys.TAB);
-        //        try {
-        //            element.sendKeys(Keys.TAB);
-        //            getLogger().info("+++++ Sent TabKey on Element " + elementName);
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Unable to send Tab key on: " + elementName);
-        //        }
-    }
-
-    public void sendEnterKey(WebElement element, String elementName) {
-        getLogger().info("+++ Send Enter Key: " + elementName);
-        element.sendKeys(Keys.ENTER);
-        try {
-            element.sendKeys(Keys.ENTER);
-            getLogger().info("+++++ Sent Enter Key: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to sendEnterkey on: " + elementName);
         }
     }
 
@@ -977,45 +828,12 @@ public class KeyWord {
     }
 
     /**
-     * @param webElement
-     * @param timeOut
-     * @param text
+     * @Description In order to wait element to be clickable by locator.
      */
-    public void waitUtilTextPresent(WebElement webElement, long timeOut, String text) {
-        getLogger().info("+++ Wait util Element: " + webElement + " present.");
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
-        wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(driver, timeOut);
-        //            wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
-        //            getLogger().info("+++++ Element: " +webElement+" is present.");
-        //        } catch (TimeoutException e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element: " +webElement+" is not present.");
-        //            throw new AssertionError(e.getMessage());
-        //        }
-    }
-
-    /**
-     * Wait Web Element is util hidden
-     *
-     * @param by
-     * @param timeOut
-     */
-    public void waitUtilElementHidden(By by, long timeOut) {
-        getLogger().info("+++ Wait util Element is hidden.");
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(driver, timeOut);
-        //            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
-        //            getLogger().info("+++++ Element is hidden.");
-        //
-        //        } catch (TimeoutException e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not hidden.");
-        //            throw new AssertionError(e.getMessage());
-        //        }
+    public void waitForClickableOfLocator(By by) {
+        getLogger().info("Try to waitForClickableOfLocator");
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
     /**
@@ -1070,41 +888,6 @@ public class KeyWord {
     }
 
     /**
-     * Author: Thuan Duong.
-     *
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait element to change Attribute value.
-     */
-    public boolean waitForAtrributeValueChanged(WebElement element, String elementName, String attributeName,
-                                                String attributeValue) {
-        getLogger().info("Try to waitForAtrributeValueChanged: " + elementName);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-            wait.until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver driver) {
-                    String actualAttributeValue = null;
-                    if (element.getAttribute(attributeName) != null) {
-                        actualAttributeValue = element.getAttribute(attributeName);
-                        System.out.println("Actual Displayed Value: " + actualAttributeValue);
-                    } else {
-                        getLogger().info(String.format("Attribute %s is null", attributeName));
-                        return false;
-                    }
-                    if (actualAttributeValue.equals(attributeValue))
-                        return true;
-                    else
-                        return false;
-                }
-            });
-            return true;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            return false;
-        }
-    }
-
-    /**
      * get element which cant use @FindBy to find
      *
      * @param xpath xpath to get element
@@ -1119,56 +902,6 @@ public class KeyWord {
             getLogger().info(ex.getMessage());
         }
         return webElement;
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait element to be visible.
-     */
-    public boolean waitForCssValueChanged(WebElement element, String elementName, String cssName, String cssValue) {
-        getLogger().info("Try to waitForCssValueChanged: " + elementName);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), 20);
-            wait.until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver driver) {
-                    String actualcssValue = element.getCssValue(cssName);
-                    System.out.println("Actual Displayed Value: " + actualcssValue);
-                    if (actualcssValue.equals(cssValue))
-                        return true;
-                    else
-                        return false;
-                }
-            });
-            return true;
-        } catch (Exception e) {
-            getLogger().info("CSS Value is not changed");
-            return false;
-        }
-    }
-
-    public boolean waitForTextValueChanged(WebElement element, String elementName, String textValue) {
-        getLogger().info("Try to waitForTextValueChanged: " + elementName);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver driver) {
-                    String actualTextValue = element.getText().trim();
-                    System.out.println("Actual Displayed Value: " + actualTextValue);
-                    System.out.println("Expected Displayed Value: " + textValue);
-                    if (actualTextValue.equals(textValue))
-                        return true;
-                    else
-                        return false;
-                }
-            });
-            getLogger().info("Text Value of element '%s' is changed to '%s' "+elementName +" " +textValue);
-            return true;
-        } catch (Exception e) {
-            getLogger().info("CSS Value is not changed");
-            getLogger().info("Text Value of element '%s' is NOT changed "+ elementName);
-            return false;
-        }
     }
 
     /**
@@ -1223,14 +956,6 @@ public class KeyWord {
         }
     }
 
-    public void waitSomeSeconds(int seconds) {
-        try {
-            Thread.sleep(seconds * 1000);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public boolean validateNotExistedElement(WebElement element, String elementName) {
         try {
             getLogger().info("Try to validate Element is not existed.");
@@ -1255,63 +980,6 @@ public class KeyWord {
             getLogger().info("Element is still displayed.");
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
-        }
-    }
-
-    public int findElementByText(java.util.List<WebElement> listElement, String textValue) {
-        try {
-            String actualTextValue;
-            for (int i = 0; i < listElement.size(); i++) {
-                actualTextValue = listElement.get(i).getText().trim();
-                if (actualTextValue.equals(textValue)) {
-                    getLogger().info("Element is found at " + i);
-                    return i;
-                }
-            }
-            getLogger().info(String.format("Cannot find the text name: %s", textValue));
-            return -1;
-
-        } catch (Exception e) {
-            getLogger().info(String.format("Cannot find the text name: %s", textValue));
-            return -1;
-        }
-    }
-
-    /**
-     * Scroll to footer of current page
-     * TODO: duplicating with scrollToFooter on AbstractService, find solution later
-     */
-    public void scrollToFooter() {
-        getLogger().info("Scroll down to see page footer.");
-        JavascriptExecutor js = ((JavascriptExecutor) getDriver());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-    }
-
-    /**
-     * Find the index(position) of Web Element in the list Web Element by attribute value
-     *
-     * @param listElement   List WebElement
-     * @param textValue     String text which is compared with each WebElements.
-     * @param attributeName String attributeName which attribute will be found with get Attribute method.
-     * @return i if the WebElement is matched, otherwise return -1.
-     */
-    public int findElementByAttribute(List<WebElement> listElement, String textValue, String attributeName) {
-        try {
-            String actualAttributeValue;
-            for (int i = 0; i < listElement.size(); i++) {
-                actualAttributeValue = listElement.get(i).getAttribute(attributeName).trim();
-                if (actualAttributeValue.equals(textValue)) {
-                    getLogger().info("Element is found at " + i);
-                    getLogger().info(String.format("The position of the text name '%s' at %d", textValue, i));
-                    return i;
-                }
-            }
-            Assert.fail(String.format("Cannot find the text name: %s", textValue));
-            return -1;
-
-        } catch (Exception e) {
-            Assert.fail(String.format("Cannot find the text name: %s", textValue));
-            return -1;
         }
     }
 
@@ -1398,33 +1066,6 @@ public class KeyWord {
         }
     }
 
-    public String getDate(int day) {
-        Calendar date = Calendar.getInstance();
-        date.add(Calendar.DATE, day);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/d/yyyy");
-        return simpleDateFormat.format(date.getTime());
-    }
-
-    //    /**
-    //     * @param element     The element that we want to check.
-    //     * @param elementName Name of element we are verifying.
-    //     * @return
-    //     */
-    //    public boolean hoverAndWaitForClickableOfElement(WebElement element, String elementName) {
-    //        getLogger().info("Try to HoverAnd waitForClickableOfElement: " + elementName);
-    //        try {
-    //            Actions actions = new Actions(driver);
-    //            actions.moveToElement(element);
-    //            actions.build().perform();
-    //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-    //            wait.until(ExpectedConditions.elementToBeClickable(element));
-    //            return true;
-    //        } catch (Exception e) {
-    //            getLogger().info(e.getMessage());
-    //            return false;
-    //        }
-    //    }
-
     public boolean validateExistedElement(WebElement element, String elementName) {
         try {
             getLogger().info("Validating " + elementName + " is existed.");
@@ -1479,6 +1120,218 @@ public class KeyWord {
         }
     }
 
+
+    /************ Select an option in Select Dropdown Element  ***************/
+
+    /**
+     * @param element     element defined on page class
+     * @param selText     Visible text that you want to select on dropdown
+     * @param elementName checkbox name
+     * @Description: select a value on dropdown via visible text
+     * @Description: select a value on dropdown via visible text
+     */
+    public void selectOptionByText(WebElement element, String selText, String elementName) {
+        getLogger().info("+++ Select By VisibleText on element: " + elementName);
+        Select dropDown = new Select(element);
+        dropDown.selectByVisibleText(selText);
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param selValue    Value that you want to select on dropdown
+     * @param elementName checkbox name
+     * @Description: select a value on dropdown via visible text
+     * @Description: select a value on dropdown via visible text
+     */
+    public void selectOptionByValue(WebElement element, String selValue, String elementName) {
+        getLogger().info("+++ Select By Value on element: " + elementName);
+        Select dropDown = new Select(element);
+        dropDown.selectByValue(selValue);
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param selIndex    Value that you want to select on dropdown
+     * @param elementName checkbox name
+     * @Description: select a value on dropdown via visible text
+     * @Description: select a value on dropdown via visible text
+     */
+    public void selectOptionByIndex(WebElement element, int selIndex, String elementName) {
+        getLogger().info("+++ Select By Index on element: " + elementName);
+        Select dropDown = new Select(element);
+        dropDown.selectByIndex(selIndex);
+    }
+
+
+    /**
+     * @param xpathElement
+     * @return Web element by xpath
+     */
+    public WebElement findWebElementByXpath(String xpathElement) {
+        WebElement resultWebElement = null;
+        getLogger().info("The xpath of web element = " + xpathElement);
+        resultWebElement = getDriver().findElement(By.xpath(xpathElement));
+        return resultWebElement;
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to click
+     * @Description: Click on element
+     */
+    public void clickElement(WebElement element, String elementName) {
+        getLogger().info("+++ Click on Element: " + elementName);
+        waitForClickableOfElement(element, elementName);
+        element.click();
+
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to click and hold
+     * @Description: Click and Hold on element
+     */
+    public void clickAndHold(WebElement element, String elementName) {
+        getLogger().info("+++ Click And Hold: " + elementName);
+        if (Generic.sBrowserData.equals("chr.")) {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element);
+            actions.click(element);
+            actions.perform();
+        } else {
+            element.click();
+        }
+
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to hover to
+     * @Description: Hover on element
+     */
+    public void hoverElement(WebElement element, String elementName) {
+        getLogger().info("+++ Hover on Element: " + elementName);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.build().perform();
+
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param text        The content of text that we want to input.
+     * @param elementName Name of element that we want to input value.
+     * @Description: Send a String to textBox.
+     * @Description: Send a String to textBox.
+     */
+    public void sendKeyTextBox(WebElement element, String text, String elementName) {
+        getLogger().info("+++ SendKey on : " + elementName);
+        waitForClickableOfElement(element, "wait for click to " + elementName);
+        element.clear();
+        waitForClickableOfElement(element, "wait for click to " + elementName);
+        element.sendKeys(text);
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to input value.
+     * @Description: Clear all Strings to textBox.
+     * @Description: Clear all Strings to textBox.
+     */
+    public void clearTextBox(WebElement element, String elementName) {
+        getLogger().info("+++ Clear text on : " + elementName);
+        element.clear();
+    }
+
+
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element: CheckBox that we want to Send TabKey
+     * @Description: Send TabKey
+     * @Description: Send TabKey
+     */
+    public void sendTabKey(WebElement element, String elementName) {
+        getLogger().info("+++ Send TabKey on Element " + elementName);
+        element.sendKeys(Keys.TAB);
+    }
+
+    public void sendEnterKey(WebElement element, String elementName) {
+        getLogger().info("+++ Send Enter Key: " + elementName);
+        element.sendKeys(Keys.ENTER);
+        try {
+            element.sendKeys(Keys.ENTER);
+            getLogger().info("+++++ Sent Enter Key: " + elementName);
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to sendEnterkey on: " + elementName);
+        }
+    }
+
+    public int findElementByText(java.util.List<WebElement> listElement, String textValue) {
+        try {
+            String actualTextValue;
+            for (int i = 0; i < listElement.size(); i++) {
+                actualTextValue = listElement.get(i).getText().trim();
+                if (actualTextValue.equals(textValue)) {
+                    getLogger().info("Element is found at " + i);
+                    return i;
+                }
+            }
+            getLogger().info(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+
+        } catch (Exception e) {
+            getLogger().info(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+        }
+    }
+
+    /**
+     * Scroll to footer of current page
+     * TODO: duplicating with scrollToFooter on AbstractService, find solution later
+     */
+    public void scrollToFooter() {
+        getLogger().info("Scroll down to see page footer.");
+        JavascriptExecutor js = ((JavascriptExecutor) getDriver());
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    /**
+     * Find the index(position) of Web Element in the list Web Element by attribute value
+     *
+     * @param listElement   List WebElement
+     * @param textValue     String text which is compared with each WebElements.
+     * @param attributeName String attributeName which attribute will be found with get Attribute method.
+     * @return i if the WebElement is matched, otherwise return -1.
+     */
+    public int findElementByAttribute(List<WebElement> listElement, String textValue, String attributeName) {
+        try {
+            String actualAttributeValue;
+            for (int i = 0; i < listElement.size(); i++) {
+                actualAttributeValue = listElement.get(i).getAttribute(attributeName).trim();
+                if (actualAttributeValue.equals(textValue)) {
+                    getLogger().info("Element is found at " + i);
+                    getLogger().info(String.format("The position of the text name '%s' at %d", textValue, i));
+                    return i;
+                }
+            }
+            Assert.fail(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+
+        } catch (Exception e) {
+            Assert.fail(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+        }
+    }
+
+    public String getDate(int day) {
+        Calendar date = Calendar.getInstance();
+        date.add(Calendar.DATE, day);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/d/yyyy");
+        return simpleDateFormat.format(date.getTime());
+    }
+
     public static boolean checkFileExists(String pathLocation, boolean deleteExisted) {
         Path path = Paths.get(pathLocation);
         System.out.println("file: " + path);
@@ -1503,34 +1356,6 @@ public class KeyWord {
         clickElement(list.get(0), elementName);
     }
 
-    /*
-Method to wait Ajax function on Site be loaded successfully.
- */
-    public boolean waitForJSandJQueryToLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        // wait for jQuery to load
-        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                try {
-                    return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
-                } catch (Exception e) {
-                    // no jQuery present
-                    return true;
-                }
-            }
-        };
-        // wait for Javascript to load
-        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                return ((JavascriptExecutor) getDriver()).executeScript("return document.readyState").toString()
-                        .equals("complete");
-            }
-        };
-        return wait.until(jQueryLoad) && wait.until(jsLoad);
-    }
-
     /**
      * Added by huy.huynh on 12/06/2017.
      * check element on dev-branch
@@ -1543,5 +1368,11 @@ Method to wait Ajax function on Site be loaded successfully.
         getLogger().info("Click by javascript of element " + elementName);
         JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript("arguments[0].click()", webElement);
+    }
+
+    public int randomNumber() {
+        Random randNum = new Random();
+        int intRanNum = randNum.nextInt(10000) + 1;
+        return intRanNum;
     }
 }

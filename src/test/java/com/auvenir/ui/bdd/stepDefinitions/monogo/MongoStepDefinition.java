@@ -4,6 +4,8 @@ import com.auvenir.ui.bdd.common.mongoBD.MongoDBService;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 
+import java.util.List;
+
 /**
  * Created by tan.pham on 9/13/2017.
  */
@@ -21,7 +23,6 @@ public class MongoStepDefinition {
         // Write code here that turns the phrase above into concrete actions
         MongoDBService.removeAllActivitiesCollectionOfAUser(userEmail);
     }
-
 
     @And("^Delete all engagement of user : \"([^\"]*)\"$")
     public void deleteAllEngagementOfUser(String userEmail) throws Throwable {
@@ -41,10 +42,12 @@ public class MongoStepDefinition {
         MongoDBService.removeEngagementObjectByName(engagementName);
     }
 
-    @And("^Delete all client of user : \"([^\"]*)\"$")
-    public void deleteAllClientOfUser(String userEmail) throws Throwable {
+    @And("^Delete all client of user$")
+    public void deleteAllClientOfUser(List<String> listEmail) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        MongoDBService.removeClientAndIndicatedValueByEmail(userEmail);
+        for (String email: listEmail){
+            MongoDBService.removeClientAndIndicatedValueByEmail(email);
+        }
     }
 
     @And("^Delete all business name by : \"([^\"]*)\"$")
@@ -63,5 +66,11 @@ public class MongoStepDefinition {
     public void deleteEngagementNameByUser(String userEmail, String engagementName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         MongoDBService.removeEngagementCreatedByLeadAuditor(userEmail,engagementName);
+    }
+
+    @And("^Delete user by email: \"([^\"]*)\"$")
+    public void deleteUserByEmail(String email) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        MongoDBService.removeUserbyEmail( email);
     }
 }
