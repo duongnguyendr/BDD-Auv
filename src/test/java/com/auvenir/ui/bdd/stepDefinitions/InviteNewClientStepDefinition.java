@@ -38,7 +38,7 @@ public class InviteNewClientStepDefinition extends BaseInit {
         inviteNewClientPage.inputEmailClient(email);
     }
 
-    @And("^I input full name on invite client popup: \"([^\"]*)\"$")
+    @And("^I input full name: \"([^\"]*)\" on invite client popup$")
     public void iInputFullNameOnInviteClientPopup(String fullName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("I input full name on invite client popup: " + fullName);
