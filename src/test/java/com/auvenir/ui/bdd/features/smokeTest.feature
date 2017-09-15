@@ -138,7 +138,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-    Scenario: Lead Auditor Active account: AUV-660
+  Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to gmail login page
     And I signIn gmail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
