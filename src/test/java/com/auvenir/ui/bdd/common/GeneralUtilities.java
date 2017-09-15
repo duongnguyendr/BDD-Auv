@@ -1,11 +1,13 @@
 package com.auvenir.ui.bdd.common;
 
+import cucumber.api.DataTable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -47,5 +49,11 @@ public class GeneralUtilities {
             return false;
         }
         return true;
+    }
+    public static List getTable ( DataTable dataTable){
+
+        List<List<String>>listDataTable;
+        listDataTable = dataTable.raw();
+        return listDataTable;
     }
 }

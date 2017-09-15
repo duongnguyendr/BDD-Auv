@@ -1,5 +1,7 @@
 package com.auvenir.ui.bdd.common;
 
+import com.google.common.collect.Table;
+import cucumber.api.DataTable;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
@@ -1316,4 +1318,7 @@ Method to wait Ajax function on Site be loaded successfully.
         // Change the first Item to Third Item
         clickElement(list.get(0), elementName);
     }
+
+
 }
+

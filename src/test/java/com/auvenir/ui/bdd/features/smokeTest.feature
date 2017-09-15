@@ -378,5 +378,5 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I create To-Do with name and category
       |ToDo name| Category|
-      |ToDo 01| Music |
-      |ToDo 02| Sport |
+      |ToDo 08| Music |
+      |ToDo 09| Sport |

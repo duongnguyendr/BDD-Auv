@@ -1,6 +1,7 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
+import com.auvenir.ui.bdd.common.KeyWord;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.GetTable;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
@@ -9,7 +10,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
-
+import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class TodoStepDefinition extends BaseInit {
     private  BaseInit baseInit;
     AuditorTodoPage auditorTodoPage;
     TodoPage todoPage;
-    GetTable getTable;
+    KeyWord keyWord;
     public TodoStepDefinition(BaseInit baseInit){
         this.baseInit = baseInit;
         auditorTodoPage = new AuditorTodoPage(logger,driver);
@@ -155,16 +156,12 @@ public class TodoStepDefinition extends BaseInit {
     public void CreateToDoWithNameAndCategory(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         getLogger().info("===== I create To-Do with name and category =====");
-//         getTable = new GetTable("ToDoname","category");
-        List<GetTable> lisTodoAndusers = new ArrayList<>();
-        List<List<String>> a = table.cells(0);
-        lisTodoAndusers = table.asList(GetTable.class);
-        lisTodoAndusers.remove(0);
 
-        for (GetTable lisTodoAnduser: lisTodoAndusers){
-            System.out.println("The Client name is: "+lisTodoAnduser.getColumn0());
-            System.out.println("The Catalog: "+lisTodoAnduser.getColumn1());
-            todoPage.verifyClientAssigneeSelected(lisTodoAnduser.getColumn0(),lisTodoAnduser.getColumn1());
+        List<List<String>> toDonameAndategory  = getTable(table);
+        for (int i = 1; i < toDonameAndategory.size() ; i++) {
+            System.out.println("The Client name is: "+toDonameAndategory.get(i).get(0));
+            System.out.println("The Catalog: "+toDonameAndategory.get(i).get(1));
+            auditorTodoPage.createToDoTaskWithCategoryName(toDonameAndategory.get(i).get(0),toDonameAndategory.get(i).get(1));
 
         }
     }
