@@ -28,7 +28,7 @@ public class TodoStepDefinition extends BaseInit {
         todoPage = new TodoPage(logger,driver);
     }
 
-    @And("^I select todo check box on todo page: \"([^\"]*)\"$")
+    @And("^I select todo: \"([^\"]*)\" check box on todo page$")
     public void iSelectTodoCheckBoxOnTodoPage(String todoName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         todoPage.selectToDoCheckboxByName(todoName);
@@ -58,7 +58,7 @@ public class TodoStepDefinition extends BaseInit {
         todoPage.clickOnArchiveButtonInMarkAsCompletePopup();
     }
 
-    @Then("^I should see todo mark completed on todo page: \"([^\"]*)\"$")
+    @Then("^I should see todo: \"([^\"]*)\" mark completed on todo page$")
     public void iShouldSeeTodoMarkCompletedOnTodoPage(String todoName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         todoPage.verifyTodoMarkCompleted(todoName);
@@ -82,7 +82,7 @@ public class TodoStepDefinition extends BaseInit {
         todoPage.clickConfirmDeleteButton();
     }
 
-    @Then("^I should see todo not existed in todo list: \"([^\"]*)\"$")
+    @Then("^I should see todo: \"([^\"]*)\" not existed in todo list$")
     public void iShouldSeeTodoNotExisted(String todoName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         todoPage.verifyToDoNotExist(todoName);
@@ -111,6 +111,27 @@ public class TodoStepDefinition extends BaseInit {
     public void iClickCheckBoxAllTodo() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         todoPage.checkOrUnCheckCheckAllCheckBox(true);
+    }
+
+    @And("^I click download attachments on bulk action$")
+    public void iClickDownloadAttachments() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("I click download attachments on bulk action.");
+        todoPage.clickToBulkDownloadAttachmentButton();
+    }
+
+    @Then("^I should see popup download attachments on todo page$")
+    public void iShouldSeePopupDownloadAttachments() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("I should see popup download attachments on todo page.");
+        todoPage.verifyPopUpDownloadAttachmentsDisplay();
+    }
+
+    @And("^I click download button on attachment download popup$")
+    public void iClickDownloadButton() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("I click download button on attachment download popup.");
+        todoPage.clickDownloadAllTodo();
     }
 
     public class LisTodoAnduser{

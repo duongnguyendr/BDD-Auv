@@ -32,8 +32,4 @@ public class GeneralStepDefinition extends BaseInit {
         logger.info("==========" + baseUrl);
         marketingPage.getUrl("https://" + baseUrl);
     }
-
-
-
-
 }

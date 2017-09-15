@@ -386,12 +386,12 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 02"
+    And I select todo: "ToDo 02" check box on todo page
     And I click bulk action drop down on todo page
     And I click mark complete button on bulk action
     Then I should see mark completed todo popup
     And I click on archive button on complete todo popup
-    Then I should see todo mark completed on todo page: "ToDo 02"
+    Then I should see todo: "ToDo 02" mark completed on todo page
 
   Scenario: Lead Auditor Bulk Actions Assign To Do: AUV-1016
     Given I navigate to Marketing page
@@ -403,7 +403,7 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 04"
+    And I select todo: "ToDo 04" check box on todo page
     And I click bulk action drop down on todo page
     And I click assignee to :"unassigned" on bulk action drop down
     And I verify Client Assignee Selected
@@ -425,12 +425,12 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 03"
+    And I select todo: "ToDo 03" check box on todo page
     And I click bulk action drop down on todo page
     And I click delete button on bulk action
     Then I should see delete todo popup
     And I click on confirm delete button on delete todo popup
-    Then I should see todo not existed in todo list: "ToDo 03"
+    Then I should see todo: "ToDo 03" not existed in todo list
 
   Scenario: Lead Auditor download all To Do: AUV-1052
     Given I navigate to Marketing page
@@ -444,6 +444,10 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
     And I click check box all todo on todo page
     And I click bulk action drop down on todo page
+    And I click download attachments on bulk action
+    Then I should see popup download attachments on todo page
+    And I click download button on attachment download popup
+
 
 #   #/Duong
 #  #Viet Le create testcase:
