@@ -14,7 +14,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                     | Password     |
+      | Email | Password |
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
@@ -62,7 +62,7 @@ Feature: Smoke Test Feature
 
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      |chr.auditor01.adm@gmail.com|Changeit@123|
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -93,8 +93,8 @@ Feature: Smoke Test Feature
     And Delete all business name by : "Titan"
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | Email                   | Password     |
+      | chr.auditor01.adm@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click create new engagement button
@@ -114,15 +114,15 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      |chr.auditor01.lead@gmail.com|Changeit@123|
     And Delete all activity of engagement by user  : "chr.auditor01.lead@gmail.com"
     And Delete all engagement of user : "chr.auditor01.lead@gmail.com"
     And Delete user by email: "chr.auditor01.lead@gmail.com"
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | Email                   | Password     |
+      | chr.auditor01.adm@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -137,7 +137,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-  Scenario: Lead Auditor Active account: AUV-660
+    Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to gmail login page
     And I signIn gmail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
@@ -152,14 +152,14 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      |chr.client01.adm@gmail.com | Changeit@123 |
     And Delete all client of user
-      | chr.client01.adm@gmail.com | chr.client01.lead@gmail.com | chr.client01@gmail.com |
+      |chr.client01.adm@gmail.com|chr.client01.lead@gmail.com|chr.client01@gmail.com|
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | Email                    | Password     |
+      | chr.auditor01.adm@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -176,8 +176,8 @@ Feature: Smoke Test Feature
     And I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                     | Password     |
-      | chr.adm.auvenir@gmail.com | Changeit@123 |
+      | Email                       | Password     |
+      | chr.adm.auvenir@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
     Then I should see status of user is onboarding
@@ -426,4 +426,3 @@ Feature: Smoke Test Feature
     Then I should see delete todo popup
     And I click on confirm delete button on delete todo popup
     Then I should see todo not existed in todo list: "ToDo 03"
-   #/Duong
