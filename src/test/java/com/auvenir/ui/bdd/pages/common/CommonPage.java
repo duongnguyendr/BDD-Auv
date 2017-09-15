@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
  * Created by duong.nguyen on 9/8/2017.
  */
 public class CommonPage extends KeyWord {
+    private static Logger logger = Logger.getLogger(CommonPage.class.getSimpleName());
     public CommonPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -28,12 +29,12 @@ public class CommonPage extends KeyWord {
     private WebElement successToastMesDescriptionEle;
 
     public void waitForProgressOverlayIsClosed() {
-        getLogger().info("Try to waiting the ProgressOverlayIsClosed.");
+        logger.info("Try to waiting the ProgressOverlayIsClosed.");
         waitForCssValueChanged(progressingDiv, "Progress Overlay", "display", "none");
     }
 
     public boolean verifyContentOfSuccessToastMessage(String expectedContent) {
-        getLogger().info("Try to Verify Content Of Warning Toast Message ");
+        logger.info("Try to Verify Content Of Warning Toast Message ");
         return verifyContentOfToastMessage(successToastMesDescriptionEle, "Success Toast Message Content", expectedContent);
     }
 
@@ -43,7 +44,7 @@ public class CommonPage extends KeyWord {
      * @Description In order to verify the content of Toast Message.
      */
     public boolean verifyContentOfToastMessage(WebElement element, String elementName, String expectedContent) {
-        getLogger().info("Try to Verify Content Of Toast Message: " + elementName);
+        logger.info("Try to Verify Content Of Toast Message: " + elementName);
         try {
             boolean result;
             //            Thread.sleep(3000);
@@ -53,7 +54,7 @@ public class CommonPage extends KeyWord {
             Assert.assertTrue(result, "The content of toast message is displayed successfully.");
             return true;
         } catch (AssertionError e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
             return false;
         }
     }

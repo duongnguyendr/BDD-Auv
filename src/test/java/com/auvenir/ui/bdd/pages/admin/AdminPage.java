@@ -13,6 +13,7 @@ import org.testng.Assert;
 import java.util.List;
 
 public class AdminPage extends CommonPage {
+    private static Logger logger = Logger.getLogger(AdminPage.class.getSimpleName());
     public AdminPage(Logger logger, WebDriver driver) {
         super(logger, driver);
         PageFactory.initElements(driver, this);
@@ -663,7 +664,7 @@ public class AdminPage extends CommonPage {
 
     public void getEleClientEntryValidate(String UserType, String Email, String DateCreated, String ClientName) throws InterruptedException {
         Thread.sleep(10000);
-//        auvenirPage = new AuvenirPage(getLogger(), getDriver());
+//        auvenirPage = new AuvenirPage(logger, getDriver());
         WebElement getEleClientTxt =
                 getDriver().findElement(By.xpath("//td[contains(text(),'" + Email + "')]//..//td[contains(text(),'" + UserType + "')]"));
         validateDisPlayedElement(getEleClientTxt, "Client Text");
@@ -698,23 +699,23 @@ public class AdminPage extends CommonPage {
     }*/
 
     public void getEleChangeOnBoardingStatus(String UserType, String Email, String DateCreated) throws InterruptedException {
-        getLogger().info("Change status of auditor to Onboarding.");
+        logger.info("Change status of auditor to Onboarding.");
         //Thread.sleep(10000);
-        getLogger().info("Set status for auditor to Onboarding.");
+        logger.info("Set status for auditor to Onboarding.");
         SelectStatus = getDriver().findElement(By.xpath(
                 "//td[contains(text(),'" + UserType + "')]//..//td[contains(text(),'" + Email + "')]//..//td[contains(text(),'" + DateCreated + "')]//..//td//select"));
         Select select = new Select(SelectStatus);
         select.selectByVisibleText("Onboarding");
 
         //Thread.sleep(3000);
-        getLogger().info("Wait for confirm popup render.");
+        logger.info("Wait for confirm popup render.");
         waitForVisibleElement(getEleWAITLISTtoONBOARDINGTxt(), "Confirm Poup");
         Assert.assertTrue(getEleWAITLISTtoONBOARDINGTxt().isDisplayed(), "Onboarding status is not selected");
 //        NXGReports.addStep("Confirmation popup changing status from pending to onboarding is displayed", LogAs.PASSED, null);
-        getLogger().info("Click confirm button.");
+        logger.info("Click confirm button.");
         getEleStatusConfirmBtn().click();
         waitForVisibleElement(eleCredentialsCloseIcn, "Auditor onboarding successful message");
-        getLogger().info("Change Auditor to Onboarding successful.");
+        logger.info("Change Auditor to Onboarding successful.");
         Assert.assertTrue(getDriver().findElement(By.xpath("//div[text()='Verified " + Email + " successfully.']")).isDisplayed(),
                 "Wait-List user is verified");
 //        NXGReports.addStep("Verified user is successfully displayed", LogAs.PASSED, null);
@@ -801,11 +802,11 @@ public class AdminPage extends CommonPage {
 
     public void verifyDropMenuMessage() {
         waitForVisibleElement(getEleThereNoEmailsTxt(), "Inbox Icon");
-        getLogger().info("Check mail box.");
+        logger.info("Check mail box.");
         validateDisPlayedElement(getEleThereNoEmailsTxt(), "There are no Emails - Text");
-        getLogger().info("Check View message button.");
+        logger.info("Check View message button.");
         validateEnabledElement(getEleViewMessagesBtn(), "View Messages - Button");
-        getLogger().info("Check My message text is displayed.");
+        logger.info("Check My message text is displayed.");
         validateDisPlayedElement(getEleMyMessagesTxt(), "My Messages - Text");
     }
 
@@ -978,7 +979,7 @@ public class AdminPage extends CommonPage {
     }
 
     public void vefiryConfirmPopupDisplay(){
-        getLogger().info("Validate Popup Confirm.");
+        logger.info("Validate Popup Confirm.");
         waitForVisibleElement(textViewOnPopupConfirm, "Are you sure you want to change user status from");
         validateElementText(textViewOnPopupConfirm, "Are you sure you want to change user status from");
     }
@@ -997,24 +998,24 @@ public class AdminPage extends CommonPage {
     }
 
 //    public void waitForProgressOverlayIsClosed() {
-//        getLogger().info("Try to waiting the ProgressOverlayIsClosed.");
+//        logger.info("Try to waiting the ProgressOverlayIsClosed.");
 //        waitForCssValueChanged(progressingDiv, "Progress Overlay", "display", "none");
 //    }
 
     /*public void verifyUserIsChangeStatusOnTheList(String email, String expectedStatus) {
-        getLogger().info("Verify user is changed status on the list.");
+        logger.info("Verify user is changed status on the list.");
         try {
             String actualStatus = getEleAuditorStatusLst(email);
             Assert.assertTrue(actualStatus.equals(expectedStatus), String.format("Auditor is not created with %s status", actualStatus));
             NXGReports.addStep("Verify user is changed status on the list.", LogAs.PASSED, null);
         } catch (AssertionError e) {
             AbstractService.sStatusCnt++;
-            getLogger().info(e);
+            logger.info(e);
             NXGReports.addStep("Failed: Verify user is changed status on the list. Expected: " + expectedStatus, LogAs.FAILED,
                     new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE), e.getMessage());
         } catch (Exception e) {
             AbstractService.sStatusCnt++;
-            getLogger().info(e);
+            logger.info(e);
             NXGReports.addStep("Failed: Verify user is changed status on the list. Expected: " + expectedStatus, LogAs.FAILED,
                     new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE), e.getMessage());
         }
@@ -1067,7 +1068,7 @@ public class AdminPage extends CommonPage {
      */
     /*public void changeTheStatusUser(String userEmail, String chooseOption) {
         try {
-            getLogger().info(String.format("Try change status of user to %s", chooseOption));
+            logger.info(String.format("Try change status of user to %s", chooseOption));
             if (!getEleAuditorStatusLst(userEmail).equals(chooseOption)) {
                 waitSomeSeconds(1);
                 //            waitForVisibleElement(eleAdminHdrTxt, "Admin");
@@ -1077,7 +1078,7 @@ public class AdminPage extends CommonPage {
                 WebElement status = getElementByXpath(xpathStatusCellOnUserTableAdminX, userEmail);
                 selectOptionByText(status, chooseOption, "User Status");
 
-                getLogger().info("Validate Popup Confirm.");
+                logger.info("Validate Popup Confirm.");
                 waitForVisibleElement(textViewOnPopupConfirm, "Are you sure you want to change user status from");
                 validateElementText(textViewOnPopupConfirm, "Are you sure you want to change user status from");
 
@@ -1101,7 +1102,7 @@ public class AdminPage extends CommonPage {
     /*public void clickClosePopupWarningBrowser() {
         try {
             if (GenericService.sBrowserData.equals("ff.")) {
-                getLogger().info("Close Popup Warning Browser");
+                logger.info("Close Popup Warning Browser");
                 Thread.sleep(3000);
                 waitForVisibleElement(eleCredentialsCloseIcn, "Close Icon");
                 waitForClickableOfElement(eleCredentialsCloseIcn, "Close Icon");
@@ -1110,12 +1111,12 @@ public class AdminPage extends CommonPage {
                 Thread.sleep(2000);
             }
         } catch (Exception e) {
-            getLogger().info(e);
+            logger.info(e);
         }
     }*/
 
     /*public void verifyAdminSeeAllUser() {
-        getLogger().info("Verify Admin can see all user in the system.");
+        logger.info("Verify Admin can see all user in the system.");
         boolean result = true;
         try {
             //            String xpathUserTypeCellOnAdminPage = "/*//*[@id='w-mu-table']//tr/td[2][text()='%s']";
@@ -1137,15 +1138,15 @@ public class AdminPage extends CommonPage {
             if (superAdmin == null) {
                 result = false;
             }
-            getLogger().info("User " + (clientUser != null ? "can" : "cannot") + " see all Client User.");
-            getLogger().info("User " + (adminUser != null ? "can" : "cannot") + " see all Admin User.");
-            getLogger().info("User " + (auditorUser != null ? "can" : "cannot") + " see all Auditor User.");
-            getLogger().info("User " + (superAdmin != null ? "can" : "cannot") + " see Super Admin User.");
+            logger.info("User " + (clientUser != null ? "can" : "cannot") + " see all Client User.");
+            logger.info("User " + (adminUser != null ? "can" : "cannot") + " see all Admin User.");
+            logger.info("User " + (auditorUser != null ? "can" : "cannot") + " see all Auditor User.");
+            logger.info("User " + (superAdmin != null ? "can" : "cannot") + " see Super Admin User.");
             Assert.assertTrue(result, "User should see all user in system.");
             NXGReports.addStep("User can see all user in system.", LogAs.PASSED, null);
         } catch (AssertionError e) {
             AbstractService.sStatusCnt++;
-            getLogger().info(e);
+            logger.info(e);
             NXGReports
                     .addStep("Failed: User cannot see all user in system.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
                             e.getMessage());
@@ -1153,7 +1154,7 @@ public class AdminPage extends CommonPage {
     }
 
     public void verifyAdminCannotChangeSttAdminUser() {
-        getLogger().info("Verify Admin cannot change the status of Admin user.");
+        logger.info("Verify Admin cannot change the status of Admin user.");
         boolean result = false;
         try {
             String xpathStatusCellOnAdmiPage = "/*//*[@id='w-mu-table']//tr/td[2][contains(text(),'%s')]/../td[5]/select";
@@ -1167,7 +1168,7 @@ public class AdminPage extends CommonPage {
             NXGReports.addStep("Admin user cannot change status of Admin user in system.", LogAs.PASSED, null);
         } catch (AssertionError e) {
             AbstractService.sStatusCnt++;
-            getLogger().info(e);
+            logger.info(e);
             NXGReports.addStep("Failed: Admin user can change status of Admin user in system", LogAs.FAILED,
                     new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE), e.getMessage());
         }
@@ -1180,7 +1181,7 @@ public class AdminPage extends CommonPage {
      * @param adminName       String  Admin Name which is assigned to Super Admin role
      */
     /*public void demoteSuperAdminRole(String superAdminEmail, String adminName, boolean confirmation) {
-        getLogger().info("Demote Super Admin role");
+        logger.info("Demote Super Admin role");
         String contentConfirmDemoteUserPopup =
                 "Are you sure you want to demote your Super Admin status? You will no longer have Super Admin privileges.";
         String contentSelectGrantedUserPopup = "Select one Admin User who will be promoted as Super Admin.";
@@ -1189,7 +1190,7 @@ public class AdminPage extends CommonPage {
                 WebElement status = getElementByXpath(xpathStatusCellOnUserTableAdminX, superAdminEmail);
                 selectOptionByText(status, "Demote", "User Status");
 
-                getLogger().info("Validate Demote Super Admin Popup Confirm.");
+                logger.info("Validate Demote Super Admin Popup Confirm.");
                 waitForAnimation(demoteSuperAdminTitlePopup, "Demote Super Admin Title Layout");
                 validateElementText(demoteSuperAdminTitleTextPopup, "Demote Super Admin Status?");
 
@@ -1208,7 +1209,7 @@ public class AdminPage extends CommonPage {
             }
         } catch (Exception e) {
             AbstractService.sStatusCnt++;
-            getLogger().info(e);
+            logger.info(e);
             NXGReports.addStep("Failed: Demote Super Admin role", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE),
                     e.getMessage());
 
@@ -1216,7 +1217,7 @@ public class AdminPage extends CommonPage {
     }
 
     public void verifySuperAdminCanChangeSttAllUser() {
-        getLogger().info("Verify Super Admin can change the status of all user.");
+        logger.info("Verify Super Admin can change the status of all user.");
         boolean result = true;
         try {
             String xpathStatusCellOnAdminPage = "/*//*[@id='w-mu-table']//tr/td[2][text()='%s']/../td[5]/select";
@@ -1238,22 +1239,22 @@ public class AdminPage extends CommonPage {
             if (superAdminUserStatusDdl.size() == 0) {
                 result = false;
             }
-            getLogger().info("User " + (clientUserStatusDdl.size() != 0 ? "can" : "cannot") + " change status of Client User.");
-            getLogger().info("User " + (adminUserStatusDdl.size() != 0 ? "can" : "cannot") + " change status of Admin User.");
-            getLogger().info("User " + (auditorUserStatusDdl.size() != 0 ? "can" : "cannot") + " change status of Auditor User.");
-            getLogger().info("User " + (superAdminUserStatusDdl.size() != 0 ? "can" : "cannot") + " change status of Super Admin User.");
+            logger.info("User " + (clientUserStatusDdl.size() != 0 ? "can" : "cannot") + " change status of Client User.");
+            logger.info("User " + (adminUserStatusDdl.size() != 0 ? "can" : "cannot") + " change status of Admin User.");
+            logger.info("User " + (auditorUserStatusDdl.size() != 0 ? "can" : "cannot") + " change status of Auditor User.");
+            logger.info("User " + (superAdminUserStatusDdl.size() != 0 ? "can" : "cannot") + " change status of Super Admin User.");
             Assert.assertTrue(result, "Super Admin User should able to change status of Admin user in system.");
             NXGReports.addStep("Super Admin User can change status of Admin user in system.", LogAs.PASSED, null);
         } catch (AssertionError e) {
             AbstractService.sStatusCnt++;
-            getLogger().info(e);
+            logger.info(e);
             NXGReports.addStep("Failed: Super Admin User cannot change status of Admin user in system.", LogAs.FAILED,
                     new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE), e.getMessage());
         }
     }*/
 
     /*public void verifyUserRoleOfEmail(String email, String role) {
-        getLogger().info(String.format("Verify User '%s'  has '%s' role", email, role));
+        logger.info(String.format("Verify User '%s'  has '%s' role", email, role));
         boolean result = true;
         try {
             String xpathRoleCellOnAdminPage = "/*//*[@id='w-mu-table']//tr/td[3][text()='%s']/../td[2]";
@@ -1263,14 +1264,14 @@ public class AdminPage extends CommonPage {
             NXGReports.addStep(String.format("Verify User '%s'  has '%s' role", email, role), LogAs.PASSED, null);
         } catch (AssertionError e) {
             AbstractService.sStatusCnt++;
-            getLogger().info(e);
+            logger.info(e);
             NXGReports.addStep(String.format("Failed: Verify User '%s'  has '%s' role", email, role), LogAs.FAILED,
                     new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE), e.getMessage());
         }
     }
 
     public boolean verifyOnlyOneSuperAdmin() {
-        getLogger().info("Verify Only One Super Admin is displayed.");
+        logger.info("Verify Only One Super Admin is displayed.");
         boolean result = false;
         try {
             List<WebElement> superAdmin = getListElementsByXpath(xpathUserTypeCellOnAdminPage, "SUPER ADMIN");
@@ -1281,7 +1282,7 @@ public class AdminPage extends CommonPage {
             NXGReports.addStep("Verify Only One Super Admin is displayed", LogAs.PASSED, null);
         } catch (AssertionError e) {
             AbstractService.sStatusCnt++;
-            getLogger().info(e);
+            logger.info(e);
             NXGReports.addStep("Failed: Verify Only One Super Admin is displayed", LogAs.FAILED,
                     new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE), e.getMessage());
         }

@@ -6,12 +6,14 @@ import com.auvenir.ui.bdd.pages.client.ClientDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.common.DetailsEngagementPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import org.apache.log4j.Logger;
 
 /**
  * Created by duong.nguyen on 9/13/2017.
  */
 public class EngagementDetailStepDefinition extends BaseInit {
     BaseInit baseInit;
+    private static Logger logger = Logger.getLogger(EngagementDetailStepDefinition.class.getSimpleName());
     AuditorDetailsEngagementPage auditorDetailsEngagementPage;
     ClientDetailsEngagementPage clientDetailsEngagementPage;
     DetailsEngagementPage detailsEngagementPage;
@@ -25,14 +27,14 @@ public class EngagementDetailStepDefinition extends BaseInit {
 
     @And("^I click on team tab$")
     public void iClickOnTeamTab() throws Throwable {
-        getLogger().info("I click on team tab");
+        logger.info("I click on team tab");
         detailsEngagementPage.navigateToTeamTab();
     }
 
     @Then("^I should see engagement detail page with Engagement Title Editable: \"([^\"]*)\"$")
     public void iShouldSeeEngagementDetailPage(String engagementName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I should see engagement detail page");
+        logger.info("I should see engagement detail page");
         detailsEngagementPage.verifyDetailsEngagementPageEditable(engagementName);
     }
 
@@ -44,7 +46,7 @@ public class EngagementDetailStepDefinition extends BaseInit {
 
     @And("^I click on Team tab on Client page$")
     public void iClickOnTeamTabOnClientPage() throws Throwable {
-        getLogger().info("Client click on Team tab");
+        logger.info("Client click on Team tab");
         detailsEngagementPage.navigateToTeamTab();
     }
 
@@ -76,7 +78,14 @@ public class EngagementDetailStepDefinition extends BaseInit {
     @And("^I click on invite client button on engagement detail page$")
     public void iClickOnInviteButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("I click on invite client button on engagement detail page");
+        logger.info("I click on invite client button on engagement detail page");
         auditorDetailsEngagementPage.clickOnInviteClientBtn();
+    }
+
+    @Then("^I should see all to do assigned : \"([^\"]*)\"$")
+    public void iShouldSeeAllToDoAssigned(String assignName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I should see all to do assigned======");
+        auditorDetailsEngagementPage.verifyToDoListAssignForUser(assignName);
     }
 }

@@ -5,15 +5,14 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import java.util.List;
 
 /**
  * Created by cuong.nguyen on 5/8/2017.
  */
-
-
 public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
-
-
     public AuditorDetailsEngagementPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -44,6 +43,9 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     @FindBy(xpath = "//*[@id='CreateEngagementParent']/../../../..")
     private WebElement createEngagementPopupEle;
+
+    @FindBy(xpath = "//div[@class='ui dropdown client todo-bulkDdl ']/div[@class='text']")
+    private List<WebElement> eleToDoAssignList;
 
     /**
      * verifyDownloadAttachmentFromAllToDo - TanPh - 2017/06/22 - Start
@@ -94,7 +96,8 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
     }
 
     public void verifyNewEngagementPopupClose() {
-        waitForCssValueChanged(createEngagementPopupEle, "Create Engagement Popup", "display", "none");
+        boolean result = waitForCssValueChanged(createEngagementPopupEle, "Create Engagement Popup", "display", "none");
+        Assert.assertTrue(result);
     }
 
     public void clickOnInviteClientBtn() {
@@ -109,7 +112,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
      */
     public void clickInviteClientButton() throws Exception {
         validateElementText(buttonInviteClient, "Invite Client");
-        clickByJavaScripts(buttonInviteClient, "Button Invite Client");
+        clickElement(buttonInviteClient, "Button Invite Client");
     }
 
     @FindBy(className = "m-ic-subTitle")
@@ -120,7 +123,8 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     public void verifyInviteYourClientPage() {
         waitSomeSeconds(1);
-        validateElementText(titleInviteClient, "Invite Your Client");
+        boolean result = validateElementText(titleInviteClient, "Invite Your Client");
+        Assert.assertTrue(result);
     }
 
     public void selectClientWithFullName(String fullName) {
@@ -142,5 +146,35 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
         //waitSomeSeconds(1);
         verifyContentOfSuccessToastMessage("Your engagement invitation has been sent.");
     }
+
+
+    //////////////////////////////Lead Client can see to-dos - AUV-1171////////////////////////////////
+    /**
+     * Check all ToDo in list is assigned for user
+     * @param assignUser : user name need check
+     * @return true : all ToDo assign | false : still at least one ToDo was not assign
+     */
+    private boolean checkAllToDoAssignForUser(String assignUser){
+        if(eleToDoAssignList.size() == 0)
+            return false;
+        for(int i=0; i<eleToDoAssignList.size();i++){
+            String todoAssign = eleToDoAssignList.get(i).getText().trim();
+            if(!todoAssign.equalsIgnoreCase(assignUser)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Verify ser can see all ToDo assigned.
+     * @param assignUser : user name need check
+     */
+    public void verifyToDoListAssignForUser(String assignUser){
+        boolean result = checkAllToDoAssignForUser(assignUser);
+        Assert.assertTrue(result);
+    }
+    ///////////////////////////////////////////////////End////////////////////////////////////////////
 }
 
