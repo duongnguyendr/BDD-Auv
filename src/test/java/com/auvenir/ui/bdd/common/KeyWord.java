@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  * Created by doai.tran on 8/21/2017.
  */
 public class KeyWord {
-    private Logger logger = null;
+    private Logger logger = Logger.getLogger(KeyWord.class.getSimpleName());
     private WebDriver driver = null;
 
     public KeyWord(Logger logger, WebDriver driver) {
@@ -42,9 +42,9 @@ public class KeyWord {
         return driver;
     }
 
-    public Logger getLogger() {
-        return logger;
-    }
+//    public Logger logger {
+//        return logger;
+//    }
 
     public static final int waitTime = 15;
     public static final int smallTimeOut = 1000;
@@ -62,7 +62,7 @@ public class KeyWord {
      * @Description In order to wait element to be visible.
      */
     public void waitForVisibleElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Visible Element: " + elementName);
+        logger.info("+++ Wait For Visible Element: " + elementName);
         WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -72,7 +72,7 @@ public class KeyWord {
      * @Description In order to wait element to be present by locator.
      */
     public void waitForPresentOfLocator(By by) {
-        getLogger().info("+++ Wait For Present Of Locator");
+        logger.info("+++ Wait For Present Of Locator");
         WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
@@ -81,7 +81,7 @@ public class KeyWord {
      * @Description In order to wait element to be visible by locator.
      */
     public void waitForVisibleOfLocator(By by) {
-        getLogger().info("+++ Wait For Visible Of Locator");
+        logger.info("+++ Wait For Visible Of Locator");
         WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
@@ -90,7 +90,7 @@ public class KeyWord {
      * @Description In order to wait element to be visible by locator with seconds input.
      */
     public boolean waitForVisibleOfLocator(By locator, int seconds) {
-        getLogger().info("+++ Wait For Visible Of Locator by seconds");
+        logger.info("+++ Wait For Visible Of Locator by seconds");
         boolean isResult = false;
         try {
             int i = 0;
@@ -109,12 +109,12 @@ public class KeyWord {
                 }
             }
             if (!isResult) {
-                getLogger().info("+++++ Element is not visible.");
+                logger.info("+++++ Element is not visible.");
             }
             return isResult;
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not visible.");
+            logger.info(e.getMessage());
+            logger.info("+++++ Element is not visible.");
             return isResult;
         }
     }
@@ -125,7 +125,7 @@ public class KeyWord {
      * @Description In order to wait element to be visible.
      */
     public void waitForClickableOfElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Clickable Of Element: " + elementName);
+        logger.info("+++ Wait For Clickable Of Element: " + elementName);
         WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
@@ -136,7 +136,7 @@ public class KeyWord {
      * @Description In order to wait element to be visible.
      */
     public void waitForInvisibleElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Invisible Element: " + elementName);
+        logger.info("+++ Wait For Invisible Element: " + elementName);
         WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
@@ -148,7 +148,7 @@ public class KeyWord {
      * @param text
      */
     public void waitUtilTextPresent(WebElement webElement, long timeOut, String text) {
-        getLogger().info("+++ Wait util Element: " + webElement + " present.");
+        logger.info("+++ Wait util Element: " + webElement + " present.");
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
     }
@@ -196,7 +196,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param timeOut
      */
     public void waitUtilElementHidden(By by, long timeOut) {
-        getLogger().info("+++ Wait util Element is hidden.");
+        logger.info("+++ Wait util Element is hidden.");
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
@@ -210,7 +210,7 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public boolean waitForAtrributeValueChanged(WebElement element, String elementName, String attributeName,
                                                 String attributeValue) {
-        getLogger().info("Try to waitForAtrributeValueChanged: " + elementName);
+        logger.info("Try to waitForAtrributeValueChanged: " + elementName);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), 10);
             wait.until(new ExpectedCondition<Boolean>() {
@@ -220,7 +220,7 @@ Method to wait Ajax function on Site be loaded successfully.
                         actualAttributeValue = element.getAttribute(attributeName);
                         System.out.println("Actual Displayed Value: " + actualAttributeValue);
                     } else {
-                        getLogger().info(String.format("Attribute %s is null", attributeName));
+                        logger.info(String.format("Attribute %s is null", attributeName));
                         return false;
                     }
                     if (actualAttributeValue.equals(attributeValue))
@@ -231,7 +231,7 @@ Method to wait Ajax function on Site be loaded successfully.
             });
             return true;
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
             return false;
         }
     }
@@ -242,7 +242,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description In order to wait element to be visible.
      */
     public boolean waitForCssValueChanged(WebElement element, String elementName, String cssName, String cssValue) {
-        getLogger().info("Try to waitForCssValueChanged: " + elementName);
+        logger.info("Try to waitForCssValueChanged: " + elementName);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), 20);
             wait.until(new ExpectedCondition<Boolean>() {
@@ -257,13 +257,13 @@ Method to wait Ajax function on Site be loaded successfully.
             });
             return true;
         } catch (Exception e) {
-            getLogger().info("CSS Value is not changed");
+            logger.info("CSS Value is not changed");
             return false;
         }
     }
 
     public boolean waitForTextValueChanged(WebElement element, String elementName, String textValue) {
-        getLogger().info("Try to waitForTextValueChanged: " + elementName);
+        logger.info("Try to waitForTextValueChanged: " + elementName);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(new ExpectedCondition<Boolean>() {
@@ -277,11 +277,11 @@ Method to wait Ajax function on Site be loaded successfully.
                         return false;
                 }
             });
-            getLogger().info(String.format("Text Value of element '%s' is changed to '%s' ", elementName, textValue));
+            logger.info(String.format("Text Value of element '%s' is changed to '%s' ", elementName, textValue));
             return true;
         } catch (Exception e) {
-            getLogger().info("CSS Value is not changed");
-            getLogger().info("Text Value of element '%s' is NOT changed " + elementName);
+            logger.info("CSS Value is not changed");
+            logger.info("Text Value of element '%s' is NOT changed " + elementName);
             return false;
         }
     }
@@ -297,7 +297,7 @@ Method to wait Ajax function on Site be loaded successfully.
         // This function is waiting to Popup Delete To Do task is displayed after running animation.
         // We can move this function to Abstract Page or Common Page.
         try {
-            getLogger().info("Waiting For Animation: " + elementName);
+            logger.info("Waiting For Animation: " + elementName);
             WebDriverWait wait = new WebDriverWait(getDriver(), 30);
             wait.until((WebDriver driver) -> {
                 boolean result = false;
@@ -306,11 +306,11 @@ Method to wait Ajax function on Site be loaded successfully.
                                 "var rect = elm.getBoundingClientRect();"
                                 + "return elm === doc1.elementFromPoint(rect.left, rect.top);",
                         webElement);
-                getLogger().info("result: " + result);
+                logger.info("result: " + result);
                 return result;
             });
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -320,7 +320,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description In order to wait the size of Element is changed.
      */
     public boolean waitForSizeListElementChanged(List<WebElement> element, String elementName, int sizeListElement) {
-        getLogger().info("Try to waitForSizeListElementChanged: " + elementName);
+        logger.info("Try to waitForSizeListElementChanged: " + elementName);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
             wait.until(new ExpectedCondition<Boolean>() {
@@ -336,7 +336,7 @@ Method to wait Ajax function on Site be loaded successfully.
             });
             return true;
         } catch (Exception e) {
-            getLogger().info("Size of Element is not changed");
+            logger.info("Size of Element is not changed");
             return false;
         }
     }
@@ -351,7 +351,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: Click on element
      */
     public void clickElement(WebElement element, String elementName) {
-        getLogger().info("+++ Click on Element: " + elementName);
+        logger.info("+++ Click on Element: " + elementName);
         waitForClickableOfElement(element, elementName);
         element.click();
 
@@ -366,7 +366,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param elementName The text name of element
      */
     public void clickByJavaScripts(WebElement webElement, String elementName) throws Exception {
-        getLogger().info("Click by javascript of element " + elementName);
+        logger.info("Click by javascript of element " + elementName);
         JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript("arguments[0].click()", webElement);
     }
@@ -377,7 +377,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: Click and Hold on element
      */
     public void clickAndHold(WebElement element, String elementName) {
-        getLogger().info("+++ Click And Hold: " + elementName);
+        logger.info("+++ Click And Hold: " + elementName);
         if (Generic.sBrowserData.equals("chr.")) {
             Actions actions = new Actions(driver);
             actions.moveToElement(element);
@@ -395,7 +395,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: Hover on element
      */
     public void hoverElement(WebElement element, String elementName) {
-        getLogger().info("+++ Hover on Element: " + elementName);
+        logger.info("+++ Hover on Element: " + elementName);
         Actions actions = new Actions(driver);
         actions.moveToElement(element);
         actions.build().perform();
@@ -409,7 +409,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: Clear all Strings to textBox.
      */
     public void clearTextBox(WebElement element, String elementName) {
-        getLogger().info("+++ Clear text on : " + elementName);
+        logger.info("+++ Clear text on : " + elementName);
         element.clear();
     }
 
@@ -421,7 +421,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: Send a String to textBox.
      */
     public void sendKeyTextBox(WebElement element, String text, String elementName) {
-        getLogger().info("+++ SendKey on : " + elementName);
+        logger.info("+++ SendKey on : " + elementName);
         waitForClickableOfElement(element, "wait for click to " + elementName);
         element.clear();
         waitForClickableOfElement(element, "wait for click to " + elementName);
@@ -435,19 +435,19 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: Send TabKey
      */
     public void sendTabKey(WebElement element, String elementName) {
-        getLogger().info("+++ Send TabKey on Element " + elementName);
+        logger.info("+++ Send TabKey on Element " + elementName);
         element.sendKeys(Keys.TAB);
     }
 
     public void sendEnterKey(WebElement element, String elementName) {
-        getLogger().info("+++ Send Enter Key: " + elementName);
+        logger.info("+++ Send Enter Key: " + elementName);
         element.sendKeys(Keys.ENTER);
         try {
             element.sendKeys(Keys.ENTER);
-            getLogger().info("+++++ Sent Enter Key: " + elementName);
+            logger.info("+++++ Sent Enter Key: " + elementName);
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to sendEnterkey on: " + elementName);
+            logger.info(e.getMessage());
+            logger.info("+++++ Unable to sendEnterkey on: " + elementName);
         }
     }
 
@@ -460,20 +460,20 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param elementText Text of Element be presented.
      */
     public boolean validateElementText(WebElement webElement, String elementText) {
-        getLogger().info("+++ Check rendered of text: " + elementText.trim());
+        logger.info("+++ Check rendered of text: " + elementText.trim());
         try {
-            getLogger().info("+++ Check rendered of text: " + elementText.trim());
-            getLogger().info("+++++ Actual Text is displayed: " + getText(webElement).trim());
+            logger.info("+++ Check rendered of text: " + elementText.trim());
+            logger.info("+++++ Actual Text is displayed: " + getText(webElement).trim());
             Assert.assertEquals(getText(webElement).trim(), elementText.trim());
             return true;
         } catch (AssertionError error) {
-            getLogger().info(error);
-            getLogger().info("+++++ Text of Element is not: " + elementText);
+            logger.info(error);
+            logger.info("+++++ Text of Element is not: " + elementText);
             return false;
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Text of Element is not: " + elementText);
+            logger.info(e.getMessage());
+            logger.info(e.getMessage());
+            logger.info("+++++ Text of Element is not: " + elementText);
             return false;
         }
     }
@@ -485,16 +485,16 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public boolean validateDisPlayedElement(WebElement element,
                                             String elementName) throws InvalidElementStateException {
-        getLogger().info("+++ Verify Displayed of: " + elementName);
+        logger.info("+++ Verify Displayed of: " + elementName);
         element.isDisplayed();
-        getLogger().info("+++++ Element : " + elementName + " is presented");
+        logger.info("+++++ Element : " + elementName + " is presented");
         try {
             element.isDisplayed();
-            getLogger().info("+++++ Element : " + elementName + " is presented");
+            logger.info("+++++ Element : " + elementName + " is presented");
             return true;
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element : " + element + "is not presented");
+            logger.info(e.getMessage());
+            logger.info("+++++ Element : " + element + "is not presented");
             return false;
         }
     }
@@ -506,14 +506,14 @@ Method to wait Ajax function on Site be loaded successfully.
      */
 
     public boolean validateEnabledElement(WebElement element, String elementName) throws InvalidElementStateException {
-        getLogger().info("+++ Verify enabled of: " + elementName);
+        logger.info("+++ Verify enabled of: " + elementName);
         try {
             element.isEnabled();
-            getLogger().info("+++++ Element : " + elementName + "is enable");
+            logger.info("+++++ Element : " + elementName + "is enable");
             return true;
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element : " + elementName + "is not enable.");
+            logger.info(e.getMessage());
+            logger.info("+++++ Element : " + elementName + "is not enable.");
             return false;
         }
     }
@@ -524,14 +524,14 @@ Method to wait Ajax function on Site be loaded successfully.
      * @throws InvalidElementStateException
      */
     public boolean validateSelectedElement(WebElement element, String elementName) throws InvalidElementStateException {
-        getLogger().info("+++ Verify selected of: " + elementName);
+        logger.info("+++ Verify selected of: " + elementName);
         try {
             element.isSelected();
-            getLogger().info("+++++ Element : " + element.getText() + "is selected.");
+            logger.info("+++++ Element : " + element.getText() + "is selected.");
             return true;
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element : " + element.getText() + "is not selected.");
+            logger.info(e.getMessage());
+            logger.info("+++++ Element : " + element.getText() + "is not selected.");
             return false;
         }
     }
@@ -543,23 +543,23 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public boolean validateNotSelectedElement(WebElement element,
                                               String elementName) throws InvalidElementStateException {
-        getLogger().info("+++ Verify not selected of: " + elementName);
+        logger.info("+++ Verify not selected of: " + elementName);
         try {
             if (!element.isSelected()) {
-                getLogger().info("+++++ Element : " + element.getText() + "is not selected.");
+                logger.info("+++++ Element : " + element.getText() + "is not selected.");
                 return true;
             } else {
                 throw new Exception();
             }
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element : " + element.getText() + "is selected.");
+            logger.info(e.getMessage());
+            logger.info("+++++ Element : " + element.getText() + "is selected.");
             return false;
         }
     }
 
     public boolean validateMaxLength(WebElement webElement, String webElementName, int maxLength) {
-        getLogger().info("Verify input with max length with " + maxLength + " characters");
+        logger.info("Verify input with max length with " + maxLength + " characters");
         try {
             String inputTextWithMaxLength = randomCharacters(maxLength);
             clickElement(webElement, webElementName);
@@ -570,7 +570,7 @@ Method to wait Ajax function on Site be loaded successfully.
                     String.format("%s cannot input %d characters", webElementName, maxLength));
             return true;
         } catch (AssertionError error) {
-            getLogger().info(error);
+            logger.info(error);
             return false;
         }
     }
@@ -581,17 +581,17 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description In order to wait element to be visible.
      */
     public boolean validateDisabledElement(WebElement element, String elementName) {
-        getLogger().info("verify disable of: " + elementName);
+        logger.info("verify disable of: " + elementName);
         try {
             if (!(element.isEnabled())) {
-                getLogger().info(element.getTagName() + " is disabled");
+                logger.info(element.getTagName() + " is disabled");
                 return true;
             } else {
                 throw new Exception();
             }
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info(elementName + " is  not disabled");
+            logger.info(e.getMessage());
+            logger.info(elementName + " is  not disabled");
             return false;
         }
     }
@@ -602,22 +602,22 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param expectedAttributeValue Expected value that we want to validate
      */
     public boolean validateAttributeElement(WebElement element, String attributeName, String expectedAttributeValue) {
-        getLogger().info("+++ Verify Attribute " + attributeName + " of: " + element.toString());
+        logger.info("+++ Verify Attribute " + attributeName + " of: " + element.toString());
         String actualAttributeValue = null;
         try {
             actualAttributeValue = element.getAttribute(attributeName).trim();
-            getLogger().info("actualAttributeValue of " + attributeName + " is: " + actualAttributeValue);
+            logger.info("actualAttributeValue of " + attributeName + " is: " + actualAttributeValue);
             if (actualAttributeValue.equals(expectedAttributeValue)) {
-                getLogger().info(element.getTagName() + " has attribute " + actualAttributeValue);
+                logger.info(element.getTagName() + " has attribute " + actualAttributeValue);
                 return true;
             } else {
                 throw new Exception(String.format("Expected ['%s'] but found ['%s']", expectedAttributeValue,
                         actualAttributeValue));
             }
         } catch (Exception e) {
-            getLogger().info(e);
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Error: " + element
+            logger.info(e);
+            logger.info(e.getMessage());
+            logger.info("+++++ Error: " + element
                     .getTagName() + " has attribute not as expected with actual: " + actualAttributeValue);
             return false;
         }
@@ -630,35 +630,35 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public boolean validateCssValueElement(WebElement element, String attributeName,
                                            String attributeValue) throws InvalidElementStateException {
-        getLogger().info("+++ Verify style with " + attributeName);
+        logger.info("+++ Verify style with " + attributeName);
         try {
-            getLogger().info("CurrentL: " + element.getCssValue(attributeName).trim());
+            logger.info("CurrentL: " + element.getCssValue(attributeName).trim());
             Assert.assertEquals(element.getCssValue(attributeName).trim(), attributeValue);
             return true;
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Validate CSS Value Element is not correct.");
+            logger.info(e.getMessage());
+            logger.info("+++++ Validate CSS Value Element is not correct.");
             return false;
         } catch (AssertionError e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ CSS Value Element is not correct.");
+            logger.info(e.getMessage());
+            logger.info("+++++ CSS Value Element is not correct.");
             return false;
         }
 
     }
 
     public boolean validateIsNotDisPlayedElement(WebElement element, String elementName) {
-        getLogger().info("+++ Verify element is not displayed of: " + elementName);
+        logger.info("+++ Verify element is not displayed of: " + elementName);
         try {
             if (!element.isDisplayed()) {
                 return true;
             } else {
-                getLogger().info("+++++ Element is not displayed.");
+                logger.info("+++++ Element is not displayed.");
                 return false;
             }
         } catch (Exception e) {
-            getLogger().info("+++++ Element is not displayed.");
-            getLogger().info(e.getMessage());
+            logger.info("+++++ Element is not displayed.");
+            logger.info(e.getMessage());
             return false;
         }
 
@@ -672,16 +672,16 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param type
      */
     public void validateElememt(WebElement webElement, String expected, Element_Type type) {
-        getLogger().info("+++++ Validate Element with: " + type);
+        logger.info("+++++ Validate Element with: " + type);
         switch (type) {
             case DISPLAYED:
                 try {
                     Assert.assertTrue(webElement.isDisplayed(), expected + " is not displayed.");
                 } catch (NoSuchElementException e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -689,10 +689,10 @@ Method to wait Ajax function on Site be loaded successfully.
                 try {
                     Assert.assertTrue(webElement.isEnabled(), expected + " is not enabled.");
                 } catch (NoSuchElementException e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -700,10 +700,10 @@ Method to wait Ajax function on Site be loaded successfully.
                 try {
                     Assert.assertTrue(webElement.isSelected(), expected + " is not selected  ");
                 } catch (NoSuchElementException e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -711,10 +711,10 @@ Method to wait Ajax function on Site be loaded successfully.
                 try {
                     Assert.assertFalse(webElement.isDisplayed(), expected + " is not hidden.");
                 } catch (NoSuchElementException e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -722,10 +722,10 @@ Method to wait Ajax function on Site be loaded successfully.
                 try {
                     Assert.assertEquals(getText(webElement), expected);
                 } catch (NoSuchElementException e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 } catch (AssertionError e) {
-                    getLogger().info(e.getMessage());
+                    logger.info(e.getMessage());
                     throw new AssertionError(e.getMessage());
                 }
                 break;
@@ -754,20 +754,20 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public boolean validateAttributeContain(WebElement webElement, String attribute, String value, String elementName) {
         try {
-            getLogger().info("Validate Style Attribute Exist " + elementName);
+            logger.info("Validate Style Attribute Exist " + elementName);
             if (webElement.getAttribute(attribute).contains(value)) {
-                getLogger().info(value + " exist on " + attribute + " on element: " + elementName);
+                logger.info(value + " exist on " + attribute + " on element: " + elementName);
                 return true;
             } else {
                 Assert.fail(value + " still exist on " + attribute + " on element: " + elementName);
                 return false;
             }
         } catch (NoSuchElementException e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
             Assert.fail("Error: " + elementName + " is not exist.");
             return false;
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
             Assert.fail("Error: Validate attribute contain " + elementName);
             return false;
         }
@@ -782,42 +782,42 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void validateElementTextContain(WebElement webElement, String value, String elementName) {
         try {
-            getLogger().info("Validate Element Text Contain " + elementName);
+            logger.info("Validate Element Text Contain " + elementName);
             System.out.println("expected = " + value);
             System.out.println("actualll = " + webElement.getText());
             if (webElement.getText().contains(value)) {
-                getLogger().info(elementName + "'s text contain: " + value);
+                logger.info(elementName + "'s text contain: " + value);
             } else {
                 Assert.fail(elementName + "'s text contain: " + value);
             }
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
             Assert.fail("Error: Validate text contain " + elementName);
         }
     }
 
     public boolean validateNotExistedElement(WebElement element, String elementName) {
         try {
-            getLogger().info("Try to validate Element is not existed.");
+            logger.info("Try to validate Element is not existed.");
             getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             element.click();
             element.getText();
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
         } catch (NoSuchElementException e) {
-            getLogger().info("Element is not existed.");
+            logger.info("Element is not existed.");
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (ElementNotVisibleException e) {
-            getLogger().info("Element is visible.");
+            logger.info("Element is visible.");
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (IndexOutOfBoundsException outEx) {
-            getLogger().info("List element is empty.");
+            logger.info("List element is empty.");
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (Exception e) {
-            getLogger().info("Element is still displayed.");
+            logger.info("Element is still displayed.");
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
         }
@@ -832,15 +832,15 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void validateElementsQuantity(List<WebElement> elements, int quantity, String elementName) {
         try {
-            getLogger().info("Validate elements quantity" + elementName);
+            logger.info("Validate elements quantity" + elementName);
             if (elements.size() == quantity) {
-                getLogger().info(elementName + " quantity equal: " + quantity);
+                logger.info(elementName + " quantity equal: " + quantity);
             } else {
                 Assert.fail(elementName + " quantity not equal: [Expected]= " + quantity + " /[Actual]= " + elements
                         .size());
             }
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
     }
 
@@ -853,15 +853,15 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void validatePlaceholder(WebElement webElement, String value, String elementName) {
         try {
-            getLogger().info("Validate placeholder " + elementName);
+            logger.info("Validate placeholder " + elementName);
             if (webElement.getAttribute("placeholder").equals(value)) {
-                getLogger().info(elementName + " placeholder equal: " + value);
+                logger.info(elementName + " placeholder equal: " + value);
             } else {
                 Assert.fail(elementName + " placeholder not equal: [Expected]= " + value + " /[Actual]= " + webElement
                         .getAttribute("placeholder"));
             }
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
     }
 
@@ -875,14 +875,14 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void validateAttributeNotContain(WebElement webElement, String attribute, String value, String elementName) {
         try {
-            getLogger().info("Validate Style Attribute Not Exist " + elementName);
+            logger.info("Validate Style Attribute Not Exist " + elementName);
             if (!webElement.getAttribute(attribute).contains(value)) {
-                getLogger().info(value + " not exist on " + attribute + " on element: " + elementName);
+                logger.info(value + " not exist on " + attribute + " on element: " + elementName);
             } else {
                 Assert.fail(value + " not exist on " + attribute + " on element: " + elementName);
             }
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
     }
 
@@ -895,33 +895,33 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void validateElementJavaScriptTextContain(WebElement webElement, String value, String elementName) {
         try {
-            getLogger().info("Validate Element JavaScript Text Contain " + elementName);
+            logger.info("Validate Element JavaScript Text Contain " + elementName);
             if (getTextByJavaScripts(webElement, elementName).contains(value)) {
-                getLogger().info(elementName + "'s JavaScript text contain: " + value);
+                logger.info(elementName + "'s JavaScript text contain: " + value);
             } else {
                 Assert.fail(elementName + "'s JavaScript text contain: " + value);
             }
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
     }
 
     public boolean validateExistedElement(WebElement element, String elementName) {
         try {
-            getLogger().info("Validating " + elementName + " is existed.");
+            logger.info("Validating " + elementName + " is existed.");
             element.getText();
             return true;
         } catch (NoSuchElementException e) {
-            getLogger().info(elementName + " is not existed.");
+            logger.info(elementName + " is not existed.");
             return false;
         } catch (ElementNotVisibleException e) {
-            getLogger().info(elementName + " is visible.");
+            logger.info(elementName + " is visible.");
             return false;
         } catch (IndexOutOfBoundsException outEx) {
-            getLogger().info("List " + elementName + " is empty.");
+            logger.info("List " + elementName + " is empty.");
             return false;
         } catch (Exception e) {
-            getLogger().info("Error: Finding " + elementName + " error.");
+            logger.info("Error: Finding " + elementName + " error.");
             //getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
         }
@@ -972,7 +972,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: select a value on dropdown via visible text
      */
     public void selectOptionByText(WebElement element, String selText, String elementName) {
-        getLogger().info("+++ Select By VisibleText on element: " + elementName);
+        logger.info("+++ Select By VisibleText on element: " + elementName);
         Select dropDown = new Select(element);
         dropDown.selectByVisibleText(selText);
     }
@@ -985,7 +985,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: select a value on dropdown via visible text
      */
     public void selectOptionByValue(WebElement element, String selValue, String elementName) {
-        getLogger().info("+++ Select By Value on element: " + elementName);
+        logger.info("+++ Select By Value on element: " + elementName);
         Select dropDown = new Select(element);
         dropDown.selectByValue(selValue);
     }
@@ -998,7 +998,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @Description: select a value on dropdown via visible text
      */
     public void selectOptionByIndex(WebElement element, int selIndex, String elementName) {
-        getLogger().info("+++ Select By Index on element: " + elementName);
+        logger.info("+++ Select By Index on element: " + elementName);
         Select dropDown = new Select(element);
         dropDown.selectByIndex(selIndex);
     }
@@ -1014,7 +1014,7 @@ Method to wait Ajax function on Site be loaded successfully.
 //     */
 //    public WebElement findWebElementByXpath(String xpathElement) {
 //        WebElement resultWebElement = null;
-//        getLogger().info("The xpath of web element = " + xpathElement);
+//        logger.info("The xpath of web element = " + xpathElement);
 //        resultWebElement = getDriver().findElement(By.xpath(xpathElement));
 //        return resultWebElement;
 //    }
@@ -1031,7 +1031,7 @@ Method to wait Ajax function on Site be loaded successfully.
         try {
             webElement = getDriver().findElement(By.xpath(xpath));
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
         return webElement;
     }
@@ -1047,15 +1047,15 @@ Method to wait Ajax function on Site be loaded successfully.
             for (int i = 0; i < listElement.size(); i++) {
                 actualTextValue = listElement.get(i).getText().trim();
                 if (actualTextValue.equals(textValue)) {
-                    getLogger().info("Element is found at " + i);
+                    logger.info("Element is found at " + i);
                     return i;
                 }
             }
-            getLogger().info(String.format("Cannot find the text name: %s", textValue));
+            logger.info(String.format("Cannot find the text name: %s", textValue));
             return -1;
 
         } catch (Exception e) {
-            getLogger().info(String.format("Cannot find the text name: %s", textValue));
+            logger.info(String.format("Cannot find the text name: %s", textValue));
             return -1;
         }
     }
@@ -1074,8 +1074,8 @@ Method to wait Ajax function on Site be loaded successfully.
             for (int i = 0; i < listElement.size(); i++) {
                 actualAttributeValue = listElement.get(i).getAttribute(attributeName).trim();
                 if (actualAttributeValue.equals(textValue)) {
-                    getLogger().info("Element is found at " + i);
-                    getLogger().info(String.format("The position of the text name '%s' at %d", textValue, i));
+                    logger.info("Element is found at " + i);
+                    logger.info(String.format("The position of the text name '%s' at %d", textValue, i));
                     return i;
                 }
             }
@@ -1093,15 +1093,15 @@ Method to wait Ajax function on Site be loaded successfully.
     /***************************************Functions: Scroll Page function: **************************************/
 
     public void scrollPageUp() {
-        getLogger().info("+++ Scroll Page up.");
+        logger.info("+++ Scroll Page up.");
         try {
             Robot robot = new Robot();
             robot.keyPress(KeyEvent.VK_PAGE_UP);
             robot.keyRelease(KeyEvent.VK_PAGE_UP);
-            getLogger().info("+++++ Scroll Page up successfully.");
+            logger.info("+++++ Scroll Page up successfully.");
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Scroll Page up unsuccessfully.");
+            logger.info(e.getMessage());
+            logger.info("+++++ Scroll Page up unsuccessfully.");
         }
     }
 
@@ -1109,15 +1109,15 @@ Method to wait Ajax function on Site be loaded successfully.
     Method to scrollPageDown
      */
     public void scrollPageDown() {
-        getLogger().info("+++ Scroll Page down.");
+        logger.info("+++ Scroll Page down.");
         try {
             Robot robot = new Robot();
             robot.keyPress(KeyEvent.VK_PAGE_DOWN);
             robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
-            getLogger().info("+++++ Scroll Page down successfully.");
+            logger.info("+++++ Scroll Page down successfully.");
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Scroll Page down unsuccessfully.");
+            logger.info(e.getMessage());
+            logger.info("+++++ Scroll Page down unsuccessfully.");
         }
     }
 
@@ -1126,7 +1126,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * TODO: duplicating with scrollToFooter on AbstractService, find solution later
      */
     public void scrollToFooter() {
-        getLogger().info("Scroll down to see page footer.");
+        logger.info("Scroll down to see page footer.");
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
@@ -1141,17 +1141,17 @@ Method to wait Ajax function on Site be loaded successfully.
      * @return The text of web element
      */
     public String getTextByJavaScripts(WebElement eleGetText, String elementName) {
-        getLogger().info("+++ Get text by javascript of element " + elementName);
+        logger.info("+++ Get text by javascript of element " + elementName);
         String textOfElement = "";
         try {
             JavascriptExecutor jse = (JavascriptExecutor) getDriver();
             textOfElement = (String) ((JavascriptExecutor) getDriver())
                     .executeScript("return arguments[0].value;", eleGetText);
-            getLogger().info("+++++ Text of element: " + elementName + textOfElement);
+            logger.info("+++++ Text of element: " + elementName + textOfElement);
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to get text of element: " + elementName + textOfElement);
+            logger.info(e.getMessage());
+            logger.info(e.getMessage());
+            logger.info("+++++ Unable to get text of element: " + elementName + textOfElement);
         }
         return textOfElement;
     }
@@ -1174,13 +1174,13 @@ Method to wait Ajax function on Site be loaded successfully.
      * @return The text of web element
      */
     public String getTextByAttributeValue(WebElement webElement, String elementName) {
-        getLogger().info("Get text by attribute 'value' " + elementName);
+        logger.info("Get text by attribute 'value' " + elementName);
         try {
             return webElement.getAttribute("value");
         } catch (NoSuchElementException e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
+            logger.info(ex.getMessage());
         }
         return null;
     }
@@ -1196,7 +1196,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param tabIndex
      */
     public void switchToOtherTab(int tabIndex) {
-        getLogger().info("+++ Switch to tab: " + tabIndex);
+        logger.info("+++ Switch to tab: " + tabIndex);
         java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(tabIndex));
     }
@@ -1208,7 +1208,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param IframeName
      */
     public void switchToFrame(String IframeName) {
-        getLogger().info("+++ Switch to iFrame: " + IframeName);
+        logger.info("+++ Switch to iFrame: " + IframeName);
         driver.switchTo().frame(IframeName);
 
     }
@@ -1219,7 +1219,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param iFrameId
      */
     public void switchToFrame(int iFrameId) {
-        getLogger().info("+++ Switch to iFrame with id: " + iFrameId);
+        logger.info("+++ Switch to iFrame with id: " + iFrameId);
         driver.switchTo().frame(iFrameId);
 
     }
@@ -1230,7 +1230,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param eleFrame
      */
     public void switchToFrame(WebElement eleFrame) {
-        getLogger().info("+++ Switch to iFrame with WebElement: " + eleFrame);
+        logger.info("+++ Switch to iFrame with WebElement: " + eleFrame);
         driver.switchTo().frame(eleFrame);
 
     }
@@ -1253,7 +1253,7 @@ Method to wait Ajax function on Site be loaded successfully.
 
 
     public void verifySortDataGrid(java.util.List<WebElement> elementRowValue, WebElement elementSortIcon) {
-        getLogger().info("+++ Verify Sort Data Grid: " + elementSortIcon);
+        logger.info("+++ Verify Sort Data Grid: " + elementSortIcon);
         java.util.List<String> listToDoTaskName = new ArrayList<String>();
         java.util.List<String> listSortedToDoTaskName;
         for (int i = 0; i < elementRowValue.size(); i++) {
@@ -1274,7 +1274,7 @@ Method to wait Ajax function on Site be loaded successfully.
             listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
         }
         Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Descending sort is NOT as expected");
-        getLogger().info("++++ Verified Sort Data Grid: " + elementSortIcon);
+        logger.info("++++ Verified Sort Data Grid: " + elementSortIcon);
     }
 
 
@@ -1284,7 +1284,7 @@ Method to wait Ajax function on Site be loaded successfully.
      * @param url
      */
     public void getUrl(String url) {
-        getLogger().info("+++ Navigate to URL: " + url);
+        logger.info("+++ Navigate to URL: " + url);
         driver.get(url);
     }
 
