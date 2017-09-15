@@ -149,7 +149,7 @@ public class TeamStepDefinition extends BaseInit {
 
     @Then("^I should see permisson of member: \"([^\"]*)\" changed to: \"([^\"]*)\"$")
     public void verifyPermissonOfMember(String memberName, String permissionLevel) throws Throwable {
-        getLogger().info("Verify permisson level of member : "+ memberName +"is "+permissionLevel);
+        logger.info("Verify permisson level of member : "+ memberName +"is "+permissionLevel);
 //        clientTeamPage.verifyPermissonOfMember(memberName,permissionLevel);
     }
 }
