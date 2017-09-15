@@ -5,7 +5,6 @@ import com.auvenir.ui.bdd.common.Generic;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
@@ -31,7 +30,7 @@ import static com.auvenir.ui.bdd.common.Generic.getConfigValue;
  * Created by doai.tran on 8/18/2017.
  */
 public class AbstractStep extends BaseInit {
-    private static Logger logger = Logger.getLogger(AbstractStep.class.getSimpleName());
+
     private BaseInit base;
     protected String SELENIUM_GRID_HUB = "http://jenkins.auvenir.com:4444/wd/hub";
 
@@ -158,6 +157,6 @@ public class AbstractStep extends BaseInit {
         }
         driver.close();
         driver.quit();
-        logger.info("***** Closed browser *****");
+        getLogger().info("***** Closed browser *****");
     }
 }

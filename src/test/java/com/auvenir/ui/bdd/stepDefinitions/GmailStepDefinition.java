@@ -6,7 +6,6 @@ import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ import java.util.List;
  * Created by duong.nguyen on 9/7/2017.
  */
 public class GmailStepDefinition extends BaseInit {
-    private Logger logger = Logger.getLogger(GmailStepDefinition.class.getSimpleName());
     private BaseInit base;
     MailPage mailPage;
 
@@ -25,14 +23,14 @@ public class GmailStepDefinition extends BaseInit {
 
     @Given("^I navigate to gmail login page$")
     public void iNavigateToGmailLoginPage() throws Throwable {
-        logger.info("===== I navigate to gmail login page =====");
+        getLogger().info("===== I navigate to gmail login page =====");
         mailPage.goGMail();
     }
 
     @And("^I signIn gmail$")
     public void iSignInGmail(DataTable users) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("===== I signIn gmail =====");
+        getLogger().info("===== I signIn gmail =====");
         List<String> lstData = users.asList(String.class);
         mailPage.signInGmail(lstData.get(0), lstData.get(1));
     }
@@ -40,21 +38,21 @@ public class GmailStepDefinition extends BaseInit {
     @And("^I open active email$")
     public void iOpenActiveEmail() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("I select Auditor active email");
+        getLogger().info("I select Auditor active email");
         mailPage.selectActiveEmail();
     }
 
     @And("^I click on confirmation link$")
     public void iClickOnConfirmationLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("I click on confirmation link");
+        getLogger().info("I click on confirmation link");
         mailPage.navigateToConfirmationLink();
     }
 
     @Given("^I delete existed email$")
     public void iDeleteExistedEmail(DataTable users) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("I delete existed email");
+        getLogger().info("I delete existed email");
         List<String> lstData = users.asList(String.class);
         mailPage.deleteAllExistedGMail(lstData.get(0), lstData.get(1));
     }
@@ -62,7 +60,7 @@ public class GmailStepDefinition extends BaseInit {
     @And("^I relogin gmail: \"([^\"]*)\"$")
     public void iReloginGmail(String password) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("I relogin gmail");
+        getLogger().info("I relogin gmail");
         mailPage.goGMail();
         mailPage.reSignInGmail(password);
     }
@@ -70,7 +68,7 @@ public class GmailStepDefinition extends BaseInit {
     @And("^I click on onboarding invitation link$")
     public void iClickOnOnboardingInvitationLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("I click on onboarding invitation link");
+        getLogger().info("I click on onboarding invitation link");
         mailPage.clickOnboardingInvitationLink();
     }
 

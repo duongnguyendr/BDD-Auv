@@ -71,6 +71,6 @@ public class MongoStepDefinition {
     @And("^Delete user by email: \"([^\"]*)\"$")
     public void deleteUserByEmail(String email) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        MongoDBService.removeUserbyEmail( email);
+        MongoDBService.removeUserByEmail( email);
     }
 }

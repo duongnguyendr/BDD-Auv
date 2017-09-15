@@ -128,6 +128,7 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP01"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
     And I click on team tab
+    And I delete existed member on team page: "Lead Auditor"
     And I click in invite new member on team page
     Then I should see invite new member page
     And I input full name on invite new member page: "Lead Auditor"
@@ -280,31 +281,31 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Auditor
-      | Auditor Name  | Todo Name |
-      | Admin Auditor | ToDo 01   |
-      | Admin Auditor | ToDo 02   |
-      | Admin Auditor | ToDo 03   |
+      | Auditor Name| Todo Name|
+      |Admin Auditor| ToDo 01  |
+      |Admin Auditor| ToDo 02  |
+      |Admin Auditor| ToDo 03  |
     And I verify Auditor Assignee Selected
-      | Auditor Name  | Todo Name |
-      | Admin Auditor | ToDo 01   |
-      | Admin Auditor | ToDo 02   |
-      | Admin Auditor | ToDo 03   |
+      | Auditor Name| Todo Name|
+      |Admin Auditor| ToDo 01  |
+      |Admin Auditor| ToDo 02  |
+      |Admin Auditor| ToDo 03  |
 
 ##Viet Le create testcase:
   Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                 | Password     |
-      | auvenirinfo@gmail.com | Changeit@123 |
+      | Email                   | Password     |
+      | auvenirinfo@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Client
-      | userName   | Todo Name |
-      | Unassigned | ToDo 01   |
-      | Unassigned | ToDo 02   |
+      |userName | Todo Name|
+      |Unassigned| ToDo 01|
+      |Unassigned| ToDo 02|
 
 #Huy
   Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
@@ -344,40 +345,7 @@ Feature: Smoke Test Feature
     And I fill up all Security Information with Password: "Changeit@123"
     And I click on Create Account Button on Security Information Page
     Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
-
-  Scenario: Lead Auditor add New member auditor into Engagement 2: AUV-787
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                    | Password     |
-      | auvenirauditor@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
-    And I click on team tab
-    And I click in invite new member on team page
-    Then I should see invite new member page
-    And I input full name on invite new member page: "Huy GA01"
-    And I input email on invite new member page: "auvenirauditor01@gmail.com"
-    And I input email confirm on invite new member page: "auvenirauditor01@gmail.com"
-    And I select role of new member
-    And I click on invite new member
-    Then I should see invite successful message
-
-  Scenario: Lead Auditor new Auditor member active account and login to Engagement 2: AUV-798
-    Given I navigate to gmail login page
-    Then I signIn gmail
-      | auvenirauditor02@gmail.com | TESTPASSWORD |
-    And I open active email
-    And I click on confirmation link
-    Then I should see personal sign up page
-    And I input confirm auditor personal information: "1234567890"
-    Then I should see provide firm information page
-    And I click on continue button on firm information page
-    And I create password: "Changeit@123"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
 #/Huy
-
   #Duong
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
@@ -426,3 +394,4 @@ Feature: Smoke Test Feature
     Then I should see delete todo popup
     And I click on confirm delete button on delete todo popup
     Then I should see todo not existed in todo list: "ToDo 03"
+   #/Duong

@@ -12,7 +12,6 @@ import java.util.List;
  * Created by huy.huynh on 20/07/2017.
  */
 public class EngagementPage extends CommonPage {
-    private static Logger logger = Logger.getLogger(EngagementPage.class.getSimpleName());
 
     //@FindBy(xpath = "//div[@id='allClientEngagement']//span[@id='c-header-title']")
     @FindBy(xpath = "//div[@id='preview-header-left']/span[@id='c-header-title']")
@@ -48,7 +47,7 @@ public class EngagementPage extends CommonPage {
      * @return the number of the position if the WebElement is matched, otherwise return -1.
      */
     public int findEngagementName(String engagementName) {
-        logger.info("Find Position of Engagement Name");
+        getLogger().info("Find Position of Engagement Name");
         String displayValue = noEngagementDivEle.getCssValue("display");
         if (displayValue.equals("block"))
             return -1;
@@ -76,7 +75,7 @@ public class EngagementPage extends CommonPage {
         waitForVisibleElement(myEngagementTextEle, "myEngagementTextEle");
         boolean isCompareText = validateElementText(myEngagementTextEle, "All Engagements");
         if (isCompareText) {
-            logger.info("Verify user's Engagement page: Pass");
+            getLogger().info("Verify user's Engagement page: Pass");
         } else {
             Assert.fail("Verify user's Engagement page: Fail");
         }
@@ -104,7 +103,7 @@ public class EngagementPage extends CommonPage {
             }
         }
         if (exist) {
-            logger.info("Verify " + role + " can see all engagements within firm");
+            getLogger().info("Verify " + role + " can see all engagements within firm");
         } else {
             Assert.fail("Fail: Verify " + role + " can see all engagements within firm");
         }

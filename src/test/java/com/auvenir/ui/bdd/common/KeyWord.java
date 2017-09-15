@@ -1220,16 +1220,45 @@ Method to wait Ajax function on Site be loaded successfully.
     }
 
     /**
-     * @param webElement
-     * @param elementName
-     * @param waitTime
+     * wait until animation for element finish
+     *
+     * @param webElement  xpath to get element
+     * @param elementName vararg for formating
      */
-    public void visibilityOfElementWait(WebElement webElement, String elementName, int waitTime) {
+    public void waitForAnimation(WebElement webElement, String elementName) {
+        // This function is waiting to Popup Delete To Do task is displayed after running animation.
+        // We can move this function to Abstract Page or Common Page.
         try {
-            WebDriverWait sWebDriverWait = new WebDriverWait(driver, waitTime);
-            sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
+            getLogger().info("Waiting For Animation: " + elementName);
+            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+            wait.until((WebDriver driver) -> {
+                boolean result = false;
+                result = (boolean) ((JavascriptExecutor) driver).executeScript(
+                        "var elm = arguments[0];" + "var doc1 = elm.ownerDocument || document;" + "var rect = elm.getBoundingClientRect();" + "return elm === doc1.elementFromPoint(rect.left, rect.top);",
+                        webElement);
+                getLogger().info("result: " + result);
+                return result;
+            });
         } catch (Exception e) {
-            logger.info(e.getMessage());
+            getLogger().info(e.getMessage());
         }
     }
+
+    /**
+     * @param webElement  Element defined in page class
+     * @param elementName The text name of element
+     * @return The text of web element
+     */
+    public String getTextByAttributeValue(WebElement webElement, String elementName) {
+        getLogger().info("Get text by attribute 'value' " + elementName);
+        try {
+            return webElement.getAttribute("value");
+        } catch (NoSuchElementException e) {
+            getLogger().info(e.getMessage());
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+        return null;
+    }
+
 }

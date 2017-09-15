@@ -54,6 +54,7 @@ public class TodoPage extends CommonPage {
     @FindBy(xpath = "//div[contains(text(),'Assign to')]/div[contains(@class,'menu')]/button")
     protected List<WebElement> childItemAssigneeBulkDrpEle;
 
+
     public int findToDoTaskName(String toDoName) {
         logger.info("Find Position of To Do Task Name");
         try {
@@ -90,7 +91,6 @@ public class TodoPage extends CommonPage {
             clickElement(clientAssigneeSelected, "clientAssigneeSelected");
 
         }
-
     /**
      * Duong Nguyen
      */
@@ -154,8 +154,8 @@ public class TodoPage extends CommonPage {
     }
 
     public void clickOptionDeleteOnBulkActionsDropDown() {
-            logger.info("Choose option: Delete.");
-            clickElement(optionDelete, "Option Delete");
+        logger.info("Choose option: Delete.");
+        clickElement(optionDelete, "Option Delete");
     }
 
     public void verifyPopUpDeleteTodoDisplay(){
@@ -202,17 +202,17 @@ public class TodoPage extends CommonPage {
      */
     public void chooseBulkActionAssignee(String assigneeName) {
         logger.info(String.format("Choose Assignee '%s' in Bulk Dropdown list", assigneeName));
-            String listUser = "";
-            boolean result = false;
-            clickElement(optionAssignTo, "Assign To Option");
-            waitSomeSeconds(2);
-            for (int i = 0; i < childItemAssigneeBulkDrpEle.size(); i++) {
-                listUser = childItemAssigneeBulkDrpEle.get(i).getAttribute("textContent");
-                System.out.println("list User: " + listUser);
-                if (listUser.contains(assigneeName)) {
-                    clickElement(childItemAssigneeBulkDrpEle.get(i), "Child Item Assignee");
-                    break;
-                }
+        String listUser = "";
+        boolean result = false;
+        clickElement(optionAssignTo, "Assign To Option");
+        waitSomeSeconds(2);
+        for (int i = 0; i < childItemAssigneeBulkDrpEle.size(); i++) {
+            listUser = childItemAssigneeBulkDrpEle.get(i).getAttribute("textContent");
+            System.out.println("list User: " + listUser);
+            if (listUser.contains(assigneeName)) {
+                clickElement(childItemAssigneeBulkDrpEle.get(i), "Child Item Assignee");
+                break;
             }
+        }
     }
 }
