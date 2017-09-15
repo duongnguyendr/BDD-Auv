@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -21,7 +22,10 @@ public class TodoPage extends CommonPage {
     @FindBy(xpath = "//div[@class='ui dropdown client todo-bulkDdl ']")
     private List<WebElement> listClientAssigneeDdl;
     protected String assineeClientEle = ".//button[text()='%s']";
-
+    @FindBy(xpath = "//*[@id='todo-table']/tbody/tr/td[7]/img")
+    private List<WebElement> listSlideOutMenu;
+    @FindBy(xpath = "//div[@id='auv-todo-details']")
+    private WebElement todoDetailPopup;
 
 
     public int findToDoTaskName(String toDoName) {
@@ -50,14 +54,25 @@ public class TodoPage extends CommonPage {
             return -1;
         }
     }
+
     public void selectClientAssigneeByName(String toDoName, String clientAssignee) {
         getLogger().info("== select Client Assignee By Name ==");
-            int index = findToDoTaskName(toDoName);
-            clickElement(listClientAssigneeDdl.get(index), "listClientAssigneeDdl");
-            waitSomeSeconds(2);
-            WebElement clientAssigneeSelected =
-                    listClientAssigneeDdl.get(index).findElement(By.xpath(String.format(assineeClientEle, clientAssignee)));
-            clickElement(clientAssigneeSelected, "clientAssigneeSelected");
+        int index = findToDoTaskName(toDoName);
+        clickElement(listClientAssigneeDdl.get(index), "listClientAssigneeDdl");
+        waitSomeSeconds(2);
+        WebElement clientAssigneeSelected =
+                listClientAssigneeDdl.get(index).findElement(By.xpath(String.format(assineeClientEle, clientAssignee)));
+        clickElement(clientAssigneeSelected, "clientAssigneeSelected");
 
-        }
+    }
+
+    public void clickSlideOutMenuOnTodo(String todoName) {
+        int index = findToDoTaskName(todoName);
+        clickElement(listSlideOutMenu.get(index), "Slide Out Menu icon");
+    }
+
+    public void verifyTodoDetailOpened() {
+        boolean isOpened = waitForCssValueChanged(todoDetailPopup, "Todo detail popup", "display", "block");
+        Assert.assertTrue(isOpened, "Todo detail is opened successfully");
+    }
 }

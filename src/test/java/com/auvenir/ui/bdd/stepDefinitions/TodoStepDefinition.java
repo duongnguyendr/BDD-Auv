@@ -4,6 +4,8 @@ import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
 import javax.enterprise.inject.New;
@@ -23,12 +25,21 @@ public class TodoStepDefinition extends BaseInit {
         todoPage = new TodoPage(logger,driver);
     }
 
+
+
     public class LisTodoAnduser{
         public String userName;
         public String todoName;
         public LisTodoAnduser (String userBeAssign, String LisTodoAnduser ){
             userName = userBeAssign;
             todoName = LisTodoAnduser;
+        }
+    }
+
+    public class ListNewRequest{
+        public String newRequestName;
+        public ListNewRequest(String newRequestName){
+            this.newRequestName = newRequestName;
         }
     }
     @Then("^I assignee list To-Do to Auditor$")
@@ -73,6 +84,32 @@ public class TodoStepDefinition extends BaseInit {
             System.out.println("The To-Do name is: "+lisTodoAnduser.todoName);
             todoPage.selectClientAssigneeByName(lisTodoAnduser.todoName,lisTodoAnduser.userName);
         }
+    }
+
+    @And("^I click slide out menu on selected To-do: \"([^\"]*)\"$")
+    public void iClickSlideOutMenuOnSelectedToDo(String todoName) throws Throwable {
+        getLogger().info("===== I click slide out panel on selected To-do =====");
+        auditorTodoPage.clickSlideOutMenuOnTodo(todoName);
+    }
+
+
+    @Then("^I should see the Todo detail opened$")
+    public void verifyTodoDetailOpened() throws Throwable {
+        getLogger().info("===== I should see the Todo detail opened =====");
+        auditorTodoPage.verifyTodoDetailOpened();
+    }
+
+    @And("^I creates some new requests$")
+    public void createsSomeNewRequests(DataTable table) throws Throwable {
+        getLogger().info("===== I creates some new Request name =====");
+        List<ListNewRequest> listNewRequests = new ArrayList<>();
+        listNewRequests = table.asList(ListNewRequest.class);
+        for (ListNewRequest listNewRequest: listNewRequests){
+            System.out.println("Prepare to create: "+listNewRequest.newRequestName);
+//            auditorTodoPage.clickElement();
+//            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
+        }
+
     }
 
 }
