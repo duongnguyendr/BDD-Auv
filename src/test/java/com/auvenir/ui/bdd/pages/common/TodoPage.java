@@ -257,7 +257,6 @@ public class TodoPage extends CommonPage {
             logger.info("UnCheck on 'CheckAll' check box in ToDo page complete");
         }
     }
-    }
 
     public void clickSlideOutMenuOnTodo(String todoName) {
         int index = findToDoTaskName(todoName);
