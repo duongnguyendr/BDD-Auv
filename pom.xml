@@ -33,7 +33,7 @@
                 <inherited>true</inherited>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>testngBDD.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

@@ -33,6 +33,8 @@ public class TodoPage extends CommonPage {
     protected WebElement popUpMarkCompleteWindows;
     @FindBy(xpath = "//label[contains(@id,'m-Mark As Complete')]")
     protected WebElement markAsCompleteTitle;
+    @FindBy(xpath = "//div[contains(@id, 'download-zip') and contains(@style, 'display: block;')]//label[contains(@id, 'm-download-zip')]")
+    protected WebElement downloadAttachmentTitle;
     @FindBy(xpath = ".//label[contains(@id, 'm-Delete Todo Modal')]")
     protected WebElement deleteTodoTitle;
     @FindBy(xpath = "//div[contains(@id, 'Mark As Complete')]//div[@class='ce-footer']//button[@class='auvbtn primary']")
@@ -54,11 +56,15 @@ public class TodoPage extends CommonPage {
     @FindBy(xpath = "//div[contains(text(),'Assign to')]/div[contains(@class,'menu')]/button")
     protected List<WebElement> childItemAssigneeBulkDrpEle;
     @FindBy(id = "cb-select-all-todo")
-    private WebElement eleCheckAllCheckBox;
+    protected WebElement eleCheckAllCheckBox;
+    @FindBy(xpath = "//div[starts-with(@id,'download-zip') and contains(@class,'au-modal')]")
+    protected WebElement popUpDownloadAttachmentsWindows;
+    @FindBy(id = "fm-downloadBtn")
+    protected WebElement downloadAllTodo;
     @FindBy(xpath = "//*[@id='todo-table']/tbody/tr/td[7]/img")
-    private List<WebElement> listSlideOutMenu;
+    protected List<WebElement> listSlideOutMenu;
     @FindBy(xpath = "//div[@id='auv-todo-details']")
-    private WebElement todoDetailPopup;
+    protected WebElement todoDetailPopup;
 
 
     public int findToDoTaskName(String toDoName) {
@@ -82,8 +88,10 @@ public class TodoPage extends CommonPage {
                     }
                 }
             }
+            logger.info("Element is not found");
             return -1;
         } catch (NoSuchElementException e) {
+            logger.info("Element is not found");
             return -1;
         }
     }
@@ -146,6 +154,11 @@ public class TodoPage extends CommonPage {
     public void clickOnArchiveButtonInMarkAsCompletePopup() {
         waitForClickableOfElement(archiveMarkPopupBtn, "Wait for click on archive button");
         clickElement(archiveMarkPopupBtn, "Click on archive button");
+    }
+
+    public void verifyPopUpDownloadAttachmentsDisplay(){
+        boolean result = validateElementText(downloadAttachmentTitle, "Ready To Download");
+        Assert.assertTrue(result, "Download Attachments popup should be displayed.");
     }
 
     public void verifyTodoMarkCompleted(String todoName) {
@@ -267,4 +280,17 @@ public class TodoPage extends CommonPage {
         boolean isOpened = waitForCssValueChanged(todoDetailPopup, "Todo detail popup", "display", "block");
         Assert.assertTrue(isOpened, "Todo detail is opened successfully");
     }
+
+    public void clickToBulkDownloadAttachmentButton() {
+        List<WebElement> menuBulkActionsDropdown = bulkActionsDropdownMenuEle.findElements(By.xpath("button[contains(@class,'item')]"));
+        clickElement(menuBulkActionsDropdown.get(0), "Bulk download attachments button");
+        waitForAnimation(popUpDownloadAttachmentsWindows, "Download To Do Popup");
+    }
+
+    public void clickDownloadAllTodo() {
+            logger.info("Click Download Button.");
+            clickElement(downloadAllTodo, "click to downloadAllTodo");
+            waitForCssValueChanged(popUpDownloadAttachmentsWindows, "Popup Mark Complete", "display", "none");
+    }
+
 }
