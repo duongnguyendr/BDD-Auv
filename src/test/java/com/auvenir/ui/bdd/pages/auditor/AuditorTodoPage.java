@@ -15,17 +15,13 @@ import java.util.List;
  */
 
 public class AuditorTodoPage extends TodoPage {
+    private static Logger logger = Logger.getLogger(AuditorTodoPage.class.getSimpleName());
     public AuditorTodoPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
 
-
-
     @FindBy(xpath = "//div[contains(@class,'ui dropdown auditor todo-bulkDdl ')]")
     private List<WebElement> listAuditorAssigneeDdl;
-
-
-
 
     public void selectAuditorAssigneeByName(String toDoName, String auditorAssignee){
 
@@ -41,15 +37,15 @@ public class AuditorTodoPage extends TodoPage {
     public void verifyAuditorAssigneeSelected(String toDoName, String auditorAssignee) {
 
         waitSomeSeconds(2);
-        getLogger().info("Verify Auditor Assignee Selected in Dropdownlist.");
+        logger.info("Verify Auditor Assignee Selected in Dropdownlist.");
         int index = findToDoTaskName(toDoName);
         WebElement auditorAssigneeSelected = listAuditorAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
         waitForTextValueChanged(auditorAssigneeSelected, "auditorAssigneeSelected", auditorAssignee);
         if (auditorAssigneeSelected.getText().equals(auditorAssignee)) {
-            getLogger().info("verify auditor assignee selected with name: " + auditorAssignee);
+            logger.info("verify auditor assignee selected with name: " + auditorAssignee);
         } else {
 
-            getLogger().info("verify auditor assignee selected with name: " + auditorAssignee);
+            logger.info("verify auditor assignee selected with name: " + auditorAssignee);
         }
 
     }

@@ -168,7 +168,7 @@ Feature: Smoke Test Feature
     And I click on invite client button on engagement detail page
     Then I should see invite new client popup
     And I select add new client on new client popup
-    And I input full name on invite client popup: "Admin Client"
+    And I input full name: "Admin Client" on invite client popup
     And I input email on invite client popup: "chr.client01.adm@gmail.com"
     And I input confirm email on invite client popup: "chr.client01.adm@gmail.com"
     And I input role on invite client popup: "IT"
@@ -184,7 +184,6 @@ Feature: Smoke Test Feature
     Then I should see status of user is onboarding
       | chr.client01.adm@gmail.com | Onboarding |
 
-#Thuan Duong create testcase:
   Scenario: Admin Client active account: AUV-645
     Given I navigate to gmail login page
     And I signIn gmail
@@ -233,7 +232,6 @@ Feature: Smoke Test Feature
     And I click create todo button on Create New Engagement Page
     Then I should see engagement detail page with Engagement Title Editable: "Thuan Engagement GP03"
 
-    #Huy
   Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
     Given I navigate to Marketing page
     And I click on login link
@@ -303,7 +301,6 @@ Feature: Smoke Test Feature
     And I click on continue button on firm information page
     And I create password: "Changeit@123"
     Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
-#/Huy
 
 #Vien Pham create testcase:
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
@@ -327,7 +324,7 @@ Feature: Smoke Test Feature
     Then I should see Invite Member successful message
 
     #Vien Pham create testcase:
-  Scenario:  Admin Client tranfer Lead permission to Lead Client in the Engagement2: AUV-847
+  Scenario:  Admin Client transfer Lead permission to Lead Client in the Engagement2: AUV-847
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -341,7 +338,7 @@ Feature: Smoke Test Feature
     And I change the permission of member: "Lead Client" to be Lead
 
   #Viet Le create testcase:
-  Scenario:Lead Auditor assign To Do task to Auditor Memeber: AUV-924
+  Scenario:Lead Auditor assign To Do task to Auditor member AUV-924
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -406,9 +403,17 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 03"
+    And I select todo check box on todo page: "ToDo 04"
     And I click bulk action drop down on todo page
-#    And I click assignee on bulk action drop down
+    And I click assignee to :"unassigned" on bulk action drop down
+    And I verify Client Assignee Selected
+      |userName  | Todo Name|
+      |Unassigned| ToDo 04  |
+    And I click bulk action drop down on todo page
+    And I click assignee to :"Lead Auditor" on bulk action drop down
+    And I verify Auditor Assignee Selected
+      | User Name    | Todo Name |
+      | Lead Auditor | ToDo 04   |
 
   Scenario: Lead Auditor delete To Do Task: AUV-1026
     Given I navigate to Marketing page
@@ -426,4 +431,33 @@ Feature: Smoke Test Feature
     Then I should see delete todo popup
     And I click on confirm delete button on delete todo popup
     Then I should see todo not existed in todo list: "ToDo 03"
-   #/Duong
+
+  Scenario: Lead Auditor download all To Do: AUV-1052
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                    | Password     |
+      | auvenirauditor@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+    And I click check box all todo on todo page
+    And I click bulk action drop down on todo page
+
+#   #/Duong
+#  #Viet Le create testcase:
+  Scenario:Lead Auditor Create To Do task: AUV-878
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I create To-Do with name and category
+      |ToDo name| Category|
+      |ToDo 01| Music |
+      |ToDo 02| Sport |

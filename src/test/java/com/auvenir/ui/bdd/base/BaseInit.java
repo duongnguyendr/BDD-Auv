@@ -8,14 +8,11 @@ import org.openqa.selenium.WebDriver;
  * Created by doai.tran on 8/7/2017.
  */
 public class BaseInit {
-    public static Logger logger = Logger.getLogger(BaseInit.class);
+    public static Logger logger = Logger.getLogger(BaseInit.class.getSimpleName());
     public static WebDriver driver = null;
 
     public WebDriver getDriver() {
         return driver;
-    }
-    public static Logger getLogger() {
-        return logger;
     }
 
     /**
@@ -24,7 +21,7 @@ public class BaseInit {
     public static String baseUrl = "ariel.auvenir.com";
     public void setBaseUrl(String serverDomainName) {
         baseUrl = serverDomainName;
-        getLogger().info("Url of testing server is: " + baseUrl);
+        logger.info("Url of testing server is: " + baseUrl);
     }
     public String getBaseUrl() {
         setBaseUrl(System.getProperty("serverDomainName"));
@@ -37,7 +34,7 @@ public class BaseInit {
     public static String sRunMode = "local";
     public void setRunMode(String runMode){
         sRunMode = runMode;
-        getLogger().info("Run Mode: " +  sRunMode);
+        logger.info("Run Mode: " +  sRunMode);
     }
     public String getRunMode(){
         setRunMode(System.getProperty("runMode"));
@@ -50,7 +47,7 @@ public class BaseInit {
     public static String sToEmail = "";
     public void setToEmail(String toEmail){
         sToEmail = toEmail;
-        getLogger().info("ToEmail: " +  sToEmail);
+        logger.info("ToEmail: " +  sToEmail);
     }
     public String getToEmail(){
         setToEmail(System.getProperty("toEmail"));
@@ -63,7 +60,7 @@ public class BaseInit {
     public static String sCcEmail = "";
     public void setCcEmail(String CcEmail){
         sCcEmail = CcEmail;
-        getLogger().info("ToEmail: " +  sCcEmail);
+        logger.info("ToEmail: " +  sCcEmail);
     }
     public String getCcEmail(){
         setCcEmail(System.getProperty("ccEmail"));
@@ -88,7 +85,7 @@ public class BaseInit {
     public String dataBase ="auvenir";
     public void setDataBase(String sDataBase){
         dataBase= sDataBase;
-        getLogger().info("DataBase: " + dataBase);
+        logger.info("DataBase: " + dataBase);
     }
     public String getDataBase(){
         return dataBase;
@@ -100,7 +97,7 @@ public class BaseInit {
     public int port= 27017;
     public void setPort(String portNo){
         port= Integer.parseInt(portNo);
-        getLogger().info("Connection Port: " + port);
+        logger.info("Connection Port: " + port);
     }
     public int getPort(){
         return port;
@@ -112,7 +109,7 @@ public class BaseInit {
     public String userName = "";
     public void setUserName(String userNameDB){
         userName= userNameDB;
-        getLogger().info("UserName: " + userName);
+        logger.info("UserName: " + userName);
     }
     public String getUserName(){
         return userName;
@@ -124,7 +121,7 @@ public class BaseInit {
     public String password = "";
     public void setPassword(String PasswordDB){
         password= PasswordDB;
-        getLogger().info("Password: " + password);
+        logger.info("Password: " + password);
     }
     public String getPassword(){
         return password;
@@ -136,7 +133,7 @@ public class BaseInit {
     public String ssl ="No";
     public void setSSL(String SSL){
         ssl= SSL;
-        getLogger().info("SSL: " + ssl);
+        logger.info("SSL: " + ssl);
     }
     public String getSSL(){
         return ssl;

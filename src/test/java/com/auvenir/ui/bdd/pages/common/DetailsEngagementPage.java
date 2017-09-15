@@ -10,7 +10,7 @@ import org.testng.Assert;
  * Created by huy.huynh on 20/07/2017.
  */
 public class DetailsEngagementPage extends CommonPage {
-
+    private static Logger logger = Logger.getLogger(DetailsEngagementPage.class.getSimpleName());
     @FindBy(xpath = "//span[@id='a-header-title']")
     protected WebElement engagementNameUneditable;
 
@@ -67,9 +67,9 @@ public class DetailsEngagementPage extends CommonPage {
 
     public void verifyCantInviteClientIntoEngagement(boolean possible) {
         if (validateExistedElement(buttonInviteClient, "Button Invite Client") == possible) {
-            getLogger().info("Verify Invite Client Into Engagement.");
+            logger.info("Verify Invite Client Into Engagement.");
         } else {
-            getLogger().info("Fail: Verify Invite Client Into Engagement.");
+            logger.info("Fail: Verify Invite Client Into Engagement.");
         }
     }
 

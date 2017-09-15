@@ -6,6 +6,7 @@ import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by doai.tran on 8/30/2017.
  */
 public class MarketingStepDefinition extends BaseInit {
+    private static Logger logger = Logger.getLogger(MarketingStepDefinition.class.getSimpleName());
     private BaseInit base;
     private MarketingPage marketingPage;
     private AdminPage adminPage;
@@ -26,14 +28,14 @@ public class MarketingStepDefinition extends BaseInit {
     @And("^I click on login link$")
     public void iClickOnLoginLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I click on login link =====");
+        logger.info("===== I click on login link =====");
         marketingPage.clickOnLoginBTN();
 
     }
     @And("^I enter the following for Login$")
     public void iEnterTheFollowingForLogin(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I enter the following for login =====");
+        logger.info("===== I enter the following for login =====");
 
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
@@ -47,7 +49,7 @@ public class MarketingStepDefinition extends BaseInit {
     @And("^I click sign up link$")
     public void iClickSignUpLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I click on login link =====");
+        logger.info("===== I click on login link =====");
         marketingPage.clickOnSignupButton();
     }
 
@@ -62,7 +64,7 @@ public class MarketingStepDefinition extends BaseInit {
     @And("^I click on login button$")
     public void iClickOnLoginButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I click on login button =====");
+        logger.info("===== I click on login button =====");
         /*MarketingPage marketingPage = new MarketingPage(logger,driver);
         marketingPage.clickOnSubmitBTN();*/
         //MarketingPage MarketingPage = new MarketingPage(logger,driver);
