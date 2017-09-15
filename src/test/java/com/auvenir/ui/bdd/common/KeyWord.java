@@ -312,6 +312,33 @@ Method to wait Ajax function on Site be loaded successfully.
         }
     }
 
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait the size of Element is changed.
+     */
+    public boolean waitForSizeListElementChanged(List<WebElement> element, String elementName, int sizeListElement) {
+        getLogger().info("Try to waitForSizeListElementChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    int actualSizeListElement = element.size();
+                    System.out.println("Actual Size of List Element: " + actualSizeListElement);
+                    System.out.println("Expected Size of List Element: " + sizeListElement);
+                    if (actualSizeListElement == sizeListElement)
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            getLogger().info("Size of Element is not changed");
+            return false;
+        }
+    }
+
     /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
 
     /***************************Functions: Action on Element ( Ex: Click Element, Hover Element   *****************/
