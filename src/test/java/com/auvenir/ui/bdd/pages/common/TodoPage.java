@@ -53,6 +53,8 @@ public class TodoPage extends CommonPage {
     protected WebElement optionAssignTo;
     @FindBy(xpath = "//div[contains(text(),'Assign to')]/div[contains(@class,'menu')]/button")
     protected List<WebElement> childItemAssigneeBulkDrpEle;
+    @FindBy(id = "cb-select-all-todo")
+    private WebElement eleCheckAllCheckBox;
 
 
     public int findToDoTaskName(String toDoName) {
@@ -216,13 +218,38 @@ public class TodoPage extends CommonPage {
         }
     }
     public void verifyClientAssigneeSelected(String toDoName, String clientAssignee) {
-        getLogger().info("== select Client Assignee By Name ==");
+        logger.info("== select Client Assignee By Name ==");
         waitSomeSeconds(2);
         int index = findToDoTaskName(toDoName);
         WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
         waitForTextValueChanged(clientAssigneeSelected, "listClientAssigneeDdl", clientAssignee);
-        getLogger().info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
+        logger.info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
         Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
+    }
 
+    /**
+     * Check/Uncheck checkall check box
+     *
+     * @param isCheck
+     */
+    public void checkOrUnCheckCheckAllCheckBox(boolean isCheck) {
+        waitForVisibleElement(eleCheckAllCheckBox, "'CheckAll' check box");
+        hoverElement(eleCheckAllCheckBox, "Hover 'CheckAll' check box");
+        if (isCheck) {
+            if (!eleCheckAllCheckBox.isSelected()) {
+                clickElement(eleCheckAllCheckBox, "Check on 'CheckAll' checkbox");
+            } else {
+                clickElement(eleCheckAllCheckBox, "Un check on 'CheckAll' checkbox");
+                clickElement(eleCheckAllCheckBox, "Check on 'CheckAll' checkbox");
+            }
+        } else {
+            if (eleCheckAllCheckBox.isSelected()) {
+                clickElement(eleCheckAllCheckBox, "Un Check on 'CheckAll' checkbox");
+            } else {
+                clickElement(eleCheckAllCheckBox, "Un check on 'CheckAll' checkbox");
+                clickElement(eleCheckAllCheckBox, "Check on 'CheckAll' checkbox");
+            }
+            logger.info("UnCheck on 'CheckAll' check box in ToDo page complete");
+        }
     }
 }

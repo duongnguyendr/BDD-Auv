@@ -15,6 +15,7 @@ import java.util.List;
  * Created by duong.nguyen on 9/7/2017.
  */
 public class AuditorSignUpPage extends CommonPage {
+    private static Logger logger = Logger.getLogger(AuditorSignUpPage.class.getSimpleName());
     public AuditorSignUpPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -235,7 +236,7 @@ public class AuditorSignUpPage extends CommonPage {
      * Verify Content of Register Personal Information Page
      */
     public void verifyPersonalInfoPageContent() {
-        getLogger().info("Verify Content of Register Personal Information Page");
+        logger.info("Verify Content of Register Personal Information Page");
         // Checking First and Last Name element is displayed
         validateElememt(eleName, "Element First and Last Name", Element_Type.DISPLAYED);
         // Checking Email Address element is displayed
@@ -340,7 +341,7 @@ public class AuditorSignUpPage extends CommonPage {
             }
             clickElement(country_State_NumberOfEmployee_ListEle.get(index), "Country State Option.");
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -359,7 +360,7 @@ public class AuditorSignUpPage extends CommonPage {
             clickElement(eleMemberID, "click to memberID");
             sendKeyTextBox(eleMemberID, value, "sendkey to member ID");
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -393,7 +394,7 @@ public class AuditorSignUpPage extends CommonPage {
 
     public void verifyCountryList() {
         try {
-            getLogger().info("Verifying list of Country displayed correctly..");
+            logger.info("Verifying list of Country displayed correctly..");
             waitForVisibleElement(countryDropdownEle, "wait for Country menu visible");
             clickElement(countryDropdownEle, "country dropdown menu");
             int isCount = country_State_NumberOfEmployee_ListEle.size();
@@ -407,7 +408,7 @@ public class AuditorSignUpPage extends CommonPage {
                 Assert.fail("Verify list of Country: failed.");
             }
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -419,7 +420,7 @@ public class AuditorSignUpPage extends CommonPage {
             }
             clickElement(country_State_NumberOfEmployee_ListEle.get(index), "Country State Option.");
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -438,7 +439,7 @@ public class AuditorSignUpPage extends CommonPage {
 
     public void verifyStateListAfterSelectCountry(String nameOfCountry) {
         try {
-            getLogger().info("Verifying list of State of: " + nameOfCountry + " displayed correctly..");
+            logger.info("Verifying list of State of: " + nameOfCountry + " displayed correctly..");
             waitForVisibleElement(stateDropdownEle, "wait for Country menu visible");
             clickElement(stateDropdownEle, "country dropdown menu");
             int isCount = country_State_NumberOfEmployee_ListEle.size();
@@ -449,25 +450,25 @@ public class AuditorSignUpPage extends CommonPage {
             System.out.println("Second State in list is: " + secoundState);
             if (nameOfCountry.equals("Canada")) {
                 if (isCount == 13 && firstState.equals("Alberta") && secoundState.equals("British Columbia")) {
-                    getLogger().info("Verify list of State :" + nameOfCountry + " passed");
+                    logger.info("Verify list of State :" + nameOfCountry + " passed");
                 } else {
                     Assert.fail("Verify list of State :" + nameOfCountry + " failed");
                 }
             }
             if (nameOfCountry.equals("United States")) {
                 if (isCount == 51 && firstState.equals("Alabama") && secoundState.equals("Alaska")) {
-                    getLogger().info("Verify list of State :" + nameOfCountry + " passed");
+                    logger.info("Verify list of State :" + nameOfCountry + " passed");
                 } else {
                     Assert.fail("Verify list of State :" + nameOfCountry + " failed");
                 }
             }
         } catch (Exception e) {
-            getLogger().info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
     public void verifySuccessPageContent() {
-        getLogger().info("Verify Content of Register Success Page");
+        logger.info("Verify Content of Register Success Page");
         waitForVisibleElement(successPageHeaderEle, "Success Page Header");
         validateDisPlayedElement(successPageHeaderEle, "Success Page Header");
         // validateElementText(successPageHeaderEle, "Your Account is on the Waitlist!");
@@ -480,7 +481,7 @@ public class AuditorSignUpPage extends CommonPage {
     }
 
     public void createPassword(String strPass) {
-        getLogger().info("Create Password for New User.");
+        logger.info("Create Password for New User.");
         waitForVisibleElement(elePassword, "Password Input");
         sendKeyTextBox(elePassword, strPass, "Password Input");
 
@@ -492,7 +493,7 @@ public class AuditorSignUpPage extends CommonPage {
     }
 
     public void confirmAuditorPersonalInfo(String strPhone) {
-        getLogger().info("Input all field in Register Personal Information Page and click Continue Button");
+        logger.info("Input all field in Register Personal Information Page and click Continue Button");
         boolean result;
         waitForVisibleElement(phoneConfirmTxtEle, "Phone number");
         sendKeyTextBox(phoneConfirmTxtEle, strPhone, "Phone number TextBox");
@@ -520,7 +521,7 @@ public class AuditorSignUpPage extends CommonPage {
         validateDisPlayedElement(firmHeaderTxtEle, "Header Firm Info Page");
         result = validateElementText(firmHeaderTxtEle, "Please Provide Your Firm Information");
         Assert.assertTrue(result, "Page Provide Your Firm Infomation should be loaded.");
-        getLogger().info("Confirm Auditor Personal Info passed");
+        logger.info("Confirm Auditor Personal Info passed");
         switchToOtherTab(2);
         getDriver().close();
         switchToOtherTab(1);

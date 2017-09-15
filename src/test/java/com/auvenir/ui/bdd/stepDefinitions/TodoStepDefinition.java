@@ -17,7 +17,7 @@ import java.util.List;
  * Created by duong.nguyen on 9/13/2017.
  */
 public class TodoStepDefinition extends BaseInit {
-    private Logger logger = Logger.getLogger(TodoStepDefinition.class.getSimpleName());
+    private static Logger logger = Logger.getLogger(TodoStepDefinition.class.getSimpleName());
     private  BaseInit baseInit;
     AuditorTodoPage auditorTodoPage;
     TodoPage todoPage;
@@ -88,6 +88,31 @@ public class TodoStepDefinition extends BaseInit {
         todoPage.verifyToDoNotExist(todoName);
     }
 
+//    @And("^I click assignee to client on bulk action drop down: \"([^\"]*)\"$")
+//    public void iClickAssigneeToClient(String clientFullName) throws Throwable {
+//        // Write code here that turns the phrase above into concrete actions
+//        logger.info("I click assignee to client on bulk action drop down: " + clientFullName);
+//        todoPage.chooseBulkActionAssignee(clientFullName);
+//    }
+//
+//    @And("^I click assignee to auditor on bulk action drop down: \"([^\"]*)\"$")
+//    public void iClickAssigneeToAuditor(String arg0) throws Throwable {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new PendingException();
+//    }
+
+    @And("^I click assignee to :\"([^\"]*)\" on bulk action drop down$")
+    public void iClickAssigneeToOnBulkActionDropDown(String fullName) throws Throwable {
+        logger.info("I click assignee to :" + fullName + " on bulk action drop down");
+        todoPage.chooseBulkActionAssignee(fullName);
+    }
+
+    @And("^I click check box all todo on todo page$")
+    public void iClickCheckBoxAllTodo() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        todoPage.checkOrUnCheckCheckAllCheckBox(true);
+    }
+
     public class LisTodoAnduser{
         public String userName;
         public String todoName;
@@ -140,7 +165,7 @@ public class TodoStepDefinition extends BaseInit {
     @Then("^I verify Client Assignee Selected$")
     public void verifyClientAssigneeSelected(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I verify Auditor Assignee Selected =====");
+        logger.info("===== I verify Auditor Assignee Selected =====");
 
         List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
         lisTodoAndusers = table.asList(LisTodoAnduser.class);
@@ -154,7 +179,7 @@ public class TodoStepDefinition extends BaseInit {
     @Then("^I create To-Do with name and category$")
     public void CreateToDoWithNameAndCategory(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        getLogger().info("===== I create To-Do with name and category =====");
+        logger.info("===== I create To-Do with name and category =====");
 //         getTable = new GetTable("ToDoname","category");
         List<GetTable> lisTodoAndusers = new ArrayList<>();
         List<List<String>> a = table.cells(0);
