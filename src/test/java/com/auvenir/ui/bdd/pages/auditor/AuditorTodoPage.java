@@ -79,7 +79,7 @@ public class AuditorTodoPage extends TodoPage {
 
     }
     public void createToDoTaskWithCategoryName(String toDoName, String categoryName) {
-        getLogger().info("Create To Do Task with 'toDoName' and 'categoryName'");
+        logger.info("Create To Do Task with 'toDoName' and 'categoryName'");
         waitForVisibleElement(createToDoBtnEle, "Create To Do Button");
         String rowString = toDoTaskRowEle.get(0).getAttribute("class");
         //Thuan Duong: Have a bug, need to start with size 2;
@@ -96,7 +96,7 @@ public class AuditorTodoPage extends TodoPage {
         }
 
         if (index == -1) {
-            getLogger().info("Create New To Do Task");
+            logger.info("Create New To Do Task");
             waitForVisibleElement(createToDoBtnEle, "Create To Do Button");
             clickElement(createToDoBtnEle, "Create To Do button");
             waitForSizeListElementChanged(toDoTaskRowEle, "To Do task row", size);
@@ -143,7 +143,7 @@ public class AuditorTodoPage extends TodoPage {
         } else {
             categoryName = categoryNameInput;
         }
-        getLogger().info("Adding new category...");
+        logger.info("Adding new category...");
         navigateToAddNewCategory();
         waitForClickableOfElement(categoryNameFieldOnFormEle, "categoryNameFieldOnFormEle");
         waitForJSandJQueryToLoad();
@@ -154,7 +154,7 @@ public class AuditorTodoPage extends TodoPage {
         //        closeSuccessToastMes();
     }
     public void navigateToAddNewCategory()  {
-        getLogger().info("== navigate To Add New Category ==");
+        logger.info("== navigate To Add New Category ==");
         clickElement(dropdownCategoryEle.get(0), "categoryDropdownEle");
         waitForTextValueChanged(listOfAddNewCategory.get(0), "categoryCreateEle", "Add New Category");
         hoverElement(listOfAddNewCategory.get(0), "categoryCreateEle");
@@ -172,7 +172,7 @@ public class AuditorTodoPage extends TodoPage {
         clickElement(detailCateColorEle, "click to detailCateColorEle");
     }
     public void clickNewCategoryCreateButton()  {
-        getLogger().info("== click New Category Create Button ==");
+        logger.info("== click New Category Create Button ==");
         waitForClickableOfElement(eleIdBtnAddCategory, "Add Category Button");
         waitForJSandJQueryToLoad();
         WebElement popUpDiv = getDriver().findElement(By.xpath(popUpDivCategoryModel));

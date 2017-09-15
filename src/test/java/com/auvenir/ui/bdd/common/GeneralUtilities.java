@@ -51,7 +51,8 @@ public class GeneralUtilities {
         return true;
     }
     public static List getTable ( DataTable dataTable){
-
+/*note: Get form 1 to List size because first row is the header of file
+*/
         List<List<String>>listDataTable;
         listDataTable = dataTable.raw();
         return listDataTable;

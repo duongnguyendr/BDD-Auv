@@ -149,18 +149,16 @@ public class TodoStepDefinition extends BaseInit {
         }
     }
     @Then("^I assignee list To-Do to Client")
-    public void assigneelistToDotoClient(DataTable table) throws Throwable {
+    public void verifyAssigneeListToDotoClient(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("===== I assignee list To-Do to General Auditor =====");
+        logger.info("===== I assignee list To-Do to Lead Client =====");
 
 
-
-        List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
-        lisTodoAndusers = table.asList(LisTodoAnduser.class);
-        for (LisTodoAnduser lisTodoAnduser: lisTodoAndusers){
-            System.out.println("The Client name is: "+lisTodoAnduser.userName);
-            System.out.println("The To-Do name is: "+lisTodoAnduser.todoName);
-            todoPage.selectClientAssigneeByName(lisTodoAnduser.todoName,lisTodoAnduser.userName);
+         List<List<String>>listToDoAndUserClient =getTable(table);
+        for (int i =1;i<listToDoAndUserClient.size();i++){
+            System.out.println("The Client name is: "+listToDoAndUserClient.get(i).get(0));
+            System.out.println("The To-Do name is: "+listToDoAndUserClient.get(i).get(1));
+            todoPage.selectClientAssigneeByName(listToDoAndUserClient.get(i).get(1),listToDoAndUserClient.get(i).get(0));
         }
     }
     @Then("^I verify Client Assignee Selected$")
@@ -168,12 +166,11 @@ public class TodoStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I verify Auditor Assignee Selected =====");
 
-        List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
-        lisTodoAndusers = table.asList(LisTodoAnduser.class);
-        for (LisTodoAnduser lisTodoAnduser: lisTodoAndusers){
-            System.out.println("The Client name is: "+lisTodoAnduser.userName);
-            System.out.println("The To-Do name is: "+lisTodoAnduser.todoName);
-            todoPage.verifyClientAssigneeSelected(lisTodoAnduser.todoName,lisTodoAnduser.userName);
+        List<List<String>>listToDoAndUserClient =getTable(table);
+        for (int i =1;i<listToDoAndUserClient.size();i++){
+            System.out.println("The Client name is: "+listToDoAndUserClient.get(i).get(0));
+            System.out.println("The To-Do name is: "+listToDoAndUserClient.get(i).get(1));
+            todoPage.verifyClientAssigneeSelected(listToDoAndUserClient.get(i).get(0),listToDoAndUserClient.get(i).get(1));
         }
     }
 
