@@ -147,10 +147,10 @@ public class TeamStepDefinition extends BaseInit {
         clientTeamPage.changePermissionOfMember(memberName);
     }
 
-    @Then("^i should see Admin Client name : \"([^\"]*)\" in team member list$")
-    public void iShouldSeeAdminClientNameInTeamMemberList(String adminClientName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        logger.info("I should see Admin Client name: " + adminClientName + " in team member list");
 
+    @Then("^I should see permisson of member: \"([^\"]*)\" changed to: \"([^\"]*)\"$")
+    public void verifyPermissonOfMember(String memberName, String permissionLevel) throws Throwable {
+        logger.info("Verify permisson level of member : "+ memberName +"is "+permissionLevel);
+//        clientTeamPage.verifyPermissonOfMember(memberName,permissionLevel);
     }
 }
