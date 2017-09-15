@@ -14,7 +14,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email | Password |
+      | Email                     | Password     |
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
@@ -62,7 +62,7 @@ Feature: Smoke Test Feature
 
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
-      |chr.auditor01.adm@gmail.com|Changeit@123|
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -93,8 +93,8 @@ Feature: Smoke Test Feature
     And Delete all business name by : "Titan"
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | chr.auditor01.adm@gmail.com   | Changeit@123 |
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click create new engagement button
@@ -114,15 +114,15 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
-      |chr.auditor01.lead@gmail.com|Changeit@123|
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And Delete all activity of engagement by user  : "chr.auditor01.lead@gmail.com"
     And Delete all engagement of user : "chr.auditor01.lead@gmail.com"
     And Delete user by email: "chr.auditor01.lead@gmail.com"
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | chr.auditor01.adm@gmail.com   | Changeit@123 |
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -138,7 +138,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-    Scenario: Lead Auditor Active account: AUV-660
+  Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to gmail login page
     And I signIn gmail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
@@ -153,14 +153,14 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
-      |chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And Delete all client of user
-      |chr.client01.adm@gmail.com|chr.client01.lead@gmail.com|chr.client01@gmail.com|
+      | chr.client01.adm@gmail.com | chr.client01.lead@gmail.com | chr.client01@gmail.com |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
-      | chr.auditor01.adm@gmail.com   | Changeit@123 |
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -177,8 +177,8 @@ Feature: Smoke Test Feature
     And I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | chr.adm.auvenir@gmail.com   | Changeit@123 |
+      | Email                     | Password     |
+      | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
     Then I should see status of user is onboarding
@@ -213,8 +213,8 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | chr.auvenirauditor01@gmail.com   | Changeit@123 |
+      | Email                          | Password     |
+      | chr.auvenirauditor01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click create new engagement button
@@ -349,39 +349,39 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Auditor
-      | Auditor Name| Todo Name|
-      |Admin Auditor| ToDo 01  |
-      |Admin Auditor| ToDo 02  |
-      |Admin Auditor| ToDo 03  |
+      | Auditor Name  | Todo Name |
+      | Admin Auditor | ToDo 01   |
+      | Admin Auditor | ToDo 02   |
+      | Admin Auditor | ToDo 03   |
     And I verify Auditor Assignee Selected
-      | Auditor Name| Todo Name|
-      |Admin Auditor| ToDo 01  |
-      |Admin Auditor| ToDo 02  |
-      |Admin Auditor| ToDo 03  |
+      | Auditor Name  | Todo Name |
+      | Admin Auditor | ToDo 01   |
+      | Admin Auditor | ToDo 02   |
+      | Admin Auditor | ToDo 03   |
 
 ##Viet Le create testcase:
   Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | auvenirinfo@gmail.com   | Changeit@123 |
+      | Email                 | Password     |
+      | auvenirinfo@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I assignee list To-Do to Client
-      |userName | Todo Name|
-      |Unassigned| ToDo 01|
-      |Unassigned| ToDo 02|
+      | userName   | Todo Name |
+      | Unassigned | ToDo 01   |
+      | Unassigned | ToDo 02   |
 
   #Duong
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -397,8 +397,8 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -407,8 +407,8 @@ Feature: Smoke Test Feature
     And I click bulk action drop down on todo page
     And I click assignee to :"unassigned" on bulk action drop down
     And I verify Client Assignee Selected
-      |userName  | Todo Name|
-      |Unassigned| ToDo 04  |
+      | userName   | Todo Name |
+      | Unassigned | ToDo 04   |
     And I click bulk action drop down on todo page
     And I click assignee to :"Lead Auditor" on bulk action drop down
     And I verify Auditor Assignee Selected
@@ -419,8 +419,8 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -451,13 +451,34 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
     Then I create To-Do with name and category
-      |ToDo name| Category|
-      |ToDo 01| Music |
-      |ToDo 02| Sport |
+      | ToDo name | Category |
+      | ToDo 01   | Music    |
+      | ToDo 02   | Sport    |
+
+#Huy
+  Scenario: Lead Client Active Account and Login to Engagement2: AUV-840
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | chr.auvenirclient@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    And I click on team tab
+    And I click in invite new member on team page
+    Then I should see invite new member page
+    And I input full name on invite new member page: "Huy LC2"
+    And I input email on invite new member page: "auvenirclient02@gmail.com"
+    And I input email confirm on invite new member page: "auvenirclient02@gmail.com"
+    And I input role of new member
+    And I click on invite new member
+    Then I should see invite successful message
+#/Huy
