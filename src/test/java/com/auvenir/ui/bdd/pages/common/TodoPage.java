@@ -215,4 +215,14 @@ public class TodoPage extends CommonPage {
             }
         }
     }
+    public void verifyClientAssigneeSelected(String toDoName, String clientAssignee) {
+        getLogger().info("== select Client Assignee By Name ==");
+        waitSomeSeconds(2);
+        int index = findToDoTaskName(toDoName);
+        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
+        waitForTextValueChanged(clientAssigneeSelected, "listClientAssigneeDdl", clientAssignee);
+        getLogger().info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
+        Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
+
+    }
 }

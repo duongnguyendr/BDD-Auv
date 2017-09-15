@@ -348,3 +348,35 @@ Feature: Smoke Test Feature
 #/Huy
 
 
+  Scenario: Lead Auditor delete To Do Task: AUV-1026
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+    And I select todo check box on todo page: "ToDo 03"
+    And I click bulk action drop down on todo page
+    And I click delete button on bulk action
+    Then I should see delete todo popup
+    And I click on confirm delete button on delete todo popup
+    Then I should see todo not existed in todo list: "ToDo 03"
+   #/Duong
+  #Viet Le create testcase:
+  Scenario:Lead Auditor Create To Do task: AUV-878
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I create To-Do with name and category
+      |ToDo name| Category|
+      |ToDo 01| Music |
+      |ToDo 02| Sport |
