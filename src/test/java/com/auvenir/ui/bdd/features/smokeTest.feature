@@ -461,3 +461,18 @@ Feature: Smoke Test Feature
       |ToDo name| Category|
       |ToDo 01| Music |
       |ToDo 02| Sport |
+
+
+#Tan
+  Scenario: Lead Client can see to-dos: AUV-1171
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | clienttan.lead@mailinator.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    Then I should see all to do assigned : "Leader Client"
+#/Tan
