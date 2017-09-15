@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  * Created by thuan.duong on 9/11/2017.
  */
 public class MailPage extends KeyWord{
-    private static Logger logger = Logger.getLogger(MailPage.class.getSimpleName());
     public MailPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -50,12 +49,12 @@ public class MailPage extends KeyWord{
     private WebElement eleSignOutBtn;
 
     public void selectActiveEmail() {
-        logger.info("Select Active Email");
+        getLogger().info("Select Active Email");
         clickElement(eleEmailAuvenir, "Non-reply Active email");
     }
 
     public void navigateToConfirmationLink() throws Exception {
-        logger.info("Navigate to Confirmation Link");
+        getLogger().info("Navigate to Confirmation Link");
         Thread.sleep(3000);
         String link = eleGetStarted.getAttribute("href");
         System.out.print("Link: " + link);
@@ -66,7 +65,7 @@ public class MailPage extends KeyWord{
     }
 
     public void clickGetStartedButton() {
-        logger.info("Click Get Started Button.");
+        getLogger().info("Click Get Started Button.");
         waitForVisibleElement(eleGetStarted, "Get Started.");
         clickElement(eleGetStarted, "Get Started.");
     }
@@ -85,7 +84,7 @@ public class MailPage extends KeyWord{
      * @param password password of email
      */
     public void signInGmail(String email, String password) {
-        logger.info("Try to login GMail");
+        getLogger().info("Try to login GMail");
         if (!getDriver().getCurrentUrl().contains("accounts.google.com")) {
             clickElement(signButtonEle, "signButtonEle");
         }
@@ -93,17 +92,17 @@ public class MailPage extends KeyWord{
             sendKeyTextBox(eleEmail, email, "eleEmail");
             sendTabKey(eleEmail, "eleEmail");
             sendEnterKey(eleEmail, "eleEmail");
-            logger.info("Send email: " + email);
+            getLogger().info("Send email: " + email);
         }
         sendKeyTextBox(elePassword, password, "password");
-        logger.info("Send password: " + password);
+        getLogger().info("Send password: " + password);
         waitSomeSeconds(2);
         clickElement(eleNext, "click to eleNext");
-        logger.info("DONE => LOGIN");
+        getLogger().info("DONE => LOGIN");
     }
 
     public void deleteAllExistedGMail(String eGMail, String ePassword) throws Exception {
-        logger.info("Try to delete all existed eGMail");
+        getLogger().info("Try to delete all existed eGMail");
         getDriver().get( Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
         getDriver().manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
         getDriver().manage().window().maximize();
@@ -117,7 +116,7 @@ public class MailPage extends KeyWord{
      */
     public void clickOnboardingInvitationLink() {
         try {
-            logger.info("Redirecting from Gmail to Auvenir Welcome Page");
+            getLogger().info("Redirecting from Gmail to Auvenir Welcome Page");
             clickElement(buttonStartEngagement, "Button Start Engagement");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -126,19 +125,19 @@ public class MailPage extends KeyWord{
 
     public void deleteAllMail() throws InterruptedException {
         waitForVisibleElement(composeBtn, "composeBtn");
-        logger.info("Try to delete all existed mail.");
+        getLogger().info("Try to delete all existed mail.");
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(ExpectedConditions.elementToBeClickable(allMailCheckBox));
         Thread.sleep(2000);
-        logger.info("Select all Delete mail: ");
+        getLogger().info("Select all Delete mail: ");
         allMailCheckBox.click();
         Thread.sleep(200);
         if (deleteBTN.isDisplayed()) {
-            logger.info("Click Delete All Email.");
+            getLogger().info("Click Delete All Email.");
             deleteBTN.click();
         }
         Thread.sleep(2000);
-        logger.info("Delete all mail successfully");
+        getLogger().info("Delete all mail successfully");
     }
 
     public void gmailLogout() throws Exception {
@@ -153,9 +152,9 @@ public class MailPage extends KeyWord{
     public void reSignInGmail(String password) throws Exception{
             Thread.sleep(1000);
             elePassword.sendKeys(password);
-            logger.info("Send password: " + password);
+            getLogger().info("Send password: " + password);
             Thread.sleep(1000);
             clickElement(eleNext, "click to eleNext");
-            logger.info("DONE => LOGIN");
+            getLogger().info("DONE => LOGIN");
     }
 }

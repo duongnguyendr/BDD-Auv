@@ -1,7 +1,6 @@
 package com.auvenir.ui.bdd.common;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
@@ -32,7 +31,6 @@ import java.util.*;
  * Created by doai.tran on 8/31/2017.
  */
 public class Generic extends BaseInit{
-    private static Logger logger = Logger.getLogger(Generic.class.getSimpleName());
     private static BaseInit base;
     public Generic(BaseInit base) {
         this.base = base;
@@ -62,17 +60,17 @@ public class Generic extends BaseInit{
      * @return
      */
     public static String getConfigValue(String sFile, String sKey) {
-        logger.info("**** Read Configuration file ****");
+        getLogger().info("**** Read Configuration file ****");
         Properties prop = new Properties();
         String sValue = null;
         try {
             InputStream input = new FileInputStream(sFile);
             prop.load(input);
             sValue = prop.getProperty(sKey);
-            logger.info("**** Value from Properties file of Parameter: "+sKey+": "+sValue);
+            getLogger().info("**** Value from Properties file of Parameter: "+sKey+": "+sValue);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            logger.info("**** Can not find the properties file ****"+sValue);
+            getLogger().info("**** Can not find the properties file ****"+sValue);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,7 +84,7 @@ public class Generic extends BaseInit{
      * @param sValue
      */
     public static void setConfigValue(String sFile, String sKey, String sValue) {
-        logger.info("**** Read Configuration file ****");
+        getLogger().info("**** Read Configuration file ****");
         Properties prop = new Properties();
         try {
             FileInputStream fis = new FileInputStream(new File(sFile));
@@ -96,7 +94,7 @@ public class Generic extends BaseInit{
             prop.setProperty(sKey, sValue);
             prop.store(fos, "Updating folder path");
             fos.close();
-            logger.info("**** Value from Properties file of Parameter: "+sKey+"be set: "+sValue);
+            getLogger().info("**** Value from Properties file of Parameter: "+sKey+"be set: "+sValue);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -648,5 +646,20 @@ public class Generic extends BaseInit{
             return false;
         }
         return true;
+    }
+
+    public static String getPrefixFromBrowser(){
+        String prefix = "";
+        if(sBrowser.equalsIgnoreCase("firefox")){
+            prefix = "ff.";
+        }else if(sBrowser.equalsIgnoreCase("internet explorer")){
+            prefix = "ie.";
+        }else if(sBrowser.equalsIgnoreCase("edge")){
+            prefix = "edge.";
+        }else{
+            prefix = "chr.";
+        }
+
+        return prefix;
     }
 }

@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class TodoPage extends CommonPage {
     private static Logger logger = Logger.getLogger(TodoPage.class.getSimpleName());
@@ -54,22 +53,6 @@ public class TodoPage extends CommonPage {
     protected WebElement optionAssignTo;
     @FindBy(xpath = "//div[contains(text(),'Assign to')]/div[contains(@class,'menu')]/button")
     protected List<WebElement> childItemAssigneeBulkDrpEle;
-    @FindBy(xpath = "//*[contains(@class,'ui dropdown todoCategory todo-category todo-bulkDdl')]")
-    private List<WebElement> dropdownCategoryEle;
-    @FindBy(id = "category-name")
-    private WebElement categoryNameFieldOnFormEle;
-    @FindBy(xpath = "//*[contains(@class,'ui dropdown todoCategory')]//div[text()='Add New Category']")
-    List<WebElement> listOfAddNewCategory;
-    @FindBy(xpath = "//*[@id='category-color']")
-    private WebElement categoryColorFieldOnFromEle;
-    @FindBy(xpath = "//*[@id=\"category-color-container\"]/ul/li[4]")
-    private WebElement detailCateColorEle;
-    @FindBy(id = "category-addBtn")
-    private WebElement eleIdBtnAddCategory;
-
-    public static final String popUpDivCategoryModel = "//div[starts-with(@id, 'categoryModel') and contains(@style,'display: block')]";
-    public static final String categoryColor = "//*[@id='category-color']";
-    public static final String categoryColorContainer = "//*[@id='category-color-container']/ul/li[4]";
 
 
     public int findToDoTaskName(String toDoName) {
@@ -98,7 +81,6 @@ public class TodoPage extends CommonPage {
             return -1;
         }
     }
-
     public void selectClientAssigneeByName(String toDoName, String clientAssignee) {
         logger.info("== select Client Assignee By Name ==");
             int index = findToDoTaskName(toDoName);
@@ -109,7 +91,6 @@ public class TodoPage extends CommonPage {
             clickElement(clientAssigneeSelected, "clientAssigneeSelected");
 
         }
-
     /**
      * Duong Nguyen
      */
@@ -173,8 +154,8 @@ public class TodoPage extends CommonPage {
     }
 
     public void clickOptionDeleteOnBulkActionsDropDown() {
-            logger.info("Choose option: Delete.");
-            clickElement(optionDelete, "Option Delete");
+        logger.info("Choose option: Delete.");
+        clickElement(optionDelete, "Option Delete");
     }
 
     public void verifyPopUpDeleteTodoDisplay(){
@@ -221,103 +202,17 @@ public class TodoPage extends CommonPage {
      */
     public void chooseBulkActionAssignee(String assigneeName) {
         logger.info(String.format("Choose Assignee '%s' in Bulk Dropdown list", assigneeName));
-            String listUser = "";
-            boolean result = false;
-            clickElement(optionAssignTo, "Assign To Option");
-            waitSomeSeconds(2);
-            for (int i = 0; i < childItemAssigneeBulkDrpEle.size(); i++) {
-                listUser = childItemAssigneeBulkDrpEle.get(i).getAttribute("textContent");
-                System.out.println("list User: " + listUser);
-                if (listUser.contains(assigneeName)) {
-                    clickElement(childItemAssigneeBulkDrpEle.get(i), "Child Item Assignee");
-                    break;
-                }
-            }
-    }
-//}
-//    }
-
-    public void verifyClientAssigneeSelected(String toDoName, String clientAssignee) {
-        getLogger().info("== select Client Assignee By Name ==");
+        String listUser = "";
+        boolean result = false;
+        clickElement(optionAssignTo, "Assign To Option");
         waitSomeSeconds(2);
-        int index = findToDoTaskName(toDoName);
-        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
-        waitForTextValueChanged(clientAssigneeSelected, "listClientAssigneeDdl", clientAssignee);
-        getLogger().info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
-        Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
-
-    }
-    public void selectCategory(String categoryName) {
-
-            int categoryExist = checkCategoryExist(categoryName);
-            if (categoryExist != -1) {
-                clickElement(dropdownCategoryEle.get(0).findElements(By.xpath(".//div[@class='item']")).get(categoryExist)," Select category Exist "+categoryName +"  success" );
-            } else {
-                sendTabKey(dropdownCategoryEle.get(0), "dropdownCategoryEle");
-                createNewCategory(categoryName);
+        for (int i = 0; i < childItemAssigneeBulkDrpEle.size(); i++) {
+            listUser = childItemAssigneeBulkDrpEle.get(i).getAttribute("textContent");
+            System.out.println("list User: " + listUser);
+            if (listUser.contains(assigneeName)) {
+                clickElement(childItemAssigneeBulkDrpEle.get(i), "Child Item Assignee");
+                break;
             }
-
-    }
-    public int checkCategoryExist(String categoryName) {
-        int index = -1;
-        try {
-            Thread.sleep(3000);
-            clickElement(dropdownCategoryEle.get(0), "click to dropdownCategoryEle");
-            List<WebElement> listCategory = dropdownCategoryEle.get(0).findElements(By.xpath(".//div[@class='item']"));
-            for (int i = 0; i < listCategory.size(); i++) {
-                if (listCategory.get(i).getAttribute("textContent").equals(categoryName)) {
-                    index = i;
-                    break;
-                }
-            }
-            return index;
-        } catch (Exception e) {
-            return index;
-        }}
-        public void createNewCategory(String categoryNameInput)  {
-            waitSomeSeconds(2);
-            String categoryName = null;
-            if (categoryNameInput == "") {
-                categoryName = "Category " + randomNumber();
-            } else {
-                categoryName = categoryNameInput;
-            }
-            getLogger().info("Adding new category...");
-            navigateToAddNewCategory();
-            waitForClickableOfElement(categoryNameFieldOnFormEle, "categoryNameFieldOnFormEle");
-            waitForJSandJQueryToLoad();
-            clickElement(categoryNameFieldOnFormEle, "click to categoryNameFieldOnFormEle");
-            sendKeyTextBox(categoryNameFieldOnFormEle, categoryName, "send key to categoryNameFieldOnFormEle");
-            chooseCategoryColorInPopup();
-            clickNewCategoryCreateButton();
-            //        closeSuccessToastMes();
         }
-    public void navigateToAddNewCategory()  {
-            getLogger().info("== navigate To Add New Category ==");
-           clickElement(dropdownCategoryEle.get(0), "categoryDropdownEle");
-            waitForTextValueChanged(listOfAddNewCategory.get(0), "categoryCreateEle", "Add New Category");
-            hoverElement(listOfAddNewCategory.get(0), "categoryCreateEle");
-            clickElement(listOfAddNewCategory.get(0), "categoryCreateEle");
-
-
     }
-    public void chooseCategoryColorInPopup()  {
-        hoverElement(categoryColorFieldOnFromEle, "categoryColorFieldOnFromEle");
-        waitForClickableOfLocator(By.xpath(categoryColor));
-        waitForClickableOfElement(categoryColorFieldOnFromEle, "categoryColorFieldOnFromEle");
-        clickElement(categoryColorFieldOnFromEle, "click to categoryColorFieldOnFromEle");
-        waitForClickableOfLocator(By.xpath(categoryColorContainer));
-        waitForClickableOfElement(detailCateColorEle, "detailCateColorEle");
-        clickElement(detailCateColorEle, "click to detailCateColorEle");
-    }
-    public void clickNewCategoryCreateButton()  {
-        getLogger().info("== click New Category Create Button ==");
-        waitForClickableOfElement(eleIdBtnAddCategory, "Add Category Button");
-        waitForJSandJQueryToLoad();
-        WebElement popUpDiv = getDriver().findElement(By.xpath(popUpDivCategoryModel));
-        clickElement(eleIdBtnAddCategory, "Add Category Button");
-        waitForCssValueChanged(popUpDiv, "PopUp Windows", "display", "none");
-    }
-    }
-
-
+}

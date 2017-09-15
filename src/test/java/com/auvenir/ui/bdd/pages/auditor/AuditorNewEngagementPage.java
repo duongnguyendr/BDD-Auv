@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public class AuditorNewEngagementPage extends CommonPage {
-    private static Logger logger = Logger.getLogger(AuditorNewEngagementPage.class.getSimpleName());
+
     //@FindBy(id = "team-component-header")
     @FindBy(id = "team-component-header")
     private WebElement teamMemberWizardHeader;
@@ -205,7 +205,7 @@ public class AuditorNewEngagementPage extends CommonPage {
     //    private WebElement teamContainerDivEle;
 
     public void verifyNewEngagementPage() {
-        logger.info("Verify New engagement Page.");
+        getLogger().info("Verify New engagement Page.");
         waitForVisibleElement(newEngagementHeaderTextTitle, "New Engagement Header");
         validateElementText(newEngagementHeaderTextTitle, "New Engagement");
     }
@@ -213,46 +213,46 @@ public class AuditorNewEngagementPage extends CommonPage {
     /*
     public void enterDataForNewEngagementPage(String engagement01, String s, String s1) throws Exception {
     	
-        logger.info("Enter engagement name.");
+        getLogger().info("Enter engagement name.");
         enterEngagementName(engagement01);
         NXGReports.addStep("Enter engagement name.", LogAs.PASSED, null);
         
-        logger.info("Select engagement type.");
+        getLogger().info("Select engagement type.");
         selectEngagementType(s);
         NXGReports.addStep("Select engagement type.", LogAs.PASSED, null);
                 
-        logger.info("Enter company name.");
+        getLogger().info("Enter company name.");
         enterCompanyName(s1);
         NXGReports.addStep("Enter company name.", LogAs.PASSED, null);
         
-        logger.info("Enter deadline date.");
+        getLogger().info("Enter deadline date.");
         enterDeadLineDate(this.tmp(10));
         NXGReports.addStep("Enter deadline date.", LogAs.PASSED, null);
     	
-        logger.info("Enter start date.");
+        getLogger().info("Enter start date.");
         enterStartDate(this.tmp(0));
         NXGReports.addStep("Enter star date.", LogAs.PASSED, null);
         
-        logger.info("Enter end date.");
+        getLogger().info("Enter end date.");
         enterEndDate(this.tmp(10));
         NXGReports.addStep("Enter end date.", LogAs.PASSED, null);
     	
-        logger.info("Click Continue button.");
+        getLogger().info("Click Continue button.");
         this.clickContinueBtn();
         NXGReports.addStep("Click Continue button.", LogAs.PASSED, null);
         
-        logger.info("Click continue button.(I don't need to add any team members to this engagement).");
+        getLogger().info("Click continue button.(I don't need to add any team members to this engagement).");
         this.clickNoMemberBtn();
         NXGReports.addStep("Click continue button.(I don't need to add any team members to this engagement).", LogAs.PASSED, null);
         
-        logger.info("Click create to do button.");
+        getLogger().info("Click create to do button.");
         this.clickCreateToDoBtn();
         NXGReports.addStep("Click create to do button.", LogAs.PASSED, null);
     }
     */
 
     public void enterDataForNewEngagementPage(String name, String engagementType, String company){
-        logger.info("Enter data for new Engagement form");
+        getLogger().info("Enter data for new Engagement form");
         try {
             enterEngagementName(name);
             selectEngagementType(engagementType);
@@ -288,38 +288,38 @@ public class AuditorNewEngagementPage extends CommonPage {
 
     public void clickEngagementMenuLink() throws Exception {
 
-        //        logger.info("Enter engagement name.");
+        //        getLogger().info("Enter engagement name.");
         //        enterEngagementName(name);
         //        NXGReports.addStep("Enter engagement name.", LogAs.PASSED, null);
         //
-        //        logger.info("Select engagement type.");
+        //        getLogger().info("Select engagement type.");
         //        selectEngagementType(engagementType);
         //        NXGReports.addStep("Select engagement type.", LogAs.PASSED, null);
         //
-        //        logger.info("Enter company name.");
+        //        getLogger().info("Enter company name.");
         //        enterCompanyName(company);
         //        NXGReports.addStep("Enter company name.", LogAs.PASSED, null);
         //
-        //        logger.info("Enter deadline date.");
+        //        getLogger().info("Enter deadline date.");
         //        clickAndHold(eleReportDeadlineInput, "Deadline date Input");
         //        enterDeadLineDate(getDate(10));
         //        clickElement(eleEngagementNameInput, "engagement Name");
         //        NXGReports.addStep("Enter deadline date.", LogAs.PASSED, null);
         //
-        //        logger.info("Enter end date.");
+        //        getLogger().info("Enter end date.");
         //        enterEndDate(getDate(10));
         //        clickElement(eleEngagementNameInput, "engagement Name");
         //        NXGReports.addStep("Enter end date.", LogAs.PASSED, null);
         //
-        //        logger.info("Enter start date.");
+        //        getLogger().info("Enter start date.");
         //        clickAndHold(eleStartDateInput, "Start Date Input");
         //        enterStartDate(getDate(1));
         //        clickElement(eleEngagementNameInput, "engagement Name");
         //        NXGReports.addStep("Enter star date.", LogAs.PASSED, null);
         //
-        //        logger.info("Click Continue button.");
+        //        getLogger().info("Click Continue button.");
         //        clickContinueBtn();
-        //        logger.info("Click continue button.(I don't need to add any team members to this engagement).");
+        //        getLogger().info("Click continue button.(I don't need to add any team members to this engagement).");
         //        clickNoMemberBtn();
         //        clickCreateToDoBtn();
         Thread.sleep(smallTimeOut);
@@ -340,17 +340,17 @@ public class AuditorNewEngagementPage extends CommonPage {
             String startDate) {
 
         try {
-            logger.info("Enter engagement name.");
+            getLogger().info("Enter engagement name.");
             enterEngagementName(name);
 
-            logger.info("Select engagement type.");
+            getLogger().info("Select engagement type.");
             selectEngagementType(engagementType);
 
-            logger.info("Enter company name.");
+            getLogger().info("Enter company name.");
             enterCompanyName(company);
 
 
-            logger.info("Enter deadline date.");
+            getLogger().info("Enter deadline date.");
             clickAndHold(eleReportDeadlineInput, "Deadline date Input");
             if (deadlineDate.equals("")) {
                 enterDeadLineDate(getDate(10));
@@ -358,7 +358,7 @@ public class AuditorNewEngagementPage extends CommonPage {
             enterDeadLineDate(deadlineDate);
             clickElement(eleEngagementNameInput, "engagement Name");
 
-            logger.info("Enter start date.");
+            getLogger().info("Enter start date.");
             clickAndHold(eleStartDateInput, "Start Date Input");
             if (startDate.equals("")) {
                 enterStartDate(getDate(1));
@@ -366,7 +366,7 @@ public class AuditorNewEngagementPage extends CommonPage {
             enterStartDate(startDate);
             clickElement(eleEngagementNameInput, "engagement Name");
 
-            logger.info("Enter end date.");
+            getLogger().info("Enter end date.");
             if (endDate.equals("")) {
                 enterEndDate(getDate(10));
             }
@@ -374,11 +374,11 @@ public class AuditorNewEngagementPage extends CommonPage {
             clickElement(eleEngagementNameInput, "engagement Name");
 
 
-            logger.info("Click Continue button.");
+            getLogger().info("Click Continue button.");
             clickContinueBtn();
             verifyTeamMemberWizardPage();
 
-            logger.info("Click continue button.(I don't need to add any team members to this engagement).");
+            getLogger().info("Click continue button.(I don't need to add any team members to this engagement).");
             clickNoMemberBtn();
             waitForVisibleElement(createNewTodoListTextEle, "Create your To-Do list");
             //old version
@@ -388,31 +388,31 @@ public class AuditorNewEngagementPage extends CommonPage {
             boolean isCheckCreateEngagement = false;
             isCheckCreateEngagement = waitForCssValueChanged(createEngagementPopupEle, "Create Engagement Popup", "display", "none");
             if (isCheckCreateEngagement) {
-                logger.info("Enter Data For New Engagement Page");
+                getLogger().info("Enter Data For New Engagement Page");
             } else {
-                logger.info("Error:  Enter Data For New Engagement Page");
+                getLogger().info("Error:  Enter Data For New Engagement Page");
             }
 
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
 
     public void verifyTeamMemberWizardPage() {
-        logger.info("Verify team member wizard page.");
+        getLogger().info("Verify team member wizard page.");
         waitForVisibleElement(teamMemberWizardHeader, "team member header");
         validateElementText(teamMemberWizardHeader, "Create your team");
     }
 
 
     public void enterEngagementName(String engagementName) {
-        logger.info("Enter engagement name.");
+        getLogger().info("Enter engagement name.");
         waitForClickableOfElement(eleEngagementNameInput, "EngagementName");
         sendKeyTextBox(eleEngagementNameInput, engagementName, "engagementName");
     }
 
     public void selectEngagementType(String engagementType) {
-        logger.info("Select engagement type.");
+        getLogger().info("Select engagement type.");
         String engagementTypeText = "";
         clickElement(eleEngagementTypeSelect, "Select Engagement Type");
         if (engagementType.equals("")) {
@@ -432,19 +432,19 @@ public class AuditorNewEngagementPage extends CommonPage {
 
 
     public void enterCompanyName(String companyName) {
-        logger.info("Enter company name.");
+        getLogger().info("Enter company name.");
         sendKeyTextBox(eleCompanyNameInput, companyName, "Company field");
     }
 
     public void selectCompanyName(String companyName){
-        logger.info("Enter company name: " + companyName);
+        getLogger().info("Enter company name: " + companyName);
         clickElement(eleCompanyNameInput, "Company Name Textbox");
         clickElement(listCompanyName.get(listCompanyName.size()-1), "List Company Name");
         sendKeyTextBox(eleCompanyNameInput, companyName, "Company field");
     }
 
     public void enterDeadLineDate(String dateLineDate) throws Exception {
-        logger.info("Enter deadline date.");
+        getLogger().info("Enter deadline date.");
         clickElement(eleReportDeadlineInput, "DeadLine Input");
         String dates [] = dateLineDate.split("/");
         DatePicker datePicker = new DatePicker(getDriver());
@@ -455,7 +455,7 @@ public class AuditorNewEngagementPage extends CommonPage {
     }
 
     public void enterStartDate(String startDate) throws Exception{
-        logger.info("Enter start date.");
+        getLogger().info("Enter start date.");
         clickElement(eleStartDateInput, "Start Date Input");
         String dates [] = startDate.split("/");
         DatePicker datePicker = new DatePicker(getDriver());
@@ -467,7 +467,7 @@ public class AuditorNewEngagementPage extends CommonPage {
     }
 
     public void enterEndDate(String endDate) throws Exception{
-        logger.info("Enter end date.");
+        getLogger().info("Enter end date.");
         clickElement(eleEndDateInput, "End Date Input");
         String dates [] = endDate.split("/");
         DatePicker datePicker = new DatePicker(getDriver());
@@ -477,19 +477,19 @@ public class AuditorNewEngagementPage extends CommonPage {
     }
 
     public void clickContinueBtn() {
-        logger.info("Click Continue button.");
+        getLogger().info("Click Continue button.");
         clickElement(eleContinueBtn, "Continue Button");
     }
 
     public void clickNoMemberBtn() {
-        logger.info("Click continue button.(I don't need to add any team members to this engagement).");
+        getLogger().info("Click continue button.(I don't need to add any team members to this engagement).");
         waitForProgressOverlayIsClosed();
         clickElement(eleContinueNoMemberBtn, "Continue No member button");
     }
 
 
     public void clickCreateToDoBtn() {
-        logger.info("Click Customize Create Button.");
+        getLogger().info("Click Customize Create Button.");
         clickElement(eleCustomizeCreateBtn, "Customize Create Button");
     }
 
@@ -510,7 +510,7 @@ public class AuditorNewEngagementPage extends CommonPage {
             validateElementText(titleSetUpHeader, "Set Up Your Engagement");
             validateAttributeElement(tabProgressSetUpCircle, "class", "ce-numberCircle ce-numberCircle-active");
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
 
@@ -550,7 +550,7 @@ public class AuditorNewEngagementPage extends CommonPage {
             validateElementJavaScriptTextContain(inputEngagementDateRangeEnd, "28", "Engagement Report Deadline");
 
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
 
@@ -564,7 +564,7 @@ public class AuditorNewEngagementPage extends CommonPage {
 
             clickElement(buttonEngagementContinue, "Button Engagement Continue");
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
 
@@ -583,7 +583,7 @@ public class AuditorNewEngagementPage extends CommonPage {
             validateAttributeElement(tabProgressSetUpNumber, "class", "ce-number auvicon-checkmark ce-nav-checkmark");
             validateAttributeElement(tabProgressTeamCircle, "class", "ce-numberCircle ce-numberCircle-active");
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
 
@@ -601,7 +601,7 @@ public class AuditorNewEngagementPage extends CommonPage {
 
             clickElement(buttonNotAddMember, "Button Engagement Continue");
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
 
@@ -621,7 +621,7 @@ public class AuditorNewEngagementPage extends CommonPage {
             validateAttributeElement(tabProgressTeamNumber, "class", "ce-number auvicon-checkmark ce-nav-checkmark");
             validateAttributeElement(tabProgressCustomizeCircle, "class", "ce-numberCircle ce-numberCircle-active");
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
 
@@ -639,14 +639,14 @@ public class AuditorNewEngagementPage extends CommonPage {
 
             clickElement(buttonCreateToDoList, "Button Create ToDo List");
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
     /*-----------end of huy.huynh on 06/06/2017.*/
 
     public void insertDataForNewEngagementPage(String name, String engagementType, String company) {
         try {
-            logger.info("Insert data for new Engagement form");
+            getLogger().info("Insert data for new Engagement form");
             enterEngagementName(name);
             selectEngagementType(engagementType);
             enterCompanyName(company);
@@ -658,7 +658,7 @@ public class AuditorNewEngagementPage extends CommonPage {
             enterStartDate(currentFirstDate);
             enterEndDate(currentLastDate);
         } catch (Exception ex) {
-            logger.info(ex.getMessage());
+            getLogger().info(ex.getMessage());
         }
     }
 
