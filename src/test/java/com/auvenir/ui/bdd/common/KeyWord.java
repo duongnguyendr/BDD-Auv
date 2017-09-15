@@ -32,7 +32,7 @@ public class KeyWord {
 
     public KeyWord(Logger logger, WebDriver driver) {
         this.driver = driver;
-        this.logger = logger;
+//        this.logger = logger;
         PageFactory.initElements(driver, this);
     }
 
@@ -47,8 +47,12 @@ public class KeyWord {
     public static final int waitTime = 15;
     public static final int smallTimeOut = 1000;
 
+    public enum Element_Type {
+        DISPLAYED, ISENABLE, ISSELECTED, HIDDEN, TEXT_VALUE, NOT_EXIST
+    }
 
-    /*************** Waiting Element function ( Ex: Wait for clickable, wait for visible,... ******************/
+
+    /***************Functions: Waiting Element function ( Ex: Wait for clickable, wait for visible,... *************/
 
     /**
      * @param element     element defined on page class
@@ -271,17 +275,183 @@ Method to wait Ajax function on Site be loaded successfully.
                         return false;
                 }
             });
-            getLogger().info("Text Value of element '%s' is changed to '%s' "+elementName +" " +textValue);
+            getLogger().info(String.format("Text Value of element '%s' is changed to '%s' ", elementName, textValue));
             return true;
         } catch (Exception e) {
             getLogger().info("CSS Value is not changed");
-            getLogger().info("Text Value of element '%s' is NOT changed "+ elementName);
+            getLogger().info("Text Value of element '%s' is NOT changed " + elementName);
             return false;
         }
     }
 
 
-    /************ Validate Element function ( Ex: validateElementText, validateDisPlayedElement,... ***************/
+    /**
+     * wait until animation for element finish
+     *
+     * @param webElement  xpath to get element
+     * @param elementName vararg for formating
+     */
+    public void waitForAnimation(WebElement webElement, String elementName) {
+        // This function is waiting to Popup Delete To Do task is displayed after running animation.
+        // We can move this function to Abstract Page or Common Page.
+        try {
+            getLogger().info("Waiting For Animation: " + elementName);
+            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+            wait.until((WebDriver driver) -> {
+                boolean result = false;
+                result = (boolean) ((JavascriptExecutor) driver).executeScript(
+                        "var elm = arguments[0];" + "var doc1 = elm.ownerDocument || document;" +
+                                "var rect = elm.getBoundingClientRect();"
+                                + "return elm === doc1.elementFromPoint(rect.left, rect.top);",
+                        webElement);
+                getLogger().info("result: " + result);
+                return result;
+            });
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+        }
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to verify
+     * @Description In order to wait the size of Element is changed.
+     */
+    public boolean waitForSizeListElementChanged(List<WebElement> element, String elementName, int sizeListElement) {
+        getLogger().info("Try to waitForSizeListElementChanged: " + elementName);
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    int actualSizeListElement = element.size();
+                    System.out.println("Actual Size of List Element: " + actualSizeListElement);
+                    System.out.println("Expected Size of List Element: " + sizeListElement);
+                    if (actualSizeListElement == sizeListElement)
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            getLogger().info("Size of Element is not changed");
+            return false;
+        }
+    }
+
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
+
+    /***************************Functions: Action on Element ( Ex: Click Element, Hover Element   *****************/
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to click
+     * @Description: Click on element
+     */
+    public void clickElement(WebElement element, String elementName) {
+        getLogger().info("+++ Click on Element: " + elementName);
+        waitForClickableOfElement(element, elementName);
+        element.click();
+
+    }
+
+    /**
+     * Added by huy.huynh on 12/06/2017.
+     * check element on dev-branch
+     */
+    /**
+     * @param webElement  Element defined in page class
+     * @param elementName The text name of element
+     */
+    public void clickByJavaScripts(WebElement webElement, String elementName) throws Exception {
+        getLogger().info("Click by javascript of element " + elementName);
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].click()", webElement);
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to click and hold
+     * @Description: Click and Hold on element
+     */
+    public void clickAndHold(WebElement element, String elementName) {
+        getLogger().info("+++ Click And Hold: " + elementName);
+        if (Generic.sBrowserData.equals("chr.")) {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element);
+            actions.click(element);
+            actions.perform();
+        } else {
+            element.click();
+        }
+
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to hover to
+     * @Description: Hover on element
+     */
+    public void hoverElement(WebElement element, String elementName) {
+        getLogger().info("+++ Hover on Element: " + elementName);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.build().perform();
+
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element that we want to input value.
+     * @Description: Clear all Strings to textBox.
+     * @Description: Clear all Strings to textBox.
+     */
+    public void clearTextBox(WebElement element, String elementName) {
+        getLogger().info("+++ Clear text on : " + elementName);
+        element.clear();
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param text        The content of text that we want to input.
+     * @param elementName Name of element that we want to input value.
+     * @Description: Send a String to textBox.
+     * @Description: Send a String to textBox.
+     */
+    public void sendKeyTextBox(WebElement element, String text, String elementName) {
+        getLogger().info("+++ SendKey on : " + elementName);
+        waitForClickableOfElement(element, "wait for click to " + elementName);
+        element.clear();
+        waitForClickableOfElement(element, "wait for click to " + elementName);
+        element.sendKeys(text);
+    }
+
+    /**
+     * @param element     element defined on page class
+     * @param elementName Name of element: CheckBox that we want to Send TabKey
+     * @Description: Send TabKey
+     * @Description: Send TabKey
+     */
+    public void sendTabKey(WebElement element, String elementName) {
+        getLogger().info("+++ Send TabKey on Element " + elementName);
+        element.sendKeys(Keys.TAB);
+    }
+
+    public void sendEnterKey(WebElement element, String elementName) {
+        getLogger().info("+++ Send Enter Key: " + elementName);
+        element.sendKeys(Keys.ENTER);
+        try {
+            element.sendKeys(Keys.ENTER);
+            getLogger().info("+++++ Sent Enter Key: " + elementName);
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to sendEnterkey on: " + elementName);
+        }
+    }
+
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
+
+    /********Functions: Validate Element function ( Ex: validateElementText, validateDisPlayedElement,... *********/
 
     /**
      * @param webElement  WebElement
@@ -788,8 +958,9 @@ Method to wait Ajax function on Site be loaded successfully.
         }
     }
 
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
 
-    /************ Select an option in Select Dropdown Element  ***************/
+    /*************************Functions: Select an option in Select Dropdown Element  *****************************/
 
     /**
      * @param element     element defined on page class
@@ -830,31 +1001,94 @@ Method to wait Ajax function on Site be loaded successfully.
         dropDown.selectByIndex(selIndex);
     }
 
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
+
+    /******************Functions: Finding an Element with parameter: "ByXpath, By Value,... ***********************/
 
 
+//    /**
+//     * @param xpathElement
+//     * @return Web element by xpath
+//     */
+//    public WebElement findWebElementByXpath(String xpathElement) {
+//        WebElement resultWebElement = null;
+//        getLogger().info("The xpath of web element = " + xpathElement);
+//        resultWebElement = getDriver().findElement(By.xpath(xpathElement));
+//        return resultWebElement;
+//    }
 
     /**
-     * @param xpathElement
-     * @return Web element by xpath
+     * get element which cant use @FindBy to find
+     *
+     * @param xpath xpath to get element
+     * @param arg   vararg for formating
      */
-    public WebElement findWebElementByXpath(String xpathElement) {
-        WebElement resultWebElement = null;
-        getLogger().info("The xpath of web element = " + xpathElement);
-        resultWebElement = getDriver().findElement(By.xpath(xpathElement));
-        return resultWebElement;
+    public WebElement getElementByXpath(String xpath, String... arg) {
+        WebElement webElement = null;
+        xpath = String.format(xpath, arg);
+        try {
+            webElement = getDriver().findElement(By.xpath(xpath));
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+        return webElement;
     }
 
-    public String randomCharacters(int maxLength) {
-        char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < maxLength; i++) {
-            char c = chars[random.nextInt(chars.length)];
-            sb.append(c);
+
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
+
+    /**************Functions: Finding position of Element in a list: By text, By attribute value ******************/
+
+    public int findElementByText(java.util.List<WebElement> listElement, String textValue) {
+        try {
+            String actualTextValue;
+            for (int i = 0; i < listElement.size(); i++) {
+                actualTextValue = listElement.get(i).getText().trim();
+                if (actualTextValue.equals(textValue)) {
+                    getLogger().info("Element is found at " + i);
+                    return i;
+                }
+            }
+            getLogger().info(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+
+        } catch (Exception e) {
+            getLogger().info(String.format("Cannot find the text name: %s", textValue));
+            return -1;
         }
-        String results = sb.toString();
-        return results;
     }
+
+    /**
+     * Find the index(position) of Web Element in the list Web Element by attribute value
+     *
+     * @param listElement   List WebElement
+     * @param textValue     String text which is compared with each WebElements.
+     * @param attributeName String attributeName which attribute will be found with get Attribute method.
+     * @return i if the WebElement is matched, otherwise return -1.
+     */
+    public int findElementByAttribute(List<WebElement> listElement, String textValue, String attributeName) {
+        try {
+            String actualAttributeValue;
+            for (int i = 0; i < listElement.size(); i++) {
+                actualAttributeValue = listElement.get(i).getAttribute(attributeName).trim();
+                if (actualAttributeValue.equals(textValue)) {
+                    getLogger().info("Element is found at " + i);
+                    getLogger().info(String.format("The position of the text name '%s' at %d", textValue, i));
+                    return i;
+                }
+            }
+            Assert.fail(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+
+        } catch (Exception e) {
+            Assert.fail(String.format("Cannot find the text name: %s", textValue));
+            return -1;
+        }
+    }
+
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
+
+    /***************************************Functions: Scroll Page function: **************************************/
 
     public void scrollPageUp() {
         getLogger().info("+++ Scroll Page up.");
@@ -885,100 +1119,19 @@ Method to wait Ajax function on Site be loaded successfully.
         }
     }
 
-
     /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to click
-     * @Description: Click on element
+     * Scroll to footer of current page
+     * TODO: duplicating with scrollToFooter on AbstractService, find solution later
      */
-    public void clickElement(WebElement element, String elementName) {
-        getLogger().info("+++ Click on Element: " + elementName);
-        waitForClickableOfElement(element, elementName);
-        element.click();
-
+    public void scrollToFooter() {
+        getLogger().info("Scroll down to see page footer.");
+        JavascriptExecutor js = ((JavascriptExecutor) getDriver());
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to click and hold
-     * @Description: Click and Hold on element
-     */
-    public void clickAndHold(WebElement element, String elementName) {
-        getLogger().info("+++ Click And Hold: " + elementName);
-        if (Generic.sBrowserData.equals("chr.")) {
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element);
-            actions.click(element);
-            actions.perform();
-        } else {
-            element.click();
-        }
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
 
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to hover to
-     * @Description: Hover on element
-     */
-    public void hoverElement(WebElement element, String elementName) {
-        getLogger().info("+++ Hover on Element: " + elementName);
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element);
-        actions.build().perform();
-
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param text        The content of text that we want to input.
-     * @param elementName Name of element that we want to input value.
-     * @Description: Send a String to textBox.
-     * @Description: Send a String to textBox.
-     */
-    public void sendKeyTextBox(WebElement element, String text, String elementName) {
-        getLogger().info("+++ SendKey on : " + elementName);
-        waitForClickableOfElement(element, "wait for click to " + elementName);
-        element.clear();
-        waitForClickableOfElement(element, "wait for click to " + elementName);
-        element.sendKeys(text);
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to input value.
-     * @Description: Clear all Strings to textBox.
-     * @Description: Clear all Strings to textBox.
-     */
-    public void clearTextBox(WebElement element, String elementName) {
-        getLogger().info("+++ Clear text on : " + elementName);
-        element.clear();
-    }
-
-
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element: CheckBox that we want to Send TabKey
-     * @Description: Send TabKey
-     * @Description: Send TabKey
-     */
-    public void sendTabKey(WebElement element, String elementName) {
-        getLogger().info("+++ Send TabKey on Element " + elementName);
-        element.sendKeys(Keys.TAB);
-    }
-
-    public void sendEnterKey(WebElement element, String elementName) {
-        getLogger().info("+++ Send Enter Key: " + elementName);
-        element.sendKeys(Keys.ENTER);
-        try {
-            element.sendKeys(Keys.ENTER);
-            getLogger().info("+++++ Sent Enter Key: " + elementName);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to sendEnterkey on: " + elementName);
-        }
-    }
+    /****************************************Functions: Get Text of an Element: ***********************************/
 
     /**
      * @param eleGetText  Element defined in page class
@@ -1001,45 +1154,38 @@ Method to wait Ajax function on Site be loaded successfully.
         return textOfElement;
     }
 
-    public void verifySortDataGrid(java.util.List<WebElement> elementRowValue, WebElement elementSortIcon) {
-        getLogger().info("+++ Verify Sort Data Grid: " + elementSortIcon);
-        java.util.List<String> listToDoTaskName = new ArrayList<String>();
-        java.util.List<String> listSortedToDoTaskName;
-        for (int i = 0; i < elementRowValue.size(); i++) {
-            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-        }
-        listSortedToDoTaskName = listToDoTaskName;
-        Collections.sort(listSortedToDoTaskName);
-        elementSortIcon.click();
-        listToDoTaskName.clear();
-        for (int i = 0; i < elementRowValue.size(); i++) {
-            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-        }
-        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Ascending sort is NOT as expected");
-        Collections.reverse(listSortedToDoTaskName);
-        elementSortIcon.click();
-        listToDoTaskName.clear();
-        for (int i = 0; i < elementRowValue.size(); i++) {
-            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-        }
-        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Descending sort is NOT as expected");
-        getLogger().info("++++ Verified Sort Data Grid: " + elementSortIcon);
+    /**
+     * Get text value of element
+     *
+     * @param webElement
+     * @return
+     */
+    public String getText(WebElement webElement) {
+        if (webElement.getTagName().equals("input") || webElement.getTagName().equals("textarea"))
+            return webElement.getAttribute("value");
+        return webElement.getText();
     }
-
-    public enum Element_Type {
-        DISPLAYED, ISENABLE, ISSELECTED, HIDDEN, TEXT_VALUE, NOT_EXIST
-    }
-
 
     /**
-     * Method togo to URL
-     *
-     * @param url
+     * @param webElement  Element defined in page class
+     * @param elementName The text name of element
+     * @return The text of web element
      */
-    public void getUrl(String url) {
-        getLogger().info("+++ Navigate to URL: " + url);
-        driver.get(url);
+    public String getTextByAttributeValue(WebElement webElement, String elementName) {
+        getLogger().info("Get text by attribute 'value' " + elementName);
+        try {
+            return webElement.getAttribute("value");
+        } catch (NoSuchElementException e) {
+            getLogger().info(e.getMessage());
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+        return null;
     }
+
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
+
+    /***************************************Function: Switch to tab, iframe: **************************************/
 
     /**
      * Switch to other tab
@@ -1051,18 +1197,6 @@ Method to wait Ajax function on Site be loaded successfully.
         getLogger().info("+++ Switch to tab: " + tabIndex);
         java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(tabIndex));
-    }
-
-    /**
-     * Get text value of element
-     *
-     * @param webElement
-     * @return
-     */
-    public String getText(WebElement webElement) {
-        if (webElement.getTagName().equals("input") || webElement.getTagName().equals("textarea"))
-            return webElement.getAttribute("value");
-        return webElement.getText();
     }
 
 
@@ -1099,79 +1233,57 @@ Method to wait Ajax function on Site be loaded successfully.
 
     }
 
+    /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
+
+    /********************************************Functions: Other *************************************************/
+
+    public String randomCharacters(int maxLength) {
+        char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < maxLength; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        String results = sb.toString();
+        return results;
+    }
+
+
+    public void verifySortDataGrid(java.util.List<WebElement> elementRowValue, WebElement elementSortIcon) {
+        getLogger().info("+++ Verify Sort Data Grid: " + elementSortIcon);
+        java.util.List<String> listToDoTaskName = new ArrayList<String>();
+        java.util.List<String> listSortedToDoTaskName;
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
+        }
+        listSortedToDoTaskName = listToDoTaskName;
+        Collections.sort(listSortedToDoTaskName);
+        elementSortIcon.click();
+        listToDoTaskName.clear();
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
+        }
+        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Ascending sort is NOT as expected");
+        Collections.reverse(listSortedToDoTaskName);
+        elementSortIcon.click();
+        listToDoTaskName.clear();
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
+        }
+        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Descending sort is NOT as expected");
+        getLogger().info("++++ Verified Sort Data Grid: " + elementSortIcon);
+    }
+
+
     /**
-     * get element which cant use @FindBy to find
+     * Method togo to URL
      *
-     * @param xpath xpath to get element
-     * @param arg   vararg for formating
+     * @param url
      */
-    public WebElement getElementByXpath(String xpath, String... arg) {
-        WebElement webElement = null;
-        xpath = String.format(xpath, arg);
-        try {
-            webElement = getDriver().findElement(By.xpath(xpath));
-        } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
-        }
-        return webElement;
-    }
-
-
-    public int findElementByText(java.util.List<WebElement> listElement, String textValue) {
-        try {
-            String actualTextValue;
-            for (int i = 0; i < listElement.size(); i++) {
-                actualTextValue = listElement.get(i).getText().trim();
-                if (actualTextValue.equals(textValue)) {
-                    getLogger().info("Element is found at " + i);
-                    return i;
-                }
-            }
-            getLogger().info(String.format("Cannot find the text name: %s", textValue));
-            return -1;
-
-        } catch (Exception e) {
-            getLogger().info(String.format("Cannot find the text name: %s", textValue));
-            return -1;
-        }
-    }
-
-    /**
-     * Scroll to footer of current page
-     * TODO: duplicating with scrollToFooter on AbstractService, find solution later
-     */
-    public void scrollToFooter() {
-        getLogger().info("Scroll down to see page footer.");
-        JavascriptExecutor js = ((JavascriptExecutor) getDriver());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-    }
-
-    /**
-     * Find the index(position) of Web Element in the list Web Element by attribute value
-     *
-     * @param listElement   List WebElement
-     * @param textValue     String text which is compared with each WebElements.
-     * @param attributeName String attributeName which attribute will be found with get Attribute method.
-     * @return i if the WebElement is matched, otherwise return -1.
-     */
-    public int findElementByAttribute(List<WebElement> listElement, String textValue, String attributeName) {
-        try {
-            String actualAttributeValue;
-            for (int i = 0; i < listElement.size(); i++) {
-                actualAttributeValue = listElement.get(i).getAttribute(attributeName).trim();
-                if (actualAttributeValue.equals(textValue)) {
-                    getLogger().info("Element is found at " + i);
-                    getLogger().info(String.format("The position of the text name '%s' at %d", textValue, i));
-                    return i;
-                }
-            }
-            Assert.fail(String.format("Cannot find the text name: %s", textValue));
-            return -1;
-
-        } catch (Exception e) {
-            Assert.fail(String.format("Cannot find the text name: %s", textValue));
-            return -1;
-        }
+    public void getUrl(String url) {
+        getLogger().info("+++ Navigate to URL: " + url);
+        driver.get(url);
     }
 
     public String getDate(int day) {
@@ -1204,61 +1316,4 @@ Method to wait Ajax function on Site be loaded successfully.
         // Change the first Item to Third Item
         clickElement(list.get(0), elementName);
     }
-
-    /**
-     * Added by huy.huynh on 12/06/2017.
-     * check element on dev-branch
-     */
-    /**
-     * @param webElement  Element defined in page class
-     * @param elementName The text name of element
-     */
-    public void clickByJavaScripts(WebElement webElement, String elementName) throws Exception {
-        getLogger().info("Click by javascript of element " + elementName);
-        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-        jse.executeScript("arguments[0].click()", webElement);
-    }
-
-    /**
-     * wait until animation for element finish
-     *
-     * @param webElement  xpath to get element
-     * @param elementName vararg for formating
-     */
-    public void waitForAnimation(WebElement webElement, String elementName) {
-        // This function is waiting to Popup Delete To Do task is displayed after running animation.
-        // We can move this function to Abstract Page or Common Page.
-        try {
-            getLogger().info("Waiting For Animation: " + elementName);
-            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-            wait.until((WebDriver driver) -> {
-                boolean result = false;
-                result = (boolean) ((JavascriptExecutor) driver).executeScript(
-                        "var elm = arguments[0];" + "var doc1 = elm.ownerDocument || document;" + "var rect = elm.getBoundingClientRect();" + "return elm === doc1.elementFromPoint(rect.left, rect.top);",
-                        webElement);
-                getLogger().info("result: " + result);
-                return result;
-            });
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-        }
-    }
-
-    /**
-     * @param webElement  Element defined in page class
-     * @param elementName The text name of element
-     * @return The text of web element
-     */
-    public String getTextByAttributeValue(WebElement webElement, String elementName) {
-        getLogger().info("Get text by attribute 'value' " + elementName);
-        try {
-            return webElement.getAttribute("value");
-        } catch (NoSuchElementException e) {
-            getLogger().info(e.getMessage());
-        } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
-        }
-        return null;
-    }
-
 }
