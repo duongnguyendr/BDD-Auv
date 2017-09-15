@@ -471,8 +471,8 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
-      | auvenirauditor@gmail.com | Changeit@123 |
+      | Email                    | Password         |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -482,6 +482,7 @@ Feature: Smoke Test Feature
     And I click download attachments on bulk action
     Then I should see popup download attachments on todo page
     And I click download button on attachment download popup
+    Then I verify file "Engagement GP02.zip" existed in computer
 
 
 #   #/Duong
@@ -490,7 +491,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                   | Password     |
+      | Email                          | Password     |
       | chr.auditor01.lead@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
