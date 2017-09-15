@@ -500,3 +500,22 @@ Feature: Smoke Test Feature
       |ToDo name| Category|
       |ToDo 01| Music |
       |ToDo 02| Sport |
+
+  Scenario:Auditor Member assign To Do to Lead Client : AUV-1069
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I assignee list To-Do to Client
+      |Lead client| Todo Name|
+      |Unassigned| ToDo 01|
+      |Unassigned| ToDo 02|
+    Then I verify Client Assignee Selected
+      |Lead client| Todo Name|
+      |Unassigned| ToDo 01|
+      |Unassigned| ToDo 02|

@@ -1,5 +1,6 @@
 package com.auvenir.ui.bdd.common;
 
+import cucumber.api.DataTable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -10,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -51,6 +53,13 @@ public class GeneralUtilities {
             return false;
         }
         return true;
+    }
+    public static List getTable ( DataTable dataTable){
+/*note: Get form 1 to List size because first row is the header of file
+*/
+        List<List<String>>listDataTable;
+        listDataTable = dataTable.raw();
+        return listDataTable;
     }
 
     //    public boolean checkFileExists(String downloadFile, boolean isDeletedFile){return false;}
