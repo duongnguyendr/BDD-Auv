@@ -15,7 +15,6 @@ import java.util.List;
  * Created by thuan.duong on 9/12/2017.
  */
 public class ClientSignUpPage extends CommonPage {
-    private static Logger logger = Logger.getLogger(ClientSignUpPage.class.getSimpleName());
 
     @FindBy(xpath = "//h3[@id='welcome-body']")
     private WebElement titleWelcome;
@@ -96,19 +95,19 @@ public class ClientSignUpPage extends CommonPage {
     }
 
     public void verifyWelcomePageTitle() {
-        logger.info("Welcome Page loaded.(Status change: Onboarding->Active)");
+        getLogger().info("Welcome Page loaded.(Status change: Onboarding->Active)");
         switchToOtherTab(1);
         boolean result = validateElementText(titleWelcome, "Welcome to Auvenir!");
         Assert.assertTrue(result, "Should see the Welcome to Auvenir! title.");
     }
 
     public void clickGetStartedButton() {
-        logger.info("Start activating client");
+        getLogger().info("Start activating client");
         clickElement(buttonWelcomeContinue, "Button Get Started");
     }
 
     public void fillUpPersonalForm(String phoneNumber) {
-        logger.info("Fill Up Personal Form");
+        getLogger().info("Fill Up Personal Form");
         //clickElement(inputPersonalRole, "Input Personal Role");
         //waitSomeSeconds(5);
         //scrollToFooter();
@@ -122,24 +121,24 @@ public class ClientSignUpPage extends CommonPage {
     }
 
     public void verifyProvideInformationPageTitle() {
-        logger.info("Verify Provide Information Page Title");
+        getLogger().info("Verify Provide Information Page Title");
         boolean result = validateElementText(titleComponentPersonal, "Please Provide your Information");
         Assert.assertTrue(result, "Should see the Please Provide your Information title.");
     }
 
     public void clickPersonalContinueButton() {
-        logger.info("Click Personal Continue Button.");
+        getLogger().info("Click Personal Continue Button.");
         clickElement(buttonPersonalContinue, "Button Personal Continue");
     }
 
     public void verifyBusinessPageTitle() {
-        logger.info("Verify Business Page Title");
+        getLogger().info("Verify Business Page Title");
         boolean result = validateElementText(titleComponentBusiness, "Please Confirm your Business Information");
         Assert.assertTrue(result, "Should see the Business Page Title.");
     }
 
     public void fillUpBusinessForm() {
-        logger.info("Fill Up Business Form");
+        getLogger().info("Fill Up Business Form");
         if (validateNotExistedElement(labelBusinessIndustry, "Input Business Industry")) {
             String industryData = getText(inputBusinessIndustry);
             System.out.println("industryData = " + industryData);
@@ -163,12 +162,12 @@ public class ClientSignUpPage extends CommonPage {
     }
 
     public void clickContinueButtonOnBusinessPage() {
-        logger.info("Click Continue Button on Business");
+        getLogger().info("Click Continue Button on Business");
         clickElement(buttonBusinessContinue, "Button Business Continue");
     }
 
     public void fillUpBankForm() {
-        logger.info("Fill Up Bank Form");
+        getLogger().info("Fill Up Bank Form");
         //        validateElementText(titleComponentBank, "Integrate with your Bank");
         //            waitSomeSeconds(10);
         waitForJSandJQueryToLoad();
@@ -176,32 +175,32 @@ public class ClientSignUpPage extends CommonPage {
     }
 
     public void verifyBankInformationTitle() {
-        logger.info("Verify Bank Information Title.");
+        getLogger().info("Verify Bank Information Title.");
         validateElementText(titleComponentBank, "Integrate with your Bank");
     }
 
     public void clickSkipButtonOnBankPage() {
-        logger.info("Click Skip Button On Bank Page.");
+        getLogger().info("Click Skip Button On Bank Page.");
         clickElement(buttonBankSkip, "Button Bank Skip");
     }
 
     public void fillUpFileForm() {
-        logger.info("Fill Up File Storage Information Form");
+        getLogger().info("Fill Up File Storage Information Form");
         scrollToFooter();
     }
 
     public void verifyFileStoragePageTitle() {
-        logger.info("Verify File Storage Page Title.");
+        getLogger().info("Verify File Storage Page Title.");
         validateElementText(titleComponentFiles, "Integrate With Your File Storage");
     }
 
     public void clickSkipButtonOnFilePage() {
-        logger.info("Click Skip Button On File Page.");
+        getLogger().info("Click Skip Button On File Page.");
         clickElement(buttonFilesSkip, "Button File Skip");
     }
 
     public void fillUpSecurityForm(String password) {
-        logger.info("Fill Up Personal Form");
+        getLogger().info("Fill Up Personal Form");
         sendKeyTextBox(inputCreatePassword, password, "Input Create Password");
         sendKeyTextBox(inputConfirmPassword, password, "Input Confirm Password");
         sendTabKey(inputConfirmPassword, "Input Confirm Password");
@@ -209,12 +208,12 @@ public class ClientSignUpPage extends CommonPage {
     }
 
     public void verifySecurityPageTitle() {
-        logger.info("Verify File Storage Page Title.");
+        getLogger().info("Verify File Storage Page Title.");
         validateElementText(titleComponentSecurity, "Create Your Password");
     }
 
     public void clickCreateAccountButtonOnSecurityPage() {
-        logger.info("Click Continue Button on Security Page.");
+        getLogger().info("Click Continue Button on Security Page.");
         clickElement(buttonSecurityContinue, "Button Security Continue");
         waitSomeSeconds(3);
         waitForProgressOverlayIsClosed();

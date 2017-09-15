@@ -14,7 +14,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                     | Password     |
+      | Email | Password |
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
@@ -62,7 +62,7 @@ Feature: Smoke Test Feature
 
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      |chr.auditor01.adm@gmail.com|Changeit@123|
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -93,8 +93,8 @@ Feature: Smoke Test Feature
     And Delete all business name by : "Titan"
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | Email                   | Password     |
+      | chr.auditor01.adm@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click create new engagement button
@@ -114,20 +114,21 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      |chr.auditor01.lead@gmail.com|Changeit@123|
     And Delete all activity of engagement by user  : "chr.auditor01.lead@gmail.com"
     And Delete all engagement of user : "chr.auditor01.lead@gmail.com"
     And Delete user by email: "chr.auditor01.lead@gmail.com"
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | Email                   | Password     |
+      | chr.auditor01.adm@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
     And I click on team tab
+    And I delete existed member on team page: "Lead Auditor"
     And I click in invite new member on team page
     Then I should see invite new member page
     And I input full name on invite new member page: "Lead Auditor"
@@ -137,7 +138,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-  Scenario: Lead Auditor Active account: AUV-660
+    Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to gmail login page
     And I signIn gmail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
@@ -152,14 +153,14 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      |chr.client01.adm@gmail.com | Changeit@123 |
     And Delete all client of user
-      | chr.client01.adm@gmail.com | chr.client01.lead@gmail.com | chr.client01@gmail.com |
+      |chr.client01.adm@gmail.com|chr.client01.lead@gmail.com|chr.client01@gmail.com|
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | Email                    | Password     |
+      | chr.auditor01.adm@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -176,8 +177,8 @@ Feature: Smoke Test Feature
     And I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                     | Password     |
-      | chr.adm.auvenir@gmail.com | Changeit@123 |
+      | Email                       | Password     |
+      | chr.adm.auvenir@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
     Then I should see status of user is onboarding
@@ -280,24 +281,24 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-   Then I assignee list To-Do to Auditor
+    Then I assignee list To-Do to Auditor
       | Auditor Name| Todo Name|
       |Admin Auditor| ToDo 01  |
       |Admin Auditor| ToDo 02  |
       |Admin Auditor| ToDo 03  |
     And I verify Auditor Assignee Selected
-      | Auditor Name  | Todo Name |
-      | Admin Auditor | ToDo 01   |
-      | Admin Auditor | ToDo 02   |
-      | Admin Auditor | ToDo 03   |
+      | Auditor Name| Todo Name|
+      |Admin Auditor| ToDo 01  |
+      |Admin Auditor| ToDo 02  |
+      |Admin Auditor| ToDo 03  |
 
-#Viet Le create testcase:
+##Viet Le create testcase:
   Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
+      | auvenirinfo@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
@@ -306,11 +307,6 @@ Feature: Smoke Test Feature
       |userName | Todo Name|
       |Unassigned| ToDo 01|
       |Unassigned| ToDo 02|
-    And I verify Client Assignee Selected
-      | Auditor Name| Todo Name|
-      |Unassigned| ToDo 01|
-      |Unassigned| ToDo 02|
-
 
 #Huy
   Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
@@ -350,101 +346,6 @@ Feature: Smoke Test Feature
     And I fill up all Security Information with Password: "Changeit@123"
     And I click on Create Account Button on Security Information Page
     Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
-
-  Scenario: Lead Auditor add New member auditor into Engagement 2: AUV-787
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                    | Password     |
-      | auvenirauditor@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
-    And I click on team tab
-    And I click in invite new member on team page
-    Then I should see invite new member page
-    And I input full name on invite new member page: "Huy GA01"
-    And I input email on invite new member page: "auvenirauditor01@gmail.com"
-    And I input email confirm on invite new member page: "auvenirauditor01@gmail.com"
-    And I select role of new member
-    And I click on invite new member
-    Then I should see invite successful message
-
-  Scenario: Lead Auditor new Auditor member active account and login to Engagement 2: AUV-798
-    Given I navigate to gmail login page
-    Then I signIn gmail
-      | auvenirauditor02@gmail.com | TESTPASSWORD |
-    And I open active email
-    And I click on confirmation link
-    Then I should see personal sign up page
-    And I input confirm auditor personal information: "1234567890"
-    Then I should see provide firm information page
-    And I click on continue button on firm information page
-    And I create password: "Changeit@123"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
 #/Huy
 
-  #Duong
-  Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 02"
-    And I click bulk action drop down on todo page
-    And I click mark complete button on bulk action
-    Then I should see mark completed todo popup
-    And I click on archive button on complete todo popup
-    Then I should see todo mark completed on todo page: "ToDo 02"
-#Viet Le create testcase:
-  Scenario:Lead Auditor Create To Do task: AUV-878
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                   | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-    Then I create To-Do with name and category
-      |ToDo name| Category|
-      |ToDo 01| Music |
-      |ToDo 02| Sport |
 
-  Scenario: Lead Auditor Bulk Actions Assign To Do: AUV-1016
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 03"
-    And I click bulk action drop down on todo page
-#    And I click assignee on bulk action drop down
-
-  Scenario: Lead Auditor delete To Do Task: AUV-1026
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auditor01.lead@gmail.com   | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo check box on todo page: "ToDo 03"
-    And I click bulk action drop down on todo page
-    And I click delete button on bulk action
-    Then I should see delete todo popup
-    And I click on confirm delete button on delete todo popup
-    Then I should see todo not existed in todo list: "ToDo 03"
-   #/Duong

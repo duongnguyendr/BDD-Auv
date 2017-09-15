@@ -7,11 +7,9 @@ import com.auvenir.ui.bdd.common.Generic;
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
-import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import sun.rmi.runtime.Log;
 
 import javax.sql.rowset.spi.SyncFactoryException;
 import java.net.UnknownHostException;
@@ -23,6 +21,7 @@ import java.util.NoSuchElementException;
 import static com.auvenir.ui.bdd.base.BaseInit.baseUrl;
 import static com.auvenir.ui.bdd.common.Generic.sDirPath;
 import static com.mongodb.MongoClientOptions.builder;
+import static javax.sql.rowset.spi.SyncFactory.getLogger;
 
 /*===================================================================
  * Created by doai.tran on 4/24/2017.
@@ -30,7 +29,6 @@ import static com.mongodb.MongoClientOptions.builder;
  *
  *=================================================================== */
 public class MongoDBService {
-    private static Logger logger = Logger.getLogger(MongoDBService.class.getSimpleName());
     private static String dataBaseSer;
     private static int port;
     private static String DB;
@@ -50,12 +48,12 @@ public class MongoDBService {
 //        password = mongoDBProperties.getUserPassword();
 //        ssl = mongoDBProperties.getSsl();
         MongoDBProperties mongoDBProperties = new MongoDBProperties((baseUrl));
-        dataBaseSer = "192.168.1.222";
-        port = 27017;
-        DB = "auvenir";
-        username = null;
-        password = null;
-        ssl = "no";
+        dataBaseSer = mongoDBProperties.getServerIp();
+        port = Integer.valueOf(mongoDBProperties.getPort());
+        DB = mongoDBProperties.getDatabaseName();
+        username = mongoDBProperties.getUserName();
+        password = mongoDBProperties.getUserPassword();
+        ssl = mongoDBProperties.getSsl();
     }
 
     /* ===================================================================
@@ -80,11 +78,11 @@ public class MongoDBService {
                     .isEmptyString(password)) {
                 mongoClient = new MongoClient(ServerHost, portNo);
             }
-            //logger.info("Connected successfully.");
+            //getLogger().info("Connected successfully.");
             System.out.println("Connected successfully.");
             return mongoClient;
         } catch (Exception e) {
-            //logger.info("Unable to connect to DB: "+ e.getMessage());
+            //getLogger().info("Unable to connect to DB: "+ e.getMessage());
             System.out.println("Unable to connect to DB: " + e.getMessage());
             e.printStackTrace();
         }
@@ -118,10 +116,9 @@ public class MongoDBService {
             array.add(documentfin);
             document.put("finCustomer", array);
             table.insert(document);
-
-            logger.info("Insert owner successfully.");
+            getLogger().info("Insert owner successfully.");
         } catch (Exception e) {
-            logger.info("Insert owner successfully." + e.getMessage());
+            getLogger().info("Insert owner successfully." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -140,9 +137,9 @@ public class MongoDBService {
             BasicDBObject document = new BasicDBObject();
             document.put("ownerUID", sData[2]);
             table.remove(document);
-            logger.info("Delete owner successfully.");
+            getLogger().info("Delete owner successfully.");
         } catch (Exception e) {
-            logger.info("Unable to delete owner." + e.getMessage());
+            getLogger().info("Unable to delete owner." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -169,9 +166,9 @@ public class MongoDBService {
             document.put("dateCreated", sData[9]);
             document.put("finLoginID", sData[10]);
             table.insert(document);
-            logger.info("Insert consumer successfully.");
+            getLogger().info("Insert consumer successfully.");
         } catch (Exception e) {
-            logger.info("Unable to insert consumer." + e.getMessage());
+            getLogger().info("Unable to insert consumer." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -190,9 +187,9 @@ public class MongoDBService {
             BasicDBObject document = new BasicDBObject();
             document.put("consumerUID", sData[4]);
             table.remove(document);
-            logger.info("Delete consumer successfully.");
+            getLogger().info("Delete consumer successfully.");
         } catch (Exception e) {
-            logger.info("Unable to delete consumer." + e.getMessage());
+            getLogger().info("Unable to delete consumer." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -225,9 +222,9 @@ public class MongoDBService {
             document.put("address", sData[14]);
             document.put("raw", sData[15]);
             table.insert(document);
-            logger.info("Insert Institution successfully.");
+            getLogger().info("Insert Institution successfully.");
         } catch (Exception e) {
-            logger.info("Unable to insert Institution." + e.getMessage());
+            getLogger().info("Unable to insert Institution." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -246,9 +243,9 @@ public class MongoDBService {
             BasicDBObject document = new BasicDBObject();
             document.put("finID", sData[4]);
             table.remove(document);
-            logger.info("Delete Institution successfully.");
+            getLogger().info("Delete Institution successfully.");
         } catch (Exception e) {
-            logger.info("Unable to delete Institution." + e.getMessage());
+            getLogger().info("Unable to delete Institution." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -282,9 +279,9 @@ public class MongoDBService {
             document.put("txnFromDate", sData[14]);
             document.put("txnToDate", sData[15]);
             table.insert(document);
-            logger.info("Insert ConsumerAccount successfully.");
+            getLogger().info("Insert ConsumerAccount successfully.");
         } catch (Exception e) {
-            logger.info("Unable to insert ConsumerAccount." + e.getMessage());
+            getLogger().info("Unable to insert ConsumerAccount." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -303,9 +300,9 @@ public class MongoDBService {
             BasicDBObject document = new BasicDBObject();
             document.put("finAccountID", sData[7]);
             table.remove(document);
-            logger.info("Delete ConsumerAccount successfully.");
+            getLogger().info("Delete ConsumerAccount successfully.");
         } catch (Exception e) {
-            logger.info("Unable to delete ConsumerAccount." + e.getMessage());
+            getLogger().info("Unable to delete ConsumerAccount." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -342,9 +339,9 @@ public class MongoDBService {
             document.put("lastTransactionDate", sData[18]);
             document.put("raw", sData[19]);
             table.insert(document);
-            logger.info("Insert Account successfully.");
+            getLogger().info("Insert Account successfully.");
         } catch (Exception e) {
-            logger.info("Unable to Insert Account." + e.getMessage());
+            getLogger().info("Unable to Insert Account." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -363,9 +360,9 @@ public class MongoDBService {
             BasicDBObject document = new BasicDBObject();
             document.put("institutionID", sData[3]);
             table.remove(document);
-            logger.info("Delete Account successfully.");
+            getLogger().info("Delete Account successfully.");
         } catch (Exception e) {
-            logger.info("Unable to delete Account." + e.getMessage());
+            getLogger().info("Unable to delete Account." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -429,9 +426,9 @@ public class MongoDBService {
 
             document.put("accounts", sData[26]);
             table.insert(document);
-            logger.info("Insert AuthSession successfully.");
+            getLogger().info("Insert AuthSession successfully.");
         } catch (Exception e) {
-            logger.info("Unable to insert AuthSession." + e.getMessage());
+            getLogger().info("Unable to insert AuthSession." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -449,9 +446,9 @@ public class MongoDBService {
             BasicDBObject document = new BasicDBObject();
             document.put("_id", sData[1]);
             table.remove(document);
-            logger.info("Delete AuthSession successfully.");
+            getLogger().info("Delete AuthSession successfully.");
         } catch (Exception e) {
-            logger.info("Unable to delete AuthSession." + e.getMessage());
+            getLogger().info("Unable to delete AuthSession." + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -1097,7 +1094,7 @@ public class MongoDBService {
         }
     }
 
-    public static void removeUserbyEmail(String email) {
+    public static void removeUserByEmail(String email) {
         try {
             removeUserObjectByEmail(getCollection("users"), email);
         } catch (Exception e) {
