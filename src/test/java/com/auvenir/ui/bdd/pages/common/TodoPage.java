@@ -234,8 +234,8 @@ public class TodoPage extends CommonPage {
                 }
             }
     }
-}
-    }
+//}
+//    }
 
     public void verifyClientAssigneeSelected(String toDoName, String clientAssignee) {
         getLogger().info("== select Client Assignee By Name ==");
@@ -253,7 +253,7 @@ public class TodoPage extends CommonPage {
             if (categoryExist != -1) {
                 clickElement(dropdownCategoryEle.get(0).findElements(By.xpath(".//div[@class='item']")).get(categoryExist)," Select category Exist "+categoryName +"  success" );
             } else {
-                sendTabkey(dropdownCategoryEle.get(0), "dropdownCategoryEle");
+                sendTabKey(dropdownCategoryEle.get(0), "dropdownCategoryEle");
                 createNewCategory(categoryName);
             }
 

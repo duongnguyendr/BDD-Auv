@@ -444,27 +444,6 @@ Method to wait Ajax function on Site be loaded successfully.
         }
     }
 
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait element to be visible.
-     */
-    public void waitForVisibleElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Visible Element: " + elementName);
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.visibilityOf(element));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.visibilityOf(element));
-        //            getLogger().info("+++++ Element: "+elementName+" is visible.");
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element: "+elementName+" is not visible.");
-        //            getLogger().info(e);
-        //            return false;
-        //        }
-    }
     public boolean waitForSizeListElementChanged(List<WebElement> element, String elementName, int sizeListElement) {
         getLogger().info("Try to waitForSizeListElementChanged: " + elementName);
         try {
@@ -487,116 +466,6 @@ Method to wait Ajax function on Site be loaded successfully.
         }
     }
 
-    /**
-     * @Description In order to wait element to be present by locator.
-     */
-    public void waitForPresentOfLocator(By by) {
-        getLogger().info("+++ Wait For Present Of Locator");
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        //            getLogger().info("+++++ Element is present.");
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not present.");
-        //            return false;
-        //        }
-    }
-
-    /**
-     * @Description In order to wait element to be visible by locator.
-     */
-    public void waitForVisibleOfLocator(By by) {
-        getLogger().info("+++ Wait For Visible Of Locator");
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        //            getLogger().info("+++++ Element is visible.");
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not visible.");
-        //            return false;
-        //        }
-    }
-
-    /**
-     * @Description In order to wait element to be visible by locator with seconds input.
-     */
-    public boolean waitForVisibleOfLocator(By locator, int seconds) {
-        getLogger().info("+++ Wait For Visible Of Locator by seconds");
-        boolean isResult = false;
-        try {
-            int i = 0;
-            while (i < seconds) {
-                try {
-                    getDriver().findElement(locator);
-                    isResult = true;
-                    break;
-                } catch (Exception ex) {
-                }
-                try {
-                    Thread.sleep(smallTimeOut);
-                    i++;
-                } catch (Exception e) {
-
-                }
-            }
-            if (!isResult) {
-                getLogger().info("+++++ Element is not visible.");
-            }
-            return isResult;
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Element is not visible.");
-            return isResult;
-        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait element to be visible.
-     */
-    public void waitForClickableOfElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Clickable Of Element: " + elementName);
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.elementToBeClickable(element));
-        //            getLogger().info("+++++ Element is clickable on Element: " + element.getText());
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not clickable on Element: " + element.getText());
-        //        }
-    }
-
-    /**
-     * @param element     element defined on page class
-     * @param elementName Name of element that we want to verify
-     * @Description In order to wait element to be visible.
-     */
-    public void waitForInvisibleElement(WebElement element, String elementName) {
-        getLogger().info("+++ Wait For Invisible Element: " + elementName);
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        wait.until(ExpectedConditions.invisibilityOf(element));
-        //        try {
-        //            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        //            wait.until(ExpectedConditions.invisibilityOf(element));
-        //            getLogger().info("+++++ Element is invisible on Element: " + elementName);
-        //            return true;
-        //        } catch (Exception e) {
-        //            getLogger().info(e.getMessage());
-        //            getLogger().info("+++++ Element is not invisible on Element: " + elementName);
-        //            return false;
-        //        }
-    }
 
     /**
      * @param element     element defined on page class
@@ -688,6 +557,62 @@ Method to wait Ajax function on Site be loaded successfully.
     }
 
     /**
+     * @param eleGetText  Element defined in page class
+     * @param elementName The text name of element
+     * @return The text of web element
+     */
+    public String getTextByJavaScripts(WebElement eleGetText, String elementName) {
+        getLogger().info("+++ Get text by javascript of element " + elementName);
+        String textOfElement = "";
+        try {
+            JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+            textOfElement = (String) ((JavascriptExecutor) getDriver())
+                    .executeScript("return arguments[0].value;", eleGetText);
+            getLogger().info("+++++ Text of element: " + elementName + textOfElement);
+        } catch (Exception e) {
+            getLogger().info(e.getMessage());
+            getLogger().info(e.getMessage());
+            getLogger().info("+++++ Unable to get text of element: " + elementName + textOfElement);
+        }
+        return textOfElement;
+    }
+
+    public void verifySortDataGrid(java.util.List<WebElement> elementRowValue, WebElement elementSortIcon) {
+        getLogger().info("+++ Verify Sort Data Grid: " + elementSortIcon);
+        java.util.List<String> listToDoTaskName = new ArrayList<String>();
+        java.util.List<String> listSortedToDoTaskName;
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
+        }
+        listSortedToDoTaskName = listToDoTaskName;
+        Collections.sort(listSortedToDoTaskName);
+        elementSortIcon.click();
+        listToDoTaskName.clear();
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
+        }
+        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Ascending sort is NOT as expected");
+        Collections.reverse(listSortedToDoTaskName);
+        elementSortIcon.click();
+        listToDoTaskName.clear();
+        for (int i = 0; i < elementRowValue.size(); i++) {
+            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
+        }
+        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Descending sort is NOT as expected");
+        getLogger().info("++++ Verified Sort Data Grid: " + elementSortIcon);
+        //        try {
+        //
+        //        } catch (AssertionError e) {
+        //            getLogger().info(e.getMessage());
+        //            getLogger().info("+++++ Unable to sort data on Data Grid View.");
+        //        }
+    }
+
+    public enum Element_Type {
+        DISPLAYED, ISENABLE, ISSELECTED, HIDDEN, TEXT_VALUE, NOT_EXIST
+    }
+
+    /**
      * Check properties of element
      *
      * @param webElement
@@ -765,6 +690,218 @@ Method to wait Ajax function on Site be loaded successfully.
             default:
                 break;
         }
+    }
+
+    /**
+     * Method togo to URL
+     *
+     * @param url
+     */
+    public void getUrl(String url) {
+        getLogger().info("+++ Navigate to URL: " + url);
+        driver.get(url);
+        //        try{
+        //            driver.get(url);
+        //            getLogger().info("+++++ Navigated to URL: "+url);
+        //        }catch (Exception e){
+        //            getLogger().info(e.getMessage());
+        //            getLogger().info("++++ Unable to navigate to URL: "+url);
+        //        }
+    }
+
+    /**
+     * Select option in select element by text
+     *
+     * @param webElement
+     * @param item
+     */
+    //    public void selectOptionByText(WebElement webElement, String item, String elementName) {
+    //        getLogger().info("+++ Select option: "+elementName+ "by Text: "+ item);
+    //        try {
+    //            Select select = new Select(webElement);
+    //            select.selectOptionByText(item);
+    //            getLogger().info("+++++ Selected option: "+elementName+" option: "+item);
+    //        } catch (Exception e) {
+    //            getLogger().info(e.getMessage());
+    //            getLogger().info("+++++ Unable to select option: "+elementName+" option: "+item);
+    //        }
+    //    }
+
+    /**
+     * Select option in select element by value
+     *
+     * @param ele
+     * @param val
+     */
+    //    public void selectOptionByValue(WebElement ele, String val) {
+    //        getLogger().info("+++ Select option: "+ele+ "by value: "+ val);
+    //        try {
+    //            Select select = new Select(ele);
+    //            select.selectOptionByValue(val);
+    //            getLogger().info("+++++ Selected option: "+ele+ "by value: "+ val);
+    //        } catch (Exception e) {
+    //            getLogger().info(e.getMessage());
+    //            getLogger().info("+++++ Unable to Select option: "+ele+ "by value: "+ val);
+    //        }
+    //    }
+
+    /**
+     * Select option in select element by index
+     *
+     * @param ele
+     * @param index
+     */
+    //    public void selectOptionByIndex(WebElement ele, int index) {
+    //        getLogger().info("+++ Select option: "+ele+ "by index: "+ index);
+    //        try {
+    //            Select select = new Select(ele);
+    //            select.selectOptionByIndex(index);
+    //            getLogger().info("+++++ Select option: "+ele+ "by index: "+ index);
+    //        } catch (Exception e) {
+    //            getLogger().info(e.getMessage());
+    //            getLogger().info("+++++ Select option: "+ele+ "by index: "+ index);
+    //
+    //        }
+    //    }
+
+    /**
+     * Switch to other tab
+     * Tab index count from 0(mean first tab tabIndex=0, second tab tabIndex=1)
+     *
+     * @param tabIndex
+     */
+    public void switchToOtherTab(int tabIndex) {
+        getLogger().info("+++ Switch to tab: " + tabIndex);
+        java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tabIndex));
+        //        try {
+        //            java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        //            driver.switchTo().window(tabs.get(tabIndex));
+        //            getLogger().info("+++++ Switched to tab: "+ tabIndex);
+        //        }catch (Exception e){
+        //            getLogger().info(e.getMessage());
+        //            getLogger().info("+++++ Unable to Switch to tab: "+ tabIndex);
+        //        }
+    }
+
+    /**
+     * Get text value of element
+     *
+     * @param webElement
+     * @return
+     */
+    public String getText(WebElement webElement) {
+        if (webElement.getTagName().equals("input") || webElement.getTagName().equals("textarea"))
+            return webElement.getAttribute("value");
+        return webElement.getText();
+    }
+
+    /**
+     * TODO
+     * Execute javascript
+     *
+     * @param script
+     * @return
+     */
+    //    public String executeJavascript(String script) {
+    //        return "";
+    //    }
+
+    /**
+     * @param webElement
+     * @param timeOut
+     */
+    public void waitUtilElementClickable(WebElement webElement, long timeOut) {
+        getLogger().info("+++ Wait util Element: " + webElement + " clickable.");
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        //        try {
+        //            WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        //            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        //            getLogger().info("+++++ Element: " +webElement+" is clickable.");
+        //
+        //        } catch (TimeoutException e) {
+        //            getLogger().info(e.getMessage());
+        //            getLogger().info("+++++ Element: " +webElement+" is not clickable.");
+        //            throw new AssertionError(e.getMessage());
+        //        }
+    }
+
+    /**
+     * @Description In order to wait element to be clickable by locator.
+     */
+    public void waitForClickableOfLocator(By by) {
+        getLogger().info("Try to waitForClickableOfLocator");
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(by));
+    }
+
+    /**
+     * Switch to other frame
+     *
+     * @param IframeName
+     */
+    public void switchToFrame(String IframeName) {
+        getLogger().info("+++ Switch to iFrame: " + IframeName);
+        driver.switchTo().frame(IframeName);
+        //        try {
+        //            driver.switchTo().frame(IframeName);
+        //            getLogger().info("+++++ Switched to iFrame: " + IframeName);
+        //        } catch (Exception e) {
+        //            getLogger().info(e.getMessage());
+        //            getLogger().info("+++++ Unable to switch to iFrame: " + IframeName);
+        //        }
+    }
+
+    /**
+     * Switch to other frame
+     *
+     * @param iFrameId
+     */
+    public void switchToFrame(int iFrameId) {
+        getLogger().info("+++ Switch to iFrame with id: " + iFrameId);
+        driver.switchTo().frame(iFrameId);
+        //        try {
+        //            driver.switchTo().frame(iFrameId);
+        //            getLogger().info("+++++ Switch to iFrame with id: " + iFrameId);
+        //        } catch (Exception e) {
+        //            getLogger().info(e.getMessage());
+        //            getLogger().info("+++++ Try to switch to iFrame with id: " + iFrameId);
+        //        }
+    }
+
+    /**
+     * Switch to other frame
+     *
+     * @param eleFrame
+     */
+    public void switchToFrame(WebElement eleFrame) {
+        getLogger().info("+++ Switch to iFrame with WebElement: " + eleFrame);
+        driver.switchTo().frame(eleFrame);
+        //        try {
+        //            driver.switchTo().frame(eleFrame);
+        //            getLogger().info("+++++ Switched to iFrame with WebElement: " + eleFrame);
+        //        } catch (Exception e) {
+        //            getLogger().info(e.getMessage());
+        //            getLogger().info("+++++ Unable to switch to iFrame with WebElement: " + eleFrame);
+        //        }
+    }
+
+    /**
+     * get element which cant use @FindBy to find
+     *
+     * @param xpath xpath to get element
+     * @param arg   vararg for formating
+     */
+    public WebElement getElementByXpath(String xpath, String... arg) {
+        WebElement webElement = null;
+        xpath = String.format(xpath, arg);
+        try {
+            webElement = getDriver().findElement(By.xpath(xpath));
+        } catch (Exception ex) {
+            getLogger().info(ex.getMessage());
+        }
+        return webElement;
     }
 
     /**
@@ -1026,8 +1163,6 @@ Method to wait Ajax function on Site be loaded successfully.
     }
 
 
-
-
     /**
      * @param xpathElement
      * @return Web element by xpath
@@ -1038,48 +1173,6 @@ Method to wait Ajax function on Site be loaded successfully.
         resultWebElement = getDriver().findElement(By.xpath(xpathElement));
         return resultWebElement;
     }
-
-    public String randomCharacters(int maxLength) {
-        char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < maxLength; i++) {
-            char c = chars[random.nextInt(chars.length)];
-            sb.append(c);
-        }
-        String results = sb.toString();
-        return results;
-    }
-
-    public void scrollPageUp() {
-        getLogger().info("+++ Scroll Page up.");
-        try {
-            Robot robot = new Robot();
-            robot.keyPress(KeyEvent.VK_PAGE_UP);
-            robot.keyRelease(KeyEvent.VK_PAGE_UP);
-            getLogger().info("+++++ Scroll Page up successfully.");
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Scroll Page up unsuccessfully.");
-        }
-    }
-
-    /*
-    Method to scrollPageDown
-     */
-    public void scrollPageDown() {
-        getLogger().info("+++ Scroll Page down.");
-        try {
-            Robot robot = new Robot();
-            robot.keyPress(KeyEvent.VK_PAGE_DOWN);
-            robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
-            getLogger().info("+++++ Scroll Page down successfully.");
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Scroll Page down unsuccessfully.");
-        }
-    }
-
 
     /**
      * @param element     element defined on page class
@@ -1174,143 +1267,6 @@ Method to wait Ajax function on Site be loaded successfully.
             getLogger().info("+++++ Unable to sendEnterkey on: " + elementName);
         }
     }
-
-    /**
-     * @param eleGetText  Element defined in page class
-     * @param elementName The text name of element
-     * @return The text of web element
-     */
-    public String getTextByJavaScripts(WebElement eleGetText, String elementName) {
-        getLogger().info("+++ Get text by javascript of element " + elementName);
-        String textOfElement = "";
-        try {
-            JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-            textOfElement = (String) ((JavascriptExecutor) getDriver())
-                    .executeScript("return arguments[0].value;", eleGetText);
-            getLogger().info("+++++ Text of element: " + elementName + textOfElement);
-        } catch (Exception e) {
-            getLogger().info(e.getMessage());
-            getLogger().info(e.getMessage());
-            getLogger().info("+++++ Unable to get text of element: " + elementName + textOfElement);
-        }
-        return textOfElement;
-    }
-
-    public void verifySortDataGrid(java.util.List<WebElement> elementRowValue, WebElement elementSortIcon) {
-        getLogger().info("+++ Verify Sort Data Grid: " + elementSortIcon);
-        java.util.List<String> listToDoTaskName = new ArrayList<String>();
-        java.util.List<String> listSortedToDoTaskName;
-        for (int i = 0; i < elementRowValue.size(); i++) {
-            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-        }
-        listSortedToDoTaskName = listToDoTaskName;
-        Collections.sort(listSortedToDoTaskName);
-        elementSortIcon.click();
-        listToDoTaskName.clear();
-        for (int i = 0; i < elementRowValue.size(); i++) {
-            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-        }
-        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Ascending sort is NOT as expected");
-        Collections.reverse(listSortedToDoTaskName);
-        elementSortIcon.click();
-        listToDoTaskName.clear();
-        for (int i = 0; i < elementRowValue.size(); i++) {
-            listToDoTaskName.add(elementRowValue.get(i).getAttribute("value"));
-        }
-        Assert.assertEquals(listSortedToDoTaskName, listToDoTaskName, "Descending sort is NOT as expected");
-        getLogger().info("++++ Verified Sort Data Grid: " + elementSortIcon);
-    }
-
-    public enum Element_Type {
-        DISPLAYED, ISENABLE, ISSELECTED, HIDDEN, TEXT_VALUE, NOT_EXIST
-    }
-
-
-    /**
-     * Method togo to URL
-     *
-     * @param url
-     */
-    public void getUrl(String url) {
-        getLogger().info("+++ Navigate to URL: " + url);
-        driver.get(url);
-    }
-
-    /**
-     * Switch to other tab
-     * Tab index count from 0(mean first tab tabIndex=0, second tab tabIndex=1)
-     *
-     * @param tabIndex
-     */
-    public void switchToOtherTab(int tabIndex) {
-        getLogger().info("+++ Switch to tab: " + tabIndex);
-        java.util.List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(tabIndex));
-    }
-
-    /**
-     * Get text value of element
-     *
-     * @param webElement
-     * @return
-     */
-    public String getText(WebElement webElement) {
-        if (webElement.getTagName().equals("input") || webElement.getTagName().equals("textarea"))
-            return webElement.getAttribute("value");
-        return webElement.getText();
-    }
-
-
-    /**
-     * Switch to other frame
-     *
-     * @param IframeName
-     */
-    public void switchToFrame(String IframeName) {
-        getLogger().info("+++ Switch to iFrame: " + IframeName);
-        driver.switchTo().frame(IframeName);
-
-    }
-
-    /**
-     * Switch to other frame
-     *
-     * @param iFrameId
-     */
-    public void switchToFrame(int iFrameId) {
-        getLogger().info("+++ Switch to iFrame with id: " + iFrameId);
-        driver.switchTo().frame(iFrameId);
-
-    }
-
-    /**
-     * Switch to other frame
-     *
-     * @param eleFrame
-     */
-    public void switchToFrame(WebElement eleFrame) {
-        getLogger().info("+++ Switch to iFrame with WebElement: " + eleFrame);
-        driver.switchTo().frame(eleFrame);
-
-    }
-
-    /**
-     * get element which cant use @FindBy to find
-     *
-     * @param xpath xpath to get element
-     * @param arg   vararg for formating
-     */
-    public WebElement getElementByXpath(String xpath, String... arg) {
-        WebElement webElement = null;
-        xpath = String.format(xpath, arg);
-        try {
-            webElement = getDriver().findElement(By.xpath(xpath));
-        } catch (Exception ex) {
-            getLogger().info(ex.getMessage());
-        }
-        return webElement;
-    }
-
 
     public int findElementByText(java.util.List<WebElement> listElement, String textValue) {
         try {
@@ -1414,41 +1370,9 @@ Method to wait Ajax function on Site be loaded successfully.
         jse.executeScript("arguments[0].click()", webElement);
     }
 
-    /**
-     * @param webElement
-     * @param elementName
-     * @param waitTime
-     */
-    public void visibilityOfElementWait(WebElement webElement, String elementName, int waitTime) {
-        try {
-            WebDriverWait sWebDriverWait = new WebDriverWait(driver, waitTime);
-            sWebDriverWait.until(ExpectedConditions.visibilityOf(webElement));
-        } catch (Exception e) {
-            logger.info(e.getMessage());
-        }
-    }
-    public void sendTabkey(WebElement element, String elementName) {
-        getLogger().info("Try to sendTabkey: " + elementName);
-            element.sendKeys(Keys.TAB);
-    }
     public int randomNumber() {
         Random randNum = new Random();
         int intRanNum = randNum.nextInt(10000) + 1;
         return intRanNum;
     }
-    public boolean waitForClickableOfLocator(By by) {
-        getLogger().info("Try to waitForClickableOfLocator");
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-            wait.until(ExpectedConditions.elementToBeClickable(by));
-            getLogger().info("eElement is clickable.");
-            return true;
-        } catch (Exception e) {
-            getLogger().info("Element is not clickable.");
-            return false;
-        }
-    }
-
-
-
 }

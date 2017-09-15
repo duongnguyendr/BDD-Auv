@@ -709,12 +709,12 @@ public class AdminPage extends CommonPage {
 
         //Thread.sleep(3000);
         logger.info("Wait for confirm popup render.");
-        visibilityOfElementWait(getEleWAITLISTtoONBOARDINGTxt(), "Confirm Poup", waitTime);
+        waitForVisibleElement(getEleWAITLISTtoONBOARDINGTxt(), "Confirm Poup");
         Assert.assertTrue(getEleWAITLISTtoONBOARDINGTxt().isDisplayed(), "Onboarding status is not selected");
 //        NXGReports.addStep("Confirmation popup changing status from pending to onboarding is displayed", LogAs.PASSED, null);
         logger.info("Click confirm button.");
         getEleStatusConfirmBtn().click();
-        visibilityOfElementWait(eleCredentialsCloseIcn, "Auditor onboarding successful message", waitTime);
+        waitForVisibleElement(eleCredentialsCloseIcn, "Auditor onboarding successful message");
         logger.info("Change Auditor to Onboarding successful.");
         Assert.assertTrue(getDriver().findElement(By.xpath("//div[text()='Verified " + Email + " successfully.']")).isDisplayed(),
                 "Wait-List user is verified");
@@ -801,7 +801,7 @@ public class AdminPage extends CommonPage {
     }
 
     public void verifyDropMenuMessage() {
-        visibilityOfElementWait(getEleThereNoEmailsTxt(), "Inbox Icon", 15);
+        waitForVisibleElement(getEleThereNoEmailsTxt(), "Inbox Icon");
         logger.info("Check mail box.");
         validateDisPlayedElement(getEleThereNoEmailsTxt(), "There are no Emails - Text");
         logger.info("Check View message button.");
