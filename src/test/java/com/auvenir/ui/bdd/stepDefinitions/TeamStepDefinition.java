@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTeamPage;
 import com.auvenir.ui.bdd.pages.client.ClientTeamPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -144,5 +145,12 @@ public class TeamStepDefinition extends BaseInit {
     public void changeThePermissionOfMember(String memberName) throws Throwable {
         logger.info("I am going change the permission of Member: " + memberName);
         clientTeamPage.changePermissionOfMember(memberName);
+    }
+
+    @Then("^i should see Admin Client name : \"([^\"]*)\" in team member list$")
+    public void iShouldSeeAdminClientNameInTeamMemberList(String adminClientName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("I should see Admin Client name: " + adminClientName + " in team member list");
+
     }
 }
