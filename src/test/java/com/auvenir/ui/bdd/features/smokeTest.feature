@@ -184,7 +184,6 @@ Feature: Smoke Test Feature
     Then I should see status of user is onboarding
       | chr.client01.adm@gmail.com | Onboarding |
 
-#Thuan Duong create testcase:
   Scenario: Admin Client active account: AUV-645
     Given I navigate to gmail login page
     And I signIn gmail
@@ -233,7 +232,6 @@ Feature: Smoke Test Feature
     And I click create todo button on Create New Engagement Page
     Then I should see engagement detail page with Engagement Title Editable: "Thuan Engagement GP03"
 
-    #Huy
   Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
     Given I navigate to Marketing page
     And I click on login link
@@ -303,7 +301,6 @@ Feature: Smoke Test Feature
     And I click on continue button on firm information page
     And I create password: "Changeit@123"
     Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
-#/Huy
 
 #Vien Pham create testcase:
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
