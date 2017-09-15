@@ -115,6 +115,7 @@ public class TodoStepDefinition extends BaseInit {
 
         List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
         lisTodoAndusers = table.asList(LisTodoAnduser.class);
+
         for (LisTodoAnduser lisTodoAnduser: lisTodoAndusers){
             System.out.println("The Auditor name is: "+lisTodoAnduser.userName);
             System.out.println("The To-Do name is: "+lisTodoAnduser.todoName);
@@ -156,7 +157,10 @@ public class TodoStepDefinition extends BaseInit {
         getLogger().info("===== I create To-Do with name and category =====");
 //         getTable = new GetTable("ToDoname","category");
         List<GetTable> lisTodoAndusers = new ArrayList<>();
+        List<List<String>> a = table.cells(0);
         lisTodoAndusers = table.asList(GetTable.class);
+        lisTodoAndusers.remove(0);
+
         for (GetTable lisTodoAnduser: lisTodoAndusers){
             System.out.println("The Client name is: "+lisTodoAnduser.getColumn0());
             System.out.println("The Catalog: "+lisTodoAnduser.getColumn1());
