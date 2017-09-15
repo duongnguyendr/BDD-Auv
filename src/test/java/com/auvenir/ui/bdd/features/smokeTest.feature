@@ -361,6 +361,7 @@ Feature: Smoke Test Feature
 
 
     #Thuan Duong create
+  @Run
   Scenario: Lead Auditor add file to request on To Do task AUV-954
     Given I navigate to Marketing page
     And I click on login link
@@ -371,7 +372,8 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement"
-    And I click on Todo slide out menu of todo: ""
+    And I click slide out menu on selected To-do: "Todo4"
+    Then I should see the Todo detail opened
 
 
 ##Viet Le create testcase:
@@ -554,3 +556,29 @@ Feature: Smoke Test Feature
 #    And  I click slide out menu on selected To-do: "Todo 01"
 #    Then I should see the Todo detail opened
 #/Huy
+
+    #Tan
+  Scenario: Lead Client can see to-dos: AUV-1171
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                         | Password     |
+      | clienttan.lead@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    Then I should see all to do assigned : "Leader Client"
+
+  Scenario: Lead client remove admin client out Engagement: AUV-1210
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                         | Password     |
+      | clienttan.lead@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    And I click on Team tab of engagement detail page
+    Then i should see Admin Client name : "Admin Client" in team member list

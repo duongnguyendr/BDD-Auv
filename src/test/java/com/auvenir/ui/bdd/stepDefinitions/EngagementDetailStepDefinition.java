@@ -4,6 +4,7 @@ import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.client.ClientDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.common.DetailsEngagementPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -25,7 +26,7 @@ public class EngagementDetailStepDefinition extends BaseInit {
         detailsEngagementPage = new DetailsEngagementPage(logger, driver);
     }
 
-    @And("^I click on team tab$")
+    @And("^I click on Team tab of engagment detail page $")
     public void iClickOnTeamTab() throws Throwable {
         logger.info("I click on team tab");
         detailsEngagementPage.navigateToTeamTab();
@@ -87,5 +88,13 @@ public class EngagementDetailStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("======I should see all to do assigned======");
         auditorDetailsEngagementPage.verifyToDoListAssignForUser(assignName);
+    }
+
+
+    @And("^I click on Team tab of engagement detail page$")
+    public void iClickOnTeamTabOfEngagementDetailPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I click on Team tab of engagement detail page=====");
+        detailsEngagementPage.navigateToTeamTab();
     }
 }
