@@ -109,7 +109,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
      */
     public void clickInviteClientButton() throws Exception {
         validateElementText(buttonInviteClient, "Invite Client");
-        clickByJavaScripts(buttonInviteClient, "Button Invite Client");
+        clickElement(buttonInviteClient, "Button Invite Client");
     }
 
     @FindBy(className = "m-ic-subTitle")
