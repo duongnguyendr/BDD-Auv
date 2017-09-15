@@ -3,12 +3,9 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTeamPage;
 import com.auvenir.ui.bdd.pages.client.ClientTeamPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
-
-import java.util.List;
 
 /**
  * Created by duong.nguyen on 9/13/2017.
@@ -18,7 +15,8 @@ public class TeamStepDefinition extends BaseInit {
     BaseInit baseInit;
     AuditorTeamPage auditorTeamPage;
     ClientTeamPage clientTeamPage;
-    public TeamStepDefinition(BaseInit baseInit){
+
+    public TeamStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         auditorTeamPage = new AuditorTeamPage(logger, driver);
         clientTeamPage = new ClientTeamPage(logger, driver);
@@ -43,6 +41,13 @@ public class TeamStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I select role of new member");
         auditorTeamPage.selectRoleMember();
+    }
+
+    @And("^I input role of new member$")
+    public void inputRoleOfNewMember() throws Throwable {
+        // Hard code role of Client
+        logger.info("I select role of new member");
+        clientTeamPage.inputMemberRole("Manager");
     }
 
     @And("^I click on invite new member$")
@@ -79,6 +84,7 @@ public class TeamStepDefinition extends BaseInit {
         logger.info("I input email confirm on invite new member page");
         auditorTeamPage.inputEmailConfirm(strEmail);
     }
+
     @And("^I click on Invite New Member button on Client team page$")
     public void iClickOnInviteNewMemberButtonOnClientTeamPage() throws Throwable {
         logger.info("I click in invite new member on client team page");
@@ -133,9 +139,17 @@ public class TeamStepDefinition extends BaseInit {
         logger.info("I delete existed member on team page");
         auditorTeamPage.deleteMemberInEngagementByName(fullName);
     }
+
     @And("^I change the permission of member: \"([^\"]*)\" to be Lead$")
     public void changeThePermissionOfMember(String memberName) throws Throwable {
-        logger.info("I am going change the permission of Member: "+ memberName);
+        logger.info("I am going change the permission of Member: " + memberName);
         clientTeamPage.changePermissionOfMember(memberName);
+    }
+
+
+    @Then("^I should see permisson of member: \"([^\"]*)\" changed to: \"([^\"]*)\"$")
+    public void verifyPermissonOfMember(String memberName, String permissionLevel) throws Throwable {
+        logger.info("Verify permisson level of member : "+ memberName +"is "+permissionLevel);
+//        clientTeamPage.verifyPermissonOfMember(memberName,permissionLevel);
     }
 }
