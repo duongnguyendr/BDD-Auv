@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTeamPage;
 import com.auvenir.ui.bdd.pages.client.ClientTeamPage;
+import com.auvenir.ui.bdd.pages.common.TeamPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -16,11 +17,13 @@ public class TeamStepDefinition extends BaseInit {
     BaseInit baseInit;
     AuditorTeamPage auditorTeamPage;
     ClientTeamPage clientTeamPage;
+    TeamPage teamPage;
 
     public TeamStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         auditorTeamPage = new AuditorTeamPage(logger, driver);
         clientTeamPage = new ClientTeamPage(logger, driver);
+        teamPage = new TeamPage(logger,driver) ;
     }
 
     @And("^I click in invite new member on team page$")
@@ -152,5 +155,19 @@ public class TeamStepDefinition extends BaseInit {
     public void verifyPermissonOfMember(String memberName, String permissionLevel) throws Throwable {
         logger.info("Verify permisson level of member : "+ memberName +"is "+permissionLevel);
 //        clientTeamPage.verifyPermissonOfMember(memberName,permissionLevel);
+    }
+
+    @Then("^I should see Admin Client name : \"([^\"]*)\" in team member list$")
+    public void iShouldSeeAdminClientNameInTeamMemberList(String memberName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I should see Admin Client name : "+ memberName +" in team member list======");
+        teamPage.verifyExistsInTeamMemberList(memberName);
+    }
+
+    @Then("^I should not see Admin Client name : \"([^\"]*)\" in team member list$")
+    public void iShouldNotSeeAdminClientNameInTeamMemberList(String memberName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I should not see Admin Client name : "+ memberName +" in team member list======");
+        teamPage.verifyNotExistsInTeamMemberList(memberName);
     }
 }

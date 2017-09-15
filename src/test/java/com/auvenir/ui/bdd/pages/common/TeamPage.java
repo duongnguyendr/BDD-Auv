@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by vien.pham on 7/28/2017.
  */
-public abstract class TeamPage extends CommonPage {
+public class TeamPage extends CommonPage {
     private static Logger logger = Logger.getLogger(TeamPage.class.getSimpleName());
     public TeamPage(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -67,6 +67,9 @@ public abstract class TeamPage extends CommonPage {
 
     @FindBy(xpath = "//tbody[@id='w-team-tableBody']//span")
     private List<WebElement> permissionLevel;
+
+    @FindBy(xpath = "//table[@class='ui very basic table']/tbody/tr/td[2]")
+    private List<WebElement> eleTeamMemberNameList;
 
     public int findMemberByName(String memberName) {
         int index = -1;
@@ -192,4 +195,30 @@ public abstract class TeamPage extends CommonPage {
         validateElementText(setUserToLeadTitle,"Set User to Lead");
         clickElement(setLeadConfirmBtn,"Confirm Set Lead Btn");
     }
+
+    private boolean isExistedInTeamMember(String memberName){
+        int totalMember = eleTeamMemberNameList.size();
+        if(totalMember ==0)
+            return false;
+
+        for(int i=0;i<totalMember;i++){
+            if(eleTeamMemberNameList.get(i).getText().equalsIgnoreCase(memberName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void verifyExistsInTeamMemberList(String memberName){
+        boolean result = isExistedInTeamMember(memberName);
+        Assert.assertTrue(result);
+    }
+
+    public void verifyNotExistsInTeamMemberList(String memberName){
+        boolean result = isExistedInTeamMember(memberName);
+        Assert.assertFalse(result);
+    }
+
+
+
 }

@@ -522,7 +522,7 @@ Feature: Smoke Test Feature
       |Unassigned| ToDo 01|
       |Unassigned| ToDo 02|
 
-    #Tan
+#Tan
   Scenario: Lead Client can see to-dos: AUV-1171
     Given I navigate to Marketing page
     And I click on login link
@@ -546,4 +546,6 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement 02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
     And I click on Team tab of engagement detail page
-    Then i should see Admin Client name : "Admin Client" in team member list
+    Then I should see Admin Client name : "Admin Client" in team member list
+    Then I should not see Admin Client name : "Admin Client" in team member list
+#Tan
