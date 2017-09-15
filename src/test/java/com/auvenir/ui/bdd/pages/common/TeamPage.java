@@ -64,6 +64,9 @@ public abstract class TeamPage extends CommonPage {
     @FindBy(xpath = "//div[@class='ui dropdown team-permission-dropdown']//div[@class='item']")
     private List<WebElement> leadPermissionOption;
 
+    @FindBy(xpath = "//tbody[@id='w-team-tableBody']//span")
+    private List<WebElement> permissionLevel;
+
     public int findMemberByName(String memberName) {
         int index = -1;
         for (int i = 0; i < listTeamMember.size(); i++) {
