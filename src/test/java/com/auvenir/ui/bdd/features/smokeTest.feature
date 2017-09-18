@@ -338,7 +338,7 @@ Feature: Smoke Test Feature
     And I input email confirm: "auvenirclient02@gmail.com" on invite new member page
     And I input role of new member
     And I click on invite new member
-    Then I should see invite successful message
+
 
   Scenario:  Admin Client transfer Lead permission to Lead Client in the Engagement2: AUV-847
     Given I navigate to Marketing page
@@ -592,11 +592,34 @@ Feature: Smoke Test Feature
     And I click on Invite New Member button on team page
     Then I should see Invite New Member popup
     And I input full name: "General Client" on invite new member popup
-    And I input email: "clienttan.general@mailinator.com" on invite new member popup
-    And I input email confirm: "clienttan.general@mailinator.com" on invite new member popup
+    And I input email: "phamhoangtan12071986@gmail.com" on invite new member popup
+    And I input email confirm: "phamhoangtan12071986@gmail.com" on invite new member popup
     And I input Role: "General Client" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
+
+  Scenario: New client log in their email and active user: AUV-1217
+    Given I navigate to GMail login page
+    And I sign In GMail
+      | phamhoangtan12071986@gmail.com | myphuong |
+    And I open active email
+    And I click on onboarding invitation link
+    Then I should see Welcome to Auvenir Page
+    And I click on Get Start button on Client Sign Up Page
+    Then I should see Provide Information Page
+    And I input Client Mobile Phone Number: "1234567899"
+    And I click on check box agreement
+    And I click on Continue Button on Personal Information Page
+    Then I should see Business Information Page
+    And I click on Continue Button on Business Information Page
+    Then I should see Bank Information Page
+    And I click on Skip Button on Bank Information Page
+    Then I should see File Storage Information Page
+    And I click on Skip Button on File Storage Information Page
+    Then I should see Security Information Page
+    And I fill up all Security Information with Password: "Changeit@123"
+    And I click on Create Account Button on Security Information Page
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
 #Tan
 
 #    Then i should see Admin Client name : "Admin Client" in team member list
