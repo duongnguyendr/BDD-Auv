@@ -4,13 +4,19 @@ import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.KeyWord;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
+import com.google.common.collect.Table;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
+
 import org.apache.poi.ss.formula.functions.T;
 
 import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
+
+import java.util.ArrayList;
+import java.util.List;
 import static com.auvenir.ui.bdd.common.GeneralUtilities.getList;
 
 import java.util.*;
@@ -142,6 +148,11 @@ public class TodoStepDefinition extends BaseInit {
         todoPage.verifyFileDownloadSuccessful(fileName);
     }
 
+    @And("^I select todo: \"([^\"]*)\" check box on Uneditable To-do page$")
+    public void selectTodoCheckBoxOnUneditableToDoPage(String todoName) throws Throwable {
+      todoPage.selectUnEditableToDoCheckboxByName(todoName);
+    }
+
     public class LisTodoAnduser{
         public String userName;
         public String todoName;
@@ -151,9 +162,10 @@ public class TodoStepDefinition extends BaseInit {
         }
     }
 
-    public class ListNewRequest{
+    public class ListNewRequest {
         public String newRequestName;
-        public ListNewRequest(String newRequestName){
+
+        public ListNewRequest(String newRequestName) {
             this.newRequestName = newRequestName;
         }
     }
@@ -245,27 +257,16 @@ public class TodoStepDefinition extends BaseInit {
         auditorTodoPage.verifyTodoDetailOpened();
     }
 
-    @And("^I creates some new requests$")
-    public void createsSomeNewRequests(DataTable table) throws Throwable {
-        logger.info("===== I creates some new Request name =====");
-        List<ListNewRequest> listNewRequests = new ArrayList<>();
-        listNewRequests = table.asList(ListNewRequest.class);
-        for (ListNewRequest listNewRequest: listNewRequests){
-            System.out.println("Prepare to create: "+listNewRequest.newRequestName);
-            auditorTodoPage.selectAddNewRequest();
-            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
-        }
-    }
+    @Then("^I verify Client Assignee Selected on Uneditabe Page$")
+    public void verifyClientAssigneeSelectedOnUneditabePage(DataTable table) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("===== I verify Auditor Assignee Selected =====");
 
-//    "([^"]*)"
-    @And("^I uploads list files on list requests$")
-    public void uploadListFilesOnRequest(DataTable table) throws Throwable {
-        logger.info("===== I uploads list files on request =====");
-        List<ListFilesOnListRequests> listFilesOnListRequests = new ArrayList<>();
-        listFilesOnListRequests = table.asList(ListFilesOnListRequests.class);
-        for (ListFilesOnListRequests fileOnRequest : listFilesOnListRequests) {
-            System.out.println("File Name: " + fileOnRequest.fileName + "--Request: " + fileOnRequest.requestName);
-            todoPage.uploadFileOnRequestByName(fileOnRequest.fileName, fileOnRequest.requestName);
+        List<List<String>> listToDoAndUserClient = getTable(table);
+        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
+            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
+            todoPage.verifyClientAssigneeSelectedOnUneditablePage(listToDoAndUserClient.get(i).get(1), listToDoAndUserClient.get(i).get(0));
         }
     }
     @And("^I create requests from To-Do$")
@@ -301,5 +302,9 @@ public class TodoStepDefinition extends BaseInit {
     }
 
 
-
+    @Then("^I should see all to do assigned : (.*)")
+    public void iShouldSeeAllToDoAssigned(List<String> toDoList) throws Throwable {
+        logger.info("=====I should see all to do assigned=====");
+        todoPage.verifyUserSeeToDo(toDoList);
+    }
 }
