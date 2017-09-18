@@ -23,16 +23,16 @@ public class GmailStepDefinition extends BaseInit {
         mailPage = new MailPage(logger, driver);
     }
 
-    @Given("^I navigate to gmail login page$")
-    public void iNavigateToGmailLoginPage() throws Throwable {
+    @Given("^I navigate to GMail login page$")
+    public void iNavigateToGMailLoginPage() throws Throwable {
         logger.info("===== I navigate to gmail login page =====");
         mailPage.goGMail();
     }
 
-    @And("^I signIn gmail$")
-    public void iSignInGmail(DataTable users) throws Throwable {
+    @And("^I sign In GMail$")
+    public void iSignInGMail(DataTable users) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("===== I signIn gmail =====");
+        logger.info("===== I signIn GMail =====");
         List<String> lstData = users.asList(String.class);
         mailPage.signInGmail(lstData.get(0), lstData.get(1));
     }

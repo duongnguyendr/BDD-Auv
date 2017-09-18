@@ -79,8 +79,8 @@ Feature: Smoke Test Feature
     Then I should see verified message successful on admin page
 
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
-    Given I navigate to gmail login page
-    And I signIn gmail
+    Given I navigate to GMail login page
+    And I sign In GMail
       | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
@@ -127,7 +127,7 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
-    And I click on team tab
+    And I click on Team tab of engagement detail page
     And I delete existed member on team page: "Lead Auditor"
     And I click in invite new member on team page
     Then I should see invite new member page
@@ -138,9 +138,9 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-  Scenario: Lead Auditor Active account: AUV-660
-    Given I navigate to gmail login page
-    And I signIn gmail
+    Scenario: Lead Auditor Active account: AUV-660
+    Given I navigate to GMail login page
+    And I sign In GMail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
@@ -246,8 +246,8 @@ Feature: Smoke Test Feature
     Then I select option Admin Client fullname: "Huy AC (Huy Company)"
     Then I click on Invite button
     Then I should see invite client success toast message
-    Then I navigate to gmail login page
-    And I signIn gmail
+    Then I navigate to GMail login page
+    And I sign In GMail
       | chr.auvenirclient@gmail.com | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
@@ -279,7 +279,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see engagement page
     Then I click on engagement: "Huy Engagement 02"
-    And I click on team tab
+    And I click on Team tab of engagement detail page
     And I click in invite new member on team page
     Then I should see invite new member page
     And I input full name on invite new member page: "Huy GA01"
@@ -290,8 +290,8 @@ Feature: Smoke Test Feature
     Then I should see invite successful message
 
   Scenario: New Auditor member active account and login to Engagement 2: AUV-798
-    Given I navigate to gmail login page
-    Then I signIn gmail
+    Given I navigate to GMail login page
+    Then I sign In GMail
       | auvenirauditor02@gmail.com | TESTPASSWORD |
     And I open active email
     And I click on confirmation link
@@ -302,7 +302,6 @@ Feature: Smoke Test Feature
     And I create password: "Changeit@123"
     Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
 
-#Vien Pham create testcase:
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
     Given I navigate to Marketing page
     And I click on login link
@@ -323,7 +322,25 @@ Feature: Smoke Test Feature
     And I click on invite button
     Then I should see Invite Member successful message
 
-    #Vien Pham create testcase:
+  Scenario: Lead Client Active Account and Login to Engagement2: AUV-840
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | chr.auvenirclient@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    And I click on Team tab of engagement detail page
+    And I click in invite new member on team page
+    Then I should see invite new member page
+    And I input full name on invite new member page: "Huy LC2"
+    And I input email on invite new member page: "auvenirclient02@gmail.com"
+    And I input email confirm on invite new member page: "auvenirclient02@gmail.com"
+    And I input role of new member
+    And I click on invite new member
+    Then I should see invite successful message
+
   Scenario:  Admin Client transfer Lead permission to Lead Client in the Engagement2: AUV-847
     Given I navigate to Marketing page
     And I click on login link
@@ -337,7 +354,36 @@ Feature: Smoke Test Feature
     And I click on Team tab on Client page
     And I change the permission of member: "Lead Client" to be Lead
 
-  #Viet Le create testcase:
+  Scenario:Lead Auditor Create To Do task: AUV-878
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I create To-Do with name and category
+      | ToDo name | Category |
+      | ToDo 01   | Music    |
+      | ToDo 02   | Sport    |
+
+  Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | auvenirinfo@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I assignee list To-Do to Client
+      | userName   | Todo Name |
+      | Unassigned | ToDo 01   |
+      | Unassigned | ToDo 02   |
+
   Scenario:Lead Auditor assign To Do task to Auditor member AUV-924
     Given I navigate to Marketing page
     And I click on login link
@@ -359,7 +405,6 @@ Feature: Smoke Test Feature
       | Admin Auditor | ToDo 02   |
       | Admin Auditor | ToDo 03   |
 
-
     #Thuan Duong create
   @Run
   Scenario: Lead Auditor add file to request on To Do task AUV-954
@@ -374,23 +419,6 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page with Engagement Title Editable: "Engagement"
     And I click slide out menu on selected To-do: "Todo4"
     Then I should see the Todo detail opened
-
-
-##Viet Le create testcase:
-  Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                 | Password     |
-      | auvenirinfo@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-    Then I assignee list To-Do to Client
-      | userName   | Todo Name |
-      | Unassigned | ToDo 01   |
-      | Unassigned | ToDo 02   |
 
   Scenario:  Lead Auditor add new request on To Do task: AUV-947
     Given I navigate to Marketing page
@@ -412,6 +440,8 @@ Feature: Smoke Test Feature
       | Request 04   |
       | Request 05   |
       | Request 06   |
+
+    #############################################
   #Duong
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
@@ -484,24 +514,7 @@ Feature: Smoke Test Feature
     And I click download attachments on bulk action
     Then I should see popup download attachments on todo page
     And I click download button on attachment download popup
-
-
-#   #/Duong
-#  #Viet Le create testcase:
-  Scenario:Lead Auditor Create To Do task: AUV-878
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-    Then I create To-Do with name and category
-      | ToDo name | Category |
-      | ToDo 01   | Music    |
-      | ToDo 02   | Sport    |
+    Then I verify file "Engagement GP02.zip" existed in computer
 
   Scenario:Auditor Member assign To Do to Lead Client : AUV-1069
     Given I navigate to Marketing page
@@ -521,26 +534,6 @@ Feature: Smoke Test Feature
       | Lead client | Todo Name |
       | Unassigned  | ToDo 01   |
       | Unassigned  | ToDo 02   |
-
-    #Huy
-  Scenario: Lead Client Active Account and Login to Engagement2: AUV-840
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                       | Password     |
-      | chr.auvenirclient@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
-    And I click on team tab
-    And I click in invite new member on team page
-    Then I should see invite new member page
-    And I input full name on invite new member page: "Huy LC2"
-    And I input email on invite new member page: "auvenirclient02@gmail.com"
-    And I input email confirm on invite new member page: "auvenirclient02@gmail.com"
-    And I input role of new member
-    And I click on invite new member
-    Then I should see invite successful message
 
 #  @Run
 #  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
@@ -581,4 +574,4 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement 02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
     And I click on Team tab of engagement detail page
-    Then i should see Admin Client name : "Admin Client" in team member list
+#    Then i should see Admin Client name : "Admin Client" in team member list

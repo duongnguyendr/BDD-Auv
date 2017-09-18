@@ -68,10 +68,10 @@ public class SignUpStepDefinition extends BaseInit {
     }
 
     @Then("^I should see provide firm information page$")
-    public void iShouldSeeProvideFirmInfomationPage() throws Throwable {
+    public void iShouldSeeProvideFirmInformationPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("I should see provide firm infomation page");
-        auditorSignUpPage.verifyFirmInfomationPage();
+        logger.info("I should see provide firm information page");
+        auditorSignUpPage.verifyFirmInformationPage();
     }
 
     @And("^I select role in firm$")
