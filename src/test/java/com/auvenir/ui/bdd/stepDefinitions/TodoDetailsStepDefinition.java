@@ -32,7 +32,7 @@ public class TodoDetailsStepDefinition extends BaseInit {
     public void clickOnConfirmDeleteButton() throws Throwable {
         logger.info("===== I input comment content =====");
         int numberOfListCommentlist = todoDetailsPage.getNumberOfListComment();
-        keyWord.waitForSizeListElementChanged()
+//        keyWord.waitForSizeListElementChanged();
     }
     //    @And("^I select todo: \"([^\"]*)\" check box on todo page$")
     //    public void iSelectTodoCheckBoxOnTodoPage(String todoName) throws Throwable {
