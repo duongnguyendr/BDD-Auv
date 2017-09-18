@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.pages.common;
 import com.auvenir.ui.bdd.common.GeneralUtilities;
 import com.auvenir.ui.bdd.common.Generic;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,23 +20,17 @@ import java.util.List;
 public class TodoDetailsPage extends CommonPage {
     private static Logger logger = Logger.getLogger(TodoDetailsPage.class.getSimpleName());
 
-    public TodoDetailsPage(Logger logger, WebDriver driver) {
-        super(logger, driver);
-    }
-
     @FindBy(xpath = "//div[@id='comment-form']/input[@placeholder='Type a comment']")
     private WebElement inputTypeComment;
 
     @FindBy(xpath = "//*[@id='comment-button']")
     private WebElement buttonPostComment;
 
-    //    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='comment-item']")
-    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='todo-comment-container']//p")
+    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='todo-comment-container']//p[@class='detComment']")
     private List<WebElement> listCommentItem;
 
-    //    @FindBy(xpath = "//*[@id='comment-box']/p")
     @FindBy(xpath = "//*[@id='comment-box']/p/span/span")
-    private WebElement commentboxTitle;
+    private WebElement titleCommentbox;
 //    @FindBy(xpath = "//*[@id='add-request-btn']")
 //    private WebElement totoPageAddRequestBtn;
     @FindBy(xpath = "//div[@id='todoDetailsReqCont']/div")
@@ -45,9 +40,9 @@ public class TodoDetailsPage extends CommonPage {
     @FindBy(xpath = "//div[@id='todoDetailsReqCont']/div[@class='detReqForFile']/span[@class='todo-req-name-label']")
     protected List<WebElement> listRequestNameLabel;
     @FindBy(xpath = "//label[@class='auvicon-line-circle-add todo-circle-add todo-icon-hover']")
-    private List<WebElement> addFileIcon;
+    protected List<WebElement> addFileIcon;
     @FindBy(xpath = "//*[@id='add-request-btn']")
-    private WebElement todoPageAddRequestBtn;
+    protected WebElement buttonTodoPageAddRequest;
     @FindBy(xpath = "//div[@class='auvicon-ex']")
     protected WebElement todoDetailPopupCloseBtn;
     @FindBy(xpath = "//div[@id='auv-todo-details']")
@@ -55,7 +50,13 @@ public class TodoDetailsPage extends CommonPage {
     @FindBy(xpath = "//*[@id='todoDetailsReqCont']//span[4]")
     protected List<WebElement> uploadRequestList;
     @FindBy(xpath = "//*[@id='todoDetailsReqCont']/div//span[contains(@class,'auvicon-line-download')]")
-    List<WebElement> buttonDownloadRequest;
+    protected List<WebElement> buttonDownloadRequest;
+    @FindBy(xpath = "//*[@id='todoDetailsReqCont']")
+    protected WebElement tableNewRequest;
+
+    public TodoDetailsPage(Logger logger, WebDriver driver) {
+        super(logger, driver);
+    }
 
     public void inputCommentWithContent(String commentContent) {
         boolean result;
@@ -63,29 +64,49 @@ public class TodoDetailsPage extends CommonPage {
         waitForVisibleElement(inputTypeComment, "Input Comment field");
         sendKeyTextBox(inputTypeComment, commentContent, "Input Comment field");
         result = validateAttributeElement(inputTypeComment, "value", commentContent);
+        Assert.assertTrue(result, "Comment content should be filled on comment box.");
     }
 
     public void clickOnPostCommentButton() {
         logger.info("Click Post Comment Button");
-        int size = getNumberOfListComment();
         waitForVisibleElement(buttonPostComment, "Comment Input field");
         clickElement(buttonPostComment, "Comment Input field");
-        waitForSizeListElementChanged(listCommentItem, "List Comment", size + 1);
     }
 
     public int getNumberOfListComment() {
         logger.info("Get Number of List Comment.");
-        if (commentboxTitle.getText().trim().equals("0")) {
+        if (titleCommentbox.getText().trim().equals("0")) {
             return 0;
         } else {
             return listCommentItem.size();
         }
     }
 
+    public void waitForSizeListCommentChanged(int numberListCommentBeforeAdding) {
+        boolean result = waitForSizeListElementChanged(listCommentItem, "List Comment Item",
+                numberListCommentBeforeAdding + 1);
+        Assert.assertTrue(result, "Comment list should be changed(plus one).");
+    }
+
+    public void verifyCommentContentIsDisplayed(String commentContent) {
+        logger.info("Verify Comment Content is displayed");
+        validateDisPlayedElement(listCommentItem.get(listCommentItem.size() - 1), "Comment Content Field");
+        boolean result = validateElementText(listCommentItem.get(listCommentItem.size() - 1), commentContent);
+        Assert.assertTrue(result, "Comment should be displayed on list comment.");
+    }
+
     public void clickAddRequestBtn() {
         logger.info("Click the add request button");
-        waitForTextValueChanged(todoPageAddRequestBtn, "Text of totoPageAddRequestBtn", "Add New Request");
-        clickElement(todoPageAddRequestBtn, "click to totoPageAddRequestBtn");
+        waitForTextValueChanged(buttonTodoPageAddRequest, "Text of totoPageAddRequestBtn", "Add New Request");
+        clickElement(buttonTodoPageAddRequest, "click to totoPageAddRequestBtn");
+    }
+
+    public void createNewRequest(String newRequest, String position) {
+            logger.info("Create request: " + newRequest + " with position: " + position);
+            waitForCssValueChanged(tableNewRequest.findElement(By.xpath("./div[" + position + "]/span")), "", "display", "inline-block");
+            clickElement(tableNewRequest.findElement(By.xpath("./div[" + position + "]/span")), "");
+            clearTextBox(tableNewRequest.findElement(By.xpath("./div[" + position + "]/input")), "");
+            sendKeyTextBox(tableNewRequest.findElement(By.xpath("./div[" + position + "]/input")), newRequest, "");
     }
 
     protected int findRequestByName(String requestName) {

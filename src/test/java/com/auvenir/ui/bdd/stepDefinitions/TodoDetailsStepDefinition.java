@@ -1,7 +1,6 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.common.KeyWord;
 import com.auvenir.ui.bdd.pages.common.TodoDetailsPage;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
@@ -15,18 +14,15 @@ import java.util.List;
 import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
 
 /**
- * Created by huy.huynh on 9/18/2017.
+ * Created by huy.huynh on 18/09/2017.
  */
 public class TodoDetailsStepDefinition extends BaseInit {
     private static Logger logger = Logger.getLogger(TodoDetailsStepDefinition.class.getSimpleName());
     private BaseInit baseInit;
-    //AuditorTodoPage auditorTodoPage;
     private TodoDetailsPage todoDetailsPage;
-    private KeyWord keyWord;
 
     public TodoDetailsStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
-        //auditorTodoPage = new AuditorTodoPage(logger,driver);
         todoDetailsPage = new TodoDetailsPage(logger, driver);
     }
 
@@ -36,17 +32,19 @@ public class TodoDetailsStepDefinition extends BaseInit {
         todoDetailsPage.inputCommentWithContent(commentContent);
     }
 
-    @Then("^I click on post comment button and verify$")
-    public void clickOnConfirmDeleteButton() throws Throwable {
-        logger.info("===== I input comment content =====");
+    @Then("^I click on post comment button$")
+    public void clickOnPostCommentButton() throws Throwable {
+        logger.info("===== I click on post comment button =====");
         int numberOfListCommentlist = todoDetailsPage.getNumberOfListComment();
-//        keyWord.waitForSizeListElementChanged();
+        todoDetailsPage.clickOnPostCommentButton();
+        todoDetailsPage.waitForSizeListCommentChanged(numberOfListCommentlist);
     }
-    //    @And("^I select todo: \"([^\"]*)\" check box on todo page$")
-    //    public void iSelectTodoCheckBoxOnTodoPage(String todoName) throws Throwable {
-    //        // Write code here that turns the phrase above into concrete actions
-    //        todoPage.selectToDoCheckboxByName(todoName);
-    //    }
+
+    @Then("^I should see this comment display on list: \"([^\"]*)\"$")
+    public void verifyCommentDisplay(String commentContent) throws Throwable {
+        logger.info("===== I should see this comment display on list =====");
+        todoDetailsPage.verifyCommentContentIsDisplayed(commentContent);
+    }
 
     @And("^I creates some new requests$")
     public void createsSomeNewRequests(DataTable table) throws Throwable {
