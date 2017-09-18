@@ -198,7 +198,7 @@ public class TodoStepDefinition extends BaseInit {
         for (int i =1;i<listToDoAndUserClient.size();i++){
             System.out.println("The Client name is: "+listToDoAndUserClient.get(i).get(0));
             System.out.println("The To-Do name is: "+listToDoAndUserClient.get(i).get(1));
-            todoPage.verifyClientAssigneeSelected(listToDoAndUserClient.get(i).get(0),listToDoAndUserClient.get(i).get(1));
+            todoPage.verifyClientAssigneeSelected(listToDoAndUserClient.get(i).get(1),listToDoAndUserClient.get(i).get(0));
         }
     }
 
