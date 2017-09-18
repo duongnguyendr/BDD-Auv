@@ -418,6 +418,14 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page with Engagement Title Editable: "Engagement"
     And I click slide out menu on selected To-do: "Todo4"
     Then I should see the Todo detail opened
+    And I uploads list files on list requests
+      | File Name               | Request Name |
+      | TXT_Auvenir.jpg         | Request 1    |
+      | TXT_Auvenir.pdf         | Request 2    |
+      | TXT_Auvenir.xlsx        | Request 3    |
+      | TXT_helloAuvenir.docx   | Request 4    |
+      | TXT_helloAuvenir.png    | Request 5    |
+      | TXT_helloAuvenir.txt    | Request 6    |
 
   Scenario:  Lead Auditor add new request on To Do task: AUV-947
     Given I navigate to Marketing page
