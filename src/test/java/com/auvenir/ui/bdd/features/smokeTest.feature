@@ -139,8 +139,8 @@ Feature: Smoke Test Feature
     Then I should see invite successful message
 
     Scenario: Lead Auditor Active account: AUV-660
-    Given I navigate to gmail login page
-    And I signIn gmail
+    Given I navigate to GMail login page
+    And I sign In GMail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
@@ -246,8 +246,8 @@ Feature: Smoke Test Feature
     Then I select option Admin Client fullname: "Huy AC (Huy Company)"
     Then I click on Invite button
     Then I should see invite client success toast message
-    Then I navigate to gmail login page
-    And I signIn gmail
+    Then I navigate to GMail login page
+    And I sign In GMail
       | chr.auvenirclient@gmail.com | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
@@ -290,8 +290,8 @@ Feature: Smoke Test Feature
     Then I should see invite successful message
 
   Scenario: New Auditor member active account and login to Engagement 2: AUV-798
-    Given I navigate to gmail login page
-    Then I signIn gmail
+    Given I navigate to GMail login page
+    Then I sign In GMail
       | auvenirauditor02@gmail.com | TESTPASSWORD |
     And I open active email
     And I click on confirmation link
