@@ -137,7 +137,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-    Scenario: Lead Auditor Active account: AUV-660
+  Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to GMail login page
     And I sign In GMail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
@@ -582,7 +582,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                     | Password     |
+      | Email                         | Password     |
       | clienttan.lead@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
@@ -598,24 +598,34 @@ Feature: Smoke Test Feature
     And I click on invite button
     Then I should see Invite Member successful message
 #Tan
-
-#    Then i should see Admin Client name : "Admin Client" in team member list
-
   # VienPham create
-  @vien
   Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
+    # Bulk action assign to-do4 to General client
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                 | Password     |
-      | clvien.lead@gmail.com | Changeit@123 |
+      | Email                      | Password     |
+      | clvien.lead@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Eng02"
+    And I click on engagement: "En02"
     Then I should see engagement detail page with Engagement Title Uneditable: "En02"
-    And I select todo: "ToDo 01" check box on todo page
+    And I select todo: "ToDo 04" check box on Uneditable To-do page
     And I click bulk action drop down on todo page
     And I click assignee to :"General Client" on bulk action drop down
-    And I verify Client Assignee Selected
+    Then I verify Client Assignee Selected on Uneditabe Page
       | User Name      | Todo Name |
       | General Client | ToDo 04   |
+
+    # VienPham create
+  Scenario: General Client can see to-dos: AUV-1299
+    #Can see 4 to-dos 1,4,6,9
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                      | Password     |
+      | clvien.lead@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "En02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "En02"
