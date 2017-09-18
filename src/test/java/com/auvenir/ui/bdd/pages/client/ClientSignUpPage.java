@@ -88,6 +88,11 @@ public class ClientSignUpPage extends CommonPage {
     @FindBy(id = "security-continueBtn")
     private WebElement buttonSecurityContinue;
 
+    @FindBy(xpath = "//div[@class='ui checkbox']")
+    private WebElement eleCheckBoxAgreementPersonal;
+
+    @FindBy(id="personal-role")
+    private WebElement elePersonalRole;
 
     public ClientSignUpPage(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -217,6 +222,21 @@ public class ClientSignUpPage extends CommonPage {
         clickElement(buttonSecurityContinue, "Button Security Continue");
         waitSomeSeconds(3);
         waitForProgressOverlayIsClosed();
+    }
+
+    public void fillUpPhoneBusinessNumber(String phoneNumber) {
+        logger.info("+++++Fill Up Business Phone Number text box+++++");
+        sendKeyTextBox(inputPersonalPhoneNumber, phoneNumber, "Input Personal Phone Number");
+        //            clickElement(checkboxConfirm, "Checkbox Confirm Chartered Professional Accountant");
+    }
+
+    public void clickOnCheckBoxAgreementPersonal() {
+        logger.info("+++++Click on check box agreement+++++");
+        waitForVisibleElement(elePersonalRole,"Personal role");
+        clickElement(elePersonalRole,"Click on Personal role");
+        clickElement(eleCheckBoxAgreementPersonal, "Checkbox Agreement Personal");
+        switchToOtherTab(1);
+        scrollToFooter();
     }
 
 }

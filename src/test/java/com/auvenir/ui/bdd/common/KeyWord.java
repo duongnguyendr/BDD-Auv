@@ -1318,7 +1318,5 @@ Method to wait Ajax function on Site be loaded successfully.
         // Change the first Item to Third Item
         clickElement(list.get(0), elementName);
     }
-
-
 }
 

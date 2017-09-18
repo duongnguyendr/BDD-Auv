@@ -33,7 +33,7 @@ public class InviteNewClientStepDefinition extends BaseInit {
         inviteNewClientPage.selectAddNewClient();
     }
 
-    @And("^I input email on invite client popup: \"([^\"]*)\"$")
+    @And("^I input email: \"([^\"]*)\" on invite client popup$")
     public void iInputEmailOnInviteClientPopup(String email) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input email on invite client popup: " + email);
@@ -47,14 +47,14 @@ public class InviteNewClientStepDefinition extends BaseInit {
         inviteNewClientPage.inputFullNameClient(fullName);
     }
 
-    @And("^I input confirm email on invite client popup: \"([^\"]*)\"$")
+    @And("^I input confirm email: \"([^\"]*)\" on invite client popup$")
     public void iInputConfirmEmailOnInviteClientPopup(String email) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input confirm email on invite client popup: " + email);
         inviteNewClientPage.inputConfirmEmail(email);
     }
 
-    @And("^I input role on invite client popup: \"([^\"]*)\"$")
+    @And("^I input role: \"([^\"]*)\" on invite client popup$")
     public void iInputRoleOnInviteClientPopup(String clientRole) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input role on invite client popup: " + clientRole);
