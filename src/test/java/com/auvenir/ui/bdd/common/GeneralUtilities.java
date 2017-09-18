@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.*;
 
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
@@ -62,6 +63,16 @@ public class GeneralUtilities {
         listDataTable.remove(0);
         return listDataTable;
     }
+    public static List getList ( DataTable dataTable){
+/*note: Get form 1 to List size because first row is the header of file
+*/
+        List<String>listDataList;
+        listDataList = dataTable.asList(String.class);
+        return listDataList;
+
+
+    }
+
 
     //    public boolean checkFileExists(String downloadFile, boolean isDeletedFile){return false;}
     public static boolean checkFileExists(String pathLocation, boolean deleteExisted) {

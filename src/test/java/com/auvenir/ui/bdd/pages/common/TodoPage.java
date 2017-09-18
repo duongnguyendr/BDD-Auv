@@ -73,6 +73,21 @@ public class TodoPage extends CommonPage {
     protected List<WebElement> listSlideOutMenu;
     @FindBy(xpath = "//div[@id='auv-todo-details']")
     protected WebElement todoDetailPopup;
+    @FindBy(xpath = "//div[@id='todoDetailsReqCont']/div")
+    protected List<WebElement> listNewRequest;
+    @FindBy(xpath = "//*[@id='todoDetailsReqCont']")
+    protected WebElement newRequestTable;
+    @FindBy(xpath = "//div[@id='todoDetailsReqCont']/div[@class='detReqForFile']/span[@class='todo-req-name-label']")
+    protected List<WebElement> listRequestNameLabel;
+    @FindBy(xpath = "//label[@class='auvicon-line-circle-add todo-circle-add todo-icon-hover']")
+    private List<WebElement> addFileIcon;
+    @FindBy(xpath = "//*[@id='add-request-btn']")
+    private WebElement todoPageAddRequestBtn;
+    @FindBy(xpath = "//div[@id='todo-req-box-adding']/input")
+    private WebElement  nameRequestInput;
+    @FindBy(id = "comment-input")
+    WebElement commentInput;
+
 
 
     public int findToDoTaskName(String toDoName) {
@@ -361,19 +376,28 @@ public class TodoPage extends CommonPage {
         Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
     }
 
-    public void verifyUserSeeToDo(List<String> toDoList){
+    public void verifyUserSeeToDo(List<String> toDoList) {
         boolean result = true;
         int totalToDo = toDoList.size();
-        for(int i=0; i<totalToDo;i++){
+        for (int i = 0; i < totalToDo; i++) {
             String toDoName = toDoList.get(i);
             int index = findUnEditableToDoTaskName(toDoName);
             if(-1 == index){
-                System.out.println("Can not see : " + toDoName);
+                logger.info("Can not see : " + toDoName);
                 result = false;
                 break;
             }
         }
         Assert.assertTrue(result);
+    }
+    public void selectAddNewRequest() {
+        clickElement(todoPageAddRequestBtn,"Add new request Btn");
+    }
+
+    public void createNewRequest(String newRequestName) {
+        logger.info("Input name request :  " + newRequestName );
+        sendKeyTextBox(nameRequestInput,newRequestName,"name request");
+        clickElement(commentInput,"comment Input ");
     }
 
 }

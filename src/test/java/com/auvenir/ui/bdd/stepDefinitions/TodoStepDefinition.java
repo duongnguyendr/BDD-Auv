@@ -11,10 +11,15 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
 
+import org.apache.poi.ss.formula.functions.T;
+
 import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
 
 import java.util.ArrayList;
 import java.util.List;
+import static com.auvenir.ui.bdd.common.GeneralUtilities.getList;
+
+import java.util.*;
 
 /**
  * Created by duong.nguyen on 9/13/2017.
@@ -264,6 +269,38 @@ public class TodoStepDefinition extends BaseInit {
             todoPage.verifyClientAssigneeSelectedOnUneditablePage(listToDoAndUserClient.get(i).get(1), listToDoAndUserClient.get(i).get(0));
         }
     }
+    @And("^I create requests from To-Do$")
+    public void createRequestsFromToDo(DataTable table) throws Throwable {
+        logger.info("===== I create requests from To-Do =====");
+       Map<String,String>maptable = new HashMap<>();
+        maptable= table.asMap(String.class,String.class);
+
+        for (String toDo: maptable.keySet()){ // for To-Do to create request
+            iClickSlideOutMenuOnSelectedToDo(toDo);
+            verifyTodoDetailOpened();
+            String [] requestNames = maptable.get(toDo).split(",");
+            for (String requestName: requestNames){
+                auditorTodoPage.selectAddNewRequest();
+                auditorTodoPage.createNewRequest(requestName);
+            }
+            auditorTodoPage.closeAddNewRequestWindow();
+        }
+    }
+
+    @Then("^I verify Auditor Create requests from To-Do: (.*)$")
+    public void verifyAuditorCreateRequestsFromToDo (List<String> listToDo,DataTable table) throws Throwable {
+        logger.info("===== I verify Auditor Create requests from To-Do: =====");
+        List<String> listRequestname = getList(table);
+
+        for(String toDoName : listToDo) {
+            System.out.println("todo Name" + toDoName);
+            iClickSlideOutMenuOnSelectedToDo(toDoName);
+            verifyTodoDetailOpened();
+            auditorTodoPage.verifyRequestCreated(listRequestname);
+        }
+
+    }
+
 
     @Then("^I should see all to do assigned : (.*)")
     public void iShouldSeeAllToDoAssigned(List<String> toDoList) throws Throwable {

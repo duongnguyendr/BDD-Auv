@@ -406,7 +406,7 @@ Feature: Smoke Test Feature
       | Admin Auditor | ToDo 01   |
       | Admin Auditor | ToDo 02   |
       | Admin Auditor | ToDo 03   |
-    And I verify Auditor Assignee Selected
+    Then I verify Auditor Assignee Selected
       | Auditor Name  | Todo Name |
       | Admin Auditor | ToDo 01   |
       | Admin Auditor | ToDo 02   |
@@ -446,20 +446,27 @@ Feature: Smoke Test Feature
       | auvien.lead@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
-    And I click on assigned engagement: "En02"
-    Then I should see engagement detail page with Engagement Title Editable: "En02"
+    And I click on assigned engagement: "Engagement aaa"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement aaa"
     And  I click slide out menu on selected To-do: "Todo 01"
     Then I should see the Todo detail opened
     And  I creates some new requests
-      | Request Name |
+      | New Request Name |
       | Request 01   |
       | Request 02   |
       | Request 03   |
       | Request 04   |
       | Request 05   |
       | Request 06   |
+    Then I verify Auditor Create requests from To-Do: Todo 01
+      |request 01|
+      |request 02|
+      |request 03|
+      |request 04|
+      |request 05|
+      |request 06|
 
-
+    #############################################
   #Duong
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
@@ -739,7 +746,7 @@ Feature: Smoke Test Feature
       | General Client | ToDo 04   |
 
     # VienPham create
-  @vien123
+
   Scenario: General Client can see to-dos: AUV-1299
     Given I navigate to Marketing page
     And I click on login link
@@ -892,3 +899,34 @@ Feature: Smoke Test Feature
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+
+
+  Scenario: Auditor Member add new request on To Do task: AUV-1083
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | auvien.lead@mailinator.com | Changeit@123|
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+   Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+   Then I create requests from To-Do
+     |Todo 01|request 01,request 02,request 03,request 04 ,request 05,request 06 |
+     |Todo 02|request 01,request 02,request 03,request 04 ,request 05,request 06 |
+     |Todo 03|request 01,request 02,request 03,request 04 ,request 05,request 06 |
+    Then I verify Auditor Create requests from To-Do: Todo 01,Todo 02,Todo 03
+      |request 01|
+      |request 02|
+      |request 03|
+      |request 04|
+      |request 05|
+      |request 06|
+
+
+
+
+
+
+
+
