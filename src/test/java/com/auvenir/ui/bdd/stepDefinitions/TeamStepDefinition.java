@@ -68,21 +68,21 @@ public class TeamStepDefinition extends BaseInit {
         auditorTeamPage.verifyAddNewMemberSuccessful();
     }
 
-    @And("^I input full name on invite new member page: \"([^\"]*)\"$")
+    @And("^I input full name: \"([^\"]*)\" on invite new member page$")
     public void iInputFullNameOnInviteNewMemberPage(String fullName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input full name on invite new member page");
         auditorTeamPage.inputFullName(fullName);
     }
 
-    @And("^I input email on invite new member page: \"([^\"]*)\"$")
+    @And("^I input email: \"([^\"]*)\" on invite new member page$")
     public void iInputEmailOnInviteNewMemberPage(String strEmail) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input email on invite new member page");
         auditorTeamPage.inputEmail(strEmail);
     }
 
-    @And("^I input email confirm on invite new member page: \"([^\"]*)\"$")
+    @And("^I input email confirm: \"([^\"]*)\" on invite new member page$")
     public void iInputEmailConfirmOnInviteNewMemberPage(String strEmail) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input email confirm on invite new member page");
@@ -101,25 +101,25 @@ public class TeamStepDefinition extends BaseInit {
         clientTeamPage.verifyInviteNewMemberPageDisplayed();
     }
 
-    @And("^I input full name on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input full name: \"([^\"]*)\" on invite new member popup$")
     public void iInputFullNameOnInviteNewMemberPopup(String clientFullName) throws Throwable {
         logger.info("I input full name on invite new member popup");
         clientTeamPage.inputFullName(clientFullName);
     }
 
-    @And("^I input email on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input email: \"([^\"]*)\" on invite new member popup$")
     public void iInputEmailOnInviteNewMemberPopup(String email) throws Throwable {
         logger.info("I input client email on invite new member popup");
         clientTeamPage.inputEmail(email);
     }
 
-    @And("^I input email confirm on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input email confirm: \"([^\"]*)\" on invite new member popup$")
     public void iInputEmailConfirmOnInviteNewMemberPopup(String email) throws Throwable {
         logger.info("I confirm client email on invite new member popup");
         clientTeamPage.inputEmailConfirm(email);
     }
 
-    @And("^I input Role of new client member on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input Role: \"([^\"]*)\" of new client member on invite new member popup$")
     public void iInputRoleOfNewClientMemberOnInviteNewMemberPopup(String roleName) throws Throwable {
         logger.info("I confirm client email on invite new member popup");
         clientTeamPage.inputMemberRole(roleName);
@@ -185,4 +185,10 @@ public class TeamStepDefinition extends BaseInit {
         teamPage.verifyNotExistsInTeamMemberList(memberName);
     }
 
+    @And("^I click on Invite New Member button on team page$")
+    public void iClickOnInviteNewMemberButtonOnTeamPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I click on Invite New Member button on team page ======");
+        teamPage.clickInviteMember();
+    }
 }

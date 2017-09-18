@@ -128,12 +128,11 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP01"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
     And I click on Team tab of engagement detail page
-    And I delete existed member on team page: "Lead Auditor"
     And I click in invite new member on team page
     Then I should see invite new member page
-    And I input full name on invite new member page: "Lead Auditor"
-    And I input email on invite new member page: "chr.auditor01.lead@gmail.com"
-    And I input email confirm on invite new member page: "chr.auditor01.lead@gmail.com"
+    And I input full name: "Lead Auditor" on invite new member page
+    And I input email: "chr.auditor01.lead@gmail.com" on invite new member page
+    And I input email confirm: "chr.auditor01.lead@gmail.com" on invite new member page
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
@@ -169,9 +168,9 @@ Feature: Smoke Test Feature
     Then I should see invite new client popup
     And I select add new client on new client popup
     And I input full name: "Admin Client" on invite client popup
-    And I input email on invite client popup: "chr.client01.adm@gmail.com"
-    And I input confirm email on invite client popup: "chr.client01.adm@gmail.com"
-    And I input role on invite client popup: "IT"
+    And I input email: "chr.client01.adm@gmail.com" on invite client popup
+    And I input confirm email: "chr.client01.adm@gmail.com" on invite client popup
+    And I input role: "IT" on invite client popup
     And I click on invite button on invite client popup
     Then I should see message invite successful: "Your engagement invitation has been sent."
     And I navigate to Marketing page
@@ -185,8 +184,8 @@ Feature: Smoke Test Feature
       | chr.client01.adm@gmail.com | Onboarding |
 
   Scenario: Admin Client active account: AUV-645
-    Given I navigate to gmail login page
-    And I signIn gmail
+    Given I navigate to GMail login page
+    And I sign In GMail
       | chr.client01.adm@gmail.com | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
@@ -282,9 +281,9 @@ Feature: Smoke Test Feature
     And I click on Team tab of engagement detail page
     And I click in invite new member on team page
     Then I should see invite new member page
-    And I input full name on invite new member page: "Huy GA01"
-    And I input email on invite new member page: "auvenirauditor01@gmail.com"
-    And I input email confirm on invite new member page: "auvenirauditor01@gmail.com"
+    And I input full name: "Huy GA01" on invite new member page
+    And I input email: "auvenirauditor01@gmail.com" on invite new member page
+    And I input email confirm: "auvenirauditor01@gmail.com" on invite new member page
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
@@ -315,10 +314,10 @@ Feature: Smoke Test Feature
     And I click on Team tab on Client page
     And I click on Invite New Member button on Client team page
     Then I should see Invite New Member popup
-    And I input full name on invite new member popup: "Lead Client"
-    And I input email on invite new member popup: "vien1234@gmail.com"
-    And I input email confirm on invite new member popup: "vien1234@gmail.com"
-    And I input Role of new client member on invite new member popup: "Client role"
+    And I input full name: "Lead Client" on invite new member popup
+    And I input email: "vien1234@gmail.com" on invite new member popup
+    And I input email confirm: "vien1234@gmail.com" on invite new member popup
+    And I input Role: "Client role" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
 
@@ -334,9 +333,9 @@ Feature: Smoke Test Feature
     And I click on Team tab of engagement detail page
     And I click in invite new member on team page
     Then I should see invite new member page
-    And I input full name on invite new member page: "Huy LC2"
-    And I input email on invite new member page: "auvenirclient02@gmail.com"
-    And I input email confirm on invite new member page: "auvenirclient02@gmail.com"
+    And I input full name: "Huy LC2" on invite new member page
+    And I input email: "auvenirclient02@gmail.com" on invite new member page
+    And I input email confirm: "auvenirclient02@gmail.com" on invite new member page
     And I input role of new member
     And I click on invite new member
     Then I should see invite successful message
@@ -440,7 +439,7 @@ Feature: Smoke Test Feature
       | Request 05   |
       | Request 06   |
 
-    #############################################
+
   #Duong
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
@@ -579,4 +578,45 @@ Feature: Smoke Test Feature
     Then I click on check box beside Admin Client name : "Admin Client" in team member list
     And I remove Admin Client name : "Admin Client" out of team member list
     Then I should not see Admin Client name : "Admin Client" in team member list
+
+  Scenario: Leader Client invite client into Engagement: AUV-1214
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | clienttan.lead@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    And I click on Team tab of engagement detail page
+    And I click on Invite New Member button on team page
+    Then I should see Invite New Member popup
+    And I input full name: "General Client" on invite new member popup
+    And I input email: "clienttan.general@mailinator.com" on invite new member popup
+    And I input email confirm: "clienttan.general@mailinator.com" on invite new member popup
+    And I input Role: "General Client" of new client member on invite new member popup
+    And I click on invite button
+    Then I should see Invite Member successful message
 #Tan
+
+#    Then i should see Admin Client name : "Admin Client" in team member list
+
+  # VienPham create
+  @vien
+  Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | clvien.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Eng02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "En02"
+    And I select todo: "ToDo 01" check box on todo page
+    And I click bulk action drop down on todo page
+    And I click assignee to :"General Client" on bulk action drop down
+    And I verify Client Assignee Selected
+      | User Name      | Todo Name |
+      | General Client | ToDo 04   |
