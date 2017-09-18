@@ -1295,25 +1295,6 @@ Method to wait Ajax function on Site be loaded successfully.
         return simpleDateFormat.format(date.getTime());
     }
 
-    public static boolean checkFileExists(String pathLocation, boolean deleteExisted) {
-        Path path = Paths.get(pathLocation);
-        System.out.println("file: " + path);
-        boolean result = false;
-        try {
-            if (Files.exists(path)) {
-                result = true;
-                if (deleteExisted) {
-                    Files.delete(path);
-                    if (Files.exists(path)) {
-                    }
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return result;
-    }
-
     public void chooseFirstOptionOfInputSelect(List<WebElement> list, String elementName) {
         // Change the first Item to Third Item
         clickElement(list.get(0), elementName);

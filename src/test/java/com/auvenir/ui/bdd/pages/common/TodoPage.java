@@ -83,6 +83,11 @@ public class TodoPage extends CommonPage {
     private List<WebElement> addFileIcon;
     @FindBy(xpath = "//*[@id='add-request-btn']")
     private WebElement todoPageAddRequestBtn;
+    @FindBy(xpath = "//div[@id='todo-req-box-adding']/input")
+    private WebElement  nameRequestInput;
+    @FindBy(id = "comment-input")
+    WebElement commentInput;
+
 
 
     public int findToDoTaskName(String toDoName) {
@@ -361,54 +366,6 @@ public class TodoPage extends CommonPage {
         Assert.assertTrue(result, "File : " + fileName + " should existed in local computer");
     }
 
-    protected int findRequestByName(String requestName) {
-        int isFind = -1;
-        for (int i = 0; i < listRequestNameLabel.size(); i++) {
-            System.out.println("Size list New Request: " + listRequestNameLabel.size());
-            System.out.println(listRequestNameLabel.get(i).getText());
-            if (listRequestNameLabel.get(i).getText().equals(requestName)) {
-                isFind = i;
-                logger.info("Request " + requestName + " at position: " + isFind);
-                break;
-            }
-        }
-        return isFind;
-    }
-
-    public void uploadFileOnRequestByName(String fileName, String requestName) throws AWTException {
-        String concatUpload = Generic.FOLDER_UPLOAD.concat(fileName);
-        System.out.println("concatUpload: " + concatUpload);
-        int isFind = findRequestByName(requestName);
-        if (isFind == -1) {
-            logger.info("Can not find any request has name is: " + requestName);
-        } else {
-            clickElement(addFileIcon.get(isFind),"Add File Icon");
-            waitSomeSeconds(2);
-            logger.info("Input path of file..");
-            StringSelection ss = new StringSelection(concatUpload);
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, ss);
-            Robot robot = new Robot();
-            robot.delay(2);
-            waitSomeSeconds(1);
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-            waitSomeSeconds(2);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-            waitSomeSeconds(1);
-        }
-    }
-
-    public void selectAddNewRequest() {
-        clickElement(todoPageAddRequestBtn,"Add new request Btn");
-    }
-
-    public void createNewRequest(String newRequestName) {
-
-    }
-
     public void verifyClientAssigneeSelectedOnUneditablePage(String toDoName, String clientAssignee) {
         logger.info("== select Client Assignee By Name ==");
         waitSomeSeconds(2);
@@ -419,10 +376,10 @@ public class TodoPage extends CommonPage {
         Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
     }
 
-    public void verifyUserSeeToDo(List<String> toDoList){
+    public void verifyUserSeeToDo(List<String> toDoList) {
         boolean result = true;
         int totalToDo = toDoList.size();
-        for(int i=0; i<totalToDo;i++){
+        for (int i = 0; i < totalToDo; i++) {
             String toDoName = toDoList.get(i);
             int index = findUnEditableToDoTaskName(toDoName);
             if(-1 == index){
@@ -433,4 +390,14 @@ public class TodoPage extends CommonPage {
         }
         Assert.assertTrue(result);
     }
+    public void selectAddNewRequest() {
+        clickElement(todoPageAddRequestBtn,"Add new request Btn");
+    }
+
+    public void createNewRequest(String newRequestName) {
+        logger.info("Input name request :  " + newRequestName );
+        sendKeyTextBox(nameRequestInput,newRequestName,"name request");
+        clickElement(commentInput,"comment Input ");
+    }
+
 }
