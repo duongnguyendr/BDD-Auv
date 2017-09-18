@@ -138,7 +138,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-    Scenario: Lead Auditor Active account: AUV-660
+  Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to GMail login page
     And I sign In GMail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
@@ -406,7 +406,6 @@ Feature: Smoke Test Feature
       | Admin Auditor | ToDo 03   |
 
     #Thuan Duong create
-  @Run
   Scenario: Lead Auditor add file to request on To Do task AUV-954
     Given I navigate to Marketing page
     And I click on login link
@@ -535,19 +534,21 @@ Feature: Smoke Test Feature
       | Unassigned  | ToDo 01   |
       | Unassigned  | ToDo 02   |
 
-#  @Run
-#  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                    | Password     |
-#      | auvenirauditor@gmail.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see engagement page
-#    Then I click on engagement: "Huy Engagement 02"
-#    Then I should see engagement detail page with Engagement Title Editable: "Huy Engagement 02"
-#    And  I click slide out menu on selected To-do: "Todo 01"
-#    Then I should see the Todo detail opened
+  @Run
+  Scenario: Lead Auditor post new comment: AUV-968
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                    | Password     |
+      | auvenirauditor@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    Then I should see engagement detail page with Engagement Title Editable: "Huy Engagement 02"
+    And  I click slide out menu on selected To-do: "Todo 01"
+    Then I should see the Todo detail opened
+    Then I input comment content: "Lead Auditor Comment"
+
 #/Huy
 
     #Tan
