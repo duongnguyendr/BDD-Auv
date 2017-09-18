@@ -547,5 +547,7 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
     And I click on Team tab of engagement detail page
     Then I should see Admin Client name : "Admin Client" in team member list
+    Then I click on check box beside Admin Client name : "Admin Client" in team member list
+    And I remove Admin Client name : "Admin Client" out of team member list
     Then I should not see Admin Client name : "Admin Client" in team member list
 #Tan

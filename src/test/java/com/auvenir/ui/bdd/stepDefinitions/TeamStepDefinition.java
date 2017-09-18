@@ -164,10 +164,25 @@ public class TeamStepDefinition extends BaseInit {
         teamPage.verifyExistsInTeamMemberList(memberName);
     }
 
+    @Then("^I click on check box beside Admin Client name : \"([^\"]*)\" in team member list$")
+    public void iClickOnCheckBoxBesideAdminClientNameInTeamMemberList(String memberName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I click on check box beside Admin Client name : "+ memberName +" in team member list======");
+        teamPage.clickOnCheckBoxMemberName(memberName);
+    }
+
+    @And("^I remove Admin Client name : \"([^\"]*)\" out of team member list$")
+    public void iRemoveAdminClientNameOutOfTeamMemberList(String memberName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I remove Admin Client name : "+ memberName +" in team member list======");
+        teamPage.clickOnDeleteIconMemberName(memberName);
+    }
+
     @Then("^I should not see Admin Client name : \"([^\"]*)\" in team member list$")
     public void iShouldNotSeeAdminClientNameInTeamMemberList(String memberName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("======I should not see Admin Client name : "+ memberName +" in team member list======");
         teamPage.verifyNotExistsInTeamMemberList(memberName);
     }
+
 }
