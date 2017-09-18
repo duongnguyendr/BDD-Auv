@@ -137,7 +137,7 @@ Feature: Smoke Test Feature
     And I click on invite new member
     Then I should see invite successful message
 
-    Scenario: Lead Auditor Active account: AUV-660
+  Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to GMail login page
     And I sign In GMail
       | chr.auditor01.lead@gmail.com | Changeit@123 |
@@ -405,7 +405,6 @@ Feature: Smoke Test Feature
       | Admin Auditor | ToDo 03   |
 
     #Thuan Duong create
-  @Run
   Scenario: Lead Auditor add file to request on To Do task AUV-954
     Given I navigate to Marketing page
     And I click on login link
@@ -448,7 +447,7 @@ Feature: Smoke Test Feature
       | Request 05   |
       | Request 06   |
 
-    #############################################
+
   #Duong
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
@@ -542,19 +541,21 @@ Feature: Smoke Test Feature
       | Unassigned  | ToDo 01   |
       | Unassigned  | ToDo 02   |
 
-#  @Run
-#  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                    | Password     |
-#      | auvenirauditor@gmail.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see engagement page
-#    Then I click on engagement: "Huy Engagement 02"
-#    Then I should see engagement detail page with Engagement Title Editable: "Huy Engagement 02"
-#    And  I click slide out menu on selected To-do: "Todo 01"
-#    Then I should see the Todo detail opened
+  @Run
+  Scenario: Lead Auditor post new comment: AUV-968
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                    | Password     |
+      | auvenirauditor@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    Then I should see engagement detail page with Engagement Title Editable: "Huy Engagement 02"
+    And  I click slide out menu on selected To-do: "Todo 01"
+    Then I should see the Todo detail opened
+    Then I input comment content: "Lead Auditor Comment"
+
 #/Huy
 
     #Tan
@@ -585,4 +586,45 @@ Feature: Smoke Test Feature
     Then I click on check box beside Admin Client name : "Admin Client" in team member list
     And I remove Admin Client name : "Admin Client" out of team member list
     Then I should not see Admin Client name : "Admin Client" in team member list
+
+  Scenario: Leader Client invite client into Engagement: AUV-1214
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | clienttan.lead@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    And I click on Team tab of engagement detail page
+    And I click on Invite New Member button on team page
+    Then I should see Invite New Member popup
+    And I input full name: "General Client" on invite new member popup
+    And I input email: "clienttan.general@mailinator.com" on invite new member popup
+    And I input email confirm: "clienttan.general@mailinator.com" on invite new member popup
+    And I input Role: "General Client" of new client member on invite new member popup
+    And I click on invite button
+    Then I should see Invite Member successful message
 #Tan
+
+#    Then i should see Admin Client name : "Admin Client" in team member list
+
+  # VienPham create
+  @vien
+  Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | clvien.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Eng02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "En02"
+    And I select todo: "ToDo 01" check box on todo page
+    And I click bulk action drop down on todo page
+    And I click assignee to :"General Client" on bulk action drop down
+    And I verify Client Assignee Selected
+      | User Name      | Todo Name |
+      | General Client | ToDo 04   |

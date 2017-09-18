@@ -78,6 +78,8 @@ public class TodoPage extends CommonPage {
     protected List<WebElement> listRequestNameLabel;
     @FindBy(xpath = "//label[@class='auvicon-line-circle-add todo-circle-add todo-icon-hover']")
     private List<WebElement> addFileIcon;
+    @FindBy(xpath = "//*[@id='add-request-btn']")
+    private WebElement todoPageAddRequestBtn;
 
 
     public int findToDoTaskName(String toDoName) {
@@ -352,4 +354,10 @@ public class TodoPage extends CommonPage {
         }
     }
 
+    public void selectAddNewRequest() {
+        clickElement(todoPageAddRequestBtn,"Add new request Btn");
+    }
+
+    public void createNewRequest(String newRequestName) {
+    }
 }

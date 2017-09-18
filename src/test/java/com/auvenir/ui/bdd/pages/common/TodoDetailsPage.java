@@ -33,7 +33,7 @@ public class TodoDetailsPage extends CommonPage {
     @FindBy(xpath = "//*[@id='add-request-btn']")
     private WebElement totoPageAddRequestBtn;
 
-    public void verifyInputAComment(String commentContent) {
+    public void inputCommentWithContent(String commentContent) {
         boolean result;
         logger.info("Verify Input a Comment");
         waitForVisibleElement(inputTypeComment, "Input Comment field");
