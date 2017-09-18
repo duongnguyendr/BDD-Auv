@@ -6,6 +6,7 @@ import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
 import com.google.common.collect.Table;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -140,6 +141,11 @@ public class TodoStepDefinition extends BaseInit {
     public void iVerifyFileExistedInComputer(String fileName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         todoPage.verifyFileDownloadSuccessful(fileName);
+    }
+
+    @And("^I select todo: \"([^\"]*)\" check box on Uneditable To-do page$")
+    public void selectTodoCheckBoxOnUneditableToDoPage(String todoName) throws Throwable {
+      todoPage.selectUnEditableToDoCheckboxByName(todoName);
     }
 
     public class LisTodoAnduser{

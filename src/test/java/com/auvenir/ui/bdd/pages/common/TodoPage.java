@@ -120,7 +120,7 @@ public class TodoPage extends CommonPage {
      * @return
      */
     public int findUnEditableToDoTaskName(String toDoName) {
-        logger.info("Find Position of To Do Task Name");
+        logger.info("Find Position of To Do Task Name "+ toDoName);
         int index = -1;
         try {
             for (int i = 0; i < unEditableTodoName.size(); i++) {

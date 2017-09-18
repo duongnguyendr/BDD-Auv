@@ -426,13 +426,13 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "Todo4"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
-      | File Name               | Request Name |
-      | TXT_Auvenir.jpg         | Request 1    |
-      | TXT_Auvenir.pdf         | Request 2    |
-      | TXT_Auvenir.xlsx        | Request 3    |
-      | TXT_helloAuvenir.docx   | Request 4    |
-      | TXT_helloAuvenir.png    | Request 5    |
-      | TXT_helloAuvenir.txt    | Request 6    |
+      | File Name             | Request Name |
+      | TXT_Auvenir.jpg       | Request 1    |
+      | TXT_Auvenir.pdf       | Request 2    |
+      | TXT_Auvenir.xlsx      | Request 3    |
+      | TXT_helloAuvenir.docx | Request 4    |
+      | TXT_helloAuvenir.png  | Request 5    |
+      | TXT_helloAuvenir.txt  | Request 6    |
 
   Scenario:  Lead Auditor add new request on To Do task: AUV-947
     Given I navigate to Marketing page
@@ -518,7 +518,7 @@ Feature: Smoke Test Feature
     And I delete existed file: "Engagement GP02.zip" in download folder
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -646,7 +646,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                         | Password     |
+      | Email                   | Password     |
       | chr.auditor01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -663,7 +663,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                        | Password     |
+      | Email                   | Password     |
       | chr.auditor01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -675,13 +675,14 @@ Feature: Smoke Test Feature
     Then I should see delete todo popup
     And I click on confirm delete button on delete todo popup
     Then I should see todo: "ToDo 08" not existed in todo list
+
   @duong123
   Scenario: Auditor download from all To-do: AUV-1141
     Given I navigate to Marketing page
     And I delete existed file: "Engagement GP02.zip" in download folder
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
+      | Email                   | Password     |
       | chr.auditor01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -717,14 +718,15 @@ Feature: Smoke Test Feature
       | General Client | ToDo 04   |
 
     # VienPham create
+  @vien123
   Scenario: General Client can see to-dos: AUV-1299
-    #Can see 4 to-dos 1,4,6,9
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                      | Password     |
-      | clvien.lead@mailinator.com | Changeit@123 |
+      | Email                         | Password     |
+      | clvien.general@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "En02"
     Then I should see engagement detail page with Engagement Title Uneditable: "En02"
+    Then I should see all to do assigned : ToDo 01,ToDo 04,Todo 06,Todo 09
