@@ -718,7 +718,7 @@ Feature: Smoke Test Feature
       | General Client | ToDo 04   |
 
     # VienPham create
-  @vien123
+
   Scenario: General Client can see to-dos: AUV-1299
     Given I navigate to Marketing page
     And I click on login link

@@ -426,7 +426,7 @@ public class TodoPage extends CommonPage {
             String toDoName = toDoList.get(i);
             int index = findUnEditableToDoTaskName(toDoName);
             if(-1 == index){
-                System.out.println("Can not see : " + toDoName);
+                logger.info("Can not see : " + toDoName);
                 result = false;
                 break;
             }
