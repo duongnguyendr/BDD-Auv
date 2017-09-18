@@ -790,7 +790,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
     And I click slide out menu on selected To-do: "ToDo 06"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
@@ -815,7 +815,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
     And I click slide out menu on selected To-do: "ToDo 01"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
@@ -847,3 +847,48 @@ Feature: Smoke Test Feature
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
 
+
+  Scenario: Auditor download file from request: AUV-1113
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement"
+    And I click slide out menu on selected To-do: "ToDo 04"
+    Then I should see the Todo detail opened
+    And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+    Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+
+  Scenario: Lead Client download file from request: AUV-1259
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
+    And I click slide out menu on selected To-do: "ToDo 04"
+    Then I should see the Todo detail opened
+    And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+    Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+
+  Scenario: Client download file from request: AUV-1319
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
+    And I click slide out menu on selected To-do: "ToDo 04"
+    Then I should see the Todo detail opened
+    And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+    Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
