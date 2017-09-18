@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by duong.nguyen on 9/13/2017.
@@ -245,9 +246,23 @@ public class TodoStepDefinition extends BaseInit {
             System.out.println("Prepare to create: "+listNewRequest.newRequestName);
 //            auditorTodoPage.clickElement();
 //            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
+        }}
+        @And("^I create requests from To-Do$")
+        public void createRequestsFromToDo(DataTable table) throws Throwable {
+            logger.info("===== I create requests from To-Do =====");
+            Set<String>toDos = null;
+            List<String>requestNames = null;
+            List<List<String>>listToDoAndRequestName =getTable(table);
+            for (int i =1;i<listToDoAndRequestName.size();i++){
+                toDos.add(listToDoAndRequestName.get(i).get(0));
+                requestNames.add(listToDoAndRequestName.get(i).get(1));
+            }
+            for (String toDo: toDos){ // for To-Do to create request
+                iClickSlideOutMenuOnSelectedToDo(toDo);
+                verifyTodoDetailOpened();
+                for (String requestName: requestNames){
+
+                }
+            }
         }
-    }
-
-
-
 }

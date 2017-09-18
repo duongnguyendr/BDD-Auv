@@ -399,7 +399,7 @@ Feature: Smoke Test Feature
       | Admin Auditor | ToDo 01   |
       | Admin Auditor | ToDo 02   |
       | Admin Auditor | ToDo 03   |
-    And I verify Auditor Assignee Selected
+    Then I verify Auditor Assignee Selected
       | Auditor Name  | Todo Name |
       | Admin Auditor | ToDo 01   |
       | Admin Auditor | ToDo 02   |
@@ -575,3 +575,39 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
     And I click on Team tab of engagement detail page
 #    Then i should see Admin Client name : "Admin Client" in team member list
+
+  Scenario: Auditor Member add new request on To Do task: AUV-1083
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | auvenirinfo@gmail.com | Changeit@123|
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    Then I create requests from To-Do
+      |ToDo Name |Request Name|
+      |Todo 01|request 01|
+      |Todo 02|request 02|
+      |Todo 03|request 03|
+      |null   |request 04|
+      |null   |request 05|
+      |null   |request 06|
+
+    Then I verify  requests wwas from To-Do
+      |ToDo Name |Request Name|
+      |Todo 01|request 01|
+      |Todo 01|request 02|
+      |Todo 01|request 03|
+      |Todo 01|request 04|
+      |Todo 01|request 05|
+      |Todo 02|request 01|
+      |Todo 02|request 02|
+      |Todo 02|request 03|
+      |Todo 02|request 04|
+      |Todo 02|request 05|
+
+
+
+
