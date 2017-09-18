@@ -53,8 +53,8 @@ public class Generic extends BaseInit{
     public static String sConfigFile = null;
     public static String sBrowserData = null;
     public final static String MONGODBPROPERTIESFILE = sDirPath + "\\src\\test\\resources\\properties\\MongoDB.properties";
-    public static final String FOLDER_DOWNLOAD  = "\\src\\test\\resources\\testData\\download\\";
     public static final String FOLDER_UPLOAD = sDirPath +"\\src\\test\\resources\\testData\\upload\\";
+    public static final String FOLDER_DOWNLOAD  = sDirPath + "\\src\\test\\resources\\testData\\download\\";
 
 
     /**

@@ -28,15 +28,17 @@ public class TodoDetailsStepDefinition extends BaseInit {
         todoDetailsPage.inputCommentWithContent(commentContent);
     }
 
-    @Then("^I click on post comment button and verify$")
+    @Then("^I click on post comment button$")
     public void clickOnConfirmDeleteButton() throws Throwable {
-        logger.info("===== I input comment content =====");
+        logger.info("===== I click on post comment button =====");
         int numberOfListCommentlist = todoDetailsPage.getNumberOfListComment();
-//        keyWord.waitForSizeListElementChanged();
+        todoDetailsPage.clickOnPostCommentButton();
+        todoDetailsPage.waitForSizeListCommentChanged(numberOfListCommentlist);
     }
-    //    @And("^I select todo: \"([^\"]*)\" check box on todo page$")
-    //    public void iSelectTodoCheckBoxOnTodoPage(String todoName) throws Throwable {
-    //        // Write code here that turns the phrase above into concrete actions
-    //        todoPage.selectToDoCheckboxByName(todoName);
-    //    }
+
+    @Then("^I should see this comment display on list: \"([^\"]*)\"$")
+    public void verifyCommentDisplay(String commentContent) throws Throwable {
+        logger.info("===== I should see this comment display on list =====");
+        todoDetailsPage.verifyCommentContentIsDisplayed(commentContent);
+    }
 }
