@@ -79,8 +79,8 @@ Feature: Smoke Test Feature
     Then I should see verified message successful on admin page
 
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
-    Given I navigate to gmail login page
-    And I signIn gmail
+    Given I navigate to GMail login page
+    And I sign In GMail
       | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
