@@ -31,6 +31,8 @@ public class MarketingPage extends CommonPage {
 
    @FindBy(xpath = "//*/a[@class='ui large basic inverted button']")
    private WebElement signUpBTN;
+   @FindBy(id = "marketing-header")
+   private WebElement marketingHeader;
 
 
    public void clickOnLoginBTN() {
@@ -60,6 +62,11 @@ public class MarketingPage extends CommonPage {
 
    public void verifyHeaderAdminPage() {
       Assert.assertEquals((eleAdminHdrTxt).getText(), "Admin");
+   }
+
+   public void verifyMaketingHeaderPage(){
+      boolean result = validateExistedElement(marketingHeader, "Marketing header");
+      Assert.assertTrue(result, "Verify marketing header page.");
    }
 
 }

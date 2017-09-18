@@ -293,11 +293,11 @@ public class TodoPage extends CommonPage {
             logger.info("Click Download Button.");
             clickElement(downloadAllTodo, "click to downloadAllTodo");
             waitForCssValueChanged(popUpDownloadAttachmentsWindows, "Popup Download", "display", "none");
+            waitSomeSeconds(3);
     }
 
     public void verifyFileDownloadSuccessful(String fileName){
-        String downloadFolder = Generic.sDirPath + Generic.FOLDER_DOWNLOAD;
-        boolean result = GeneralUtilities.checkFileExists(downloadFolder + fileName, true);
+        boolean result = GeneralUtilities.checkFileExists(Generic.FOLDER_DOWNLOAD + fileName, false);
         Assert.assertTrue(result, "File : " + fileName + " should existed in local computer");
     }
 

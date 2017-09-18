@@ -59,6 +59,7 @@ Feature: Smoke Test Feature
     And I click continue button on sign up page
     Then I should see thank for create account page
     And I click continue button on sign up page
+    Then I should see marketing portal page
 
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
@@ -77,6 +78,8 @@ Feature: Smoke Test Feature
     Then I should see confirm popup on admin page
     And I click confirm button on admin page
     Then I should see verified message successful on admin page
+    Then I should see status of user is onboarding
+      | chr.auditor01.adm@gmail.com | Onboarding |
 
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
     Given I navigate to GMail login page
@@ -500,10 +503,11 @@ Feature: Smoke Test Feature
 
   Scenario: Lead Auditor download all To Do: AUV-1052
     Given I navigate to Marketing page
+    And I delete existed file: "Engagement GP02.zip" in download folder
     And I click on login link
     And I enter the following for Login
       | Email                    | Password     |
-      | auvenirauditor@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -578,3 +582,57 @@ Feature: Smoke Test Feature
     And I remove Admin Client name : "Admin Client" out of team member list
     Then I should not see Admin Client name : "Admin Client" in team member list
 #Tan
+  #Duong
+
+  Scenario: Auditor mark as complete one To-Do: AUV-1217
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                         | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I select todo: "ToDo 07" check box on todo page
+    And I click bulk action drop down on todo page
+    And I click mark complete button on bulk action
+    Then I should see mark completed todo popup
+    And I click on archive button on complete todo popup
+    Then I should see todo: "ToDo 07" mark completed on todo page
+
+  Scenario: Auditor delete 1 To-Do: AUV-1130
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                        | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I select todo: "ToDo 08" check box on todo page
+    And I click bulk action drop down on todo page
+    And I click delete button on bulk action
+    Then I should see delete todo popup
+    And I click on confirm delete button on delete todo popup
+    Then I should see todo: "ToDo 08" not existed in todo list
+  @duong123
+  Scenario: Auditor download from all To-do: AUV-1141
+    Given I navigate to Marketing page
+    And I delete existed file: "Engagement GP02.zip" in download folder
+    And I click on login link
+    And I enter the following for Login
+      | Email                    | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I click check box all todo on todo page
+    And I click bulk action drop down on todo page
+    And I click download attachments on bulk action
+    Then I should see popup download attachments on todo page
+    And I click download button on attachment download popup
+    Then I verify file "Engagement GP02.zip" existed in computer
+  #/Duong
