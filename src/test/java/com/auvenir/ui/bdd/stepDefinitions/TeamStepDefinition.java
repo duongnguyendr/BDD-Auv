@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTeamPage;
 import com.auvenir.ui.bdd.pages.client.ClientTeamPage;
+import com.auvenir.ui.bdd.pages.common.TeamPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -16,11 +17,13 @@ public class TeamStepDefinition extends BaseInit {
     BaseInit baseInit;
     AuditorTeamPage auditorTeamPage;
     ClientTeamPage clientTeamPage;
+    TeamPage teamPage;
 
     public TeamStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         auditorTeamPage = new AuditorTeamPage(logger, driver);
         clientTeamPage = new ClientTeamPage(logger, driver);
+        teamPage = new TeamPage(logger,driver) ;
     }
 
     @And("^I click in invite new member on team page$")
@@ -65,21 +68,21 @@ public class TeamStepDefinition extends BaseInit {
         auditorTeamPage.verifyAddNewMemberSuccessful();
     }
 
-    @And("^I input full name on invite new member page: \"([^\"]*)\"$")
+    @And("^I input full name: \"([^\"]*)\" on invite new member page$")
     public void iInputFullNameOnInviteNewMemberPage(String fullName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input full name on invite new member page");
         auditorTeamPage.inputFullName(fullName);
     }
 
-    @And("^I input email on invite new member page: \"([^\"]*)\"$")
+    @And("^I input email: \"([^\"]*)\" on invite new member page$")
     public void iInputEmailOnInviteNewMemberPage(String strEmail) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input email on invite new member page");
         auditorTeamPage.inputEmail(strEmail);
     }
 
-    @And("^I input email confirm on invite new member page: \"([^\"]*)\"$")
+    @And("^I input email confirm: \"([^\"]*)\" on invite new member page$")
     public void iInputEmailConfirmOnInviteNewMemberPage(String strEmail) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input email confirm on invite new member page");
@@ -98,25 +101,25 @@ public class TeamStepDefinition extends BaseInit {
         clientTeamPage.verifyInviteNewMemberPageDisplayed();
     }
 
-    @And("^I input full name on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input full name: \"([^\"]*)\" on invite new member popup$")
     public void iInputFullNameOnInviteNewMemberPopup(String clientFullName) throws Throwable {
         logger.info("I input full name on invite new member popup");
         clientTeamPage.inputFullName(clientFullName);
     }
 
-    @And("^I input email on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input email: \"([^\"]*)\" on invite new member popup$")
     public void iInputEmailOnInviteNewMemberPopup(String email) throws Throwable {
         logger.info("I input client email on invite new member popup");
         clientTeamPage.inputEmail(email);
     }
 
-    @And("^I input email confirm on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input email confirm: \"([^\"]*)\" on invite new member popup$")
     public void iInputEmailConfirmOnInviteNewMemberPopup(String email) throws Throwable {
         logger.info("I confirm client email on invite new member popup");
         clientTeamPage.inputEmailConfirm(email);
     }
 
-    @And("^I input Role of new client member on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input Role: \"([^\"]*)\" of new client member on invite new member popup$")
     public void iInputRoleOfNewClientMemberOnInviteNewMemberPopup(String roleName) throws Throwable {
         logger.info("I confirm client email on invite new member popup");
         clientTeamPage.inputMemberRole(roleName);
@@ -153,4 +156,33 @@ public class TeamStepDefinition extends BaseInit {
         logger.info("Verify permisson level of member : "+ memberName +"is "+permissionLevel);
 //        clientTeamPage.verifyPermissonOfMember(memberName,permissionLevel);
     }
+
+    @Then("^I should see Admin Client name : \"([^\"]*)\" in team member list$")
+    public void iShouldSeeAdminClientNameInTeamMemberList(String memberName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I should see Admin Client name : "+ memberName +" in team member list======");
+        teamPage.verifyExistsInTeamMemberList(memberName);
+    }
+
+    @Then("^I click on check box beside Admin Client name : \"([^\"]*)\" in team member list$")
+    public void iClickOnCheckBoxBesideAdminClientNameInTeamMemberList(String memberName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I click on check box beside Admin Client name : "+ memberName +" in team member list======");
+        teamPage.clickOnCheckBoxMemberName(memberName);
+    }
+
+    @And("^I remove Admin Client name : \"([^\"]*)\" out of team member list$")
+    public void iRemoveAdminClientNameOutOfTeamMemberList(String memberName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I remove Admin Client name : "+ memberName +" in team member list======");
+        teamPage.clickOnDeleteIconMemberName(memberName);
+    }
+
+    @Then("^I should not see Admin Client name : \"([^\"]*)\" in team member list$")
+    public void iShouldNotSeeAdminClientNameInTeamMemberList(String memberName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I should not see Admin Client name : "+ memberName +" in team member list======");
+        teamPage.verifyNotExistsInTeamMemberList(memberName);
+    }
+
 }
