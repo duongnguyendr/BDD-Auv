@@ -302,7 +302,7 @@ public class AuditorSignUpPage extends CommonPage {
         clickElement(btnContinue, "continue button");
     }
 
-    public void verifyFirmInfomationPage(){
+    public void verifyFirmInformationPage(){
         boolean result = validateDisPlayedElement(pageProvideFirmInfoEle, "Page Provide Firm Infomation");
         Assert.assertTrue(result, "Page Provide Your Firm Infomation should be loaded.");
     }
