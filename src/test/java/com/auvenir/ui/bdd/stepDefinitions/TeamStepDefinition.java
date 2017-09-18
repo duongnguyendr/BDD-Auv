@@ -65,21 +65,21 @@ public class TeamStepDefinition extends BaseInit {
         auditorTeamPage.verifyAddNewMemberSuccessful();
     }
 
-    @And("^I input full name on invite new member page: \"([^\"]*)\"$")
+    @And("^I input full name: \"([^\"]*)\" on invite new member page$")
     public void iInputFullNameOnInviteNewMemberPage(String fullName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input full name on invite new member page");
         auditorTeamPage.inputFullName(fullName);
     }
 
-    @And("^I input email on invite new member page: \"([^\"]*)\"$")
+    @And("^I input email: \"([^\"]*)\" on invite new member page$")
     public void iInputEmailOnInviteNewMemberPage(String strEmail) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input email on invite new member page");
         auditorTeamPage.inputEmail(strEmail);
     }
 
-    @And("^I input email confirm on invite new member page: \"([^\"]*)\"$")
+    @And("^I input email confirm: \"([^\"]*)\" on invite new member page$")
     public void iInputEmailConfirmOnInviteNewMemberPage(String strEmail) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I input email confirm on invite new member page");

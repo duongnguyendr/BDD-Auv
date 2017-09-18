@@ -128,12 +128,11 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP01"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
     And I click on Team tab of engagement detail page
-    And I delete existed member on team page: "Lead Auditor"
     And I click in invite new member on team page
     Then I should see invite new member page
-    And I input full name on invite new member page: "Lead Auditor"
-    And I input email on invite new member page: "chr.auditor01.lead@gmail.com"
-    And I input email confirm on invite new member page: "chr.auditor01.lead@gmail.com"
+    And I input full name: "Lead Auditor" on invite new member page
+    And I input email: "chr.auditor01.lead@gmail.com" on invite new member page
+    And I input email confirm: "chr.auditor01.lead@gmail.com" on invite new member page
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
@@ -282,9 +281,9 @@ Feature: Smoke Test Feature
     And I click on Team tab of engagement detail page
     And I click in invite new member on team page
     Then I should see invite new member page
-    And I input full name on invite new member page: "Huy GA01"
-    And I input email on invite new member page: "auvenirauditor01@gmail.com"
-    And I input email confirm on invite new member page: "auvenirauditor01@gmail.com"
+    And I input full name: "Huy GA01" on invite new member page
+    And I input email: "auvenirauditor01@gmail.com" on invite new member page
+    And I input email confirm: "auvenirauditor01@gmail.com" on invite new member page
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
@@ -334,9 +333,9 @@ Feature: Smoke Test Feature
     And I click on Team tab of engagement detail page
     And I click in invite new member on team page
     Then I should see invite new member page
-    And I input full name on invite new member page: "Huy LC2"
-    And I input email on invite new member page: "auvenirclient02@gmail.com"
-    And I input email confirm on invite new member page: "auvenirclient02@gmail.com"
+    And I input full name: "Huy LC2" on invite new member page
+    And I input email: "auvenirclient02@gmail.com" on invite new member page
+    And I input email confirm: "auvenirclient02@gmail.com" on invite new member page
     And I input role of new member
     And I click on invite new member
     Then I should see invite successful message
