@@ -10,6 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 public class TodoPage extends CommonPage {
@@ -67,6 +70,16 @@ public class TodoPage extends CommonPage {
     protected List<WebElement> listSlideOutMenu;
     @FindBy(xpath = "//div[@id='auv-todo-details']")
     protected WebElement todoDetailPopup;
+    @FindBy(xpath = "//div[@id='todoDetailsReqCont']/div")
+    protected List<WebElement> listNewRequest;
+    @FindBy(xpath = "//*[@id='todoDetailsReqCont']")
+    protected WebElement newRequestTable;
+    @FindBy(xpath = "//div[@id='todoDetailsReqCont']/div[@class='detReqForFile']/span[@class='todo-req-name-label']")
+    protected List<WebElement> listRequestNameLabel;
+    @FindBy(xpath = "//label[@class='auvicon-line-circle-add todo-circle-add todo-icon-hover']")
+    private List<WebElement> addFileIcon;
+    @FindBy(xpath = "//*[@id='add-request-btn']")
+    private WebElement todoPageAddRequestBtn;
 
 
     public int findToDoTaskName(String toDoName) {
@@ -301,5 +314,50 @@ public class TodoPage extends CommonPage {
         Assert.assertTrue(result, "File : " + fileName + " should existed in local computer");
     }
 
+    protected int findRequestByName(String requestName) {
+        int isFind = -1;
+        for (int i = 0; i < listRequestNameLabel.size(); i++) {
+            System.out.println("Size list New Request: " + listRequestNameLabel.size());
+            System.out.println(listRequestNameLabel.get(i).getText());
+            if (listRequestNameLabel.get(i).getText().equals(requestName)) {
+                isFind = i;
+                logger.info("Request " + requestName + " at position: " + isFind);
+                break;
+            }
+        }
+        return isFind;
+    }
 
+    public void uploadFileOnRequestByName(String fileName, String requestName) throws AWTException {
+        String concatUpload = Generic.FOLDER_UPLOAD.concat(fileName);
+        System.out.println("concatUpload: " + concatUpload);
+        int isFind = findRequestByName(requestName);
+        if (isFind == -1) {
+            logger.info("Can not find any request has name is: " + requestName);
+        } else {
+            clickElement(addFileIcon.get(isFind),"Add File Icon");
+            waitSomeSeconds(2);
+            logger.info("Input path of file..");
+            StringSelection ss = new StringSelection(concatUpload);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, ss);
+            Robot robot = new Robot();
+            robot.delay(2);
+            waitSomeSeconds(1);
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            waitSomeSeconds(2);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            waitSomeSeconds(1);
+        }
+    }
+
+    public void selectAddNewRequest() {
+        clickElement(todoPageAddRequestBtn,"Add new request Btn");
+    }
+
+    public void createNewRequest(String newRequestName) {
+    }
 }

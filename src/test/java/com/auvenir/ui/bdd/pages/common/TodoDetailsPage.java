@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class TodoDetailsPage extends CommonPage {
     private WebElement buttonPostComment;
 
     //    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='comment-item']")
-    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='todo-comment-container']//p")
+    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='todo-comment-container']//p[@class='detComment']")
     private List<WebElement> listCommentItem;
 
     //    @FindBy(xpath = "//*[@id='comment-box']/p")
@@ -36,7 +37,7 @@ public class TodoDetailsPage extends CommonPage {
     @FindBy(xpath = "//*[@id='todoDetailsReqCont']")
     WebElement newRequestTable;
 
-    public void verifyInputAComment(String commentContent) {
+    public void inputCommentWithContent(String commentContent) {
         boolean result;
         logger.info("Verify Input a Comment");
         waitForVisibleElement(inputTypeComment, "Input Comment field");
@@ -59,6 +60,17 @@ public class TodoDetailsPage extends CommonPage {
         } else {
             return listCommentItem.size();
         }
+    }
+
+    public void waitForSizeListCommentChanged(int numberListCommentBeforeAdding) {
+        waitForSizeListElementChanged(listCommentItem, "List Comment Item", numberListCommentBeforeAdding);
+    }
+
+    public void verifyCommentContentIsDisplayed(String commentContent) {
+        logger.info("Verify Comment Content is displayed");
+        validateDisPlayedElement(listCommentItem.get(listCommentItem.size() - 1), "Comment Content Field");
+        boolean result = validateElementText(listCommentItem.get(listCommentItem.size() - 1), commentContent);
+        Assert.assertTrue(result, "Comment should be displayed on list comment.");
     }
 
     public void clickAddRequestBtn() {

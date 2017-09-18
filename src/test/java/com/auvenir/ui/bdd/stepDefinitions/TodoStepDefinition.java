@@ -1,14 +1,10 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.common.GeneralUtilities;
-import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.ui.bdd.common.KeyWord;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
-import com.auvenir.ui.bdd.pages.common.GetTable;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -158,6 +154,16 @@ public class TodoStepDefinition extends BaseInit {
             this.newRequestName = newRequestName;
         }
     }
+
+    public class ListFilesOnListRequests {
+        public String fileName;
+        public String requestName;
+        public ListFilesOnListRequests(String fileName, String requestName) {
+            this.fileName = fileName;
+            this.requestName = requestName;
+        }
+    }
+
     @Then("^I assignee list To-Do to Auditor$")
     public void assigneelistToDotoAuditor(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -243,11 +249,22 @@ public class TodoStepDefinition extends BaseInit {
         listNewRequests = table.asList(ListNewRequest.class);
         for (ListNewRequest listNewRequest: listNewRequests){
             System.out.println("Prepare to create: "+listNewRequest.newRequestName);
-//            auditorTodoPage.clickElement();
-//            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
+            auditorTodoPage.selectAddNewRequest();
+            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
         }
     }
 
+//    "([^"]*)"
+    @And("^I uploads list files on list requests$")
+    public void uploadListFilesOnRequest(DataTable table) throws Throwable {
+        logger.info("===== I uploads list files on request =====");
+        List<ListFilesOnListRequests> listFilesOnListRequests = new ArrayList<>();
+        listFilesOnListRequests = table.asList(ListFilesOnListRequests.class);
+        for (ListFilesOnListRequests fileOnRequest : listFilesOnListRequests) {
+            System.out.println("File Name: " + fileOnRequest.fileName + "--Request: " + fileOnRequest.requestName);
+            todoPage.uploadFileOnRequestByName(fileOnRequest.fileName, fileOnRequest.requestName);
+        }
+    }
 
 
 }
