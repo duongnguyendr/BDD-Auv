@@ -243,8 +243,8 @@ public class TodoStepDefinition extends BaseInit {
         listNewRequests = table.asList(ListNewRequest.class);
         for (ListNewRequest listNewRequest: listNewRequests){
             System.out.println("Prepare to create: "+listNewRequest.newRequestName);
-//            auditorTodoPage.clickElement();
-//            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
+            auditorTodoPage.selectAddNewRequest();
+            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
         }
     }
 

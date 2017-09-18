@@ -67,6 +67,8 @@ public class TodoPage extends CommonPage {
     protected List<WebElement> listSlideOutMenu;
     @FindBy(xpath = "//div[@id='auv-todo-details']")
     protected WebElement todoDetailPopup;
+    @FindBy(xpath = "//*[@id='add-request-btn']")
+    private WebElement todoPageAddRequestBtn;
 
 
     public int findToDoTaskName(String toDoName) {
@@ -302,4 +304,10 @@ public class TodoPage extends CommonPage {
     }
 
 
+    public void selectAddNewRequest() {
+        clickElement(todoPageAddRequestBtn,"Add new request Btn");
+    }
+
+    public void createNewRequest(String newRequestName) {
+    }
 }

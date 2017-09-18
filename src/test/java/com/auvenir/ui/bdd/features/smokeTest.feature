@@ -440,7 +440,7 @@ Feature: Smoke Test Feature
       | Request 05   |
       | Request 06   |
 
-    #############################################
+
   #Duong
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
@@ -594,7 +594,28 @@ Feature: Smoke Test Feature
     And I input full name: "General Client" on invite new member popup
     And I input email: "clienttan.general@mailinator.com" on invite new member popup
     And I input email confirm: "clienttan.general@mailinator.com" on invite new member popup
-    And I input Role: "General Client " of new client member on invite new member popup
+    And I input Role: "General Client" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
 #Tan
+
+#    Then i should see Admin Client name : "Admin Client" in team member list
+
+  # VienPham create
+  @vien
+  Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | clvien.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Eng02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "En02"
+    And I select todo: "ToDo 01" check box on todo page
+    And I click bulk action drop down on todo page
+    And I click assignee to :"General Client" on bulk action drop down
+    And I verify Client Assignee Selected
+      | User Name      | Todo Name |
+      | General Client | ToDo 04   |
