@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by vien.pham on 7/28/2017.
  */
-public abstract class TeamPage extends CommonPage {
+public class TeamPage extends CommonPage {
     private static Logger logger = Logger.getLogger(TeamPage.class.getSimpleName());
     public TeamPage(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -67,6 +67,18 @@ public abstract class TeamPage extends CommonPage {
 
     @FindBy(xpath = "//tbody[@id='w-team-tableBody']//span")
     private List<WebElement> permissionLevel;
+
+    @FindBy(xpath = "//table[@class='ui very basic table']/tbody/tr/td[2]")
+    private List<WebElement> eleTeamMemberNameList;
+
+    @FindBy(xpath = "//table[@class='ui very basic table']/tbody/tr/td[1]/input")
+    private List<WebElement> eleTeamMemberCheckBoxList;
+
+    @FindBy(xpath = "//table[@class='ui very basic table']/tbody/tr/td[5]/span")
+    private List<WebElement> eleTeamMemberDeleteIconList;
+
+    @FindBy(xpath = "//img[@class='w-team-emptyClipboard']")
+    private WebElement eleEmptyTeamImage;
 
     public int findMemberByName(String memberName) {
         int index = -1;
@@ -192,4 +204,42 @@ public abstract class TeamPage extends CommonPage {
         validateElementText(setUserToLeadTitle,"Set User to Lead");
         clickElement(setLeadConfirmBtn,"Confirm Set Lead Btn");
     }
+
+    private int getPositionInTeamListByName(String memberName){
+        int totalMember = eleTeamMemberNameList.size();
+        if(totalMember ==0)
+            return -1;
+
+        for(int i=0;i<totalMember;i++){
+            if(eleTeamMemberNameList.get(i).getText().equalsIgnoreCase(memberName)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private boolean isExistedInTeamMember(String memberName){
+        return getPositionInTeamListByName(memberName) == -1 ? false : true;
+    }
+
+    public void verifyExistsInTeamMemberList(String memberName){
+        boolean result = isExistedInTeamMember(memberName);
+        Assert.assertTrue(result);
+    }
+
+    public void verifyNotExistsInTeamMemberList(String memberName) throws InterruptedException {
+        waitForVisibleElement(eleEmptyTeamImage,"Empty team image");
+    }
+
+    public void clickOnCheckBoxMemberName(String memberName){
+        int index = getPositionInTeamListByName(memberName);
+        clickElement(eleTeamMemberCheckBoxList.get(index), "Check box of " + memberName);
+    }
+
+    public void clickOnDeleteIconMemberName(String memberName){
+        int index = getPositionInTeamListByName(memberName);
+        clickElement(eleTeamMemberDeleteIconList.get(index), "Delete icon of " + memberName);
+    }
+
+
 }
