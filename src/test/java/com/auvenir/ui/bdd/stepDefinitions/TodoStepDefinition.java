@@ -4,11 +4,15 @@ import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.KeyWord;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
+import com.google.common.collect.Table;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
+
 import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,6 +143,11 @@ public class TodoStepDefinition extends BaseInit {
         todoPage.verifyFileDownloadSuccessful(fileName);
     }
 
+    @And("^I select todo: \"([^\"]*)\" check box on Uneditable To-do page$")
+    public void selectTodoCheckBoxOnUneditableToDoPage(String todoName) throws Throwable {
+      todoPage.selectUnEditableToDoCheckboxByName(todoName);
+    }
+
     public class LisTodoAnduser{
         public String userName;
         public String todoName;
@@ -148,9 +157,10 @@ public class TodoStepDefinition extends BaseInit {
         }
     }
 
-    public class ListNewRequest{
+    public class ListNewRequest {
         public String newRequestName;
-        public ListNewRequest(String newRequestName){
+
+        public ListNewRequest(String newRequestName) {
             this.newRequestName = newRequestName;
         }
     }
@@ -265,6 +275,22 @@ public class TodoStepDefinition extends BaseInit {
             todoPage.uploadFileOnRequestByName(fileOnRequest.fileName, fileOnRequest.requestName);
         }
     }
+    @Then("^I verify Client Assignee Selected on Uneditabe Page$")
+    public void verifyClientAssigneeSelectedOnUneditabePage(DataTable table) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("===== I verify Auditor Assignee Selected =====");
 
+        List<List<String>> listToDoAndUserClient = getTable(table);
+        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
+            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
+            todoPage.verifyClientAssigneeSelectedOnUneditablePage(listToDoAndUserClient.get(i).get(1), listToDoAndUserClient.get(i).get(0));
+        }
+    }
 
+    @Then("^I should see all to do assigned : (.*)")
+    public void iShouldSeeAllToDoAssigned(List<String> toDoList) throws Throwable {
+        logger.info("=====I should see all to do assigned=====");
+        todoPage.verifyUserSeeToDo(toDoList);
+    }
 }

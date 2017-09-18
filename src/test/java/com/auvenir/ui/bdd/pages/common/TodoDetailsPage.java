@@ -1,6 +1,7 @@
 package com.auvenir.ui.bdd.pages.common;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,10 +15,6 @@ import java.util.List;
 public class TodoDetailsPage extends CommonPage {
     private static Logger logger = Logger.getLogger(TodoDetailsPage.class.getSimpleName());
 
-    public TodoDetailsPage(Logger logger, WebDriver driver) {
-        super(logger, driver);
-    }
-
     @FindBy(xpath = "//div[@id='comment-form']/input[@placeholder='Type a comment']")
     private WebElement inputTypeComment;
 
@@ -28,7 +25,17 @@ public class TodoDetailsPage extends CommonPage {
     private List<WebElement> listCommentItem;
 
     @FindBy(xpath = "//*[@id='comment-box']/p/span/span")
-    private WebElement commentboxTitle;
+    private WebElement titleCommentbox;
+
+    @FindBy(xpath = "//*[@id='add-request-btn']")
+    private WebElement buttonTodoPageAddRequest;
+
+    @FindBy(xpath = "//*[@id='todoDetailsReqCont']")
+    WebElement tableNewRequest;
+
+    public TodoDetailsPage(Logger logger, WebDriver driver) {
+        super(logger, driver);
+    }
 
     public void inputCommentWithContent(String commentContent) {
         boolean result;
@@ -47,7 +54,7 @@ public class TodoDetailsPage extends CommonPage {
 
     public int getNumberOfListComment() {
         logger.info("Get Number of List Comment.");
-        if (commentboxTitle.getText().trim().equals("0")) {
+        if (titleCommentbox.getText().trim().equals("0")) {
             return 0;
         } else {
             return listCommentItem.size();
@@ -65,5 +72,19 @@ public class TodoDetailsPage extends CommonPage {
         validateDisPlayedElement(listCommentItem.get(listCommentItem.size() - 1), "Comment Content Field");
         boolean result = validateElementText(listCommentItem.get(listCommentItem.size() - 1), commentContent);
         Assert.assertTrue(result, "Comment should be displayed on list comment.");
+    }
+
+    public void clickAddRequestBtn() {
+        logger.info("Click the add request button");
+        waitForTextValueChanged(buttonTodoPageAddRequest, "Text of totoPageAddRequestBtn", "Add New Request");
+        clickElement(buttonTodoPageAddRequest, "click to totoPageAddRequestBtn");
+    }
+
+    public void createNewRequest(String newRequest, String position) {
+            logger.info("Create request: " + newRequest + " with position: " + position);
+            waitForCssValueChanged(tableNewRequest.findElement(By.xpath("./div[" + position + "]/span")), "", "display", "inline-block");
+            clickElement(tableNewRequest.findElement(By.xpath("./div[" + position + "]/span")), "");
+            clearTextBox(tableNewRequest.findElement(By.xpath("./div[" + position + "]/input")), "");
+            sendKeyTextBox(tableNewRequest.findElement(By.xpath("./div[" + position + "]/input")), newRequest, "");
     }
 }
