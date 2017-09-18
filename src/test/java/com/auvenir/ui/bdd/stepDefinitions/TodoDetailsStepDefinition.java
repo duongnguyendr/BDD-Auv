@@ -53,7 +53,7 @@ public class TodoDetailsStepDefinition extends BaseInit {
         listNewRequests = table.asList(TodoStepDefinition.ListNewRequest.class);
         for (TodoStepDefinition.ListNewRequest listNewRequest: listNewRequests){
             System.out.println("Prepare to create: "+listNewRequest.newRequestName);
-            todoDetailsPage.selectAddNewRequest();
+            todoDetailsPage.clickAddRequestBtn();
             todoDetailsPage.createNewRequest(listNewRequest.newRequestName);
         }
     }
@@ -88,14 +88,6 @@ public class TodoDetailsStepDefinition extends BaseInit {
         logger.info("===== I click download list file on Todo detail popup =====");
         for(String fileName : listFileName) {
             todoDetailsPage.downloadRequestFile(fileName);
-        }
-    }
-
-    @And("^I should see list files which are downloaded successfully: (.*)$")
-    public void verifyDownloadListFilesSuccess(List<String> listFileName) throws Throwable {
-        logger.info("===== I click download list file on Todo detail popup =====");
-        for(String fileName : listFileName) {
-            todoDetailsPage.verifyDownloadFileSuccess(fileName);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.common;
 import cucumber.api.DataTable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -97,5 +98,19 @@ public class GeneralUtilities {
         }
         return md5;
 
+    }
+
+    public static void verifyDownloadFileSuccessAndChecksum(String fileName) {
+        String concatUpload = Generic.FOLDER_UPLOAD.concat(fileName);
+        String concatDownload = Generic.FOLDER_DOWNLOAD.concat(fileName);
+        boolean fileExisted = GeneralUtilities.checkFileExists(concatDownload, false);
+        Assert.assertTrue(fileExisted, String.format("File 's' should be existed."));
+        if (fileExisted) {
+            String checkMd5UploadFile = GeneralUtilities.calculateMD5(concatUpload);
+            System.out.println("md5 upload is: " + checkMd5UploadFile);
+            String checkMd5DownloadFile = GeneralUtilities.calculateMD5(concatDownload);
+            System.out.println("md5 download is: " + checkMd5DownloadFile);
+            Assert.assertEquals(checkMd5DownloadFile,checkMd5DownloadFile, "Checksum Download File and Upload File should be matched.");
+        }
     }
 }

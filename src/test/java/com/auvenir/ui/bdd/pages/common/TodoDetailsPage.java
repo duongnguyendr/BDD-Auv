@@ -149,10 +149,6 @@ public class TodoDetailsPage extends CommonPage {
         }
     }
 
-    public void selectAddNewRequest() {
-        clickElement(todoPageAddRequestBtn,"Add new request Btn");
-    }
-
     public void createNewRequest(String newRequestName) {
     }
 
@@ -190,19 +186,5 @@ public class TodoDetailsPage extends CommonPage {
         Assert.assertTrue(index != -1, String.format("File 's' should be found.", fileName));
         clickElement(buttonDownloadRequest.get(index), "Button download request");
         waitSomeSeconds(3);
-    }
-
-    public void verifyDownloadFileSuccess(String fileName) {
-        String concatUpload = Generic.FOLDER_UPLOAD.concat(fileName);
-        String concatDownload = Generic.FOLDER_DOWNLOAD.concat(fileName);
-        boolean fileExisted = GeneralUtilities.checkFileExists(concatDownload, false);
-        Assert.assertTrue(fileExisted, String.format("File 's' should not be existed."));
-        if (fileExisted) {
-            String checkMd5UploadFile = GeneralUtilities.calculateMD5(concatUpload);
-            logger.info("md5 upload is: " + checkMd5UploadFile);
-            String checkMd5DownloadFile = GeneralUtilities.calculateMD5(concatDownload);
-            logger.info("md5 download is: " + checkMd5DownloadFile);
-            Assert.assertEquals(checkMd5DownloadFile,checkMd5DownloadFile, "Checksum Download File and Upload File should be matched.");
-        }
     }
 }

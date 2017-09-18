@@ -42,4 +42,12 @@ public class GeneralStepDefinition extends BaseInit {
         logger.info("Check file: " + fileName + " exist in download folder and delete if any.");
         GeneralUtilities.checkFileExists(Generic.FOLDER_DOWNLOAD + fileName, true);
     }
+
+    @And("^I should see list files which are downloaded successfully: (.*)$")
+    public void verifyDownloadListFilesSuccess(List<String> listFileName) throws Throwable {
+        logger.info("===== I click download list file on Todo detail popup =====");
+        for(String fileName : listFileName) {
+            GeneralUtilities.verifyDownloadFileSuccessAndChecksum(fileName);
+        }
+    }
 }

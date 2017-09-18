@@ -571,7 +571,7 @@ Feature: Smoke Test Feature
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Auditor Comment"
 
-  @Run
+#  @Run
   Scenario: General Auditor post new comment: AUV-1123
     Given I navigate to Marketing page
     And I click on login link
