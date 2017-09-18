@@ -4,6 +4,7 @@ import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.client.ClientDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.common.DetailsEngagementPage;
+import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -94,9 +95,5 @@ public class EngagementDetailStepDefinition extends BaseInit {
     }
 
 
-    @Then("^I should see all to do assigned : (.*)")
-    public void iShouldSeeAllToDoAssigned(List<String> toDoList) throws Throwable {
-        logger.info("=====I should see all to do assigned=====");
 
-    }
 }

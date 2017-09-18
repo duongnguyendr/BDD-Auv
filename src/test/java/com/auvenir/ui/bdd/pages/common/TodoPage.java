@@ -418,4 +418,19 @@ public class TodoPage extends CommonPage {
         logger.info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
         Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
     }
+
+    public void verifyUserSeeToDo(List<String> toDoList){
+        boolean result = true;
+        int totalToDo = toDoList.size();
+        for(int i=0; i<totalToDo;i++){
+            String toDoName = toDoList.get(i);
+            int index = findUnEditableToDoTaskName(toDoName);
+            if(-1 == index){
+                System.out.println("Can not see : " + toDoName);
+                result = false;
+                break;
+            }
+        }
+        Assert.assertTrue(result);
+    }
 }
