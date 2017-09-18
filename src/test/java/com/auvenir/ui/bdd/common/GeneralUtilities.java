@@ -10,10 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 public class GeneralUtilities {
 
@@ -60,7 +57,19 @@ public class GeneralUtilities {
         List<List<String>>listDataTable;
         listDataTable = dataTable.raw();
         return listDataTable;
+
+
     }
+    public static List getList ( DataTable dataTable){
+/*note: Get form 1 to List size because first row is the header of file
+*/
+        List<String>listDataList;
+        listDataList = dataTable.asList(String.class);
+        return listDataList;
+
+
+    }
+
 
     //    public boolean checkFileExists(String downloadFile, boolean isDeletedFile){return false;}
     public static boolean checkFileExists(String pathLocation, boolean deleteExisted) {

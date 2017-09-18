@@ -80,6 +80,11 @@ public class TodoPage extends CommonPage {
     private List<WebElement> addFileIcon;
     @FindBy(xpath = "//*[@id='add-request-btn']")
     private WebElement todoPageAddRequestBtn;
+    @FindBy(xpath = "//div[@id='todo-req-box-adding']/input")
+    private WebElement  nameRequestInput;
+    @FindBy(id = "comment-input")
+    WebElement commentInput;
+
 
 
     public int findToDoTaskName(String toDoName) {
@@ -359,5 +364,9 @@ public class TodoPage extends CommonPage {
     }
 
     public void createNewRequest(String newRequestName) {
+        logger.info("Input name request :  " + newRequestName );
+        sendKeyTextBox(nameRequestInput,newRequestName,"name request");
+        clickElement(commentInput,"comment Input ");
     }
+
 }
