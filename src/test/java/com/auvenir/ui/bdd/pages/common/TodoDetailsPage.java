@@ -30,6 +30,8 @@ public class TodoDetailsPage extends CommonPage {
     //    @FindBy(xpath = "//*[@id='comment-box']/p")
     @FindBy(xpath = "//*[@id='comment-box']/p/span/span")
     private WebElement commentboxTitle;
+    @FindBy(xpath = "//*[@id='add-request-btn']")
+    private WebElement totoPageAddRequestBtn;
 
     public void verifyInputAComment(String commentContent) {
         boolean result;
@@ -54,5 +56,11 @@ public class TodoDetailsPage extends CommonPage {
         } else {
             return listCommentItem.size();
         }
+    }
+
+    public void clickAddRequestBtn() {
+        logger.info("Click the add request button");
+        waitForTextValueChanged(totoPageAddRequestBtn, "Text of totoPageAddRequestBtn", "Add New Request");
+        clickElement(totoPageAddRequestBtn, "click to totoPageAddRequestBtn");
     }
 }
