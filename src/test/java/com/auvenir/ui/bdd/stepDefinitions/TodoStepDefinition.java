@@ -1,6 +1,8 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
+import com.auvenir.ui.bdd.common.GeneralUtilities;
+import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.ui.bdd.common.KeyWord;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.GetTable;
@@ -135,6 +137,12 @@ public class TodoStepDefinition extends BaseInit {
         todoPage.clickDownloadAllTodo();
     }
 
+    @Then("^I verify file \"([^\"]*)\" existed in computer$")
+    public void iVerifyFileExistedInComputer(String fileName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        todoPage.verifyFileDownloadSuccessful(fileName);
+    }
+
     public class LisTodoAnduser{
         public String userName;
         public String todoName;
@@ -238,7 +246,8 @@ public class TodoStepDefinition extends BaseInit {
 //            auditorTodoPage.clickElement();
 //            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
         }
-
     }
+
+
 
 }
