@@ -322,22 +322,27 @@ Feature: Smoke Test Feature
     Then I should see Invite Member successful message
 
   Scenario: Lead Client Active Account and Login to Engagement2: AUV-840
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                       | Password     |
-      | chr.auvenirclient@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
-    And I click on Team tab of engagement detail page
-    And I click in invite new member on team page
-    Then I should see invite new member page
-    And I input full name: "Huy LC2" on invite new member page
-    And I input email: "auvenirclient02@gmail.com" on invite new member page
-    And I input email confirm: "auvenirclient02@gmail.com" on invite new member page
-    And I input role of new member
-    And I click on invite new member
+    Given I navigate to GMail login page
+    And I sign In GMail
+      | phamhoangtan13052007@gmail.com | myphuong |
+    And I open active email
+    And I click on onboarding invitation link
+    Then I should see Welcome to Auvenir Page
+    And I click on Get Start button on Client Sign Up Page
+    Then I should see Provide Information Page
+    And I input Client Mobile Phone Number: "1234567899"
+    And I click on check box agreement
+    And I click on Continue Button on Personal Information Page
+    Then I should see Business Information Page
+    And I click on Continue Button on Business Information Page
+    Then I should see Bank Information Page
+    And I click on Skip Button on Bank Information Page
+    Then I should see File Storage Information Page
+    And I click on Skip Button on File Storage Information Page
+    Then I should see Security Information Page
+    And I fill up all Security Information with Password: "Changeit@123"
+    And I click on Create Account Button on Security Information Page
+    Then I should see engagement detail page with Engagement Title Uneditable: "0"
 
 
   Scenario:  Admin Client transfer Lead permission to Lead Client in the Engagement2: AUV-847
