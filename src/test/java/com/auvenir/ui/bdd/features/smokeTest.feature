@@ -577,6 +577,26 @@ Feature: Smoke Test Feature
     Then I click on check box beside Admin Client name : "Admin Client" in team member list
     And I remove Admin Client name : "Admin Client" out of team member list
     Then I should not see Admin Client name : "Admin Client" in team member list
+
+  Scenario: Leader Client invite client into Engagement: AUV-1214
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | clienttan.lead@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    And I click on Team tab of engagement detail page
+    And I click on Invite New Member button on team page
+    Then I should see Invite New Member popup
+    And I input full name on invite new member popup: "General Client"
+    And I input email on invite new member popup: "clienttan.general@mailinator.com"
+    And I input email confirm on invite new member popup: "clienttan.general@mailinator.com"
+    And I input Role of new client member on invite new member popup: "General Client"
+    And I click on invite button
+    Then I should see Invite Member successful message
 #Tan
 
 #    Then i should see Admin Client name : "Admin Client" in team member list

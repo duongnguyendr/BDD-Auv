@@ -185,4 +185,10 @@ public class TeamStepDefinition extends BaseInit {
         teamPage.verifyNotExistsInTeamMemberList(memberName);
     }
 
+    @And("^I click on Invite New Member button on team page$")
+    public void iClickOnInviteNewMemberButtonOnTeamPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I click on Invite New Member button on team page ======");
+        teamPage.clickInviteMember();
+    }
 }
