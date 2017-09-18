@@ -591,10 +591,10 @@ Feature: Smoke Test Feature
     And I click on Team tab of engagement detail page
     And I click on Invite New Member button on team page
     Then I should see Invite New Member popup
-    And I input full name on invite new member popup: "General Client"
-    And I input email on invite new member popup: "clienttan.general@mailinator.com"
-    And I input email confirm on invite new member popup: "clienttan.general@mailinator.com"
-    And I input Role of new client member on invite new member popup: "General Client"
+    And I input full name: "General Client" on invite new member popup
+    And I input email: "clienttan.general@mailinator.com" on invite new member popup
+    And I input email confirm: "clienttan.general@mailinator.com" on invite new member popup
+    And I input Role: "General Client" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
 #Tan
