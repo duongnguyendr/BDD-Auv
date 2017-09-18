@@ -24,15 +24,11 @@ public class TodoDetailsPage extends CommonPage {
     @FindBy(xpath = "//*[@id='comment-button']")
     private WebElement buttonPostComment;
 
-    //    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='comment-item']")
     @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='todo-comment-container']//p[@class='detComment']")
     private List<WebElement> listCommentItem;
 
-    //    @FindBy(xpath = "//*[@id='comment-box']/p")
     @FindBy(xpath = "//*[@id='comment-box']/p/span/span")
     private WebElement commentboxTitle;
-    @FindBy(xpath = "//*[@id='add-request-btn']")
-    private WebElement totoPageAddRequestBtn;
 
     public void inputCommentWithContent(String commentContent) {
         boolean result;
@@ -40,14 +36,13 @@ public class TodoDetailsPage extends CommonPage {
         waitForVisibleElement(inputTypeComment, "Input Comment field");
         sendKeyTextBox(inputTypeComment, commentContent, "Input Comment field");
         result = validateAttributeElement(inputTypeComment, "value", commentContent);
+        Assert.assertTrue(result, "Comment content should be filled on comment box.");
     }
 
     public void clickOnPostCommentButton() {
         logger.info("Click Post Comment Button");
-        int size = getNumberOfListComment();
         waitForVisibleElement(buttonPostComment, "Comment Input field");
         clickElement(buttonPostComment, "Comment Input field");
-        waitForSizeListElementChanged(listCommentItem, "List Comment", size + 1);
     }
 
     public int getNumberOfListComment() {
@@ -60,7 +55,9 @@ public class TodoDetailsPage extends CommonPage {
     }
 
     public void waitForSizeListCommentChanged(int numberListCommentBeforeAdding) {
-        waitForSizeListElementChanged(listCommentItem, "List Comment Item", numberListCommentBeforeAdding);
+        boolean result = waitForSizeListElementChanged(listCommentItem, "List Comment Item",
+                numberListCommentBeforeAdding + 1);
+        Assert.assertTrue(result, "Comment list should be changed(plus one).");
     }
 
     public void verifyCommentContentIsDisplayed(String commentContent) {
@@ -68,11 +65,5 @@ public class TodoDetailsPage extends CommonPage {
         validateDisPlayedElement(listCommentItem.get(listCommentItem.size() - 1), "Comment Content Field");
         boolean result = validateElementText(listCommentItem.get(listCommentItem.size() - 1), commentContent);
         Assert.assertTrue(result, "Comment should be displayed on list comment.");
-    }
-
-    public void clickAddRequestBtn() {
-        logger.info("Click the add request button");
-        waitForTextValueChanged(totoPageAddRequestBtn, "Text of totoPageAddRequestBtn", "Add New Request");
-        clickElement(totoPageAddRequestBtn, "click to totoPageAddRequestBtn");
     }
 }

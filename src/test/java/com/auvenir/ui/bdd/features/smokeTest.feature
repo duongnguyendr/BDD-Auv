@@ -423,13 +423,13 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "Todo4"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
-      | File Name               | Request Name |
-      | TXT_Auvenir.jpg         | Request 1    |
-      | TXT_Auvenir.pdf         | Request 2    |
-      | TXT_Auvenir.xlsx        | Request 3    |
-      | TXT_helloAuvenir.docx   | Request 4    |
-      | TXT_helloAuvenir.png    | Request 5    |
-      | TXT_helloAuvenir.txt    | Request 6    |
+      | File Name             | Request Name |
+      | TXT_Auvenir.jpg       | Request 1    |
+      | TXT_Auvenir.pdf       | Request 2    |
+      | TXT_Auvenir.xlsx      | Request 3    |
+      | TXT_helloAuvenir.docx | Request 4    |
+      | TXT_helloAuvenir.png  | Request 5    |
+      | TXT_helloAuvenir.txt  | Request 6    |
 
   Scenario:  Lead Auditor add new request on To Do task: AUV-947
     Given I navigate to Marketing page
@@ -546,7 +546,7 @@ Feature: Smoke Test Feature
       | Unassigned  | ToDo 01   |
       | Unassigned  | ToDo 02   |
 
-  @Run
+#Huy
   Scenario: Lead Auditor post new comment: AUV-968
     Given I navigate to Marketing page
     And I click on login link
@@ -557,11 +557,28 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     Then I click on engagement: "Huy Engagement 02"
     Then I should see engagement detail page with Engagement Title Editable: "Huy Engagement 02"
-    And  I click slide out menu on selected To-do: "Todo 01"
+    And  I click slide out menu on selected To-do: "Todo 02"
     Then I should see the Todo detail opened
     Then I input comment content: "Lead Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Auditor Comment"
+
+  @Run
+  Scenario: General Auditor post new comment: AUV-1123
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                      | Password     |
+      | auvenirauditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
+    And  I click slide out menu on selected To-do: "Todo 04"
+    Then I should see the Todo detail opened
+    Then I input comment content: "General Auditor Comment"
+    Then I click on post comment button
+    Then I should see this comment display on list: "General Auditor Comment"
 #/Huy
 
     #Tan
