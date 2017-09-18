@@ -5,7 +5,9 @@ import com.auvenir.ui.bdd.pages.admin.AdminPage;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -51,6 +53,14 @@ public class MarketingStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I click on login link =====");
         marketingPage.clickOnSignupButton();
+    }
+
+    @Then("^I should see marketing portal page$")
+    public void iShouldSeeMarketingPortalPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("I should see marketing portal page");
+        marketingPage.verifyMaketingHeaderPage();
+
     }
 
     public class User{

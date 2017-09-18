@@ -341,4 +341,18 @@ public class SignUpStepDefinition extends BaseInit {
         logger.info("I click on Create Account Button on Security Information Page");
         clientSignUpPage.clickCreateAccountButtonOnSecurityPage();
     }
+
+    @And("^I click on check box agreement$")
+    public void iClickOnCheckBoxAgreement() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I click on check box agreement =====");
+        clientSignUpPage.clickOnCheckBoxAgreementPersonal();
+    }
+
+    @And("^I input Client Mobile Phone Number: \"([^\"]*)\"$")
+    public void iInputClientMobilePhoneNumber(String phoneNumber) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("======I input Client Mobile Phone Number: " + phoneNumber + "=====");
+        clientSignUpPage.fillUpPhoneBusinessNumber(phoneNumber);
+    }
 }
