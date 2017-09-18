@@ -10,10 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
+
+import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 public class GeneralUtilities {
 
@@ -57,8 +56,9 @@ public class GeneralUtilities {
     public static List getTable ( DataTable dataTable){
 /*note: Get form 1 to List size because first row is the header of file
 */
-        List<List<String>>listDataTable;
-        listDataTable = dataTable.raw();
+        LinkedList<List<String>> listDataTable;
+        listDataTable = new LinkedList<List<String>>( dataTable.raw());
+        listDataTable.remove(0);
         return listDataTable;
     }
 
@@ -82,5 +82,20 @@ public class GeneralUtilities {
             return false;
         }
         return result;
+    }
+
+    public static String calculateMD5(String fileMD5) {
+        String md5 = null;
+        try {
+            FileInputStream fis = new FileInputStream(fileMD5);
+            System.out.println("fileMD5 = " + fileMD5);
+            md5 = md5Hex(fis);
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unable to calculate MD5 file.");
+        }
+        return md5;
+
     }
 }

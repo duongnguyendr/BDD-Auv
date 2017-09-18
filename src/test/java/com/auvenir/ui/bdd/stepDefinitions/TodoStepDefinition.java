@@ -242,29 +242,4 @@ public class TodoStepDefinition extends BaseInit {
         auditorTodoPage.verifyTodoDetailOpened();
     }
 
-    @And("^I creates some new requests$")
-    public void createsSomeNewRequests(DataTable table) throws Throwable {
-        logger.info("===== I creates some new Request name =====");
-        List<ListNewRequest> listNewRequests = new ArrayList<>();
-        listNewRequests = table.asList(ListNewRequest.class);
-        for (ListNewRequest listNewRequest: listNewRequests){
-            System.out.println("Prepare to create: "+listNewRequest.newRequestName);
-            auditorTodoPage.selectAddNewRequest();
-            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
-        }
-    }
-
-//    "([^"]*)"
-    @And("^I uploads list files on list requests$")
-    public void uploadListFilesOnRequest(DataTable table) throws Throwable {
-        logger.info("===== I uploads list files on request =====");
-        List<ListFilesOnListRequests> listFilesOnListRequests = new ArrayList<>();
-        listFilesOnListRequests = table.asList(ListFilesOnListRequests.class);
-        for (ListFilesOnListRequests fileOnRequest : listFilesOnListRequests) {
-            System.out.println("File Name: " + fileOnRequest.fileName + "--Request: " + fileOnRequest.requestName);
-            todoPage.uploadFileOnRequestByName(fileOnRequest.fileName, fileOnRequest.requestName);
-        }
-    }
-
-
 }
