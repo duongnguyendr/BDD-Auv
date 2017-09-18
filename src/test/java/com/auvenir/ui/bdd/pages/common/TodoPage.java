@@ -1,5 +1,7 @@
 package com.auvenir.ui.bdd.pages.common;
 
+import com.auvenir.ui.bdd.common.GeneralUtilities;
+import com.auvenir.ui.bdd.common.Generic;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -290,7 +292,14 @@ public class TodoPage extends CommonPage {
     public void clickDownloadAllTodo() {
             logger.info("Click Download Button.");
             clickElement(downloadAllTodo, "click to downloadAllTodo");
-            waitForCssValueChanged(popUpDownloadAttachmentsWindows, "Popup Mark Complete", "display", "none");
+            waitForCssValueChanged(popUpDownloadAttachmentsWindows, "Popup Download", "display", "none");
     }
+
+    public void verifyFileDownloadSuccessful(String fileName){
+        String downloadFolder = Generic.sDirPath + Generic.FOLDER_DOWNLOAD;
+        boolean result = GeneralUtilities.checkFileExists(downloadFolder + fileName, true);
+        Assert.assertTrue(result, "File : " + fileName + " should existed in local computer");
+    }
+
 
 }
