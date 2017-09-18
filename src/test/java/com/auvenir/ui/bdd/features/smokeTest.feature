@@ -574,7 +574,7 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement 02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    Then I should see all to do assigned : "Leader Client"
+    Then I should see all to do assigned : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
 
   Scenario: Lead client remove admin client out Engagement: AUV-1210
     Given I navigate to Marketing page

@@ -6,8 +6,11 @@ import com.auvenir.ui.bdd.pages.client.ClientDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.common.DetailsEngagementPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
+
+import java.util.List;
 
 /**
  * Created by duong.nguyen on 9/13/2017.
@@ -83,18 +86,17 @@ public class EngagementDetailStepDefinition extends BaseInit {
         auditorDetailsEngagementPage.clickOnInviteClientBtn();
     }
 
-    @Then("^I should see all to do assigned : \"([^\"]*)\"$")
-    public void iShouldSeeAllToDoAssigned(String assignName) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        logger.info("======I should see all to do assigned======");
-        auditorDetailsEngagementPage.verifyToDoListAssignForUser(assignName);
-    }
-
-
     @And("^I click on Team tab of engagement detail page$")
     public void iClickOnTeamTabOfEngagementDetailPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("=====I click on Team tab of engagement detail page=====");
         detailsEngagementPage.navigateToTeamTab();
+    }
+
+
+    @Then("^I should see all to do assigned : (.*)")
+    public void iShouldSeeAllToDoAssigned(List<String> toDoList) throws Throwable {
+        logger.info("=====I should see all to do assigned=====");
+
     }
 }
