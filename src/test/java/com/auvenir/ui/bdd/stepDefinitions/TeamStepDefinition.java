@@ -101,25 +101,25 @@ public class TeamStepDefinition extends BaseInit {
         clientTeamPage.verifyInviteNewMemberPageDisplayed();
     }
 
-    @And("^I input full name on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input full name: \"([^\"]*)\" on invite new member popup$")
     public void iInputFullNameOnInviteNewMemberPopup(String clientFullName) throws Throwable {
         logger.info("I input full name on invite new member popup");
         clientTeamPage.inputFullName(clientFullName);
     }
 
-    @And("^I input email on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input email: \"([^\"]*)\" on invite new member popup$")
     public void iInputEmailOnInviteNewMemberPopup(String email) throws Throwable {
         logger.info("I input client email on invite new member popup");
         clientTeamPage.inputEmail(email);
     }
 
-    @And("^I input email confirm on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input email confirm: \"([^\"]*)\" on invite new member popup$")
     public void iInputEmailConfirmOnInviteNewMemberPopup(String email) throws Throwable {
         logger.info("I confirm client email on invite new member popup");
         clientTeamPage.inputEmailConfirm(email);
     }
 
-    @And("^I input Role of new client member on invite new member popup: \"([^\"]*)\"$")
+    @And("^I input Role: \"([^\"]*)\" of new client member on invite new member popup$")
     public void iInputRoleOfNewClientMemberOnInviteNewMemberPopup(String roleName) throws Throwable {
         logger.info("I confirm client email on invite new member popup");
         clientTeamPage.inputMemberRole(roleName);

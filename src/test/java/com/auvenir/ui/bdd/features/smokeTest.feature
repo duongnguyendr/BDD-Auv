@@ -168,9 +168,9 @@ Feature: Smoke Test Feature
     Then I should see invite new client popup
     And I select add new client on new client popup
     And I input full name: "Admin Client" on invite client popup
-    And I input email on invite client popup: "chr.client01.adm@gmail.com"
-    And I input confirm email on invite client popup: "chr.client01.adm@gmail.com"
-    And I input role on invite client popup: "IT"
+    And I input email: "chr.client01.adm@gmail.com" on invite client popup
+    And I input confirm email: "chr.client01.adm@gmail.com" on invite client popup
+    And I input role: "IT" on invite client popup
     And I click on invite button on invite client popup
     Then I should see message invite successful: "Your engagement invitation has been sent."
     And I navigate to Marketing page
@@ -184,8 +184,8 @@ Feature: Smoke Test Feature
       | chr.client01.adm@gmail.com | Onboarding |
 
   Scenario: Admin Client active account: AUV-645
-    Given I navigate to gmail login page
-    And I signIn gmail
+    Given I navigate to GMail login page
+    And I sign In GMail
       | chr.client01.adm@gmail.com | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
@@ -314,10 +314,10 @@ Feature: Smoke Test Feature
     And I click on Team tab on Client page
     And I click on Invite New Member button on Client team page
     Then I should see Invite New Member popup
-    And I input full name on invite new member popup: "Lead Client"
-    And I input email on invite new member popup: "vien1234@gmail.com"
-    And I input email confirm on invite new member popup: "vien1234@gmail.com"
-    And I input Role of new client member on invite new member popup: "Client role"
+    And I input full name: "Lead Client" on invite new member popup
+    And I input email: "vien1234@gmail.com" on invite new member popup
+    And I input email confirm: "vien1234@gmail.com" on invite new member popup
+    And I input Role: "Client role" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
 
