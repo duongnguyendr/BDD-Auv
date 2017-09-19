@@ -11,7 +11,9 @@ import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by doai.tran on 8/30/2017.
@@ -39,6 +41,8 @@ public class MarketingStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I enter the following for login =====");
 
+        Map<String, String> data = new HashMap<>();
+        table.asMap(String.class, String.class);
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
         for (User user: users){
