@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TodoPage extends CommonPage {
     private static Logger logger = Logger.getLogger(TodoPage.class.getSimpleName());
@@ -91,30 +92,35 @@ public class TodoPage extends CommonPage {
 
 
     public int findToDoTaskName(String toDoName) {
-        logger.info("Find Position of To Do Task Name");
+        logger.info(String.format("Find Position of To Do Task Name: '%s'", toDoName));
         try {
             String actualAttributeValue;
             String classAttribute;
+            WebElement toDoTaskName;
             for (int i = 0; i < toDoTaskRowEle.size(); i++) {
                 classAttribute = toDoTaskRowEle.get(i).getAttribute("class");
                 if (classAttribute.equals("newRow")) {
-                    boolean elementExisted =
-                            validateNotExistedElement(toDoTaskRowEle.get(i).findElement(By.xpath("td/input[@type='text']")), "toDoTaskRowEle");
-                    if (!elementExisted) {
-                        WebElement toDoNameCell = toDoTaskRowEle.get(i).findElement(By.xpath("td/input[@type='text']"));
-                        actualAttributeValue = toDoNameCell.getAttribute("value").trim();
-
-                        if (actualAttributeValue.equals(toDoName)) {
+                    System.out.println(String.format("td[2]/*[@value|text()='%s']",toDoName));
+                    try {
+                        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                        toDoTaskName = toDoTaskRowEle.get(i).findElement(By.xpath(String.format("td[2]/*[@value|text()='%s']", toDoName)));
+                        if(toDoTaskName != null) {
                             logger.info("Element is found at " + i);
+                            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                             return i;
                         }
+                    } catch (NoSuchElementException e) {
+                        logger.info("Find to next item.");
                     }
                 }
             }
             logger.info("Element is not found");
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return -1;
         } catch (NoSuchElementException e) {
             logger.info("Element is not found");
+            logger.info(e.toString());
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return -1;
         }
     }
@@ -124,23 +130,23 @@ public class TodoPage extends CommonPage {
      * @param toDoName
      * @return
      */
-    public int findUnEditableToDoTaskName(String toDoName) {
-        logger.info("Find Position of To Do Task Name "+ toDoName);
-        int index = -1;
-        try {
-            for (int i = 0; i < unEditableTodoName.size(); i++) {
-                String actualTodoName = unEditableTodoName.get(i).getText();
-                if (actualTodoName.equals(toDoName)) {
-                    index = i;
-                    break;
-                }
-            }
-            return index;
-        } catch (NoSuchElementException e) {
-            logger.info("Element is not found");
-            return -1;
-        }
-    }
+//    public int findUnEditableToDoTaskName(String toDoName) {
+//        logger.info("Find Position of To Do Task Name "+ toDoName);
+//        int index = -1;
+//        try {
+//            for (int i = 0; i < unEditableTodoName.size(); i++) {
+//                String actualTodoName = unEditableTodoName.get(i).getText();
+//                if (actualTodoName.equals(toDoName)) {
+//                    index = i;
+//                    break;
+//                }
+//            }
+//            return index;
+//        } catch (NoSuchElementException e) {
+//            logger.info("Element is not found");
+//            return -1;
+//        }
+//    }
 
     public void selectClientAssigneeByName(String toDoName, String clientAssignee) {
         logger.info("== select Client Assignee By Name ==");
@@ -176,20 +182,20 @@ public class TodoPage extends CommonPage {
      * @param todoName
      * @return
      */
-    public int selectUnEditableToDoCheckboxByName(String todoName) {
-        logger.info("Select To Do Task Check Box by Name");
-        try {
-            int index = findUnEditableToDoTaskName(todoName);
-            System.out.println("Index: " + index);
-            if (index != -1) {
-                if (!eleToDoCheckboxRow.get(index).isSelected())
-                    clickElement(eleToDoCheckboxRow.get(index), String.format("Check box of Task Name: %s", todoName));
-            }
-            return index;
-        } catch (Exception e) {
-            return -1;
-        }
-    }
+//    public int selectUnEditableToDoCheckboxByName(String todoName) {
+//        logger.info("Select To Do Task Check Box by Name");
+//        try {
+//            int index = findUnEditableToDoTaskName(todoName);
+//            System.out.println("Index: " + index);
+//            if (index != -1) {
+//                if (!eleToDoCheckboxRow.get(index).isSelected())
+//                    clickElement(eleToDoCheckboxRow.get(index), String.format("Check box of Task Name: %s", todoName));
+//            }
+//            return index;
+//        } catch (Exception e) {
+//            return -1;
+//        }
+//    }
 
     /**
      * Duong Nguyen
@@ -369,7 +375,7 @@ public class TodoPage extends CommonPage {
     public void verifyClientAssigneeSelectedOnUneditablePage(String toDoName, String clientAssignee) {
         logger.info("== select Client Assignee By Name ==");
         waitSomeSeconds(2);
-        int index = findUnEditableToDoTaskName(toDoName);
+        int index = findToDoTaskName(toDoName);
         WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
         waitForTextValueChanged(clientAssigneeSelected, "listClientAssigneeDdl", clientAssignee);
         logger.info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
@@ -381,7 +387,7 @@ public class TodoPage extends CommonPage {
         int totalToDo = toDoList.size();
         for (int i = 0; i < totalToDo; i++) {
             String toDoName = toDoList.get(i);
-            int index = findUnEditableToDoTaskName(toDoName);
+            int index = findToDoTaskName(toDoName);
             if(-1 == index){
                 logger.info("Can not see : " + toDoName);
                 result = false;
@@ -390,6 +396,7 @@ public class TodoPage extends CommonPage {
         }
         Assert.assertTrue(result);
     }
+
     public void selectAddNewRequest() {
         clickElement(todoPageAddRequestBtn,"Add new request Btn");
     }

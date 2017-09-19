@@ -806,18 +806,22 @@ Method to wait Ajax function on Site be loaded successfully.
             return false;
         } catch (NoSuchElementException e) {
             logger.info("Element is not existed.");
+            logger.info(e.toString());
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (ElementNotVisibleException e) {
             logger.info("Element is visible.");
+            logger.info(e.toString());
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (IndexOutOfBoundsException outEx) {
             logger.info("List element is empty.");
+            logger.info(outEx.toString());
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (Exception e) {
             logger.info("Element is still displayed.");
+            logger.info(e.toString());
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
         }

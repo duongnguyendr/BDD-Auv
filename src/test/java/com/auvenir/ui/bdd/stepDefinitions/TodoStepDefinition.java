@@ -150,7 +150,7 @@ public class TodoStepDefinition extends BaseInit {
 
     @And("^I select todo: \"([^\"]*)\" check box on Uneditable To-do page$")
     public void selectTodoCheckBoxOnUneditableToDoPage(String todoName) throws Throwable {
-      todoPage.selectUnEditableToDoCheckboxByName(todoName);
+      todoPage.selectToDoCheckboxByName(todoName);
     }
 
     public class LisTodoAnduser{
