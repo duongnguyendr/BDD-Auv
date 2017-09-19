@@ -23,6 +23,9 @@ public class DetailsEngagementPage extends CommonPage {
     @FindBy(id = "engagementTeamLink")
     private WebElement tabTeam;
 
+    @FindBy(xpath = "//span[@id='h-engagementsLink']")
+    private WebElement eleEngagementTab;
+
     public DetailsEngagementPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -73,5 +76,8 @@ public class DetailsEngagementPage extends CommonPage {
         }
     }
 
+    public void navigateToEngagementTab(){
+        clickElement(eleEngagementTab, "engagement tab");
+    }
 
 }

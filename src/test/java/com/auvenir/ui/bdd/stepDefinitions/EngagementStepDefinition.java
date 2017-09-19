@@ -3,9 +3,13 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.auditor.AuditorEngagementPage;
 import com.auvenir.ui.bdd.pages.client.ClientEngagementPage;
+import com.auvenir.ui.bdd.pages.common.EngagementPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
+
+import java.util.List;
 
 /**
  * Created by duong.nguyen on 9/13/2017.
@@ -15,10 +19,12 @@ public class EngagementStepDefinition extends BaseInit {
     BaseInit baseInit;
     AuditorEngagementPage auditorEngagementPage;
     ClientEngagementPage clientEngagementPage;
+    EngagementPage engagementPage;
     public EngagementStepDefinition(BaseInit baseInit){
         this.baseInit = baseInit;
         auditorEngagementPage = new AuditorEngagementPage(logger, driver);
         clientEngagementPage = new ClientEngagementPage(logger, driver);
+        engagementPage = new EngagementPage(logger,driver);
     }
 
     @Then("^I should see engagement page$")
@@ -52,5 +58,12 @@ public class EngagementStepDefinition extends BaseInit {
     public void iClickOnAssignedEngagement(String engagementName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         clientEngagementPage.viewEngagementDetailsPage(engagementName);
+    }
+
+    @And("^I should see engagement list : (.*)")
+    public void iShouldSeeEngagementList(List<String> engagementList) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I should see engagement list======");
+        engagementPage.verifySeeEngagementList(engagementList);
     }
 }

@@ -95,5 +95,10 @@ public class EngagementDetailStepDefinition extends BaseInit {
     }
 
 
-
+    @Then("^I click on engagement tab return engagement page$")
+    public void iClickOnEngagementTabReturnEngagementPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I click on engagement tab return engagement page=====");
+        detailsEngagementPage.navigateToEngagementTab();
+    }
 }
