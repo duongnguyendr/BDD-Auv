@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -85,6 +86,17 @@ public class TodoPage extends CommonPage {
     @FindBy(xpath = "//label[@class='auvicon-line-circle-add todo-circle-add todo-icon-hover']")
     private List<WebElement> addFileIcon;
 
+    @FindBy(xpath = "//div[@id='auv-todo-detailsReqBox']//span[1]")
+    protected List<WebElement> listRequestEle;
+
+    @FindBy(xpath = "//*[@id='todoDetailsReqCont']//span[4]")
+    protected List<WebElement> listRequestFileEle;
+
+    @FindBy(xpath = "//div[@class='auvicon-ex']")
+    protected WebElement requestCloseBtn;
+    @FindBy(xpath = "//div[@id='auv-todo-details']")
+    protected WebElement addNewRequestWindow;
+
 
     public int findToDoTaskName(String toDoName) {
         logger.info(String.format("Find Position of To Do Task Name: '%s'", toDoName));
@@ -95,11 +107,11 @@ public class TodoPage extends CommonPage {
             for (int i = 0; i < toDoTaskRowEle.size(); i++) {
                 classAttribute = toDoTaskRowEle.get(i).getAttribute("class");
                 if (classAttribute.equals("newRow")) {
-                    System.out.println(String.format("td[2]/*[@value|text()='%s']",toDoName));
+                    System.out.println(String.format("td[2]/*[@value|text()='%s']", toDoName));
                     try {
                         getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                         toDoTaskName = toDoTaskRowEle.get(i).findElement(By.xpath(String.format("td[2]/*[@value|text()='%s']", toDoName)));
-                        if(toDoTaskName != null) {
+                        if (toDoTaskName != null) {
                             logger.info("Element is found at " + i);
                             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                             return i;
@@ -143,7 +155,6 @@ public class TodoPage extends CommonPage {
 //            return -1;
 //        }
 //    }
-
     public void selectClientAssigneeByName(String toDoName, String clientAssignee) {
         logger.info("== select Client Assignee By Name ==");
         int index = findToDoTaskName(toDoName);
@@ -345,9 +356,9 @@ public class TodoPage extends CommonPage {
     }
 
     public void clickSlideOutMenuOnTodo(String todoName) {
-        String xpathImageSlideOutByName = "//*[@value|text()='%s']/ancestor::tr[@class='newRow']//img";
+        String xpathImageSlideOutByName = "//*[@value|text()='%s']/ancestor::tr[contains(@class,'newRow')]//img";
         WebElement imageSlideOut = getElementByXpath(xpathImageSlideOutByName, todoName);
-        System.out.println("imageSlideOut = " + imageSlideOut);
+        logger.info("imageSlideOut = " + imageSlideOut);
         Assert.assertNotNull(imageSlideOut, "Todo named: " + todoName + " expected exist on list todo.");
         clickElement(imageSlideOut, "Image Slide Out of todo: " + todoName);
     }
@@ -392,7 +403,7 @@ public class TodoPage extends CommonPage {
         for (int i = 0; i < totalToDo; i++) {
             String toDoName = toDoList.get(i);
             int index = findToDoTaskName(toDoName);
-            if(-1 == index){
+            if (-1 == index) {
                 logger.info("Can not see : " + toDoName);
                 result = false;
                 break;
@@ -401,10 +412,39 @@ public class TodoPage extends CommonPage {
         Assert.assertTrue(result);
     }
 
-
-
-
-    public static void verifyRequestFromTodo(DataTable dataTable) {
-
+    public void closeAddNewRequestWindow() {
+        clickElement(requestCloseBtn,"close Add New Request Window ");
+        waitForCssValueChanged(addNewRequestWindow, "Add new Request Window", "display", "none");
     }
+
+    /*
+    Vien.Pham
+     */
+    public boolean verifyExistedRequestName(String requestName) {
+        logger.info("Verify request name: "+requestName);
+        boolean isFind = false;
+        for (WebElement requestEle : listRequestEle) {
+            waitSomeSeconds(1);
+            if (requestEle.getText().contains(requestName)) {
+                isFind = true;
+                break;
+            }
+        }
+        return isFind;
+    }
+
+    public boolean verifyExistedRequestFile(String requestFile) {
+        logger.info("Verify request name: "+requestFile);
+        boolean isFind = false;
+        for (WebElement requestFileEle : listRequestFileEle) {
+            waitSomeSeconds(1);
+            if (requestFileEle.getText().contains(requestFile)) {
+                isFind = true;
+                break;
+            }
+        }
+        return isFind;
+    }
+
+
 }
