@@ -578,7 +578,6 @@ Feature: Smoke Test Feature
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Auditor Comment"
 
-#  @Run
   Scenario: General Auditor post new comment: AUV-1123
     Given I navigate to Marketing page
     And I click on login link
@@ -594,6 +593,23 @@ Feature: Smoke Test Feature
     Then I input comment content: "General Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Auditor Comment"
+
+  @Run
+  Scenario: Lead Client post new comment: AUV-1267
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | auvenirclient01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
+    And  I click slide out menu on selected To-do: "Todo 06"
+    Then I should see the Todo detail opened
+    Then I input comment content: "Lead Client Comment"
+    Then I click on post comment button
+    Then I should see this comment display on list: "Lead Client Comment"
 #/Huy
 
     #Tan
@@ -767,11 +783,11 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+      | auditor01.thuan@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
     And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
@@ -793,7 +809,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+      | chr.auvenirclient01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement"
@@ -838,7 +854,7 @@ Feature: Smoke Test Feature
     Then I should see the Todo detail opened
     Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
 
-  @Run
+    @Run
   Scenario: Lead Auditor download files of request on To Do task: AUV-961
     Given I navigate to Marketing page
     And I click on login link
@@ -860,12 +876,12 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+      | auditor01.thuan@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 04"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
+    And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
@@ -875,12 +891,12 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+      | chr.auvenirclient01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 04"
+    And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
@@ -911,11 +927,11 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement abc"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-    And I create requests from To-Do
+    Then I create requests from To-Do
       | Todo 01 | request 01,request 02,request 03,request 04 ,request 05,request 06 |
       | Todo 02 | request 01,request 02,request 03,request 04 ,request 05,request 06 |
       | Todo 03 | request 01,request 02,request 03,request 04 ,request 05,request 06 |
-    Then I verify created requests from To-Do: Todo 01,Todo 02,Todo 03
+    Then I verify Auditor Create requests from To-Do: Todo 01,Todo 02,Todo 03
       | request 01 |
       | request 02 |
       | request 03 |
@@ -940,9 +956,73 @@ Feature: Smoke Test Feature
 
 
 
+  Scenario: Admin auditor can see engagement in firm: AUV-1336
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                         | Password     |
+      | auditortan.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement 01, Engagement 02
+    Then I click on engagement: "Engagement 01"
+    And I should see engagement detail page with Engagement Title Editable: "Engagement 01"
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement 02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
 
 
+  Scenario: Admin client can see all engagement(s) in business: AUV-1376
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                        | Password     |
+      | clienttan.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement 01, Engagement 02
+    Then I click on engagement: "Engagement 01"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 01"
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement 02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
 
 
+  Scenario: Admin auditor can see all to-dos in firm: AUV-2253
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | auditortan.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement 01, Engagement 02
+    Then I click on engagement: "Engagement 01"
+    And I should see engagement detail page with Engagement Title Editable: "Engagement 01"
+    Then I should see empty ToDo list
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement 02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
 
 
+  Scenario:  Admin client can see all To-do(s) in business: AUV-2256
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | clienttan.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement 01, Engagement 02
+    Then I click on engagement: "Engagement 01"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 01"
+    Then I should see empty ToDo list
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement 02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
