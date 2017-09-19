@@ -2,6 +2,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.common.TodoDetailsPage;
+import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
@@ -90,4 +91,5 @@ public class TodoDetailsStepDefinition extends BaseInit {
             todoDetailsPage.downloadRequestFile(fileName);
         }
     }
+
 }

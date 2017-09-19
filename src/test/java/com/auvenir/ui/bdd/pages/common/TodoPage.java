@@ -2,6 +2,7 @@ package com.auvenir.ui.bdd.pages.common;
 
 import com.auvenir.ui.bdd.common.GeneralUtilities;
 import com.auvenir.ui.bdd.common.Generic;
+import cucumber.api.DataTable;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -400,4 +401,7 @@ public class TodoPage extends CommonPage {
         clickElement(commentInput,"comment Input ");
     }
 
+    public static void verifyRequestFromTodo(DataTable dataTable) {
+
+    }
 }
