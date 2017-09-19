@@ -147,7 +147,12 @@ Feature: Smoke Test Feature
     And I open active email
     And I click on confirmation link
     Then I should see personal sign up page
-    And I input confirm auditor personal information: "1234567890"
+#    And I input confirm auditor personal information: "1234567890"
+    And I input phone number: "12345678990" on personal information page
+    And I select Auvenir referral on personal information page
+    And I select check box agree on personal information page
+    And I select confirm CPA check box on personal information page
+    And I click on continue button on personal information page
     Then I should see provide firm information page
     And I click on continue button on firm information page
     And I create password: "Changeit@123"
@@ -195,14 +200,17 @@ Feature: Smoke Test Feature
     Then I should see Welcome to Auvenir Page
     And I click on Get Start button on Client Sign Up Page
     Then I should see Provide Information Page
-    And I fill up all Client Personal Information with Phone Number: "1234567899"
+    And I input Client Mobile Phone Number: "1234567899"
+    And I click on check box agreement
     And I click on Continue Button on Personal Information Page
     Then I should see Business Information Page
-    And I fill up all Client Business Information
+    And I select Fiscal End Year on Business Information page
+    And I select Business Industry on Business Information page
+    And I select Accounting framework on Business Information page
     And I click on Continue Button on Business Information Page
-    Then I should see Bank Information Page
-    And I fill up all Bank Information
-    And I click on Skip Button on Bank Information Page
+#    Then I should see Bank Information Page ################ comment code
+#    And I fill up all Bank Information ################ comment code
+#    And I click on Skip Button on Bank Information Page ################ comment code
     Then I should see File Storage Information Page
     And I fill up all File Storage Information
     And I click on Skip Button on File Storage Information Page
@@ -216,12 +224,12 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click create new engagement button
     Then I should see new engagement page
-    And I input engagement name: "Thuan Engagement GP03"
+    And I input engagement name: "Engagement GP02"
     And I select engagement type: "Review"
     And I select company name: "Titan"
     And I set report deadline
@@ -232,61 +240,68 @@ Feature: Smoke Test Feature
     And I click continue button without member
     And I should see create todo list page
     And I click create todo button on Create New Engagement Page
-    Then I should see engagement detail page with Engagement Title Editable: "Thuan Engagement GP03"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
 
-  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                    | Password     |
-      | auvenirauditor@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
-    Then I click on Invite Client button
-    Then I should see Invite Your Client page
-    Then I select option Admin Client fullname: "Huy AC (Huy Company)"
-    Then I click on Invite button
-    Then I should see invite client success toast message
-    Then I navigate to GMail login page
-    And I sign In GMail
-      | chr.auvenirclient@gmail.com | Changeit@123 |
-    And I open active email
-    And I click on onboarding invitation link
-    Then I should see Welcome to Auvenir Page
-    And I click on Get Start button on Client Sign Up Page
-    Then I should see Provide Information Page
-    And I fill up all Client Personal Information with Phone Number: "1234567899"
-    And I click on Continue Button on Personal Information Page
-    Then I should see Business Information Page
-    And I fill up all Client Business Information
-    And I click on Continue Button on Business Information Page
-    Then I should see Bank Information Page
-    And I fill up all Bank Information
-    And I click on Skip Button on Bank Information Page
-    Then I should see File Storage Information Page
-    And I fill up all File Storage Information
-    And I click on Skip Button on File Storage Information Page
-    Then I should see Security Information Page
-    And I fill up all Security Information with Password: "Changeit@123"
-    And I click on Create Account Button on Security Information Page
-    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
+  #  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
+#    Given I delete existed email
+#      | chr.client01.adm@gmail.com | Changeit@123 |
+#    Given I navigate to Marketing page
+#    And I click on login link
+#    And I enter the following for Login
+#      | Email                    | Password     |
+#      | chr.auditor01.lead@gmail.com | Changeit@123 |
+#    And I click on login button
+#    Then I should see engagement page
+#    Then I click on engagement: "Engagement GP02"
+#    Then I click on Invite Client button
+#    Then I should see Invite Your Client page
+#    Then I select option Admin Client fullname: "Admin Client"
+#    Then I click on Invite button
+#    Then I should see invite client success toast message
+#    And I relogin gmail: "Changeit@123"
+#    And I open active email
+#    And I click on onboarding invitation link
+#    Then I should see Welcome to Auvenir Page
+#    And I click on Get Start button on Client Sign Up Page
+#    Then I should see Provide Information Page
+#    And I input phone number: "1234567890" on personal information page
+#    And I select check box agree on personal information page
+#    And I click on Continue Button on Personal Information Page
+#    Then I should see Business Information Page
+#    And I select Fiscal End Year on Business Information page
+#    And I select Business Industry on Business Information page
+#    And I select Accounting framework on Business Information page
+#    And I click on Continue Button on Business Information Page
+##    Then I should see Bank Information Page ################ comment code
+##    And I fill up all Bank Information ################ comment code
+##    And I click on Skip Button on Bank Information Page ################ comment code
+#    Then I should see File Storage Information Page
+#    And I fill up all File Storage Information
+#    And I click on Skip Button on File Storage Information Page
+#    Then I should see Security Information Page
+#    And I fill up all Security Information with Password: "Changeit@123"
+#    And I click on Create Account Button on Security Information Page
+#    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
 
   Scenario: Lead Auditor add New member auditor into Engagement 2: AUV-787
+    Given I delete existed email
+      | chr.auditor01@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
+    And Delete all activity of engagement by user  : "chr.auditor01@gmail.com"
+    And Delete user by email: "chr.auditor01@gmail.com"
     And I click on login link
     And I enter the following for Login
       | Email                    | Password     |
-      | auvenirauditor@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
+    Then I click on engagement: "Engagement GP02"
     And I click on Team tab of engagement detail page
     And I click in invite new member on team page
     Then I should see invite new member page
-    And I input full name: "Huy GA01" on invite new member page
-    And I input email: "auvenirauditor01@gmail.com" on invite new member page
-    And I input email confirm: "auvenirauditor01@gmail.com" on invite new member page
+    And I input full name: "Auvenir Auditor" on invite new member page
+    And I input email: "chr.auditor01@gmail.com" on invite new member page
+    And I input email confirm: "chr.auditor01@gmail.com" on invite new member page
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
@@ -294,40 +309,48 @@ Feature: Smoke Test Feature
   Scenario: New Auditor member active account and login to Engagement 2: AUV-798
     Given I navigate to GMail login page
     Then I sign In GMail
-      | auvenirauditor02@gmail.com | TESTPASSWORD |
+      | chr.auditor01@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
     Then I should see personal sign up page
-    And I input confirm auditor personal information: "1234567890"
+    And I input phone number: "12345678990" on personal information page
+    And I select Auvenir referral on personal information page
+    And I select check box agree on personal information page
+    And I select confirm CPA check box on personal information page
+    And I click on continue button on personal information page
     Then I should see provide firm information page
     And I click on continue button on firm information page
     And I create password: "Changeit@123"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
 
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
+    Given I delete existed email
+      |chr.client01.lead@gmail.com|Changeit@123|
     Given I navigate to Marketing page
+    And Delete all client of user
+      | chr.client01.lead@gmail.com |
     And I click on login link
     And I enter the following for Login
-      | Email                     | Password     |
-      | clvien.adm@mailinator.com | Changeit@123 |
+      | Email                      | Password     |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
-    And I click on assigned engagement: "En05"
-    Then I should see engagement detail page with Engagement Title Uneditable: "En05"
+    And I click on assigned engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click on Team tab on Client page
     And I click on Invite New Member button on Client team page
     Then I should see Invite New Member popup
     And I input full name: "Lead Client" on invite new member popup
-    And I input email: "vien1234@gmail.com" on invite new member popup
-    And I input email confirm: "vien1234@gmail.com" on invite new member popup
-    And I input Role: "Client role" of new client member on invite new member popup
+    And I input email: "chr.client01.lead@gmail.com" on invite new member popup
+    And I input email confirm: "chr.client01.lead@gmail.com" on invite new member popup
+    And I input Role: "IT" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
 
   Scenario: Lead Client Active Account and Login to Engagement2: AUV-840
     Given I navigate to GMail login page
     And I sign In GMail
-      | phamhoangtan13052007@gmail.com | myphuong |
+      | chr.client01.lead@gmail.com | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
     Then I should see Welcome to Auvenir Page
@@ -338,14 +361,14 @@ Feature: Smoke Test Feature
     And I click on Continue Button on Personal Information Page
     Then I should see Business Information Page
     And I click on Continue Button on Business Information Page
-    Then I should see Bank Information Page
-    And I click on Skip Button on Bank Information Page
+#    Then I should see Bank Information Page  ################ comment code
+#    And I click on Skip Button on Bank Information Page  ################ comment code
     Then I should see File Storage Information Page
     And I click on Skip Button on File Storage Information Page
     Then I should see Security Information Page
     And I fill up all Security Information with Password: "Changeit@123"
     And I click on Create Account Button on Security Information Page
-    Then I should see engagement detail page with Engagement Title Uneditable: "0"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
 
 
   Scenario:  Admin Client transfer Lead permission to Lead Client in the Engagement2: AUV-847
@@ -353,11 +376,11 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                     | Password     |
-      | clvien.adm@mailinator.com | Changeit@123 |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
-    And I click on assigned engagement: "En05"
-    Then I should see engagement detail page with Engagement Title Uneditable: "En05"
+    And I click on assigned engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click on Team tab on Client page
     And I change the permission of member: "Lead Client" to be Lead
 
@@ -369,105 +392,135 @@ Feature: Smoke Test Feature
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
     Then I create To-Do with name and category
       | ToDo name | Category |
-      | ToDo 01   | Music    |
-      | ToDo 02   | Sport    |
+      | ToDo 01   | Cat1     |
+      | ToDo 02   | Cat1     |
+      | ToDo 03   | Cat1     |
+      | ToDo 04   | Cat1     |
+      | ToDo 05   | Cat1     |
 
   Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                 | Password     |
-      | auvenirinfo@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
     Then I assignee list To-Do to Client
-      | userName   | Todo Name |
-      | Unassigned | ToDo 01   |
-      | Unassigned | ToDo 02   |
+      | Client Full Name | Todo Name |
+      | Lead Client      | ToDo 01   |
+      | Lead Client      | ToDo 02   |
+      | Lead Client      | ToDo 03   |
+      | Lead Client      | ToDo 04   |
+      | Lead Client      | ToDo 05   |
 
   Scenario:Lead Auditor assign To Do task to Auditor member AUV-924
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                 | Password     |
-      | auvenirinfo@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
     Then I assignee list To-Do to Auditor
-      | Auditor Name  | Todo Name |
-      | Admin Auditor | ToDo 01   |
-      | Admin Auditor | ToDo 02   |
-      | Admin Auditor | ToDo 03   |
-    Then I verify Auditor Assignee Selected
-      | Auditor Name  | Todo Name |
-      | Admin Auditor | ToDo 01   |
-      | Admin Auditor | ToDo 02   |
-      | Admin Auditor | ToDo 03   |
-
-    #Thuan Duong create
-  Scenario: Lead Auditor add file to request on To Do task AUV-954
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 04"
-    Then I should see the Todo detail opened
-    And I uploads list files on list requests
-      | File Name             | Request Name |
-      | TXT_Auvenir.jpg       | Request 1    |
-      | TXT_Auvenir.pdf       | Request 2    |
-      | TXT_Auvenir.xlsx      | Request 3    |
-      | TXT_helloAuvenir.docx | Request 4    |
-      | TXT_helloAuvenir.png  | Request 5    |
-      | TXT_helloAuvenir.txt  | Request 6    |
-    And I closes the To Do detail popup
-    And I click slide out menu on selected To-do: "ToDo 04"
-    Then I should see the Todo detail opened
-    Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+      | Auditor Name    | Todo Name |
+      | Auvenir Auditor | ToDo 01   |
+      | Auvenir Auditor | ToDo 04   |
+    And I verify Auditor Assignee Selected
+      | Auditor Name    | Todo Name |
+      | Auvenir Auditor | ToDo 01   |
+      | Auvenir Auditor | ToDo 04   |
 
   Scenario:  Lead Auditor add new request on To Do task: AUV-947
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                      | Password     |
-      | auvien.lead@mailinator.com | Changeit@123 |
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
-    And I click on assigned engagement: "Engagement aaa"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement aaa"
-    And  I click slide out menu on selected To-do: "Todo 01"
-    Then I should see the Todo detail opened
-    And  I creates some new requests
-      | New Request Name |
-      | Request 01       |
-      | Request 02       |
-      | Request 03       |
-      | Request 04       |
-      | Request 05       |
-      | Request 06       |
-    Then I verify Auditor Create requests from To-Do: Todo 01
-      | request 01 |
-      | request 02 |
-      | request 03 |
-      | request 04 |
-      | request 05 |
-      | request 06 |
+    And I click on assigned engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+    Then I create requests from To-Do
+      | ToDo 01 | request 01, request 02, request 03, request 04, request 05, request 06 |
+      | ToDo 02 | request 01, request 02, request 03, request 04, request 05, request 06 |
+      | ToDo 03 | request 01, request 02, request 03, request 04, request 05, request 06 |
+      | ToDo 04 | request 01, request 02, request 03, request 04, request 05, request 06 |
+      | ToDo 05 | request 01, request 02, request 03, request 04, request 05, request 06 |
 
-    #############################################
-  #Duong
+    Then I verify Auditor Create requests from To-Do: ToDo 01, ToDo 02, ToDo 03, ToDo 04, ToDo 05
+      | Request Name |
+      | Request 01   |
+      | Request 02   |
+      | Request 03   |
+      | Request 04   |
+      | Request 05   |
+      | Request 06   |
+
+  Scenario: Lead Auditor add file to request on To Do task AUV-954
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+    And I click slide out menu on selected To-do: "ToDo 04"
+    Then I should see the Todo detail opened
+    And I uploads list files on list requests
+      | File Name             | Request Name |
+      | TXT_Auvenir.jpg       | Request 01   |
+      | TXT_Auvenir.pdf       | Request 02   |
+      | TXT_Auvenir.xlsx      | Request 03   |
+      | TXT_helloAuvenir.docx | Request 04   |
+      | TXT_helloAuvenir.png  | Request 05   |
+      | TXT_helloAuvenir.txt  | Request 06   |
+    And I closes the To Do detail popup
+    And I click slide out menu on selected To-do: "ToDo 04"
+    Then I should see the Todo detail opened
+    Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+
+  Scenario: Lead Auditor download files of request on To Do task: AUV-961
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+    And I click slide out menu on selected To-do: "ToDo 04"
+    Then I should see the Todo detail opened
+    And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+    Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+
+  Scenario: Lead Auditor post new comment: AUV-968
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                        | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+    And  I click slide out menu on selected To-do: "ToDo 04"
+    Then I should see the Todo detail opened
+    Then I input comment content: "Lead Auditor Comment"
+    Then I click on post comment button
+    Then I should see this comment display on list: "Lead Auditor Comment"
+
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
     And I click on login link
@@ -495,17 +548,17 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    And I select todo: "ToDo 04" check box on todo page
+    And I select todo: "ToDo 03" check box on todo page
     And I click bulk action drop down on todo page
-    And I click assignee to :"unassigned" on bulk action drop down
+    And I click assignee to :"Lead Client" on bulk action drop down
     And I verify Client Assignee Selected
-      | userName   | Todo Name |
-      | Unassigned | ToDo 04   |
+      | userName    | Todo Name |
+      | Lead Client | ToDo 03   |
     And I click bulk action drop down on todo page
-    And I click assignee to :"Lead Auditor" on bulk action drop down
+    And I click assignee to :"Auvenir Auditor" on bulk action drop down
     And I verify Auditor Assignee Selected
-      | User Name    | Todo Name |
-      | Lead Auditor | ToDo 04   |
+      | User Name       | Todo Name |
+      | Auvenir Auditor | ToDo 03   |
 
   Scenario: Lead Auditor delete To Do Task: AUV-1026
     Given I navigate to Marketing page
@@ -542,151 +595,128 @@ Feature: Smoke Test Feature
     And I click download button on attachment download popup
     Then I verify file "Engagement GP02.zip" existed in computer
 
+  Scenario:Auditor Member creates to do task: AUV-1060
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    Then I create To-Do with name and category
+      | ToDo name | Category |
+      | ToDo 06   | Cat1     |
+      | ToDo 07   | Cat1     |
+      | ToDo 08   | Cat1     |
+      | ToDo 09   | Cat1     |
+      | ToDo 10   | Cat1     |
+
   Scenario:Auditor Member assign To Do to Lead Client : AUV-1069
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | Email                   | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
     Then I assignee list To-Do to Client
-      | Lead client | Todo Name |
-      | Unassigned  | ToDo 01   |
-      | Unassigned  | ToDo 02   |
+      | Client Full Name | Todo Name |
+      | Lead Client      | ToDo 06   |
+      | Lead Client      | ToDo 07   |
+      | Lead Client      | ToDo 09   |
     Then I verify Client Assignee Selected
-      | Lead client | Todo Name |
-      | Unassigned  | ToDo 01   |
-      | Unassigned  | ToDo 02   |
+      | Client Full Name | Todo Name |
+      | Lead Client      | ToDo 06   |
+      | Lead Client      | ToDo 07   |
+      | Lead Client      | ToDo 09   |
 
-#Huy
-  Scenario: Lead Auditor post new comment: AUV-968
+  Scenario: Auditor Member add new request on To Do task: AUV-1083
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
-      | auvenirauditor@gmail.com | Changeit@123 |
+      | Email                   | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
-    Then I should see engagement detail page with Engagement Title Editable: "Huy Engagement 02"
-    And  I click slide out menu on selected To-do: "Todo 02"
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
+    Then I create requests from To-Do
+      | ToDo 06 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 07 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 08 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 09 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 10 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+
+    Then I verify Auditor Create requests from To-Do: ToDo 06, ToDo 07, ToDo 08, ToDo 09, ToDo 10
+      | Request Name |
+      | request 01   |
+      | request 02   |
+      | request 03   |
+      | request 04   |
+      | request 05   |
+      | request 06   |
+
+  Scenario: Auditor add file to request on To-Do: AUV-1107
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
-    Then I input comment content: "Lead Auditor Comment"
-    Then I click on post comment button
-    Then I should see this comment display on list: "Lead Auditor Comment"
+    And I uploads list files on list requests
+      | File Name             | Request Name |
+      | TXT_Auvenir.jpg       | Request 01    |
+      | TXT_Auvenir.pdf       | Request 02    |
+      | TXT_Auvenir.xlsx      | Request 03    |
+      | TXT_helloAuvenir.docx | Request 04    |
+      | TXT_helloAuvenir.png  | Request 05    |
+      | TXT_helloAuvenir.txt  | Request 06    |
+    And I closes the To Do detail popup
+    And I click slide out menu on selected To-do: "ToDo 09"
+    Then I should see the Todo detail opened
+    Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+
+  Scenario: Auditor download file from request: AUV-1113
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I click slide out menu on selected To-do: "ToDo 09"
+    Then I should see the Todo detail opened
+    And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+    Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
 
   Scenario: General Auditor post new comment: AUV-1123
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                      | Password     |
-      | auvenirauditor01@gmail.com | Changeit@123 |
+      | Email                   | Password     |
+      | chr.auditor01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
-    And  I click slide out menu on selected To-do: "Todo 04"
+    Then I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And  I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
     Then I input comment content: "General Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Auditor Comment"
 
-  @Run
-  Scenario: Lead Client post new comment: AUV-1267
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                     | Password     |
-      | auvenirclient01@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    Then I click on engagement: "Huy Engagement 02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
-    And  I click slide out menu on selected To-do: "Todo 06"
-    Then I should see the Todo detail opened
-    Then I input comment content: "Lead Client Comment"
-    Then I click on post comment button
-    Then I should see this comment display on list: "Lead Client Comment"
-#/Huy
-
-    #Tan
-  Scenario: Lead Client can see to-dos: AUV-1171
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                         | Password     |
-      | clienttan.lead@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement 02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    Then I should see all to do assigned : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
-
-  Scenario: Lead client remove admin client out Engagement: AUV-1210
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                         | Password     |
-      | clienttan.lead@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement 02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    And I click on Team tab of engagement detail page
-    Then I should see Admin Client name : "Admin Client" in team member list
-    Then I click on check box beside Admin Client name : "Admin Client" in team member list
-    And I remove Admin Client name : "Admin Client" out of team member list
-    Then I should not see Admin Client name : "Admin Client" in team member list
-
-  Scenario: Leader Client invite client into Engagement: AUV-1214
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                         | Password     |
-      | clienttan.lead@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see client engagement page
-    And I click on engagement: "Engagement 02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    And I click on Team tab of engagement detail page
-    And I click on Invite New Member button on team page
-    Then I should see Invite New Member popup
-    And I input full name: "General Client" on invite new member popup
-    And I input email: "phamhoangtan12071986@gmail.com" on invite new member popup
-    And I input email confirm: "phamhoangtan12071986@gmail.com" on invite new member popup
-    And I input Role: "General Client" of new client member on invite new member popup
-    And I click on invite button
-    Then I should see Invite Member successful message
-
-  Scenario: New client log in their email and active user: AUV-1217
-    Given I navigate to GMail login page
-    And I sign In GMail
-      | phamhoangtan12071986@gmail.com | myphuong |
-    And I open active email
-    And I click on onboarding invitation link
-    Then I should see Welcome to Auvenir Page
-    And I click on Get Start button on Client Sign Up Page
-    Then I should see Provide Information Page
-    And I input Client Mobile Phone Number: "1234567899"
-    And I click on check box agreement
-    And I click on Continue Button on Personal Information Page
-    Then I should see Business Information Page
-    And I click on Continue Button on Business Information Page
-    Then I should see Bank Information Page
-    And I click on Skip Button on Bank Information Page
-    Then I should see File Storage Information Page
-    And I click on Skip Button on File Storage Information Page
-    Then I should see Security Information Page
-    And I fill up all Security Information with Password: "Changeit@123"
-    And I click on Create Account Button on Security Information Page
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-#Tan
-  #Duong
-
-  Scenario: Auditor mark as complete one To-Do: AUV-1217
+  Scenario: Auditor mark as complete one To-Do: AUV-1127
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -720,7 +750,6 @@ Feature: Smoke Test Feature
     And I click on confirm delete button on delete todo popup
     Then I should see todo: "ToDo 08" not existed in todo list
 
-  @duong123
   Scenario: Auditor download from all To-do: AUV-1141
     Given I navigate to Marketing page
     And I delete existed file: "Engagement GP02.zip" in download folder
@@ -738,210 +767,333 @@ Feature: Smoke Test Feature
     Then I should see popup download attachments on todo page
     And I click download button on attachment download popup
     Then I verify file "Engagement GP02.zip" existed in computer
-  #/Duong
 
-#    Then i should see Admin Client name : "Admin Client" in team member list
-
-  # VienPham create
-  @vientest
-  Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
-    # Bulk action assign to-do4 to General client
+  Scenario: Lead Client can see to-dos: AUV-1171
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                      | Password     |
-      | clvien.lead@mailinator.com | Changeit@123 |
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "En02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "En02"
-    And I select todo: "Todo 01" check box on Uneditable To-do page
-    And I click bulk action drop down on todo page
-    And I click assignee to :"General Client" on bulk action drop down
-    And I verify Client Assignee Selected
-      | User Name      | Todo Name |
-      | General Client | Todo 01   |
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    Then I should see all to do assigned : ToDo 01, ToDo 02, ToDo 04, ToDo 05, ToDo 06, ToDo 07, ToDo 09
 
-    # VienPham create
-
-  Scenario: General Client can see to-dos: AUV-1299
+  Scenario: Lead client remove admin client out Engagement: AUV-1210
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                         | Password     |
-      | clvien.general@mailinator.com | Changeit@123 |
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "En02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "En02"
-    Then I should see all to do assigned : ToDo 01,ToDo 04,Todo 06,Todo 09
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I click on Team tab of engagement detail page
+    Then I should see Admin Client name : "Admin Client" in team member list
+    Then I click on check box beside Admin Client name : "Admin Client" in team member list
+    And I remove Admin Client name : "Admin Client" out of team member list
+    Then I should not see Admin Client name : "Admin Client" in team member list
 
+  Scenario: Leader Client invite client into Engagement: AUV-1214
+    Given I delete existed email
+      | chr.client01@gmail.com | Changeit@123 |
+    Given I navigate to Marketing page
+    And Delete all client of user
+      |chr.client01@gmail.com|
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see client engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I click on Team tab of engagement detail page
+    And I click on Invite New Member button on team page
+    Then I should see Invite New Member popup
+    And I input full name: "General Client" on invite new member popup
+    And I input email: "chr.client01@gmail.com" on invite new member popup
+    And I input email confirm: "chr.client01@gmail.com" on invite new member popup
+    And I input Role: "IT" of new client member on invite new member popup
+    And I click on invite button
+    Then I should see Invite Member successful message
 
+  Scenario: New client log in their email and active user: AUV-1217
+    Given I navigate to GMail login page
+    And I sign In GMail
+      | chr.client01@gmail.com | Changeit@123 |
+    And I open active email
+    And I click on onboarding invitation link
+    Then I should see Welcome to Auvenir Page
+    And I click on Get Start button on Client Sign Up Page
+    Then I should see Provide Information Page
+    And I input Client Mobile Phone Number: "1234567899"
+    And I click on check box agreement
+    And I click on Continue Button on Personal Information Page
+    Then I should see Business Information Page
+    And I click on Continue Button on Business Information Page
+    Then I should see Bank Information Page
+    And I click on Skip Button on Bank Information Page
+    Then I should see File Storage Information Page
+    And I click on Skip Button on File Storage Information Page
+    Then I should see Security Information Page
+    And I fill up all Security Information with Password: "Changeit@123"
+    And I click on Create Account Button on Security Information Page
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
 
-        #Thuan Duong create
-  Scenario: Auditor add file to request on To-Do: AUV-1107
+  Scenario: Lead Client assign To Do to client: AUV-2248
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                          | Password     |
-      | auditor01.thuan@mailinator.com | Changeit@123 |
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 09"
-    Then I should see the Todo detail opened
-    And I uploads list files on list requests
-      | File Name             | Request Name |
-      | TXT_Auvenir.jpg       | Request 1    |
-      | TXT_Auvenir.pdf       | Request 2    |
-      | TXT_Auvenir.xlsx      | Request 3    |
-      | TXT_helloAuvenir.docx | Request 4    |
-      | TXT_helloAuvenir.png  | Request 5    |
-      | TXT_helloAuvenir.txt  | Request 6    |
-    And I closes the To Do detail popup
-    And I click slide out menu on selected To-do: "ToDo 09"
-    Then I should see the Todo detail opened
-    Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    Then I assignee list To-Do to Client
+      | Client Full Name | Todo Name |
+      | General Client   | ToDo 01   |
+      | General Client   | ToDo 06   |
+      | General Client   | ToDo 09   |
 
   Scenario: Lead client login and add file to request: AUV-1250
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                         | Password     |
-      | chr.auvenirclient01@gmail.com | Changeit@123 |
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click slide out menu on selected To-do: "ToDo 06"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
       | File Name             | Request Name |
-      | TXT_Auvenir.jpg       | Request 1    |
-      | TXT_Auvenir.pdf       | Request 2    |
-      | TXT_Auvenir.xlsx      | Request 3    |
-      | TXT_helloAuvenir.docx | Request 4    |
-      | TXT_helloAuvenir.png  | Request 5    |
-      | TXT_helloAuvenir.txt  | Request 6    |
+      | TXT_Auvenir.jpg       | Request 01   |
+      | TXT_Auvenir.pdf       | Request 02   |
+      | TXT_Auvenir.xlsx      | Request 03   |
+      | TXT_helloAuvenir.docx | Request 04   |
+      | TXT_helloAuvenir.png  | Request 05   |
+      | TXT_helloAuvenir.txt  | Request 06   |
     And I closes the To Do detail popup
     And I click slide out menu on selected To-do: "ToDo 06"
     Then I should see the Todo detail opened
     Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-
-  Scenario: Client add file to request on To-Do: AUV-1316
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 01"
-    Then I should see the Todo detail opened
-    And I uploads list files on list requests
-      | File Name             | Request Name |
-      | TXT_Auvenir.jpg       | Request 1    |
-      | TXT_Auvenir.pdf       | Request 2    |
-      | TXT_Auvenir.xlsx      | Request 3    |
-      | TXT_helloAuvenir.docx | Request 4    |
-      | TXT_helloAuvenir.png  | Request 5    |
-      | TXT_helloAuvenir.txt  | Request 6    |
-    And I closes the To Do detail popup
-    And I click slide out menu on selected To-do: "ToDo 01"
-    Then I should see the Todo detail opened
-    Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-
-  @Run
-  Scenario: Lead Auditor download files of request on To Do task: AUV-961
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 04"
-    Then I should see the Todo detail opened
-    And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-    Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-
-
-  Scenario: Auditor download file from request: AUV-1113
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                          | Password     |
-      | auditor01.thuan@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 09"
-    Then I should see the Todo detail opened
-    And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-    Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
 
   Scenario: Lead Client download file from request: AUV-1259
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                         | Password     |
-      | chr.auvenirclient01@gmail.com | Changeit@123 |
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 09"
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I click slide out menu on selected To-do: "ToDo 06"
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
+
+  Scenario: Lead Client post new comment: AUV-1267
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And  I click slide out menu on selected To-do: "ToDo 06"
+    Then I should see the Todo detail opened
+    Then I input comment content: "Lead Client Comment"
+    Then I click on post comment button
+    Then I should see this comment display on list: "Lead Client Comment"
+
+  Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I select todo: "ToDo 04" check box on Uneditable To-do page
+    And I click bulk action drop down on todo page
+    And I click assignee to :"General Client" on bulk action drop down
+    And I verify Client Assignee Selected
+      | Client Full Name | Todo Name |
+      | General Client   | ToDo 04   |
+
+  Scenario: General Client can see to-dos: AUV-1299
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                  | Password     |
+      | chr.client01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    Then I should see all to do assigned : ToDo 01, ToDo 04, ToDo 06, ToDo 09
+
+  Scenario: Client add file to request on To-Do: AUV-1316
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                  | Password     |
+      | chr.client01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I click slide out menu on selected To-do: "ToDo 01"
+    Then I should see the Todo detail opened
+    And I uploads list files on list requests
+      | File Name             | Request Name |
+      | TXT_Auvenir.jpg       | Request 01   |
+      | TXT_Auvenir.pdf       | Request 02   |
+      | TXT_Auvenir.xlsx      | Request 03   |
+      | TXT_helloAuvenir.docx | Request 04   |
+      | TXT_helloAuvenir.png  | Request 05   |
+      | TXT_helloAuvenir.txt  | Request 06   |
+    And I closes the To Do detail popup
+    And I click slide out menu on selected To-do: "ToDo 01"
+    Then I should see the Todo detail opened
+    Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
 
   Scenario: Client download file from request: AUV-1319
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                          | Password     |
-      | chr.auvenirauditor01@gmail.com | Changeit@123 |
+      | Email                  | Password     |
+      | chr.client01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement"
-    And I click slide out menu on selected To-do: "ToDo 04"
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I click slide out menu on selected To-do: "ToDo 01"
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
 
+  Scenario: Client post new comment: AUV-1326
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                  | Password     |
+      | chr.client01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And  I click slide out menu on selected To-do: "ToDo 01"
+    Then I should see the Todo detail opened
+    Then I input comment content: "General Client Comment"
+    Then I click on post comment button
+    Then I should see this comment display on list: "General Client Comment"
 
-  Scenario: Auditor Member add new request on To Do task: AUV-1083
+  Scenario: Admin auditor can see engagement in firm: AUV-1336
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement GP01, Engagement GP02
+    Then I click on engagement: "Engagement GP01"
+    And I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement GP02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+
+  Scenario: Admin client can see all engagement(s) in business: AUV-1376
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                      | Password     |
-      | auvien.lead@mailinator.com | Changeit@123 |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement abc"
-    Then I create requests from To-Do
-      | Todo 01 | request 01,request 02,request 03,request 04 ,request 05,request 06 |
-      | Todo 02 | request 01,request 02,request 03,request 04 ,request 05,request 06 |
-      | Todo 03 | request 01,request 02,request 03,request 04 ,request 05,request 06 |
-    Then I verify Auditor Create requests from To-Do: Todo 01,Todo 02,Todo 03
-      | Request Name |
-      | request 01   |
-      | request 02   |
-      | request 03   |
-      | request 04   |
-      | request 05   |
-      | request 06   |
+    And I should see engagement list : Engagement GP01, Engagement GP02
+    Then I click on engagement: "Engagement GP01"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement GP02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
 
-    #Vien.pham
+  Scenario: Admin auditor can see all to-dos in firm: AUV-2253
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement GP01, Engagement GP02
+    Then I click on engagement: "Engagement GP01"
+    And I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
+    Then I should see empty ToDo list
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement GP02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    Then I should see all to do : ToDo 01, ToDo 02, ToDo 04, ToDo 05, ToDo 06, ToDo 07, ToDo 09, ToDo 10
+
+  Scenario: Admin client can see all request(s) in business: AUV-2257
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                      | Password     |
+      | clvien1.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    And I verify Created request name from Todo
+      | Todo name | Request name         |
+      | Todo 01   | r1, r2, r3, r4,r5,r6 |
+
+  Scenario:  Admin client can see all To-do(s) in business: AUV-2256
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                        | Password     |
+      | clienttan.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement 01, Engagement 02
+    Then I click on engagement: "Engagement 01"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 01"
+    Then I should see empty ToDo list
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement 02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
+
+  Scenario: Admin auditor can see all comments in firm : AUV-2255
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                         | Password     |
+      | adm.auditor001@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement01"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement01"
+
+ #Vien.pham
   @vp
   Scenario: Admin auditor can see all request(s) in Firm: AUV-2254
     Given I navigate to Marketing page
@@ -981,121 +1133,3 @@ Feature: Smoke Test Feature
     And I verify Existed request files from Todo
       | Todo name | Request name                                                 |
       | Todo 02   | GA2.xlsx,GC2.xlsx,GCupload.png,LAupload.png,LC2.xlsx,sc1.jpg |
-
-
-  Scenario: Admin auditor can see engagement in firm: AUV-1336
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                         | Password     |
-      | auditortan.adm@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I should see engagement list : Engagement 01, Engagement 02
-    Then I click on engagement: "Engagement 01"
-    And I should see engagement detail page with Engagement Title Editable: "Engagement 01"
-    Then I click on engagement tab return engagement page
-    And I should see engagement page
-    Then I click on engagement: "Engagement 02"
-    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-
-
-  Scenario: Admin client can see all engagement(s) in business: AUV-1376
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                        | Password     |
-      | clienttan.adm@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I should see engagement list : Engagement 01, Engagement 02
-    Then I click on engagement: "Engagement 01"
-    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 01"
-    Then I click on engagement tab return engagement page
-    And I should see engagement page
-    Then I click on engagement: "Engagement 02"
-    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-
-
-  Scenario: Admin auditor can see all to-dos in firm: AUV-2253
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                         | Password     |
-      | auditortan.adm@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I should see engagement list : Engagement 01, Engagement 02
-    Then I click on engagement: "Engagement 01"
-    And I should see engagement detail page with Engagement Title Editable: "Engagement 01"
-    Then I should see empty ToDo list
-    Then I click on engagement tab return engagement page
-    And I should see engagement page
-    Then I click on engagement: "Engagement 02"
-    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
-
-
-  Scenario:  Admin client can see all To-do(s) in business: AUV-2256
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                        | Password     |
-      | clienttan.adm@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I should see engagement list : Engagement 01, Engagement 02
-    Then I click on engagement: "Engagement 01"
-    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 01"
-    Then I should see empty ToDo list
-    Then I click on engagement tab return engagement page
-    And I should see engagement page
-    Then I click on engagement: "Engagement 02"
-    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
-
-  Scenario:Auditor Member creates to do task: AUV-1060
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                      | Password     |
-      | auvenirauditor01@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement abc"
-    Then I create To-Do with name and category
-      | ToDo name | Category |
-      | ToDo 03   | Music    |
-      | ToDo 04   | Sport    |
-      | ToDo 03   | Music    |
-
-
-  Scenario: Lead Client assign To Do to client: AUV-2248
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                 | Password     |
-      | auvenirinfo@gmail.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement abc"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement abc"
-    Then I assignee list To-Do to Client
-      | userName   | Todo Name |
-      | Unassigned | ToDo 01   |
-      | Unassigned | ToDo 02   |
-
-
-  @Vietlq
-  Scenario: Admin auditor can see all comments in firm : AUV-2255
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                         | Password     |
-      | adm.auditor001@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement01"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement01"
-

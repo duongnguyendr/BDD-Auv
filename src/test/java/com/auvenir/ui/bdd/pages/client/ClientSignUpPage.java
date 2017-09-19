@@ -142,6 +142,23 @@ public class ClientSignUpPage extends CommonPage {
         Assert.assertTrue(result, "Should see the Business Page Title.");
     }
 
+    public void inputFiscalEndyear(){
+        clickElement(inputFiscalEndYear, "Input Fiscal End Year");
+        DatePicker datePicker = new DatePicker(getDriver());
+        datePicker.pickADate("28");
+    }
+
+    public void selectBussinessIndustry(){
+        clickElement(inputBusinessIndustry, "Input Business Industry");
+        clickElement(listOptionIndustryEle.get(0), "First Option Industry");
+        clickElement(businessNameEle, "Business Name Textbox");
+    }
+
+    public void selectAccountingFramework(){
+        clickElement(inputAccountingFramework, "Input Accounting Framework");
+        chooseFirstOptionOfInputSelect(listOptionAccountingFramework, "List Option Accounting Framework");
+    }
+
     public void fillUpBusinessForm() {
         logger.info("Fill Up Business Form");
         if (validateNotExistedElement(labelBusinessIndustry, "Input Business Industry")) {

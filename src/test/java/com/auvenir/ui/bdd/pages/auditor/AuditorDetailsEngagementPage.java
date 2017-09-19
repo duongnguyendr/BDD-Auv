@@ -130,8 +130,10 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
     public void selectClientWithFullName(String fullName) {
         verifyInviteYourClientPage();
         clickElement(selectOptionInviteClient, "Select Client");
-        String xpathOptionAdminClientName = "//ul[@class='ddlLink inputDdl inputDdl-after']//a[text()='%s']";
+//        String xpathOptionAdminClientName = "//ul[@class='ddlLink inputDdl inputDdl-after']//a[contains(text()='%s')]";
+        String xpathOptionAdminClientName = ".//a[@class='ddlText auv-inputDdl-text' and contains(text(), '%s')]";
         clickElement(getElementByXpath(xpathOptionAdminClientName, fullName), "Option Admin Client Name");
+        waitSomeSeconds(1);
     }
 
     @FindBy(id = "m-ic-continueBtn")
@@ -139,6 +141,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
 
     public void clickInviteButton() {
         clickElement(buttonInvite, "Button Invite");
+        waitForProgressOverlayIsClosed();
     }
 
     public void verifyInviteClientSuccess() {

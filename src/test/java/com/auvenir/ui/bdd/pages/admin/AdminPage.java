@@ -254,7 +254,7 @@ public class AdminPage extends CommonPage {
     private String xpathUserTypeCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[2]";
     private String xpathEmailCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[3]";
     private String xpathDateCreatedCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[4]";
-    private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
+    private String xpathStatusCellOnUserTableAdminX = "//td/p[text()='%s']/ancestor::tr/td[5]/select";
     /**
      * Add new by huy.huynh on 06/07/2017.
      * R2.1 NewFeature
