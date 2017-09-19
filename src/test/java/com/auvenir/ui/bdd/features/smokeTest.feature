@@ -605,7 +605,7 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     Then I click on engagement: "Huy Engagement 02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
-    And  I click slide out menu on selected To-do: "Todo 04"
+    And  I click slide out menu on selected To-do: "Todo 06"
     Then I should see the Todo detail opened
     Then I input comment content: "Lead Client Comment"
     Then I click on post comment button
