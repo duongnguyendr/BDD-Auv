@@ -26,6 +26,9 @@ public class DetailsEngagementPage extends CommonPage {
     @FindBy(xpath = "//span[@id='h-engagementsLink']")
     private WebElement eleEngagementTab;
 
+    @FindBy(xpath = "//table[@id='todo-table']/tbody/tr[@id='empty-todo']/td/div/img")
+    private WebElement eleEmptyToDoImage;
+
     public DetailsEngagementPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -80,4 +83,7 @@ public class DetailsEngagementPage extends CommonPage {
         clickElement(eleEngagementTab, "engagement tab");
     }
 
+    public void verifyEmptyToDoList(){
+        waitForVisibleElement(eleEmptyToDoImage, "empty ToDo image");
+    }
 }

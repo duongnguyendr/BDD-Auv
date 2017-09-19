@@ -958,3 +958,39 @@ Feature: Smoke Test Feature
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
 
 
+  Scenario: Admin auditor can see all to-dos in firm: AUV-2253
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | auditortan.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement 01, Engagement 02
+    Then I click on engagement: "Engagement 01"
+    And I should see engagement detail page with Engagement Title Editable: "Engagement 01"
+    Then I should see empty ToDo list
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement 02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
+
+
+  Scenario:  Admin client can see all To-do(s) in business: AUV-2256
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                          | Password     |
+      | clienttan.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I should see engagement list : Engagement 01, Engagement 02
+    Then I click on engagement: "Engagement 01"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 01"
+    Then I should see empty ToDo list
+    Then I click on engagement tab return engagement page
+    And I should see engagement page
+    Then I click on engagement: "Engagement 02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5

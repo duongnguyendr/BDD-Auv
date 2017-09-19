@@ -153,6 +153,8 @@ public class TodoStepDefinition extends BaseInit {
       todoPage.selectUnEditableToDoCheckboxByName(todoName);
     }
 
+
+
     public class LisTodoAnduser{
         public String userName;
         public String todoName;
@@ -305,6 +307,13 @@ public class TodoStepDefinition extends BaseInit {
     @Then("^I should see all to do assigned : (.*)")
     public void iShouldSeeAllToDoAssigned(List<String> toDoList) throws Throwable {
         logger.info("=====I should see all to do assigned=====");
+        todoPage.verifyUserSeeToDo(toDoList);
+    }
+
+    @Then("^I should see all to do : (.*)")
+    public void iShouldSeeAllToDo(List<String> toDoList) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I should see all to do =====");
         todoPage.verifyUserSeeToDo(toDoList);
     }
 }
