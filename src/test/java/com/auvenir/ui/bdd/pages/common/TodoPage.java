@@ -376,15 +376,15 @@ public class TodoPage extends CommonPage {
         Assert.assertTrue(result, "File : " + fileName + " should existed in local computer");
     }
 
-    public void verifyClientAssigneeSelectedOnUneditablePage(String toDoName, String clientAssignee) {
-        logger.info("== select Client Assignee By Name ==");
-        waitSomeSeconds(2);
-        int index = findToDoTaskName(toDoName);
-        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
-        waitForTextValueChanged(clientAssigneeSelected, "listClientAssigneeDdl", clientAssignee);
-        logger.info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
-        Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
-    }
+//    public void verifyClientAssigneeSelectedOnUneditablePage(String toDoName, String clientAssignee) {
+//        logger.info("== select Client Assignee By Name ==");
+//        waitSomeSeconds(2);
+//        int index = findToDoTaskName(toDoName);
+//        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
+//        waitForTextValueChanged(clientAssigneeSelected, "listClientAssigneeDdl", clientAssignee);
+//        logger.info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
+//        Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
+//    }
 
     public void verifyUserSeeToDo(List<String> toDoList) {
         boolean result = true;

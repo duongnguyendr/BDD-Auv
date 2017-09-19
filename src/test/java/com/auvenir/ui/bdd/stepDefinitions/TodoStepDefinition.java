@@ -267,19 +267,19 @@ public class TodoStepDefinition extends BaseInit {
         auditorTodoPage.verifyTodoDetailOpened();
     }
 
-    @Then("^I verify Client Assignee Selected on Uneditabe Page$")
-    public void verifyClientAssigneeSelectedOnUneditabePage(DataTable table) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        logger.info("===== I verify Auditor Assignee Selected =====");
-
-        List<List<String>> listToDoAndUserClient = getTable(table);
-        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
-            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
-            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
-            todoPage.verifyClientAssigneeSelectedOnUneditablePage(listToDoAndUserClient.get(i).get(1),
-                    listToDoAndUserClient.get(i).get(0));
-        }
-    }
+//    @Then("^I verify Client Assignee Selected on Uneditabe Page$")
+//    public void verifyClientAssigneeSelectedOnUneditabePage(DataTable table) throws Throwable {
+//        // Write code here that turns the phrase above into concrete actions
+//        logger.info("===== I verify Auditor Assignee Selected =====");
+//
+//        List<List<String>> listToDoAndUserClient = getTable(table);
+//        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+//            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
+//            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
+//            todoPage.verifyClientAssigneeSelectedOnUneditablePage(listToDoAndUserClient.get(i).get(1),
+//                    listToDoAndUserClient.get(i).get(0));
+//        }
+//    }
 
     @And("^I create requests from To-Do$")
     public void createRequestsFromToDo(DataTable table) throws Throwable {
