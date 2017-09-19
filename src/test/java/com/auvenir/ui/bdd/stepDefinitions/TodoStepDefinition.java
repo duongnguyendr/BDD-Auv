@@ -211,14 +211,14 @@ public class TodoStepDefinition extends BaseInit {
         }
     }
 
-    @Then("^I assignee list To-Do to Client")
+    @And("^I assignee list To-Do to Client")
     public void verifyAssigneeListToDotoClient(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I assignee list To-Do to Lead Client =====");
 
 
         List<List<String>> listToDoAndUserClient = getTable(table);
-        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+        for (int i = 0; i < listToDoAndUserClient.size(); i++) {
             System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
             System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
             todoPage.selectClientAssigneeByName(listToDoAndUserClient.get(i).get(1),
@@ -232,7 +232,7 @@ public class TodoStepDefinition extends BaseInit {
         logger.info("===== I verify Auditor Assignee Selected =====");
 
         List<List<String>> listToDoAndUserClient = getTable(table);
-        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+        for (int i = 0; i < listToDoAndUserClient.size(); i++) {
             System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
             System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
             todoPage.verifyClientAssigneeSelected(listToDoAndUserClient.get(i).get(1),
