@@ -191,7 +191,7 @@ public class TodoDetailsPage extends CommonPage {
         GeneralUtilities.checkFileExists(concatDownload, true);
         waitSomeSeconds(1);
         int index = findRequestUploadFile(fileName);
-        Assert.assertTrue(index != -1, String.format("File 's' should be found.", fileName));
+        Assert.assertTrue(index != -1, String.format("File '%s' should be found.", fileName));
         clickElement(buttonDownloadRequest.get(index), "Button download request");
         waitSomeSeconds(3);
     }

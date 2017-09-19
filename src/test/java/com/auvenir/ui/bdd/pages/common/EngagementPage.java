@@ -31,6 +31,9 @@ public class EngagementPage extends CommonPage {
     @FindBy(id = "newAuditBtn")
     protected WebElement buttonNewEngagement;
 
+    @FindBy(xpath = "//table[@id='engagement-table']/tbody/tr/td[@class='engagement-name']/p")
+    private List<WebElement> eleEngagementNameList;
+
     public EngagementPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -109,4 +112,25 @@ public class EngagementPage extends CommonPage {
         }
     }
     /*-----------end of huy.huynh on 17/07/2017.*/
+
+    public boolean checkEngagementListExists(List<String > engagementNames){
+        if(eleEngagementNameList.size() != engagementNames.size())
+            return false;
+
+        int totalEngagement = engagementNames.size();
+        for(int i=0; i<totalEngagement; i++){
+            if(!engagementNames.contains(eleEngagementNameList.get(i).getText().trim())){
+                logger.info("Can not see all engagement list : " + engagementNames.toString());
+                return false;
+            }
+        }
+        logger.info("See all engagement list : " + engagementNames.toString());
+        return true;
+    }
+
+    public void verifySeeEngagementList(List<String> engagementNames){
+        logger.info("-----------See All Engagement--------------");
+        boolean result = checkEngagementListExists(engagementNames);
+        Assert.assertTrue(result);
+    }
 }
