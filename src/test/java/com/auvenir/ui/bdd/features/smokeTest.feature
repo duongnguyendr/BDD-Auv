@@ -594,7 +594,6 @@ Feature: Smoke Test Feature
     Then I click on post comment button
     Then I should see this comment display on list: "General Auditor Comment"
 
-  @Run
   Scenario: Lead Client post new comment: AUV-1267
     Given I navigate to Marketing page
     And I click on login link
@@ -610,6 +609,23 @@ Feature: Smoke Test Feature
     Then I input comment content: "Lead Client Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Client Comment"
+
+  @Run
+  Scenario: Client post new comment: AUV-1326
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | auvenirclient02@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
+    And  I click slide out menu on selected To-do: "Todo 01"
+    Then I should see the Todo detail opened
+    Then I input comment content: "General Client Comment"
+    Then I click on post comment button
+    Then I should see this comment display on list: "General Client Comment"
 #/Huy
 
     #Tan
@@ -855,7 +871,6 @@ Feature: Smoke Test Feature
     Then I should see the Todo detail opened
     Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
 
-  @Run
   Scenario: Lead Auditor download files of request on To Do task: AUV-961
     Given I navigate to Marketing page
     And I click on login link
