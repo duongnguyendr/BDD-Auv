@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.pages.common;
 import com.auvenir.ui.bdd.common.GeneralUtilities;
 import com.auvenir.ui.bdd.common.Generic;
 import org.apache.log4j.Logger;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,6 +60,10 @@ public class TodoDetailsPage extends CommonPage {
     WebElement commentInput;
     @FindBy(xpath = "//*[@id='add-request-btn']")
     private WebElement todoPageAddRequestBtn;
+    @FindBy(xpath = "//div[@class='todo-comment-container']//p[contains(@class,'comment-fileName')]")
+    List<WebElement> commentFilesName;
+
+    String userComment="//*[text()='%s']/ancestor::div[@class='todo-comment-container']//span";
 
 
 
@@ -202,5 +207,56 @@ public class TodoDetailsPage extends CommonPage {
     }
      public void selectAddNewRequest() {
         clickElement(todoPageAddRequestBtn,"Add new request Btn");
+    }
+    public boolean checkTwoValueIsMatch(String a ,String b){
+        Boolean result = true;
+        if (a.equals(b))
+        {result= true;}
+        else
+        {result= false;}
+
+        return result;
+
+    }
+    public void verifyCommentUnknowType(String typeComment,String commentContent,String userInput){
+        logger.info("verify Comment Unknow Type Input");
+        if (("input").equals(typeComment.trim().toLowerCase())){
+            // compare with type input just text
+
+        }else {
+            // compare with type input have  attachment
+            System.out.println("compare with type input have  attachment "+commentContent);
+            verifyCommentFilesDisplayedCorrectly(commentContent);
+            verifyUserCommentDisplayedCorrectly(commentContent,userInput);
+
+
+
+        }
+    }
+
+    public int findCommentFile(String fileName) {
+        logger.info("findCommentFile .."+fileName);
+        int isFind = -1;
+        for (int i = 0; i < commentFilesName.size(); i++) {
+            System.out.println("Comment file name at position: " + i + " is " + commentFilesName.get(i).getText());
+            if (commentFilesName.get(i).getText().equals(fileName)) {
+                isFind = i;
+                break;
+            }
+        }
+        return isFind;
+    }
+    public void verifyCommentFilesDisplayedCorrectly(String fileName) {
+        logger.info("Verifying this file '%s' existed in the list. : " +fileName);
+            int isFind = findCommentFile(fileName);
+            Assert.assertNotEquals(isFind,-1);
+
+    }
+    public void verifyUserCommentDisplayedCorrectly(String contentComment ,String userInput ){
+        logger.info("Verifying this file '%s' existed in the list..");
+        WebElement contentCommentEle = getElementByXpath(userComment, contentComment);
+        System.out.println("aaaaasasa"+contentCommentEle);
+        Assert.assertEquals(contentCommentEle.getText(),userInput);
+
     }
 }

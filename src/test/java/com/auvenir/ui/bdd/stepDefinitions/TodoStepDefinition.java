@@ -299,12 +299,11 @@ public class TodoStepDefinition extends BaseInit {
     }
 
     @Then("^I verify Auditor Create requests from To-Do: (.*)$")
-    public void verifyAuditorCreateRequestsFromToDo(List<String> listToDo, DataTable table) throws Throwable {
+    public void  verifyAuditorCreateRequestsFromToDo(List<String> listToDo, DataTable table) throws Throwable {
         logger.info("===== I verify Auditor Create requests from To-Do: =====");
         List<String> listRequestname = getList(table);
 
         for (String toDoName : listToDo) {
-            System.out.println("todo Name" + toDoName);
             clickSlideOutMenuOnSelectedToDo(toDoName);
             verifyTodoDetailOpened();
             auditorTodoPage.verifyRequestCreated(listRequestname);

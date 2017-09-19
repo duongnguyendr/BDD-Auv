@@ -1,11 +1,14 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
+import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.TodoDetailsPage;
+import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import jdk.nashorn.internal.objects.NativeArray;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -20,10 +23,14 @@ public class TodoDetailsStepDefinition extends BaseInit {
     private static Logger logger = Logger.getLogger(TodoDetailsStepDefinition.class.getSimpleName());
     private BaseInit baseInit;
     private TodoDetailsPage todoDetailsPage;
+    private TodoPage todoPage;
+    private AuditorTodoPage auditorTodoPage;
 
     public TodoDetailsStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         todoDetailsPage = new TodoDetailsPage(logger, driver);
+        todoPage = new TodoPage(logger,driver);
+        auditorTodoPage = new AuditorTodoPage(logger,driver);
     }
 
     @Then("^I input comment content: \"([^\"]*)\"$")
@@ -51,8 +58,8 @@ public class TodoDetailsStepDefinition extends BaseInit {
         logger.info("===== I creates some new Request name =====");
         List<TodoStepDefinition.ListNewRequest> listNewRequests = new ArrayList<>();
         listNewRequests = table.asList(TodoStepDefinition.ListNewRequest.class);
-        for (TodoStepDefinition.ListNewRequest listNewRequest: listNewRequests){
-            System.out.println("Prepare to create: "+listNewRequest.newRequestName);
+        for (TodoStepDefinition.ListNewRequest listNewRequest : listNewRequests) {
+            System.out.println("Prepare to create: " + listNewRequest.newRequestName);
             todoDetailsPage.clickAddRequestBtn();
             todoDetailsPage.createNewRequest(listNewRequest.newRequestName);
         }
@@ -78,7 +85,7 @@ public class TodoDetailsStepDefinition extends BaseInit {
     @And("^I should see list files: (.*)$")
     public void verifyListFilesOnListRequests(List<String> listFileName) throws Throwable {
         logger.info("===== I should see list files on list requests =====");
-        for(String fileName : listFileName) {
+        for (String fileName : listFileName) {
             todoDetailsPage.verifyUploadFileSuccessfully(fileName);
         }
     }
@@ -86,8 +93,42 @@ public class TodoDetailsStepDefinition extends BaseInit {
     @And("^I click download list files on Todo detail popup: (.*)$")
     public void clickDownloadListFileOnToDoDetailPopup(List<String> listFileName) throws Throwable {
         logger.info("===== I click download list file on Todo detail popup =====");
-        for(String fileName : listFileName) {
+        for (String fileName : listFileName) {
             todoDetailsPage.downloadRequestFile(fileName);
         }
+    }
+
+    @And("^I verify comment at list To-Do$")
+    public void verifyCommentAtListToDo(DataTable Table) throws Throwable {
+        logger.info("===== I verify comment at list To-Do =====");
+        List<List<String>>listToDo = getTable(Table);
+        String nameLastTodo= "string";
+        String nameTodo;
+        String typeComment;
+        String contentName;
+        String userComment;
+        for (int i = 1; i < listToDo.size() ; i++) {
+         {
+             nameTodo =listToDo.get(i).get(0);
+             typeComment=listToDo.get(i).get(1);
+             userComment=listToDo.get(i).get(2);
+             contentName= listToDo.get(i).get(3);
+             if(i!=1 &&(!nameTodo.equals(nameLastTodo)))
+              {
+                 auditorTodoPage.closeAddNewRequestWindow();
+                 nameLastTodo = listToDo.get(i).get(0);
+              }
+             System.out.println("nameTodo(0)" + nameTodo);
+              System.out.println("nameLastTodoget(0)" + nameLastTodo);
+              todoPage.clickSlideOutMenuOnTodo(nameTodo);
+              auditorTodoPage.verifyTodoDetailOpened();
+              todoDetailsPage.verifyCommentUnknowType(typeComment, contentName, userComment);
+
+
+         }
+
+         }
+
+
     }
 }
