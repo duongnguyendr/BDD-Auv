@@ -48,12 +48,8 @@ public class AuditorTodoPage extends TodoPage {
     private WebElement detailCateColorEle;
     @FindBy(id = "category-addBtn")
     private WebElement eleIdBtnAddCategory;
-    @FindBy(xpath = "//div[@class='auvicon-ex']")
-    protected WebElement requestCloseBtn;
-    @FindBy(xpath = "//div[@id='auv-todo-details']")
-    protected WebElement addNewRequestWindow;
-    @FindBy(xpath = "//div[@id='auv-todo-detailsReqBox']//div[@id='todoDetailsReqCont']/div[contains(@id, 'todo-req-box')]/span[1]")
-    protected List<WebElement> listRequestEle;
+
+
 
     public static final String popUpDivCategoryModel = "//div[starts-with(@id, 'categoryModel') and contains(@style,'display: block')]";
     public static final String categoryColor = "//*[@id='category-color']";
@@ -188,10 +184,10 @@ public class AuditorTodoPage extends TodoPage {
         clickElement(eleIdBtnAddCategory, "Add Category Button");
         waitForCssValueChanged(popUpDiv, "PopUp Windows", "display", "none");
     }
-    public void closeAddNewRequestWindow() {
-        clickElement(requestCloseBtn,"close Add New Request Window ");
-        waitForCssValueChanged(addNewRequestWindow, "Add new Request Window", "display", "none");
-    }
+//    public void closeAddNewRequestWindow() {
+//        clickElement(requestCloseBtn,"close Add New Request Window ");
+//        waitForCssValueChanged(addNewRequestWindow, "Add new Request Window", "display", "none");
+//    }
     public void verifyRequestCreated(List<String> listRequest) {
         logger.info("== verify Request Created ==");
         List<String> lstRequestDisplayed = new ArrayList<>();

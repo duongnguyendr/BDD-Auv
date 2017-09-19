@@ -942,7 +942,28 @@ Feature: Smoke Test Feature
       | request 06   |
 
     #Vien.pham
-  Scenario: Admin client can see all request(s) in business: AUV-2257
+  @vp
+  Scenario: Admin auditor can see all request(s) in Firm: AUV-2254
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                      | Password     |
+      | auvien1.adm@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    And I verify Existed request name from Todo
+      | Todo name | Request name      |
+      | Todo 01   | r1,r2,r3,r4,r5,r6 |
+      | Todo 03   | r1,r2,r3          |
+      | Todo 04   | r1,r2,r3,r4,r5,r6 |
+    And I verify Existed request files from Todo
+      | Todo name | Request name                                                 |
+      | Todo 02   | GA2.xlsx,GC2.xlsx,GCupload.png,LAupload.png,LC2.xlsx,sc1.jpg |
+
+      #Vien.pham
+  Scenario: Admin client can see all request(s) in Business: AUV-2257
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -952,9 +973,14 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement 02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    And I verify Created request name from Todo
-      | Todo name | Request name         |
-      | Todo 01   | r1, r2, r3, r4,r5,r6 |
+    And I verify Existed request name from Todo
+      | Todo name | Request name      |
+      | Todo 01   | r1,r2,r3,r4,r5,r6 |
+      | Todo 03   | r1,r2,r3          |
+      | Todo 04   | r1,r2,r3,r4,r5,r6 |
+    And I verify Existed request files from Todo
+      | Todo name | Request name                                                 |
+      | Todo 02   | GA2.xlsx,GC2.xlsx,GCupload.png,LAupload.png,LC2.xlsx,sc1.jpg |
 
 
   Scenario: Admin auditor can see engagement in firm: AUV-1336
