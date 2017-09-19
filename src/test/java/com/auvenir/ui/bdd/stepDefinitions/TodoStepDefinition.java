@@ -245,9 +245,9 @@ public class TodoStepDefinition extends BaseInit {
         }
     }
     @And("^I click slide out menu on selected To-do: \"([^\"]*)\"$")
-    public void iClickSlideOutMenuOnSelectedToDo(String todoName) throws Throwable {
+    public void clickSlideOutMenuOnSelectedToDo(String todoName) throws Throwable {
         logger.info("===== I click slide out panel on selected To-do =====");
-        auditorTodoPage.clickSlideOutMenuOnTodo(todoName);
+        todoPage.clickSlideOutMenuOnTodo(todoName);
     }
 
 
