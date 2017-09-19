@@ -8,6 +8,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+
 /**
  * Created by doai.tran on 8/7/2017.
  */
@@ -39,7 +41,7 @@ public class GeneralStepDefinition extends BaseInit {
     @And("^I should see list files which are downloaded successfully: (.*)$")
     public void verifyDownloadListFilesSuccess(List<String> listFileName) throws Throwable {
         logger.info("===== I click download list file on Todo detail popup =====");
-        for(String fileName : listFileName) {
+        for (String fileName : listFileName) {
             GeneralUtilities.verifyDownloadFileSuccessAndChecksum(fileName);
         }
     }
