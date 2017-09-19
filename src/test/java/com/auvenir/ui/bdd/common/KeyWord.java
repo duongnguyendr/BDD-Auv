@@ -806,18 +806,22 @@ Method to wait Ajax function on Site be loaded successfully.
             return false;
         } catch (NoSuchElementException e) {
             logger.info("Element is not existed.");
+            logger.info(e.toString());
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (ElementNotVisibleException e) {
             logger.info("Element is visible.");
+            logger.info(e.toString());
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (IndexOutOfBoundsException outEx) {
             logger.info("List element is empty.");
+            logger.info(outEx.toString());
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return true;
         } catch (Exception e) {
             logger.info("Element is still displayed.");
+            logger.info(e.toString());
             getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return false;
         }
@@ -1293,25 +1297,6 @@ Method to wait Ajax function on Site be loaded successfully.
         date.add(Calendar.DATE, day);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/d/yyyy");
         return simpleDateFormat.format(date.getTime());
-    }
-
-    public static boolean checkFileExists(String pathLocation, boolean deleteExisted) {
-        Path path = Paths.get(pathLocation);
-        System.out.println("file: " + path);
-        boolean result = false;
-        try {
-            if (Files.exists(path)) {
-                result = true;
-                if (deleteExisted) {
-                    Files.delete(path);
-                    if (Files.exists(path)) {
-                    }
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return result;
     }
 
     public void chooseFirstOptionOfInputSelect(List<WebElement> list, String elementName) {

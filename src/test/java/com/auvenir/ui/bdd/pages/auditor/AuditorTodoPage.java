@@ -1,13 +1,16 @@
 package com.auvenir.ui.bdd.pages.auditor;
 
 import com.auvenir.ui.bdd.pages.common.TodoPage;
+import com.google.common.util.concurrent.AbstractService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -45,6 +48,12 @@ public class AuditorTodoPage extends TodoPage {
     private WebElement detailCateColorEle;
     @FindBy(id = "category-addBtn")
     private WebElement eleIdBtnAddCategory;
+    @FindBy(xpath = "//div[@class='auvicon-ex']")
+    protected WebElement requestCloseBtn;
+    @FindBy(xpath = "//div[@id='auv-todo-details']")
+    protected WebElement addNewRequestWindow;
+    @FindBy(xpath = "//div[@id='auv-todo-detailsReqBox']//div[@id='todoDetailsReqCont']/div[contains(@id, 'todo-req-box')]/span[1]")
+    protected List<WebElement> listRequestEle;
 
     public static final String popUpDivCategoryModel = "//div[starts-with(@id, 'categoryModel') and contains(@style,'display: block')]";
     public static final String categoryColor = "//*[@id='category-color']";
@@ -178,6 +187,24 @@ public class AuditorTodoPage extends TodoPage {
         WebElement popUpDiv = getDriver().findElement(By.xpath(popUpDivCategoryModel));
         clickElement(eleIdBtnAddCategory, "Add Category Button");
         waitForCssValueChanged(popUpDiv, "PopUp Windows", "display", "none");
+    }
+    public void closeAddNewRequestWindow() {
+        clickElement(requestCloseBtn,"close Add New Request Window ");
+        waitForCssValueChanged(addNewRequestWindow, "Add new Request Window", "display", "none");
+    }
+    public void verifyRequestCreated(List<String> listRequest) {
+        logger.info("== verify Request Created ==");
+        List<String> lstRequestDisplayed = new ArrayList<>();
+        for (WebElement requestEle : listRequestEle) {
+            waitSomeSeconds(1);
+            lstRequestDisplayed.add(requestEle.getText());
+        }
+        logger.info("test listRequest"+listRequest.size());
+        for (int i = 0; i < listRequest.size(); i++) {
+            Assert.assertTrue(lstRequestDisplayed.contains(listRequest.get(i)));
+        }
+        closeAddNewRequestWindow();
+
     }
 
 

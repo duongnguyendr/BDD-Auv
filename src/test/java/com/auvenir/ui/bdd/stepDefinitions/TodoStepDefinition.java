@@ -2,29 +2,40 @@ package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.KeyWord;
+import com.auvenir.ui.bdd.pages.auditor.AuditorDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
+import com.auvenir.ui.bdd.pages.common.TodoDetailsPage;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
-import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+
+import static com.auvenir.ui.bdd.common.GeneralUtilities.getList;
+import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
 
 /**
  * Created by duong.nguyen on 9/13/2017.
  */
 public class TodoStepDefinition extends BaseInit {
     private static Logger logger = Logger.getLogger(TodoStepDefinition.class.getSimpleName());
-    private  BaseInit baseInit;
+    private BaseInit baseInit;
     AuditorTodoPage auditorTodoPage;
+    TodoDetailsPage todoDetailsPage;
+
     TodoPage todoPage;
     KeyWord keyWord;
-    public TodoStepDefinition(BaseInit baseInit){
+
+    public TodoStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
-        auditorTodoPage = new AuditorTodoPage(logger,driver);
-        todoPage = new TodoPage(logger,driver);
+        auditorTodoPage = new AuditorTodoPage(logger, driver);
+        todoPage = new TodoPage(logger, driver);
     }
 
     @And("^I select todo: \"([^\"]*)\" check box on todo page$")
@@ -87,18 +98,18 @@ public class TodoStepDefinition extends BaseInit {
         todoPage.verifyToDoNotExist(todoName);
     }
 
-//    @And("^I click assignee to client on bulk action drop down: \"([^\"]*)\"$")
-//    public void iClickAssigneeToClient(String clientFullName) throws Throwable {
-//        // Write code here that turns the phrase above into concrete actions
-//        logger.info("I click assignee to client on bulk action drop down: " + clientFullName);
-//        todoPage.chooseBulkActionAssignee(clientFullName);
-//    }
-//
-//    @And("^I click assignee to auditor on bulk action drop down: \"([^\"]*)\"$")
-//    public void iClickAssigneeToAuditor(String arg0) throws Throwable {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new PendingException();
-//    }
+    //    @And("^I click assignee to client on bulk action drop down: \"([^\"]*)\"$")
+    //    public void iClickAssigneeToClient(String clientFullName) throws Throwable {
+    //        // Write code here that turns the phrase above into concrete actions
+    //        logger.info("I click assignee to client on bulk action drop down: " + clientFullName);
+    //        todoPage.chooseBulkActionAssignee(clientFullName);
+    //    }
+    //
+    //    @And("^I click assignee to auditor on bulk action drop down: \"([^\"]*)\"$")
+    //    public void iClickAssigneeToAuditor(String arg0) throws Throwable {
+    //        // Write code here that turns the phrase above into concrete actions
+    //        throw new PendingException();
+    //    }
 
     @And("^I click assignee to :\"([^\"]*)\" on bulk action drop down$")
     public void iClickAssigneeToOnBulkActionDropDown(String fullName) throws Throwable {
@@ -139,18 +150,25 @@ public class TodoStepDefinition extends BaseInit {
         todoPage.verifyFileDownloadSuccessful(fileName);
     }
 
-    public class LisTodoAnduser{
+    @And("^I select todo: \"([^\"]*)\" check box on Uneditable To-do page$")
+    public void selectTodoCheckBoxOnUneditableToDoPage(String todoName) throws Throwable {
+      todoPage.selectToDoCheckboxByName(todoName);
+    }
+
+    public class LisTodoAnduser {
         public String userName;
         public String todoName;
-        public LisTodoAnduser (String userBeAssign, String LisTodoAnduser ){
+
+        public LisTodoAnduser(String userBeAssign, String LisTodoAnduser) {
             userName = userBeAssign;
             todoName = LisTodoAnduser;
         }
     }
 
-    public class ListNewRequest{
+    public class ListNewRequest {
         public String newRequestName;
-        public ListNewRequest(String newRequestName){
+
+        public ListNewRequest(String newRequestName) {
             this.newRequestName = newRequestName;
         }
     }
@@ -158,6 +176,7 @@ public class TodoStepDefinition extends BaseInit {
     public class ListFilesOnListRequests {
         public String fileName;
         public String requestName;
+
         public ListFilesOnListRequests(String fileName, String requestName) {
             this.fileName = fileName;
             this.requestName = requestName;
@@ -170,12 +189,13 @@ public class TodoStepDefinition extends BaseInit {
         logger.info("===== I assignee list To-Do to General Auditor =====");
         List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
         lisTodoAndusers = table.asList(LisTodoAnduser.class);
-        for (LisTodoAnduser lisTodoAnduser: lisTodoAndusers){
-            System.out.println("The Auditor name is: "+lisTodoAnduser.userName);
-            System.out.println("The To-Do name is: "+lisTodoAnduser.todoName);
+        for (LisTodoAnduser lisTodoAnduser : lisTodoAndusers) {
+            System.out.println("The Auditor name is: " + lisTodoAnduser.userName);
+            System.out.println("The To-Do name is: " + lisTodoAnduser.todoName);
             auditorTodoPage.selectAuditorAssigneeByName(lisTodoAnduser.todoName, lisTodoAnduser.userName);
         }
     }
+
     @Then("^I verify Auditor Assignee Selected$")
     public void verifyAuditorAssigneeSelected(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -184,35 +204,39 @@ public class TodoStepDefinition extends BaseInit {
         List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
         lisTodoAndusers = table.asList(LisTodoAnduser.class);
 
-        for (LisTodoAnduser lisTodoAnduser: lisTodoAndusers){
-            System.out.println("The Auditor name is: "+lisTodoAnduser.userName);
-            System.out.println("The To-Do name is: "+lisTodoAnduser.todoName);
-            auditorTodoPage.verifyAuditorAssigneeSelected(lisTodoAnduser.todoName,lisTodoAnduser.userName);
+        for (LisTodoAnduser lisTodoAnduser : lisTodoAndusers) {
+            System.out.println("The Auditor name is: " + lisTodoAnduser.userName);
+            System.out.println("The To-Do name is: " + lisTodoAnduser.todoName);
+            auditorTodoPage.verifyAuditorAssigneeSelected(lisTodoAnduser.todoName, lisTodoAnduser.userName);
         }
     }
+
     @Then("^I assignee list To-Do to Client")
     public void verifyAssigneeListToDotoClient(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I assignee list To-Do to Lead Client =====");
 
 
-         List<List<String>>listToDoAndUserClient =getTable(table);
-        for (int i =1;i<listToDoAndUserClient.size();i++){
-            System.out.println("The Client name is: "+listToDoAndUserClient.get(i).get(0));
-            System.out.println("The To-Do name is: "+listToDoAndUserClient.get(i).get(1));
-            todoPage.selectClientAssigneeByName(listToDoAndUserClient.get(i).get(1),listToDoAndUserClient.get(i).get(0));
+        List<List<String>> listToDoAndUserClient = getTable(table);
+        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
+            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
+            todoPage.selectClientAssigneeByName(listToDoAndUserClient.get(i).get(1),
+                    listToDoAndUserClient.get(i).get(0));
         }
     }
+
     @Then("^I verify Client Assignee Selected$")
     public void verifyClientAssigneeSelected(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I verify Auditor Assignee Selected =====");
 
-        List<List<String>>listToDoAndUserClient =getTable(table);
-        for (int i =1;i<listToDoAndUserClient.size();i++){
-            System.out.println("The Client name is: "+listToDoAndUserClient.get(i).get(0));
-            System.out.println("The To-Do name is: "+listToDoAndUserClient.get(i).get(1));
-            todoPage.verifyClientAssigneeSelected(listToDoAndUserClient.get(i).get(1),listToDoAndUserClient.get(i).get(0));
+        List<List<String>> listToDoAndUserClient = getTable(table);
+        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
+            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
+            todoPage.verifyClientAssigneeSelected(listToDoAndUserClient.get(i).get(1),
+                    listToDoAndUserClient.get(i).get(0));
         }
     }
 
@@ -222,17 +246,18 @@ public class TodoStepDefinition extends BaseInit {
         logger.info("===== I create To-Do with name and category =====");
 
         List<List<String>> toDonameAndategory  = getTable(table);
-        for (int i = 1; i < toDonameAndategory.size() ; i++) {
+        for (int i = 0; i < toDonameAndategory.size() ; i++) {
             System.out.println("The Client name is: "+toDonameAndategory.get(i).get(0));
             System.out.println("The Catalog: "+toDonameAndategory.get(i).get(1));
             auditorTodoPage.createToDoTaskWithCategoryName(toDonameAndategory.get(i).get(0),toDonameAndategory.get(i).get(1));
 
         }
     }
+
     @And("^I click slide out menu on selected To-do: \"([^\"]*)\"$")
-    public void iClickSlideOutMenuOnSelectedToDo(String todoName) throws Throwable {
+    public void clickSlideOutMenuOnSelectedToDo(String todoName) throws Throwable {
         logger.info("===== I click slide out panel on selected To-do =====");
-        auditorTodoPage.clickSlideOutMenuOnTodo(todoName);
+        todoPage.clickSlideOutMenuOnTodo(todoName);
     }
 
 
@@ -242,29 +267,76 @@ public class TodoStepDefinition extends BaseInit {
         auditorTodoPage.verifyTodoDetailOpened();
     }
 
-    @And("^I creates some new requests$")
-    public void createsSomeNewRequests(DataTable table) throws Throwable {
-        logger.info("===== I creates some new Request name =====");
-        List<ListNewRequest> listNewRequests = new ArrayList<>();
-        listNewRequests = table.asList(ListNewRequest.class);
-        for (ListNewRequest listNewRequest: listNewRequests){
-            System.out.println("Prepare to create: "+listNewRequest.newRequestName);
-            auditorTodoPage.selectAddNewRequest();
-            auditorTodoPage.createNewRequest(listNewRequest.newRequestName);
+//    @Then("^I verify Client Assignee Selected on Uneditabe Page$")
+//    public void verifyClientAssigneeSelectedOnUneditabePage(DataTable table) throws Throwable {
+//        // Write code here that turns the phrase above into concrete actions
+//        logger.info("===== I verify Auditor Assignee Selected =====");
+//
+//        List<List<String>> listToDoAndUserClient = getTable(table);
+//        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+//            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
+//            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
+//            todoPage.verifyClientAssigneeSelectedOnUneditablePage(listToDoAndUserClient.get(i).get(1),
+//                    listToDoAndUserClient.get(i).get(0));
+//        }
+//    }
+
+    @And("^I create requests from To-Do$")
+    public void createRequestsFromToDo(DataTable table) throws Throwable {
+        logger.info("===== I create requests from To-Do =====");
+        Map<String, String> maptable = new HashMap<>();
+        maptable = table.asMap(String.class, String.class);
+
+        for (String toDo : maptable.keySet()) { // for To-Do to create request
+            clickSlideOutMenuOnSelectedToDo(toDo);
+            verifyTodoDetailOpened();
+            String [] requestNames = maptable.get(toDo).split(",");
+            for (String requestName: requestNames){
+                todoDetailsPage.selectAddNewRequest();
+                todoDetailsPage.createNewRequest(requestName);
+            }
+            auditorTodoPage.closeAddNewRequestWindow();
         }
     }
 
-//    "([^"]*)"
-    @And("^I uploads list files on list requests$")
-    public void uploadListFilesOnRequest(DataTable table) throws Throwable {
-        logger.info("===== I uploads list files on request =====");
-        List<ListFilesOnListRequests> listFilesOnListRequests = new ArrayList<>();
-        listFilesOnListRequests = table.asList(ListFilesOnListRequests.class);
-        for (ListFilesOnListRequests fileOnRequest : listFilesOnListRequests) {
-            System.out.println("File Name: " + fileOnRequest.fileName + "--Request: " + fileOnRequest.requestName);
-            todoPage.uploadFileOnRequestByName(fileOnRequest.fileName, fileOnRequest.requestName);
+    @Then("^I verify Auditor Create requests from To-Do: (.*)$")
+    public void verifyAuditorCreateRequestsFromToDo(List<String> listToDo, DataTable table) throws Throwable {
+        logger.info("===== I verify Auditor Create requests from To-Do: =====");
+        List<String> listRequestname = getList(table);
+
+        for (String toDoName : listToDo) {
+            System.out.println("todo Name" + toDoName);
+            clickSlideOutMenuOnSelectedToDo(toDoName);
+            verifyTodoDetailOpened();
+            auditorTodoPage.verifyRequestCreated(listRequestname);
         }
+
     }
 
 
+    @Then("^I should see all to do assigned : (.*)")
+    public void iShouldSeeAllToDoAssigned(List<String> toDoList) throws Throwable {
+        logger.info("=====I should see all to do assigned=====");
+        todoPage.verifyUserSeeToDo(toDoList);
+    }
+
+    @Then("^I should see all to do : (.*)")
+    public void iShouldSeeAllToDo(List<String> toDoList) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I should see all to do =====");
+        todoPage.verifyUserSeeToDo(toDoList);
+    }
+
+    @And("^I verify Created request name from Todo$")
+    public void verifyCreatedRequestNameFromTodo(DataTable table) throws Throwable {
+        logger.info("=====I verify created request name from todo=====");
+        List<List<String>> listTodoAndRequestName = getTable(table);
+        for (List<String> todoRequest : listTodoAndRequestName) {
+            logger.info("Verify todo name: " + todoRequest.get(0));
+            String [] requests = todoRequest.get(1).split(",");
+            logger.info("Verify request name: " + requests);
+
+
+        }
+    }
 }

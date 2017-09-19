@@ -30,14 +30,14 @@ public class MarketingStepDefinition extends BaseInit {
     }
 
     @And("^I click on login link$")
-    public void iClickOnLoginLink() throws Throwable {
+    public void clickOnLoginLink() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I click on login link =====");
         marketingPage.clickOnLoginBTN();
 
     }
     @And("^I enter the following for Login$")
-    public void iEnterTheFollowingForLogin(DataTable table) throws Throwable {
+    public void enterTheFollowingForLogin(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I enter the following for login =====");
 
@@ -76,7 +76,7 @@ public class MarketingStepDefinition extends BaseInit {
         }
     }
     @And("^I click on login button$")
-    public void iClickOnLoginButton() throws Throwable {
+    public void clickOnLoginButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I click on login button =====");
         /*MarketingPage marketingPage = new MarketingPage(logger,driver);

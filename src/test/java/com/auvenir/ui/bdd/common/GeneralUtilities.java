@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.common;
 import cucumber.api.DataTable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,10 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
+import java.util.*;
+
+import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 public class GeneralUtilities {
 
@@ -57,10 +58,21 @@ public class GeneralUtilities {
     public static List getTable ( DataTable dataTable){
 /*note: Get form 1 to List size because first row is the header of file
 */
-        List<List<String>>listDataTable;
-        listDataTable = dataTable.raw();
+        LinkedList<List<String>> listDataTable;
+        listDataTable = new LinkedList<List<String>>( dataTable.raw());
+        listDataTable.remove(0);
         return listDataTable;
     }
+    public static List getList ( DataTable dataTable){
+/*note: Get form 1 to List size because first row is the header of file
+*/
+        List<String>listDataList;
+        listDataList = dataTable.asList(String.class);
+        return listDataList;
+
+
+    }
+
 
     //    public boolean checkFileExists(String downloadFile, boolean isDeletedFile){return false;}
     public static boolean checkFileExists(String pathLocation, boolean deleteExisted) {
@@ -82,5 +94,34 @@ public class GeneralUtilities {
             return false;
         }
         return result;
+    }
+
+    public static String calculateMD5(String fileMD5) {
+        String md5 = null;
+        try {
+            FileInputStream fis = new FileInputStream(fileMD5);
+            System.out.println("fileMD5 = " + fileMD5);
+            md5 = md5Hex(fis);
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unable to calculate MD5 file.");
+        }
+        return md5;
+
+    }
+
+    public static void verifyDownloadFileSuccessAndChecksum(String fileName) {
+        String concatUpload = Generic.FOLDER_UPLOAD.concat(fileName);
+        String concatDownload = Generic.FOLDER_DOWNLOAD.concat(fileName);
+        boolean fileExisted = GeneralUtilities.checkFileExists(concatDownload, false);
+        Assert.assertTrue(fileExisted, String.format("File 's' should be existed."));
+        if (fileExisted) {
+            String checkMd5UploadFile = GeneralUtilities.calculateMD5(concatUpload);
+            System.out.println("md5 upload is: " + checkMd5UploadFile);
+            String checkMd5DownloadFile = GeneralUtilities.calculateMD5(concatDownload);
+            System.out.println("md5 download is: " + checkMd5DownloadFile);
+            Assert.assertEquals(checkMd5DownloadFile,checkMd5DownloadFile, "Checksum Download File and Upload File should be matched.");
+        }
     }
 }
