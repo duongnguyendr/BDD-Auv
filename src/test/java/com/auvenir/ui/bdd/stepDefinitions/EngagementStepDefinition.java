@@ -22,27 +22,27 @@ public class EngagementStepDefinition extends BaseInit {
     }
 
     @Then("^I should see engagement page$")
-    public void iShouldSeeEngagementPage() throws Throwable{
+    public void seeEngagementPage() throws Throwable{
         logger.info("I should see engagement page");
         auditorEngagementPage.verifyEngagementPage();
     }
 
     @And("^I click create new engagement button$")
-    public void iClickCreateNewEngagementButton() throws Throwable {
+    public void clickCreateNewEngagementButton() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I click create new engagement button");
         auditorEngagementPage.clickNewEngagementButton();
     }
 
     @And("^I click on engagement: \"([^\"]*)\"$")
-    public void iClickOnEngagement(String engagementName) throws Throwable {
+    public void clickOnEngagement(String engagementName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I click on engagement: " + engagementName);
         auditorEngagementPage.viewEngagementDetailsPage(engagementName);
     }
 
     @Then("^I should see client engagement page$")
-    public void iShouldSeeClientEngagementPage() throws Throwable {
+    public void seeClientEngagementPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I should see client engagement page");
         clientEngagementPage.verifyEngagementPage();

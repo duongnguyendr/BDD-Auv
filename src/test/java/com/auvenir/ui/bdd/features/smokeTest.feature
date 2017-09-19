@@ -567,7 +567,6 @@ Feature: Smoke Test Feature
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Auditor Comment"
 
-  @Run
   Scenario: General Auditor post new comment: AUV-1123
     Given I navigate to Marketing page
     And I click on login link
@@ -583,6 +582,23 @@ Feature: Smoke Test Feature
     Then I input comment content: "General Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Auditor Comment"
+
+  @Run
+  Scenario: Lead Client post new comment: AUV-1267
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | auvenirclient01@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Huy Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Huy Engagement 02"
+    And  I click slide out menu on selected To-do: "Todo 04"
+    Then I should see the Todo detail opened
+    Then I input comment content: "Lead Client Comment"
+    Then I click on post comment button
+    Then I should see this comment display on list: "Lead Client Comment"
 #/Huy
 
     #Tan

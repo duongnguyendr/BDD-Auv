@@ -41,19 +41,23 @@ public class TodoPage extends CommonPage {
     protected WebElement popUpMarkCompleteWindows;
     @FindBy(xpath = "//label[contains(@id,'m-Mark As Complete')]")
     protected WebElement markAsCompleteTitle;
-    @FindBy(xpath = "//div[contains(@id, 'download-zip') and contains(@style, 'display: block;')]//label[contains(@id, 'm-download-zip')]")
+    @FindBy(xpath = "//div[contains(@id, 'download-zip') and contains(@style, 'display: block;')]//label[contains" +
+            "(@id, 'm-download-zip')]")
     protected WebElement downloadAttachmentTitle;
     @FindBy(xpath = ".//label[contains(@id, 'm-Delete Todo Modal')]")
     protected WebElement deleteTodoTitle;
-    @FindBy(xpath = "//div[contains(@id, 'Mark As Complete')]//div[@class='ce-footer']//button[@class='auvbtn primary']")
+    @FindBy(xpath = "//div[contains(@id, 'Mark As Complete')]//div[@class='ce-footer']//button[@class='auvbtn " +
+            "primary']")
     protected WebElement archiveMarkPopupBtn;
-    @FindBy(xpath = "//table[@id='todo-table']//td/div[@class='auvicon-circle-checkmark completeBtn priColor']/../../td/span")
+    @FindBy(xpath = "//table[@id='todo-table']//td/div[@class='auvicon-circle-checkmark completeBtn " +
+            "priColor']/../../td/span")
     protected List<WebElement> listTodoCompleted;
     @FindBy(xpath = "//button[contains(text(),'Delete')][@class='item']")
     protected WebElement optionDelete;
     @FindBy(xpath = "//div[starts-with(@id,'Delete Todo Modal')]/div/div[starts-with(@id,'m-Delete Todo Modal')]")
     protected WebElement divConfirmDeleteToDoAnimate;
-    @FindBy(xpath = "//div[contains(@id,'m-Delete Todo Modal')]/following-sibling::div//button[@class='auvbtn warning']")
+    @FindBy(xpath = "//div[contains(@id,'m-Delete Todo Modal')]/following-sibling::div//button[@class='auvbtn " +
+            "warning']")
     protected WebElement buttonConfirmDeleteToDo;
     @FindBy(xpath = "//div[starts-with(@id,'Delete Todo Modal')]")
     protected WebElement divConfirmDeleteToDo;
@@ -93,8 +97,8 @@ public class TodoPage extends CommonPage {
             for (int i = 0; i < toDoTaskRowEle.size(); i++) {
                 classAttribute = toDoTaskRowEle.get(i).getAttribute("class");
                 if (classAttribute.equals("newRow")) {
-                    boolean elementExisted =
-                            validateNotExistedElement(toDoTaskRowEle.get(i).findElement(By.xpath("td/input[@type='text']")), "toDoTaskRowEle");
+                    boolean elementExisted = validateNotExistedElement(
+                            toDoTaskRowEle.get(i).findElement(By.xpath("td/input[@type='text']")), "toDoTaskRowEle");
                     if (!elementExisted) {
                         WebElement toDoNameCell = toDoTaskRowEle.get(i).findElement(By.xpath("td/input[@type='text']"));
                         actualAttributeValue = toDoNameCell.getAttribute("value").trim();
@@ -116,11 +120,12 @@ public class TodoPage extends CommonPage {
 
     /**
      * Vien Pham
+     *
      * @param toDoName
      * @return
      */
     public int findUnEditableToDoTaskName(String toDoName) {
-        logger.info("Find Position of To Do Task Name "+ toDoName);
+        logger.info("Find Position of To Do Task Name " + toDoName);
         int index = -1;
         try {
             for (int i = 0; i < unEditableTodoName.size(); i++) {
@@ -142,8 +147,8 @@ public class TodoPage extends CommonPage {
         int index = findToDoTaskName(toDoName);
         clickElement(listClientAssigneeDdl.get(index), "listClientAssigneeDdl");
         waitSomeSeconds(2);
-        WebElement clientAssigneeSelected =
-                listClientAssigneeDdl.get(index).findElement(By.xpath(String.format(assineeClientEle, clientAssignee)));
+        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index)
+                .findElement(By.xpath(String.format(assineeClientEle, clientAssignee)));
         clickElement(clientAssigneeSelected, "clientAssigneeSelected");
 
     }
@@ -153,7 +158,7 @@ public class TodoPage extends CommonPage {
      */
     public int selectToDoCheckboxByName(String todoName) {//need
         logger.info("Select To Do Task Check Box by Name");
-        try{
+        try {
             int index = findToDoTaskName(todoName);
             System.out.println("Index: " + index);
             if (index != -1) {
@@ -161,13 +166,14 @@ public class TodoPage extends CommonPage {
                     clickElement(eleToDoCheckboxRow.get(index), String.format("Check box of Task Name: %s", todoName));
             }
             return index;
-        }catch (Exception e) {
+        } catch (Exception e) {
             return -1;
         }
     }
 
     /**
      * Vien.Pham
+     *
      * @param todoName
      * @return
      */
@@ -197,7 +203,8 @@ public class TodoPage extends CommonPage {
      * Duong Nguyen
      */
     public void clickToBulkCompleteButton() {
-        List<WebElement> menuBulkActionsDropdown = bulkActionsDropdownMenuEle.findElements(By.xpath("button[contains(@class,'item')]"));
+        List<WebElement> menuBulkActionsDropdown = bulkActionsDropdownMenuEle
+                .findElements(By.xpath("button[contains(@class,'item')]"));
         clickElement(menuBulkActionsDropdown.get(1), "Bulk complete button");
         waitForCssValueChanged(popUpMarkCompleteWindows, "PopUp Mark Complete", "display", "block");
     }
@@ -205,7 +212,7 @@ public class TodoPage extends CommonPage {
     /**
      * Duong Nguyen
      */
-    public void verifyPopUpMarkCompletedDisplay(){
+    public void verifyPopUpMarkCompletedDisplay() {
         boolean result = validateElementText(markAsCompleteTitle, "Mark As Complete?");
         Assert.assertTrue(result, "Complete Mark Popup should be displayed.");
     }
@@ -218,7 +225,7 @@ public class TodoPage extends CommonPage {
         clickElement(archiveMarkPopupBtn, "Click on archive button");
     }
 
-    public void verifyPopUpDownloadAttachmentsDisplay(){
+    public void verifyPopUpDownloadAttachmentsDisplay() {
         boolean result = validateElementText(downloadAttachmentTitle, "Ready To Download");
         Assert.assertTrue(result, "Download Attachments popup should be displayed.");
     }
@@ -240,7 +247,7 @@ public class TodoPage extends CommonPage {
         clickElement(optionDelete, "Option Delete");
     }
 
-    public void verifyPopUpDeleteTodoDisplay(){
+    public void verifyPopUpDeleteTodoDisplay() {
         boolean result = validateElementText(deleteTodoTitle, "Delete To-Do?");
         Assert.assertTrue(result, "Delete todo popup should be displayed.");
     }
@@ -297,11 +304,13 @@ public class TodoPage extends CommonPage {
             }
         }
     }
+
     public void verifyClientAssigneeSelected(String toDoName, String clientAssignee) {
         logger.info("== select Client Assignee By Name ==");
         waitSomeSeconds(2);
         int index = findToDoTaskName(toDoName);
-        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
+        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index)
+                .findElement(By.xpath("./div[@class='text']"));
         waitForTextValueChanged(clientAssigneeSelected, "listClientAssigneeDdl", clientAssignee);
         logger.info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
         Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
@@ -334,8 +343,11 @@ public class TodoPage extends CommonPage {
     }
 
     public void clickSlideOutMenuOnTodo(String todoName) {
-        int index = findToDoTaskName(todoName);
-        clickElement(listSlideOutMenu.get(index), "Slide Out Menu icon");
+        String xpathImageSlideOutByName = "//*[@value|text()='%s']/ancestor::tr[@class='newRow']//img";
+        WebElement imageSlideOut = getElementByXpath(xpathImageSlideOutByName, todoName);
+        System.out.println("imageSlideOut = " + imageSlideOut);
+        Assert.assertNotNull(imageSlideOut, "Todo named: " + todoName + " expected exist on list todo.");
+        clickElement(imageSlideOut, "Image Slide Out of todo: " + todoName);
     }
 
     public void verifyTodoDetailOpened() {
@@ -344,19 +356,20 @@ public class TodoPage extends CommonPage {
     }
 
     public void clickToBulkDownloadAttachmentButton() {
-        List<WebElement> menuBulkActionsDropdown = bulkActionsDropdownMenuEle.findElements(By.xpath("button[contains(@class,'item')]"));
+        List<WebElement> menuBulkActionsDropdown = bulkActionsDropdownMenuEle
+                .findElements(By.xpath("button[contains(@class,'item')]"));
         clickElement(menuBulkActionsDropdown.get(0), "Bulk download attachments button");
         waitForAnimation(popUpDownloadAttachmentsWindows, "Download To Do Popup");
     }
 
     public void clickDownloadAllTodo() {
-            logger.info("Click Download Button.");
-            clickElement(downloadAllTodo, "click to downloadAllTodo");
-            waitForCssValueChanged(popUpDownloadAttachmentsWindows, "Popup Download", "display", "none");
-            waitSomeSeconds(3);
+        logger.info("Click Download Button.");
+        clickElement(downloadAllTodo, "click to downloadAllTodo");
+        waitForCssValueChanged(popUpDownloadAttachmentsWindows, "Popup Download", "display", "none");
+        waitSomeSeconds(3);
     }
 
-    public void verifyFileDownloadSuccessful(String fileName){
+    public void verifyFileDownloadSuccessful(String fileName) {
         boolean result = GeneralUtilities.checkFileExists(Generic.FOLDER_DOWNLOAD + fileName, false);
         Assert.assertTrue(result, "File : " + fileName + " should existed in local computer");
     }
@@ -382,7 +395,7 @@ public class TodoPage extends CommonPage {
         if (isFind == -1) {
             logger.info("Can not find any request has name is: " + requestName);
         } else {
-            clickElement(addFileIcon.get(isFind),"Add File Icon");
+            clickElement(addFileIcon.get(isFind), "Add File Icon");
             waitSomeSeconds(2);
             logger.info("Input path of file..");
             StringSelection ss = new StringSelection(concatUpload);
@@ -402,7 +415,7 @@ public class TodoPage extends CommonPage {
     }
 
     public void selectAddNewRequest() {
-        clickElement(todoPageAddRequestBtn,"Add new request Btn");
+        clickElement(todoPageAddRequestBtn, "Add new request Btn");
     }
 
     public void createNewRequest(String newRequestName) {
@@ -413,19 +426,20 @@ public class TodoPage extends CommonPage {
         logger.info("== select Client Assignee By Name ==");
         waitSomeSeconds(2);
         int index = findUnEditableToDoTaskName(toDoName);
-        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index).findElement(By.xpath("./div[@class='text']"));
+        WebElement clientAssigneeSelected = listClientAssigneeDdl.get(index)
+                .findElement(By.xpath("./div[@class='text']"));
         waitForTextValueChanged(clientAssigneeSelected, "listClientAssigneeDdl", clientAssignee);
         logger.info("++ Assert With " + clientAssigneeSelected.getText() + "and " + clientAssignee);
         Assert.assertEquals(clientAssigneeSelected.getText(), clientAssignee);
     }
 
-    public void verifyUserSeeToDo(List<String> toDoList){
+    public void verifyUserSeeToDo(List<String> toDoList) {
         boolean result = true;
         int totalToDo = toDoList.size();
-        for(int i=0; i<totalToDo;i++){
+        for (int i = 0; i < totalToDo; i++) {
             String toDoName = toDoList.get(i);
             int index = findUnEditableToDoTaskName(toDoName);
-            if(-1 == index){
+            if (-1 == index) {
                 System.out.println("Can not see : " + toDoName);
                 result = false;
                 break;

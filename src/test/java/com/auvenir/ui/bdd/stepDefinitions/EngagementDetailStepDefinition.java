@@ -44,13 +44,13 @@ public class EngagementDetailStepDefinition extends BaseInit {
     }
 
     @Then("^I should see engagement detail page with Engagement Title Uneditable: \"([^\"]*)\"$")
-    public void iShouldSeeTheTitleOfSelectedEngagement(String engagementName) throws Throwable {
+    public void seeTheTitleOfSelectedEngagement(String engagementName) throws Throwable {
         detailsEngagementPage.verifyDetailsEngagementPageUnEditable(engagementName);
     }
 
 
     @And("^I click on Team tab on Client page$")
-    public void iClickOnTeamTabOnClientPage() throws Throwable {
+    public void clickOnTeamTabOnClientPage() throws Throwable {
         logger.info("Client click on Team tab");
         detailsEngagementPage.navigateToTeamTab();
     }
