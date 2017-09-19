@@ -932,12 +932,13 @@ Feature: Smoke Test Feature
       | Todo 02 | request 01,request 02,request 03,request 04 ,request 05,request 06 |
       | Todo 03 | request 01,request 02,request 03,request 04 ,request 05,request 06 |
     Then I verify Auditor Create requests from To-Do: Todo 01,Todo 02,Todo 03
-      | request 01 |
-      | request 02 |
-      | request 03 |
-      | request 04 |
-      | request 05 |
-      | request 06 |
+      |Request Name |
+       |request 01|
+       |request 02|
+       |request 03|
+       |request 04|
+       |request 05|
+       |request 06|
 
     #Vien.pham
   Scenario: Admin client can see all request(s) in business: AUV-2257
@@ -1026,3 +1027,49 @@ Feature: Smoke Test Feature
     Then I click on engagement: "Engagement 02"
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
     Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
+
+  Scenario:Auditor Member creates to do task: AUV-1060
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                        | Password     |
+      | auvenirauditor01@gmail.com| Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement abc"
+    Then I create To-Do with name and category
+      | ToDo name | Category |
+      | ToDo 03   | Music    |
+      | ToDo 04   | Sport    |
+      | ToDo 03   | Music    |
+
+
+  Scenario: Lead Client assign To Do to client: AUV-2248
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | auvenirinfo@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement abc"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement abc"
+    Then I assignee list To-Do to Client
+      | userName   | Todo Name |
+      | Unassigned | ToDo 01   |
+      | Unassigned | ToDo 02   |
+
+
+  @Vietlq
+  Scenario: Admin auditor can see all comments in firm : AUV-2255
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                 | Password     |
+      | adm.auditor001@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement01"
+    Then I should see engagement detail page with Engagement Title Editable: "Engagement01"
+

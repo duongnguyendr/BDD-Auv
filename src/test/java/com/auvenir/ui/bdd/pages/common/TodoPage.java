@@ -84,12 +84,6 @@ public class TodoPage extends CommonPage {
     protected List<WebElement> listRequestNameLabel;
     @FindBy(xpath = "//label[@class='auvicon-line-circle-add todo-circle-add todo-icon-hover']")
     private List<WebElement> addFileIcon;
-    @FindBy(xpath = "//*[@id='add-request-btn']")
-    private WebElement todoPageAddRequestBtn;
-    @FindBy(xpath = "//div[@id='todo-req-box-adding']/input")
-    private WebElement nameRequestInput;
-    @FindBy(id = "comment-input")
-    WebElement commentInput;
 
 
     public int findToDoTaskName(String toDoName) {
@@ -407,15 +401,8 @@ public class TodoPage extends CommonPage {
         Assert.assertTrue(result);
     }
 
-    public void selectAddNewRequest() {
-        clickElement(todoPageAddRequestBtn, "Add new request Btn");
-    }
 
-    public void createNewRequest(String newRequestName) {
-        logger.info("Input name request :  " + newRequestName);
-        sendKeyTextBox(nameRequestInput, newRequestName, "name request");
-        clickElement(commentInput, "comment Input ");
-    }
+
 
     public static void verifyRequestFromTodo(DataTable dataTable) {
 

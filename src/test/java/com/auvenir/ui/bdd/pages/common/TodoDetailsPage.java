@@ -53,6 +53,15 @@ public class TodoDetailsPage extends CommonPage {
     protected List<WebElement> buttonDownloadRequest;
     @FindBy(xpath = "//*[@id='todoDetailsReqCont']")
     protected WebElement tableNewRequest;
+    @FindBy(xpath = "//div[@id='todo-req-box-adding']/input")
+    private WebElement  nameRequestInput;
+    @FindBy(id = "comment-input")
+    WebElement commentInput;
+    @FindBy(xpath = "//*[@id='add-request-btn']")
+    private WebElement todoPageAddRequestBtn;
+
+
+
 
     public TodoDetailsPage(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -149,8 +158,7 @@ public class TodoDetailsPage extends CommonPage {
         }
     }
 
-    public void createNewRequest(String newRequestName) {
-    }
+
 
     public void closeAddNewRequestWindow() {
         clickElement(todoDetailPopupCloseBtn, "Close To Do detail popup");
@@ -186,5 +194,13 @@ public class TodoDetailsPage extends CommonPage {
         Assert.assertTrue(index != -1, String.format("File '%s' should be found.", fileName));
         clickElement(buttonDownloadRequest.get(index), "Button download request");
         waitSomeSeconds(3);
+    }
+    public void createNewRequest(String newRequestName) {
+        logger.info("Input name request :  " + newRequestName );
+        sendKeyTextBox(nameRequestInput,newRequestName,"name request");
+        clickElement(commentInput,"comment Input ");
+    }
+     public void selectAddNewRequest() {
+        clickElement(todoPageAddRequestBtn,"Add new request Btn");
     }
 }
