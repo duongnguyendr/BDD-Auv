@@ -2,7 +2,9 @@ package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.KeyWord;
+import com.auvenir.ui.bdd.pages.auditor.AuditorDetailsEngagementPage;
 import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
+import com.auvenir.ui.bdd.pages.common.TodoDetailsPage;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
 import com.google.common.collect.Table;
 import cucumber.api.DataTable;
@@ -28,6 +30,8 @@ public class TodoStepDefinition extends BaseInit {
     private static Logger logger = Logger.getLogger(TodoStepDefinition.class.getSimpleName());
     private  BaseInit baseInit;
     AuditorTodoPage auditorTodoPage;
+    TodoDetailsPage todoDetailsPage;
+
     TodoPage todoPage;
     KeyWord keyWord;
     public TodoStepDefinition(BaseInit baseInit){
@@ -237,7 +241,7 @@ public class TodoStepDefinition extends BaseInit {
         logger.info("===== I create To-Do with name and category =====");
 
         List<List<String>> toDonameAndategory  = getTable(table);
-        for (int i = 1; i < toDonameAndategory.size() ; i++) {
+        for (int i = 0; i < toDonameAndategory.size() ; i++) {
             System.out.println("The Client name is: "+toDonameAndategory.get(i).get(0));
             System.out.println("The Catalog: "+toDonameAndategory.get(i).get(1));
             auditorTodoPage.createToDoTaskWithCategoryName(toDonameAndategory.get(i).get(0),toDonameAndategory.get(i).get(1));
@@ -280,8 +284,8 @@ public class TodoStepDefinition extends BaseInit {
             verifyTodoDetailOpened();
             String [] requestNames = maptable.get(toDo).split(",");
             for (String requestName: requestNames){
-                auditorTodoPage.selectAddNewRequest();
-                auditorTodoPage.createNewRequest(requestName);
+                todoDetailsPage.selectAddNewRequest();
+                todoDetailsPage.createNewRequest(requestName);
             }
             auditorTodoPage.closeAddNewRequestWindow();
         }
@@ -292,9 +296,9 @@ public class TodoStepDefinition extends BaseInit {
         logger.info("===== I verify Auditor Create requests from To-Do: =====");
         List<String> listRequestname = getList(table);
 
-        for(String toDoName : listToDo) {
-            System.out.println("todo Name" + toDoName);
-            iClickSlideOutMenuOnSelectedToDo(toDoName);
+        for(int i =1; i<listRequestname.size();i++) {
+            System.out.println("todo Name" + listRequestname.get(i));
+            iClickSlideOutMenuOnSelectedToDo(listRequestname.get(i));
             verifyTodoDetailOpened();
             auditorTodoPage.verifyRequestCreated(listRequestname);
         }
