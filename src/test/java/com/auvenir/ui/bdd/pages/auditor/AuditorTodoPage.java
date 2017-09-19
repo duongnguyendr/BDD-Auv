@@ -199,14 +199,11 @@ public class AuditorTodoPage extends TodoPage {
             waitSomeSeconds(1);
             lstRequestDisplayed.add(requestEle.getText());
         }
-        System.out.println("test listRequest"+listRequest.size());
+        logger.info("test listRequest"+listRequest.size());
         for (int i = 0; i < listRequest.size(); i++) {
             Assert.assertTrue(lstRequestDisplayed.contains(listRequest.get(i)));
-
-
         }
-        closeAddNewRequestWindow();;
-
+        closeAddNewRequestWindow();
 
     }
 

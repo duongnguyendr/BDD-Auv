@@ -101,4 +101,11 @@ public class EngagementDetailStepDefinition extends BaseInit {
         logger.info("=====I click on engagement tab return engagement page=====");
         detailsEngagementPage.navigateToEngagementTab();
     }
+
+    @Then("^I should see empty ToDo list$")
+    public void iShouldSeeEmptyToDoList() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I should see empty ToDo list=====");
+        detailsEngagementPage.verifyEmptyToDoList();
+    }
 }
