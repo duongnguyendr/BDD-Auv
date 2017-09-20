@@ -66,4 +66,11 @@ public class EngagementStepDefinition extends BaseInit {
         logger.info("=====I should see engagement list======");
         engagementPage.verifySeeEngagementList(engagementList);
     }
+
+    @Then("^I come back engagement page$")
+    public void comeBackEngagementPage() throws Throwable {
+        logger.info("===== I come back Engagement Page ======");
+        engagementPage.clickOnTabHeaderEngagements();
+    }
+
 }

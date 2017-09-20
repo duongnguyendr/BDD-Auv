@@ -1,6 +1,7 @@
 package com.auvenir.ui.bdd.pages.common;
 
 import org.apache.log4j.Logger;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +43,9 @@ public class EngagementPage extends CommonPage {
         waitForVisibleElement(titleAllEngagement, "Title All Engagement");
         validateElementText(titleAllEngagement, "All Engagements");
     }
+
+    @FindBy(id = "h-engagementsLink")
+    private WebElement tabHeaderEngagements;
 
     /*
      * Find the index(position) of Engagement in the list Engagement by Engagement Name
@@ -132,5 +136,10 @@ public class EngagementPage extends CommonPage {
         logger.info("-----------See All Engagement--------------");
         boolean result = checkEngagementListExists(engagementNames);
         Assert.assertTrue(result);
+    }
+    public void clickOnTabHeaderEngagements(){
+        logger.info("----------- Click On Tab Header Engagement --------------");
+        clickElement(tabHeaderEngagements,"tab Header Engagements");
+
     }
 }

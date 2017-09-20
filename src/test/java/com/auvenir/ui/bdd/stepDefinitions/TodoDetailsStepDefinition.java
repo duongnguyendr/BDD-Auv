@@ -25,7 +25,11 @@ public class TodoDetailsStepDefinition extends BaseInit {
     private TodoDetailsPage todoDetailsPage;
     private TodoPage todoPage;
     private AuditorTodoPage auditorTodoPage;
-
+    String nameLastTodo= "string";
+    String nameTodo;
+    String typeComment;
+    String contentName;
+    String userComment;
     public TodoDetailsStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         todoDetailsPage = new TodoDetailsPage(logger, driver);
@@ -99,21 +103,20 @@ public class TodoDetailsStepDefinition extends BaseInit {
     }
 
     @And("^I verify comment at list To-Do$")
-    public void verifyCommentAtListToDo(DataTable Table) throws Throwable {
+    public void verifyCommentAtListToDo(DataTable Table) throws Throwable
+    {
         logger.info("===== I verify comment at list To-Do =====");
         List<List<String>>listToDo = getTable(Table);
-        String nameLastTodo= "string";
-        String nameTodo;
-        String typeComment;
-        String contentName;
-        String userComment;
-        for (int i = 1; i < listToDo.size() ; i++) {
-         {
+
+        for (int i = 0; i < listToDo.size() ; i++)
+        {
+
              nameTodo =listToDo.get(i).get(0);
              typeComment=listToDo.get(i).get(1);
              userComment=listToDo.get(i).get(2);
              contentName= listToDo.get(i).get(3);
-             if(i!=1 &&(!nameTodo.equals(nameLastTodo)))
+             System.out.println("LIST DATATABLE :"+nameTodo+", "+typeComment+" , "+userComment+" ,"+contentName);
+             if(i!=0 &&(!nameTodo.equals(nameLastTodo)))
               {
                  auditorTodoPage.closeAddNewRequestWindow();
                  nameLastTodo = listToDo.get(i).get(0);
@@ -124,12 +127,11 @@ public class TodoDetailsStepDefinition extends BaseInit {
               auditorTodoPage.verifyTodoDetailOpened();
               todoDetailsPage.verifyCommentUnknowType(typeComment, contentName, userComment);
 
-}
+
+        }
 
 
-         }
-
-         }
+    }
 
 
     }

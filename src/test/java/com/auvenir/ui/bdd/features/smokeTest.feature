@@ -382,7 +382,7 @@ Feature: Smoke Test Feature
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click on Team tab on Client page
     And I change the permission of member: "Lead Client" to be Lead
-  @run
+
   Scenario:Lead Auditor Create To Do task: AUV-878
     Given I navigate to Marketing page
     And I click on login link
@@ -1091,7 +1091,7 @@ Feature: Smoke Test Feature
     Then I click on engagement: "Engagement 02"
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
     Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
-
+  @Vietlq
   Scenario: Admin auditor can see all comments in firm : AUV-2255
     Given I navigate to Marketing page
     And I click on login link
@@ -1100,8 +1100,48 @@ Feature: Smoke Test Feature
       | adm.auditor001@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
+    And I click on engagement: "Engagement02"
+  Then I should see engagement detail page with Engagement Title Uneditable: "Engagement02"
+  Then I verify comment at list To-Do
+    |To-Do Name|Type Input |User Comment | Content Comment|
+    | Todo 04 | input      |Member auditor 01| helllo |
+    | Todo 04 | input      |Member auditor 01| hi |
+    | Todo 04 | attachment |Member auditor 01| Captures.jpg |
+    | Todo 05 | attachment |Member auditor 01| Captures.jpg |
+  Then I come back engagement page
+  Then I should see engagement page
+  And I click on engagement: "Engagement01"
+  Then I should see engagement detail page with Engagement Title Editable: "Engagement01"
+  Then I verify comment at list To-Do
+    |To-Do Name|Type Input |User Comment | Content Comment|
+    | Todo 11 | attachment |Member auditor 01| TXT_helloAuvenir1.txt |
+    | Todo 11 | attachment |viet le| TXT_helloAuvenir1.txt |
+
+
+  Scenario: Admin client can see all comment(s) in business: AUV-2258
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                         | Password     |
+      | adm.auditor001@mailinator.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement02"
+    And I verify comment at list To-Do
+      |To-Do Name|Type Input |User Comment | Content Comment|
+      | Todo 04 | input      |Member auditor 01| helllo |
+      | Todo 04 | input      |Member auditor 01| hi |
+      | Todo 04 | attachment |Member auditor 01| Captures.jpg |
+      | Todo 05 | attachment |Member auditor 01| Captures.jpg |
+    Then I come back engagement page
+    Then I should see engagement page
     And I click on engagement: "Engagement01"
-    Then I should see engagement detail page with Engagement Title Editable: "Engagement01"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement01"
+    Then I verify comment at list To-Do
+      |To-Do Name|Type Input |User Comment | Content Comment|
+      | Todo 11 | attachment |Member auditor 01| TXT_helloAuvenir1.txt |
+      | Todo 11 | attachment |viet le          | TXT_helloAuvenir1.txt |
 
  #Vien.pham
   @vp
