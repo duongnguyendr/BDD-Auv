@@ -63,6 +63,7 @@ Feature: Smoke Test Feature
 
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
+      | Email                       | Password     |
       | chr.auditor01.adm@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And I click on login link
@@ -71,19 +72,17 @@ Feature: Smoke Test Feature
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-    Then I should see status of user is wait listed
-      | chr.auditor01.adm@gmail.com | Wait Listed |
-    And I change status of user to onboarding
-      | chr.auditor01.adm@gmail.com | Onboarding |
+    Then I should see status of user: "chr.auditor01.adm@gmail.com" is "Wait Listed"
+    And I change status of user: "chr.auditor01.adm@gmail.com" to "Onboarding"
     Then I should see confirm popup on admin page
     And I click confirm button on admin page
     Then I should see verified message successful on admin page
-    Then I should see status of user is onboarding
-      | chr.auditor01.adm@gmail.com | Onboarding |
+    Then I should see status of user: "chr.auditor01.adm@gmail.com" is "Onboarding"
 
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
     Given I navigate to GMail login page
     And I sign In GMail
+      | Email                       | Password     |
       | chr.auditor01.adm@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
@@ -117,6 +116,7 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And Delete all activity of engagement by user  : "chr.auditor01.lead@gmail.com"
     And Delete all engagement of user : "chr.auditor01.lead@gmail.com"
@@ -143,6 +143,7 @@ Feature: Smoke Test Feature
   Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to GMail login page
     And I sign In GMail
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
@@ -160,6 +161,7 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
+      | Email                      | Password     |
       | chr.client01.adm@gmail.com | Changeit@123 |
     And Delete all client of user
       | chr.client01.adm@gmail.com | chr.client01.lead@gmail.com | chr.client01@gmail.com |
@@ -188,12 +190,12 @@ Feature: Smoke Test Feature
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-    Then I should see status of user is onboarding
-      | chr.client01.adm@gmail.com | Onboarding |
+    Then I should see status of user: "chr.client01.adm@gmail.com" is "Onboarding"
 
   Scenario: Admin Client active account: AUV-645
     Given I navigate to GMail login page
     And I sign In GMail
+      | Email                      | Password     |
       | chr.client01.adm@gmail.com | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
@@ -244,6 +246,7 @@ Feature: Smoke Test Feature
 
   #  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
 #    Given I delete existed email
+#      | Email                      | Password     |
 #      | chr.client01.adm@gmail.com | Changeit@123 |
 #    Given I navigate to Marketing page
 #    And I click on login link
@@ -285,6 +288,7 @@ Feature: Smoke Test Feature
 
   Scenario: Lead Auditor add New member auditor into Engagement 2: AUV-787
     Given I delete existed email
+      | Email                   | Password     |
       | chr.auditor01@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And Delete all activity of engagement by user  : "chr.auditor01@gmail.com"
@@ -309,6 +313,7 @@ Feature: Smoke Test Feature
   Scenario: New Auditor member active account and login to Engagement 2: AUV-798
     Given I navigate to GMail login page
     Then I sign In GMail
+      | Email                   | Password     |
       | chr.auditor01@gmail.com | Changeit@123 |
     And I open active email
     And I click on confirmation link
@@ -325,9 +330,11 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
     Given I delete existed email
+      | Email                     | Password   |
       |chr.client01.lead@gmail.com|Changeit@123|
     Given I navigate to Marketing page
     And Delete all client of user
+      |           Email             |
       | chr.client01.lead@gmail.com |
     And I click on login link
     And I enter the following for Login
@@ -350,6 +357,7 @@ Feature: Smoke Test Feature
   Scenario: Lead Client Active Account and Login to Engagement2: AUV-840
     Given I navigate to GMail login page
     And I sign In GMail
+      | Email                       | Password     |
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
@@ -405,7 +413,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                 | Password     |
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -558,7 +566,7 @@ Feature: Smoke Test Feature
     And I click bulk action drop down on todo page
     And I click assignee to :"Lead Client" on bulk action drop down
     And I verify Client Assignee Selected
-      | userName    | Todo Name |
+      | User Name    | Todo Name |
       | Lead Client | ToDo 03   |
     And I click bulk action drop down on todo page
     And I click assignee to :"Auvenir Auditor" on bulk action drop down
@@ -685,7 +693,7 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
-      | File Name             | Request Name |
+      | File Name             | Request Name  |
       | TXT_Auvenir.jpg       | Request 01    |
       | TXT_Auvenir.pdf       | Request 02    |
       | TXT_Auvenir.xlsx      | Request 03    |
@@ -816,9 +824,11 @@ Feature: Smoke Test Feature
   @run
   Scenario: Leader Client invite client into Engagement: AUV-1214
     Given I delete existed email
+      | Email                  | Password     |
       | chr.client01@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And Delete all client of user
+      |        Email         |
       |chr.client01@gmail.com|
     And I click on login link
     And I enter the following for Login
@@ -841,6 +851,7 @@ Feature: Smoke Test Feature
   Scenario: New client log in their email and active user: AUV-1217
     Given I navigate to GMail login page
     And I sign In GMail
+      | Email                  | Password     |
       | chr.client01@gmail.com | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
@@ -926,7 +937,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                     | Password     |
+      | Email                       | Password     |
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page

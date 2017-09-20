@@ -1,10 +1,12 @@
 package com.auvenir.ui.bdd.stepDefinitions.monogo;
 
 import com.auvenir.ui.bdd.common.mongoBD.MongoDBService;
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 
 import java.util.List;
+import static com.auvenir.ui.bdd.common.GeneralUtilities.getList;
 
 /**
  * Created by tan.pham on 9/13/2017.
@@ -43,8 +45,9 @@ public class MongoStepDefinition {
     }
 
     @And("^Delete all client of user$")
-    public void deleteAllClientOfUser(List<String> listEmail) throws Throwable {
+    public void deleteAllClientOfUser(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
+        List<String> listEmail = getList(table);
         for (String email: listEmail){
             MongoDBService.removeClientAndIndicatedValueByEmail(email);
         }

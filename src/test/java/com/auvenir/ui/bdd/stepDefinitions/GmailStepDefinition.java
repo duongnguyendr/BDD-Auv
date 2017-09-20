@@ -8,7 +8,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by duong.nguyen on 9/7/2017.
@@ -30,11 +33,17 @@ public class GmailStepDefinition extends BaseInit {
     }
 
     @And("^I sign In GMail$")
-    public void iSignInGMail(DataTable users) throws Throwable {
+    public void iSignInGMail(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I signIn GMail =====");
-        List<String> lstData = users.asList(String.class);
-        mailPage.signInGmail(lstData.get(0), lstData.get(1));
+        table.asMap(String.class, String.class);
+        List<MarketingStepDefinition.User> users = new ArrayList<MarketingStepDefinition.User>();
+        users = table.asList(MarketingStepDefinition.User.class);
+        for (MarketingStepDefinition.User user: users){
+            System.out.println("The Email is: "+user.email);
+            System.out.println("The Password is: "+user.password);
+            mailPage.deleteAllExistedGMail(user.email, user.password);
+        }
     }
 
     @And("^I open active email$")
@@ -52,11 +61,18 @@ public class GmailStepDefinition extends BaseInit {
     }
 
     @Given("^I delete existed email$")
-    public void iDeleteExistedEmail(DataTable users) throws Throwable {
+    public void iDeleteExistedEmail(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("I delete existed email");
-        List<String> lstData = users.asList(String.class);
-        mailPage.deleteAllExistedGMail(lstData.get(0), lstData.get(1));
+        logger.info("===== I delete existed email =====");
+
+        table.asMap(String.class, String.class);
+        List<MarketingStepDefinition.User> users = new ArrayList<MarketingStepDefinition.User>();
+        users = table.asList(MarketingStepDefinition.User.class);
+        for (MarketingStepDefinition.User user: users){
+            System.out.println("The Email is: "+user.email);
+            System.out.println("The Password is: "+user.password);
+            mailPage.deleteAllExistedGMail(user.email, user.password);
+        }
     }
 
     @And("^I relogin gmail: \"([^\"]*)\"$")
