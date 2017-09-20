@@ -41,7 +41,6 @@ public class MarketingStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I enter the following for login =====");
 
-        Map<String, String> data = new HashMap<>();
         table.asMap(String.class, String.class);
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);

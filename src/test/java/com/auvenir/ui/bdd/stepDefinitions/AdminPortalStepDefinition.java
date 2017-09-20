@@ -32,21 +32,6 @@ public class AdminPortalStepDefinition extends BaseInit {
         //MarketingPage MarketingPage = new MarketingPage(logger,driver);
         adminPage.verifyHeaderAdminPage();
     }
-    @Then("^I should see status of user is wait listed$")
-    public void iShouldSeeStatusOfUserIsWaitListed(DataTable datas) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        logger.info("I should see status off user is waitlisted");
-        List<String> listData = datas.asList(String.class);
-        adminPage.verifyUserStatusAsExpected(listData.get(0), listData.get(1));
-    }
-
-    @And("^I change status of user to onboarding$")
-    public void iChangeStatusOfUserToOnboarding(DataTable datas) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        logger.info("I change status of user to onboarding");
-        List<String> listData = datas.asList(String.class);
-        adminPage.changeStatusUser(listData.get(0), listData.get(1));
-    }
 
     @Then("^I should see confirm popup on admin page$")
     public void iShouldSeeConfirmPopupOnAdminPage() throws Throwable {
@@ -69,12 +54,17 @@ public class AdminPortalStepDefinition extends BaseInit {
         adminPage.verifyMessageSuccessful();
     }
 
-    @Then("^I should see status of user is onboarding$")
-    public void iShouldSeeStatusOffUserIsOnboarding(DataTable datas) throws Throwable {
+    @Then("^I should see status of user: \"([^\"]*)\" is \"([^\"]*)\"$")
+    public void iShouldSeeStatusOfUserIs(String user, String status) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("I should see status of user is Onboarding");
-        List<String> listData = datas.asList(String.class);
-        adminPage.verifyUserStatusAsExpected(listData.get(0), listData.get(1));
+        logger.info("I should see status off user: " + user + " is " + status);
+        adminPage.verifyUserStatusAsExpected(user, status);
     }
 
+    @And("^I change status of user: \"([^\"]*)\" to \"([^\"]*)\"$")
+    public void iChangeStatusOfUserTo(String user, String status) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("I change status of user: " + user + " to " + status);
+        adminPage.changeStatusUser(user, status);
+    }
 }
