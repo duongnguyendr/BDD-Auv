@@ -2,9 +2,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.common.TodoDetailsPage;
-import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -37,6 +35,7 @@ public class TodoDetailsStepDefinition extends BaseInit {
     public void clickOnPostCommentButton() throws Throwable {
         logger.info("===== I click on post comment button =====");
         int numberOfListCommentlist = todoDetailsPage.getNumberOfListComment();
+        System.out.println("numberOfListCommentlist = " + numberOfListCommentlist);
         todoDetailsPage.clickOnPostCommentButton();
         todoDetailsPage.waitForSizeListCommentChanged(numberOfListCommentlist);
     }
@@ -44,16 +43,26 @@ public class TodoDetailsStepDefinition extends BaseInit {
     @Then("^I should see this comment display on list: \"([^\"]*)\"$")
     public void verifyCommentDisplay(String commentContent) throws Throwable {
         logger.info("===== I should see this comment display on list =====");
-        todoDetailsPage.verifyCommentContentIsDisplayed(commentContent);
+        todoDetailsPage.verifyCommentContentDisplayed(commentContent);
     }
+
+    @Then("^I attach to comment a file: \"([^\"]*)\"$")
+    public void chooseAFile(String commentFile) throws Throwable {
+        logger.info("===== I attach a file to comment =====");
+        int numberOfListCommentlist = todoDetailsPage.getNumberOfListComment();
+        todoDetailsPage.clickAttachCommentIcon();
+        todoDetailsPage.attachCommentFile(commentFile);
+        todoDetailsPage.waitForSizeListCommentChanged(numberOfListCommentlist);
+    }
+
 
     @And("^I creates some new requests$")
     public void createsSomeNewRequests(DataTable table) throws Throwable {
         logger.info("===== I creates some new Request name =====");
         List<TodoStepDefinition.ListNewRequest> listNewRequests = new ArrayList<>();
         listNewRequests = table.asList(TodoStepDefinition.ListNewRequest.class);
-        for (TodoStepDefinition.ListNewRequest listNewRequest: listNewRequests){
-            System.out.println("Prepare to create: "+listNewRequest.newRequestName);
+        for (TodoStepDefinition.ListNewRequest listNewRequest : listNewRequests) {
+            System.out.println("Prepare to create: " + listNewRequest.newRequestName);
             todoDetailsPage.clickAddRequestBtn();
             todoDetailsPage.createNewRequest(listNewRequest.newRequestName);
         }
@@ -79,7 +88,7 @@ public class TodoDetailsStepDefinition extends BaseInit {
     @And("^I should see list files: (.*)$")
     public void verifyListFilesOnListRequests(List<String> listFileName) throws Throwable {
         logger.info("===== I should see list files on list requests =====");
-        for(String fileName : listFileName) {
+        for (String fileName : listFileName) {
             todoDetailsPage.verifyUploadFileSuccessfully(fileName);
         }
     }
@@ -87,9 +96,8 @@ public class TodoDetailsStepDefinition extends BaseInit {
     @And("^I click download list files on Todo detail popup: (.*)$")
     public void clickDownloadListFileOnToDoDetailPopup(List<String> listFileName) throws Throwable {
         logger.info("===== I click download list file on Todo detail popup =====");
-        for(String fileName : listFileName) {
+        for (String fileName : listFileName) {
             todoDetailsPage.downloadRequestFile(fileName);
         }
     }
-
 }
