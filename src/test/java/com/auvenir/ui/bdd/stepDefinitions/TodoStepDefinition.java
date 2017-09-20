@@ -316,7 +316,6 @@ public class TodoStepDefinition extends BaseInit {
 
     }
 
-
     @Then("^I should see all to do assigned : (.*)")
     public void iShouldSeeAllToDoAssigned(List<String> toDoList) throws Throwable {
         logger.info("=====I should see all to do assigned=====");
