@@ -221,11 +221,15 @@ public class TodoDetailsPage extends CommonPage {
     public void verifyCommentUnknowType(String typeComment,String commentContent,String userInput){
         logger.info("verify Comment Unknow Type Input");
         if (("input").equals(typeComment.trim().toLowerCase())){
-            // compare with type input just text
+            logger.info("compare with type input text :: "+commentContent);
+            boolean result = validateElementText(listCommentItem.get(listCommentItem.size() - 1), commentContent);
+            Assert.assertTrue(result, "Comment should be displayed on list comment.");
+            verifyUserCommentDisplayedCorrectly(commentContent,userInput);
+
 
         }else {
             // compare with type input have  attachment
-            System.out.println("compare with type input have  attachment "+commentContent);
+            logger.info("compare with type input have  attachment "+commentContent);
             verifyCommentFilesDisplayedCorrectly(commentContent);
             verifyUserCommentDisplayedCorrectly(commentContent,userInput);
 
@@ -253,7 +257,7 @@ public class TodoDetailsPage extends CommonPage {
 
     }
     public void verifyUserCommentDisplayedCorrectly(String contentComment ,String userInput ){
-        logger.info("Verifying this file '%s' existed in the list..");
+        logger.info("Verifying this user comment : "+userInput+" existed in the list.. "+contentComment);
         WebElement contentCommentEle = getElementByXpath(userComment, contentComment);
         System.out.println("aaaaasasa"+contentCommentEle);
         Assert.assertEquals(contentCommentEle.getText(),userInput);

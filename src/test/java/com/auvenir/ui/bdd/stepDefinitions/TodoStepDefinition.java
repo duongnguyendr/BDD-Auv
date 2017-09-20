@@ -158,17 +158,6 @@ public class TodoStepDefinition extends BaseInit {
     }
 
 
-
-    public class LisTodoAnduser {
-        public String userName;
-        public String todoName;
-
-        public LisTodoAnduser(String userBeAssign, String LisTodoAnduser) {
-            userName = userBeAssign;
-            todoName = LisTodoAnduser;
-        }
-    }
-
     public class ListNewRequest {
         public String newRequestName;
 
@@ -191,12 +180,14 @@ public class TodoStepDefinition extends BaseInit {
     public void assigneelistToDotoAuditor(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I assignee list To-Do to General Auditor =====");
-        List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
-        lisTodoAndusers = table.asList(LisTodoAnduser.class);
-        for (LisTodoAnduser lisTodoAnduser : lisTodoAndusers) {
-            System.out.println("The Auditor name is: " + lisTodoAnduser.userName);
-            System.out.println("The To-Do name is: " + lisTodoAnduser.todoName);
-            auditorTodoPage.selectAuditorAssigneeByName(lisTodoAnduser.todoName, lisTodoAnduser.userName);
+        List<List<String>> listTodoAndusers = getTable(table);
+        String toDo;
+        String user;
+
+        for (List<String> listTodoAnduser : listTodoAndusers) {
+           toDo=  listTodoAnduser.get(1);
+            user= listTodoAnduser.get(0);
+            auditorTodoPage.selectAuditorAssigneeByName(toDo, user);
         }
     }
 
@@ -204,14 +195,14 @@ public class TodoStepDefinition extends BaseInit {
     public void verifyAuditorAssigneeSelected(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I verify Auditor Assignee Selected =====");
+        String toDo;
+        String user;
+        List<List<String>> listTodoAndusers = getTable(table);
 
-        List<LisTodoAnduser> lisTodoAndusers = new ArrayList<>();
-        lisTodoAndusers = table.asList(LisTodoAnduser.class);
-
-        for (LisTodoAnduser lisTodoAnduser : lisTodoAndusers) {
-            System.out.println("The Auditor name is: " + lisTodoAnduser.userName);
-            System.out.println("The To-Do name is: " + lisTodoAnduser.todoName);
-            auditorTodoPage.verifyAuditorAssigneeSelected(lisTodoAnduser.todoName, lisTodoAnduser.userName);
+        for (List<String> listTodoAnduser : listTodoAndusers) {
+            toDo=  listTodoAnduser.get(1);
+            user= listTodoAnduser.get(0);
+            auditorTodoPage.verifyAuditorAssigneeSelected(toDo,user);
         }
     }
 
