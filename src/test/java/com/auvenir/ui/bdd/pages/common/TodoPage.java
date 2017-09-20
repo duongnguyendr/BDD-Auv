@@ -100,36 +100,25 @@ public class TodoPage extends CommonPage {
 
     public int findToDoTaskName(String toDoName) {
         logger.info(String.format("Find Position of To Do Task Name: '%s'", toDoName));
-        try {
-            String actualAttributeValue;
-            String classAttribute;
-            WebElement toDoTaskName;
-            for (int i = 0; i < toDoTaskRowEle.size(); i++) {
-                classAttribute = toDoTaskRowEle.get(i).getAttribute("class");
-                if (classAttribute.equals("newRow")) {
-                    System.out.println(String.format("td[2]/*[@value|text()='%s']", toDoName));
-                    try {
-                        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                        toDoTaskName = toDoTaskRowEle.get(i).findElement(By.xpath(String.format("td[2]/*[@value|text()='%s']", toDoName)));
-                        if (toDoTaskName != null) {
-                            logger.info("Element is found at " + i);
-                            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-                            return i;
-                        }
-                    } catch (NoSuchElementException e) {
-                        logger.info("Find to next item.");
+        String classAttribute;
+        WebElement toDoTaskName;
+        for (int i = 0; i < toDoTaskRowEle.size(); i++) {
+            classAttribute = toDoTaskRowEle.get(i).getAttribute("class");
+            if (classAttribute.contains("newRow")) {
+                try {
+                    toDoTaskName = toDoTaskRowEle.get(i).findElement(By.xpath("td[2]/*"));
+                    if (getText(toDoTaskName).equals(toDoName))
+                    {
+                        logger.info("Element is found at " + i);
+                        return i;
                     }
+                } catch (NoSuchElementException e) {
+                    logger.info("Find to next item.");
                 }
             }
-            logger.info("Element is not found");
-            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            return -1;
-        } catch (NoSuchElementException e) {
-            logger.info("Element is not found");
-            logger.info(e.toString());
-            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            return -1;
         }
+        logger.info("Element is not found");
+        return -1;
     }
 
     /**
@@ -155,6 +144,7 @@ public class TodoPage extends CommonPage {
 //            return -1;
 //        }
 //    }
+
     public void selectClientAssigneeByName(String toDoName, String clientAssignee) {
         logger.info("== select Client Assignee By Name ==");
         int index = findToDoTaskName(toDoName);
