@@ -225,7 +225,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                          | Password     |
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -251,7 +251,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -295,7 +295,7 @@ Feature: Smoke Test Feature
     And Delete user by email: "chr.auditor01@gmail.com"
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -330,11 +330,11 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
     Given I delete existed email
-      | Email                     | Password   |
-      |chr.client01.lead@gmail.com|Changeit@123|
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And Delete all client of user
-      |           Email             |
+      | Email                       |
       | chr.client01.lead@gmail.com |
     And I click on login link
     And I enter the following for Login
@@ -445,7 +445,7 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                 | Password     |
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -541,6 +541,8 @@ Feature: Smoke Test Feature
     Then I input comment content: "Lead Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Auditor Comment"
+    Then I attach to comment a file: "TXT_ATTACHMENT.png"
+    Then I should see this comment display on list: "TXT_ATTACHMENT.png"
 
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
@@ -573,7 +575,7 @@ Feature: Smoke Test Feature
     And I click bulk action drop down on todo page
     And I click assignee to :"Lead Client" on bulk action drop down
     And I verify Client Assignee Selected
-      | User Name    | Todo Name |
+      | User Name   | Todo Name |
       | Lead Client | ToDo 03   |
     And I click bulk action drop down on todo page
     And I click assignee to :"Auvenir Auditor" on bulk action drop down
@@ -707,13 +709,13 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
-      | File Name             | Request Name  |
-      | TXT_Auvenir.jpg       | Request 01    |
-      | TXT_Auvenir.pdf       | Request 02    |
-      | TXT_Auvenir.xlsx      | Request 03    |
-      | TXT_helloAuvenir.docx | Request 04    |
-      | TXT_helloAuvenir.png  | Request 05    |
-      | TXT_helloAuvenir.txt  | Request 06    |
+      | File Name             | Request Name |
+      | TXT_Auvenir.jpg       | Request 01   |
+      | TXT_Auvenir.pdf       | Request 02   |
+      | TXT_Auvenir.xlsx      | Request 03   |
+      | TXT_helloAuvenir.docx | Request 04   |
+      | TXT_helloAuvenir.png  | Request 05   |
+      | TXT_helloAuvenir.txt  | Request 06   |
     And I closes the To Do detail popup
     And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
@@ -749,6 +751,8 @@ Feature: Smoke Test Feature
     Then I input comment content: "General Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Auditor Comment"
+    Then I attach to comment a file: "TXT_Auvenir.jpg"
+    Then I should see this comment display on list: "TXT_Auvenir.jpg"
 
   Scenario: Auditor mark as complete one To-Do: AUV-1127
     Given I navigate to Marketing page
@@ -842,8 +846,8 @@ Feature: Smoke Test Feature
       | chr.client01@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And Delete all client of user
-      |        Email         |
-      |chr.client01@gmail.com|
+      | Email                  |
+      | chr.client01@gmail.com |
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
@@ -962,6 +966,8 @@ Feature: Smoke Test Feature
     Then I input comment content: "Lead Client Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Client Comment"
+    Then I attach to comment a file: "TXT_Auvenir.pdf"
+    Then I should see this comment display on list: "TXT_Auvenir.pdf"
 
   Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
     Given I navigate to Marketing page
@@ -1047,6 +1053,8 @@ Feature: Smoke Test Feature
     Then I input comment content: "General Client Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Client Comment"
+    Then I attach to comment a file: "TXT_Auvenir.xlsx"
+    Then I should see this comment display on list: "TXT_Auvenir.xlsx"
 
   Scenario: Admin auditor can see engagement in firm: AUV-1336
     Given I navigate to Marketing page
@@ -1109,7 +1117,7 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I verify Existed request name from Todo
-      | Todo Name |                         Request Name                                   |
+      | Todo Name | Request Name                                                           |
       | ToDo 02   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
       | ToDo 05   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
       | ToDo 07   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
@@ -1142,8 +1150,8 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                        | Password     |
-      | chr.client01.adm@gmail.com   | Changeit@123 |
+      | Email                      | Password     |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I should see engagement list : Engagement GP01, Engagement GP02
@@ -1186,16 +1194,16 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement02"
     And I verify comment at list To-Do
-      |To-Do Name|Type Input |User Comment | Content Comment|
-      | Todo 04 | input      |Member auditor 01| helllo |
-      | Todo 04 | input      |Member auditor 01| hi |
-      | Todo 04 | attachment |Member auditor 01| Captures.jpg |
-      | Todo 05 | attachment |Member auditor 01| Captures.jpg |
+      | To-Do Name | Type Input | User Comment      | Content Comment |
+      | Todo 04    | input      | Member auditor 01 | helllo          |
+      | Todo 04    | input      | Member auditor 01 | hi              |
+      | Todo 04    | attachment | Member auditor 01 | Captures.jpg    |
+      | Todo 05    | attachment | Member auditor 01 | Captures.jpg    |
     Then I come back engagement page
     Then I should see engagement page
     And I click on engagement: "Engagement01"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement01"
     Then I verify comment at list To-Do
-      |To-Do Name|Type Input |User Comment | Content Comment|
-      | Todo 11 | attachment |Member auditor 01| TXT_helloAuvenir1.txt |
-      | Todo 11 | attachment |viet le          | TXT_helloAuvenir1.txt |
+      | To-Do Name | Type Input | User Comment      | Content Comment       |
+      | Todo 11    | attachment | Member auditor 01 | TXT_helloAuvenir1.txt |
+      | Todo 11    | attachment | viet le           | TXT_helloAuvenir1.txt |
