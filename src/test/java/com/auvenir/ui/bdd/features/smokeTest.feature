@@ -1,24 +1,24 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
-#  @run
-#  Scenario: Verify super admin login: AUV-2186
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                   | Password     |
-#      | chr.auvenirad@gmail.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see the AdminPortal page
-#  @run
-#  Scenario: Verify admin login: AUV-2187
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                     | Password     |
-#      | chr.adm.auvenir@gmail.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see the AdminPortal page
-  @run
+  
+  Scenario: Verify super admin login: AUV-2186
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                   | Password     |
+      | chr.auvenirad@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see the AdminPortal page
+  
+  Scenario: Verify admin login: AUV-2187
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                     | Password     |
+      | chr.adm.auvenir@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see the AdminPortal page
+  
   Scenario: Auditor Admin click Sign up button and fill information: AUV-542
     Given I navigate to Marketing page
     And Delete all activity of engagement by user  : "chr.auditor01.adm@gmail.com"
@@ -60,7 +60,7 @@ Feature: Smoke Test Feature
     Then I should see thank for create account page
     And I click continue button on sign up page
     Then I should see marketing portal page
-  @run
+  
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
       | Email                       | Password     |
@@ -78,7 +78,7 @@ Feature: Smoke Test Feature
     And I click confirm button on admin page
     Then I should see verified message successful on admin page
     Then I should see status of user: "chr.auditor01.adm@gmail.com" is "Onboarding"
-  @run
+  
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
     Given I navigate to GMail login page
     And I sign In GMail
@@ -88,7 +88,7 @@ Feature: Smoke Test Feature
     And I click on confirmation link
     And I create password: "Changeit@123"
     Then I should see engagement page
-  @run
+  
   Scenario: Admin auditor user create new Engagement: AUV-585
     Given I navigate to Marketing page
     And Delete engagement name by user  : "chr.auditor01.adm@gmail.com", "Engagement GP01"
@@ -113,7 +113,7 @@ Feature: Smoke Test Feature
     And I should see create todo list page
     And I click create todo button on Create New Engagement Page
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
-  @run
+  
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
       | Email                        | Password     |
@@ -139,7 +139,7 @@ Feature: Smoke Test Feature
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
-  @run
+  
   Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to GMail login page
     And I sign In GMail
@@ -158,7 +158,7 @@ Feature: Smoke Test Feature
     And I click on continue button on firm information page
     And I create password: "Changeit@123"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
-  @run
+  
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
       | Email                      | Password     |
@@ -191,7 +191,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see the AdminPortal page
     Then I should see status of user: "chr.client01.adm@gmail.com" is "Onboarding"
-  @run
+  
   Scenario: Admin Client active account: AUV-645
     Given I navigate to GMail login page
     And I sign In GMail
@@ -220,7 +220,7 @@ Feature: Smoke Test Feature
     And I fill up all Security Information with Password: "Changeit@123"
     And I click on Create Account Button on Security Information Page
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
-  @run
+  
   Scenario: Lead Auditor Create new Engagement: AUV-684
     Given I navigate to Marketing page
     And I click on login link
@@ -243,48 +243,48 @@ Feature: Smoke Test Feature
     And I should see create todo list page
     And I click create todo button on Create New Engagement Page
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-#  @run
-#  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
-#    Given I delete existed email
-#      | Email                      | Password     |
-#      | chr.client01.adm@gmail.com | Changeit@123 |
-#    Given I navigate to Marketing page
-#    And I click on login link
-#    And I enter the following for Login
-#      | Email                    | Password     |
-#      | chr.auditor01.lead@gmail.com | Changeit@123 |
-#    And I click on login button
-#    Then I should see engagement page
-#    Then I click on engagement: "Engagement GP02"
-#    Then I click on Invite Client button
-#    Then I should see Invite Your Client page
-#    Then I select option Admin Client fullname: "Admin Client"
-#    Then I click on Invite button
-#    Then I should see invite client success toast message
-#    And I relogin gmail: "Changeit@123"
-#    And I open active email
-#    And I click on onboarding invitation link
-#    Then I should see Welcome to Auvenir Page
-#    And I click on Get Start button on Client Sign Up Page
-#    Then I should see Provide Information Page
-#    And I input phone number: "1234567890" on personal information page
-#    And I select check box agree on personal information page
-#    And I click on Continue Button on Personal Information Page
-#    Then I should see Business Information Page
-#    And I select Fiscal End Year on Business Information page
-#    And I select Business Industry on Business Information page
-#    And I select Accounting framework on Business Information page
-#    And I click on Continue Button on Business Information Page
-##    Then I should see Bank Information Page ################ comment code
-##    And I fill up all Bank Information ################ comment code
-##    And I click on Skip Button on Bank Information Page ################ comment code
-#    Then I should see File Storage Information Page
-#    And I fill up all File Storage Information
-#    And I click on Skip Button on File Storage Information Page
-#    Then I should see Security Information Page
-#    And I fill up all Security Information with Password: "Changeit@123"
-#    And I click on Create Account Button on Security Information Page
-#    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+  
+  Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
+    Given I delete existed email
+      | Email                      | Password     |
+      | chr.client01.adm@gmail.com | Changeit@123 |
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                    | Password     |
+      | chr.auditor01.lead@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    Then I click on engagement: "Engagement GP02"
+    Then I click on Invite Client button
+    Then I should see Invite Your Client page
+    Then I select option Admin Client fullname: "Admin Client"
+    Then I click on Invite button
+    Then I should see invite client success toast message
+    And I relogin gmail: "Changeit@123"
+    And I open active email
+    And I click on onboarding invitation link
+    Then I should see Welcome to Auvenir Page
+    And I click on Get Start button on Client Sign Up Page
+    Then I should see Provide Information Page
+    And I input phone number: "1234567890" on personal information page
+    And I select check box agree on personal information page
+    And I click on Continue Button on Personal Information Page
+    Then I should see Business Information Page
+    And I select Fiscal End Year on Business Information page
+    And I select Business Industry on Business Information page
+    And I select Accounting framework on Business Information page
+    And I click on Continue Button on Business Information Page
+#    Then I should see Bank Information Page ################ comment code
+#    And I fill up all Bank Information ################ comment code
+#    And I click on Skip Button on Bank Information Page ################ comment code
+    Then I should see File Storage Information Page
+    And I fill up all File Storage Information
+    And I click on Skip Button on File Storage Information Page
+    Then I should see Security Information Page
+    And I fill up all Security Information with Password: "Changeit@123"
+    And I click on Create Account Button on Security Information Page
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
 
   Scenario: Lead Auditor add New member auditor into Engagement 2: AUV-787
     Given I delete existed email
@@ -433,7 +433,7 @@ Feature: Smoke Test Feature
       | Lead Client      | ToDo 03   |
       | Lead Client      | ToDo 04   |
       | Lead Client      | ToDo 05   |
-  @run1
+
   Scenario:Lead Auditor assign To Do task to Auditor member AUV-924
     Given I navigate to Marketing page
     And I click on login link
@@ -452,7 +452,7 @@ Feature: Smoke Test Feature
       | Auditor Name    | Todo Name |
       | Auvenir Auditor | ToDo 01   |
       | Auvenir Auditor | ToDo 04   |
-  
+
   Scenario:  Lead Auditor add new request on To Do task: AUV-947
     Given I navigate to Marketing page
     And I click on login link
@@ -464,11 +464,11 @@ Feature: Smoke Test Feature
     And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
     Then I create requests from To-Do
-      | ToDo 01 | request 01, request 02, request 03, request 04, request 05, request 06 |
-      | ToDo 02 | request 01, request 02, request 03, request 04, request 05, request 06 |
-      | ToDo 03 | request 01, request 02, request 03, request 04, request 05, request 06 |
-      | ToDo 04 | request 01, request 02, request 03, request 04, request 05, request 06 |
-      | ToDo 05 | request 01, request 02, request 03, request 04, request 05, request 06 |
+      | ToDo 01 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 02 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 03 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 04 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 05 | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
 
     Then I verify Auditor Create requests from To-Do: ToDo 01, ToDo 02, ToDo 03, ToDo 04, ToDo 05
       | Request Name |
@@ -478,7 +478,7 @@ Feature: Smoke Test Feature
       | Request 04   |
       | Request 05   |
       | Request 06   |
-  
+
   Scenario: Lead Auditor add file to request on To Do task AUV-954
     Given I navigate to Marketing page
     And I click on login link
@@ -503,7 +503,7 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "ToDo 04"
     Then I should see the Todo detail opened
     Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-  
+
   Scenario: Lead Auditor download files of request on To Do task: AUV-961
     Given I navigate to Marketing page
     And I click on login link
@@ -518,7 +518,7 @@ Feature: Smoke Test Feature
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-  
+
   Scenario: Lead Auditor post new comment: AUV-968
     Given I navigate to Marketing page
     And I click on login link
@@ -534,7 +534,7 @@ Feature: Smoke Test Feature
     Then I input comment content: "Lead Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Auditor Comment"
-  
+
   Scenario: Lead Auditor Mark Complete a To Do task: AUV-981
     Given I navigate to Marketing page
     And I click on login link
@@ -551,7 +551,7 @@ Feature: Smoke Test Feature
     Then I should see mark completed todo popup
     And I click on archive button on complete todo popup
     Then I should see todo: "ToDo 02" mark completed on todo page
-  
+
   Scenario: Lead Auditor Bulk Actions Assign To Do: AUV-1016
     Given I navigate to Marketing page
     And I click on login link
@@ -573,7 +573,7 @@ Feature: Smoke Test Feature
     And I verify Auditor Assignee Selected
       | User Name       | Todo Name |
       | Auvenir Auditor | ToDo 03   |
-  
+
   Scenario: Lead Auditor delete To Do Task: AUV-1026
     Given I navigate to Marketing page
     And I click on login link
@@ -596,7 +596,7 @@ Feature: Smoke Test Feature
     Then I should see delete todo popup
     And I click on confirm delete button on delete todo popup
     Then I should see todo: "ToDo 03" not existed in todo list
-  
+
   Scenario: Lead Auditor download all To Do: AUV-1052
     Given I navigate to Marketing page
     And I delete existed file: "Engagement GP02.zip" in download folder
@@ -614,7 +614,7 @@ Feature: Smoke Test Feature
     Then I should see popup download attachments on todo page
     And I click download button on attachment download popup
     Then I verify file "Engagement GP02.zip" existed in computer
-  
+
   Scenario:Auditor Member creates to do task: AUV-1060
     Given I navigate to Marketing page
     And I click on login link
@@ -632,7 +632,7 @@ Feature: Smoke Test Feature
       | ToDo 08   | Cat1     |
       | ToDo 09   | Cat1     |
       | ToDo 10   | Cat1     |
-  
+
   Scenario:Auditor Member assign To Do to Lead Client : AUV-1069
     Given I navigate to Marketing page
     And I click on login link
@@ -653,7 +653,7 @@ Feature: Smoke Test Feature
       | Lead Client      | ToDo 06   |
       | Lead Client      | ToDo 07   |
       | Lead Client      | ToDo 09   |
-  
+
   Scenario: Auditor Member add new request on To Do task: AUV-1083
     Given I navigate to Marketing page
     And I click on login link
@@ -673,13 +673,13 @@ Feature: Smoke Test Feature
 
     Then I verify Auditor Create requests from To-Do: ToDo 06, ToDo 07, ToDo 08, ToDo 09, ToDo 10
       | Request Name |
-      | request 01   |
-      | request 02   |
-      | request 03   |
-      | request 04   |
-      | request 05   |
-      | request 06   |
-  
+      | Request 01   |
+      | Request 02   |
+      | Request 03   |
+      | Request 04   |
+      | Request 05   |
+      | Request 06   |
+
   Scenario: Auditor add file to request on To-Do: AUV-1107
     Given I navigate to Marketing page
     And I click on login link
@@ -704,7 +704,7 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
     Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-  
+
   Scenario: Auditor download file from request: AUV-1113
     Given I navigate to Marketing page
     And I click on login link
@@ -719,7 +719,7 @@ Feature: Smoke Test Feature
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-  
+
   Scenario: General Auditor post new comment: AUV-1123
     Given I navigate to Marketing page
     And I click on login link
@@ -735,7 +735,7 @@ Feature: Smoke Test Feature
     Then I input comment content: "General Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Auditor Comment"
-  
+
   Scenario: Auditor mark as complete one To-Do: AUV-1127
     Given I navigate to Marketing page
     And I click on login link
@@ -752,7 +752,7 @@ Feature: Smoke Test Feature
     Then I should see mark completed todo popup
     And I click on archive button on complete todo popup
     Then I should see todo: "ToDo 07" mark completed on todo page
-  
+
   Scenario: Auditor delete 1 To-Do: AUV-1130
     Given I navigate to Marketing page
     And I click on login link
@@ -775,7 +775,7 @@ Feature: Smoke Test Feature
     Then I should see delete todo popup
     And I click on confirm delete button on delete todo popup
     Then I should see todo: "ToDo 08" not existed in todo list
-  
+
   Scenario: Auditor download from all To-do: AUV-1141
     Given I navigate to Marketing page
     And I delete existed file: "Engagement GP02.zip" in download folder
@@ -793,7 +793,7 @@ Feature: Smoke Test Feature
     Then I should see popup download attachments on todo page
     And I click download button on attachment download popup
     Then I verify file "Engagement GP02.zip" existed in computer
-  
+
   Scenario: Lead Client can see to-dos: AUV-1171
     Given I navigate to Marketing page
     And I click on login link
@@ -805,7 +805,7 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I should see all to do assigned : ToDo 01, ToDo 02, ToDo 04, ToDo 05, ToDo 06, ToDo 07, ToDo 09
-  
+
   Scenario: Lead client remove admin client out Engagement: AUV-1210
     Given I navigate to Marketing page
     And I click on login link
@@ -821,7 +821,7 @@ Feature: Smoke Test Feature
     Then I click on check box beside Admin Client name : "Admin Client" in team member list
     And I remove Admin Client name : "Admin Client" out of team member list
     Then I should not see Admin Client name : "Admin Client" in team member list
-  
+
   Scenario: Leader Client invite client into Engagement: AUV-1214
     Given I delete existed email
       | Email                  | Password     |
@@ -847,7 +847,7 @@ Feature: Smoke Test Feature
     And I input Role: "IT" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
-  
+
   Scenario: New client log in their email and active user: AUV-1217
     Given I navigate to GMail login page
     And I sign In GMail
@@ -863,15 +863,15 @@ Feature: Smoke Test Feature
     And I click on Continue Button on Personal Information Page
     Then I should see Business Information Page
     And I click on Continue Button on Business Information Page
-    Then I should see Bank Information Page
-    And I click on Skip Button on Bank Information Page
+#    Then I should see Bank Information Page ################ comment code
+#    And I click on Skip Button on Bank Information Page ################ comment code
     Then I should see File Storage Information Page
     And I click on Skip Button on File Storage Information Page
     Then I should see Security Information Page
     And I fill up all Security Information with Password: "Changeit@123"
     And I click on Create Account Button on Security Information Page
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
-  
+
   Scenario: Lead Client assign To Do to client: AUV-2248
     Given I navigate to Marketing page
     And I click on login link
@@ -892,7 +892,7 @@ Feature: Smoke Test Feature
       | General Client   | ToDo 01   |
       | General Client   | ToDo 06   |
       | General Client   | ToDo 09   |
-  
+
   Scenario: Lead client login and add file to request: AUV-1250
     Given I navigate to Marketing page
     And I click on login link
@@ -917,7 +917,7 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "ToDo 06"
     Then I should see the Todo detail opened
     Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-  
+
   Scenario: Lead Client download file from request: AUV-1259
     Given I navigate to Marketing page
     And I click on login link
@@ -932,7 +932,7 @@ Feature: Smoke Test Feature
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-  
+
   Scenario: Lead Client post new comment: AUV-1267
     Given I navigate to Marketing page
     And I click on login link
@@ -948,7 +948,7 @@ Feature: Smoke Test Feature
     Then I input comment content: "Lead Client Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Client Comment"
-  
+
   Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
     Given I navigate to Marketing page
     And I click on login link
@@ -965,7 +965,7 @@ Feature: Smoke Test Feature
     And I verify Client Assignee Selected
       | Client Full Name | Todo Name |
       | General Client   | ToDo 04   |
-  
+
   Scenario: General Client can see to-dos: AUV-1299
     Given I navigate to Marketing page
     And I click on login link
@@ -977,7 +977,7 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I should see all to do assigned : ToDo 01, ToDo 04, ToDo 06, ToDo 09
-  
+
   Scenario: Client add file to request on To-Do: AUV-1316
     Given I navigate to Marketing page
     And I click on login link
@@ -1002,7 +1002,7 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "ToDo 01"
     Then I should see the Todo detail opened
     Then I should see list files: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-  
+
   Scenario: Client download file from request: AUV-1319
     Given I navigate to Marketing page
     And I click on login link
@@ -1017,7 +1017,7 @@ Feature: Smoke Test Feature
     Then I should see the Todo detail opened
     And I click download list files on Todo detail popup: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
     Then I should see list files which are downloaded successfully: TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt
-  
+
   Scenario: Client post new comment: AUV-1326
     Given I navigate to Marketing page
     And I click on login link
@@ -1033,7 +1033,7 @@ Feature: Smoke Test Feature
     Then I input comment content: "General Client Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Client Comment"
-  
+
   Scenario: Admin auditor can see engagement in firm: AUV-1336
     Given I navigate to Marketing page
     And I click on login link
@@ -1084,50 +1084,82 @@ Feature: Smoke Test Feature
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I should see all to do : ToDo 01, ToDo 02, ToDo 04, ToDo 05, ToDo 06, ToDo 07, ToDo 09, ToDo 10
 
+  Scenario: Admin auditor can see all request(s) in Firm: AUV-2254
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    And I verify Existed request name from Todo
+      | Todo Name |                         Request Name                                   |
+      | ToDo 02   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 05   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 07   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+      | ToDo 10   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
+    And I verify Existed request files from Todo
+      | Todo Name | File Request                                                                                                          |
+      | ToDo 01   | TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt |
+      | ToDo 04   | TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt |
+      | ToDo 06   | TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt |
+      | ToDo 09   | TXT_Auvenir.jpg, TXT_Auvenir.pdf, TXT_Auvenir.xlsx, TXT_helloAuvenir.docx, TXT_helloAuvenir.png, TXT_helloAuvenir.txt |
+
+  Scenario: Admin auditor can see all comments in firm : AUV-2255
+    Given I navigate to Marketing page
+    And I click on login link
+    And I enter the following for Login
+      | Email                       | Password     |
+      | chr.auditor01.adm@gmail.com | Changeit@123 |
+    And I click on login button
+    Then I should see engagement page
+    And I click on engagement: "Engagement GP02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
+    Then I verify comment at list To-Do
+      | To-Do Name | Type Input | User Comment    | Content Comment         |
+      | ToDo 01    | input      | General Client  | General Auditor Comment |
+      | ToDo 04    | input      | Lead Auditor    | Lead Client Comment     |
+      | ToDo 06    | input      | Lead Client     | Lead Auditor Comment    |
+      | ToDo 09    | input      | Auvenir Auditor | General Client Comment  |
 
   Scenario:  Admin client can see all To-do(s) in business: AUV-2256
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | clienttan.adm@mailinator.com | Changeit@123 |
+      | chr.client01.adm@gmail.com   | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I should see engagement list : Engagement 01, Engagement 02
-    Then I click on engagement: "Engagement 01"
-    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 01"
+    And I should see engagement list : Engagement GP01, Engagement GP02
+    Then I click on engagement: "Engagement GP01"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
     Then I should see empty ToDo list
     Then I click on engagement tab return engagement page
     And I should see engagement page
-    Then I click on engagement: "Engagement 02"
-    And I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    Then I click on engagement: "Engagement GP02"
+    And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I should see all to do : ToDo1,ToDo2,ToDo3,ToDo4,ToDo5
-  @Vietlq
-  Scenario: Admin auditor can see all comments in firm : AUV-2255
+
+  Scenario: Admin client can see all request(s) in Business: AUV-2257
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                         | Password     |
-      | adm.auditor001@mailinator.com | Changeit@123 |
+      | Email                      | Password     |
+      | clvien1.adm@mailinator.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement02"
-  Then I should see engagement detail page with Engagement Title Uneditable: "Engagement02"
-  Then I verify comment at list To-Do
-    |To-Do Name|Type Input |User Comment | Content Comment|
-    | Todo 04 | input      |Member auditor 01| helllo |
-    | Todo 04 | input      |Member auditor 01| hi |
-    | Todo 04 | attachment |Member auditor 01| Captures.jpg |
-    | Todo 05 | attachment |Member auditor 01| Captures.jpg |
-  Then I come back engagement page
-  Then I should see engagement page
-  And I click on engagement: "Engagement01"
-  Then I should see engagement detail page with Engagement Title Editable: "Engagement01"
-  Then I verify comment at list To-Do
-    |To-Do Name|Type Input |User Comment | Content Comment|
-    | Todo 11 | attachment |Member auditor 01| TXT_helloAuvenir1.txt |
-    | Todo 11 | attachment |viet le| TXT_helloAuvenir1.txt |
-
+    And I click on engagement: "Engagement 02"
+    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
+    And I verify Existed request name from Todo
+      | Todo name | Request name      |
+      | Todo 01   | r1,r2,r3,r4,r5,r6 |
+      | Todo 03   | r1,r2,r3          |
+      | Todo 04   | r1,r2,r3,r4,r5,r6 |
+    And I verify Existed request files from Todo
+      | Todo name | Request name                                                 |
+      | Todo 02   | GA2.xlsx,GC2.xlsx,GCupload.png,LAupload.png,LC2.xlsx,sc1.jpg |
 
   Scenario: Admin client can see all comment(s) in business: AUV-2258
     Given I navigate to Marketing page
@@ -1153,44 +1185,3 @@ Feature: Smoke Test Feature
       |To-Do Name|Type Input |User Comment | Content Comment|
       | Todo 11 | attachment |Member auditor 01| TXT_helloAuvenir1.txt |
       | Todo 11 | attachment |viet le          | TXT_helloAuvenir1.txt |
-
- #Vien.pham
-  @vp
-  Scenario: Admin auditor can see all request(s) in Firm: AUV-2254
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                      | Password     |
-      | auvien1.adm@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement 02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    And I verify Existed request name from Todo
-      | Todo name | Request name      |
-      | Todo 01   | r1,r2,r3,r4,r5,r6 |
-      | Todo 03   | r1,r2,r3          |
-      | Todo 04   | r1,r2,r3,r4,r5,r6 |
-    And I verify Existed request files from Todo
-      | Todo name | Request name                                                 |
-      | Todo 02   | GA2.xlsx,GC2.xlsx,GCupload.png,LAupload.png,LC2.xlsx,sc1.jpg |
-
-      #Vien.pham
-  Scenario: Admin client can see all request(s) in Business: AUV-2257
-    Given I navigate to Marketing page
-    And I click on login link
-    And I enter the following for Login
-      | Email                      | Password     |
-      | clvien1.adm@mailinator.com | Changeit@123 |
-    And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement 02"
-    Then I should see engagement detail page with Engagement Title Uneditable: "Engagement 02"
-    And I verify Existed request name from Todo
-      | Todo name | Request name      |
-      | Todo 01   | r1,r2,r3,r4,r5,r6 |
-      | Todo 03   | r1,r2,r3          |
-      | Todo 04   | r1,r2,r3,r4,r5,r6 |
-    And I verify Existed request files from Todo
-      | Todo name | Request name                                                 |
-      | Todo 02   | GA2.xlsx,GC2.xlsx,GCupload.png,LAupload.png,LC2.xlsx,sc1.jpg |

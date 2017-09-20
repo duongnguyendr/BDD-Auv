@@ -28,6 +28,8 @@ public class DetailsEngagementPage extends CommonPage {
 
     @FindBy(xpath = "//table[@id='todo-table']/tbody/tr[@id='empty-todo']/td/div/img")
     private WebElement eleEmptyToDoImage;
+    @FindBy(xpath = "//div[@id='engagementPage']//p[text()='Engagement Overview']")
+    private WebElement engagementOverview;
 
     public DetailsEngagementPage(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -48,7 +50,8 @@ public class DetailsEngagementPage extends CommonPage {
     public void verifyDetailsEngagementPageEditable(String engagementName) {
         waitForVisibleElement(engagementNameEditable, "Engagement name text");
         clickElement(engagementNameEditable, "Engagement name text");
-        sendTabKey(engagementNameEditable, "");
+        clickElement(engagementOverview, "Engegement overview");
+//        sendTabKey(engagementNameEditable, "");
         boolean result = validateAttributeElement(engagementNameEditable, "placeholder", engagementName);
         Assert.assertTrue(result,"Should see Detail Engagement.");
     }

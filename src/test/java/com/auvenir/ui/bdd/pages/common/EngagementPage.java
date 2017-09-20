@@ -118,9 +118,10 @@ public class EngagementPage extends CommonPage {
     /*-----------end of huy.huynh on 17/07/2017.*/
 
     public boolean checkEngagementListExists(List<String > engagementNames){
-        if(eleEngagementNameList.size() != engagementNames.size())
+        if(eleEngagementNameList.size() != engagementNames.size()){
+            logger.info("Actual engagement: " + eleEngagementNameList.size() + ". But expected: " + engagementNames.size());
             return false;
-
+        }
         int totalEngagement = engagementNames.size();
         for(int i=0; i<totalEngagement; i++){
             if(!engagementNames.contains(eleEngagementNameList.get(i).getText().trim())){

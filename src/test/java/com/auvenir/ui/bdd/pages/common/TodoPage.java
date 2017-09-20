@@ -28,7 +28,7 @@ public class TodoPage extends CommonPage {
     protected List<WebElement> unEditableTodoName;
     @FindBy(xpath = "//div[contains(@class,'ui dropdown auditor todo-bulkDdl ')]")
     private List<WebElement> listAuditorAssigneeDdl;
-    @FindBy(xpath = "//div[@class='ui dropdown client todo-bulkDdl ']")
+    @FindBy(xpath = "//div[contains(@class,'ui dropdown client todo-bulkDdl ')]")
     private List<WebElement> listClientAssigneeDdl;
     protected String assineeClientEle = ".//button[text()='%s']";
     @FindBy(xpath = "//*[@id='todo-table']/tbody/tr//input[@type='checkbox']")

@@ -78,7 +78,6 @@ public class AuditorTodoPage extends TodoPage {
         if (auditorAssigneeSelected.getText().equals(auditorAssignee)) {
             logger.info("verify auditor assignee selected with name: " + auditorAssignee);
         } else {
-
             logger.info("verify auditor assignee selected with name: " + auditorAssignee);
         }
 
@@ -90,12 +89,12 @@ public class AuditorTodoPage extends TodoPage {
         //Thuan Duong: Have a bug, need to start with size 2;
         int size = 1;
         int index = -1;
-        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        if (validateExistedElement(emptyTodo, "emptyTodo")) {
-            size ++;
-        }
-        getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        if (!rowString.equals("")) {
+//        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+////        if (validateExistedElement(emptyTodo, "emptyTodo")) {
+////            size ++;
+////        }
+//        getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        if (rowString.contains("newRow")) {
             size = toDoTaskRowEle.size() + 1;
             index = findToDoTaskName(toDoName);
         }
@@ -195,7 +194,7 @@ public class AuditorTodoPage extends TodoPage {
             waitSomeSeconds(1);
             lstRequestDisplayed.add(requestEle.getText());
         }
-        logger.info("test listRequest"+listRequest.size());
+        logger.info("test listRequest: " + listRequest.size());
         for (int i = 0; i < listRequest.size(); i++) {
             Assert.assertTrue(lstRequestDisplayed.contains(listRequest.get(i)));
         }

@@ -38,6 +38,7 @@ public class TodoStepDefinition extends BaseInit {
         this.baseInit = baseInit;
         auditorTodoPage = new AuditorTodoPage(logger, driver);
         todoPage = new TodoPage(logger, driver);
+        todoDetailsPage = new TodoDetailsPage(logger, driver);
     }
 
     @And("^I select todo: \"([^\"]*)\" check box on todo page$")

@@ -66,11 +66,10 @@ public class GeneralUtilities {
     public static List getList ( DataTable dataTable){
 /*note: Get form 1 to List size because first row is the header of file
 */
-        List<String>listDataList;
-        listDataList = dataTable.asList(String.class);
+        LinkedList<String>listDataList;
+        listDataList = new LinkedList<String>(dataTable.asList(String.class));
+        listDataList.remove(0);
         return listDataList;
-
-
     }
 
 
