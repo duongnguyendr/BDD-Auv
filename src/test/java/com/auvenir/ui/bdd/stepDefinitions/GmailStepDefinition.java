@@ -42,7 +42,7 @@ public class GmailStepDefinition extends BaseInit {
         for (MarketingStepDefinition.User user: users){
             System.out.println("The Email is: "+user.email);
             System.out.println("The Password is: "+user.password);
-            mailPage.deleteAllExistedGMail(user.email, user.password);
+            mailPage.signInGmail(user.email, user.password);
         }
     }
 
