@@ -27,7 +27,8 @@ _Example_:
           | chr.auvenirad@gmail.com | Changeit@123 |
         And I click on login button
         Then I should see the AdminPortal page
-        
+
+Test Data will be input directly on feature file for each scenario.
 **3. Run Test:**
 we can run test framework on Local (Selenium WebDriver) and Selenium Grid
 We can run test script with Maven command line: `_mvn clean verify_` 

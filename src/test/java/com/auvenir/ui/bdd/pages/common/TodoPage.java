@@ -22,6 +22,7 @@ public class TodoPage extends CommonPage {
         super(logger, driver);
     }
 
+
     @FindBy(xpath = "//*[@id='todo-table']/tbody/tr")
     protected List<WebElement> toDoTaskRowEle;
     @FindBy(xpath = "//*[@id='todo-table']/tbody/tr/td/span[@class='todo-name-readonly']")
@@ -96,6 +97,7 @@ public class TodoPage extends CommonPage {
     protected WebElement requestCloseBtn;
     @FindBy(xpath = "//div[@id='auv-todo-details']")
     protected WebElement addNewRequestWindow;
+    String getCategoryFollowToDo = "//*[@value|text()='%s']/ancestor::tr[@class='newRow']//div[@class='todo-categoryName']";
 
 
     public int findToDoTaskName(String toDoName) {
@@ -436,5 +438,25 @@ public class TodoPage extends CommonPage {
         return isFind;
     }
 
+    public void checkToDoIsExists( String todoName) {
+        logger.info("Select To Do Task List Check Box by Name");
 
+            int index = getIndexOfToDoItem(eleToDoNameRow, todoName);
+           Assert.assertNotEquals(index,-1);
+    }
+    public int getIndexOfToDoItem(List<WebElement> eleDataRowList, String toDoName) {
+        for (int i = 0; i < eleDataRowList.size(); i++) {
+            String actualAttributeValue = eleDataRowList.get(i).getAttribute("value").trim();
+            if (actualAttributeValue.equals(toDoName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public void checkCategoryIsExists(String todoName,String category){
+
+        logger.info("Verify to do be created  : "+todoName+" has comment .. "+category);
+        WebElement contentCommentEle = getElementByXpath(getCategoryFollowToDo, todoName);
+        Assert.assertEquals(contentCommentEle.getText(),category);
+    }
 }

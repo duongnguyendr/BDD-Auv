@@ -1,6 +1,6 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
-  
+
   Scenario: Verify super admin login: AUV-2186
     Given I navigate to Marketing page
     And I click on login link
@@ -9,7 +9,7 @@ Feature: Smoke Test Feature
       | chr.auvenirad@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-  
+
   Scenario: Verify admin login: AUV-2187
     Given I navigate to Marketing page
     And I click on login link
@@ -18,7 +18,7 @@ Feature: Smoke Test Feature
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-  
+
   Scenario: Auditor Admin click Sign up button and fill information: AUV-542
     Given I navigate to Marketing page
     And Delete all activity of engagement by user  : "chr.auditor01.adm@gmail.com"
@@ -60,7 +60,7 @@ Feature: Smoke Test Feature
     Then I should see thank for create account page
     And I click continue button on sign up page
     Then I should see marketing portal page
-  
+
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
       | Email                       | Password     |
@@ -78,7 +78,7 @@ Feature: Smoke Test Feature
     And I click confirm button on admin page
     Then I should see verified message successful on admin page
     Then I should see status of user: "chr.auditor01.adm@gmail.com" is "Onboarding"
-  
+
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
     Given I navigate to GMail login page
     And I sign In GMail
@@ -88,7 +88,7 @@ Feature: Smoke Test Feature
     And I click on confirmation link
     And I create password: "Changeit@123"
     Then I should see engagement page
-  
+
   Scenario: Admin auditor user create new Engagement: AUV-585
     Given I navigate to Marketing page
     And Delete engagement name by user  : "chr.auditor01.adm@gmail.com", "Engagement GP01"
@@ -113,7 +113,7 @@ Feature: Smoke Test Feature
     And I should see create todo list page
     And I click create todo button on Create New Engagement Page
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP01"
-  
+
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
       | Email                        | Password     |
@@ -139,7 +139,7 @@ Feature: Smoke Test Feature
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
-  
+
   Scenario: Lead Auditor Active account: AUV-660
     Given I navigate to GMail login page
     And I sign In GMail
@@ -158,7 +158,7 @@ Feature: Smoke Test Feature
     And I click on continue button on firm information page
     And I create password: "Changeit@123"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
-  
+
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
       | Email                      | Password     |
@@ -191,7 +191,7 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see the AdminPortal page
     Then I should see status of user: "chr.client01.adm@gmail.com" is "Onboarding"
-  
+
   Scenario: Admin Client active account: AUV-645
     Given I navigate to GMail login page
     And I sign In GMail
@@ -220,7 +220,7 @@ Feature: Smoke Test Feature
     And I fill up all Security Information with Password: "Changeit@123"
     And I click on Create Account Button on Security Information Page
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
-  
+
   Scenario: Lead Auditor Create new Engagement: AUV-684
     Given I navigate to Marketing page
     And I click on login link
@@ -243,7 +243,7 @@ Feature: Smoke Test Feature
     And I should see create todo list page
     And I click create todo button on Create New Engagement Page
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-  
+
   Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
     Given I delete existed email
       | Email                      | Password     |
@@ -401,7 +401,14 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    Then I create To-Do with name and category
+    And I create To-Do with name and category
+      | ToDo name | Category |
+      | ToDo 01   | Cat1     |
+      | ToDo 02   | Cat1     |
+      | ToDo 03   | Cat1     |
+      | ToDo 04   | Cat1     |
+      | ToDo 05   | Cat1     |
+    Then I verify To-Do has been created and category
       | ToDo name | Category |
       | ToDo 01   | Cat1     |
       | ToDo 02   | Cat1     |
@@ -625,13 +632,20 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
-    Then I create To-Do with name and category
+    And I create To-Do with name and category
       | ToDo name | Category |
       | ToDo 06   | Cat1     |
       | ToDo 07   | Cat1     |
       | ToDo 08   | Cat1     |
       | ToDo 09   | Cat1     |
       | ToDo 10   | Cat1     |
+    Then I verify To-Do has been created and category
+      | ToDo name | Category |
+      | ToDo 01   | Cat1     |
+      | ToDo 02   | Cat1     |
+      | ToDo 03   | Cat1     |
+      | ToDo 04   | Cat1     |
+      | ToDo 05   | Cat1     |
 
   Scenario:Auditor Member assign To Do to Lead Client : AUV-1069
     Given I navigate to Marketing page
@@ -1049,7 +1063,7 @@ Feature: Smoke Test Feature
     And I should see engagement page
     Then I click on engagement: "Engagement GP02"
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
-  
+
   Scenario: Admin client can see all engagement(s) in business: AUV-1376
     Given I navigate to Marketing page
     And I click on login link
@@ -1065,7 +1079,7 @@ Feature: Smoke Test Feature
     And I should see engagement page
     Then I click on engagement: "Engagement GP02"
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
-  
+
   Scenario: Admin auditor can see all to-dos in firm: AUV-2253
     Given I navigate to Marketing page
     And I click on login link
