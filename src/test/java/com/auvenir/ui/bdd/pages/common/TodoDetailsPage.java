@@ -226,14 +226,11 @@ public class TodoDetailsPage extends CommonPage {
             Assert.assertTrue(result, "Comment should be displayed on list comment.");
             verifyUserCommentDisplayedCorrectly(commentContent,userInput);
 
-
         }else {
             // compare with type input have  attachment
             logger.info("compare with type input have  attachment "+commentContent);
             verifyCommentFilesDisplayedCorrectly(commentContent);
             verifyUserCommentDisplayedCorrectly(commentContent,userInput);
-
-
 
         }
     }
@@ -259,7 +256,6 @@ public class TodoDetailsPage extends CommonPage {
     public void verifyUserCommentDisplayedCorrectly(String contentComment ,String userInput ){
         logger.info("Verifying this user comment : "+userInput+" existed in the list.. "+contentComment);
         WebElement contentCommentEle = getElementByXpath(userComment, contentComment);
-        System.out.println("aaaaasasa"+contentCommentEle);
         Assert.assertEquals(contentCommentEle.getText(),userInput);
 
     }

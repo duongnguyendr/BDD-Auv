@@ -393,13 +393,21 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
-    Then I create To-Do with name and category
+    And I create To-Do with name and category
       | ToDo name | Category |
       | ToDo 01   | Cat1     |
       | ToDo 02   | Cat1     |
       | ToDo 03   | Cat1     |
       | ToDo 04   | Cat1     |
       | ToDo 05   | Cat1     |
+    Then I verify To-Do has been created and category
+      | ToDo name | Category |
+      | ToDo 01   | Cat1     |
+      | ToDo 02   | Cat1     |
+      | ToDo 03   | Cat1     |
+      | ToDo 04   | Cat1     |
+      | ToDo 05   | Cat1     |
+
   @run
   Scenario:Lead Auditor assign To Do task to Lead Client: AUV-896
     Given I navigate to Marketing page
@@ -617,13 +625,21 @@ Feature: Smoke Test Feature
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
-    Then I create To-Do with name and category
+    And I create To-Do with name and category
       | ToDo name | Category |
       | ToDo 06   | Cat1     |
       | ToDo 07   | Cat1     |
       | ToDo 08   | Cat1     |
       | ToDo 09   | Cat1     |
       | ToDo 10   | Cat1     |
+    Then I verify To-Do has been created and category
+      | ToDo name | Category |
+      | ToDo 01   | Cat1     |
+      | ToDo 02   | Cat1     |
+      | ToDo 03   | Cat1     |
+      | ToDo 04   | Cat1     |
+      | ToDo 05   | Cat1     |
+
   @run
   Scenario:Auditor Member assign To Do to Lead Client : AUV-1069
     Given I navigate to Marketing page

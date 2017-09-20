@@ -353,4 +353,19 @@ public class TodoStepDefinition extends BaseInit {
             todoPage.closeAddNewRequestWindow();
         }
     }
+
+    @And("^I verify To-Do has been created and category$")
+    public void verifyToDoHasBeenCreatedAndCategory(DataTable table) throws Throwable {
+        logger.info("===== I verify To-Do has been created and category =====");
+        List<List<String>> toDonameAndategorys = getTable(table);
+        String toDoName;
+        String category;
+        for (List<String> toDonameAndategory :toDonameAndategorys) {
+            toDoName= toDonameAndategory.get(0);
+            category= toDonameAndategory.get(1);
+            todoPage.checkToDoIsExists(toDoName);
+            todoPage.checkCategoryIsExists(toDoName,category);
+
+        }
+    }
 }
