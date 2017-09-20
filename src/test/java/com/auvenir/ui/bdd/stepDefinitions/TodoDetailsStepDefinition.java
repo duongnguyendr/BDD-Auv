@@ -124,6 +124,8 @@ public class TodoDetailsStepDefinition extends BaseInit {
               auditorTodoPage.verifyTodoDetailOpened();
               todoDetailsPage.verifyCommentUnknowType(typeComment, contentName, userComment);
 
+}
+
 
          }
 
@@ -131,4 +133,3 @@ public class TodoDetailsStepDefinition extends BaseInit {
 
 
     }
-}

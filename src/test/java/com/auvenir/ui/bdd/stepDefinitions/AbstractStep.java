@@ -36,7 +36,8 @@ public class AbstractStep extends BaseInit {
     protected String SELENIUM_GRID_HUB = "http://jenkins.auvenir.com:4444/wd/hub";
 
     @Before
-    public void intializeWebDriver() throws MalformedURLException {
+    public void intializeWebDriver(Scenario scenario) throws MalformedURLException {
+        logger.info("============ Start scenario: " + scenario.getName() + " ============");
         getBaseUrl();
         baseUrl = getConfigValue(PROPERTIES_FILE, "BASE_URL");
         getToEmail();
@@ -159,5 +160,6 @@ public class AbstractStep extends BaseInit {
         driver.close();
         driver.quit();
         logger.info("***** Closed browser *****");
+        logger.info("============ End scenario: " + scenario.getName() + " ============");
     }
 }

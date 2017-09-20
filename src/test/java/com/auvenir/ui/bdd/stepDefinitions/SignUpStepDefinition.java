@@ -291,19 +291,19 @@ public class SignUpStepDefinition extends BaseInit {
     @Then("^I should see Bank Information Page$")
     public void seeBankInformationPage() throws Throwable {
         logger.info("I should see Bank Information Page");
-        //        clientSignUpPage.verifyBankInformationTitle();
+        clientSignUpPage.verifyBankInformationTitle();
     }
 
     @And("^I fill up all Bank Information$")
     public void fillUpBankInformation() throws Throwable {
         logger.info("I fill up all Bank Information");
-        //        clientSignUpPage.fillUpBankForm();
+        clientSignUpPage.fillUpBankForm();
     }
 
     @And("^I click on Skip Button on Bank Information Page$")
     public void clickSkipButtonOnBankPage() throws Throwable {
         logger.info("I click on Skip Button on Bank Information Page");
-        //        clientSignUpPage.clickSkipButtonOnBankPage();
+        clientSignUpPage.clickSkipButtonOnBankPage();
     }
 
     @Then("^I should see File Storage Information Page$")
@@ -354,5 +354,53 @@ public class SignUpStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("======I input Client Mobile Phone Number: " + phoneNumber + "=====");
         clientSignUpPage.fillUpPhoneBusinessNumber(phoneNumber);
+    }
+
+    @And("^I input phone number: \"([^\"]*)\" on personal information page$")
+    public void iInputPhoneNumberOnPersonalPage(String phoneNumber) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.inputPersonalPhoneNumber(phoneNumber);
+    }
+
+    @And("^I select Auvenir referral on personal information page$")
+    public void iSelectAuvenirRefferal() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.selectAuvenirReferal();
+    }
+
+    @And("^I select check box agree on personal information page$")
+    public void iSelectCheckBoxAgree() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.selectAgreeCheckbox();
+    }
+
+    @And("^I select confirm CPA check box on personal information page$")
+    public void iSelectConfirmCPACheckBox() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.clickConfirmCPACheckbox();
+    }
+
+    @And("^I click on continue button on personal information page$")
+    public void iClickOnContinueButtonOnPersonalInformationPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        auditorSignUpPage.clickPersonalContinueBtn();
+    }
+
+    @And("^I select Fiscal End Year on Business Information page$")
+    public void iSelectFiscalEndYear() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        clientSignUpPage.inputFiscalEndyear();
+    }
+
+    @And("^I select Business Industry on Business Information page$")
+    public void iSelectBusinessIndustry() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        clientSignUpPage.selectBussinessIndustry();
+    }
+
+    @And("^I select Accounting framework on Business Information page$")
+    public void iSelectAccountingFramework() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        clientSignUpPage.selectAccountingFramework();
     }
 }

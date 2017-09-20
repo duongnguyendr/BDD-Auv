@@ -7,14 +7,17 @@ import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.TodoDetailsPage;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import static com.auvenir.ui.bdd.common.GeneralUtilities.getList;
 import static com.auvenir.ui.bdd.common.GeneralUtilities.getTable;
@@ -151,8 +154,10 @@ public class TodoStepDefinition extends BaseInit {
 
     @And("^I select todo: \"([^\"]*)\" check box on Uneditable To-do page$")
     public void selectTodoCheckBoxOnUneditableToDoPage(String todoName) throws Throwable {
-      todoPage.selectToDoCheckboxByName(todoName);
+        todoPage.selectToDoCheckboxByName(todoName);
     }
+
+
 
     public class LisTodoAnduser {
         public String userName;
@@ -210,14 +215,14 @@ public class TodoStepDefinition extends BaseInit {
         }
     }
 
-    @Then("^I assignee list To-Do to Client")
+    @And("^I assignee list To-Do to Client")
     public void verifyAssigneeListToDotoClient(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I assignee list To-Do to Lead Client =====");
 
 
         List<List<String>> listToDoAndUserClient = getTable(table);
-        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+        for (int i = 0; i < listToDoAndUserClient.size(); i++) {
             System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
             System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
             todoPage.selectClientAssigneeByName(listToDoAndUserClient.get(i).get(1),
@@ -231,7 +236,7 @@ public class TodoStepDefinition extends BaseInit {
         logger.info("===== I verify Auditor Assignee Selected =====");
 
         List<List<String>> listToDoAndUserClient = getTable(table);
-        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+        for (int i = 0; i < listToDoAndUserClient.size(); i++) {
             System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
             System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
             todoPage.verifyClientAssigneeSelected(listToDoAndUserClient.get(i).get(1),
@@ -244,11 +249,11 @@ public class TodoStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I create To-Do with name and category =====");
 
-        List<List<String>> toDonameAndategory  = getTable(table);
-        for (int i = 0; i < toDonameAndategory.size() ; i++) {
-            System.out.println("The Client name is: "+toDonameAndategory.get(i).get(0));
-            System.out.println("The Catalog: "+toDonameAndategory.get(i).get(1));
-            auditorTodoPage.createToDoTaskWithCategoryName(toDonameAndategory.get(i).get(0),toDonameAndategory.get(i).get(1));
+        List<List<String>> toDonameAndategory = getTable(table);
+        for (int i = 0; i < toDonameAndategory.size(); i++) {
+            System.out.println("The Client name is: " + toDonameAndategory.get(i).get(0));
+            System.out.println("The Catalog: " + toDonameAndategory.get(i).get(1));
+            auditorTodoPage.createToDoTaskWithCategoryName(toDonameAndategory.get(i).get(0), toDonameAndategory.get(i).get(1));
 
         }
     }
@@ -266,19 +271,19 @@ public class TodoStepDefinition extends BaseInit {
         auditorTodoPage.verifyTodoDetailOpened();
     }
 
-    @Then("^I verify Client Assignee Selected on Uneditabe Page$")
-    public void verifyClientAssigneeSelectedOnUneditabePage(DataTable table) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        logger.info("===== I verify Auditor Assignee Selected =====");
-
-        List<List<String>> listToDoAndUserClient = getTable(table);
-        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
-            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
-            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
-            todoPage.verifyClientAssigneeSelectedOnUneditablePage(listToDoAndUserClient.get(i).get(1),
-                    listToDoAndUserClient.get(i).get(0));
-        }
-    }
+//    @Then("^I verify Client Assignee Selected on Uneditabe Page$")
+//    public void verifyClientAssigneeSelectedOnUneditabePage(DataTable table) throws Throwable {
+//        // Write code here that turns the phrase above into concrete actions
+//        logger.info("===== I verify Auditor Assignee Selected =====");
+//
+//        List<List<String>> listToDoAndUserClient = getTable(table);
+//        for (int i = 1; i < listToDoAndUserClient.size(); i++) {
+//            System.out.println("The Client name is: " + listToDoAndUserClient.get(i).get(0));
+//            System.out.println("The To-Do name is: " + listToDoAndUserClient.get(i).get(1));
+//            todoPage.verifyClientAssigneeSelectedOnUneditablePage(listToDoAndUserClient.get(i).get(1),
+//                    listToDoAndUserClient.get(i).get(0));
+//        }
+//    }
 
     @And("^I create requests from To-Do$")
     public void createRequestsFromToDo(DataTable table) throws Throwable {
@@ -289,8 +294,8 @@ public class TodoStepDefinition extends BaseInit {
         for (String toDo : maptable.keySet()) { // for To-Do to create request
             clickSlideOutMenuOnSelectedToDo(toDo);
             verifyTodoDetailOpened();
-            String [] requestNames = maptable.get(toDo).split(",");
-            for (String requestName: requestNames){
+            String[] requestNames = maptable.get(toDo).split(",");
+            for (String requestName : requestNames) {
                 todoDetailsPage.selectAddNewRequest();
                 todoDetailsPage.createNewRequest(requestName);
             }
@@ -323,5 +328,39 @@ public class TodoStepDefinition extends BaseInit {
         // Write code here that turns the phrase above into concrete actions
         logger.info("=====I should see all to do =====");
         todoPage.verifyUserSeeToDo(toDoList);
+    }
+
+    @And("^I verify Existed request name from Todo$")
+    public void verifyCreatedRequestNameFromTodo(DataTable table) throws Throwable {
+        logger.info("===== Verify Existed request name from Todos=====");
+        List<List<String>> listTodoAndRequestName = getTable(table);
+        for (List<String> todoAndRequestName : listTodoAndRequestName) {
+            logger.info("On Todo name: " + todoAndRequestName.get(0));
+            clickSlideOutMenuOnSelectedToDo(todoAndRequestName.get(0));
+            verifyTodoDetailOpened();
+            String[] requestNames = todoAndRequestName.get(1).split(",");
+            for (String requestName : requestNames) {
+                boolean isFind = todoPage.verifyExistedRequestName(requestName);
+                Assert.assertTrue(isFind,"Can see request name");
+            }
+            todoPage.closeAddNewRequestWindow();
+        }
+    }
+
+    @And("^I verify Existed request files from Todo$")
+    public void iVerifyExistedRequestFilesFromTodo(DataTable table) throws Throwable {
+        logger.info("===== Verify Existed request files from Todos=====");
+        List<List<String>> listTodoAndRequestName = getTable(table);
+        for (List<String> todoAndRequestName : listTodoAndRequestName) {
+            logger.info("On Todo name: " + todoAndRequestName.get(0));
+            clickSlideOutMenuOnSelectedToDo(todoAndRequestName.get(0));
+            verifyTodoDetailOpened();
+            String[] requestFiles = todoAndRequestName.get(1).split(",");
+            for (String requestFile : requestFiles) {
+                boolean isFind = todoPage.verifyExistedRequestFile(requestFile);
+                Assert.assertTrue(isFind,"Can see request file");
+            }
+            todoPage.closeAddNewRequestWindow();
+        }
     }
 }

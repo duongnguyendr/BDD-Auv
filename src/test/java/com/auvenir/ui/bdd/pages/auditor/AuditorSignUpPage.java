@@ -492,6 +492,40 @@ public class AuditorSignUpPage extends CommonPage {
         waitSomeSeconds(5);
     }
 
+    public void inputPersonalPhoneNumber(String strPhone){
+        waitForVisibleElement(phoneConfirmTxtEle, "Phone number");
+        sendKeyTextBox(phoneConfirmTxtEle, strPhone, "Phone number TextBox");
+    }
+
+    public void selectAuvenirReferal(){
+        clickElement(referalConfirmDrdEle, "Referal Dropdown List");
+        waitForAtrributeValueChanged(referalConfirmDrdEle, "Role in Firm Dropdown", "aria-expanded", "true");
+        String firstItemText = selectFirstOptionOfHearAuvenir.get(0).getText();
+        clickElement(selectFirstOptionOfHearAuvenir.get(0), "First Item on Role Dropdown");
+
+        System.out.print("firstItemText: " + firstItemText);
+        waitForTextValueChanged(valueOfHearAuvenir, "", firstItemText);
+        waitForAtrributeValueChanged(referalConfirmDrdEle, "Role in Firm Dropdown", "class", "ui selection dropdown");
+    }
+
+    public void selectAgreeCheckbox(){
+        scrollToFooter();
+        waitForVisibleElement(agreementCheckbox, "Agree Check Box");
+        clickElement(agreementCheckbox, "Agree Check Box");
+        switchToOtherTab(2);
+        getDriver().close();
+        switchToOtherTab(1);
+    }
+    public void clickConfirmCPACheckbox(){
+        waitForVisibleElement(herebyCheckbox, "Confirm CPA Check Box");
+        clickElement(herebyCheckbox, "Confirm CPA Check Box");
+    }
+
+    public void clickPersonalContinueBtn(){
+        waitForVisibleElement(continuePerConfirmBtnEle, "Continue button");
+        clickElement(continuePerConfirmBtnEle, "continue button");
+    }
+
     public void confirmAuditorPersonalInfo(String strPhone) {
         logger.info("Input all field in Register Personal Information Page and click Continue Button");
         boolean result;
