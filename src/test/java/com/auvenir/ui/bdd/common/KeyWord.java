@@ -46,7 +46,7 @@ public class KeyWord {
 //        return logger;
 //    }
 
-    public static final int waitTime = 15;
+    public static final int waitTime = 30;
     public static final int smallTimeOut = 1000;
 
     public enum Element_Type {
@@ -352,6 +352,7 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void clickElement(WebElement element, String elementName) {
         logger.info("+++ Click on Element: " + elementName);
+        waitForVisibleElement(element, elementName);
         waitForClickableOfElement(element, elementName);
         element.click();
 

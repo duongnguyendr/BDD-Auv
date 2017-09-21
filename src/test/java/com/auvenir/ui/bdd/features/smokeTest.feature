@@ -1,6 +1,6 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
-
+  @run1
   Scenario: Verify super admin login: AUV-2186
     Given I navigate to Marketing page
     And I click on login link
@@ -9,7 +9,7 @@ Feature: Smoke Test Feature
       | chr.auvenirad@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-
+  @run1
   Scenario: Verify admin login: AUV-2187
     Given I navigate to Marketing page
     And I click on login link
