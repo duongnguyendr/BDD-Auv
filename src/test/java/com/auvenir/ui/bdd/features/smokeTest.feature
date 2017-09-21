@@ -18,7 +18,7 @@ Feature: Smoke Test Feature
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-
+@run1
   Scenario: Auditor Admin click Sign up button and fill information: AUV-542
     Given I navigate to Marketing page
     And Delete all activity of engagement by user  : "chr.auditor01.adm@gmail.com"
@@ -60,7 +60,7 @@ Feature: Smoke Test Feature
     Then I should see thank for create account page
     And I click continue button on sign up page
     Then I should see marketing portal page
-
+  @run1
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
       | Email                       | Password     |
@@ -755,8 +755,8 @@ Feature: Smoke Test Feature
     Then I input comment content: "General Auditor Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Auditor Comment"
-    Then I attach to comment a file: "TXT_Auvenir.jpg"
-    Then I should see this comment display on list: "TXT_Auvenir.jpg"
+    Then I attach to comment a file: "TXT_ATTACHMENT.docx"
+    Then I should see this comment display on list: "TXT_ATTACHMENT.docx"
 
   Scenario: Auditor mark as complete one To-Do: AUV-1127
     Given I navigate to Marketing page
@@ -970,8 +970,8 @@ Feature: Smoke Test Feature
     Then I input comment content: "Lead Client Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "Lead Client Comment"
-    Then I attach to comment a file: "TXT_Auvenir.pdf"
-    Then I should see this comment display on list: "TXT_Auvenir.pdf"
+    Then I attach to comment a file: "TXT_ATTACHMENT.txt"
+    Then I should see this comment display on list: "TXT_ATTACHMENT.txt"
 
   Scenario: Lead client - Bulk acction - assign To-Do to General Client: AUV-1294
     Given I navigate to Marketing page
@@ -1057,8 +1057,8 @@ Feature: Smoke Test Feature
     Then I input comment content: "General Client Comment"
     Then I click on post comment button
     Then I should see this comment display on list: "General Client Comment"
-    Then I attach to comment a file: "TXT_Auvenir.xlsx"
-    Then I should see this comment display on list: "TXT_Auvenir.xlsx"
+    Then I attach to comment a file: "TXT_ATTACHMENT.docx"
+    Then I should see this comment display on list: "TXT_ATTACHMENT.docx"
 
   Scenario: Admin auditor can see engagement in firm: AUV-1336
     Given I navigate to Marketing page
@@ -1146,9 +1146,13 @@ Feature: Smoke Test Feature
     Then I verify comment at list To-Do
       | To-Do Name | Type Input | User Comment    | Content Comment         |
       | ToDo 01    | input      | General Client  | General Client Comment  |
+      | ToDo 01    | attachment | General Client  | TXT_ATTACHMENT.docx     |
       | ToDo 04    | input      | Lead Auditor    | Lead Auditor Comment    |
+      | ToDo 04    | attachment | Lead Auditor    | TXT_ATTACHMENT.png      |
       | ToDo 06    | input      | Lead Client     | Lead Client Comment     |
+      | ToDo 06    | attachment | Lead Client     | TXT_ATTACHMENT.txt      |
       | ToDo 09    | input      | Auvenir Auditor | General Auditor Comment |
+      | ToDo 09    | attachment | Auvenir Auditor | TXT_ATTACHMENT.docx     |
 
   Scenario:  Admin client can see all To-do(s) in business: AUV-2256
     Given I navigate to Marketing page
@@ -1203,6 +1207,11 @@ Feature: Smoke Test Feature
     And I verify comment at list To-Do
       | To-Do Name | Type Input | User Comment    | Content Comment         |
       | ToDo 01    | input      | General Client  | General Client Comment  |
+      | ToDo 01    | attachment | General Client  | TXT_ATTACHMENT.docx     |
       | ToDo 04    | input      | Lead Auditor    | Lead Auditor Comment    |
+      | ToDo 04    | attachment | Lead Auditor    | TXT_ATTACHMENT.png      |
       | ToDo 06    | input      | Lead Client     | Lead Client Comment     |
+      | ToDo 06    | attachment | Lead Client     | TXT_ATTACHMENT.txt      |
       | ToDo 09    | input      | Auvenir Auditor | General Auditor Comment |
+      | ToDo 09    | attachment | Auvenir Auditor | TXT_ATTACHMENT.docx     |
+

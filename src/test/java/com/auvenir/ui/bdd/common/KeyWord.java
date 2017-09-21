@@ -422,7 +422,7 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void sendKeyTextBox(WebElement element, String text, String elementName) {
         logger.info("+++ SendKey on : " + elementName);
-        waitForVisibleElement(element, "wait for click to " + elementName);
+        waitForVisibleElement(element, elementName);
         element.clear();
         element.sendKeys(text);
     }
