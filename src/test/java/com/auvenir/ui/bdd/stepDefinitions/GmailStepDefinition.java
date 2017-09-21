@@ -43,6 +43,7 @@ public class GmailStepDefinition extends BaseInit {
             System.out.println("The Email is: "+user.email);
             System.out.println("The Password is: "+user.password);
             mailPage.signInGmail(user.email, user.password);
+
         }
     }
 
