@@ -12,61 +12,52 @@ import org.testng.Assert;
  * Created by doai.tran on 8/29/2017.
  */
 public class MarketingPage extends CommonPage {
-   public MarketingPage(Logger logger,WebDriver driver) {
-      super(logger, driver);
-      PageFactory.initElements(driver, this);
-   }
-   private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
-   @FindBy(xpath = "//*[@class='ui right aligned container']/button")
-   private WebElement loginBTN;
 
-   @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='email']")
-   private WebElement emailTextBox;
+    @FindBy(xpath = "//*[@class='ui right aligned container']/button")
+    private WebElement buttonLogin;
 
-   @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='password']")
-   private WebElement passwordTextBox;
+    @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='email']")
+    private WebElement inputEmail;
 
-   @FindBy(xpath = ".//*[@id='login-popup']//button")
-   private WebElement submitBTN;
+    @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='password']")
+    private WebElement inputPassword;
 
-   @FindBy(xpath = "//*/a[@class='ui large basic inverted button']")
-   private WebElement signUpBTN;
-   @FindBy(id = "marketing-header")
-   private WebElement marketingHeader;
+    @FindBy(xpath = ".//*[@id='login-popup']//button")
+    private WebElement buttonSubmit;
 
+    @FindBy(xpath = "//*/a[@class='ui large basic inverted button']")
+    private WebElement buttonSignUp;
 
-   public void clickOnLoginBTN() {
-      //getLogger().info("Click on login button.");
-      clickElement(loginBTN, "loginBTN");
-      //loginBTN.click();
-   }
+    @FindBy(id = "marketing-header")
+    private WebElement marketingHeader;
 
-   public void clickOnSignupButton() {
-      clickElement(signUpBTN, "signup button");
-   }
+    //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
-   public void inputUserNamePassword(String username, String password) {
-      sendKeyTextBox(emailTextBox, username, "emailTextBox");
-      sendKeyTextBox(passwordTextBox, password, "passwordTextBox");
-        /*emailTextBox.sendKeys(username);
-        passwordTextBox.sendKeys(password);.*/
-   }
+    public MarketingPage(Logger logger, WebDriver driver) {
+        super(logger, driver);
+        PageFactory.initElements(driver, this);
+    }
 
-   public void clickOnSubmitBTN() {
-      clickElement(submitBTN, "loginBTN");
-      //submitBTN.click();
-   }
+    public void clickOnLoginButton() {
+        clickElement(buttonLogin, "Login Button");
+    }
 
-   @FindBy(id = "pageHeadBackText")
-   private WebElement eleAdminHdrTxt;
+    public void clickOnSignUpButton() {
+        clickElement(buttonSignUp, "Button Sign Up");
+    }
 
-   public void verifyHeaderAdminPage() {
-      Assert.assertEquals((eleAdminHdrTxt).getText(), "Admin");
-   }
+    public void inputUserNamePassword(String username, String password) {
+        sendKeyTextBox(inputEmail, username, "emailTextBox");
+        sendKeyTextBox(inputPassword, password, "passwordTextBox");
+    }
 
-   public void verifyMaketingHeaderPage(){
-      boolean result = validateExistedElement(marketingHeader, "Marketing header");
-      Assert.assertTrue(result, "Verify marketing header page.");
-   }
+    public void clickOnSubmitButton() {
+        clickElement(buttonSubmit, "Button Submit");
+    }
+
+    public void verifyMaketingHeaderPage() {
+        boolean result = validateExistedElement(marketingHeader, "Marketing header");
+        Assert.assertTrue(result, "Verify marketing header page.");
+    }
 
 }
