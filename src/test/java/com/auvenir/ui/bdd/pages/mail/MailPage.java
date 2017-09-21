@@ -97,7 +97,7 @@ public class MailPage extends KeyWord{
             clickElement(eleNext, "click to eleNext");
             logger.info("Send email: " + email);
         }
-//        waitSomeSeconds(2);
+        waitSomeSeconds(2);
         sendKeyTextBox(elePassword, password, "password");
         waitForAtrributeValueChanged(elePassword, "password", "value", password);
         logger.info("Send password: " + password);
