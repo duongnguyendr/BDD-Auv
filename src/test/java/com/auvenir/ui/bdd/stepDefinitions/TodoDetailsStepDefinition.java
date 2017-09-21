@@ -23,7 +23,7 @@ public class TodoDetailsStepDefinition extends BaseInit {
     private TodoDetailsPage todoDetailsPage;
     private TodoPage todoPage;
     private AuditorTodoPage auditorTodoPage;
-    String nameLastTodo = "string";
+    String nameLastTodo = "";
     String nameTodo;
     String typeComment;
     String contentName;
@@ -115,24 +115,21 @@ public class TodoDetailsStepDefinition extends BaseInit {
     public void verifyCommentAtListToDo(DataTable Table) throws Throwable {
         logger.info("===== I verify comment at list To-Do =====");
         List<List<String>> listToDo = getTable(Table);
-
         for (int i = 0; i < listToDo.size(); i++) {
-
             nameTodo = listToDo.get(i).get(0);
-            typeComment = listToDo.get(i).get(1);
-            userComment = listToDo.get(i).get(2);
-            contentName = listToDo.get(i).get(3);
-            System.out.println(
-                    "LIST DATATABLE :" + nameTodo + ", " + typeComment + " , " + userComment + " ," + contentName);
-            if (i != 0 && (!nameTodo.equals(nameLastTodo))) {
+            userComment = listToDo.get(i).get(1);
+            contentName = listToDo.get(i).get(2);
+            logger.info(String.format("Todo Name: %s, User: %s, Comment: %s", nameTodo, userComment, contentName));
+            if(nameLastTodo.isEmpty()){
+                nameLastTodo = nameTodo;
+                todoPage.clickSlideOutMenuOnTodo(nameTodo);
+            }else if (!nameTodo.equals(nameLastTodo)){
                 auditorTodoPage.closeAddNewRequestWindow();
-                nameLastTodo = listToDo.get(i).get(0);
+                nameLastTodo = nameTodo;
+                todoPage.clickSlideOutMenuOnTodo(nameTodo);
             }
-            System.out.println("nameTodo(0)" + nameTodo);
-            System.out.println("nameLastTodoget(0)" + nameLastTodo);
-            todoPage.clickSlideOutMenuOnTodo(nameTodo);
             auditorTodoPage.verifyTodoDetailOpened();
-            todoDetailsPage.verifyCommentUnknowType(typeComment, contentName, userComment);
+            todoDetailsPage.verifyCommentUnknowType(contentName, userComment);
         }
     }
 }

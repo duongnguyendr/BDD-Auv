@@ -1,6 +1,6 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
-  @run1
+  
   Scenario: Verify super admin login: AUV-2186
     Given I navigate to Marketing page
     And I click on login link
@@ -9,7 +9,7 @@ Feature: Smoke Test Feature
       | chr.auvenirad@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-  @run1
+  
   Scenario: Verify admin login: AUV-2187
     Given I navigate to Marketing page
     And I click on login link
@@ -18,7 +18,7 @@ Feature: Smoke Test Feature
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-@run1
+
   Scenario: Auditor Admin click Sign up button and fill information: AUV-542
     Given I navigate to Marketing page
     And Delete all activity of engagement by user  : "chr.auditor01.adm@gmail.com"
@@ -60,7 +60,7 @@ Feature: Smoke Test Feature
     Then I should see thank for create account page
     And I click continue button on sign up page
     Then I should see marketing portal page
-  @run1
+  
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
       | Email                       | Password     |
@@ -1144,15 +1144,15 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I verify comment at list To-Do
-      | To-Do Name | Type Input | User Comment    | Content Comment         |
-      | ToDo 01    | input      | General Client  | General Client Comment  |
-      | ToDo 01    | attachment | General Client  | TXT_ATTACHMENT.docx     |
-      | ToDo 04    | input      | Lead Auditor    | Lead Auditor Comment    |
-      | ToDo 04    | attachment | Lead Auditor    | TXT_ATTACHMENT.png      |
-      | ToDo 06    | input      | Lead Client     | Lead Client Comment     |
-      | ToDo 06    | attachment | Lead Client     | TXT_ATTACHMENT.txt      |
-      | ToDo 09    | input      | Auvenir Auditor | General Auditor Comment |
-      | ToDo 09    | attachment | Auvenir Auditor | TXT_ATTACHMENT.docx     |
+      | To-Do Name |User Comment     | Content Comment         |
+      | ToDo 01    | General Client  | General Client Comment  |
+      | ToDo 01    | General Client  | TXT_ATTACHMENT.docx     |
+      | ToDo 04    | Lead Auditor    | Lead Auditor Comment    |
+      | ToDo 04    | Lead Auditor    | TXT_ATTACHMENT.png      |
+      | ToDo 06    | Lead Client     | Lead Client Comment     |
+      | ToDo 06    | Lead Client     | TXT_ATTACHMENT.txt      |
+      | ToDo 09    | Auvenir Auditor | General Auditor Comment |
+      | ToDo 09    | Auvenir Auditor | TXT_ATTACHMENT.docx     |
 
   Scenario:  Admin client can see all To-do(s) in business: AUV-2256
     Given I navigate to Marketing page
@@ -1205,13 +1205,12 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I verify comment at list To-Do
-      | To-Do Name | Type Input | User Comment    | Content Comment         |
-      | ToDo 01    | input      | General Client  | General Client Comment  |
-      | ToDo 01    | attachment | General Client  | TXT_ATTACHMENT.docx     |
-      | ToDo 04    | input      | Lead Auditor    | Lead Auditor Comment    |
-      | ToDo 04    | attachment | Lead Auditor    | TXT_ATTACHMENT.png      |
-      | ToDo 06    | input      | Lead Client     | Lead Client Comment     |
-      | ToDo 06    | attachment | Lead Client     | TXT_ATTACHMENT.txt      |
-      | ToDo 09    | input      | Auvenir Auditor | General Auditor Comment |
-      | ToDo 09    | attachment | Auvenir Auditor | TXT_ATTACHMENT.docx     |
-
+      | To-Do Name |User Comment     | Content Comment         |
+      | ToDo 01    | General Client  | General Client Comment  |
+      | ToDo 01    | General Client  | TXT_ATTACHMENT.docx     |
+      | ToDo 04    | Lead Auditor    | Lead Auditor Comment    |
+      | ToDo 04    | Lead Auditor    | TXT_ATTACHMENT.png      |
+      | ToDo 06    | Lead Client     | Lead Client Comment     |
+      | ToDo 06    | Lead Client     | TXT_ATTACHMENT.txt      |
+      | ToDo 09    | Auvenir Auditor | General Auditor Comment |
+      | ToDo 09    | Auvenir Auditor | TXT_ATTACHMENT.docx     |
