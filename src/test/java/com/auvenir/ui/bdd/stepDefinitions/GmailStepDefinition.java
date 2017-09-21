@@ -1,17 +1,14 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.pages.mail.MailPage;
+import com.auvenir.ui.bdd.pages.mail.GmailPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by duong.nguyen on 9/7/2017.
@@ -19,11 +16,11 @@ import java.util.Map;
 public class GmailStepDefinition extends BaseInit {
     private static Logger logger = Logger.getLogger(GmailStepDefinition.class.getSimpleName());
     private BaseInit base;
-    MailPage mailPage;
+    GmailPage mailPage;
 
     public GmailStepDefinition(BaseInit base) {
         this.base = base;
-        mailPage = new MailPage(logger, driver);
+        mailPage = new GmailPage(logger, driver);
     }
 
     @Given("^I navigate to GMail login page$")

@@ -6,13 +6,11 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class SquirrelMailPage extends KeyWord {
-    private static Logger logger = Logger.getLogger(MailPage.class.getSimpleName());
+public class SquirrelMailPage extends MailPage {
+    private static Logger logger = Logger.getLogger(GmailPage.class.getSimpleName());
 
     public SquirrelMailPage(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -36,30 +34,43 @@ public class SquirrelMailPage extends KeyWord {
     @FindBy(xpath = "//a[text()='Click here to log back in.']")
     private WebElement eleReSignOutBtn;
     @FindBy(xpath = "//a[@class='loginButton']")
-    private WebElement eleGetStarted;
+    private WebElement  eleGetStarted;
     @FindBy(xpath = "//label[text()='andi@auvenir.com']")
     private WebElement eleEmailAuvenir;
     @FindBy(xpath = " (//frame[@frameborder='1'])[2]")
     private WebElement frameRight;
+    @FindBy(xpath = "//a[contains(text(), 'Welcome to the Auvenir Audit Smarter ')]")
+    private WebElement buttonStartEngagement;
 
 
-
+    public void clickOnboardingInvitationLink() {
+        try {
+            logger.info("Redirecting from Gmail to Auvenir Welcome Page");
+            switchToFrame(frameRight);
+            clickElement(buttonStartEngagement, "Button Start Engagement");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     public void navigateToConfirmationLink() throws Exception {
         logger.info("Navigate to Confirmation Link");
-        Thread.sleep(3000);
+        switchToFrame(frameRight);
+        waitSomeSeconds(2);
         String link = eleGetStarted.getAttribute("href");
         System.out.print("Link: " + link);
 
-        Thread.sleep(2000);
+        waitSomeSeconds(2);
         clickGetStartedButton();
         switchToOtherTab(1);
     }
     public void selectActiveEmail() {
         logger.info("Select Active Email");
+        switchToFrame(frameRight);
         clickElement(eleEmailAuvenir, "Non-reply Active email");
     }
     public void clickGetStartedButton() {
         logger.info("Click Get Started Button.");
+        switchToFrame(frameRight);
         waitForVisibleElement(eleGetStarted, "Get Started.");
         clickElement(eleGetStarted, "Get Started.");
     }
@@ -83,7 +94,8 @@ public class SquirrelMailPage extends KeyWord {
         logger.info("Send password: " + password);
 
         clickElement(eleLogin, "click to Login");
-        //waitForVisibleElement(composeBtn,"compose button");
+        switchToFrame(frameRight);
+        waitForVisibleElement(composeBtn,"compose button");
 
         logger.info("DONE => LOGIN");
 
@@ -92,7 +104,6 @@ public class SquirrelMailPage extends KeyWord {
         //waitForVisibleElement(composeBtn, "composeBtn");
 
         logger.info("Try to delete all existed mail.");
-
         waitSomeSeconds(5);
         logger.info("Select all Delete mail: ");
         switchToFrame(frameRight);
@@ -113,12 +124,12 @@ public class SquirrelMailPage extends KeyWord {
         emailLogout();
     }
     public void emailLogout() throws Exception {
-
+        switchToFrame(frameRight);
         waitForVisibleElement(eleSignOutBtn, "eleSignOutBtn");
         clickElement(eleSignOutBtn, "click to eleSignOutBtn");
         Thread.sleep(3000);
     }
-    public void reSignInGmail(String Email,String password) throws Exception{
+    public void reSignInEmail(String Email,String password) throws Exception{
         Thread.sleep(1000);
         clickElement(eleReSignOutBtn,"Click re-sign out button");
         signInEmail(Email,password);
