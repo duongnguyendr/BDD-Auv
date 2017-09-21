@@ -27,37 +27,52 @@ public class TodoDetailsPage extends CommonPage {
     @FindBy(xpath = "//*[@id='comment-button']")
     private WebElement buttonPostComment;
 
-    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='todo-comment-container']//p[@class='detComment']")
+    @FindBy(xpath = "//*[@id='todoDetailsCommentList']/div[@class='todo-comment-container']//p[contains(@class,'detComment')]")
     private List<WebElement> listCommentItem;
 
     @FindBy(xpath = "//*[@id='comment-box']/p/span/span")
     private WebElement titleCommentbox;
-//    @FindBy(xpath = "//*[@id='add-request-btn']")
-//    private WebElement totoPageAddRequestBtn;
+
+    @FindBy(xpath = "//div[@id='comment-form']/div[@class='auvicon-line-attach comment-attachment']")
+    private WebElement iconAttachCommentFile;
+    //    @FindBy(xpath = "//*[@id='add-request-btn']")
+    //    private WebElement totoPageAddRequestBtn;
     @FindBy(xpath = "//div[@id='todoDetailsReqCont']/div")
     protected List<WebElement> listNewRequest;
+
     @FindBy(xpath = "//*[@id='todoDetailsReqCont']")
     protected WebElement newRequestTable;
+
     @FindBy(xpath = "//div[@id='todoDetailsReqCont']/div[@class='detReqForFile']/span[@class='todo-req-name-label']")
     protected List<WebElement> listRequestNameLabel;
+
     @FindBy(xpath = "//label[@class='auvicon-line-circle-add todo-circle-add todo-icon-hover']")
     protected List<WebElement> addFileIcon;
+
     @FindBy(xpath = "//*[@id='add-request-btn']")
     protected WebElement buttonTodoPageAddRequest;
+
     @FindBy(xpath = "//div[@class='auvicon-ex']")
     protected WebElement todoDetailPopupCloseBtn;
+
     @FindBy(xpath = "//div[@id='auv-todo-details']")
     protected WebElement todoDetailPopup;
+
     @FindBy(xpath = "//*[@id='todoDetailsReqCont']//span[4]")
     protected List<WebElement> uploadRequestList;
+
     @FindBy(xpath = "//*[@id='todoDetailsReqCont']/div//span[contains(@class,'auvicon-line-download')]")
     protected List<WebElement> buttonDownloadRequest;
+
     @FindBy(xpath = "//*[@id='todoDetailsReqCont']")
     protected WebElement tableNewRequest;
+
     @FindBy(xpath = "//div[@id='todo-req-box-adding']/input")
-    private WebElement  nameRequestInput;
+    private WebElement nameRequestInput;
+
     @FindBy(id = "comment-input")
     WebElement commentInput;
+
     @FindBy(xpath = "//*[@id='add-request-btn']")
     private WebElement todoPageAddRequestBtn;
     @FindBy(xpath = "//div[@class='todo-comment-container']//p[contains(@class,'comment-fileName')]")
@@ -65,8 +80,8 @@ public class TodoDetailsPage extends CommonPage {
 
     String userComment="//*[text()='%s']/ancestor::div[@class='todo-comment-container']//span";
 
-
-
+    @FindBy(xpath = "//div[@class='todo-comment-container']//p[contains(@class,'comment-fileName')]")
+    List<WebElement> listCommentFilesName;
 
     public TodoDetailsPage(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -92,7 +107,7 @@ public class TodoDetailsPage extends CommonPage {
         if (titleCommentbox.getText().trim().equals("0")) {
             return 0;
         } else {
-            return listCommentItem.size();
+            return Integer.valueOf(titleCommentbox.getText().trim());
         }
     }
 
@@ -100,14 +115,46 @@ public class TodoDetailsPage extends CommonPage {
         boolean result = waitForSizeListElementChanged(listCommentItem, "List Comment Item",
                 numberListCommentBeforeAdding + 1);
         Assert.assertTrue(result, "Comment list should be changed(plus one).");
+
     }
 
-    public void verifyCommentContentIsDisplayed(String commentContent) {
+//    public void verifyListCommentConsistentWithCounter(){
+//        int commentQuantity= Integer.valueOf(titleCommentbox.getText().trim())
+//        if(listCommentItem.size()!=Integer.valueOf(titleCommentbox.getText().trim())){
+//
+//        }
+//    }
+
+    public void verifyCommentContentDisplayed(String commentContent) {
         logger.info("Verify Comment Content is displayed");
         validateDisPlayedElement(listCommentItem.get(listCommentItem.size() - 1), "Comment Content Field");
         boolean result = validateElementText(listCommentItem.get(listCommentItem.size() - 1), commentContent);
         Assert.assertTrue(result, "Comment should be displayed on list comment.");
     }
+
+    public void clickAttachCommentIcon() {
+        clickElement(iconAttachCommentFile, "Icon Attach File to Comment");
+    }
+
+    public void attachCommentFile(String commentFile) throws AWTException {
+        String pathAttachLocation = Generic.FOLDER_UPLOAD;
+        waitSomeSeconds(2);
+        StringSelection ss = new StringSelection(pathAttachLocation.concat(commentFile));
+        System.out.println("Path is: " + pathAttachLocation.concat(commentFile));
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, ss);
+        Robot robot = new Robot();
+        robot.delay(2);
+        waitSomeSeconds(1);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        waitSomeSeconds(1);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        waitSomeSeconds(2);
+    }
+
 
     public void clickAddRequestBtn() {
         logger.info("Click the add request button");
@@ -116,11 +163,12 @@ public class TodoDetailsPage extends CommonPage {
     }
 
     public void createNewRequest(String newRequest, String position) {
-            logger.info("Create request: " + newRequest + " with position: " + position);
-            waitForCssValueChanged(tableNewRequest.findElement(By.xpath("./div[" + position + "]/span")), "", "display", "inline-block");
-            clickElement(tableNewRequest.findElement(By.xpath("./div[" + position + "]/span")), "");
-            clearTextBox(tableNewRequest.findElement(By.xpath("./div[" + position + "]/input")), "");
-            sendKeyTextBox(tableNewRequest.findElement(By.xpath("./div[" + position + "]/input")), newRequest, "");
+        logger.info("Create request: " + newRequest + " with position: " + position);
+        waitForCssValueChanged(tableNewRequest.findElement(By.xpath("./div[" + position + "]/span")), "", "display",
+                "inline-block");
+        clickElement(tableNewRequest.findElement(By.xpath("./div[" + position + "]/span")), "");
+        clearTextBox(tableNewRequest.findElement(By.xpath("./div[" + position + "]/input")), "");
+        sendKeyTextBox(tableNewRequest.findElement(By.xpath("./div[" + position + "]/input")), newRequest, "");
     }
 
     protected int findRequestByName(String requestName) {
@@ -144,14 +192,14 @@ public class TodoDetailsPage extends CommonPage {
         if (isFind == -1) {
             logger.info("Can not find any request has name is: " + requestName);
         } else {
-            clickElement(addFileIcon.get(isFind),"Add File Icon");
+            clickElement(addFileIcon.get(isFind), "Add File Icon");
             waitSomeSeconds(2);
             logger.info("Input path of file..");
             StringSelection ss = new StringSelection(concatUpload);
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, ss);
             Robot robot = new Robot();
             robot.delay(2);
-//            waitSomeSeconds(1);
+            //            waitSomeSeconds(1);
             robot.keyPress(KeyEvent.VK_CONTROL);
             robot.keyPress(KeyEvent.VK_V);
             robot.keyRelease(KeyEvent.VK_V);
@@ -162,7 +210,6 @@ public class TodoDetailsPage extends CommonPage {
             waitSomeSeconds(1);
         }
     }
-
 
 
     public void closeAddNewRequestWindow() {
@@ -188,7 +235,7 @@ public class TodoDetailsPage extends CommonPage {
         Assert.assertTrue(isFind != -1, String.format("File '%s' should be uploaded successfully.", fileName));
     }
 
-    public void downloadRequestFile(String  fileName) {
+    public void downloadRequestFile(String fileName) {
 
         //Delete file before download
 
@@ -200,13 +247,15 @@ public class TodoDetailsPage extends CommonPage {
         clickElement(buttonDownloadRequest.get(index), "Button download request");
         waitSomeSeconds(3);
     }
+
     public void createNewRequest(String newRequestName) {
-        logger.info("Input name request :  " + newRequestName );
-        sendKeyTextBox(nameRequestInput,newRequestName,"name request");
-        clickElement(commentInput,"comment Input ");
+        logger.info("Input name request :  " + newRequestName);
+        sendKeyTextBox(nameRequestInput, newRequestName, "name request");
+        clickElement(commentInput, "comment Input ");
     }
-     public void selectAddNewRequest() {
-        clickElement(todoPageAddRequestBtn,"Add new request Btn");
+
+    public void selectAddNewRequest() {
+        clickElement(todoPageAddRequestBtn, "Add new request Btn");
     }
     public boolean checkTwoValueIsMatch(String a ,String b){
         Boolean result = true;

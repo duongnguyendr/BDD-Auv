@@ -5,10 +5,8 @@ import com.auvenir.ui.bdd.pages.auditor.AuditorTodoPage;
 import com.auvenir.ui.bdd.pages.common.TodoDetailsPage;
 import com.auvenir.ui.bdd.pages.common.TodoPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import jdk.nashorn.internal.objects.NativeArray;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -25,16 +23,17 @@ public class TodoDetailsStepDefinition extends BaseInit {
     private TodoDetailsPage todoDetailsPage;
     private TodoPage todoPage;
     private AuditorTodoPage auditorTodoPage;
-    String nameLastTodo= "string";
+    String nameLastTodo = "string";
     String nameTodo;
     String typeComment;
     String contentName;
     String userComment;
+
     public TodoDetailsStepDefinition(BaseInit baseInit) {
         this.baseInit = baseInit;
         todoDetailsPage = new TodoDetailsPage(logger, driver);
-        todoPage = new TodoPage(logger,driver);
-        auditorTodoPage = new AuditorTodoPage(logger,driver);
+        todoPage = new TodoPage(logger, driver);
+        auditorTodoPage = new AuditorTodoPage(logger, driver);
     }
 
     @Then("^I input comment content: \"([^\"]*)\"$")
@@ -54,8 +53,18 @@ public class TodoDetailsStepDefinition extends BaseInit {
     @Then("^I should see this comment display on list: \"([^\"]*)\"$")
     public void verifyCommentDisplay(String commentContent) throws Throwable {
         logger.info("===== I should see this comment display on list =====");
-        todoDetailsPage.verifyCommentContentIsDisplayed(commentContent);
+        todoDetailsPage.verifyCommentContentDisplayed(commentContent);
     }
+
+    @Then("^I attach to comment a file: \"([^\"]*)\"$")
+    public void chooseAFile(String commentFile) throws Throwable {
+        logger.info("===== I attach a file to comment =====");
+        int numberOfListCommentlist = todoDetailsPage.getNumberOfListComment();
+        todoDetailsPage.clickAttachCommentIcon();
+        todoDetailsPage.attachCommentFile(commentFile);
+        todoDetailsPage.waitForSizeListCommentChanged(numberOfListCommentlist);
+    }
+
 
     @And("^I creates some new requests$")
     public void createsSomeNewRequests(DataTable table) throws Throwable {
@@ -103,35 +112,27 @@ public class TodoDetailsStepDefinition extends BaseInit {
     }
 
     @And("^I verify comment at list To-Do$")
-    public void verifyCommentAtListToDo(DataTable Table) throws Throwable
-    {
+    public void verifyCommentAtListToDo(DataTable Table) throws Throwable {
         logger.info("===== I verify comment at list To-Do =====");
-        List<List<String>>listToDo = getTable(Table);
+        List<List<String>> listToDo = getTable(Table);
 
-        for (int i = 0; i < listToDo.size() ; i++)
-        {
+        for (int i = 0; i < listToDo.size(); i++) {
 
-             nameTodo =listToDo.get(i).get(0);
-             typeComment=listToDo.get(i).get(1);
-             userComment=listToDo.get(i).get(2);
-             contentName= listToDo.get(i).get(3);
-             System.out.println("LIST DATATABLE :"+nameTodo+", "+typeComment+" , "+userComment+" ,"+contentName);
-             if(i!=0 &&(!nameTodo.equals(nameLastTodo)))
-              {
-                 auditorTodoPage.closeAddNewRequestWindow();
-                 nameLastTodo = listToDo.get(i).get(0);
-              }
-             System.out.println("nameTodo(0)" + nameTodo);
-              System.out.println("nameLastTodoget(0)" + nameLastTodo);
-              todoPage.clickSlideOutMenuOnTodo(nameTodo);
-              auditorTodoPage.verifyTodoDetailOpened();
-              todoDetailsPage.verifyCommentUnknowType(typeComment, contentName, userComment);
-
-
+            nameTodo = listToDo.get(i).get(0);
+            typeComment = listToDo.get(i).get(1);
+            userComment = listToDo.get(i).get(2);
+            contentName = listToDo.get(i).get(3);
+            System.out.println(
+                    "LIST DATATABLE :" + nameTodo + ", " + typeComment + " , " + userComment + " ," + contentName);
+            if (i != 0 && (!nameTodo.equals(nameLastTodo))) {
+                auditorTodoPage.closeAddNewRequestWindow();
+                nameLastTodo = listToDo.get(i).get(0);
+            }
+            System.out.println("nameTodo(0)" + nameTodo);
+            System.out.println("nameLastTodoget(0)" + nameLastTodo);
+            todoPage.clickSlideOutMenuOnTodo(nameTodo);
+            auditorTodoPage.verifyTodoDetailOpened();
+            todoDetailsPage.verifyCommentUnknowType(typeComment, contentName, userComment);
         }
-
-
     }
-
-
-    }
+}
