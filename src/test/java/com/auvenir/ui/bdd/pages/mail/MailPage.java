@@ -90,11 +90,16 @@ public class MailPage extends KeyWord{
         }
         if (!email.isEmpty()) {
             sendKeyTextBox(eleEmail, email, "eleEmail");
-            sendTabKey(eleEmail, "eleEmail");
-            sendEnterKey(eleEmail, "eleEmail");
+            waitForAtrributeValueChanged(eleEmail, "eleEmail", "value", email);
+//            waitForTextValueChanged(eleEmail, "eleEmail", email);
+//            sendTabKey(eleEmail, "eleEmail");
+//            sendEnterKey(eleEmail, "eleEmail");
+            clickElement(eleNext, "click to eleNext");
             logger.info("Send email: " + email);
         }
+//        waitSomeSeconds(2);
         sendKeyTextBox(elePassword, password, "password");
+        waitForAtrributeValueChanged(elePassword, "password", "value", password);
         logger.info("Send password: " + password);
         waitSomeSeconds(2);
         clickElement(eleNext, "click to eleNext");
