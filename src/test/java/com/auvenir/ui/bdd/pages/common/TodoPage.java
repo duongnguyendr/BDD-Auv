@@ -394,7 +394,7 @@ public class TodoPage extends CommonPage {
         int totalToDo = toDoList.size();
         for (int i = 0; i < totalToDo; i++) {
             String toDoName = toDoList.get(i);
-            int index = findToDoTaskName(toDoName);
+            int index = findToDoTaskName(toDoName.trim());
             if (-1 == index) {
                 logger.info("Can not see : " + toDoName);
                 result = false;
@@ -417,7 +417,7 @@ public class TodoPage extends CommonPage {
         boolean isFind = false;
         for (WebElement requestEle : listRequestEle) {
             waitSomeSeconds(1);
-            if (requestEle.getText().contains(requestName)) {
+            if (requestEle.getText().contains(requestName.trim())) {
                 isFind = true;
                 break;
             }
@@ -430,7 +430,7 @@ public class TodoPage extends CommonPage {
         boolean isFind = false;
         for (WebElement requestFileEle : listRequestFileEle) {
             waitSomeSeconds(1);
-            if (requestFileEle.getText().contains(requestFile)) {
+            if (requestFileEle.getText().contains(requestFile.trim())) {
                 isFind = true;
                 break;
             }
