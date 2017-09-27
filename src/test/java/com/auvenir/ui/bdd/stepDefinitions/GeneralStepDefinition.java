@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.GeneralUtilities;
 import com.auvenir.ui.bdd.common.Generic;
+import com.auvenir.ui.bdd.pages.mail.MailPage;
 import com.auvenir.ui.bdd.pages.mail.SquirrelMailPage;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 import cucumber.api.java.en.And;
@@ -19,12 +20,14 @@ public class GeneralStepDefinition extends BaseInit {
     private BaseInit base;
 
     private MarketingPage marketingPage;
+    private MailPage mailPage;
     private SquirrelMailPage squirrelMailPage;
 
     public GeneralStepDefinition(BaseInit base) {
         this.base = base;
         marketingPage = new MarketingPage(logger, driver);
-        squirrelMailPage = new SquirrelMailPage(logger, driver);
+        mailPage = new MailPage(logger, driver);
+        squirrelMailPage = new SquirrelMailPage(logger,driver);
     }
 
     @Given("^I navigate to Marketing page$")
@@ -47,6 +50,15 @@ public class GeneralStepDefinition extends BaseInit {
         for (String fileName : listFileName) {
             GeneralUtilities.verifyDownloadFileSuccessAndChecksum(fileName);
         }
+    }
+
+    @Given("^I Check email function work$")
+    public void Checkemailfunctionwork() throws Throwable {
+        String email = "lead.auditorthuan";
+        String passwd ="Changeit@123";
+        squirrelMailPage.deleteAllExisted(email,passwd);
+
+
     }
 
 }

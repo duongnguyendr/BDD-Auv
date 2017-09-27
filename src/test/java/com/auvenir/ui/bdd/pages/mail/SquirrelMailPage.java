@@ -37,7 +37,7 @@ public class SquirrelMailPage extends MailPage {
     private WebElement  eleGetStarted;
     @FindBy(xpath = "//label[text()='andi@auvenir.com']")
     private WebElement eleEmailAuvenir;
-    @FindBy(xpath = " (//frame[@frameborder='1'])[2]")
+    @FindBy(xpath = "(//frame[@frameborder='1'])[2]")
     private WebElement frameRight;
     @FindBy(xpath = "//a[contains(text(), 'Welcome to the Auvenir Audit Smarter ')]")
     private WebElement buttonStartEngagement;
@@ -46,15 +46,16 @@ public class SquirrelMailPage extends MailPage {
     public void clickOnboardingInvitationLink() {
         try {
             logger.info("Redirecting from Gmail to Auvenir Welcome Page");
-            switchToFrame(frameRight);
+           // switchToFrame(frameRight);
             clickElement(buttonStartEngagement, "Button Start Engagement");
+            waitSomeSeconds(10);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     public void navigateToConfirmationLink() throws Exception {
         logger.info("Navigate to Confirmation Link");
-        switchToFrame(frameRight);
+        //switchToFrame(frameRight);
         waitSomeSeconds(2);
         String link = eleGetStarted.getAttribute("href");
         System.out.print("Link: " + link);
@@ -65,12 +66,12 @@ public class SquirrelMailPage extends MailPage {
     }
     public void selectActiveEmail() {
         logger.info("Select Active Email");
-        switchToFrame(frameRight);
+        //switchToFrame(frameRight);
         clickElement(eleEmailAuvenir, "Non-reply Active email");
     }
     public void clickGetStartedButton() {
         logger.info("Click Get Started Button.");
-        switchToFrame(frameRight);
+        //switchToFrame(frameRight);
         waitForVisibleElement(eleGetStarted, "Get Started.");
         clickElement(eleGetStarted, "Get Started.");
     }
@@ -104,16 +105,16 @@ public class SquirrelMailPage extends MailPage {
         //waitForVisibleElement(composeBtn, "composeBtn");
 
         logger.info("Try to delete all existed mail.");
-        waitSomeSeconds(5);
+        waitSomeSeconds(2);
         logger.info("Select all Delete mail: ");
-        switchToFrame(frameRight);
-        clickElement(allMailCheckBox,"all Mail CheckBox");
-        Thread.sleep(200);
-        if (deleteBTN.isDisplayed()) {
+        //switchToFrame(frameRight);
+        if (allMailCheckBox.isDisplayed()){
+            clickElement(allMailCheckBox,"all Mail CheckBox");
+            Thread.sleep(200);
             logger.info("Click Delete All Email.");
             deleteBTN.click();
         }
-        Thread.sleep(2000);
+        waitSomeSeconds(2);
         logger.info("Delete all mail successfully");
     }
     public void deleteAllExistedEMail(String Email, String ePassword) throws Exception {
@@ -124,10 +125,10 @@ public class SquirrelMailPage extends MailPage {
         emailLogout();
     }
     public void emailLogout() throws Exception {
-        switchToFrame(frameRight);
+        //switchToFrame(frameRight);
         waitForVisibleElement(eleSignOutBtn, "eleSignOutBtn");
         clickElement(eleSignOutBtn, "click to eleSignOutBtn");
-        Thread.sleep(3000);
+       waitSomeSeconds(2);
     }
     public void reSignInEmail(String Email,String password) throws Exception{
         Thread.sleep(1000);

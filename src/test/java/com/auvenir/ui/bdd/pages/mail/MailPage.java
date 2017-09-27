@@ -1,15 +1,17 @@
 package com.auvenir.ui.bdd.pages.mail;
 
 import com.auvenir.ui.bdd.common.KeyWord;
+import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-public class MailPage extends KeyWord {
-    private GmailPage gmailPage;
-    private SquirrelMailPage squirrelMailPage;
+public class MailPage extends CommonPage {
+     GmailPage gmailPage;
+     SquirrelMailPage squirrelMailPage;
     public MailPage(Logger logger, WebDriver driver) {
         super(logger, driver);
-
+       // gmailPage = new GmailPage(logger,driver);
+      //  squirrelMailPage = new SquirrelMailPage(logger,driver);
     }
 
 
@@ -55,13 +57,7 @@ public class MailPage extends KeyWord {
         }else
             squirrelMailPage.goEMail();
     }
-    public void signInGmail(String email ,String passwd){
-        if(email.trim().toLowerCase().contains("@gmail.com")){
-            gmailPage.signInGmail(email,passwd);
 
-        }else
-            squirrelMailPage.signInEmail(email,passwd);
-    }
     public void emailLogout () throws Exception {
         boolean checkSideMail = getDriver().getCurrentUrl().contains("mail.google");
         System.out.println();

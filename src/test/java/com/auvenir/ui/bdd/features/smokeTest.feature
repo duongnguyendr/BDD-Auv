@@ -1214,3 +1214,8 @@ Feature: Smoke Test Feature
       | ToDo 06    | Lead Client     | TXT_ATTACHMENT.txt      |
       | ToDo 09    | Auvenir Auditor | General Auditor Comment |
       | ToDo 09    | Auvenir Auditor | TXT_ATTACHMENT.docx     |
+
+
+    @VietDT
+  Scenario: Admin client can see all comment(s) in business: AUV-2258
+    Given I Check email function work
