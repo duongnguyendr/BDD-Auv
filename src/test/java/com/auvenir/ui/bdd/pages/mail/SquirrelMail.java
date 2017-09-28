@@ -1,7 +1,6 @@
 package com.auvenir.ui.bdd.pages.mail;
 
 import com.auvenir.ui.bdd.common.Generic;
-import com.auvenir.ui.bdd.common.KeyWord;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.concurrent.TimeUnit;
 
-public class SquirrelMailPage extends MailPage {
-    private static Logger logger = Logger.getLogger(GmailPage.class.getSimpleName());
+public class SquirrelMail extends AbstracEmail {
+    private static Logger logger = Logger.getLogger(Gmail.class.getSimpleName());
 
-    public SquirrelMailPage(Logger logger, WebDriver driver) {
+    public SquirrelMail(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
 
@@ -117,7 +116,7 @@ public class SquirrelMailPage extends MailPage {
         waitSomeSeconds(2);
         logger.info("Delete all mail successfully");
     }
-    public void deleteAllExistedEMail(String Email, String ePassword) throws Exception {
+    public void deleteAllExistedEmail(String Email, String ePassword) throws Exception {
         logger.info("Try to delete all existed eGMail");
         goEMail();
         signInEmail(Email, ePassword);

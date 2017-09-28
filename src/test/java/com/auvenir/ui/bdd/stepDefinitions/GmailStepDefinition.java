@@ -1,7 +1,7 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
-import com.auvenir.ui.bdd.pages.mail.GmailPage;
+import com.auvenir.ui.bdd.pages.mail.Gmail;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -16,11 +16,11 @@ import java.util.List;
 public class GmailStepDefinition extends BaseInit {
     private static Logger logger = Logger.getLogger(GmailStepDefinition.class.getSimpleName());
     private BaseInit base;
-    GmailPage mailPage;
+    Gmail mailPage;
 
     public GmailStepDefinition(BaseInit base) {
         this.base = base;
-        mailPage = new GmailPage(logger, driver);
+        mailPage = new Gmail(logger, driver);
     }
 
     @Given("^I navigate to GMail login page$")
@@ -36,10 +36,10 @@ public class GmailStepDefinition extends BaseInit {
         table.asMap(String.class, String.class);
         List<MarketingStepDefinition.User> users = new ArrayList<MarketingStepDefinition.User>();
         users = table.asList(MarketingStepDefinition.User.class);
-        for (MarketingStepDefinition.User user: users){
-            System.out.println("The Email is: "+user.email);
-            System.out.println("The Password is: "+user.password);
-            mailPage.signInGmail(user.email, user.password);
+        for (MarketingStepDefinition.User user : users) {
+            System.out.println("The Email is: " + user.email);
+            System.out.println("The Password is: " + user.password);
+            mailPage.signInEmail(user.email, user.password);
 
         }
     }
@@ -66,10 +66,10 @@ public class GmailStepDefinition extends BaseInit {
         table.asMap(String.class, String.class);
         List<MarketingStepDefinition.User> users = new ArrayList<MarketingStepDefinition.User>();
         users = table.asList(MarketingStepDefinition.User.class);
-        for (MarketingStepDefinition.User user: users){
-            System.out.println("The Email is: "+user.email);
-            System.out.println("The Password is: "+user.password);
-            mailPage.deleteAllExistedGMail(user.email, user.password);
+        for (MarketingStepDefinition.User user : users) {
+            System.out.println("The Email is: " + user.email);
+            System.out.println("The Password is: " + user.password);
+            mailPage.deleteAllExistedEmail(user.email, user.password);
         }
     }
 

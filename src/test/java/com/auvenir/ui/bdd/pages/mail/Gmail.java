@@ -1,8 +1,6 @@
 package com.auvenir.ui.bdd.pages.mail;
 
 import com.auvenir.ui.bdd.common.Generic;
-import com.auvenir.ui.bdd.common.KeyWord;
-//import com.auvenir.utilities.GenericService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,14 +10,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
+//import com.auvenir.utilities.GenericService;
+
 /**
  * Created by thuan.duong on 9/11/2017.
  */
-public class GmailPage extends MailPage{
-    private static Logger logger = Logger.getLogger(GmailPage.class.getSimpleName());
-    public GmailPage(Logger logger, WebDriver driver) {
+public class Gmail extends AbstracEmail {
+    private static Logger logger = Logger.getLogger(Gmail.class.getSimpleName());
+
+    public Gmail(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
+
     @FindBy(xpath = "//div[@class='yW']/span[@email='andi@auvenir.com']")
     private WebElement eleEmailAuvenir;
     @FindBy(xpath = "//center/a")
@@ -70,7 +72,7 @@ public class GmailPage extends MailPage{
     }
 
     public void goGMail() {
-//            getDriver().get("https://mail.google.com/mail/u/0/?tab=wm#inbox");
+        //            getDriver().get("https://mail.google.com/mail/u/0/?tab=wm#inbox");
         getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
         getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         getDriver().manage().window().maximize();
@@ -82,7 +84,7 @@ public class GmailPage extends MailPage{
      * @param email    email to login
      * @param password password of email
      */
-    public void signInGmail(String email, String password) {
+    public void signInEmail(String email, String password) {
         logger.info("Try to login GMail");
         if (!getDriver().getCurrentUrl().contains("accounts.google.com")) {
             clickElement(signButtonEle, "signButtonEle");
@@ -90,9 +92,9 @@ public class GmailPage extends MailPage{
         if (!email.isEmpty()) {
             sendKeyTextBox(eleEmail, email, "eleEmail");
             waitForAtrributeValueChanged(eleEmail, "eleEmail", "value", email);
-//            waitForTextValueChanged(eleEmail, "eleEmail", email);
-//            sendTabKey(eleEmail, "eleEmail");
-//            sendEnterKey(eleEmail, "eleEmail");
+            //            waitForTextValueChanged(eleEmail, "eleEmail", email);
+            //            sendTabKey(eleEmail, "eleEmail");
+            //            sendEnterKey(eleEmail, "eleEmail");
             clickElement(eleNext, "click to eleNext");
             logger.info("Send email: " + email);
         }
@@ -105,12 +107,15 @@ public class GmailPage extends MailPage{
         logger.info("DONE => LOGIN");
     }
 
-    public void deleteAllExistedGMail(String eGMail, String ePassword) throws Exception {
+    public void deleteAllExistedEmail(String eGMail, String ePassword) throws Exception {
         logger.info("Try to delete all existed eGMail");
-        getDriver().get( Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
+        System.out.println("aaaaa: " + Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
+        System.out.println("bbbbb: " + getDriver());
+//        getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
+        getDriver().get("http://www.gmail.com/");
         getDriver().manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
         getDriver().manage().window().maximize();
-        signInGmail(eGMail, ePassword);
+        signInEmail(eGMail, ePassword);
         deleteAllMail();
         gmailLogout();
     }
@@ -153,12 +158,12 @@ public class GmailPage extends MailPage{
         Thread.sleep(3000);
     }
 
-    public void reSignInGmail(String password) throws Exception{
-            Thread.sleep(1000);
-            elePassword.sendKeys(password);
-            logger.info("Send password: " + password);
-            Thread.sleep(1000);
-            clickElement(eleNext, "click to eleNext");
-            logger.info("DONE => LOGIN");
+    public void reSignInGmail(String password) throws Exception {
+        Thread.sleep(1000);
+        elePassword.sendKeys(password);
+        logger.info("Send password: " + password);
+        Thread.sleep(1000);
+        clickElement(eleNext, "click to eleNext");
+        logger.info("DONE => LOGIN");
     }
 }
