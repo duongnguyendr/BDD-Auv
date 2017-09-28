@@ -109,10 +109,7 @@ public class Gmail extends AbstracEmail {
 
     public void deleteAllExistedEmail(String eGMail, String ePassword) throws Exception {
         logger.info("Try to delete all existed eGMail");
-        System.out.println("aaaaa: " + Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
-        System.out.println("bbbbb: " + getDriver());
-//        getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
-        getDriver().get("http://www.gmail.com/");
+        getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "GMAIL_URL"));
         getDriver().manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
         getDriver().manage().window().maximize();
         signInEmail(eGMail, ePassword);
