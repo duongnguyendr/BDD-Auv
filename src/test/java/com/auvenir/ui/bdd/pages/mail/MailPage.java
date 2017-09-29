@@ -10,8 +10,8 @@ public class MailPage extends CommonPage {
      SquirrelMailPage squirrelMailPage;
     public MailPage(Logger logger, WebDriver driver) {
         super(logger, driver);
-       // gmailPage = new GmailPage(logger,driver);
-      //  squirrelMailPage = new SquirrelMailPage(logger,driver);
+        gmailPage = new GmailPage(logger,driver);
+        squirrelMailPage = new SquirrelMailPage(logger,driver);
     }
 
 

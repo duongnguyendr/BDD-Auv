@@ -2,6 +2,7 @@ package com.auvenir.ui.bdd.pages.mail;
 
 import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.ui.bdd.common.KeyWord;
+import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.concurrent.TimeUnit;
 
-public class SquirrelMailPage extends MailPage {
+public class SquirrelMailPage extends CommonPage {
     private static Logger logger = Logger.getLogger(GmailPage.class.getSimpleName());
 
     public SquirrelMailPage(Logger logger, WebDriver driver) {

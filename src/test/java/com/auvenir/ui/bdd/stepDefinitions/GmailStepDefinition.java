@@ -16,6 +16,8 @@ import java.util.List;
 public class GmailStepDefinition extends BaseInit {
     private static Logger logger = Logger.getLogger(GmailStepDefinition.class.getSimpleName());
     private BaseInit base;
+
+
     GmailPage mailPage;
 
     public GmailStepDefinition(BaseInit base) {

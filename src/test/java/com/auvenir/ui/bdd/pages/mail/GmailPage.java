@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.pages.mail;
 import com.auvenir.ui.bdd.common.Generic;
 import com.auvenir.ui.bdd.common.KeyWord;
 //import com.auvenir.utilities.GenericService;
+import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by thuan.duong on 9/11/2017.
  */
-public class GmailPage extends MailPage{
+public class GmailPage extends CommonPage {
     private static Logger logger = Logger.getLogger(GmailPage.class.getSimpleName());
     public GmailPage(Logger logger, WebDriver driver) {
         super(logger, driver);
