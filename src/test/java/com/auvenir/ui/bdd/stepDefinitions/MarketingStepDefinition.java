@@ -74,16 +74,81 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.seeJoinAsAuditorLink();
     }
 
+    @Then("^I scroll to footer$")
+    public void scrollToFooter() throws Throwable {
+        marketingPage.scrollToFooter();
+    }
+
     @Then("^I redirect to About Page$")
     public void redirectToAboutPage() throws Throwable {
         marketingPage.redirectToAboutPage();
     }
 
     @Then("^I should see Banner Information$")
-    public void seeBannerInfomation() throws Throwable {
+    public void seeBannerInformation() throws Throwable {
         marketingPage.seeBannerInformation();
     }
 
+    @Then("^I scroll to Auvenir Mission part$")
+    public void scrollToAuvenirMissionPart() throws Throwable {
+        marketingPage.scrollToAuvenirMissionPart();
+    }
+
+    @Then("^I should see Auvenir Mission header$")
+    public void seeAuvenirMissionHeader() throws Throwable {
+        marketingPage.seeAuvenirMissionHeader();
+    }
+
+    @Then("^I should see Auvenir Mission content$")
+    public void seeAuvenirMissionContent() throws Throwable {
+        marketingPage.seeAuvenirMissionContent();
+    }
+
+    @Then("^I scroll to Why Auvenir part$")
+    public void scrollToWhyAuvenirPart() throws Throwable {
+        marketingPage.scrollToWhyAuvenirPart();
+    }
+
+    @Then("^I should see Why Auvenir header$")
+    public void seeWhyAuvenirHeader() throws Throwable {
+        marketingPage.seeWhyAuvenirHeader();
+    }
+
+    @Then("^I should see Why Auvenir content$")
+    public void seeWhyAuvenirContent() throws Throwable {
+        marketingPage.seeWhyAuvenirContent();
+    }
+
+    @Then("^I should see Home link$")
+    public void seeHomeLink() throws Throwable {
+        marketingPage.seeHomeLink();
+    }
+
+    @Then("^I should see About link$")
+    public void seeAboutLink() throws Throwable {
+        marketingPage.seeAboutLink();
+    }
+
+    @Then("^I should see Contact link$")
+    public void seeContactLink() throws Throwable {
+        marketingPage.seeContactLink();
+    }
+
+    @Then("^I should see Terms of Service link$")
+    public void seeTermsOfServiceLink() throws Throwable {
+        marketingPage.seeTermsOfServiceLink();
+    }
+
+    @Then("^I should see Privacy Policy link$")
+    public void seePrivacyPolicyLink() throws Throwable {
+        marketingPage.seePrivacyPolicyLink();
+    }
+
+    @Then("^I should see Cookie Notice link$")
+    public void seeCookieNoticeLink() throws Throwable {
+        marketingPage.seeCookieNoticeLink();
+    }
+    
     public class User {
         public String email;
         public String password;

@@ -49,11 +49,45 @@ public class MarketingPage extends CommonPage {
     @FindBy(id = "forgot-popup")
     private WebElement popupForgotPassword;
 
+    @FindBy(xpath = "//div[contains(@class,'about-header')]")
+    private WebElement textBannerInformation;
+
+    @FindBy(xpath = "//div[@id='home_mission']/h2")
+    private WebElement titleMissionHeader;
+
+    @FindBy(xpath = "//div[@id='home_mission']/p[1]")
+    private WebElement titleMissionContentPartOne;
+
+    @FindBy(xpath = "//div[@id='home_mission']/p[2]")
+    private WebElement titleMissionContentPartTwo;
+
+    @FindBy(xpath = "//div[@id='home_whyAuvenir']//h2")
+    private WebElement titleWhyAuvenirHeader;
+
+    @FindBy(xpath = "//div[@id='home_whyAuvenir']//p[1]")
+    private WebElement titleWhyAuvenirContentPartOne;
+
+    @FindBy(xpath = "//div[@id='home_whyAuvenir']//p[2]")
+    private WebElement titleWhyAuvenirContentPartTwo;
+
+    @FindBy(xpath = "//div[@id='footer']//a[@href='/']")
+    private WebElement itemFooterHome;
+
     @FindBy(xpath = "//div[@id='footer']//a[@href='/about']")
     private WebElement itemFooterAbout;
 
-    @FindBy(xpath = "//div[contains(@class,'about-header')]")
-    private WebElement textBannerInformation;
+    @FindBy(xpath = "//div[@id='footer']//a[@href='/contact']")
+    private WebElement itemFooterContact;
+
+    @FindBy(xpath = "//div[@id='footer']//a[@href='/terms']")
+    private WebElement itemFooterTermsOfSevice;
+
+    @FindBy(xpath = "//div[@id='footer']//a[@href='/privacy']")
+    private WebElement itemFooterPrivacyPolicy;
+
+    @FindBy(xpath = "//div[@id='footer']//a[@href='/cookies']")
+    private WebElement itemFooterCookieNotice;
+
 
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
@@ -152,13 +186,81 @@ public class MarketingPage extends CommonPage {
         Assert.assertTrue(result, "Link Join As Auditor should be exist");
     }
 
+
     public void redirectToAboutPage() {
-        scrollToFooter();
         clickElement(itemFooterAbout, "Item Footer About");
     }
 
     public void seeBannerInformation() {
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
         Assert.assertTrue(result, "Banner Information should be exist");
+    }
+
+    public void scrollToAuvenirMissionPart() {
+        scrollPageDown();
+    }
+
+    public void seeAuvenirMissionHeader() {
+        validateElementText(titleMissionHeader, "Auvenir is on a mission to enable a Smarter Audit.");
+    }
+
+    public void seeAuvenirMissionContent() {
+        validateElementText(titleMissionContentPartOne,
+                "As a Deloitte venture, Auvenir benefits from the agility of a start-up culture while leveraging " +
+                        "deep" + " world-class audit and technology expertise. Our long term goal is to facilitate "
+                        + "higher " + "trust and confidence in financial reporting and assurance.");
+        validateElementText(titleMissionContentPartTwo,
+                "The Auvenir platform seamlessly integrates advanced technology to enhance the financial audit " +
+                        "workflow, improving efficiencies and communications for auditors and their clients. This " +
+                        "includes a robust collaboration tool, as well as patent pending machine learning software "
+                        + "that automates routine tasks of the audit process.");
+    }
+
+    public void scrollToWhyAuvenirPart() {
+        scrollPageDown();
+    }
+
+    public void seeWhyAuvenirHeader() {
+        validateElementText(titleWhyAuvenirHeader, "Why Auvenir?");
+    }
+
+    public void seeWhyAuvenirContent() {
+        validateElementText(titleWhyAuvenirContentPartOne, "Your time and your business.");
+        validateElementText(titleWhyAuvenirContentPartTwo,
+                "A smarter audit means a straightforward, faster process that gives you back time to focus on higher " +
+                        "" + "value services and activities in your practice.  It means improved client collaboration" +
+                        " and " + "interaction, giving you stronger client relationships and more referrals.  A " +
+                        "smarter audit " + "experience means a better way of doing business.");
+    }
+
+
+    public void seeHomeLink() {
+        boolean result = validateExistedElement(itemFooterHome, "Item Footer Home");
+        Assert.assertTrue(result, "Item Footer Home should be exist");
+    }
+
+    public void seeAboutLink() {
+        boolean result = validateExistedElement(itemFooterAbout, "Item Footer About");
+        Assert.assertTrue(result, "Item Footer About should be exist");
+    }
+
+    public void seeContactLink() {
+        boolean result = validateExistedElement(itemFooterContact, "Item Footer Contact");
+        Assert.assertTrue(result, "Item Footer Contact should be exist");
+    }
+
+    public void seeTermsOfServiceLink() {
+        boolean result = validateExistedElement(itemFooterTermsOfSevice, "Item Footer Terms Of Sevice");
+        Assert.assertTrue(result, "Item Footer Terms Of Sevice should be exist");
+    }
+
+    public void seePrivacyPolicyLink() {
+        boolean result = validateExistedElement(itemFooterPrivacyPolicy, "Item Footer Privacy Policy");
+        Assert.assertTrue(result, "Item Footer PrivacyP olicy should be exist");
+    }
+
+    public void seeCookieNoticeLink() {
+        boolean result = validateExistedElement(itemFooterCookieNotice, "Item Footer Cookie Notice");
+        Assert.assertTrue(result, "Item Footer Cookie Notice should be exist");
     }
 }
