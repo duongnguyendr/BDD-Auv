@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -21,6 +22,66 @@ public class MarketingStepDefinition extends BaseInit {
     public MarketingStepDefinition(BaseInit base) {
         this.baseInit = base;
         marketingPage = new MarketingPage(logger, driver);
+    }
+
+    @Then("^I should see Forgot Password popup$")
+    public void seeForgotPasswordPopup() throws Throwable {
+        marketingPage.verifyForgotPasswordPopup();
+    }
+
+    @Then("^I input email forgotten password : \"([^\"]*)\"$")
+    public void inputEmailForgottenPassword(String email) throws Throwable {
+        marketingPage.inputEmailForgottenPassword(email);
+    }
+
+    @Then("^I click on Request Reset Link button$")
+    public void clickOnRequestResetLinkButton() throws Throwable {
+        marketingPage.clickOnRequestResetLinkButton();
+    }
+
+    @Then("^I should see Account still processing message")
+    public void seeAccountStillProcessingMessage() throws Throwable {
+        marketingPage.verifyStillProcessingMessage();
+    }
+
+    @Then("^I should see Login popup title$")
+    public void seeLoginPopupTitle() throws Throwable {
+        marketingPage.verifyLoginPopupTitle();
+    }
+
+    @Then("^I should see Header Logo$")
+    public void seeHeaderLogo() throws Throwable {
+        marketingPage.verifyHeaderLogo();
+    }
+
+    @Then("^I should see Login link$")
+    public void seeLoginLink() throws Throwable {
+        marketingPage.verifyLoginLink();
+    }
+
+    @Then("^I should see Sign Up Link$")
+    public void seeSignUpLink() throws Throwable {
+        marketingPage.seeSignUpLink();
+    }
+
+    @Then("^I should see Language Link$")
+    public void seeLanguageLink() throws Throwable {
+        marketingPage.seeLanguageLink();
+    }
+
+    @Then("^I should see Join As Auditor Link$")
+    public void seeJoinAsAuditorLink() throws Throwable {
+        marketingPage.seeJoinAsAuditorLink();
+    }
+
+    @Then("^I redirect to About Page$")
+    public void redirectToAboutPage() throws Throwable {
+        marketingPage.redirectToAboutPage();
+    }
+
+    @Then("^I should see Banner Information$")
+    public void seeBannerInfomation() throws Throwable {
+        marketingPage.seeBannerInformation();
     }
 
     public class User {
@@ -78,4 +139,10 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.clickOnSubmitButton();
         marketingPage.waitForProgressOverlayIsClosed();
     }
+
+    @And("^I click on forgot password link$")
+    public void clickOnForgotPasswordLink() throws Throwable {
+        marketingPage.clickOnForgotPasswordLink();
+    }
+
 }
