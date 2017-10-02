@@ -1,8 +1,6 @@
 package com.auvenir.ui.bdd.pages.mail;
 
 import com.auvenir.ui.bdd.common.Generic;
-import com.auvenir.ui.bdd.common.KeyWord;
-import com.auvenir.ui.bdd.pages.common.CommonPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.concurrent.TimeUnit;
 
-public class SquirrelMailPage extends CommonPage {
-    private static Logger logger = Logger.getLogger(GmailPage.class.getSimpleName());
+public class SquirrelMail extends AbstracEmail {
+    private static Logger logger = Logger.getLogger(Gmail.class.getSimpleName());
 
-    public SquirrelMailPage(Logger logger, WebDriver driver) {
+    public SquirrelMail(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
 
@@ -36,17 +34,21 @@ public class SquirrelMailPage extends CommonPage {
     private WebElement eleReSignOutBtn;
     @FindBy(xpath = "//a[@class='loginButton']")
     private WebElement  eleGetStarted;
-    @FindBy(xpath = "//label[text()='andi@auvenir.com']")
+    @FindBy(xpath = "//a[@title='Invitation from Lead C to participate in an engagement on the Auvenir Platform']")
     private WebElement eleEmailAuvenir;
     @FindBy(xpath = "(//frame[@frameborder='1'])[2]")
     private WebElement frameRight;
-    @FindBy(xpath = "//a[contains(text(), 'Welcome to the Auvenir Audit Smarter ')]")
+    @FindBy(xpath = "//a[contains(text(), 'Start Your Engagement')]")
     private WebElement buttonStartEngagement;
+
+    @FindBy(xpath = "//b[text()='THIS FOLDER IS EMPTY']")
+    private WebElement checkNullEmail;
+
 
 
     public void clickOnboardingInvitationLink() {
         try {
-            logger.info("Redirecting from Gmail to Auvenir Welcome Page");
+            logger.info("Redirecting from SquirrelMail to Auvenir Welcome Page");
            // switchToFrame(frameRight);
             clickElement(buttonStartEngagement, "Button Start Engagement");
             waitSomeSeconds(10);
@@ -57,9 +59,9 @@ public class SquirrelMailPage extends CommonPage {
     public void navigateToConfirmationLink() throws Exception {
         logger.info("Navigate to Confirmation Link");
         //switchToFrame(frameRight);
-        waitSomeSeconds(2);
-        String link = eleGetStarted.getAttribute("href");
-        System.out.print("Link: " + link);
+       // waitSomeSeconds(2);
+       // String link = eleGetStarted.getAttribute("href");
+       // System.out.print("Link: " + link);
 
         waitSomeSeconds(2);
         clickGetStartedButton();
@@ -85,9 +87,9 @@ public class SquirrelMailPage extends CommonPage {
 
     public void signInEmail(String email, String password) {
         logger.info("Try to login Email");
-//        if (!getDriver().getCurrentUrl().contains("accounts.google.com")) {
-//            clickElement(signButtonEle, "signButtonEle");
-//        }
+        if (!getDriver().getCurrentUrl().contains("accounts.google.com")) {
+          // clickElement(signButtonEle, "signButtonEle");
+        }
         if (!email.isEmpty()) {
             sendKeyTextBox(eleEmail, email, "eleEmail");
             logger.info("Send email: " + email);
@@ -109,7 +111,7 @@ public class SquirrelMailPage extends CommonPage {
         waitSomeSeconds(2);
         logger.info("Select all Delete mail: ");
         //switchToFrame(frameRight);
-        if (allMailCheckBox.isDisplayed()){
+        if (!checkNullEmail.isDisplayed()){
             clickElement(allMailCheckBox,"all Mail CheckBox");
             Thread.sleep(200);
             logger.info("Click Delete All Email.");
@@ -118,7 +120,7 @@ public class SquirrelMailPage extends CommonPage {
         waitSomeSeconds(2);
         logger.info("Delete all mail successfully");
     }
-    public void deleteAllExistedEMail(String Email, String ePassword) throws Exception {
+    public void deleteAllExistedEmail(String Email, String ePassword) throws Exception {
         logger.info("Try to delete all existed eGMail");
         goEMail();
         signInEmail(Email, ePassword);
@@ -133,7 +135,8 @@ public class SquirrelMailPage extends CommonPage {
     }
     public void reSignInEmail(String Email,String password) throws Exception{
         Thread.sleep(1000);
-        clickElement(eleReSignOutBtn,"Click re-sign out button");
+       // clickElement(eleReSignOutBtn,"Click re-sign out button");
+        goEMail();
         signInEmail(Email,password);
         logger.info("DONE => LOGIN");
     }
