@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import java.util.List;
+
 /**
  * Created by doai.tran on 8/29/2017.
  */
@@ -103,6 +105,19 @@ public class MarketingPage extends CommonPage {
 
     @FindBy(xpath = "//div[contains(@class,'copyright-footer')]")
     private WebElement titleFooterCopyright;
+
+    @FindBy(xpath = "//div[@id='about-league']//h2[@class='ui header']")
+    private WebElement titleMeetTheAuvyLeagueHeader;
+
+    @FindBy(xpath = "//div[@id='about-league']//img[@class='ui image']")
+    private List<WebElement> imageMeetTheAuvyLeagueContentAvatar;
+
+    @FindBy(xpath = "//div[@id='about-league']//h4[@class='name']")
+    private List<WebElement> textMeetTheAuvyLeagueContentName;
+
+    @FindBy(xpath = "//div[@id='about-league']//p[@class='title']")
+    private List<WebElement> textMeetTheAuvyLeagueContentTitle;
+
 
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
@@ -249,10 +264,11 @@ public class MarketingPage extends CommonPage {
         validateElementText(titleWhyAuvenirContentPartOne, "Your time and your business.");
         validateElementText(titleWhyAuvenirContentPartTwo,
                 "A smarter audit means a straightforward, faster process that gives you back time to focus on higher " +
-                        "" + "" + "" + "" + "" + "value services and activities in your practice.  It means improved " +
-                        "" + "client " + "collaboration" + " and " + "interaction, giving you stronger client " +
-                        "relationships and more " + "referrals.  A " + "smarter audit " + "experience means a better " +
-                        "" + "way of doing business.");
+                        "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "value services and activities in your " +
+                        "practice." + "  It " + "means" + " " + "improved " + "" + "client " + "collaboration" + " " +
+                        "and " + "interaction, " + "giving you " + "stronger " + "client " + "relationships and more " +
+                        "" + "referrals.  A " + "smarter audit " + "experience " + "means a better " + "" + "way of " +
+                        "doing " + "business.");
     }
 
 
@@ -304,5 +320,22 @@ public class MarketingPage extends CommonPage {
     public void seeCopyrightTitle() {
         boolean result = validateExistedElement(titleFooterCopyright, "Title Footer Copyright");
         Assert.assertTrue(result, "Title Footer Copyright should be exist");
+    }
+
+    public void seeMeetTheAuvyLeagueHeader() {
+        scrollToElement(titleMeetTheAuvyLeagueHeader);
+        waitSomeSeconds(2);
+        boolean result = validateExistedElement(titleMeetTheAuvyLeagueHeader, "Title Meet The Auvy League Header");
+        Assert.assertTrue(result, "Title Meet The Auvy League Header should be exist");
+    }
+
+    public void seeMeetTheAuvyLeagueContent(String members) {
+        int memberQuantity = Integer.parseInt(members);
+        Assert.assertEquals(imageMeetTheAuvyLeagueContentAvatar.size(), memberQuantity,
+                "Quantity of avatar member should be equals: " + memberQuantity);
+        Assert.assertEquals(textMeetTheAuvyLeagueContentName.size(), memberQuantity,
+                "Quantity of name member should be equals: " + memberQuantity);
+        Assert.assertEquals(textMeetTheAuvyLeagueContentTitle.size(), memberQuantity,
+                "Quantity of title member should be equals: " + memberQuantity);
     }
 }

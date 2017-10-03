@@ -60,7 +60,7 @@ Feature: Marketing Feature
     Then I should see Why Auvenir header
     Then I should see Why Auvenir content
 
-  @Run
+#  @Run
   Scenario: Home page- Verify Footer: AUV-560
     Given I navigate to Marketing page
     Then I scroll to footer
@@ -74,3 +74,13 @@ Feature: Marketing Feature
     Then I should see Twitter icon
     Then I should see Linkedin icon
     Then I should see Copyright title
+
+  @Run
+  Scenario: About Page - Verify Meet The Auvy League board: AUV-562
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to About Page
+    Then I should see Meet The Auvy League header
+    Then I should see Meet The Auvy League content: "12" members
+
+    

@@ -169,6 +169,16 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.seeCopyrightTitle();
     }
 
+    @Then("^I should see Meet The Auvy League header$")
+    public void seeMeetTheAuvyLeagueHeader() throws Throwable {
+        marketingPage.seeMeetTheAuvyLeagueHeader();
+    }
+
+    @Then("^I should see Meet The Auvy League content: \"([^\"]*)\" members$")
+    public void seeMeetTheAuvyLeagueContent(String members) throws Throwable {
+        marketingPage.seeMeetTheAuvyLeagueContent(members);
+    }
+
     public class User {
         public String email;
         public String password;
