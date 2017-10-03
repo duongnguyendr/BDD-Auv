@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.common;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import javax.xml.bind.Element;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
@@ -1128,6 +1130,14 @@ Method to wait Ajax function on Site be loaded successfully.
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
+    public void scrollToElement(WebElement Element){
+        Point hoverItem =Element.getLocation();
+        ((JavascriptExecutor) driver).executeScript("return window.title;");
+            waitSomeSeconds(2);
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + (hoverItem.getY()) + ");");
+
+    }
+
 
     /************ ++++++++++++++++++++++++++++++++ End Block +++++++++++++++++++++++++++++++++++++ ****************/
 

@@ -52,6 +52,10 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[contains(@class,'about-header')]")
     private WebElement textBannerInformation;
 
+    @FindBy(id = "about-joinUs")
+    private WebElement aboutJoinUs;
+
+
     @FindBy(xpath = "//div[@id='home_mission']/h2")
     private WebElement titleMissionHeader;
 
@@ -186,7 +190,6 @@ public class MarketingPage extends CommonPage {
         Assert.assertTrue(result, "Link Join As Auditor should be exist");
     }
 
-
     public void redirectToAboutPage() {
         clickElement(itemFooterAbout, "Item Footer About");
     }
@@ -194,6 +197,12 @@ public class MarketingPage extends CommonPage {
     public void seeBannerInformation() {
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
         Assert.assertTrue(result, "Banner Information should be exist");
+    }
+    public void seeAboutJoinUs(){
+        scrollToElement(aboutJoinUs);
+        waitSomeSeconds(2);
+        boolean result = validateExistedElement(textBannerInformation, "Banner Information");
+        Assert.assertTrue(result,"");
     }
 
     public void scrollToAuvenirMissionPart() {
