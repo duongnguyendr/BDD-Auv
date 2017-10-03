@@ -92,6 +92,17 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@id='footer']//a[@href='/cookies']")
     private WebElement itemFooterCookieNotice;
 
+    @FindBy(xpath = "//i[contains(@class,'facebook')]")
+    private WebElement iconFooterFacebook;
+
+    @FindBy(xpath = "//i[contains(@class,'twitter')]")
+    private WebElement iconFooterTwitter;
+
+    @FindBy(xpath = "//i[contains(@class,'linkedin')]")
+    private WebElement iconFooterLinkedin;
+
+    @FindBy(xpath = "//div[contains(@class,'copyright-footer')]")
+    private WebElement titleFooterCopyright;
 
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
@@ -198,11 +209,12 @@ public class MarketingPage extends CommonPage {
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
         Assert.assertTrue(result, "Banner Information should be exist");
     }
-    public void seeAboutJoinUs(){
+
+    public void seeAboutJoinUs() {
         scrollToElement(aboutJoinUs);
         waitSomeSeconds(2);
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
-        Assert.assertTrue(result,"");
+        Assert.assertTrue(result, "");
     }
 
     public void scrollToAuvenirMissionPart() {
@@ -237,9 +249,10 @@ public class MarketingPage extends CommonPage {
         validateElementText(titleWhyAuvenirContentPartOne, "Your time and your business.");
         validateElementText(titleWhyAuvenirContentPartTwo,
                 "A smarter audit means a straightforward, faster process that gives you back time to focus on higher " +
-                        "" + "value services and activities in your practice.  It means improved client collaboration" +
-                        " and " + "interaction, giving you stronger client relationships and more referrals.  A " +
-                        "smarter audit " + "experience means a better way of doing business.");
+                        "" + "" + "" + "" + "" + "value services and activities in your practice.  It means improved " +
+                        "" + "client " + "collaboration" + " and " + "interaction, giving you stronger client " +
+                        "relationships and more " + "referrals.  A " + "smarter audit " + "experience means a better " +
+                        "" + "way of doing business.");
     }
 
 
@@ -271,5 +284,25 @@ public class MarketingPage extends CommonPage {
     public void seeCookieNoticeLink() {
         boolean result = validateExistedElement(itemFooterCookieNotice, "Item Footer Cookie Notice");
         Assert.assertTrue(result, "Item Footer Cookie Notice should be exist");
+    }
+
+    public void seeFacebookIcon() {
+        boolean result = validateExistedElement(iconFooterFacebook, "Icon Footer Facebook");
+        Assert.assertTrue(result, "Icon Facebook should be exist");
+    }
+
+    public void seeTwitterIcon() {
+        boolean result = validateExistedElement(iconFooterTwitter, "Icon Footer Twitter");
+        Assert.assertTrue(result, "Icon Twitter should be exist");
+    }
+
+    public void seeLinkedinIcon() {
+        boolean result = validateExistedElement(iconFooterLinkedin, "Icon Footer Linkedin");
+        Assert.assertTrue(result, "Icon Linkedin should be exist");
+    }
+
+    public void seeCopyrightTitle() {
+        boolean result = validateExistedElement(titleFooterCopyright, "Title Footer Copyright");
+        Assert.assertTrue(result, "Title Footer Copyright should be exist");
     }
 }

@@ -148,7 +148,27 @@ public class MarketingStepDefinition extends BaseInit {
     public void seeCookieNoticeLink() throws Throwable {
         marketingPage.seeCookieNoticeLink();
     }
-    
+
+    @Then("^I should see Facebook icon$")
+    public void seeFacebookIcon() throws Throwable {
+        marketingPage.seeFacebookIcon();
+    }
+
+    @Then("^I should see Twitter icon$")
+    public void seeTwitterIcon() throws Throwable {
+        marketingPage.seeTwitterIcon();
+    }
+
+    @Then("^I should see Linkedin icon$")
+    public void seeLinkedinIcon() throws Throwable {
+        marketingPage.seeLinkedinIcon();
+    }
+
+    @Then("^I should see Copyright title$")
+    public void seeCopyrightTitle() throws Throwable {
+        marketingPage.seeCopyrightTitle();
+    }
+
     public class User {
         public String email;
         public String password;

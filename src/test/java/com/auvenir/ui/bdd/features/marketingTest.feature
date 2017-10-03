@@ -70,3 +70,7 @@ Feature: Marketing Feature
     Then I should see Terms of Service link
     Then I should see Privacy Policy link
     Then I should see Cookie Notice link
+    Then I should see Facebook icon
+    Then I should see Twitter icon
+    Then I should see Linkedin icon
+    Then I should see Copyright title
