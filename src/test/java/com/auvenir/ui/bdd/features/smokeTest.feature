@@ -1,6 +1,6 @@
 Feature: Smoke Test Feature
   This feature create six role on auvenir and test some basic feature.
-  
+
   Scenario: Verify super admin login: AUV-2186
     Given I navigate to Marketing page
     And I click on login link
@@ -9,7 +9,8 @@ Feature: Smoke Test Feature
       | chr.auvenirad@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-  
+
+
   Scenario: Verify admin login: AUV-2187
     Given I navigate to Marketing page
     And I click on login link
@@ -60,7 +61,7 @@ Feature: Smoke Test Feature
     Then I should see thank for create account page
     And I click continue button on sign up page
     Then I should see marketing portal page
-  
+
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
       | Email                       | Password     |
@@ -78,7 +79,7 @@ Feature: Smoke Test Feature
     And I click confirm button on admin page
     Then I should see verified message successful on admin page
     Then I should see status of user: "chr.auditor01.adm@gmail.com" is "Onboarding"
-
+  @Run
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
     Given I navigate to GMail login page
     And I sign In GMail

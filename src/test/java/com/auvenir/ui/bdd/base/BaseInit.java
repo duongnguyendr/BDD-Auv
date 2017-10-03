@@ -95,8 +95,10 @@ public class BaseInit {
      * Description: Methods to get getPort
      */
     public int port= 27017;
-    public void setPort(String portNo){
-        port= Integer.parseInt(portNo);
+    public void setPort(int portNo){
+        //port= Integer.parseInt(portNo);
+        port= portNo;
+
         logger.info("Connection Port: " + port);
     }
     public int getPort(){
