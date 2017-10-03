@@ -145,4 +145,10 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.clickOnForgotPasswordLink();
     }
 
+    @Then("^I should see text Wanna join Us$")
+    public void seeTextWannaJoinUs() throws Throwable {
+        marketingPage.seeAboutJoinUs();
+
+    }
+
 }

@@ -33,3 +33,14 @@ Feature: Marketing Feature
     Then I should see Sign Up Link
     Then I should see Language Link
     Then I should see Banner Information
+
+
+  Scenario: Marketing Page - About Page - Verify Title :"Wanna Join US?" :AUV-578 (Pendding)
+    Given I navigate to Marketing page
+    Then I redirect to About Page
+    Then I should see text Wanna join Us
+
+
+  @Vietlq
+  Scenario: Marketing Pages- Home page- Password textbox : AUV-579
+    Given I navigate to Marketing page

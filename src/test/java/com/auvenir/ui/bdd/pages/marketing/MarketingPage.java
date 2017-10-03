@@ -55,6 +55,10 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[contains(@class,'about-header')]")
     private WebElement textBannerInformation;
 
+    @FindBy(id = "about-joinUs")
+    private WebElement aboutJoinUs;
+
+
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
     public MarketingPage(Logger logger, WebDriver driver) {
@@ -160,5 +164,11 @@ public class MarketingPage extends CommonPage {
     public void seeBannerInformation() {
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
         Assert.assertTrue(result, "Banner Information should be exist");
+    }
+    public void seeAboutJoinUs(){
+        scrollToElement(aboutJoinUs);
+        waitSomeSeconds(2);
+        boolean result = validateExistedElement(textBannerInformation, "Banner Information");
+        Assert.assertTrue(result,"");
     }
 }
