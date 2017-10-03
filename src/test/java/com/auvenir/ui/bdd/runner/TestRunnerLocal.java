@@ -9,11 +9,13 @@ import org.testng.annotations.*;
  * Created by doai.tran on 8/21/2017.
  */
 //@RunWith(Cucumber.class)
+//This file config belong to marketing page
 @Test
-@CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features/smokeTest.feature"}
-        ,format={"json:target/cucumber-report.json","html:target/site/cucumber-pretty"}
-        ,glue="com.auvenir.ui.bdd.stepDefinitions", tags = "@thuan")
-public class TestRunnerLocal extends AbstractTestNGCucumberTests{
+@Test
+@CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features/marketingPage.feature"}, format =
+        {"json:target/cucumber-report.json", "html:target/site/cucumber-pretty"}, glue = "com.auvenir.ui.bdd" + "" +
+        ".stepDefinitions", tags = "@Run")
+public class TestRunnerLocal extends AbstractTestNGCucumberTests {
 
     @Parameters({"browser", "version", "os"})
     @BeforeMethod

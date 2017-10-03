@@ -1,7 +1,5 @@
 package com.auvenir.ui.bdd.common;
 
-import com.google.common.collect.Table;
-import cucumber.api.DataTable;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,10 +13,6 @@ import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
@@ -34,7 +28,7 @@ public class KeyWord {
 
     public KeyWord(Logger logger, WebDriver driver) {
         this.driver = driver;
-//        this.logger = logger;
+        //        this.logger = logger;
         PageFactory.initElements(driver, this);
     }
 
@@ -42,9 +36,9 @@ public class KeyWord {
         return driver;
     }
 
-//    public Logger logger {
-//        return logger;
-//    }
+    //    public Logger logger {
+    //        return logger;
+    //    }
 
     public static final int waitTime = 30;
     public static final int smallTimeOut = 1000;
@@ -302,9 +296,9 @@ Method to wait Ajax function on Site be loaded successfully.
             wait.until((WebDriver driver) -> {
                 boolean result = false;
                 result = (boolean) ((JavascriptExecutor) driver).executeScript(
-                        "var elm = arguments[0];" + "var doc1 = elm.ownerDocument || document;" +
-                                "var rect = elm.getBoundingClientRect();"
-                                + "return elm === doc1.elementFromPoint(rect.left, rect.top);",
+                        "var elm = arguments[0];" + "var doc1 = elm.ownerDocument || document;" + "var rect = elm" +
+                                ".getBoundingClientRect();" + "return elm === doc1.elementFromPoint(rect.left, rect" +
+                                ".top);",
                         webElement);
                 logger.info("result: " + result);
                 return result;
@@ -1012,16 +1006,16 @@ Method to wait Ajax function on Site be loaded successfully.
     /******************Functions: Finding an Element with parameter: "ByXpath, By Value,... ***********************/
 
 
-//    /**
-//     * @param xpathElement
-//     * @return Web element by xpath
-//     */
-//    public WebElement findWebElementByXpath(String xpathElement) {
-//        WebElement resultWebElement = null;
-//        logger.info("The xpath of web element = " + xpathElement);
-//        resultWebElement = getDriver().findElement(By.xpath(xpathElement));
-//        return resultWebElement;
-//    }
+    //    /**
+    //     * @param xpathElement
+    //     * @return Web element by xpath
+    //     */
+    //    public WebElement findWebElementByXpath(String xpathElement) {
+    //        WebElement resultWebElement = null;
+    //        logger.info("The xpath of web element = " + xpathElement);
+    //        resultWebElement = getDriver().findElement(By.xpath(xpathElement));
+    //        return resultWebElement;
+    //    }
 
     /**
      * get element which cant use @FindBy to find
