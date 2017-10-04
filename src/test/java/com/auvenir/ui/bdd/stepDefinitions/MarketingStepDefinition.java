@@ -224,6 +224,41 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.seeColorOfForgotPasswordLinkIsGreen();
     }
 
+    @And("^I should see Forgot Password popup title$")
+    public void seeForgotPasswordPopupTitle() throws Throwable {
+        marketingPage.seeForgotPasswordPopupTitle();
+    }
+
+    @And("^I should see Forgot Password popup guide$")
+    public void seeForgotPasswordPopupGuide() throws Throwable {
+        marketingPage.seeForgotPasswordPopupGuide();
+    }
+
+    @And("^I should see Forgot Password popup border$")
+    public void seeForgotPasswordPopupBorder() throws Throwable {
+        marketingPage.seeForgotPasswordPopupBorder();
+    }
+
+    @And("^I should see Forgot Password popup Email label$")
+    public void seeForgotPasswordPopupEmailLabel() throws Throwable {
+        marketingPage.seeForgotPasswordPopupEmailLabel();
+    }
+
+    @And("^I should see Forgot Password popup Email input$")
+    public void seeForgotPasswordPopupEmailInput() throws Throwable {
+        marketingPage.seeForgotPasswordPopupEmailInput();
+    }
+
+    @And("^I should see Forgot Password popup Email input number$")
+    public void seeForgotPasswordPopupEmailInputNumber() throws Throwable {
+        marketingPage.seeForgotPasswordPopupEmailInputNumber();
+    }
+
+    @And("^I should see Forgot Password popup Email input special character$")
+    public void seeForgotPasswordPopupEmailInputSpecialCharacter() throws Throwable {
+        marketingPage.seeForgotPasswordPopupEmailInputSpecialCharacter();
+    }
+
 
     public class User {
         public String email;

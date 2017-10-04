@@ -127,6 +127,13 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@class='term-service']//div[contains(@class,'header-main-text')]")
     private WebElement textTermsOfServiceHeaderBanner;
 
+    @FindBy(id = "forgot-title")
+    private WebElement titleForgotPassword;
+
+    @FindBy(xpath = "//div[@id='forgot-popup']//span")
+    private WebElement textForgotPasswordGuide;
+
+
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
     public MarketingPage(Logger logger, WebDriver driver) {
@@ -272,10 +279,10 @@ public class MarketingPage extends CommonPage {
     public void seeWhyAuvenirContent() {
         validateElementText(titleWhyAuvenirContentPartOne, "Your time and your business.");
         validateElementText(titleWhyAuvenirContentPartTwo,
-                "A smarter audit means a straightforward, faster process that gives you back time to focus on higher " +
-                        "" + "value services and activities in your practice.  It means improved client collaboration" +
-                        " and " + "interaction, giving you stronger client relationships and more referrals.  A " +
-                        "smarter audit " + "experience means a better way of doing business.");
+                "A smarter audit means a straightforward, faster process that gives you back time to focus on " +
+                        "higher value services and activities in your practice.  It means improved client " +
+                        "collaboration and interaction, giving you stronger client relationships and more " +
+                        "referrals.  A smarter audit experience means a better way of doing business.");
     }
 
 
@@ -390,5 +397,26 @@ public class MarketingPage extends CommonPage {
         String colorCode = "rgba(89, 155, 161, 1)";
         boolean result = validateCssValueElement(linkForgotPassword, "color", colorCode);
         Assert.assertTrue(result, "Link Forgot Password color should be: " + colorCode);
+    }
+
+    public void seeForgotPasswordPopupTitle() {
+    }
+
+    public void seeForgotPasswordPopupGuide() {
+    }
+
+    public void seeForgotPasswordPopupBorder() {
+    }
+
+    public void seeForgotPasswordPopupEmailLabel() {
+    }
+
+    public void seeForgotPasswordPopupEmailInput() {
+    }
+
+    public void seeForgotPasswordPopupEmailInputNumber() {
+    }
+
+    public void seeForgotPasswordPopupEmailInputSpecialCharacter() {
     }
 }

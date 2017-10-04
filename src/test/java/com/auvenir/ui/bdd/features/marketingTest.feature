@@ -105,7 +105,7 @@ Feature: Marketing Feature
     Then I should see Language Link
     Then I should see Terms of Service Header Banner
 
-  @Run
+#  @Run
   Scenario: Home page- Forgot password link: AUV-583
     Given I navigate to Marketing page
     And I click on login link
@@ -113,4 +113,17 @@ Feature: Marketing Feature
     Then I click on forgot password link
     Then I should see Forgot Password popup
 
+  @Run
+  Scenario: Home page- Verify Forgot your password popup: AUV-588
+    Given I navigate to Marketing page
+    And I click on login link
+    Then I click on forgot password link
+    Then I should see Forgot Password popup
+    And I should see Forgot Password popup title
+    And I should see Forgot Password popup guide
+    And I should see Forgot Password popup border
+    And I should see Forgot Password popup Email label
+    And I should see Forgot Password popup Email input
+    And I should see Forgot Password popup Email input number
+    And I should see Forgot Password popup Email input special character
     
