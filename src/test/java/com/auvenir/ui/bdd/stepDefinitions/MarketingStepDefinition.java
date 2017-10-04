@@ -179,6 +179,37 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.seeMeetTheAuvyLeagueContent(members);
     }
 
+    @Then("^I verify Email label$")
+    public void verifyEmailLabel() throws Throwable {
+        marketingPage.verifyEmailLabel();
+    }
+
+    @Then("^I verify Email textbox$")
+    public void verifyEmailTextbox() throws Throwable {
+        marketingPage.verifyEmailTextbox();
+    }
+
+    @Then("^I verify Password label$")
+    public void verifyPasswordLabel() throws Throwable {
+        marketingPage.verifyPasswordLabel();
+    }
+
+    @Then("^I verify Password textbox$")
+    public void verifyPasswordTextbox() throws Throwable {
+        marketingPage.verifyPasswordTextbox();
+    }
+
+    @Then("^I verify Forgot password link$")
+    public void verifyForgotPasswordLink() throws Throwable {
+        marketingPage.verifyForgotPasswordLink();
+    }
+
+    @Then("^I verify Login button$")
+    public void verifyLoginButton() throws Throwable {
+        marketingPage.verifyLoginButton();
+    }
+
+
     public class User {
         public String email;
         public String password;

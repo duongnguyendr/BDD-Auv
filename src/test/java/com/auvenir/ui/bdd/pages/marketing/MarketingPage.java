@@ -18,8 +18,14 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//*[@class='ui right aligned container']/button")
     private WebElement buttonLogin;
 
+    @FindBy(xpath = "//div[@id='login-popup']//input[@name='email']/ancestor::div[@class='field']/label")
+    private WebElement labelEmail;
+
     @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='email']")
     private WebElement inputEmail;
+
+    @FindBy(xpath = "//div[@id='login-popup']//input[@name='password']/ancestor::div[@class='field']/label")
+    private WebElement labelPassword;
 
     @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='password']")
     private WebElement inputPassword;
@@ -264,11 +270,11 @@ public class MarketingPage extends CommonPage {
         validateElementText(titleWhyAuvenirContentPartOne, "Your time and your business.");
         validateElementText(titleWhyAuvenirContentPartTwo,
                 "A smarter audit means a straightforward, faster process that gives you back time to focus on higher " +
-                        "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "value services and activities in your " +
-                        "practice." + "  It " + "means" + " " + "improved " + "" + "client " + "collaboration" + " " +
-                        "and " + "interaction, " + "giving you " + "stronger " + "client " + "relationships and more " +
-                        "" + "referrals.  A " + "smarter audit " + "experience " + "means a better " + "" + "way of " +
-                        "doing " + "business.");
+                        "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "value services and " +
+                        "activities in" + " your" + " " + "practice." + "  It " + "means" + " " + "improved " + "" +
+                        "client " + "collaboration" + " " + "and " + "interaction, " + "giving you " + "stronger " +
+                        "client " + "relationships " + "and more " + "" + "referrals.  A " + "smarter audit " +
+                        "experience " + "means a better " + "" + "way of " + "doing " + "business.");
     }
 
 
@@ -337,5 +343,36 @@ public class MarketingPage extends CommonPage {
                 "Quantity of name member should be equals: " + memberQuantity);
         Assert.assertEquals(textMeetTheAuvyLeagueContentTitle.size(), memberQuantity,
                 "Quantity of title member should be equals: " + memberQuantity);
+    }
+
+
+    public void verifyEmailLabel() {
+        boolean result = validateExistedElement(labelEmail, "Label Email");
+        Assert.assertTrue(result, "Label Email should be exist");
+    }
+
+    public void verifyEmailTextbox() {
+        boolean result = validateExistedElement(inputEmail, "Input Email");
+        Assert.assertTrue(result, "Input Email should be exist");
+    }
+
+    public void verifyPasswordLabel() {
+        boolean result = validateExistedElement(labelPassword, "Label Password");
+        Assert.assertTrue(result, "Label Password should be exist");
+    }
+
+    public void verifyPasswordTextbox() {
+        boolean result = validateExistedElement(inputPassword, "Input Password");
+        Assert.assertTrue(result, "Input Password should be exist");
+    }
+
+    public void verifyForgotPasswordLink() {
+        boolean result = validateExistedElement(linkForgotPassword, "Link Forgot Password");
+        Assert.assertTrue(result, "Link Forgot Password should be exist");
+    }
+
+    public void verifyLoginButton() {
+        boolean result = validateExistedElement(buttonLogin, "Button Login");
+        Assert.assertTrue(result, "Button Login should be exist");
     }
 }

@@ -75,7 +75,7 @@ Feature: Marketing Feature
     Then I should see Linkedin icon
     Then I should see Copyright title
 
-  @Run
+#  @Run
   Scenario: About Page - Verify Meet The Auvy League board: AUV-562
     Given I navigate to Marketing page
     Then I scroll to footer
@@ -83,4 +83,13 @@ Feature: Marketing Feature
     Then I should see Meet The Auvy League header
     Then I should see Meet The Auvy League content: "12" members
 
-    
+  @Run
+  Scenario: About Page - Home page- Verify popup UI: AUV-563
+    Given I navigate to Marketing page
+    And I click on login link
+    Then I verify Email label
+    Then I verify Email textbox
+    Then I verify Password label
+    Then I verify Password textbox
+    Then I verify Forgot password link
+    Then I verify Login button
