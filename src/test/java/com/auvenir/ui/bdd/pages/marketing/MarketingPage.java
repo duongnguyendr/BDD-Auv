@@ -100,6 +100,9 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@id='footer']//a[@href='/cookies']")
     private WebElement itemFooterCookieNotice;
 
+    public static final String borderColor = "border-color";
+    public final String selectedBorderCSSColor = "rgb(133, 183, 217)";
+
     @FindBy(xpath = "//i[contains(@class,'facebook')]")
     private WebElement iconFooterFacebook;
 
@@ -240,12 +243,11 @@ public class MarketingPage extends CommonPage {
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
         Assert.assertTrue(result, "Banner Information should be exist");
     }
-
-    public void seeAboutJoinUs() {
-        scrollToElement(aboutJoinUs);
+    public void seeAboutJoinUs(){
+        scrollToElement(aboutJoinUs,-200);
         waitSomeSeconds(2);
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
-        Assert.assertTrue(result, "");
+        Assert.assertTrue(result,"");
     }
 
     public void scrollToAuvenirMissionPart() {
@@ -315,6 +317,19 @@ public class MarketingPage extends CommonPage {
         boolean result = validateExistedElement(itemFooterCookieNotice, "Item Footer Cookie Notice");
         Assert.assertTrue(result, "Item Footer Cookie Notice should be exist");
     }
+    public void clickOnTextBoxPassword(){
+      clickElement(inputPassword,"inputpassword");
+    }
+    public void verifyBoundaryPasswordChange(){
+      boolean result=  waitForCssValueChanged(inputPassword, " Password Text Box", borderColor, selectedBorderCSSColor);
+        Assert.assertTrue(result, "verify password change border color when focus ");
+
+    }
+    public void verifyInputPassword (String password){
+    sendKeyTextBox(inputPassword, password, "passwordTextBox");
+        Assert.assertEquals(getText(inputPassword),password);
+    }
+
 
     public void seeFacebookIcon() {
         boolean result = validateExistedElement(iconFooterFacebook, "Icon Footer Facebook");

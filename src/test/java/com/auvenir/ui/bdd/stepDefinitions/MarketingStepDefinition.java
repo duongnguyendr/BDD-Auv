@@ -321,10 +321,38 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.clickOnForgotPasswordLink();
     }
 
-    @Then("^I should see text Wanna join Us$")
-    public void seeTextWannaJoinUs() throws Throwable {
+    @Then("^I should see text :\"([^\"]*)\"$")
+    public void seeTextWannaJoinUs(String arg1) throws Throwable {
         marketingPage.seeAboutJoinUs();
 
+    }
+    @Then("^I click on password field$")
+    public void clickOnPasswordField() throws Throwable {
+        marketingPage.clickOnTextBoxPassword();
+
+    }
+    @Then("^I verify change color boundary of field$")
+    public void verifyChangeColorBoundary() throws Throwable {
+        marketingPage.verifyBoundaryPasswordChange();
+
+
+    }
+    @Then("^I verify input with text :\"([^\"]*)\"$")
+    public void verifyInputWithText(String arg1) throws Throwable {
+        marketingPage.verifyInputPassword(arg1);
+
+    }
+    @Then("^I verify input with number :\"([^\"]*)\"$")
+    public void verifyInputWithNumber(String arg1) throws Throwable {
+        marketingPage.verifyInputPassword(arg1);
+    }
+    @Then("^I verify input special character : \"([^\"]*)\"$")
+    public void verifyInputSpecialCharacter(String arg1) throws Throwable {
+        marketingPage.verifyInputPassword(arg1);
+    }
+    @Then("^I verify input text have space :\"([^\"]*)\"$")
+    public void verifyInputTextHaveSpace(String arg1) throws Throwable {
+        marketingPage.verifyInputPassword(arg1);
     }
 
 }
