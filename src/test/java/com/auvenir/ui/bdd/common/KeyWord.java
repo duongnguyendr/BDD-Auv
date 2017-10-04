@@ -1130,11 +1130,18 @@ Method to wait Ajax function on Site be loaded successfully.
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
-    public void scrollToElement(WebElement Element){
-        Point hoverItem =Element.getLocation();
+    public void scrollToElement(WebElement element){
+        Point hoverItem =element.getLocation();
         ((JavascriptExecutor) driver).executeScript("return window.title;");
             waitSomeSeconds(2);
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + (hoverItem.getY()) + ");");
+
+    }
+    public void scrollToElement(WebElement element,double height){
+        Point hoverItem =element.getLocation();
+        ((JavascriptExecutor) driver).executeScript("return window.title;");
+        waitSomeSeconds(2);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + (hoverItem.getY() + height) + ");");
 
     }
 

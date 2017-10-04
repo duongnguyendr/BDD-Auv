@@ -35,16 +35,22 @@ Feature: Marketing Feature
     Then I should see Language Link
     Then I should see Banner Information
 
-
+ #    vietlq
   Scenario: Marketing Page - About Page - Verify Title :"Wanna Join US?" :AUV-578 (Pendding)
     Given I navigate to Marketing page
     Then I redirect to About Page
-    Then I should see text Wanna join Us
+    Then I should see text :"Wanna join us ?"
 
-
-  @Vietlq
+#    vietlq
   Scenario: Marketing Pages- Home page- Password textbox : AUV-579
     Given I navigate to Marketing page
+    And I click on login link
+    Then I click on password field
+    Then I verify change color boundary of field
+    Then I verify input with text :"MarketingPage"
+    Then I verify input with number :"123456789"
+    Then I verify input special character : "<><><>!@"
+    Then I verify input text have space :"ABC ABC"
 
 #  @Run
   Scenario: Home page- Verify Our Mission text(English): AUV-558
