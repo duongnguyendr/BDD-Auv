@@ -79,7 +79,7 @@ Feature: Smoke Test Feature
     And I click confirm button on admin page
     Then I should see verified message successful on admin page
     Then I should see status of user: "chr.auditor01.adm@gmail.com" is "Onboarding"
-  @Run
+
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
     Given I navigate to GMail login page
     And I sign In GMail
@@ -165,10 +165,10 @@ Feature: Smoke Test Feature
       | Email                      | Password     |
       | chr.client01.adm@gmail.com | Changeit@123 |
     And Delete all client of user
-      | Email                      |
-      | chr.client01.adm@gmail.com |
-      |chr.client01.lead@gmail.com |
-      |   chr.client01@gmail.com   |
+      | Email                       |
+      | chr.client01.adm@gmail.com  |
+      | chr.client01.lead@gmail.com |
+      | chr.client01@gmail.com      |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -300,7 +300,7 @@ Feature: Smoke Test Feature
     And Delete user by email: "chr.auditor01@gmail.com"
     And I click on login link
     And I enter the following for Login
-      | Email                    | Password     |
+      | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
@@ -335,11 +335,11 @@ Feature: Smoke Test Feature
 
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
     Given I delete existed email
-      | Email                     | Password   |
-      |chr.client01.lead@gmail.com|Changeit@123|
+      | Email                       | Password     |
+      | chr.client01.lead@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And Delete all client of user
-      |           Email             |
+      | Email                       |
       | chr.client01.lead@gmail.com |
     And I click on login link
     And I enter the following for Login
@@ -435,14 +435,12 @@ Feature: Smoke Test Feature
       | Client Full Name | Todo Name |
       | Lead Client      | ToDo 01   |
       | Lead Client      | ToDo 02   |
-      | Lead Client      | ToDo 03   |
       | Lead Client      | ToDo 04   |
       | Lead Client      | ToDo 05   |
     Then I verify Client Assignee Selected
       | Client Full Name | Todo Name |
       | Lead Client      | ToDo 01   |
       | Lead Client      | ToDo 02   |
-      | Lead Client      | ToDo 03   |
       | Lead Client      | ToDo 04   |
       | Lead Client      | ToDo 05   |
 
@@ -472,7 +470,7 @@ Feature: Smoke Test Feature
       | Email                        | Password     |
       | chr.auditor01.lead@gmail.com | Changeit@123 |
     And I click on login button
-    Then I should see client engagement page
+    Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Editable: "Engagement GP02"
     Then I create requests from To-Do
@@ -714,13 +712,13 @@ Feature: Smoke Test Feature
     And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
     And I uploads list files on list requests
-      | File Name             | Request Name  |
-      | TXT_Auvenir.jpg       | Request 01    |
-      | TXT_Auvenir.pdf       | Request 02    |
-      | TXT_Auvenir.xlsx      | Request 03    |
-      | TXT_helloAuvenir.docx | Request 04    |
-      | TXT_helloAuvenir.png  | Request 05    |
-      | TXT_helloAuvenir.txt  | Request 06    |
+      | File Name             | Request Name |
+      | TXT_Auvenir.jpg       | Request 01   |
+      | TXT_Auvenir.pdf       | Request 02   |
+      | TXT_Auvenir.xlsx      | Request 03   |
+      | TXT_helloAuvenir.docx | Request 04   |
+      | TXT_helloAuvenir.png  | Request 05   |
+      | TXT_helloAuvenir.txt  | Request 06   |
     And I closes the To Do detail popup
     And I click slide out menu on selected To-do: "ToDo 09"
     Then I should see the Todo detail opened
@@ -824,8 +822,8 @@ Feature: Smoke Test Feature
       | Email                       | Password     |
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
-    Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    Then I should see client engagement page
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I should see all to do assigned : ToDo 01, ToDo 02, ToDo 04, ToDo 05, ToDo 06, ToDo 07, ToDo 09
 
@@ -837,7 +835,7 @@ Feature: Smoke Test Feature
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click on Team tab of engagement detail page
     Then I should see Admin Client name : "Admin Client" in team member list
@@ -851,15 +849,15 @@ Feature: Smoke Test Feature
       | chr.client01@gmail.com | Changeit@123 |
     Given I navigate to Marketing page
     And Delete all client of user
-      |        Email         |
-      |chr.client01@gmail.com|
+      | Email                  |
+      | chr.client01@gmail.com |
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click on Team tab of engagement detail page
     And I click on Invite New Member button on team page
@@ -903,7 +901,7 @@ Feature: Smoke Test Feature
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I assignee list To-Do to Client
       | Client Full Name | Todo Name |
@@ -924,7 +922,7 @@ Feature: Smoke Test Feature
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click slide out menu on selected To-do: "ToDo 06"
     Then I should see the Todo detail opened
@@ -949,7 +947,7 @@ Feature: Smoke Test Feature
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click slide out menu on selected To-do: "ToDo 06"
     Then I should see the Todo detail opened
@@ -964,7 +962,7 @@ Feature: Smoke Test Feature
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    Then I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And  I click slide out menu on selected To-do: "ToDo 06"
     Then I should see the Todo detail opened
@@ -982,7 +980,7 @@ Feature: Smoke Test Feature
       | chr.client01.lead@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I select todo: "ToDo 04" check box on Uneditable To-do page
     And I click bulk action drop down on todo page
@@ -999,7 +997,7 @@ Feature: Smoke Test Feature
       | chr.client01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I should see all to do assigned : ToDo 01, ToDo 04, ToDo 06, ToDo 09
 
@@ -1011,7 +1009,7 @@ Feature: Smoke Test Feature
       | chr.client01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click slide out menu on selected To-do: "ToDo 01"
     Then I should see the Todo detail opened
@@ -1036,7 +1034,7 @@ Feature: Smoke Test Feature
       | chr.client01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I click slide out menu on selected To-do: "ToDo 01"
     Then I should see the Todo detail opened
@@ -1051,7 +1049,7 @@ Feature: Smoke Test Feature
       | chr.client01@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    Then I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And  I click slide out menu on selected To-do: "ToDo 01"
     Then I should see the Todo detail opened
@@ -1086,11 +1084,11 @@ Feature: Smoke Test Feature
     And I click on login button
     Then I should see engagement page
     And I should see engagement list : Engagement GP01, Engagement GP02
-    Then I click on engagement: "Engagement GP01"
+    Then I click on assigned engagement: "Engagement GP01"
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
     Then I click on engagement tab return engagement page
     And I should see engagement page
-    Then I click on engagement: "Engagement GP02"
+    Then I click on assigned engagement: "Engagement GP02"
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
 
   Scenario: Admin auditor can see all to-dos in firm: AUV-2253
@@ -1111,6 +1109,7 @@ Feature: Smoke Test Feature
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I should see all to do : ToDo 01, ToDo 02, ToDo 04, ToDo 05, ToDo 06, ToDo 07, ToDo 09, ToDo 10
 
+
   Scenario: Admin auditor can see all request(s) in Firm: AUV-2254
     Given I navigate to Marketing page
     And I click on login link
@@ -1122,7 +1121,7 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I verify Existed request name from Todo
-      | Todo Name |                         Request Name                                   |
+      | Todo Name | Request Name                                                           |
       | ToDo 02   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
       | ToDo 05   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
       | ToDo 07   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
@@ -1145,7 +1144,7 @@ Feature: Smoke Test Feature
     And I click on engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I verify comment at list To-Do
-      | To-Do Name |User Comment     | Content Comment         |
+      | To-Do Name | User Comment    | Content Comment         |
       | ToDo 01    | General Client  | General Client Comment  |
       | ToDo 01    | General Client  | TXT_ATTACHMENT.docx     |
       | ToDo 04    | Lead Auditor    | Lead Auditor Comment    |
@@ -1159,17 +1158,17 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                        | Password     |
-      | chr.client01.adm@gmail.com   | Changeit@123 |
+      | Email                      | Password     |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I should see engagement list : Engagement GP01, Engagement GP02
-    Then I click on engagement: "Engagement GP01"
+    Then I click on assigned engagement: "Engagement GP01"
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP01"
     Then I should see empty ToDo list
     Then I click on engagement tab return engagement page
     And I should see engagement page
-    Then I click on engagement: "Engagement GP02"
+    Then I click on assigned engagement: "Engagement GP02"
     And I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     Then I should see all to do : ToDo 01, ToDo 02, ToDo 04, ToDo 05, ToDo 06, ToDo 07, ToDo 09
 
@@ -1177,14 +1176,14 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                        | Password     |
-      | chr.client01.adm@gmail.com   | Changeit@123 |
+      | Email                      | Password     |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I verify Existed request name from Todo
-      | Todo Name |                         Request Name                                   |
+      | Todo Name | Request Name                                                           |
       | ToDo 02   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
       | ToDo 05   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
       | ToDo 07   | Request 01, Request 02, Request 03, Request 04, Request 05, Request 06 |
@@ -1199,14 +1198,14 @@ Feature: Smoke Test Feature
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
-      | Email                        | Password     |
-      | chr.client01.adm@gmail.com   | Changeit@123 |
+      | Email                      | Password     |
+      | chr.client01.adm@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see engagement page
-    And I click on engagement: "Engagement GP02"
+    And I click on assigned engagement: "Engagement GP02"
     Then I should see engagement detail page with Engagement Title Uneditable: "Engagement GP02"
     And I verify comment at list To-Do
-      | To-Do Name |User Comment     | Content Comment         |
+      | To-Do Name | User Comment    | Content Comment         |
       | ToDo 01    | General Client  | General Client Comment  |
       | ToDo 01    | General Client  | TXT_ATTACHMENT.docx     |
       | ToDo 04    | Lead Auditor    | Lead Auditor Comment    |
