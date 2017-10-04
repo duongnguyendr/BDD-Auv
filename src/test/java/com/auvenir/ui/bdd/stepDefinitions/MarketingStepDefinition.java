@@ -3,6 +3,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -216,6 +217,11 @@ public class MarketingStepDefinition extends BaseInit {
     @Then("^I should see Terms of Service Header Banner$")
     public void seeTermsOfServiceHeaderBanner() throws Throwable {
         marketingPage.seeTermsOfServiceHeaderBanner();
+    }
+
+    @Then("^I should see color of forgot password link is green$")
+    public void seeColorOfForgotPasswordLinkIsGreen() throws Throwable {
+        marketingPage.seeColorOfForgotPasswordLinkIsGreen();
     }
 
 

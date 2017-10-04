@@ -94,7 +94,7 @@ Feature: Marketing Feature
     Then I verify Forgot password link
     Then I verify Login button
 
-  @Run
+#  @Run
   Scenario: Terms of Service page- Verify Top Banner: AUV-575
     Given I navigate to Marketing page
     Then I scroll to footer
@@ -104,3 +104,13 @@ Feature: Marketing Feature
     Then I should see Sign Up Link
     Then I should see Language Link
     Then I should see Terms of Service Header Banner
+
+  @Run
+  Scenario: Home page- Forgot password link: AUV-583
+    Given I navigate to Marketing page
+    And I click on login link
+    Then I should see color of forgot password link is green
+    Then I click on forgot password link
+    Then I should see Forgot Password popup
+
+    
