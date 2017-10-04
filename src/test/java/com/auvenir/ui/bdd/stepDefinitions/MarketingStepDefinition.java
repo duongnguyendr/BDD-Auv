@@ -3,7 +3,6 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -207,6 +206,16 @@ public class MarketingStepDefinition extends BaseInit {
     @Then("^I verify Login button$")
     public void verifyLoginButton() throws Throwable {
         marketingPage.verifyLoginButton();
+    }
+
+    @Then("^I redirect to Terms of Service Page$")
+    public void redirectToTermsOfServicePage() throws Throwable {
+        marketingPage.redirectToTermsOfServicePage();
+    }
+
+    @Then("^I should see Terms of Service Header Banner$")
+    public void seeTermsOfServiceHeaderBanner() throws Throwable {
+        marketingPage.seeTermsOfServiceHeaderBanner();
     }
 
 

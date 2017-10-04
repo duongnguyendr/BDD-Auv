@@ -124,6 +124,8 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@id='about-league']//p[@class='title']")
     private List<WebElement> textMeetTheAuvyLeagueContentTitle;
 
+    @FindBy(xpath = "//div[@class='term-service']//div[contains(@class,'header-main-text')]")
+    private WebElement textTermsOfServiceHeaderBanner;
 
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
@@ -270,11 +272,12 @@ public class MarketingPage extends CommonPage {
         validateElementText(titleWhyAuvenirContentPartOne, "Your time and your business.");
         validateElementText(titleWhyAuvenirContentPartTwo,
                 "A smarter audit means a straightforward, faster process that gives you back time to focus on higher " +
-                        "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "value services and " +
-                        "activities in" + " your" + " " + "practice." + "  It " + "means" + " " + "improved " + "" +
-                        "client " + "collaboration" + " " + "and " + "interaction, " + "giving you " + "stronger " +
-                        "client " + "relationships " + "and more " + "" + "referrals.  A " + "smarter audit " +
-                        "experience " + "means a better " + "" + "way of " + "doing " + "business.");
+                        "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "value "
+                        + "services " + "and " + "activities in" + " your" + " " + "practice." + "  It " + "means" +
+                        " " + "" + "improved " + "" + "" + "client " + "collaboration" + " " + "and " + "interaction," +
+                        " " + "giving you " + "stronger " + "client " + "relationships " + "and more " + "" +
+                        "referrals.  " + "A " + "smarter " + "audit " + "experience " + "means a better " + "" + "way" +
+                        " of " + "doing " + "business.");
     }
 
 
@@ -374,5 +377,14 @@ public class MarketingPage extends CommonPage {
     public void verifyLoginButton() {
         boolean result = validateExistedElement(buttonLogin, "Button Login");
         Assert.assertTrue(result, "Button Login should be exist");
+    }
+
+    public void redirectToTermsOfServicePage() {
+        clickElement(itemFooterTermsOfSevice, "Item Footer Terms Of Sevice");
+    }
+
+    public void seeTermsOfServiceHeaderBanner() {
+        boolean result = validateExistedElement(textTermsOfServiceHeaderBanner, "Terms Of Service Header Banner");
+        Assert.assertTrue(result, "Terms Of Service Header Banner should be exist");
     }
 }

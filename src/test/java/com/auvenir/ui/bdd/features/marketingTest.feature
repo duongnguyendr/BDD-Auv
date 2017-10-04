@@ -83,7 +83,7 @@ Feature: Marketing Feature
     Then I should see Meet The Auvy League header
     Then I should see Meet The Auvy League content: "12" members
 
-  @Run
+#  @Run
   Scenario: About Page - Home page- Verify popup UI: AUV-563
     Given I navigate to Marketing page
     And I click on login link
@@ -93,3 +93,14 @@ Feature: Marketing Feature
     Then I verify Password textbox
     Then I verify Forgot password link
     Then I verify Login button
+
+  @Run
+  Scenario: Terms of Service page- Verify Top Banner: AUV-575
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to Terms of Service Page
+    Then I should see Header Logo
+    Then I should see Login link
+    Then I should see Sign Up Link
+    Then I should see Language Link
+    Then I should see Terms of Service Header Banner
