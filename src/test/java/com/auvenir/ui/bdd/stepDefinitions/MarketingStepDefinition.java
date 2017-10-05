@@ -244,19 +244,34 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.seeForgotPasswordPopupEmailLabel();
     }
 
-    @And("^I should see Forgot Password popup Email input$")
-    public void seeForgotPasswordPopupEmailInput() throws Throwable {
-        marketingPage.seeForgotPasswordPopupEmailInput();
+    @And("^I verify input Forgot Email with text: \"([^\"]*)\"$")
+    public void verifyInputForgotEmailWithText(String textString) throws Throwable {
+        marketingPage.verifyInputForgotEmailWithText(textString);
     }
 
-    @And("^I should see Forgot Password popup Email input number$")
-    public void seeForgotPasswordPopupEmailInputNumber() throws Throwable {
-        marketingPage.seeForgotPasswordPopupEmailInputNumber();
+    @And("^I verify input Forgot Email with number: \"([^\"]*)\"$")
+    public void verifyInputForgotEmailWithNumber(String numberString) throws Throwable {
+        marketingPage.verifyInputForgotEmailWithNumber(numberString);
     }
 
-    @And("^I should see Forgot Password popup Email input special character$")
-    public void seeForgotPasswordPopupEmailInputSpecialCharacter() throws Throwable {
-        marketingPage.seeForgotPasswordPopupEmailInputSpecialCharacter();
+    @And("^I verify input Forgot Email with special character: \"([^\"]*)\"$")
+    public void verifyInputForgotEmailWithSpecialCharacter(String specialCharacterString) throws Throwable {
+        marketingPage.verifyInputForgotEmailWithSpecialCharacter(specialCharacterString);
+    }
+
+    @Then("^I click confirm with Account still processing message$")
+    public void clickConfirmWithAccountStillProcessingMessage() throws Throwable {
+        marketingPage.clickConfirmWithAccountStillProcessingMessage();
+    }
+
+    @Then("^I should see Account not exist error message$")
+    public void seeAccountNotExistErrorMessage() throws Throwable {
+        marketingPage.seeAccountNotExistErrorMessage();
+    }
+
+    @Then("^I should see Reset Link Sent message$")
+    public void seeResetLinkSentMessage() throws Throwable {
+        marketingPage.seeResetLinkSentMessage();
     }
 
 
@@ -326,30 +341,36 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.seeAboutJoinUs();
 
     }
+
     @Then("^I click on password field$")
     public void clickOnPasswordField() throws Throwable {
         marketingPage.clickOnTextBoxPassword();
 
     }
+
     @Then("^I verify change color boundary of field$")
     public void verifyChangeColorBoundary() throws Throwable {
         marketingPage.verifyBoundaryPasswordChange();
 
 
     }
+
     @Then("^I verify input with text :\"([^\"]*)\"$")
     public void verifyInputWithText(String arg1) throws Throwable {
         marketingPage.verifyInputPassword(arg1);
 
     }
+
     @Then("^I verify input with number :\"([^\"]*)\"$")
     public void verifyInputWithNumber(String arg1) throws Throwable {
         marketingPage.verifyInputPassword(arg1);
     }
+
     @Then("^I verify input special character : \"([^\"]*)\"$")
     public void verifyInputSpecialCharacter(String arg1) throws Throwable {
         marketingPage.verifyInputPassword(arg1);
     }
+
     @Then("^I verify input text have space :\"([^\"]*)\"$")
     public void verifyInputTextHaveSpace(String arg1) throws Throwable {
         marketingPage.verifyInputPassword(arg1);

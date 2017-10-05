@@ -129,7 +129,19 @@ Feature: Marketing Feature
     And I should see Forgot Password popup guide
     And I should see Forgot Password popup border
     And I should see Forgot Password popup Email label
-    And I should see Forgot Password popup Email input
-    And I should see Forgot Password popup Email input number
-    And I should see Forgot Password popup Email input special character
-    
+    And I verify input Forgot Email with text: "abc"
+    And I verify input Forgot Email with number: "132156"
+    And I verify input Forgot Email with special character: "!@#$%^&*("
+    Then I input email forgotten password : "auveniradm02@gmail.com"
+    Then I click on Request Reset Link button
+    Then I should see Account still processing message
+    Then I click confirm with Account still processing message
+    And I click on login link
+    Then I click on forgot password link
+    Then I should see Forgot Password popup
+    Then I input email forgotten password : "auveniradm012345@gmail.com"
+    Then I click on Request Reset Link button
+    Then I should see Account not exist error message
+    Then I input email forgotten password : "auveniradm01@gmail.com"
+    Then I click on Request Reset Link button
+    Then I should see Reset Link Sent message

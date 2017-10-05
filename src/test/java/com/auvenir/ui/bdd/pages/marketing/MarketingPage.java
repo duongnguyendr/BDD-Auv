@@ -45,7 +45,7 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@id='forgot-popup']//input[@name='email']")
     private WebElement inputForgottenEmail;
 
-    @FindBy(xpath = "//div[@id='forgot-popup']//button[@type='submit']")
+    @FindBy(xpath = "//button[contains(@class,'submit-forgot')]")
     private WebElement buttonRequestResetLink;
 
     @FindBy(xpath = "//div[@id='waitlist-popup']//span")
@@ -62,7 +62,6 @@ public class MarketingPage extends CommonPage {
 
     @FindBy(id = "about-joinUs")
     private WebElement aboutJoinUs;
-
 
     @FindBy(xpath = "//div[@id='home_mission']/h2")
     private WebElement titleMissionHeader;
@@ -100,9 +99,6 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@id='footer']//a[@href='/cookies']")
     private WebElement itemFooterCookieNotice;
 
-    public static final String borderColor = "border-color";
-    public final String selectedBorderCSSColor = "rgb(133, 183, 217)";
-
     @FindBy(xpath = "//i[contains(@class,'facebook')]")
     private WebElement iconFooterFacebook;
 
@@ -130,12 +126,29 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@class='term-service']//div[contains(@class,'header-main-text')]")
     private WebElement textTermsOfServiceHeaderBanner;
 
-    @FindBy(id = "forgot-title")
+    @FindBy(className = "forgot-title")
     private WebElement titleForgotPassword;
 
     @FindBy(xpath = "//div[@id='forgot-popup']//span")
     private WebElement textForgotPasswordGuide;
 
+    @FindBy(xpath = "//div[@id='forgot-popup']//label")
+    private WebElement labelForgotPasswordEmail;
+
+    @FindBy(xpath = "//button[contains(@class,'waitlist-done')]")
+    private WebElement buttonConfirmProcessing;
+
+    @FindBy(xpath = "//div[@id='forgot-popup']//div[contains(@class,'error message')]//p")
+    private WebElement textNotExistEmailErrorMessage;
+
+    @FindBy(className = "email-sending-title")
+    private WebElement titleResetLinkSent;
+
+    public static final String borderColorCSSName = "border-color";
+    public final String colorCSSName = "color";
+
+    public final String selectedBorderCSSColor = "rgb(133, 183, 217)";
+    public final String greenLinkColorCode = "rgba(89, 155, 161, 1)";
 
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
@@ -243,11 +256,12 @@ public class MarketingPage extends CommonPage {
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
         Assert.assertTrue(result, "Banner Information should be exist");
     }
-    public void seeAboutJoinUs(){
-        scrollToElement(aboutJoinUs,-200);
+
+    public void seeAboutJoinUs() {
+        scrollToElement(aboutJoinUs, -200);
         waitSomeSeconds(2);
         boolean result = validateExistedElement(textBannerInformation, "Banner Information");
-        Assert.assertTrue(result,"");
+        Assert.assertTrue(result, "");
     }
 
     public void scrollToAuvenirMissionPart() {
@@ -317,17 +331,21 @@ public class MarketingPage extends CommonPage {
         boolean result = validateExistedElement(itemFooterCookieNotice, "Item Footer Cookie Notice");
         Assert.assertTrue(result, "Item Footer Cookie Notice should be exist");
     }
-    public void clickOnTextBoxPassword(){
-      clickElement(inputPassword,"inputpassword");
+
+    public void clickOnTextBoxPassword() {
+        clickElement(inputPassword, "inputpassword");
     }
-    public void verifyBoundaryPasswordChange(){
-      boolean result=  waitForCssValueChanged(inputPassword, " Password Text Box", borderColor, selectedBorderCSSColor);
+
+    public void verifyBoundaryPasswordChange() {
+        boolean result = waitForCssValueChanged(inputPassword, " Password Text Box", borderColorCSSName,
+                selectedBorderCSSColor);
         Assert.assertTrue(result, "verify password change border color when focus ");
 
     }
-    public void verifyInputPassword (String password){
-    sendKeyTextBox(inputPassword, password, "passwordTextBox");
-        Assert.assertEquals(getText(inputPassword),password);
+
+    public void verifyInputPassword(String password) {
+        sendKeyTextBox(inputPassword, password, "passwordTextBox");
+        Assert.assertEquals(getText(inputPassword), password);
     }
 
 
@@ -409,29 +427,60 @@ public class MarketingPage extends CommonPage {
     }
 
     public void seeColorOfForgotPasswordLinkIsGreen() {
-        String colorCode = "rgba(89, 155, 161, 1)";
-        boolean result = validateCssValueElement(linkForgotPassword, "color", colorCode);
-        Assert.assertTrue(result, "Link Forgot Password color should be: " + colorCode);
+        boolean result = validateCssValueElement(linkForgotPassword, colorCSSName, greenLinkColorCode);
+        Assert.assertTrue(result, "Link Forgot Password color should be: " + greenLinkColorCode);
     }
 
     public void seeForgotPasswordPopupTitle() {
+        boolean result = validateExistedElement(titleForgotPassword, "Title Forgot Password");
+        Assert.assertTrue(result, "Title Forgot Password should be exist");
     }
 
     public void seeForgotPasswordPopupGuide() {
+        boolean result = validateExistedElement(textForgotPasswordGuide, "Forgot Password Guide");
+        Assert.assertTrue(result, "Forgot Password Guide should be exist");
     }
 
     public void seeForgotPasswordPopupBorder() {
+        clickElement(inputForgottenEmail, "Input Forgotten Email");
+        boolean result = waitForCssValueChanged(inputForgottenEmail, "Input Forgotten Email", borderColorCSSName,
+                selectedBorderCSSColor);
+        Assert.assertTrue(result,
+                "Input Forgotten Email border color when selected should be: " + selectedBorderCSSColor);
     }
 
     public void seeForgotPasswordPopupEmailLabel() {
+        boolean result = validateExistedElement(labelForgotPasswordEmail, "Label Forgot Password Email");
+        Assert.assertTrue(result, "Label Forgot Password Email should be exist");
     }
 
-    public void seeForgotPasswordPopupEmailInput() {
+    public void verifyInputForgotEmailWithText(String textString) {
+        sendKeyTextBox(inputForgottenEmail, textString, "passwordTextBox");
+        Assert.assertEquals(getText(inputForgottenEmail), textString);
     }
 
-    public void seeForgotPasswordPopupEmailInputNumber() {
+    public void verifyInputForgotEmailWithNumber(String numberString) {
+        sendKeyTextBox(inputForgottenEmail, numberString, "passwordTextBox");
+        Assert.assertEquals(getText(inputForgottenEmail), numberString);
     }
 
-    public void seeForgotPasswordPopupEmailInputSpecialCharacter() {
+    public void verifyInputForgotEmailWithSpecialCharacter(String specialCharacterString) {
+        sendKeyTextBox(inputForgottenEmail, specialCharacterString, "passwordTextBox");
+        Assert.assertEquals(getText(inputForgottenEmail), specialCharacterString);
+    }
+
+
+    public void clickConfirmWithAccountStillProcessingMessage() {
+        clickElement(buttonConfirmProcessing, "Button Confirm Processing");
+    }
+
+    public void seeAccountNotExistErrorMessage() {
+        boolean result = validateExistedElement(textNotExistEmailErrorMessage, "Not Exist Email Error Message");
+        Assert.assertTrue(result, "Not Exist Email Error Message should be exist");
+    }
+
+    public void seeResetLinkSentMessage() {
+        boolean result = validateExistedElement(titleResetLinkSent, "Title Reset Link Sent");
+        Assert.assertTrue(result, "Title Reset Link Sent should be exist");
     }
 }
