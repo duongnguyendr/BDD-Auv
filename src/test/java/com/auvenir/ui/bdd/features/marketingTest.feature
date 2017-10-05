@@ -66,7 +66,7 @@ Feature: Marketing Feature
     Then I should see Why Auvenir header
     Then I should see Why Auvenir content
 
-  @Run
+#  @Run
   Scenario: Home page- Verify Footer: AUV-560
     Given I navigate to Marketing page
     Then I scroll to footer
@@ -76,8 +76,65 @@ Feature: Marketing Feature
     Then I should see Terms of Service link
     Then I should see Privacy Policy link
     Then I should see Cookie Notice link
+    Then I should see Facebook icon
+    Then I should see Twitter icon
+    Then I should see Linkedin icon
+    Then I should see Copyright title
 
-#  @vietlq
+#  @Run
+  Scenario: About Page - Verify Meet The Auvy League board: AUV-562
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to About Page
+    Then I should see Meet The Auvy League header
+    Then I should see Meet The Auvy League content: "12" members
+
+#  @Run
+  Scenario: About Page - Home page- Verify popup UI: AUV-563
+    Given I navigate to Marketing page
+    And I click on login link
+    Then I verify Email label
+    Then I verify Email textbox
+    Then I verify Password label
+    Then I verify Password textbox
+    Then I verify Forgot password link
+    Then I verify Login button
+
+#  @Run
+  Scenario: Terms of Service page- Verify Top Banner: AUV-575
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to Terms of Service Page
+    Then I should see Header Logo
+    Then I should see Login link
+    Then I should see Sign Up Link
+    Then I should see Language Link
+    Then I should see Terms of Service Header Banner
+
+#  @Run
+  Scenario: Home page- Forgot password link: AUV-583
+    Given I navigate to Marketing page
+    And I click on login link
+    Then I should see color of forgot password link is green
+    Then I click on forgot password link
+    Then I should see Forgot Password popup
+
+  @Run
+  Scenario: Home page- Verify Forgot your password popup: AUV-588
+    Given I navigate to Marketing page
+    And I click on login link
+    Then I click on forgot password link
+    Then I should see Forgot Password popup
+    And I should see Forgot Password popup title
+    And I should see Forgot Password popup guide
+    And I should see Forgot Password popup border
+    And I should see Forgot Password popup Email label
+    And I should see Forgot Password popup Email input
+    And I should see Forgot Password popup Email input number
+    And I should see Forgot Password popup Email input special character
+
+
+    #  @vietlq
   Scenario: Marketing Page - About Page - Verify "Highlights of our Weekend Photo Competition" board: AUV-590
     Given I navigate to Marketing page
     Then I redirect to About Page
@@ -93,6 +150,6 @@ Feature: Marketing Feature
 
   @vietlq
   Scenario:Contact page > Verify that Contact page displays after user click on Contact
-    link in footer at the end of the page: AUV-592
+  link in footer at the end of the page: AUV-592
     Given I navigate to Marketing page
     Then I redirect to Contact Page

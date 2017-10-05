@@ -19,8 +19,14 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//*[@class='ui right aligned container']/button")
     private WebElement buttonLogin;
 
+    @FindBy(xpath = "//div[@id='login-popup']//input[@name='email']/ancestor::div[@class='field']/label")
+    private WebElement labelEmail;
+
     @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='email']")
     private WebElement inputEmail;
+
+    @FindBy(xpath = "//div[@id='login-popup']//input[@name='password']/ancestor::div[@class='field']/label")
+    private WebElement labelPassword;
 
     @FindBy(xpath = ".//*[@id='login-popup']//div/input[@name='password']")
     private WebElement inputPassword;
@@ -111,6 +117,39 @@ public class MarketingPage extends CommonPage {
     public static final String borderColor = "border-color";
     public final String selectedBorderCSSColor = "rgb(133, 183, 217)";
 
+    @FindBy(xpath = "//i[contains(@class,'facebook')]")
+    private WebElement iconFooterFacebook;
+
+    @FindBy(xpath = "//i[contains(@class,'twitter')]")
+    private WebElement iconFooterTwitter;
+
+    @FindBy(xpath = "//i[contains(@class,'linkedin')]")
+    private WebElement iconFooterLinkedin;
+
+    @FindBy(xpath = "//div[contains(@class,'copyright-footer')]")
+    private WebElement titleFooterCopyright;
+
+    @FindBy(xpath = "//div[@id='about-league']//h2[@class='ui header']")
+    private WebElement titleMeetTheAuvyLeagueHeader;
+
+    @FindBy(xpath = "//div[@id='about-league']//img[@class='ui image']")
+    private List<WebElement> imageMeetTheAuvyLeagueContentAvatar;
+
+    @FindBy(xpath = "//div[@id='about-league']//h4[@class='name']")
+    private List<WebElement> textMeetTheAuvyLeagueContentName;
+
+    @FindBy(xpath = "//div[@id='about-league']//p[@class='title']")
+    private List<WebElement> textMeetTheAuvyLeagueContentTitle;
+
+    @FindBy(xpath = "//div[@class='term-service']//div[contains(@class,'header-main-text')]")
+    private WebElement textTermsOfServiceHeaderBanner;
+
+    @FindBy(id = "forgot-title")
+    private WebElement titleForgotPassword;
+
+    @FindBy(xpath = "//div[@id='forgot-popup']//span")
+    private WebElement textForgotPasswordGuide;
+
 
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
@@ -185,8 +224,9 @@ public class MarketingPage extends CommonPage {
     private WebElement linkJoinAsAuditor;
 
     public void verifyHeaderLogo() {
-        boolean result = validateAttributeContain(imageLogo, "src", "static/images/logo-auvenir.svg", "Image Logo");
-        Assert.assertTrue(result, "Link Header Logo should be: " + "static/images/logo-auvenir.svg");
+        String partialLogoURL = "static/images/logo-auvenir.svg";
+        boolean result = validateAttributeContain(imageLogo, "src", partialLogoURL, "Image Logo");
+        Assert.assertTrue(result, "Link Header Logo should be: " + partialLogoURL);
     }
 
     public void verifyLoginLink() {
@@ -235,8 +275,8 @@ public class MarketingPage extends CommonPage {
     public void seeAuvenirMissionContent() {
         validateElementText(titleMissionContentPartOne,
                 "As a Deloitte venture, Auvenir benefits from the agility of a start-up culture while leveraging " +
-                        "deep" + " world-class audit and technology expertise. Our long term goal is to facilitate "
-                        + "higher " + "trust and confidence in financial reporting and assurance.");
+                        "deep world-class audit and technology expertise. Our long term goal is to facilitate " +
+                        "higher trust and confidence in financial reporting and assurance.");
         validateElementText(titleMissionContentPartTwo,
                 "The Auvenir platform seamlessly integrates advanced technology to enhance the financial audit " +
                         "workflow, improving efficiencies and communications for auditors and their clients. This " +
@@ -255,10 +295,10 @@ public class MarketingPage extends CommonPage {
     public void seeWhyAuvenirContent() {
         validateElementText(titleWhyAuvenirContentPartOne, "Your time and your business.");
         validateElementText(titleWhyAuvenirContentPartTwo,
-                "A smarter audit means a straightforward, faster process that gives you back time to focus on higher " +
-                        "" + "value services and activities in your practice.  It means improved client collaboration" +
-                        " and " + "interaction, giving you stronger client relationships and more referrals.  A " +
-                        "smarter audit " + "experience means a better way of doing business.");
+                "A smarter audit means a straightforward, faster process that gives you back time to focus on " +
+                        "higher value services and activities in your practice.  It means improved client " +
+                        "collaboration and interaction, giving you stronger client relationships and more " +
+                        "referrals.  A smarter audit experience means a better way of doing business.");
     }
 
 
@@ -327,5 +367,108 @@ public class MarketingPage extends CommonPage {
         clickElement(itemFooterContact, "Item Footer About");
         waitForVisibleElement(headerContact,"verify header Contact");
 
+
+    public void seeFacebookIcon() {
+        boolean result = validateExistedElement(iconFooterFacebook, "Icon Footer Facebook");
+        Assert.assertTrue(result, "Icon Facebook should be exist");
+    }
+
+    public void seeTwitterIcon() {
+        boolean result = validateExistedElement(iconFooterTwitter, "Icon Footer Twitter");
+        Assert.assertTrue(result, "Icon Twitter should be exist");
+    }
+
+    public void seeLinkedinIcon() {
+        boolean result = validateExistedElement(iconFooterLinkedin, "Icon Footer Linkedin");
+        Assert.assertTrue(result, "Icon Linkedin should be exist");
+    }
+
+    public void seeCopyrightTitle() {
+        boolean result = validateExistedElement(titleFooterCopyright, "Title Footer Copyright");
+        Assert.assertTrue(result, "Title Footer Copyright should be exist");
+    }
+
+    public void seeMeetTheAuvyLeagueHeader() {
+        scrollToElement(titleMeetTheAuvyLeagueHeader);
+        waitSomeSeconds(2);
+        boolean result = validateExistedElement(titleMeetTheAuvyLeagueHeader, "Title Meet The Auvy League Header");
+        Assert.assertTrue(result, "Title Meet The Auvy League Header should be exist");
+    }
+
+    public void seeMeetTheAuvyLeagueContent(String members) {
+        int memberQuantity = Integer.parseInt(members);
+        Assert.assertEquals(imageMeetTheAuvyLeagueContentAvatar.size(), memberQuantity,
+                "Quantity of avatar member should be equals: " + memberQuantity);
+        Assert.assertEquals(textMeetTheAuvyLeagueContentName.size(), memberQuantity,
+                "Quantity of name member should be equals: " + memberQuantity);
+        Assert.assertEquals(textMeetTheAuvyLeagueContentTitle.size(), memberQuantity,
+                "Quantity of title member should be equals: " + memberQuantity);
+    }
+
+
+    public void verifyEmailLabel() {
+        boolean result = validateExistedElement(labelEmail, "Label Email");
+        Assert.assertTrue(result, "Label Email should be exist");
+    }
+
+    public void verifyEmailTextbox() {
+        boolean result = validateExistedElement(inputEmail, "Input Email");
+        Assert.assertTrue(result, "Input Email should be exist");
+    }
+
+    public void verifyPasswordLabel() {
+        boolean result = validateExistedElement(labelPassword, "Label Password");
+        Assert.assertTrue(result, "Label Password should be exist");
+    }
+
+    public void verifyPasswordTextbox() {
+        boolean result = validateExistedElement(inputPassword, "Input Password");
+        Assert.assertTrue(result, "Input Password should be exist");
+    }
+
+    public void verifyForgotPasswordLink() {
+        boolean result = validateExistedElement(linkForgotPassword, "Link Forgot Password");
+        Assert.assertTrue(result, "Link Forgot Password should be exist");
+    }
+
+    public void verifyLoginButton() {
+        boolean result = validateExistedElement(buttonLogin, "Button Login");
+        Assert.assertTrue(result, "Button Login should be exist");
+    }
+
+    public void redirectToTermsOfServicePage() {
+        clickElement(itemFooterTermsOfSevice, "Item Footer Terms Of Sevice");
+    }
+
+    public void seeTermsOfServiceHeaderBanner() {
+        boolean result = validateExistedElement(textTermsOfServiceHeaderBanner, "Terms Of Service Header Banner");
+        Assert.assertTrue(result, "Terms Of Service Header Banner should be exist");
+    }
+
+    public void seeColorOfForgotPasswordLinkIsGreen() {
+        String colorCode = "rgba(89, 155, 161, 1)";
+        boolean result = validateCssValueElement(linkForgotPassword, "color", colorCode);
+        Assert.assertTrue(result, "Link Forgot Password color should be: " + colorCode);
+    }
+
+    public void seeForgotPasswordPopupTitle() {
+    }
+
+    public void seeForgotPasswordPopupGuide() {
+    }
+
+    public void seeForgotPasswordPopupBorder() {
+    }
+
+    public void seeForgotPasswordPopupEmailLabel() {
+    }
+
+    public void seeForgotPasswordPopupEmailInput() {
+    }
+
+    public void seeForgotPasswordPopupEmailInputNumber() {
+    }
+
+    public void seeForgotPasswordPopupEmailInputSpecialCharacter() {
     }
 }

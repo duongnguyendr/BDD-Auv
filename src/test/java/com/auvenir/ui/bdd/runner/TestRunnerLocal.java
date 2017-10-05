@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Test
 @CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features/marketingTest.feature"}, format =
         {"json:target/cucumber-report.json", "html:target/site/cucumber-pretty"}, glue = "com.auvenir.ui.bdd" + "" +
-        ".stepDefinitions")
+        ".stepDefinitions",tags = "@vietlq")
 public class TestRunnerLocal extends AbstractTestNGCucumberTests {
 
     @Parameters({"browser", "version", "os"})

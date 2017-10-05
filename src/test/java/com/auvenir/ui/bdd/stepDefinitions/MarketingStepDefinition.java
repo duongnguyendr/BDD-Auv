@@ -148,7 +148,118 @@ public class MarketingStepDefinition extends BaseInit {
     public void seeCookieNoticeLink() throws Throwable {
         marketingPage.seeCookieNoticeLink();
     }
-    
+
+    @Then("^I should see Facebook icon$")
+    public void seeFacebookIcon() throws Throwable {
+        marketingPage.seeFacebookIcon();
+    }
+
+    @Then("^I should see Twitter icon$")
+    public void seeTwitterIcon() throws Throwable {
+        marketingPage.seeTwitterIcon();
+    }
+
+    @Then("^I should see Linkedin icon$")
+    public void seeLinkedinIcon() throws Throwable {
+        marketingPage.seeLinkedinIcon();
+    }
+
+    @Then("^I should see Copyright title$")
+    public void seeCopyrightTitle() throws Throwable {
+        marketingPage.seeCopyrightTitle();
+    }
+
+    @Then("^I should see Meet The Auvy League header$")
+    public void seeMeetTheAuvyLeagueHeader() throws Throwable {
+        marketingPage.seeMeetTheAuvyLeagueHeader();
+    }
+
+    @Then("^I should see Meet The Auvy League content: \"([^\"]*)\" members$")
+    public void seeMeetTheAuvyLeagueContent(String members) throws Throwable {
+        marketingPage.seeMeetTheAuvyLeagueContent(members);
+    }
+
+    @Then("^I verify Email label$")
+    public void verifyEmailLabel() throws Throwable {
+        marketingPage.verifyEmailLabel();
+    }
+
+    @Then("^I verify Email textbox$")
+    public void verifyEmailTextbox() throws Throwable {
+        marketingPage.verifyEmailTextbox();
+    }
+
+    @Then("^I verify Password label$")
+    public void verifyPasswordLabel() throws Throwable {
+        marketingPage.verifyPasswordLabel();
+    }
+
+    @Then("^I verify Password textbox$")
+    public void verifyPasswordTextbox() throws Throwable {
+        marketingPage.verifyPasswordTextbox();
+    }
+
+    @Then("^I verify Forgot password link$")
+    public void verifyForgotPasswordLink() throws Throwable {
+        marketingPage.verifyForgotPasswordLink();
+    }
+
+    @Then("^I verify Login button$")
+    public void verifyLoginButton() throws Throwable {
+        marketingPage.verifyLoginButton();
+    }
+
+    @Then("^I redirect to Terms of Service Page$")
+    public void redirectToTermsOfServicePage() throws Throwable {
+        marketingPage.redirectToTermsOfServicePage();
+    }
+
+    @Then("^I should see Terms of Service Header Banner$")
+    public void seeTermsOfServiceHeaderBanner() throws Throwable {
+        marketingPage.seeTermsOfServiceHeaderBanner();
+    }
+
+    @Then("^I should see color of forgot password link is green$")
+    public void seeColorOfForgotPasswordLinkIsGreen() throws Throwable {
+        marketingPage.seeColorOfForgotPasswordLinkIsGreen();
+    }
+
+    @And("^I should see Forgot Password popup title$")
+    public void seeForgotPasswordPopupTitle() throws Throwable {
+        marketingPage.seeForgotPasswordPopupTitle();
+    }
+
+    @And("^I should see Forgot Password popup guide$")
+    public void seeForgotPasswordPopupGuide() throws Throwable {
+        marketingPage.seeForgotPasswordPopupGuide();
+    }
+
+    @And("^I should see Forgot Password popup border$")
+    public void seeForgotPasswordPopupBorder() throws Throwable {
+        marketingPage.seeForgotPasswordPopupBorder();
+    }
+
+    @And("^I should see Forgot Password popup Email label$")
+    public void seeForgotPasswordPopupEmailLabel() throws Throwable {
+        marketingPage.seeForgotPasswordPopupEmailLabel();
+    }
+
+    @And("^I should see Forgot Password popup Email input$")
+    public void seeForgotPasswordPopupEmailInput() throws Throwable {
+        marketingPage.seeForgotPasswordPopupEmailInput();
+    }
+
+    @And("^I should see Forgot Password popup Email input number$")
+    public void seeForgotPasswordPopupEmailInputNumber() throws Throwable {
+        marketingPage.seeForgotPasswordPopupEmailInputNumber();
+    }
+
+    @And("^I should see Forgot Password popup Email input special character$")
+    public void seeForgotPasswordPopupEmailInputSpecialCharacter() throws Throwable {
+        marketingPage.seeForgotPasswordPopupEmailInputSpecialCharacter();
+    }
+
+
     public class User {
         public String email;
         public String password;
