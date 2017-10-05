@@ -76,3 +76,23 @@ Feature: Marketing Feature
     Then I should see Terms of Service link
     Then I should see Privacy Policy link
     Then I should see Cookie Notice link
+
+#  @vietlq
+  Scenario: Marketing Page - About Page - Verify "Highlights of our Weekend Photo Competition" board: AUV-590
+    Given I navigate to Marketing page
+    Then I redirect to About Page
+    Then I verify Highlights of our Weekend Photo Competition title
+    Then I verify display 12 picture on board
+
+#  @vietlq
+  Scenario:Marketing Page - About Page - Verify "View Careers" button: AUV-582
+    Given I navigate to Marketing page
+    Then I redirect to About Page
+    Then I verify text "View careers" and color of text
+    And I click on view careers button
+
+  @vietlq
+  Scenario:Contact page > Verify that Contact page displays after user click on Contact
+    link in footer at the end of the page: AUV-592
+    Given I navigate to Marketing page
+    Then I redirect to Contact Page

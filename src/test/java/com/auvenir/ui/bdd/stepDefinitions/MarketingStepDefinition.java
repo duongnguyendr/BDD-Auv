@@ -243,5 +243,26 @@ public class MarketingStepDefinition extends BaseInit {
     public void verifyInputTextHaveSpace(String arg1) throws Throwable {
         marketingPage.verifyInputPassword(arg1);
     }
+    @Then("^I verify Highlights of our Weekend Photo Competition title$")
+    public void verifyTextHighlightsTitle() throws Throwable {
+       marketingPage.verifyTextTitleHighlights();
+    }
+    @Then("^I verify display (\\d+) picture on board$")
+    public void verifDisplayPictureOnBoard(int arg1) throws Throwable {
+       marketingPage.verifDisplayPictureOnBoard(arg1);
+    }
+    @Then("^I verify text \"([^\"]*)\" and color of text$")
+    public void verifyTextAndColorOfText(String arg1) throws Throwable {
+       marketingPage.verifyTextAndColorOfText(arg1);
+    }
+    @And("^I click on view careers button$")
+    public void clickOnViewCareersButton() throws Throwable {
+        marketingPage.clickOnViewcareersButton();
+    }
+    @Then("^I redirect to Contact Page$")
+    public void redirectToContactPage() throws Throwable {
+        marketingPage.redirectToContactPage();
+
+    }
 
 }

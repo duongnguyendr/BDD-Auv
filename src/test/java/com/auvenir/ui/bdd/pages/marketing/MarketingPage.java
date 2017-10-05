@@ -1,12 +1,15 @@
 package com.auvenir.ui.bdd.pages.marketing;
 
 import com.auvenir.ui.bdd.pages.common.CommonPage;
+import com.sun.jna.platform.unix.X11;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+
+import java.util.List;
 
 /**
  * Created by doai.tran on 8/29/2017.
@@ -91,6 +94,19 @@ public class MarketingPage extends CommonPage {
 
     @FindBy(xpath = "//div[@id='footer']//a[@href='/cookies']")
     private WebElement itemFooterCookieNotice;
+
+    @FindBy(xpath = "//div[@id='about-highlightPhotos']//img")
+    private List<WebElement> listImgHighlight;
+
+    @FindBy(xpath = "//div[@id='about-highlightPhotos']/h2")
+    private WebElement textTitleImgHighlight;
+
+    @FindBy(xpath = "//div[@class='center aligned column']/a")
+    private WebElement textViewcareers;
+
+    @FindBy(xpath = "//div[ @class='contact']")
+    private WebElement headerContact;
+
 
     public static final String borderColor = "border-color";
     public final String selectedBorderCSSColor = "rgb(133, 183, 217)";
@@ -287,5 +303,29 @@ public class MarketingPage extends CommonPage {
     sendKeyTextBox(inputPassword, password, "passwordTextBox");
         Assert.assertEquals(getText(inputPassword),password);
     }
+    public void verifDisplayPictureOnBoard(int numberPicture){
+        Assert.assertEquals(listImgHighlight.size(),numberPicture);
+    }
+    public void verifyTextTitleHighlights(){
+        scrollToElement(textTitleImgHighlight,-300);
+        waitSomeSeconds(2);
+        Assert.assertEquals(textTitleImgHighlight.getText().trim(),"Highlights of our Weekend Photo Competition");
+    }
+    public void verifyTextAndColorOfText(String text){
+        String colorCode="rgba(249, 250, 251, 1)";
+       scrollToElement(textViewcareers,-200);
+        waitSomeSeconds(2);
+        validateElementText(textViewcareers,text);
+        System.out.println("textViewcareers.getCssValue(\"color\") = " + textViewcareers.getCssValue("color"));
+        boolean result= validateCssValueElement(textViewcareers,"color",colorCode);
+        Assert.assertTrue(result,"Verify color of text");
+    }
+    public void clickOnViewcareersButton(){
+        clickElement(textViewcareers,"text View Careers");
+    }
+    public void redirectToContactPage() {
+        clickElement(itemFooterContact, "Item Footer About");
+        waitForVisibleElement(headerContact,"verify header Contact");
 
+    }
 }
