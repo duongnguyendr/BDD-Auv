@@ -119,7 +119,7 @@ Feature: Marketing Feature
     Then I click on forgot password link
     Then I should see Forgot Password popup
 
-  @Run
+#  @Run
   Scenario: Home page- Verify Forgot your password popup: AUV-588
     Given I navigate to Marketing page
     And I click on login link
@@ -145,3 +145,28 @@ Feature: Marketing Feature
     Then I input email forgotten password : "auveniradm01@gmail.com"
     Then I click on Request Reset Link button
     Then I should see Reset Link Sent message
+
+#  @Run
+  Scenario: Home page- Verify Product Features: AUV-589
+    Given I navigate to Marketing page
+    Then I scroll to Product Feartures part
+    Then I should see Spend Less Time, Earn More
+    Then I should see Securely Store Your Documents
+    Then I should see Simplify Your Workﬂow
+    Then I should see Collaborate Better With Your Clients
+    Then I should see Intelligently Allocate Resources
+    Then I should see Seamlessly Import Data
+    Then I should see Customize Branding
+    Then I should see Automated Tools
+
+  @Run
+  Scenario: About Page- Home page- Verify popup UI: AUV-594
+    Given I navigate to Marketing page
+    And I click on login link
+    Then I input Login Email Address: "auveniradm01@gmail.com"
+    Then I should see "auveniradm01@gmail.com" on Email textbox
+    Then I input Login Password: "Changeit@123"
+    Then I should see "12" characters on Password textbox
+    Then I click on login button
+    Then I should see engagement page
+

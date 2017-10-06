@@ -144,6 +144,79 @@ public class MarketingPage extends CommonPage {
     @FindBy(className = "email-sending-title")
     private WebElement titleResetLinkSent;
 
+    @FindBy(xpath = "//img[contains(@src,'time-money.svg')]")
+    private WebElement imageSpendLessTimeEarnMore;
+
+    @FindBy(xpath = "//img[contains(@src,'time-money.svg')]/../../h4")
+    private WebElement titleSpendLessTimeEarnMore;
+
+    @FindBy(xpath = "//img[contains(@src,'time-money.svg')]/../../p")
+    private WebElement textSpendLessTimeEarnMoreDescription;
+
+    @FindBy(xpath = "//img[contains(@src,'locked-cloud.svg')]")
+    private WebElement imageSecurelyStoreYourDocuments;
+
+    @FindBy(xpath = "//img[contains(@src,'locked-cloud.svg')]/../../h4")
+    private WebElement titleSecurelyStoreYourDocuments;
+
+    @FindBy(xpath = "//img[contains(@src,'locked-cloud.svg')]/../../p")
+    private WebElement textSecurelyStoreYourDocumentsDescription;
+
+    @FindBy(xpath = "//img[contains(@src,'clipboard.svg')]")
+    private WebElement imageSimplifyYourWorkﬂow;
+
+    @FindBy(xpath = "//img[contains(@src,'clipboard.svg')]/../../h4")
+    private WebElement titleSimplifyYourWorkﬂow;
+
+    @FindBy(xpath = "//img[contains(@src,'clipboard.svg')]/../../p")
+    private WebElement textSimplifyYourWorkﬂowDescription;
+
+    @FindBy(xpath = "//img[contains(@src,'files-in-folder.svg')]")
+    private WebElement imageCollaborateBetterWithYourClients;
+
+    @FindBy(xpath = "//img[contains(@src,'files-in-folder.svg')]/../../h4")
+    private WebElement titleCollaborateBetterWithYourClients;
+
+    @FindBy(xpath = "//img[contains(@src,'files-in-folder.svg')]/../../p")
+    private WebElement textCollaborateBetterWithYourClientsDescription;
+
+    @FindBy(xpath = "//img[contains(@src,'handshake.svg')]")
+    private WebElement imageIntelligentlyAllocateResources;
+
+    @FindBy(xpath = "//img[contains(@src,'handshake.svg')]/../../h4")
+    private WebElement titleIntelligentlyAllocateResources;
+
+    @FindBy(xpath = "//img[contains(@src,'handshake.svg')]/../../p")
+    private WebElement textIntelligentlyAllocateResourcesDescription;
+
+    @FindBy(xpath = "//img[contains(@src,'download-cloud.svg')]")
+    private WebElement imageSeamlesslyImportData;
+
+    @FindBy(xpath = "//img[contains(@src,'download-cloud.svg')]/../../h4")
+    private WebElement titleSeamlesslyImportData;
+
+    @FindBy(xpath = "//img[contains(@src,'download-cloud.svg')]/../../p")
+    private WebElement textSeamlesslyImportDataDescription;
+
+    @FindBy(xpath = "//img[contains(@src,'laptop.svg')]")
+    private WebElement imageCustomizeBranding;
+
+    @FindBy(xpath = "//img[contains(@src,'laptop.svg')]/../../h4")
+    private WebElement titleCustomizeBranding;
+
+    @FindBy(xpath = "//img[contains(@src,'laptop.svg')]/../../p")
+    private WebElement textCustomizeBrandingDescription;
+
+    @FindBy(xpath = "//img[contains(@src,'gears.svg')]")
+    private WebElement imageAutomatedTools;
+
+    @FindBy(xpath = "//img[contains(@src,'gears.svg')]/../../h4")
+    private WebElement titleAutomatedTools;
+
+    @FindBy(xpath = "//img[contains(@src,'gears.svg')]/../../p")
+    private WebElement textAutomatedToolsDescription;
+
+
     public static final String borderColorCSSName = "border-color";
     public final String colorCSSName = "color";
 
@@ -483,4 +556,107 @@ public class MarketingPage extends CommonPage {
         boolean result = validateExistedElement(titleResetLinkSent, "Title Reset Link Sent");
         Assert.assertTrue(result, "Title Reset Link Sent should be exist");
     }
+
+    public void scrollToProductFearturesPart() {
+        scrollPageDown();
+        scrollPageDown();
+    }
+
+    public void seeSpendLessTimeEarnMore() {
+        boolean result = validateExistedElement(imageSpendLessTimeEarnMore, "Image Spend Less Time Earn More");
+        Assert.assertTrue(result, "Image Spend Less Time Earn More should be exist");
+        result = validateExistedElement(titleSpendLessTimeEarnMore, "Title Spend Less Time Earn More");
+        Assert.assertTrue(result, "Title Spend Less Time Earn More should be exist");
+        result = validateExistedElement(textSpendLessTimeEarnMoreDescription, "Description Spend Less Time Earn More");
+        Assert.assertTrue(result, "Description Spend Less Time Earn More should be exist");
+    }
+
+    public void seeSecurelyStoreYourDocuments() {
+        boolean result = validateExistedElement(imageSecurelyStoreYourDocuments, "Image Securely Store Your Documents");
+        Assert.assertTrue(result, "Image Securely Store Your Documents should be exist");
+        result = validateExistedElement(titleSecurelyStoreYourDocuments, "Title Securely Store Your Documents");
+        Assert.assertTrue(result, "Title Securely Store Your Documents should be exist");
+        result = validateExistedElement(textSecurelyStoreYourDocumentsDescription,
+                "Description Securely Store Your Documents");
+        Assert.assertTrue(result, "Description Securely Store Your Documents should be exist");
+    }
+
+    public void seeSimplifyYourWorkﬂow() {
+        boolean result = validateExistedElement(imageSimplifyYourWorkﬂow, "Image Simplify Your Workﬂow");
+        Assert.assertTrue(result, "Image Simplify Your Workﬂow should be exist");
+        result = validateExistedElement(titleSimplifyYourWorkﬂow, "Title Simplify Your Workﬂow");
+        Assert.assertTrue(result, "Title Simplify Your Workﬂow should be exist");
+        result = validateExistedElement(textSimplifyYourWorkﬂowDescription, "Description Simplify Your Workﬂow");
+        Assert.assertTrue(result, "Description Simplify Your Workﬂow should be exist");
+    }
+
+    public void seeCollaborateBetterWithYourClients() {
+        boolean result = validateExistedElement(imageCollaborateBetterWithYourClients,
+                "Image Collaborate Better With Your Clients");
+        Assert.assertTrue(result, "Image Collaborate Better With Your Clients should be exist");
+        result = validateExistedElement(titleCollaborateBetterWithYourClients,
+                "Title Collaborate Better With Your Clients");
+        Assert.assertTrue(result, "Title Collaborate Better With Your Clients should be exist");
+        result = validateExistedElement(textCollaborateBetterWithYourClientsDescription,
+                "Description Collaborate Better With Your Clients");
+        Assert.assertTrue(result, "Description Collaborate Better With Your Clients should be exist");
+    }
+
+    public void seeIntelligentlyAllocateResources() {
+        boolean result = validateExistedElement(imageIntelligentlyAllocateResources,
+                "Image Intelligently Allocate Resources");
+        Assert.assertTrue(result, "Image Intelligently Allocate Resources should be exist");
+        result = validateExistedElement(titleIntelligentlyAllocateResources, "Title Intelligently Allocate Resources");
+        Assert.assertTrue(result, "Title Intelligently Allocate Resources should be exist");
+        result = validateExistedElement(textIntelligentlyAllocateResourcesDescription,
+                "Description Intelligently Allocate Resources");
+        Assert.assertTrue(result, "Description Intelligently Allocate Resources should be exist");
+    }
+
+    public void seeSeamlesslyImportData() {
+        boolean result = validateExistedElement(imageSeamlesslyImportData, "Image Seamlessly Import Data");
+        Assert.assertTrue(result, "Image Seamlessly Import Data should be exist");
+        result = validateExistedElement(titleSeamlesslyImportData, "Title Seamlessly Import Data");
+        Assert.assertTrue(result, "Title Seamlessly Import Data should be exist");
+        result = validateExistedElement(textSeamlesslyImportDataDescription, "Description Seamlessly Import Data");
+        Assert.assertTrue(result, "Description Seamlessly Import Data should be exist");
+    }
+
+    public void seeCustomizeBranding() {
+        boolean result = validateExistedElement(imageCustomizeBranding, "Image Customize Branding");
+        Assert.assertTrue(result, "Image Customize Branding should be exist");
+        result = validateExistedElement(titleCustomizeBranding, "Title Customize Branding");
+        Assert.assertTrue(result, "Title Customize Branding should be exist");
+        result = validateExistedElement(textCustomizeBrandingDescription, "Description Customize Branding");
+        Assert.assertTrue(result, "Description Customize Branding should be exist");
+    }
+
+    public void seeAutomatedTools() {
+        boolean result = validateExistedElement(imageAutomatedTools, "Image Automated Tools");
+        Assert.assertTrue(result, "Image Automated Tools should be exist");
+        result = validateExistedElement(titleAutomatedTools, "Title Automated Tools");
+        Assert.assertTrue(result, "Title Automated Tools should be exist");
+        result = validateExistedElement(textAutomatedToolsDescription, "Description Automated Tools");
+        Assert.assertTrue(result, "Description Automated Tools should be exist");
+    }
+
+    public void inputLoginEmailAddress(String email) {
+        sendKeyTextBox(inputEmail, email, "Input Email");
+    }
+
+    public void seeOnEmailTextbox(String email) {
+        Assert.assertEquals(getText(inputEmail), email);
+    }
+
+    public void inputLoginPassword(String password) {
+        sendKeyTextBox(inputPassword, password, "Input Password");
+    }
+
+    public void seeCharactersOnPasswordTextbox(String password) {
+        Assert.assertEquals(getText(inputPassword).length(), (int) Integer.valueOf(password));
+    }
+
+
+    //    scrollToElement(aboutJoinUs, -200);
+    //    waitSomeSeconds(2);
 }

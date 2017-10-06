@@ -274,6 +274,70 @@ public class MarketingStepDefinition extends BaseInit {
         marketingPage.seeResetLinkSentMessage();
     }
 
+    @Then("^I scroll to Product Feartures part$")
+    public void scrollToProductFearturesPart() throws Throwable {
+        marketingPage.scrollToProductFearturesPart();
+    }
+
+    @Then("^I should see Spend Less Time, Earn More$")
+    public void seeSpendLessTimeEarnMore() throws Throwable {
+        marketingPage.seeSpendLessTimeEarnMore();
+    }
+
+    @Then("^I should see Securely Store Your Documents$")
+    public void seeSecurelyStoreYourDocuments() throws Throwable {
+        marketingPage.seeSecurelyStoreYourDocuments();
+    }
+
+    @Then("^I should see Simplify Your Workﬂow$")
+    public void seeSimplifyYourWorkﬂow() throws Throwable {
+        marketingPage.seeSimplifyYourWorkﬂow();
+    }
+
+    @Then("^I should see Collaborate Better With Your Clients$")
+    public void seeCollaborateBetterWithYourClients() throws Throwable {
+        marketingPage.seeCollaborateBetterWithYourClients();
+    }
+
+    @Then("^I should see Intelligently Allocate Resources$")
+    public void seeIntelligentlyAllocateResources() throws Throwable {
+        marketingPage.seeIntelligentlyAllocateResources();
+    }
+
+    @Then("^I should see Seamlessly Import Data$")
+    public void seeSeamlesslyImportData() throws Throwable {
+        marketingPage.seeSeamlesslyImportData();
+    }
+
+    @Then("^I should see Customize Branding$")
+    public void seeCustomizeBranding() throws Throwable {
+        marketingPage.seeCustomizeBranding();
+    }
+
+    @Then("^I should see Automated Tools$")
+    public void seeAutomatedTools() throws Throwable {
+        marketingPage.seeAutomatedTools();
+    }
+
+    @Then("^I input Login Email Address: \"([^\"]*)\"$")
+    public void inputLoginEmailAddress(String email) throws Throwable {
+        marketingPage.inputLoginEmailAddress(email);
+    }
+
+    @Then("^I should see \"([^\"]*)\" on Email textbox$")
+    public void seeOnEmailTextbox(String email) throws Throwable {
+        marketingPage.seeOnEmailTextbox(email);
+    }
+
+    @Then("^I input Login Password: \"([^\"]*)\"$")
+    public void inputLoginPassword(String password) throws Throwable {
+        marketingPage.inputLoginPassword(password);
+    }
+
+    @Then("^I should see \"([^\"]*)\" characters on Password textbox$")
+    public void seeCharactersOnPasswordTextbox(String password) throws Throwable {
+        marketingPage.seeCharactersOnPasswordTextbox(password);
+    }
 
     public class User {
         public String email;
