@@ -3,7 +3,8 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.common.GeneralUtilities;
 import com.auvenir.ui.bdd.common.Generic;
-import com.auvenir.ui.bdd.pages.mail.SquirrelMailPage;
+import com.auvenir.ui.bdd.pages.mail.MailPage;
+import com.auvenir.ui.bdd.pages.mail.SquirrelMail;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -19,12 +20,17 @@ public class GeneralStepDefinition extends BaseInit {
     private BaseInit base;
 
     private MarketingPage marketingPage;
-    private SquirrelMailPage squirrelMailPage;
+    private MailPage mailPage;
+    private SquirrelMail squirrelMailPage;
+
 
     public GeneralStepDefinition(BaseInit base) {
         this.base = base;
         marketingPage = new MarketingPage(logger, driver);
-        squirrelMailPage = new SquirrelMailPage(logger, driver);
+        squirrelMailPage = new SquirrelMail(logger, driver);
+
+        //squirrelMailPage = new SquirrelMailPage(logger,driver);
+
     }
 
     @Given("^I navigate to Marketing page$")
@@ -48,5 +54,19 @@ public class GeneralStepDefinition extends BaseInit {
             GeneralUtilities.verifyDownloadFileSuccessAndChecksum(fileName);
         }
     }
+
+    @Given("^I Check email function work$")
+    public void checkEmailFunctionWork() throws Throwable {
+        String email = "general.clientthuan";
+        String password = "Changeit@123";
+        mailPage = new MailPage(logger, driver, email);
+        mailPage.goEMail();
+        mailPage.signInEmail(email,password);
+        mailPage.selectActiveEmail();
+        mailPage.navigateToConfirmationLink();
+
+    }
+
+
 
 }
