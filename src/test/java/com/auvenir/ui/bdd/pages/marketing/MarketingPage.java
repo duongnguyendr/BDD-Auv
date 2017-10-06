@@ -365,7 +365,8 @@ public class MarketingPage extends CommonPage {
     }
     public void redirectToContactPage() {
         clickElement(itemFooterContact, "Item Footer About");
-        waitForVisibleElement(headerContact,"verify header Contact");
+        waitForVisibleElement(headerContact, "verify header Contact");
+    }
 
 
     public void seeFacebookIcon() {
