@@ -90,7 +90,7 @@ Feature: Marketing Feature
     Then I should see Meet The Auvy League content: "12" members
 
 #  @Run
-  Scenario: About Page - Home page- Verify popup UI: AUV-563
+  Scenario: Home page- Verify popup UI: AUV-563
     Given I navigate to Marketing page
     And I click on login link
     Then I verify Email label
@@ -159,8 +159,8 @@ Feature: Marketing Feature
     Then I should see Customize Branding
     Then I should see Automated Tools
 
-  @Run
-  Scenario: About Page- Home page- Verify popup UI: AUV-594
+#  @Run
+  Scenario: Home page- Verify popup UI: AUV-594
     Given I navigate to Marketing page
     And I click on login link
     Then I input Login Email Address: "auveniradm01@gmail.com"
@@ -170,3 +170,20 @@ Feature: Marketing Feature
     Then I click on login button
     Then I should see engagement page
 
+  @Run
+  Scenario: About Page- Verify Footer: AUV-598
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to About Page
+    Then I scroll to footer
+    Then I scroll down
+    Then I should see Home link
+    Then I should see About link
+    Then I should see Contact link
+    Then I should see Terms of Service link
+    Then I should see Privacy Policy link
+    Then I should see Cookie Notice link
+    Then I should see Facebook icon
+    Then I should see Twitter icon
+    Then I should see Linkedin icon
+    Then I should see Copyright title

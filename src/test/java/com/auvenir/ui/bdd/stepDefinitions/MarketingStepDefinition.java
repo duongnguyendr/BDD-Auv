@@ -3,7 +3,6 @@ package com.auvenir.ui.bdd.stepDefinitions;
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.marketing.MarketingPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
@@ -77,6 +76,11 @@ public class MarketingStepDefinition extends BaseInit {
     @Then("^I scroll to footer$")
     public void scrollToFooter() throws Throwable {
         marketingPage.scrollToFooter();
+    }
+
+    @Then("^I scroll down$")
+    public void scrollDown() throws Throwable {
+        marketingPage.scrollPageDown();
     }
 
     @Then("^I redirect to About Page$")
