@@ -157,7 +157,7 @@ public class Gmail extends AbstracEmail {
         Thread.sleep(3000);
     }
 
-    public void reSignInEmail(String email,String password) throws Exception {
+    public void reSignInEmail(String password) throws Exception {
         Thread.sleep(1000);
         elePassword.sendKeys(password);
         logger.info("Send password: " + password);

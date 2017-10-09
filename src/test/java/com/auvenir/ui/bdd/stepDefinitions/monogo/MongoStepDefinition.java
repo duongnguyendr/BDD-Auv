@@ -76,4 +76,10 @@ public class MongoStepDefinition {
         // Write code here that turns the phrase above into concrete actions
         MongoDBService.removeUserByEmail( email);
     }
+
+    @And("^Delete user role mapping by email: \"([^\"]*)\"$")
+    public void deleteUserRoleMappingByEmail(String email) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        MongoDBService.removeUserRoleMappingByEmail(email);
+    }
 }

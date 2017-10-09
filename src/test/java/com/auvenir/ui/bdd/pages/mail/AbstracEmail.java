@@ -16,7 +16,7 @@ public abstract class AbstracEmail extends CommonPage {
     public abstract void clickGetStartedButton();
     public abstract void emailLogout()throws Exception;
     public abstract void navigateToConfirmationLink()throws Exception;
-    public abstract void reSignInEmail(String email,String password)throws Exception ;
+    public abstract void reSignInEmail(String password)throws Exception ;
     public abstract void deleteAllExistedEmail(String email, String ePassword) throws Exception;
 
 }

@@ -1101,4 +1101,33 @@ public class MongoDBService {
             e.printStackTrace();
         }
     }
+
+    public static void removeUserRoleMappingByEmail(String email) {
+        String objectId;
+        int count = 0;
+        try {
+            DBCollection dBCollection = getCollection("userRoleMapping");
+            objectId = getObjectIdOfEmailUser(email);
+            if (objectId != null) {
+                BasicDBObject searchQuery = new BasicDBObject();
+                searchQuery.put("userID", new ObjectId(objectId));
+                DBCursor curs = dBCollection.find(searchQuery);
+                while (curs.hasNext()) {
+                    DBObject dBbject = curs.next();
+                    dBCollection.remove(dBbject);
+                    count++;
+                }
+            }
+            if (count == 0) {
+                System.out.println(String.format(
+                        "User Role Mapping record integrated with User email '%s' is not exist on database.",
+                        email));
+            } else
+                System.out.println("Deleted User Role Mapping record successfully.");
+        } catch (NoSuchElementException ex) {
+            System.out.println("This User Role Mapping record not exist on database: " + ex.toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

@@ -20,6 +20,7 @@ public class ClientSignUpPage extends CommonPage {
     private WebElement titleWelcome;
 
     @FindBy(id = "welcome-continueBtn")
+//    @FindBy(id = "//button[@class='ui button auvbtn primary active']")
     private WebElement buttonWelcomeContinue;
 
     @FindBy(xpath = "//div[@id='onboarding-personal-container']//h2")
@@ -32,7 +33,8 @@ public class ClientSignUpPage extends CommonPage {
     @FindBy(xpath = "//div[@id='icheckbox']")
     private WebElement checkboxAgreementPersonal;
 
-    @FindBy(id = "personal-continueBtn")
+//    @FindBy(id = "personal-continueBtn")
+    @FindBy(xpath = "//div[@id='personal-react-holder']//button[@class='ui button auvbtn primary active']")
     private WebElement buttonPersonalContinue;
 
     @FindBy(xpath = "//div[@id='onboarding-business-container']//h2")
@@ -61,7 +63,8 @@ public class ClientSignUpPage extends CommonPage {
     @FindBy(xpath = "//div[@class='field business-smallerInput']//div[@role='option']")
     private List<WebElement> listOptionAccountingFramework;
 
-    @FindBy(id = "onboard-business-continue")
+//    @FindBy(id = "onboard-business-continue")
+    @FindBy(xpath = "//div[@id='business-react-holder']//button[@class='ui button auvbtn primary active']")
     private WebElement buttonBusinessContinue;
 
     @FindBy(xpath = "//div[@id='onboarding-bank-container']//h3")
@@ -85,7 +88,8 @@ public class ClientSignUpPage extends CommonPage {
     @FindBy(name = "retype_password")
     private WebElement inputConfirmPassword;
 
-    @FindBy(id = "security-continueBtn")
+//    @FindBy(id = "security-continueBtn")
+    @FindBy(xpath = "//div[@id='security-react-holder']//button[@class='ui button auvbtn primary active']")
     private WebElement buttonSecurityContinue;
 
     @FindBy(xpath = "//div[@class='ui checkbox']")

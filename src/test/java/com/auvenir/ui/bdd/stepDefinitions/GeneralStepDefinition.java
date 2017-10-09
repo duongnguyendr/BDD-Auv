@@ -55,17 +55,17 @@ public class GeneralStepDefinition extends BaseInit {
         }
     }
 
-    @Given("^I Check email function work$")
-    public void checkEmailFunctionWork() throws Throwable {
-        String email = "general.clientthuan";
-        String password = "Changeit@123";
-        mailPage = new MailPage(logger, driver, email);
-        mailPage.goEMail();
-        mailPage.signInEmail(email,password);
-        mailPage.selectActiveEmail();
-        mailPage.navigateToConfirmationLink();
-
-    }
+//    @Given("^I Check email function work$")
+//    public void checkEmailFunctionWork() throws Throwable {
+//        String email = "general.clientthuan";
+//        String password = "Changeit@123";
+//        mailPage = new MailPage(logger, driver, email);
+//        mailPage.goEMail();
+//        mailPage.signInEmail(email,password);
+//        mailPage.selectActiveEmail();
+//        mailPage.navigateToConfirmationLink();
+//
+//    }
 
 
 

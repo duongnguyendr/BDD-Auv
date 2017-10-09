@@ -228,7 +228,10 @@ public class TeamPage extends CommonPage {
     }
 
     public void verifyNotExistsInTeamMemberList(String memberName) throws InterruptedException {
-        waitForVisibleElement(eleEmptyTeamImage,"Empty team image");
+//        waitForVisibleElement(eleEmptyTeamImage,"Empty team image");
+        System.out.println("The number of Team member after removing is: " + listTeamMember.size());
+        int isCheck = findMemberByName(memberName);
+        Assert.assertTrue(isCheck == -1, String.format("'%s' is not exists in Team Member List"));
     }
 
     public void clickOnCheckBoxMemberName(String memberName){

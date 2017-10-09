@@ -199,7 +199,8 @@ public class AuditorSignUpPage extends CommonPage {
     //    @FindBy(xpath = "//input[@id='second-password']")
     private WebElement eleConfirmPass;
 
-    @FindBy(xpath = "//button[@id='security-continueBtn']")
+//    @FindBy(xpath = "//button[@id='security-continueBtn']")
+    @FindBy(xpath = "//div[@id='security-react-holder']//button[@class='ui button auvbtn primary active']")
     private WebElement createAccountBtnEle;
 
     @FindBy(xpath = "//*[@id='personal-phoneNumber']")
@@ -214,7 +215,8 @@ public class AuditorSignUpPage extends CommonPage {
     @FindBy(xpath = "//*[@id='personal-referral']/../ul")
     private WebElement referalDropdownPopupEle;
 
-    @FindBy(xpath = "//button[@id='personal-continueBtn']")
+//    @FindBy(xpath = "//button[@id='personal-continueBtn']")
+    @FindBy(xpath = "//div[@id='personal-react-holder']//button[@class='ui button auvbtn primary active']")
     private WebElement continuePerConfirmBtnEle;
 
     @FindBy(xpath = "//div[@id='personal-referral']//div[@class='text']")
@@ -229,7 +231,8 @@ public class AuditorSignUpPage extends CommonPage {
     @FindBy(xpath = "//*[@id='onboarding-firm-container']/div//h2")
     private WebElement firmHeaderTxtEle;
 
-    @FindBy(xpath = "//button[@id='onboard-firm-continue']")
+//    @FindBy(xpath = "//button[@id='onboard-firm-continue']")
+    @FindBy(xpath = "//div[@id='firm-react-holder']//button[@class='ui button auvbtn primary active']")
     private WebElement continueFirmConfirmBtnEle;
 
     /**

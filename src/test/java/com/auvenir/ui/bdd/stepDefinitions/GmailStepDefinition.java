@@ -2,6 +2,7 @@ package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
 import com.auvenir.ui.bdd.pages.mail.Gmail;
+import com.auvenir.ui.bdd.pages.mail.MailPage;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -16,23 +17,29 @@ import java.util.List;
 public class GmailStepDefinition extends BaseInit {
     private static Logger logger = Logger.getLogger(GmailStepDefinition.class.getSimpleName());
     private BaseInit base;
-    Gmail mailPage;
+    MailPage mailPage;
 
     public GmailStepDefinition(BaseInit base) {
         this.base = base;
-        mailPage = new Gmail(logger, driver);
+        mailPage = new MailPage(logger, driver);
     }
 
     @Given("^I navigate to GMail login page$")
-    public void iNavigateToGMailLoginPage() throws Throwable {
+    public void navigateToGMailLoginPage() throws Throwable {
         logger.info("===== I navigate to gmail login page =====");
-       // mailPage.goGMail();
+        mailPage.goEMail("Gmail");
     }
 
-    @And("^I sign In GMail$")
-    public void iSignInGMail(DataTable table) throws Throwable {
+    @Given("^I navigate to SquirrelMail login page$")
+    public void navigateToSquirrelMailLoginPage() throws Throwable {
+        logger.info("===== I navigate to gmail login page =====");
+        mailPage.goEMail("SquirrelMail");
+    }
+
+    @And("^I sign In Email$")
+    public void iSignInEMail(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        logger.info("===== I signIn GMail =====");
+        logger.info("===== I signIn EMail =====");
         table.asMap(String.class, String.class);
         List<MarketingStepDefinition.User> users = new ArrayList<MarketingStepDefinition.User>();
         users = table.asList(MarketingStepDefinition.User.class);
@@ -40,7 +47,6 @@ public class GmailStepDefinition extends BaseInit {
             System.out.println("The Email is: " + user.email);
             System.out.println("The Password is: " + user.password);
             mailPage.signInEmail(user.email, user.password);
-
         }
     }
 
@@ -59,7 +65,7 @@ public class GmailStepDefinition extends BaseInit {
     }
 
     @Given("^I delete existed email$")
-    public void iDeleteExistedEmail(DataTable table) throws Throwable {
+    public void deleteExistedEmail(DataTable table) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("===== I delete existed email =====");
 
@@ -77,8 +83,8 @@ public class GmailStepDefinition extends BaseInit {
     public void iReloginGmail(String password) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         logger.info("I relogin gmail");
-       // mailPage.goGMail("Gmail");
-     //   mailPage.reSignInGmail(password);
+//        mailPage.goEMail();
+        mailPage.reSignInEmail(password);
     }
 
     @And("^I click on onboarding invitation link$")

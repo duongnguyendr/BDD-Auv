@@ -9,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.concurrent.TimeUnit;
 
 public class SquirrelMail extends AbstracEmail {
-    private static Logger logger = Logger.getLogger(Gmail.class.getSimpleName());
+    private static Logger logger = Logger.getLogger(SquirrelMail.class.getSimpleName());
+    private String email;
 
     public SquirrelMail(Logger logger, WebDriver driver) {
         super(logger, driver);
@@ -34,7 +35,7 @@ public class SquirrelMail extends AbstracEmail {
     private WebElement eleReSignOutBtn;
     @FindBy(xpath = "//a[@class='loginButton']")
     private WebElement  eleGetStarted;
-    @FindBy(xpath = "//a[@title='Invitation from Lead C to participate in an engagement on the Auvenir Platform']")
+    @FindBy(xpath = "//label/b[text()='andi@auvenir.com']/../../..//a")
     private WebElement eleEmailAuvenir;
     @FindBy(xpath = "(//frame[@frameborder='1'])[2]")
     private WebElement frameRight;
@@ -44,7 +45,11 @@ public class SquirrelMail extends AbstracEmail {
     @FindBy(xpath = "//b[text()='THIS FOLDER IS EMPTY']")
     private WebElement checkNullEmail;
 
-
+    public String emailConcat(String email) {
+        String emailConcat;
+        System.out.println("Concat email: " + email.split("@")[0]);
+        return emailConcat = email.split("@")[0];
+    }
 
     public void clickOnboardingInvitationLink() {
         try {
@@ -80,6 +85,7 @@ public class SquirrelMail extends AbstracEmail {
     }
 
     public void goEMail() {
+        System.out.println("Navigate to Squirrel Mail.");
         getDriver().get(Generic.getConfigValue(Generic.PROPERTIES_FILE, "MAIL_URL"));
         getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         getDriver().manage().window().maximize();
@@ -87,12 +93,12 @@ public class SquirrelMail extends AbstracEmail {
 
     public void signInEmail(String email, String password) {
         logger.info("Try to login Email");
-        if (!getDriver().getCurrentUrl().contains("accounts.google.com")) {
-          // clickElement(signButtonEle, "signButtonEle");
-        }
+//        if (!getDriver().getCurrentUrl().contains("accounts.google.com")) {
+//          // clickElement(signButtonEle, "signButtonEle");
+//        }
         if (!email.isEmpty()) {
-            sendKeyTextBox(eleEmail, email, "eleEmail");
-            logger.info("Send email: " + email);
+            sendKeyTextBox(eleEmail, emailConcat(email), "eleEmail");
+            logger.info("Send email: " + emailConcat(email));
         }
         sendKeyTextBox(elePassword, password, "password");
         logger.info("Send password: " + password);
@@ -100,9 +106,8 @@ public class SquirrelMail extends AbstracEmail {
         clickElement(eleLogin, "click to Login");
         switchToFrame(frameRight);
         waitForVisibleElement(composeBtn,"compose button");
-
+        this.email = email;
         logger.info("DONE => LOGIN");
-
     }
     public void deleteAllMail() throws Exception {
         //waitForVisibleElement(composeBtn, "composeBtn");
@@ -111,8 +116,8 @@ public class SquirrelMail extends AbstracEmail {
         waitSomeSeconds(2);
         logger.info("Select all Delete mail: ");
         //switchToFrame(frameRight);
-        if (!checkNullEmail.isDisplayed()){
-            clickElement(allMailCheckBox,"all Mail CheckBox");
+        if (!validateNotExistedElement(allMailCheckBox,"Check All Email")){
+//            clickElement(allMailCheckBox,"all Mail CheckBox");
             Thread.sleep(200);
             logger.info("Click Delete All Email.");
             deleteBTN.click();
@@ -133,11 +138,11 @@ public class SquirrelMail extends AbstracEmail {
         clickElement(eleSignOutBtn, "click to eleSignOutBtn");
        waitSomeSeconds(2);
     }
-    public void reSignInEmail(String Email,String password) throws Exception{
+    public void reSignInEmail(String password) throws Exception{
         Thread.sleep(1000);
-       // clickElement(eleReSignOutBtn,"Click re-sign out button");
+//        clickElement(eleReSignOutBtn,"Click re-sign out button");
         goEMail();
-        signInEmail(Email,password);
+        signInEmail(this.email,password);
         logger.info("DONE => LOGIN");
     }
 }

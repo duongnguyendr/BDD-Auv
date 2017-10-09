@@ -8,7 +8,9 @@ import org.openqa.selenium.WebDriver;
  * Created by huy.huynh on 28/09/2017.
  */
 public class MailPage extends CommonPage {
+    private static Logger logger = Logger.getLogger(MailPage.class.getSimpleName());
     private AbstracEmail mail;
+    private String typeEmailClass = "";
 
     public MailPage(Logger logger, WebDriver driver, String email) {
         super(logger, driver);
@@ -19,18 +21,41 @@ public class MailPage extends CommonPage {
         }
     }
 
+    public MailPage(Logger logger, WebDriver driver) {
+        super(logger, driver);
+    }
+
     public void signInEmail(String email, String password) {
         this.mail.signInEmail(email, password);
     }
-    public void goEMail (){
-        this.mail.goEMail();
+    public void goEMail (String typeEmail){
+        System.out.println("Gooo Email");
+        if(typeEmailClass.equals("")) {
+            if(typeEmail == "Gmail") {
+                this.mail = new Gmail(logger, getDriver());
+            } else if (typeEmail == "SquirrelMail") {
+                this.mail = new SquirrelMail(logger, getDriver());
+            }
+            typeEmailClass = typeEmail;
+            this.mail.goEMail();
+        }
     }
     public void clickOnboardingInvitationLink(){
         this.mail.clickOnboardingInvitationLink();
     }
 
     public void deleteAllExistedEmail(String email, String password) throws Exception {
-        this.mail.deleteAllExistedEmail(email, password);
+        System.out.println("Delete all existed email");
+        if(typeEmailClass.equals("")) {
+            if(email.contains("gmail")) {
+                this.mail = new Gmail(logger, getDriver());
+                typeEmailClass = "Gmail";
+            } else if (email.contains("vietnam-software.org")) {
+                this.mail = new SquirrelMail(logger, getDriver());
+                typeEmailClass = "SquirrelMail";
+            }
+            this.mail.deleteAllExistedEmail(email, password);
+        }
     }
     public void selectActiveEmail(){
         this.mail.selectActiveEmail();
@@ -38,8 +63,9 @@ public class MailPage extends CommonPage {
     public void clickGetStartedButton(){
         this.mail.clickGetStartedButton();
     }
-    public void reSignInEmail(String email, String password)throws Exception{
-        this.mail.reSignInEmail(email,password);
+    public void reSignInEmail(String password)throws Exception{
+        this.mail.goEMail();
+        this.mail.reSignInEmail(password);
     }
     public void emailLogout()throws Exception{
         this.mail.emailLogout();
