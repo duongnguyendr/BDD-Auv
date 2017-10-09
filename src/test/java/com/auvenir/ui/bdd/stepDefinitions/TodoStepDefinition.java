@@ -332,7 +332,7 @@ public class TodoStepDefinition extends BaseInit {
             String[] requestNames = todoAndRequestName.get(1).split(",");
             for (String requestName : requestNames) {
                 boolean isFind = todoPage.verifyExistedRequestName(requestName);
-                Assert.assertTrue(isFind,"Can see request name");
+                Assert.assertTrue(isFind,"Should see request name: " + requestName);
             }
             todoPage.closeAddNewRequestWindow();
         }

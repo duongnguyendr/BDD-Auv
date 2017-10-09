@@ -267,38 +267,27 @@ public class TodoDetailsPage extends CommonPage {
         return result;
 
     }
-    public void verifyCommentUnknowType(String typeComment,String commentContent,String userInput){
+    public void verifyCommentUnknowType(String commentContent, String userInput){
         logger.info("verify Comment Unknow Type Input");
-        if (("input").equals(typeComment.trim().toLowerCase())){
-            logger.info("compare with type input text :: "+commentContent);
-            boolean result = validateElementText(listCommentItem.get(listCommentItem.size() - 1), commentContent);
-            Assert.assertTrue(result, "Comment should be displayed on list comment.");
-            verifyUserCommentDisplayedCorrectly(commentContent,userInput);
-
-        }else {
-            // compare with type input have  attachment
-            logger.info("compare with type input have  attachment "+commentContent);
-            verifyCommentFilesDisplayedCorrectly(commentContent);
-            verifyUserCommentDisplayedCorrectly(commentContent,userInput);
-
-        }
+        verifyCommentDisplayedCorrectly(commentContent);
+        verifyUserCommentDisplayedCorrectly(commentContent,userInput);
     }
 
-    public int findCommentFile(String fileName) {
-        logger.info("findCommentFile .."+fileName);
+    public int findCommentsOfUser(String userComments) {
+        logger.info("findCommentFile .." + userComments);
         int isFind = -1;
-        for (int i = 0; i < commentFilesName.size(); i++) {
-            System.out.println("Comment file name at position: " + i + " is " + commentFilesName.get(i).getText());
-            if (commentFilesName.get(i).getText().equals(fileName)) {
+        for (int i = 0; i < listCommentItem.size(); i++) {
+            System.out.println("Comment file name at position: " + i + " is " + listCommentItem.get(i).getText());
+            if (listCommentItem.get(i).getText().equals(userComments)) {
                 isFind = i;
                 break;
             }
         }
         return isFind;
     }
-    public void verifyCommentFilesDisplayedCorrectly(String fileName) {
-        logger.info("Verifying this file '%s' existed in the list. : " +fileName);
-            int isFind = findCommentFile(fileName);
+    public void verifyCommentDisplayedCorrectly(String userComments) {
+        logger.info(String.format("Verifying this file '%s' existed in the list. : ", userComments));
+            int isFind = findCommentsOfUser(userComments);
             Assert.assertNotEquals(isFind,-1);
 
     }

@@ -42,7 +42,7 @@ public class KeyWord {
     //        return logger;
     //    }
 
-    public static final int waitTime = 15;
+    public static final int waitTime = 30;
     public static final int smallTimeOut = 1000;
 
     public enum Element_Type {
@@ -348,6 +348,7 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void clickElement(WebElement element, String elementName) {
         logger.info("+++ Click on Element: " + elementName);
+        waitForVisibleElement(element, elementName);
         waitForClickableOfElement(element, elementName);
         element.click();
 
@@ -418,9 +419,8 @@ Method to wait Ajax function on Site be loaded successfully.
      */
     public void sendKeyTextBox(WebElement element, String text, String elementName) {
         logger.info("+++ SendKey on : " + elementName);
-        waitForClickableOfElement(element, "wait for click to " + elementName);
+        waitForVisibleElement(element, elementName);
         element.clear();
-        waitForClickableOfElement(element, "wait for click to " + elementName);
         element.sendKeys(text);
     }
 
@@ -1129,6 +1129,7 @@ Method to wait Ajax function on Site be loaded successfully.
         logger.info("Scroll down to see page footer.");
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        waitSomeSeconds(2);
     }
     public void scrollToElement(WebElement element){
         Point hoverItem =element.getLocation();

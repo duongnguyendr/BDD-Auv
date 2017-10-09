@@ -23,7 +23,7 @@ public class EngagementPage extends CommonPage {
 
     // Old version
     //    @FindBy(xpath = "//div[@id='cpa-main']/div")
-    @FindBy(xpath = "//tbody[@id='engagement-tbody']//td/p")
+    @FindBy(xpath = "//tbody[@id='engagement-tbody']/tr/td[2]")
     protected List<WebElement> engagementListEle;
 
     @FindBy(id = "c-header-title")
@@ -32,7 +32,7 @@ public class EngagementPage extends CommonPage {
     @FindBy(id = "newAuditBtn")
     protected WebElement buttonNewEngagement;
 
-    @FindBy(xpath = "//table[@id='engagement-table']/tbody/tr/td[@class='engagement-name']/p")
+    @FindBy(xpath = "//table[@id='engagement-table']/tbody/tr/td[@class='engagement-name']")
     private List<WebElement> eleEngagementNameList;
 
     public EngagementPage(Logger logger, WebDriver driver) {

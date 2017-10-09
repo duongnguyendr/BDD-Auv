@@ -122,7 +122,7 @@ public class AuditorDetailsEngagementPage extends DetailsEngagementPage {
     private WebElement selectOptionInviteClient;
 
     public void verifyInviteYourClientPage() {
-        waitSomeSeconds(1);
+        waitSomeSeconds(2);
         boolean result = validateElementText(titleInviteClient, "Invite Your Client");
         Assert.assertTrue(result);
     }

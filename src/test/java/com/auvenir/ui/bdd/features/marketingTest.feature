@@ -129,6 +129,82 @@ Feature: Marketing Feature
     And I should see Forgot Password popup guide
     And I should see Forgot Password popup border
     And I should see Forgot Password popup Email label
+    And I should see Forgot Password popup Email input
+    And I should see Forgot Password popup Email input number
+    And I should see Forgot Password popup Email input special character
+
+
+    #  @vietlq
+  Scenario: Marketing Page - About Page - Verify "Highlights of our Weekend Photo Competition" board: AUV-590
+    Given I navigate to Marketing page
+    Then I redirect to About Page
+    Then I verify Highlights of our Weekend Photo Competition title
+    Then I verify display 12 picture on board
+
+#  @vietlq
+  Scenario:Marketing Page - About Page - Verify "View Careers" button: AUV-582
+    Given I navigate to Marketing page
+    Then I redirect to About Page
+    Then I verify text "View careers" and color of text
+    And I click on view careers button
+
+#  @vietlq
+  Scenario:Contact page > Verify that Contact page displays after user click on Contact
+  link in footer at the end of the page: AUV-592
+    Given I navigate to Marketing page
+    Then I redirect to Contact Page
+
+#  @vietlq
+  Scenario:Contact page > Verify that Top Banners display on the top of the page are base on design: AUV-602
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to Contact Page
+    Then I should see Header Logo
+    Then I should see Login link
+    Then I should see Sign Up Link
+    Then I should see Language Link
+    Then I should see Banner information contact page
+
+#  @vietlq
+  Scenario:Contact page > Verify that Footer are base on design: AUV-602
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to Contact Page
+    And I scroll to footer
+    Then I should see About link
+    Then I should see Contact link
+    Then I should see Terms of Service link
+    Then I should see Privacy Policy link
+    Then I should see Cookie Notice link
+    Then I should see Facebook icon
+    Then I should see Twitter icon
+    Then I should see Linkedin icon
+    Then I should see Copyright title
+
+
+#  @vietlq
+  Scenario:Contact page > Verify that the Contact's page title is "Get in Touch with Auvenir": AUV-618
+    Given I navigate to Marketing page
+    And I scroll to footer
+    Then I redirect to Contact Page
+    Then I verify text aligned on header "Get in Touch with Auvenir"
+
+
+#  @vietlq
+  Scenario:Contact page > Verify that Promise hint sentence is "We will respond within 24 hours.": AUV-618
+    Given I navigate to Marketing page
+    And I scroll to footer
+    Then I redirect to Contact Page
+    Then I verify text Promise hint sentence "We will respond within 24 hours."
+
+  @vietlq
+  Scenario:Contact page > Verify your email text box: AUV-632
+    Given I navigate to Marketing page
+    And I scroll to footer
+    Then I redirect to Contact Page
+    Then I click on  field
+    Then I verify change color boundary of field
+
     And I verify input Forgot Email with text: "abc"
     And I verify input Forgot Email with number: "132156"
     And I verify input Forgot Email with special character: "!@#$%^&*("

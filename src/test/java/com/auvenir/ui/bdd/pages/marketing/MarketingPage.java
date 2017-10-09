@@ -99,6 +99,18 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@id='footer']//a[@href='/cookies']")
     private WebElement itemFooterCookieNotice;
 
+    @FindBy(xpath = "//div[@id='about-highlightPhotos']//img")
+    private List<WebElement> listImgHighlight;
+
+    @FindBy(xpath = "//div[@id='about-highlightPhotos']/h2")
+    private WebElement textTitleImgHighlight;
+
+    @FindBy(xpath = "//div[@class='center aligned column']/a")
+    private WebElement textViewcareers;
+
+    @FindBy(xpath = "//div[ @class='contact']")
+    private WebElement headerContact;
+
     @FindBy(xpath = "//i[contains(@class,'facebook')]")
     private WebElement iconFooterFacebook;
 
@@ -131,6 +143,12 @@ public class MarketingPage extends CommonPage {
 
     @FindBy(xpath = "//div[@id='forgot-popup']//span")
     private WebElement textForgotPasswordGuide;
+
+    @FindBy(xpath = "//div[@class='ui centered padded grid']//h2")
+    private WebElement centerAlignedHeaderConactpage;
+
+    @FindBy(xpath = "//div[@class='sub header']")
+    private WebElement subHeader;
 
     @FindBy(xpath = "//div[@id='forgot-popup']//label")
     private WebElement labelForgotPasswordEmail;
@@ -216,7 +234,22 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//img[contains(@src,'gears.svg')]/../../p")
     private WebElement textAutomatedToolsDescription;
 
+    @FindBy(xpath = "//img[contains(@class,'ui-logo')]")
+    private WebElement imageLogo;
 
+    @FindBy(xpath = "//button[contains(@class,'btn-login')]")
+    private WebElement linkLogin;
+
+    @FindBy(xpath = "//div[@class='row header-logo']//a[contains(@class,'inverted button')]")
+    private WebElement linkAuditorSignUp;
+
+    @FindBy(xpath = "//div[contains(@class,'button inverted')]")
+    private WebElement linkLanguage;
+
+    @FindBy(xpath = "//div[@class='row']//a[contains(@class,'inverted button')]")
+    private WebElement linkJoinAsAuditor;
+
+    public static final String borderColor = "border-color";
     public static final String borderColorCSSName = "border-color";
     public final String colorCSSName = "color";
 
@@ -279,21 +312,6 @@ public class MarketingPage extends CommonPage {
     public void verifyLoginPopupTitle() {
         validateElementText(titleLogin, "Login to Auvenir");
     }
-
-    @FindBy(xpath = "//img[contains(@class,'ui-logo')]")
-    private WebElement imageLogo;
-
-    @FindBy(xpath = "//button[contains(@class,'btn-login')]")
-    private WebElement linkLogin;
-
-    @FindBy(xpath = "//div[@class='row header-logo']//a[contains(@class,'inverted button')]")
-    private WebElement linkAuditorSignUp;
-
-    @FindBy(xpath = "//div[contains(@class,'button inverted')]")
-    private WebElement linkLanguage;
-
-    @FindBy(xpath = "//div[@class='row']//a[contains(@class,'inverted button')]")
-    private WebElement linkJoinAsAuditor;
 
     public void verifyHeaderLogo() {
         String partialLogoURL = "static/images/logo-auvenir.svg";
@@ -421,6 +439,35 @@ public class MarketingPage extends CommonPage {
         Assert.assertEquals(getText(inputPassword), password);
     }
 
+    public void verifDisplayPictureOnBoard(int numberPicture) {
+        Assert.assertEquals(listImgHighlight.size(), numberPicture);
+    }
+
+    public void verifyTextTitleHighlights() {
+        scrollToElement(textTitleImgHighlight, -300);
+        waitSomeSeconds(2);
+        Assert.assertEquals(textTitleImgHighlight.getText().trim(), "Highlights of our Weekend Photo Competition");
+    }
+
+    public void verifyTextAndColorOfText(String text) {
+        String colorCode = "rgba(249, 250, 251, 1)";
+        scrollToElement(textViewcareers, -200);
+        waitSomeSeconds(2);
+        validateElementText(textViewcareers, text);
+        System.out.println("textViewcareers.getCssValue(\"color\") = " + textViewcareers.getCssValue("color"));
+        boolean result = validateCssValueElement(textViewcareers, "color", colorCode);
+        Assert.assertTrue(result, "Verify color of text");
+    }
+
+    public void clickOnViewcareersButton() {
+        clickElement(textViewcareers, "text View Careers");
+    }
+
+    public void redirectToContactPage() {
+        clickElement(itemFooterContact, "Item Footer About");
+        waitForVisibleElement(headerContact, "verify header Contact");
+    }
+
 
     public void seeFacebookIcon() {
         boolean result = validateExistedElement(iconFooterFacebook, "Icon Footer Facebook");
@@ -540,6 +587,18 @@ public class MarketingPage extends CommonPage {
     public void verifyInputForgotEmailWithSpecialCharacter(String specialCharacterString) {
         sendKeyTextBox(inputForgottenEmail, specialCharacterString, "passwordTextBox");
         Assert.assertEquals(getText(inputForgottenEmail), specialCharacterString);
+    }
+
+    public void seeBannerInformationContact() {
+        validateExistedElement(headerContact, "verify header Contact");
+    }
+
+    public void textAlignedHeaderConactpage(String text) {
+        Assert.assertEquals(centerAlignedHeaderConactpage.getText(), text);
+    }
+
+    public void verifysubHeader(String text) {
+        Assert.assertEquals(subHeader.getText(), text);
     }
 
 

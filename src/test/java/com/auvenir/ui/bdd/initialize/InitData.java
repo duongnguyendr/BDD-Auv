@@ -37,16 +37,17 @@ public class InitData extends AbstractStep {
             //getCcEmail();
             MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
             DB db = MongoClient.getDB(dataBase);
-            DBCollection usersCollection = db.getCollection("users");
-
+//            DBCollection usersCollection = db.getCollection("users");
             //code to drop all records of collections on DB. TODO: be careful
             dropAllCollections(db);
             initUser("User1");
+            initUserRoleMapping("User1");
             initUser("User2");
-            initUser("User3");
-            initUser("User4");
-            initUser("User5");
-            initUser("User6");
+            initUserRoleMapping("User2");
+//            initUser("User3");
+//            initUser("User4");
+//            initUser("User5");
+//            initUser("User6");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,4 +91,18 @@ public class InitData extends AbstractStep {
         adminDBObject.put("password_salt",getDataColumn(userAdd,"PasswordSalt"));
         usersCollection.insert(adminDBObject);
     }
+
+    public void initUserRoleMapping(String userAdd) throws UnknownHostException, SyncFactoryException {
+        MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
+        com.mongodb.DB db = MongoClient.getDB(dataBase);
+        DBCollection usersCollection = db.getCollection("userRoleMapping");
+        DBObject adminDBObject = (DBObject) JSON.parse(getDataColumn(userAdd,"User role mapping Json"));
+        adminDBObject.put("_id", new ObjectId(getDataColumn(userAdd,"_id_userRoleMapping")));
+        adminDBObject.put("userID", new ObjectId(getDataColumn(userAdd,"ID")));
+        adminDBObject.put("firmID", new ObjectId(getDataColumn(userAdd,"firmID_userRoleMapping")));
+        usersCollection.insert(adminDBObject);
+
+    }
+
+
 }

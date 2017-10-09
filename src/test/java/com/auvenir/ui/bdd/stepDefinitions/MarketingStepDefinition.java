@@ -76,6 +76,7 @@ public class MarketingStepDefinition extends BaseInit {
     @Then("^I scroll to footer$")
     public void scrollToFooter() throws Throwable {
         marketingPage.scrollToFooter();
+
     }
 
     @Then("^I scroll down$")
@@ -442,6 +443,39 @@ public class MarketingStepDefinition extends BaseInit {
     @Then("^I verify input text have space :\"([^\"]*)\"$")
     public void verifyInputTextHaveSpace(String arg1) throws Throwable {
         marketingPage.verifyInputPassword(arg1);
+    }
+    @Then("^I verify Highlights of our Weekend Photo Competition title$")
+    public void verifyTextHighlightsTitle() throws Throwable {
+       marketingPage.verifyTextTitleHighlights();
+    }
+    @Then("^I verify display (\\d+) picture on board$")
+    public void verifDisplayPictureOnBoard(int arg1) throws Throwable {
+       marketingPage.verifDisplayPictureOnBoard(arg1);
+    }
+    @Then("^I verify text \"([^\"]*)\" and color of text$")
+    public void verifyTextAndColorOfText(String arg1) throws Throwable {
+       marketingPage.verifyTextAndColorOfText(arg1);
+    }
+    @And("^I click on view careers button$")
+    public void clickOnViewCareersButton() throws Throwable {
+        marketingPage.clickOnViewcareersButton();
+    }
+    @Then("^I redirect to Contact Page$")
+    public void redirectToContactPage() throws Throwable {
+        marketingPage.redirectToContactPage();
+
+    }
+    @Then("^I should see Banner information contact page$")
+    public void seeBannerInformationContactPage() throws Throwable {
+        marketingPage.seeBannerInformationContact();
+    }
+    @Then("^I verify text aligned on header \"([^\"]*)\"$")
+    public void verifyTextAlignedOnHeader(String arg1) throws Throwable {
+        marketingPage.textAlignedHeaderConactpage(arg1);
+    }
+    @Then("^I verify text Promise hint sentence \"([^\"]*)\"$")
+    public void verifyTextPromiseHintSentence(String arg1) throws Throwable {
+       marketingPage.verifysubHeader(arg1);
     }
 
 }

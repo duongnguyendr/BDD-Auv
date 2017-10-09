@@ -1,7 +1,5 @@
 package com.auvenir.ui.bdd.common.mongoBD;
 
-import com.auvenir.ui.bdd.common.Generic;
-
 /**
  * Created by tan.pham on 9/12/2017.
  */
@@ -11,7 +9,7 @@ public class MongoDBProperties {
     private String databaseName;
     private String userName;
     private String userPassword;
-    private String port;
+    private int port;
     private String ssl;
 
     public MongoDBProperties(){
@@ -19,31 +17,28 @@ public class MongoDBProperties {
     }
 
     public MongoDBProperties(String runServer){
-        this.getMongoDBProperties(runServer);
+        getMongoDBProperties(runServer);
     }
 
 
-    private MongoDBProperties getMongoDBProperties(String runServer){
-        MongoDBProperties item = new MongoDBProperties();
-        item.setServerIp("192.168.1.222");
-        item.setDatabaseName("auvenir");
-        item.setUserName("");
-        item.setUserPassword("");
-        item.setPort("27017");
-        item.setSsl("No");
+    private void getMongoDBProperties(String runServer){
+        this.setServerIp("192.168.1.222");
+        this.setDatabaseName("auvenir");
+        this.setUserName("");
+        this.setUserPassword("");
+        this.setPort(27017);
+        this.setSsl("No");
 
         if(runServer.equalsIgnoreCase("greed.auvenir.com")){
-            item.setServerIp("golem.auvenir.com");
-            item.setDatabaseName("auvenir");
-            item.setUserName("auvqadb");
-            item.setUserPassword("rE7IrgSfjnSjP9Pr08MQNhcXpezZp3d7SzfWreRVhW1zpU6f4gHnca0CNOLH9wvKewslvb5mfXDd3vsds76UhQ==");
-            item.setPort("27017");
-            item.setSsl("");
+            this.setServerIp("golem.auvenir.com");
+            this.setDatabaseName("auvenir");
+            this.setUserName("auvqadb");
+            this.setUserPassword("rE7IrgSfjnSjP9Pr08MQNhcXpezZp3d7SzfWreRVhW1zpU6f4gHnca0CNOLH9wvKewslvb5mfXDd3vsds76UhQ==");
+            this.setPort(27017);
+            this.setSsl("");
         }else{
 
         }
-
-        return item;
     }
 
     public String getServerIp() {
@@ -78,11 +73,11 @@ public class MongoDBProperties {
         this.userPassword = userPassword;
     }
 
-    public String getPort() {
+    public int getPort() {
         return port;
     }
 
-    public void setPort(String port) {
+    public void setPort(int port) {
         this.port = port;
     }
 
