@@ -77,6 +77,7 @@ public class MarketingStepDefinition extends BaseInit {
     @Then("^I scroll to footer$")
     public void scrollToFooter() throws Throwable {
         marketingPage.scrollToFooter();
+
     }
 
     @Then("^I redirect to About Page$")
@@ -374,6 +375,18 @@ public class MarketingStepDefinition extends BaseInit {
     public void redirectToContactPage() throws Throwable {
         marketingPage.redirectToContactPage();
 
+    }
+    @Then("^I should see Banner information contact page$")
+    public void seeBannerInformationContactPage() throws Throwable {
+        marketingPage.seeBannerInformationContact();
+    }
+    @Then("^I verify text aligned on header \"([^\"]*)\"$")
+    public void verifyTextAlignedOnHeader(String arg1) throws Throwable {
+        marketingPage.textAlignedHeaderConactpage(arg1);
+    }
+    @Then("^I verify text Promise hint sentence \"([^\"]*)\"$")
+    public void verifyTextPromiseHintSentence(String arg1) throws Throwable {
+       marketingPage.verifysubHeader(arg1);
     }
 
 }

@@ -1129,6 +1129,7 @@ Method to wait Ajax function on Site be loaded successfully.
         logger.info("Scroll down to see page footer.");
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        waitSomeSeconds(2);
     }
     public void scrollToElement(WebElement element){
         Point hoverItem =element.getLocation();

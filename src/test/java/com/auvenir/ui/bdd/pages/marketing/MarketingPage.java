@@ -150,6 +150,12 @@ public class MarketingPage extends CommonPage {
     @FindBy(xpath = "//div[@id='forgot-popup']//span")
     private WebElement textForgotPasswordGuide;
 
+    @FindBy(xpath = "//div[@class='ui centered padded grid']//h2")
+    private WebElement centerAlignedHeaderConactpage;
+
+    @FindBy(xpath = "//div[@class='sub header']")
+    private WebElement subHeader;
+
 
     //private String xpathStatusCellOnUserTableAdminX = "//td[text()='%s']/ancestor::tr/td[5]/select";
 
@@ -365,9 +371,9 @@ public class MarketingPage extends CommonPage {
     }
     public void redirectToContactPage() {
         clickElement(itemFooterContact, "Item Footer About");
-        waitForVisibleElement(headerContact,"verify header Contact");
+        waitForVisibleElement(headerContact, "verify header Contact");
 
-
+    }
     public void seeFacebookIcon() {
         boolean result = validateExistedElement(iconFooterFacebook, "Icon Footer Facebook");
         Assert.assertTrue(result, "Icon Facebook should be exist");
@@ -471,4 +477,14 @@ public class MarketingPage extends CommonPage {
 
     public void seeForgotPasswordPopupEmailInputSpecialCharacter() {
     }
+    public void seeBannerInformationContact(){
+        validateExistedElement(headerContact,"verify header Contact");
+    }
+    public void textAlignedHeaderConactpage(String text){
+        Assert.assertEquals(centerAlignedHeaderConactpage.getText(),text);
+    }
+    public void verifysubHeader(String text){
+        Assert.assertEquals(subHeader.getText(),text);
+    }
+
 }

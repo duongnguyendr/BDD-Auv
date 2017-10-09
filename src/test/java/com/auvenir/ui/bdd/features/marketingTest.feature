@@ -148,8 +148,59 @@ Feature: Marketing Feature
     Then I verify text "View careers" and color of text
     And I click on view careers button
 
-  @vietlq
+#  @vietlq
   Scenario:Contact page > Verify that Contact page displays after user click on Contact
   link in footer at the end of the page: AUV-592
     Given I navigate to Marketing page
     Then I redirect to Contact Page
+
+#  @vietlq
+  Scenario:Contact page > Verify that Top Banners display on the top of the page are base on design: AUV-602
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to Contact Page
+    Then I should see Header Logo
+    Then I should see Login link
+    Then I should see Sign Up Link
+    Then I should see Language Link
+    Then I should see Banner information contact page
+
+#  @vietlq
+  Scenario:Contact page > Verify that Footer are base on design: AUV-602
+    Given I navigate to Marketing page
+    Then I scroll to footer
+    Then I redirect to Contact Page
+    And I scroll to footer
+    Then I should see About link
+    Then I should see Contact link
+    Then I should see Terms of Service link
+    Then I should see Privacy Policy link
+    Then I should see Cookie Notice link
+    Then I should see Facebook icon
+    Then I should see Twitter icon
+    Then I should see Linkedin icon
+    Then I should see Copyright title
+
+
+#  @vietlq
+  Scenario:Contact page > Verify that the Contact's page title is "Get in Touch with Auvenir": AUV-618
+    Given I navigate to Marketing page
+    And I scroll to footer
+    Then I redirect to Contact Page
+    Then I verify text aligned on header "Get in Touch with Auvenir"
+
+
+#  @vietlq
+  Scenario:Contact page > Verify that Promise hint sentence is "We will respond within 24 hours.": AUV-618
+    Given I navigate to Marketing page
+    And I scroll to footer
+    Then I redirect to Contact Page
+    Then I verify text Promise hint sentence "We will respond within 24 hours."
+
+  @vietlq
+  Scenario:Contact page > Verify your email text box: AUV-632
+    Given I navigate to Marketing page
+    And I scroll to footer
+    Then I redirect to Contact Page
+    Then I click on  field
+    Then I verify change color boundary of field
