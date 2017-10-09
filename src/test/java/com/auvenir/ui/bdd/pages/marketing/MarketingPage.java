@@ -372,8 +372,9 @@ public class MarketingPage extends CommonPage {
     public void redirectToContactPage() {
         clickElement(itemFooterContact, "Item Footer About");
         waitForVisibleElement(headerContact, "verify header Contact");
-
     }
+
+
     public void seeFacebookIcon() {
         boolean result = validateExistedElement(iconFooterFacebook, "Icon Footer Facebook");
         Assert.assertTrue(result, "Icon Facebook should be exist");

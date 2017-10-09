@@ -50,7 +50,7 @@ public class MongoDBService {
         MongoDBProperties mongoDBProperties = new MongoDBProperties((baseUrl));
         dataBaseSer = "192.168.1.222";
         port = 27017;
-        DB = "auvenir";
+        DB = "auvenir_test";
         username = "";
         password = "";
         ssl = "no";

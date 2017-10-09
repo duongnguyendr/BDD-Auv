@@ -20,7 +20,7 @@ public class ClientEngagementPage extends EngagementPage {
     @FindBy(xpath = "//*[@id='auditPageNoEngagement']")
     private WebElement noEngagementDivEle;
 
-    @FindBy(xpath = "//tbody[@id='engagement-tbody']//p")
+    @FindBy(xpath = "//tbody[@id='engagement-tbody']//td[@class='engagement-name']")
     private List<WebElement> clientEngagementListEle;
 
     public void viewEngagementDetailsPage(String engagementName) {

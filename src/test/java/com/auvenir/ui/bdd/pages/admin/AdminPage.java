@@ -970,7 +970,7 @@ public class AdminPage extends CommonPage {
 
     public void verifyUserStatusAsExpected(String userEmail, String expectedStatus){
         String status = getEleAuditorStatusLst(userEmail);
-        Assert.assertEquals(expectedStatus, status);
+        Assert.assertEquals(status, expectedStatus, String.format("Client status should be '%s'",expectedStatus));
     }
 
     public void changeStatusUser(String email, String status){
