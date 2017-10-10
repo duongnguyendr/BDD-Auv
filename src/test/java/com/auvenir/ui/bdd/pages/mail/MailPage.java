@@ -30,15 +30,15 @@ public class MailPage extends CommonPage {
     }
     public void goEMail (String typeEmail){
         System.out.println("Gooo Email");
-        if(typeEmailClass.equals("")) {
+        if(!typeEmailClass.equals(typeEmail)) {
             if(typeEmail == "Gmail") {
                 this.mail = new Gmail(logger, getDriver());
             } else if (typeEmail == "SquirrelMail") {
                 this.mail = new SquirrelMail(logger, getDriver());
             }
             typeEmailClass = typeEmail;
-            this.mail.goEMail();
         }
+        this.mail.goEMail();
     }
     public void clickOnboardingInvitationLink(){
         this.mail.clickOnboardingInvitationLink();
@@ -46,16 +46,14 @@ public class MailPage extends CommonPage {
 
     public void deleteAllExistedEmail(String email, String password) throws Exception {
         System.out.println("Delete all existed email");
-        if(typeEmailClass.equals("")) {
-            if(email.contains("gmail")) {
+        if(email.contains("gmail") && !typeEmailClass.equals("Gmail")) {
                 this.mail = new Gmail(logger, getDriver());
                 typeEmailClass = "Gmail";
-            } else if (email.contains("vietnam-software.org")) {
+        } else if (email.contains("vietnam-software.org") && !typeEmailClass.equals("SquirrelMail")) {
                 this.mail = new SquirrelMail(logger, getDriver());
                 typeEmailClass = "SquirrelMail";
-            }
-            this.mail.deleteAllExistedEmail(email, password);
         }
+        this.mail.deleteAllExistedEmail(email, password);
     }
     public void selectActiveEmail(){
         this.mail.selectActiveEmail();
