@@ -40,7 +40,8 @@ public class InitData extends AbstractStep {
             MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
             DB db = MongoClient.getDB(dataBase);
 
-            initAdminAuditor("Admin Auditor");
+
+
 //            DBCollection usersCollection = db.getCollection("users");
             //code to drop all records of collections on DB. TODO: be careful
 //            dropAllCollections(db);
@@ -48,10 +49,13 @@ public class InitData extends AbstractStep {
 //            initUserRoleMapping("User1");
 //            initUser("User2");
 //            initUserRoleMapping("User2");
-//            initUser("User3");
-//            initUser("User4");
-//            initUser("User5");
-//            initUser("User6");
+
+            initAdminAuditor("Admin Auditor");
+            initLeadAuditor("Lead Auditor");
+            initGeneralAuditor("General Auditor");
+            initAdminClient("Admin Client");
+            initLeadClient("Lead Client");
+            initGeneralClient("General Client");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,8 +119,6 @@ public class InitData extends AbstractStep {
             MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
             com.mongodb.DB db = MongoClient.getDB(dataBase);
             DBCollection usersCollection = db.getCollection("users");
-            System.out.println("Id: " + getDataColumn(userAdd, "ID"));
-            System.out.println("JSon: " + JSON.parse(getDataColumn(userAdd, "User Json")));
             DBObject usersDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "User Json"));
             usersCollection.insert(usersDBObject);
 
@@ -124,19 +126,169 @@ public class InitData extends AbstractStep {
             DBCollection firms = db.getCollection("firms");
             DBObject firmsDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm Json"));
             firms.insert(firmsDBObject);
-            System.out.println("Firm ID: " + getDataColumn(userAdd, "firmID"));
-            addFirmPermission(getDataColumn(userAdd, "ID"), getDataColumn(userAdd, "firmID"), firms, true);
+//            System.out.println("Firm ID: " + getDataColumn(userAdd, "firmID"));
+//            addFirmPermission(getDataColumn(userAdd, "ID"), getDataColumn(userAdd, "firmID"), firms, true);
 
             // Create new userRoleMapping Firm_Admin of Admin Auditor.
             DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
             DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
             usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 Admin role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+
+
+            // Create engagement
+            DBCollection engagement = db.getCollection("engagements");
+            DBObject engagementsDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 Json"));
+            engagement.insert(engagementsDBObject);
+
+            // Create business
+            DBCollection business = db.getCollection("businesses");
+            DBObject businessesDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Business Json"));
+            business.insert(businessesDBObject);
+
+//            System.out.println("Engagement1 ID: " + getDataColumn(userAdd, "Engagement1 Json"));
 
         } catch (Exception e) {
             System.out.println("Admin Auditor cannot create successfully.");
             e.printStackTrace();
         }
     }
+
+    public void initLeadAuditor(String userAdd) {
+        try {
+            // Create new Admin Auditor user.
+            System.out.println("Init Lead Auditor.");
+            MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
+            com.mongodb.DB db = MongoClient.getDB(dataBase);
+            DBCollection usersCollection = db.getCollection("users");
+            DBObject usersDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "User Json"));
+            usersCollection.insert(usersDBObject);
+
+            // Create new userRoleMapping Firm_Admin of Admin Auditor.
+            DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
+            DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+
+            // Create engagement
+            DBCollection engagement = db.getCollection("engagements");
+            DBObject engagementsDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 Json"));
+            engagement.insert(engagementsDBObject);
+
+
+        } catch (Exception e) {
+            System.out.println("Lead Auditor cannot create successfully.");
+            e.printStackTrace();
+        }
+    }
+
+    public void initGeneralAuditor(String userAdd) {
+        try {
+            // Create new Admin Auditor user.
+            System.out.println("Init General Auditor.");
+            MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
+            com.mongodb.DB db = MongoClient.getDB(dataBase);
+            DBCollection usersCollection = db.getCollection("users");
+            DBObject usersDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "User Json"));
+            usersCollection.insert(usersDBObject);
+
+            // Create new userRoleMapping Firm_Admin of Admin Auditor.
+            DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
+            DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+
+
+        } catch (Exception e) {
+            System.out.println("Lead Auditor cannot create successfully.");
+            e.printStackTrace();
+        }
+    }
+
+    public void initAdminClient(String userAdd) {
+        try {
+            // Create new Admin Auditor user.
+            System.out.println("Init Admin Client.");
+            MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
+            com.mongodb.DB db = MongoClient.getDB(dataBase);
+            DBCollection usersCollection = db.getCollection("users");
+            DBObject usersDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "User Json"));
+            usersCollection.insert(usersDBObject);
+
+            // Create new userRoleMapping Business_Admin of Admin Auditor.
+            DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
+            DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 Admin role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+//            System.out.println("Engagement1 ID: " + getDataColumn(userAdd, "Engagement1 Json"));
+
+        } catch (Exception e) {
+            System.out.println("Admin Client cannot create successfully.");
+            e.printStackTrace();
+        }
+    }
+
+    public void initLeadClient(String userAdd) {
+        try {
+            // Create new Admin Auditor user.
+            System.out.println("Init Lead Client.");
+            MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
+            com.mongodb.DB db = MongoClient.getDB(dataBase);
+            DBCollection usersCollection = db.getCollection("users");
+            DBObject usersDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "User Json"));
+            usersCollection.insert(usersDBObject);
+
+            // Create new userRoleMapping Business_User of Admin Auditor.
+            DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
+            DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+//            System.out.println("Engagement1 ID: " + getDataColumn(userAdd, "Engagement1 Json"));
+
+        } catch (Exception e) {
+            System.out.println("Admin Client cannot create successfully.");
+            e.printStackTrace();
+        }
+    }
+
+    public void initGeneralClient(String userAdd) {
+        try {
+            // Create new Admin Auditor user.
+            System.out.println("Init General Client.");
+            MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
+            com.mongodb.DB db = MongoClient.getDB(dataBase);
+            DBCollection usersCollection = db.getCollection("users");
+            DBObject usersDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "User Json"));
+            usersCollection.insert(usersDBObject);
+
+            // Create new userRoleMapping Business_User of Admin Auditor.
+            DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
+            DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+
+        } catch (Exception e) {
+            System.out.println("Admin Client cannot create successfully.");
+            e.printStackTrace();
+        }
+    }
+
 
     public void addFirmPermission(String userID, String firmID, DBCollection firms, boolean isAdmin) {
         DBObject find = new BasicDBObject("_id", new ObjectId(firmID));
