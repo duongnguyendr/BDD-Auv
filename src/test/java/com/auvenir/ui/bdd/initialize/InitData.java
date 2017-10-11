@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
 import org.bson.types.ObjectId;
+import org.codehaus.groovy.runtime.powerassert.SourceText;
+import org.json.JSONArray;
 import org.testng.annotations.BeforeSuite;
 
 import javax.sql.rowset.spi.SyncFactoryException;
@@ -37,13 +39,15 @@ public class InitData extends AbstractStep {
             //getCcEmail();
             MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
             DB db = MongoClient.getDB(dataBase);
+
+            initAdminAuditor("Admin Auditor");
 //            DBCollection usersCollection = db.getCollection("users");
             //code to drop all records of collections on DB. TODO: be careful
-            dropAllCollections(db);
-            initUser("User1");
-            initUserRoleMapping("User1");
-            initUser("User2");
-            initUserRoleMapping("User2");
+//            dropAllCollections(db);
+//            initUser("User1");
+//            initUserRoleMapping("User1");
+//            initUser("User2");
+//            initUserRoleMapping("User2");
 //            initUser("User3");
 //            initUser("User4");
 //            initUser("User5");
@@ -68,7 +72,7 @@ public class InitData extends AbstractStep {
 
 
     private String getDataColumn(String user, String columnName) {
-        return Generic.getTestDataFromExcelNoBrowserPrefix("usersRegression", user, columnName);
+        return Generic.getTestDataFromExcelNoBrowserPrefix("SetupUserRoles", user, columnName);
     }
 
     public void initUser(String userAdd) throws UnknownHostException, SyncFactoryException {
@@ -104,4 +108,40 @@ public class InitData extends AbstractStep {
 
     }
 
+    public void initAdminAuditor(String userAdd) {
+        try {
+            // Create new Admin Auditor user.
+            System.out.println("Init Admin Auditor.");
+            MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
+            com.mongodb.DB db = MongoClient.getDB(dataBase);
+            DBCollection usersCollection = db.getCollection("users");
+            System.out.println("Id: " + getDataColumn(userAdd, "ID"));
+            System.out.println("JSon: " + JSON.parse(getDataColumn(userAdd, "User Json")));
+            DBObject usersDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "User Json"));
+            usersCollection.insert(usersDBObject);
+
+            // Create new Firm of Admin Auditor.
+            DBCollection firms = db.getCollection("firms");
+            DBObject firmsDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm Json"));
+            firms.insert(firmsDBObject);
+            System.out.println("Firm ID: " + getDataColumn(userAdd, "firmID"));
+            addFirmPermission(getDataColumn(userAdd, "ID"), getDataColumn(userAdd, "firmID"), firms, true);
+
+            // Create new userRoleMapping Firm_Admin of Admin Auditor.
+            DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
+            DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+
+        } catch (Exception e) {
+            System.out.println("Admin Auditor cannot create successfully.");
+            e.printStackTrace();
+        }
+    }
+
+    public void addFirmPermission(String userID, String firmID, DBCollection firms, boolean isAdmin) {
+        DBObject find = new BasicDBObject("_id", new ObjectId(firmID));
+        String json = String.format("{$push:{acl:{id:{ \"$oid\" : \"%s\"}, admin:%b}}}", userID, isAdmin);
+        DBObject push = (DBObject) JSON.parse(json);
+        firms.update(find, push);
+    }
 }
