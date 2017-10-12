@@ -108,4 +108,19 @@ public class EngagementDetailStepDefinition extends BaseInit {
         logger.info("=====I should see empty ToDo list=====");
         detailsEngagementPage.verifyEmptyToDoList();
     }
+
+    @And("^I click on expand arrow icon$")
+    public void iClickOnExpandArrowIcon() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I click on expand arrow icon=====");
+        detailsEngagementPage.clickOnExpandArrowIcon();
+    }
+
+    @And("^I see (\\d+) in Overdue To-Dos field$")
+    public void iSeeInOverdueToDosField(int numberOverdueToDos) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I see " + numberOverdueToDos +" in Overdue To-Dos field=====");
+        detailsEngagementPage.verifyOverdueToDosValue(numberOverdueToDos);
+    }
+
 }

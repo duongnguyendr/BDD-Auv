@@ -31,6 +31,12 @@ public class DetailsEngagementPage extends CommonPage {
     @FindBy(xpath = "//div[@id='engagementPage']//p[text()='Engagement Overview']")
     private WebElement engagementOverview;
 
+    @FindBy(xpath = "//*[@class='auvicon-arrow-forward']")
+    private  WebElement eleExpandArrowIcon;
+
+    @FindBy(xpath = "//p[@id='engOverview-overDueTodo']")
+    private  WebElement eleOverdueTodoNumber;
+
     public DetailsEngagementPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -90,4 +96,14 @@ public class DetailsEngagementPage extends CommonPage {
         waitForVisibleElement(eleEmptyToDoImage, "empty ToDo image");
     }
 
+    public void clickOnExpandArrowIcon(){
+        waitForVisibleElement(eleExpandArrowIcon,"expand arrow icon");
+        clickElement(eleExpandArrowIcon,"click on expand arrow icon");
+    }
+
+    public void verifyOverdueToDosValue(int checkNumber){
+        waitForVisibleElement(eleOverdueTodoNumber,"overdue to-dos");
+        boolean result = Integer.parseInt(eleOverdueTodoNumber.getText()) == checkNumber ? true : false;
+        Assert.assertTrue(result);;
+    }
 }
