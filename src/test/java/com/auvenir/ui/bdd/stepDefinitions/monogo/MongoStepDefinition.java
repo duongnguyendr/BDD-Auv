@@ -82,4 +82,10 @@ public class MongoStepDefinition {
         // Write code here that turns the phrase above into concrete actions
         MongoDBService.removeUserRoleMappingByEmail(email);
     }
+
+    @And("^Delete all firm which is create by : \"([^\"]*)\"$")
+    public void removeFirmCreatedByAdminFirm(String email) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        MongoDBService.removeFirmCreatedByAdminFirm(email);
+    }
 }

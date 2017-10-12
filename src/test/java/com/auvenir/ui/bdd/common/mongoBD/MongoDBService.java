@@ -984,8 +984,6 @@ public class MongoDBService {
             if (objectId != null) {
                 BasicDBObject searchQuery = new BasicDBObject();
                 searchQuery.put("acl.id", new ObjectId(objectId));
-                //                BasicDBObject searchQuery1 = new BasicDBObject();
-                //                searchQuery.put("name",engagementName);
                 DBCursor curs = dBCollection.find(searchQuery);
                 while (curs.hasNext()) {
                     DBObject dBbject = curs.next();
@@ -1130,4 +1128,48 @@ public class MongoDBService {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Remove firm which is created by Admin Firm(email)
+     *
+     * @param email the String email which has object ID displayed in 'acl' array object.
+     */
+    public static void removeFirmCreatedByAdminFirm(String email) {
+        String objectId = null;
+        int count = 0;
+        try {
+            DBCollection dBCollection = getCollection("firms");
+            objectId = getObjectIdOfEmailUser(email);
+            if (objectId != null) {
+                BasicDBObject searchQuery = new BasicDBObject();
+                searchQuery.put("acl.id", new ObjectId(objectId));
+                DBCursor curs = dBCollection.find(searchQuery);
+                while (curs.hasNext()) {
+                    DBObject dBbject = curs.next();
+                    // shows the whole result document
+                    BasicDBList aclObjectID = (BasicDBList) dBbject.get("acl");
+                    BasicDBObject[] aclObjectArr = aclObjectID.toArray(new BasicDBObject[0]);
+                    for (BasicDBObject dbObj : aclObjectArr) {
+                        // shows each item from the lights array
+                        if (dbObj.get("id").toString().equals(objectId) && dbObj.get("admin").equals(true)) {
+                            System.out.println("Firm ObjectID: " + dBbject.get("_id"));
+                            System.out.println("Acl ObjectID: " + dBbject.get("acl"));
+                            dBCollection.remove(dBbject);
+                        }
+                    }
+                    count++;
+                }
+            }
+            if (count == 0) {
+                System.out.println(
+                        String.format("Firm which is created by '%s' is not exist on database", email));
+            } else
+                System.out.println("Deleted Engagement successfully.");
+        } catch (NoSuchElementException ex) {
+            System.out.println("This engagement not exist on database.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

@@ -22,18 +22,18 @@ Feature: Smoke Test Feature
   @thuan
   Scenario: Auditor Admin click Sign up button and fill information: AUV-542
     Given I navigate to Marketing page
-    And Delete all activity of engagement by user  : "chr.auditor01.adm@gmail.com"
-    And Delete all firm by name : "Firm Auvenir1"
-    And Delete all engagement of user : "chr.auditor01.adm@gmail.com"
-    And Delete user by email: "chr.auditor01.adm@gmail.com"
-    And Delete user role mapping by email: "chr.auditor01.adm@gmail.com"
+    And Delete all activity of user : "chr.auditor01.adm@vietnam-software.org"
+    And Delete all engagement of user : "chr.auditor01.adm@vietnam-software.org"
+    And Delete user role mapping by email: "chr.auditor01.adm@vietnam-software.org"
+    And Delete all firm which is create by : "chr.auditor01.adm@vietnam-software.org"
+    And Delete user by email: "chr.auditor01.adm@vietnam-software.org"
     And I click sign up link
     Then I should see personal sign up page
 
     # Input personal information
     And I input full name: "Admin Auditor" text box
-    And I input email address: "chr.auditor01.adm@gmail.com"
-    And I input confirm email: "chr.auditor01.adm@gmail.com"
+    And I input email address: "chr.auditor01.adm@vietnam-software.org"
+    And I input confirm email: "chr.auditor01.adm@vietnam-software.org"
     And I select role in firm
     And I input phone number: "1234567890"
     And I select how to hear about Auvenir
@@ -65,7 +65,7 @@ Feature: Smoke Test Feature
   Scenario: Admin change status to Onboarding of a User: AUV-557
     Given I delete existed email
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
@@ -73,19 +73,19 @@ Feature: Smoke Test Feature
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-    Then I should see status of user: "chr.auditor01.adm@gmail.com" is "Wait Listed"
-    And I change status of user: "chr.auditor01.adm@gmail.com" to "Onboarding"
+    Then I should see status of user: "chr.auditor01.adm@vietnam-software.org" is "Wait Listed"
+    And I change status of user: "chr.auditor01.adm@vietnam-software.org" to "Onboarding"
     Then I should see confirm popup on admin page
     And I click confirm button on admin page
     Then I should see verified message successful on admin page
-    Then I should see status of user: "chr.auditor01.adm@gmail.com" is "Onboarding"
+    Then I should see status of user: "chr.auditor01.adm@vietnam-software.org" is "Onboarding"
   @thuan
   Scenario: Auditor user active email via email web app and login to Auvenir: AUV-572
-    Given I navigate to GMail login page
-#    Given I navigate to SquirrelMail login page
+#    Given I navigate to GMail login page
+    Given I navigate to SquirrelMail login page
     And I sign In Email
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     And I open active email
     And I click on confirmation link
     And I create password: "Changeit@123"
@@ -93,12 +93,12 @@ Feature: Smoke Test Feature
   @thuan
   Scenario: Admin auditor user create new Engagement: AUV-585
     Given I navigate to Marketing page
-    And Delete engagement name by user  : "chr.auditor01.adm@gmail.com", "Engagement GP01"
+    And Delete engagement name by user  : "chr.auditor01.adm@vietnam-software.org", "Engagement GP01"
     And Delete all business name by : "Titan"
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click create new engagement button
@@ -119,15 +119,17 @@ Feature: Smoke Test Feature
   Scenario: Admin Auditor Invite Lead Auditor: AUV-599
     Given I delete existed email
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
-    And Delete all activity of engagement by user  : "chr.auditor01.lead@gmail.com"
-    And Delete all engagement of user : "chr.auditor01.lead@gmail.com"
-    And Delete user by email: "chr.auditor01.lead@gmail.com"
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
+    And Delete all activity of user : "chr.auditor01.lead@vietnam-software.org"
+#    And Delete all activity of engagement by user  : "chr.auditor01.lead@vietnam-software.org"
+    And Delete all engagement of user : "chr.auditor01.lead@vietnam-software.org"
+    And Delete user role mapping by email: "chr.auditor01.lead@vietnam-software.org"
+    And Delete user by email: "chr.auditor01.lead@vietnam-software.org"
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -136,18 +138,18 @@ Feature: Smoke Test Feature
     And I click in invite new member on team page
     Then I should see invite new member page
     And I input full name: "Lead Auditor" on invite new member page
-    And I input email: "chr.auditor01.lead@gmail.com" on invite new member page
-    And I input email confirm: "chr.auditor01.lead@gmail.com" on invite new member page
+    And I input email: "chr.auditor01.lead@vietnam-software.org" on invite new member page
+    And I input email confirm: "chr.auditor01.lead@vietnam-software.org" on invite new member page
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
   @thuan
   Scenario: Lead Auditor Active account: AUV-660
-    Given I navigate to GMail login page
-#    Given I navigate to SquirrelMail login page
+#    Given I navigate to GMail login page
+    Given I navigate to SquirrelMail login page
     And I sign In Email
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I open active email
     And I click on confirmation link
     Then I should see personal sign up page
@@ -165,17 +167,17 @@ Feature: Smoke Test Feature
   Scenario: Admin Auditor Invite Admin Client: AUV-633
     Given I delete existed email
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     And Delete all client of user
       | Email                       |
-      | chr.client01.adm@gmail.com  |
-      | chr.client01.lead@gmail.com |
-      | chr.client01@gmail.com      |
+      | chr.client01.adm@vietnam-software.org  |
+      | chr.client01.lead@vietnam-software.org |
+      | chr.client01@vietnam-software.org      |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP01"
@@ -184,8 +186,8 @@ Feature: Smoke Test Feature
     Then I should see invite new client popup
     And I select add new client on new client popup
     And I input full name: "Admin Client" on invite client popup
-    And I input email: "chr.client01.adm@gmail.com" on invite client popup
-    And I input confirm email: "chr.client01.adm@gmail.com" on invite client popup
+    And I input email: "chr.client01.adm@vietnam-software.org" on invite client popup
+    And I input confirm email: "chr.client01.adm@vietnam-software.org" on invite client popup
     And I input role: "IT" on invite client popup
     And I click on invite button on invite client popup
     Then I should see message invite successful: "Your engagement invitation has been sent."
@@ -196,14 +198,14 @@ Feature: Smoke Test Feature
       | chr.adm.auvenir@gmail.com | Changeit@123 |
     And I click on login button
     Then I should see the AdminPortal page
-    Then I should see status of user: "chr.client01.adm@gmail.com" is "Onboarding"
+    Then I should see status of user: "chr.client01.adm@vietnam-software.org" is "Onboarding"
   @thuan
   Scenario: Admin Client active account: AUV-645
-    Given I navigate to GMail login page
-#    Given I navigate to SquirrelMail login page
+#    Given I navigate to GMail login page
+    Given I navigate to SquirrelMail login page
     And I sign In Email
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
     Then I should see Welcome to Auvenir Page
@@ -230,11 +232,11 @@ Feature: Smoke Test Feature
   @thuan
   Scenario: Lead Auditor Create new Engagement: AUV-684
     Given I navigate to Marketing page
-    And Delete engagement name by user  : "chr.auditor01.lead@gmail.com", "Engagement GP02"
+    And Delete engagement name by user  : "chr.auditor01.lead@vietnam-software.org", "Engagement GP02"
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click create new engagement button
@@ -255,12 +257,12 @@ Feature: Smoke Test Feature
   Scenario: Lead Auditor Invite Admin Client into Engagement 2: AUV-710
     Given I delete existed email
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     Given I navigate to Marketing page
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     Then I click on engagement: "Engagement GP02"
@@ -297,14 +299,14 @@ Feature: Smoke Test Feature
   Scenario: Lead Auditor add New member auditor into Engagement 2: AUV-787
     Given I delete existed email
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     Given I navigate to Marketing page
-    And Delete all activity of engagement by user  : "chr.auditor01@gmail.com"
-    And Delete user by email: "chr.auditor01@gmail.com"
+    And Delete all activity of engagement by user  : "chr.auditor01@vietnam-software.org"
+    And Delete user by email: "chr.auditor01@vietnam-software.org"
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     Then I click on engagement: "Engagement GP02"
@@ -312,18 +314,18 @@ Feature: Smoke Test Feature
     And I click in invite new member on team page
     Then I should see invite new member page
     And I input full name: "Auvenir Auditor" on invite new member page
-    And I input email: "chr.auditor01@gmail.com" on invite new member page
-    And I input email confirm: "chr.auditor01@gmail.com" on invite new member page
+    And I input email: "chr.auditor01@vietnam-software.org" on invite new member page
+    And I input email confirm: "chr.auditor01@vietnam-software.org" on invite new member page
     And I select role of new member
     And I click on invite new member
     Then I should see invite successful message
   @thuan
   Scenario: New Auditor member active account and login to Engagement 2: AUV-798
-    Given I navigate to GMail login page
-#    Given I navigate to SquirrelMail login page
+#    Given I navigate to GMail login page
+    Given I navigate to SquirrelMail login page
     Then I sign In Email
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I open active email
     And I click on confirmation link
     Then I should see personal sign up page
@@ -340,15 +342,15 @@ Feature: Smoke Test Feature
   Scenario: Admin Client invite Lead Client into Engagement: AUV-818
     Given I delete existed email
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     Given I navigate to Marketing page
     And Delete all client of user
       | Email                       |
-      | chr.client01.lead@gmail.com |
+      | chr.client01.lead@vietnam-software.org |
     And I click on login link
     And I enter the following for Login
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -357,18 +359,18 @@ Feature: Smoke Test Feature
     And I click on Invite New Member button on Client team page
     Then I should see Invite New Member popup
     And I input full name: "Lead Client" on invite new member popup
-    And I input email: "chr.client01.lead@gmail.com" on invite new member popup
-    And I input email confirm: "chr.client01.lead@gmail.com" on invite new member popup
+    And I input email: "chr.client01.lead@vietnam-software.org" on invite new member popup
+    And I input email confirm: "chr.client01.lead@vietnam-software.org" on invite new member popup
     And I input Role: "IT" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
   @thuan
   Scenario: Lead Client Active Account and Login to Engagement2: AUV-840
-    Given I navigate to GMail login page
-#    Given I navigate to SquirrelMail login page
+#    Given I navigate to GMail login page
+    Given I navigate to SquirrelMail login page
     And I sign In Email
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
     Then I should see Welcome to Auvenir Page
@@ -393,7 +395,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -407,7 +409,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -422,15 +424,15 @@ Feature: Smoke Test Feature
   Scenario: Leader Client invite client into Engagement: AUV-1214
     Given I delete existed email
       | Email                  | Password     |
-      | chr.client01@gmail.com | Changeit@123 |
+      | chr.client01@vietnam-software.org | Changeit@123 |
     Given I navigate to Marketing page
     And Delete all client of user
       | Email                  |
-      | chr.client01@gmail.com |
+      | chr.client01@vietnam-software.org |
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -439,19 +441,19 @@ Feature: Smoke Test Feature
     And I click on Invite New Member button on team page
     Then I should see Invite New Member popup
     And I input full name: "General Client" on invite new member popup
-    And I input email: "chr.client01@gmail.com" on invite new member popup
-    And I input email confirm: "chr.client01@gmail.com" on invite new member popup
+    And I input email: "chr.client01@vietnam-software.org" on invite new member popup
+    And I input email confirm: "chr.client01@vietnam-software.org" on invite new member popup
     And I input Role: "IT" of new client member on invite new member popup
     And I click on invite button
     Then I should see Invite Member successful message
 
   @thuan
   Scenario: New client log in their email and active user: AUV-1217
-    Given I navigate to GMail login page
-#    Given I navigate to SquirrelMail login page
+#    Given I navigate to GMail login page
+    Given I navigate to SquirrelMail login page
     And I sign In Email
       | Email                  | Password     |
-      | chr.client01@gmail.com | Changeit@123 |
+      | chr.client01@vietnam-software.org | Changeit@123 |
     And I open active email
     And I click on onboarding invitation link
     Then I should see Welcome to Auvenir Page
@@ -476,7 +478,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -501,7 +503,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -524,7 +526,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -543,7 +545,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -569,7 +571,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -594,7 +596,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -609,7 +611,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     Then I click on engagement: "Engagement GP02"
@@ -627,7 +629,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -644,7 +646,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -655,6 +657,7 @@ Feature: Smoke Test Feature
     And I verify Client Assignee Selected
       | User Name   | Todo Name |
       | Lead Client | ToDo 03   |
+    And I select todo: "ToDo 03" check box on todo page
     And I click bulk action drop down on todo page
     And I click assignee to :"Auvenir Auditor" on bulk action drop down
     And I verify Auditor Assignee Selected
@@ -666,7 +669,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -690,7 +693,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                        | Password     |
-      | chr.auditor01.lead@gmail.com | Changeit@123 |
+      | chr.auditor01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -707,7 +710,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -732,7 +735,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -753,7 +756,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -779,7 +782,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -804,7 +807,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -819,7 +822,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     Then I click on engagement: "Engagement GP02"
@@ -837,7 +840,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -854,7 +857,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -878,7 +881,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                   | Password     |
-      | chr.auditor01@gmail.com | Changeit@123 |
+      | chr.auditor01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -895,7 +898,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see client engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -907,7 +910,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -928,7 +931,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -953,7 +956,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -968,7 +971,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -986,7 +989,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.client01.lead@gmail.com | Changeit@123 |
+      | chr.client01.lead@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -1003,7 +1006,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                  | Password     |
-      | chr.client01@gmail.com | Changeit@123 |
+      | chr.client01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -1015,7 +1018,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                  | Password     |
-      | chr.client01@gmail.com | Changeit@123 |
+      | chr.client01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -1040,7 +1043,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                  | Password     |
-      | chr.client01@gmail.com | Changeit@123 |
+      | chr.client01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -1055,7 +1058,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                  | Password     |
-      | chr.client01@gmail.com | Changeit@123 |
+      | chr.client01@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -1073,7 +1076,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I should see engagement list : Engagement GP01, Engagement GP02
@@ -1089,7 +1092,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I should see engagement list : Engagement GP01, Engagement GP02
@@ -1105,7 +1108,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I should see engagement list : Engagement GP01, Engagement GP02
@@ -1124,7 +1127,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -1147,7 +1150,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                       | Password     |
-      | chr.auditor01.adm@gmail.com | Changeit@123 |
+      | chr.auditor01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on engagement: "Engagement GP02"
@@ -1168,7 +1171,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I should see engagement list : Engagement GP01, Engagement GP02
@@ -1186,7 +1189,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
@@ -1208,7 +1211,7 @@ Feature: Smoke Test Feature
     And I click on login link
     And I enter the following for Login
       | Email                      | Password     |
-      | chr.client01.adm@gmail.com | Changeit@123 |
+      | chr.client01.adm@vietnam-software.org | Changeit@123 |
     And I click on login button
     Then I should see engagement page
     And I click on assigned engagement: "Engagement GP02"
