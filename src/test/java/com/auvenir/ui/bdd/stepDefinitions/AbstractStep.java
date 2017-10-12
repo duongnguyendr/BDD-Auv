@@ -1,6 +1,7 @@
 package com.auvenir.ui.bdd.stepDefinitions;
 
 import com.auvenir.ui.bdd.base.BaseInit;
+import com.auvenir.ui.bdd.common.GeneralUtilities;
 import com.auvenir.ui.bdd.common.Generic;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -102,6 +103,7 @@ public class AbstractStep extends BaseInit {
             }
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+            GeneralUtilities.focusWebBrowser();
             System.out.println("***** Open browser *****");
         }
     public Platform setOSForBrowser(String os) {

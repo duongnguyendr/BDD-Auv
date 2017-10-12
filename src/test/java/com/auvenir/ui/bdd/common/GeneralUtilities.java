@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +15,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.*;
+import java.util.List;
 
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
@@ -121,6 +124,26 @@ public class GeneralUtilities {
             String checkMd5DownloadFile = GeneralUtilities.calculateMD5(concatDownload);
             System.out.println("md5 download is: " + checkMd5DownloadFile);
             Assert.assertEquals(checkMd5DownloadFile,checkMd5DownloadFile, "Checksum Download File and Upload File should be matched.");
+        }
+    }
+
+    public static void focusWebBrowser(){
+        Robot robot = null;
+        System.out.println("Focus on Web Browser.");
+        try {
+            Thread.sleep(1000);
+            robot = new Robot();
+            robot.delay(2);
+            robot.keyPress(KeyEvent.VK_ALT);
+            robot.keyPress(KeyEvent.VK_M);
+            Thread.sleep(1000);
+            robot.keyRelease(KeyEvent.VK_M);
+            robot.keyRelease(KeyEvent.VK_ALT);
+            Thread.sleep(2000);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
