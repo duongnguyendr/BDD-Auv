@@ -45,10 +45,9 @@ public class InitData extends AbstractStep {
 //            DBCollection usersCollection = db.getCollection("users");
             //code to drop all records of collections on DB. TODO: be careful
 //            dropAllCollections(db);
-//            initUser("User1");
-//            initUserRoleMapping("User1");
-//            initUser("User2");
-//            initUserRoleMapping("User2");
+            initAdminUser("Super Admin");
+            initAdminUser("Admin User");
+//            initUserRoleMapping("Admin User");
 
             initAdminAuditor("Admin Auditor");
             initLeadAuditor("Lead Auditor");
@@ -79,38 +78,25 @@ public class InitData extends AbstractStep {
         return Generic.getTestDataFromExcelNoBrowserPrefix("SetupUserRoles", user, columnName);
     }
 
-    public void initUser(String userAdd) throws UnknownHostException, SyncFactoryException {
+    public void initAdminUser(String userAdd) throws UnknownHostException, SyncFactoryException {
         MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
         com.mongodb.DB db = MongoClient.getDB(dataBase);
         DBCollection usersCollection = db.getCollection("users");
+//        System.out.println("Json parse: " + (DBObject) JSON.parse(getDataColumn(userAdd,"User Json")));
         DBObject adminDBObject = (DBObject) JSON.parse(getDataColumn(userAdd,"User Json"));
-        adminDBObject.put("_id", new ObjectId(getDataColumn(userAdd,"ID")));
-        ISO8601DateFormat df = new ISO8601DateFormat();
-        adminDBObject.put("lastLogin", getDataColumn(userAdd,"Last Login"));
-        adminDBObject.put("dateCreated", getDataColumn(userAdd,"Date Created"));
-
-        BasicDBObject access = new BasicDBObject();
-        access.put("expires",getDataColumn(userAdd,"Expires"));
-        BasicDBObject auth = new BasicDBObject();
-        auth.put("id", getDataColumn(userAdd,"Auth Id"));
-        auth.put("access", access);
-        adminDBObject.put("auth", auth);
-        adminDBObject.put("password",getDataColumn(userAdd,"Password"));
-        adminDBObject.put("password_salt",getDataColumn(userAdd,"PasswordSalt"));
-        usersCollection.insert(adminDBObject);
-    }
-
-    public void initUserRoleMapping(String userAdd) throws UnknownHostException, SyncFactoryException {
-        MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseServer, port, dataBase, userName, password, ssl);
-        com.mongodb.DB db = MongoClient.getDB(dataBase);
-        DBCollection usersCollection = db.getCollection("userRoleMapping");
-        DBObject adminDBObject = (DBObject) JSON.parse(getDataColumn(userAdd,"User role mapping Json"));
-        adminDBObject.put("_id", new ObjectId(getDataColumn(userAdd,"_id_userRoleMapping")));
-        adminDBObject.put("userID", new ObjectId(getDataColumn(userAdd,"ID")));
-        adminDBObject.put("firmID", new ObjectId(getDataColumn(userAdd,"firmID_userRoleMapping")));
         usersCollection.insert(adminDBObject);
 
+        DBCollection firms = db.getCollection("firms");
+        DBObject firmsDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm Json"));
+        firms.insert(firmsDBObject);
+
+        // Create new userRoleMapping Firm_Admin of Admin Auditor.
+        DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
+        DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
+        usersRoleMapping.insert(usersRoleMappingDBObject);
+
     }
+
 
     public void initAdminAuditor(String userAdd) {
         try {
@@ -126,8 +112,6 @@ public class InitData extends AbstractStep {
             DBCollection firms = db.getCollection("firms");
             DBObject firmsDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm Json"));
             firms.insert(firmsDBObject);
-//            System.out.println("Firm ID: " + getDataColumn(userAdd, "firmID"));
-//            addFirmPermission(getDataColumn(userAdd, "ID"), getDataColumn(userAdd, "firmID"), firms, true);
 
             // Create new userRoleMapping Firm_Admin of Admin Auditor.
             DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
@@ -151,7 +135,6 @@ public class InitData extends AbstractStep {
             DBObject businessesDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Business Json"));
             business.insert(businessesDBObject);
 
-//            System.out.println("Engagement1 ID: " + getDataColumn(userAdd, "Engagement1 Json"));
 
         } catch (Exception e) {
             System.out.println("Admin Auditor cannot create successfully.");
@@ -209,7 +192,7 @@ public class InitData extends AbstractStep {
 
 
         } catch (Exception e) {
-            System.out.println("Lead Auditor cannot create successfully.");
+            System.out.println("General Auditor cannot create successfully.");
             e.printStackTrace();
         }
     }
@@ -234,7 +217,6 @@ public class InitData extends AbstractStep {
             usersRoleMapping.insert(usersRoleMappingDBObject);
             usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 Admin role mapping Json"));
             usersRoleMapping.insert(usersRoleMappingDBObject);
-//            System.out.println("Engagement1 ID: " + getDataColumn(userAdd, "Engagement1 Json"));
 
         } catch (Exception e) {
             System.out.println("Admin Client cannot create successfully.");
@@ -258,10 +240,9 @@ public class InitData extends AbstractStep {
             usersRoleMapping.insert(usersRoleMappingDBObject);
             usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 role mapping Json"));
             usersRoleMapping.insert(usersRoleMappingDBObject);
-//            System.out.println("Engagement1 ID: " + getDataColumn(userAdd, "Engagement1 Json"));
 
         } catch (Exception e) {
-            System.out.println("Admin Client cannot create successfully.");
+            System.out.println("Lead Client cannot create successfully.");
             e.printStackTrace();
         }
     }
@@ -284,16 +265,9 @@ public class InitData extends AbstractStep {
             usersRoleMapping.insert(usersRoleMappingDBObject);
 
         } catch (Exception e) {
-            System.out.println("Admin Client cannot create successfully.");
+            System.out.println("General Client cannot create successfully.");
             e.printStackTrace();
         }
     }
 
-
-    public void addFirmPermission(String userID, String firmID, DBCollection firms, boolean isAdmin) {
-        DBObject find = new BasicDBObject("_id", new ObjectId(firmID));
-        String json = String.format("{$push:{acl:{id:{ \"$oid\" : \"%s\"}, admin:%b}}}", userID, isAdmin);
-        DBObject push = (DBObject) JSON.parse(json);
-        firms.update(find, push);
-    }
 }
