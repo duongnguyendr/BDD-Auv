@@ -123,4 +123,24 @@ public class EngagementDetailStepDefinition extends BaseInit {
         detailsEngagementPage.verifyOverdueToDosValue(numberOverdueToDos);
     }
 
+    @Then("^I see (\\d+) in OutStanding To-Dos field$")
+    public void iSeeInOutStandingToDosField(int numberOutStandingToDos) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I see " + numberOutStandingToDos +" in OutStanding To-Dos field=====");
+        detailsEngagementPage.verifyOutstandingToDosValue(numberOutStandingToDos);
+    }
+
+    @Then("^I see (\\d+) in Overdue Documents field$")
+    public void iSeeInOverdueDocumentsField(int numberOverStandingDocument) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I see " + numberOverStandingDocument +" in OutStanding Document field=====");
+        detailsEngagementPage.verifyOutstandingDocumentsValue(numberOverStandingDocument);
+    }
+
+    @Then("^I see (\\d+) in OutStanding Documents field$")
+    public void iSeeInOutStandingDocumentsField(int numberOutStandingDocuments) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        logger.info("=====I see " + numberOutStandingDocuments +" in OutStanding Document field=====");
+        detailsEngagementPage.verifyOutstandingDocumentsValue(numberOutStandingDocuments);
+    }
 }

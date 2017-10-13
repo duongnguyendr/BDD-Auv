@@ -10,7 +10,7 @@ import org.testng.annotations.*;
  */
 //@RunWith(Cucumber.class)
 @Test
-@CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features/smokeTest.feature"}
+@CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features/toDoTest.feature"}
 ,format={"json:target/cucumber-report.json","html:target/site/cucumber-pretty"}
 ,glue="com.auvenir.ui.bdd.stepDefinitions"/*, tags = "@run1"*/)
 public class TestRunner extends AbstractTestNGCucumberTests{

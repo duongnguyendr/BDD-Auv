@@ -37,6 +37,15 @@ public class DetailsEngagementPage extends CommonPage {
     @FindBy(xpath = "//p[@id='engOverview-overDueTodo']")
     private  WebElement eleOverdueTodoNumber;
 
+    @FindBy(xpath = "//p[@id='engOverview-outstandingTodo']")
+    private  WebElement eleOutstandingTodoNumber;
+
+    @FindBy(xpath = "//p[@id='engOverview-overdueDocs']")
+    private  WebElement eleOverdueDocumentsNumber;
+
+    @FindBy(xpath = "//p[@id='engOverview-outstandingDocs']")
+    private  WebElement eleOutstandingDocumentsNumber;
+
     public DetailsEngagementPage(Logger logger, WebDriver driver) {
         super(logger, driver);
     }
@@ -104,6 +113,24 @@ public class DetailsEngagementPage extends CommonPage {
     public void verifyOverdueToDosValue(int checkNumber){
         waitForVisibleElement(eleOverdueTodoNumber,"overdue to-dos");
         boolean result = Integer.parseInt(eleOverdueTodoNumber.getText()) == checkNumber ? true : false;
+        Assert.assertTrue(result);;
+    }
+
+    public void verifyOutstandingToDosValue(int checkNumber){
+        waitForVisibleElement(eleOutstandingTodoNumber,"outstanding to-dos");
+        boolean result = Integer.parseInt(eleOutstandingTodoNumber.getText()) == checkNumber ? true : false;
+        Assert.assertTrue(result);;
+    }
+
+    public void verifyOverdueDocumentsValue(int checkNumber){
+        waitForVisibleElement(eleOverdueDocumentsNumber,"overdue document");
+        boolean result = Integer.parseInt(eleOverdueDocumentsNumber.getText()) == checkNumber ? true : false;
+        Assert.assertTrue(result);;
+    }
+
+    public void verifyOutstandingDocumentsValue(int checkNumber){
+        waitForVisibleElement(eleOutstandingDocumentsNumber,"outstanding documents");
+        boolean result = Integer.parseInt(eleOutstandingDocumentsNumber.getText()) == checkNumber ? true : false;
         Assert.assertTrue(result);;
     }
 }
