@@ -12,7 +12,7 @@ import org.testng.annotations.Parameters;
 //@RunWith(Cucumber.class)
 //This file config belong to marketing page
 
-@CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features/smokeTest.feature"}, format =
+@CucumberOptions(features = {"src/test/java/com/auvenir/ui/bdd/features/toDoTest.feature"}, format =
         {"json:target/cucumber-report.json", "html:target/site/cucumber-pretty"}, glue = "com.auvenir.ui.bdd" + "" +
         ".stepDefinitions")
 public class TestRunnerLocal extends AbstractTestNGCucumberTests {
