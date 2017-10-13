@@ -1172,4 +1172,52 @@ public class MongoDBService {
         }
     }
 
+    private String getDataColumn(String user, String columnName) {
+        return Generic.getTestDataFromExcelNoBrowserPrefix("SetupUserRoles", user, columnName);
+    }
+
+    public void initAdminAuditor(String userAdd) {
+        try {
+            // Create new Admin Auditor user.
+            System.out.println("Init Admin Auditor.");
+            MongoClient MongoClient = MongoDBService.connectDBServer(dataBaseSer, port, DB, username, password, ssl);
+            com.mongodb.DB db = MongoClient.getDB(DB);
+            DBCollection usersCollection = db.getCollection("users");
+            DBObject usersDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "User Json"));
+            usersCollection.insert(usersDBObject);
+
+            // Create new Firm of Admin Auditor.
+            DBCollection firms = db.getCollection("firms");
+            DBObject firmsDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm Json"));
+            firms.insert(firmsDBObject);
+
+            // Create new userRoleMapping Firm_Admin of Admin Auditor.
+            DBCollection usersRoleMapping = db.getCollection("userRoleMapping");
+            DBObject usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Firm User role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement2 role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+            usersRoleMappingDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 Admin role mapping Json"));
+            usersRoleMapping.insert(usersRoleMappingDBObject);
+
+
+            // Create engagement
+            DBCollection engagement = db.getCollection("engagements");
+            DBObject engagementsDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Engagement1 Json"));
+            engagement.insert(engagementsDBObject);
+
+            // Create business
+            DBCollection business = db.getCollection("businesses");
+            DBObject businessesDBObject = (DBObject) JSON.parse(getDataColumn(userAdd, "Business Json"));
+            business.insert(businessesDBObject);
+
+
+        } catch (Exception e) {
+            System.out.println("Admin Auditor cannot create successfully.");
+            e.printStackTrace();
+        }
+    }
+
 }
